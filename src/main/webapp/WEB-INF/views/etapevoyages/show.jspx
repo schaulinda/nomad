@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_EtapeVoyage" object="${etapevoyage}" path="/etapevoyages" z="cq4/nMfQeBMXVzwBVHPwX13eHQA=">
+        <field:display field="description" id="s_com_nomade_domain_EtapeVoyage_description" object="${etapevoyage}" z="nen3DBrMq8KjU9VqdQZu7vEVQik="/>
+        <field:display date="true" dateTimePattern="${etapeVoyage_dateetape_date_format}" field="dateEtape" id="s_com_nomade_domain_EtapeVoyage_dateEtape" object="${etapevoyage}" z="GPvwUIp4imGfkBLxodrRdvvZ+Sw="/>
+        <field:display field="photo" id="s_com_nomade_domain_EtapeVoyage_photo" object="${etapevoyage}" z="l7nwS+EyH5/043C5h5mY8Lg3XXA="/>
+        <field:display field="location" id="s_com_nomade_domain_EtapeVoyage_location" object="${etapevoyage}" z="gG/efHHZb1MvtZxfd/EAbK4lp9k="/>
+    </page:show>
+</div>

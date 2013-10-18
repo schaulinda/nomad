@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-user"> <!--co  -->
+				</i> Gestion du compte
+			</h3>
+		</div>
+		<div class="row">
+		<spring:url value="/users/compte" var="compte_update_url"></spring:url>
+			<form:form modelAttribute="nomade.compte" action="${compte_update_url}" method="POST">
+			<p class="text-danger">${message}</p>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="email">Email address</label>
+						<form:input type="email" cssClass="form-control" path="email"
+							placeholder="Christophe@gmail.com"
+							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" required="required" />
+					</div>
+					<div class="form-group">
+						<label for="fullName">full Name</label>
+						<form:input type="text" cssClass="form-control" path="fullName"
+							placeholder="Jean La fontaine" />
+					</div>
+					<div class="form-group">
+						<label for="gender">Gender</label>
+						<form:select path="gender" cssClass="form-control"
+							items="${genders}" placeholder="Male" />
+					</div>
+					<div class="form-group">
+						<label for="birthDate"> birth Date</label>
+						<form:input cssClass="datepicker form-control" path="birthDate" type="date"
+							placeholder="12-03-1991" data-date-format="dd-mm-yyyy" />
+					</div>
+					<div class="form-group">
+						<label for="adress">adress</label>
+						<form:input type="text" cssClass="form-control" path="adress"
+							placeholder="cameroun douala rue 38" />
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label for="phoneNumber">phone Number</label>
+						<form:input type="text" cssClass="form-control" path="phoneNumber"
+							placeholder="+33968745213" />
+					</div>
+					<div class="form-group">
+						<label for="nationality">Nationality</label>
+						<form:select path="nationality" cssClass="form-control"
+							items="${nationalitys}" />
+					</div>
+					<div class="form-group">
+						<label for="confidentiality">confidentiality</label>
+						<form:select path="confidentiality" cssClass="form-control"
+							items="${confidentialitys}" />
+					</div>
+					<div class="checkbox">
+						<label><form:checkbox cssClass="form-control"
+								path="newsletter" /> newsletter </label>
+					</div>
+					<div class="checkbox">
+						<label> <form:checkbox cssClass="form-control"
+								path="notifications" /> notifications
+						</label>
+					</div>
+					<div class="checkbox">
+						<label> <form:checkbox cssClass="form-control"
+								path="commercialParteners" /> commercialParteners
+						</label>
+					</div>
+					<button type="submit" class="btn btn-warning btn-block">Modifier</button>
+					
+				</div>
+					
+			</form:form>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function() {
+		$(".chosen-select").chosen();
+		$('.datepicker').datepicker();  
+	});
+	</script>
+</div>

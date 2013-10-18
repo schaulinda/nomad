@@ -1,0 +1,82 @@
+package org.fakoship.fffako.security;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.TypedQuery;
+
+import org.apache.commons.lang.StringUtils;
+import org.fakoship.fffako.domain.FkUser;
+import org.fakoship.fffako.domain.RoleName;
+import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+@Transactional
+public class FerryUserDetailsService implements UserDetailsService {
+
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException, DataAccessException {
+		
+		try {
+
+			if(StringUtils.isBlank(username)){
+				throw new UsernameNotFoundException(
+				"Estate user with email not found");
+			}
+			TypedQuery<FkUser> typedQuery = FkUser.findFkUsersByUserNameEquals(username);
+			List<FkUser> resultList = typedQuery.getResultList();
+			FkUser fkUser = null;
+			for (FkUser found : resultList) {
+				fkUser = found;
+			}
+			if (fkUser == null)
+				throw new UsernameNotFoundException(
+				"Estate user with email not found");
+			return createUserDetails(fkUser);
+		} finally {
+
+		}
+	}
+
+	public static UserDetails createUserDetails(FkUser fkUser)
+			throws UsernameNotFoundException, DataAccessException 
+	{
+		String password = fkUser.getPassword();
+		boolean enabled = !fkUser.isDisableLogin();
+		Date accountExpiration = fkUser.getAccountExpiration();
+		boolean accountNonExpired = false;
+		if (accountExpiration != null) {
+			accountNonExpired = new Date().before(accountExpiration);
+		}
+		Date credentialExpiration = fkUser.getCredentialExpiration();
+		boolean credentialsNonExpired = false;
+		if (credentialExpiration != null) {
+			credentialsNonExpired = new Date().before(credentialExpiration);
+		}
+		boolean accountNonLocked = !fkUser.isAccountLocked();
+
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		Set<RoleName> roles = fkUser.getRoleNames();
+		for (RoleName roleName : roles) {
+			GrantedAuthorityImpl ga = new GrantedAuthorityImpl(
+					roleName.name());
+			authorities.add(ga);
+		}
+		UserDetails userDetails = new User(fkUser.getUserName(), password, enabled,
+				accountNonExpired, credentialsNonExpired, accountNonLocked,
+				authorities);
+		return userDetails;
+	}
+}

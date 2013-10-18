@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_nomade_domain_UserNomade" modelAttribute="userNomade" path="/users" render="${empty dependencies}" z="lU9idXWFObRX5fusNcCqoua64Ys=">
+        <field:input field="userName" id="c_com_nomade_domain_UserNomade_userName" z="5zVVXJEAQZm484Evg9Jmc8BWcZc="/>
+        <field:input field="password" id="c_com_nomade_domain_UserNomade_password" z="Om+y/LmcsVJxHli4lk2q9771zAQ="/>
+        <field:datetime dateTimePattern="${userNomade_accountexpiration_date_format}" field="accountExpiration" id="c_com_nomade_domain_UserNomade_accountExpiration" z="zcsj8mwFujdXVlw5n18EVcBE+P8="/>
+        <field:checkbox field="disableLogin" id="c_com_nomade_domain_UserNomade_disableLogin" z="tnC5R+3JO9WyAOAAbWg7MOVuwBc="/>
+        <field:checkbox field="accountLocked" id="c_com_nomade_domain_UserNomade_accountLocked" z="/r9c3zPC4CNhFXLYCShADi2pAJM="/>
+        <field:datetime dateTimePattern="${userNomade_credentialexpiration_date_format}" field="credentialExpiration" id="c_com_nomade_domain_UserNomade_credentialExpiration" z="xgZCTpKY/mv52GPPV7dD3QfX0k8="/>
+        <field:select field="roleNames" id="c_com_nomade_domain_UserNomade_roleNames" items="${rolenames}" path="rolenames" z="32zUajNx2athIbjpz7/VVSDbbQ8="/>
+        <field:input field="profil" id="c_com_nomade_domain_UserNomade_profil" z="QsP305SP+pWTNX/6+qsn+q6Wa5I="/>
+        <field:input field="compte" id="c_com_nomade_domain_UserNomade_compte" z="HPiCrr45H1y0JuezOSyzR/Xs0RA="/>
+        <field:input field="vehicule" id="c_com_nomade_domain_UserNomade_vehicule" z="l7JtxtR6NqS68twX8JgCPBdBoqk="/>
+        <field:select field="albums" id="c_com_nomade_domain_UserNomade_albums" itemValue="id" items="${albums}" multiple="true" path="/albums" z="Yse45nYpyXcMcr0j/jR+eQ2IBTM="/>
+        <field:select field="etapeVoyages" id="c_com_nomade_domain_UserNomade_etapeVoyages" itemValue="id" items="${etapevoyages}" multiple="true" path="/etapevoyages" z="y6H9w0/mz7wH8R78LnfmRFighvk="/>
+        <field:select field="etapeVehicules" id="c_com_nomade_domain_UserNomade_etapeVehicules" itemValue="id" items="${etapevehicules}" multiple="true" path="/etapevehicules" z="qu0y0jSdEseRf1Awglo/cpNhX5k="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_UserNomade" render="${not empty dependencies}" z="GDaGStylUbztanE5ZjK6Q9oyav8="/>
+</div>

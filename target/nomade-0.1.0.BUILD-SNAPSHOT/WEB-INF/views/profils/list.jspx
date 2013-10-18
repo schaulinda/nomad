@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_Profil" items="${profils}" z="j1jvfiU3px1iMxs200bLva9F7gE=">
+        <table:table data="${profils}" id="l_com_nomade_domain_Profil" path="/profils" z="+G4yF3WQdp90icjH+TlUOs6BYwc=">
+            <table:column id="c_com_nomade_domain_Profil_pseudo" property="pseudo" z="cQyC0D9tN3dA6eWl661ulo46iuI="/>
+            <table:column id="c_com_nomade_domain_Profil_photo" property="photo" z="O8O5Ny1gTtwVsYFEL0zoQPmCsv8="/>
+            <table:column id="c_com_nomade_domain_Profil_website" property="website" z="rbiBWDuVGhk56cLpQ0CDgaUJg2s="/>
+            <table:column id="c_com_nomade_domain_Profil_langues" property="langues" z="g+QXVl361kHgUT1QKCLGOR4g6Lc="/>
+            <table:column id="c_com_nomade_domain_Profil_visitedCountry" property="visitedCountry" z="P5XlkS7TMibsy0eaqV2m7ne6+eY="/>
+            <table:column id="c_com_nomade_domain_Profil_butVoyage" property="butVoyage" z="Ps0eZ2ieRYis3DWv1q8fSvBPwbw="/>
+        </table:table>
+    </page:list>
+</div>

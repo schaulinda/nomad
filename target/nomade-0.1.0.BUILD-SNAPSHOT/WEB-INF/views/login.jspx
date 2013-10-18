@@ -1,0 +1,107 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+xmlns:form="http://www.springframework.org/tags/form"
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8" />
+  <jsp:output omit-xml-declaration="yes" />
+  <spring:url var="resources" value="/resources" />
+  <spring:url var="home" value="/" />
+	<!-- header -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="nav-collapse collapse bs-navbar-collapse">
+	
+	<a href="${home}" class="navbar-brand" style="margin-left: 10px;"><img
+				src="${resources}/img/navbarlogo.png" ><!-- eh --></img></a>
+		<ul class="nav navbar-nav col-lg-offset-8">
+			<li class="dropdown ">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					Language:
+					<b class="caret"><!--  com--></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="#">French</a>
+					</li>
+					<li>
+						<a href="#">English</a>
+					</li>
+				</ul>
+				</li>
+		</ul>
+		</div>
+	</div>
+	<!-- body conetnt -->
+	
+		<div class="fond-bg" >
+			<img alt="" src="${resources}/img/travel.jpg"><!--  com--></img>
+		</div>
+		<div class="block-avant">
+			<div class="row">
+					<div class="col-lg-5 col-lg-offset-2 front-welcome-text col-sm-5 col-sm-offset-1 col-12">
+						<h3>Welcome to Petit Nomade.</h3>
+						<p>Travel Together, lorem up um isodor market with popo mexico.</p>
+					</div>
+
+					<div class="col-lg-3 col-sm-5 col-12">	
+						<div class="well">
+							
+							<c:if test="${not empty param.login_error}">
+						      <div class="errors">
+						        <p>
+						          <spring:message code="security_login_unsuccessful" />
+						          <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+						          .
+						        </p>
+						      </div>
+						    </c:if>
+						    <c:if test="${empty param.login_error}">
+						      <legend>
+						        <spring:message code="security_login_message" />
+						      </legend>
+						    </c:if>
+						    <spring:url value="/resources/j_spring_security_check" var="form_url" />
+						    <form name="f" action="${fn:escapeXml(form_url)}" method="POST">
+								
+								<input type="text" id="j_username" name='j_username' class="form-control" placeholder="Username" />
+			
+								<input type="password" id="j_password" required="required"  class="form-control" name="j_password" placeholder="Password" />
+								
+								<label class="checkbox col-lg-6 col-sm-6 col-6">
+									<input type="checkbox"   name="_spring_security_remember_me" value="1" /><span style="font-size: 13px;color: gray;font-weight: lighter;" > Remember Me </span>
+								</label>
+								<a class="col-lg-6 col-sm-6 col-6" href="" style="font-size: 13px;margin-top: 10px;cursor: pointer;">Forgot password?</a>
+								
+								<button id="proceed" type="submit" name="submit"  class="btn btn-info btn-block">Sign in</button>
+							</form>
+						</div>
+					    <div class="well">
+						    <legend>New to Petit Nomade?</legend>
+						    <spring:url value="/users/register" var="register_url"></spring:url>
+						    <form:form action="${register_url}" method="post" modelAttribute="beanRegister" >
+						    	
+						    	<form:errors cssClass="errors"  path="email" cssStyle="color:red;" />
+						    	<input class="form-control" name="email" placeholder="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" required="required" type="text" />
+						    	
+						    	<form:errors cssClass="errors"  path="userName" cssStyle="color:red;" />
+						    	<input class="form-control" name="userName" placeholder="Username" required="required" min="3" type="text" />
+						    	
+						    	<form:errors cssClass="errors"  path="password" cssStyle="color:red;" />
+						    	<input class="form-control" name="password" placeholder="Password" required="required" min="6" type="password" /><br/>
+						    	<button class="btn btn-warning btn-block" type="submit">Sign up</button>
+						    </form:form>
+						</div>
+					</div>
+			</div>
+			<br/>
+			<footer class="text-center" style="z-index: 99;position: relative;">
+				<a href="#">© Petit Nomad 2238 </a> | <a href="#" class="traitgauche">Contact
+				</a> | <a href="#" class="traitgauche">Confidentialité </a> | <a href="#"
+					class="traitgauche">Mentions légales </a> | <a href="#"
+					class="traitgauche">Aide / FAQ </a> | <a href="#"
+					class="traitgauche">Professionels </a> | <a href="#"
+					class="traitgauche">Annonceurs </a> | <a href="#"
+					class="traitgauche">Développement / Traduction </a>
+			</footer>
+		</div>
+  
+  </div>

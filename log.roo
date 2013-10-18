@@ -1,0 +1,165 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-11 10:46:28
+project com.nomade
+mongo setup --databaseName nomadedb
+enum type --class ~.domain.RoleName
+enum constant --name ROLE_ADMIN
+enum constant --name ROLE_SIMPLE_USER
+enum type --class ~.domain.Gender
+enum constant --name Male
+enum constant --name Female
+enum constant --name Neutral
+enum type --class ~.domain.Langue
+enum constant --name english
+enum constant --name French
+enum constant --name Arabic
+enum constant --name Italian
+enum constant --name Espagnol
+enum constant --name German
+enum type --class ~.domain.Confidentiality
+enum constant --name Publique
+enum constant --name NomadesOnly
+enum constant --name FriendsOnly
+enum type --class ~.domain.VehiculeType
+enum constant --name DeuxRouesRoutier
+enum constant --name DeuxRouesToutTerrain
+enum constant --name QuatrexQuatre
+enum constant --name CampingCar
+enum constant --name Camion
+enum constant --name Camionette
+enum constant --name Velo
+enum constant --name Voiture
+enum constant --name Autre
+enum type --class ~.domain.VehiculeState
+enum constant --name NonAchete
+enum constant --name EnRechercheAchat
+enum constant --name AVendre
+enum constant --name SurLaRoute
+enum constant --name EnEtape
+enum constant --name EnReparation
+enum constant --name RentreAlaMaison
+enum type --class ~.domain.Nationality
+enum constant --name UK
+enum constant --name French
+enum constant --name Arabic
+enum constant --name Italian
+enum constant --name Espagnol
+enum constant --name German
+enum constant --name Cameroonian
+enum constant --name Qatarian
+enum constant --name Nepalais
+enum type --class ~.domain.Country
+enum constant --name UK
+enum constant --name Germany
+enum constant --name Cameroon
+enum constant --name USA
+enum constant --name Nigeria
+class --class ~.domain.BeanRegister --rooAnnotations true
+field string --fieldName userName --notNull --sizeMax 20 --sizeMin 3
+field string --fieldName password --notNull --sizeMax 20 --sizeMin 6
+field string --fieldName email --notNull --regexp [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}
+class --class ~.domain.BeanNewItineraire --rooAnnotations true
+field string --fieldName depart
+field string --fieldName etape
+field string --fieldName arrive
+class --class ~.domain.BeanPasswordReset --rooAnnotations true
+field string --fieldName currentPassword
+field string --fieldName newPassword
+field string --fieldName confirmNewPassword
+entity mongo --class ~.domain.Profil
+field string --fieldName pseudo
+field string --fieldName photo
+field string --fieldName website
+field set --fieldName langues --type ~.domain.Langue
+field set --fieldName visitedCountry --type ~.domain.Country
+field string --fieldName butVoyage
+field string --fieldName metier
+entity mongo --class ~.domain.Account
+field string --fieldName email --notNull --regexp [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}
+field string --fieldName fullName
+field enum --fieldName gender --type ~.domain.Gender
+field date --fieldName birthDate --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy"
+field enum --fieldName nationality --type ~.domain.Nationality
+field string --fieldName adress
+field string --fieldName phoneNumber
+field enum --fieldName confidentiality --type ~.domain.Confidentiality
+field boolean --fieldName newsletter
+field boolean --fieldName notifications
+field boolean --fieldName commercialParteners
+entity mongo --class ~.domain.Vehicule
+field string --fieldName vehiculeName
+field string --fieldName photo
+field enum --fieldName vehiculeType --type ~.domain.VehiculeType
+field enum --fieldName vehiculeState --type ~.domain.VehiculeState
+field string --fieldName model
+field string --fieldName couleur
+field enum --fieldName forSellCountry --type ~.domain.Country
+field date --fieldName anneMiseEnService --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy"
+field string --fieldName description
+entity mongo --class ~.domain.File
+field string --fieldName fileName --notNull
+entity mongo --class ~.domain.Album
+field string --fieldName name --notNull
+field set --fieldName files --type ~.domain.File
+entity mongo --class ~.domain.EtapeVoyage
+field string --fieldName description
+field date --fieldName dateEtape --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy"
+field string --fieldName photo
+field string --fieldName location
+entity mongo --class ~.domain.EtapeVehicule
+field string --fieldName description
+field date --fieldName dateEtape --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy"
+field string --fieldName photo
+field string --fieldName location
+entity mongo --class ~.domain.User
+field string --fieldName userName --unique
+field string --fieldName password
+field date --fieldName accountExpiration --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"
+field boolean --fieldName disableLogin --notNull --primitive
+field boolean --fieldName accountLocked --notNull --primitive
+field date --fieldName credentialExpiration --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"
+field set --fieldName roleNames --type ~.domain.RoleName --fetch EAGER
+field other --fieldName profil --type ~.domain.Profil
+field other --fieldName compte --type ~.domain.Account
+field other --fieldName vehicule --type ~.domain.Vehicule
+field set --fieldName albums --type ~.domain.Album
+field set --fieldName etapeVoyages --type ~.domain.EtapeVoyage
+field set --fieldName etapeVehicules --type ~.domain.EtapeVehicule
+repository mongo --interface ~.repository.ProfilRepository --entity ~.domain.Profil
+repository mongo --interface ~.repository.AccountRepository --entity ~.domain.Account
+repository mongo --interface ~.repository.VehiculeRepository --entity ~.domain.Vehicule
+repository mongo --interface ~.repository.FileRepository --entity ~.domain.File
+repository mongo --interface ~.repository.AlbumRepository --entity ~.domain.Album
+repository mongo --interface ~.repository.EtapeVoyageRepository --entity ~.domain.EtapeVoyage
+repository mongo --interface ~.repository.EtapeVehiculeRepository --entity ~.domain.EtapeVehicule
+repository mongo --interface ~.repository.UserRepository --entity ~.domain.User
+service --interface ~.service.ProfilService --entity ~.domain.Profil
+service --interface ~.service.AccountService --entity ~.domain.Account
+service --interface ~.service.VehiculeService --entity ~.domain.Vehicule
+service --interface ~.service.FileService --entity ~.domain.File
+service --interface ~.service.AlbumService --entity ~.domain.Album
+service --interface ~.service.EtapeVoyageService --entity ~.domain.EtapeVoyage
+service --interface ~.service.EtapeVehiculeService --entity ~.domain.EtapeVehicule
+service --interface ~.service.UserService --entity ~.domain.User
+controller all --package ~.web
+web mvc install language --code en
+security setup
+logging setup --level WARN
+// script --file roonomade.roo
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-11 12:29:46
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-11 13:02:34
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-11 14:13:03
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-14 10:22:10
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-14 14:40:06
+interface --class ~.email.NotificationService
+class --class ~.email.NotificationServiceImpl
+email sender setup --hostServer smtp.gmail.com --protocol SMTP
+email template setup --from guymoyo@gmail.com --subject "Confirm your registration"
+field email template --fieldName mailTemplate --class ~.email.NotificationServiceImpl
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-15 15:08:05
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-10-15 15:08:40
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-17 12:22:24
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-17 12:24:47
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-17 13:39:26
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-17 15:45:48
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-17 16:17:50
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-18 10:37:28

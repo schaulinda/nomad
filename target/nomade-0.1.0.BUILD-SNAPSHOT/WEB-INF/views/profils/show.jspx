@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_Profil" object="${profil}" path="/profils" z="Y7ezW0Ow/HuoB6bXEKrZaWzgkbo=">
+        <field:display field="pseudo" id="s_com_nomade_domain_Profil_pseudo" object="${profil}" z="ueCz6mj7yOVoRH0Vg+RutmwwdRc="/>
+        <field:display field="photo" id="s_com_nomade_domain_Profil_photo" object="${profil}" z="MwYLkHH7MK7aTQQFiVemgwWsUeE="/>
+        <field:display field="website" id="s_com_nomade_domain_Profil_website" object="${profil}" z="Asz2PK5mniszfdjEYdNbTL6hFS0="/>
+        <field:display field="langues" id="s_com_nomade_domain_Profil_langues" object="${profil}" z="laydYlhy4ASYf1rkyf8p2MNdCws="/>
+        <field:display field="visitedCountry" id="s_com_nomade_domain_Profil_visitedCountry" object="${profil}" z="i1+XLLagg28N8u6PyQRrqkGadjQ="/>
+        <field:display field="butVoyage" id="s_com_nomade_domain_Profil_butVoyage" object="${profil}" z="DvOIVPWq2vchEnZL3qJb7aluwFI="/>
+        <field:display field="metier" id="s_com_nomade_domain_Profil_metier" object="${profil}" z="Hzu0qLkcM0q3T/RsfDDV/qS7/eo="/>
+    </page:show>
+</div>

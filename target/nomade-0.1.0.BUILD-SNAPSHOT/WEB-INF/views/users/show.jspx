@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_UserNomade" object="${usernomade}" path="/users" z="t0TemgeScAx0vsPRbuPWPWexZ7Q=">
+        <field:display field="userName" id="s_com_nomade_domain_UserNomade_userName" object="${usernomade}" z="m+ctKD7PthkRkIAMQUKwozF9tkg="/>
+        <field:display field="password" id="s_com_nomade_domain_UserNomade_password" object="${usernomade}" z="1cyexXTtlZKYbcpNwDcRFGHRSRE="/>
+        <field:display date="true" dateTimePattern="${userNomade_accountexpiration_date_format}" field="accountExpiration" id="s_com_nomade_domain_UserNomade_accountExpiration" object="${usernomade}" z="ezk5e644pEpfKsMtxj8/L1ZleNs="/>
+        <field:display field="disableLogin" id="s_com_nomade_domain_UserNomade_disableLogin" object="${usernomade}" z="9HjHp4u5biMayG9aCCRlvmzYMZE="/>
+        <field:display field="accountLocked" id="s_com_nomade_domain_UserNomade_accountLocked" object="${usernomade}" z="hwjGG55eFS4kVFuUe3caS918A+g="/>
+        <field:display date="true" dateTimePattern="${userNomade_credentialexpiration_date_format}" field="credentialExpiration" id="s_com_nomade_domain_UserNomade_credentialExpiration" object="${usernomade}" z="Pf4dHzX/iJhSw9k0fsdoTSYsDOo="/>
+        <field:display field="roleNames" id="s_com_nomade_domain_UserNomade_roleNames" object="${usernomade}" z="lin/8lo01PJ61VOGs/KHc668FGQ="/>
+        <field:display field="profil" id="s_com_nomade_domain_UserNomade_profil" object="${usernomade}" z="cu0j+KYvxReS7yMp/NlHcU59OXc="/>
+        <field:display field="compte" id="s_com_nomade_domain_UserNomade_compte" object="${usernomade}" z="sSLu8If024szI595b6ti4ZiYeDw="/>
+        <field:display field="vehicule" id="s_com_nomade_domain_UserNomade_vehicule" object="${usernomade}" z="7kC/4u6+1pkF8NDv4s/CazRYUgQ="/>
+        <field:display field="albums" id="s_com_nomade_domain_UserNomade_albums" object="${usernomade}" z="1IoFG5S2jWsVVEEG2eIpISQdtSk="/>
+        <field:display field="etapeVoyages" id="s_com_nomade_domain_UserNomade_etapeVoyages" object="${usernomade}" z="qtH37ZmqFnml7Emk84XS6VqXTOY="/>
+        <field:display field="etapeVehicules" id="s_com_nomade_domain_UserNomade_etapeVehicules" object="${usernomade}" z="cEtK+uFYUPBvdvAO2xOA3Uzuw3Q="/>
+    </page:show>
+</div>

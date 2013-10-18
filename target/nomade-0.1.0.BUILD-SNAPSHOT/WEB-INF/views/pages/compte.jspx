@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-user"><!--co  --></i> Gestion du compte
+			</h3>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>adresse mail :</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">adresse@mail.x</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>mot de passe :</p>
+			</div>
+			<div class="col-lg-offset-6 col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>
+					Nom :<br />Prénom<br />Date de naissance :
+				</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">
+					Lorcery<br />Pierre<br />28/05/1987
+				</p>
+				<!--ces informations ne seront plus modifiables si le compte devient premium-->
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>Nationalité :</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">
+					<img data-src="holder.js/40x25" src="img/france.png" alt="france"/>
+				</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>Adresse :</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">
+					Escoussac<br />19220<br />Darazac
+				</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>N° de tel :</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">+33123456789</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>paramètres de confidentialité :</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">
+					<select class="form-control">
+						<option>Public</option>
+						<option>Seulement les Nomad's</option>
+						<option>Seulement les amis</option>
+					</select>
+				</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">modifier</p></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<p>
+					Newsletter du site :<br />Notifications du site :<br />Newsletter
+					de partenaires commerciaux :
+				</p>
+			</div>
+			<div class="col-lg-6">
+				<p class="text-center">
+					<input type="checkbox"/><br /> <input type="checkbox"/><br />
+					<input type="checkbox"/>
+				</p>
+			</div>
+			<div class="col-lg-3">
+				<a href="#"><p class="text-right">
+						<button>modifier</button>
+					</p></a>
+			</div>
+		</div>
+	</div>
+
+</div>
+

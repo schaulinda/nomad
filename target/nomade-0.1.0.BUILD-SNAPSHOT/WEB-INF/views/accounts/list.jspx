@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_Account" items="${accounts}" z="c8m6nACVK0rRkjqa/q0ki/4toy8=">
+        <table:table data="${accounts}" id="l_com_nomade_domain_Account" path="/accounts" z="YBx9Fwp2UCXKG0OEFEZeQGiCin0=">
+            <table:column id="c_com_nomade_domain_Account_email" property="email" z="9ktRtUNgNC+YB6X1ZzENZKUf/9w="/>
+            <table:column id="c_com_nomade_domain_Account_fullName" property="fullName" z="h6xb/FEDSPn5zpaBhxGBSyXvp2g="/>
+            <table:column id="c_com_nomade_domain_Account_gender" property="gender" z="SwK5tDnsTqXnEKU6Hs4QFTAkmCE="/>
+            <table:column date="true" dateTimePattern="${account_birthdate_date_format}" id="c_com_nomade_domain_Account_birthDate" property="birthDate" z="cxYqrAyBw6nZOrCCQVNJ0WoVfqA="/>
+            <table:column id="c_com_nomade_domain_Account_nationality" property="nationality" z="ZMAE3GEvuiH9o/smQsL8NwUtH6M="/>
+            <table:column id="c_com_nomade_domain_Account_adress" property="adress" z="XiOTi4rLkbMnfghqGZRwo51pjTw="/>
+        </table:table>
+    </page:list>
+</div>

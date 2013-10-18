@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-user"><!-- co --></i> Profil véhicule
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Pseudo :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">Balloch</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Photo de profil :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">
+						<img data-src="holder.js/50x50" src="#" alt="france"/>
+					</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Type</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">
+						<select class="form-control">
+							<option>2 roues routier</option>
+							<option>2 roues tout terrain</option>
+							<option>4x4</option>
+							<option>Camping-car</option>
+							<option>Camion</option>
+							<option>Camionette</option>
+							<option>Vélo</option>
+							<option>Voiture</option>
+							<option>Autre</option>
+						</select>
+					</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Modèle</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">Peugot 206 berline</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Couleur :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">Bleue</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Pays d'achat :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">Tunisie</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Année de mise en service :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">Select année</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					<p>Histoire/Description du véhicule :</p>
+				</div>
+				<div class="col-lg-6">
+					<p class="text-center">
+						<textarea class="form-control" row="1">Blah Blah Blah</textarea>
+					</p>
+				</div>
+				<div class="col-lg-3">
+					<a href="#"><p class="text-right">modifier</p></a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-lg-offset-9">
+					<p class="text-right">
+						<a href="index.html"><button type="button"
+								class="btn btn-default">
+								Accès au site <i class="icon-circle-arrow-right"><!-- co --></i>
+							</button></a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="footer" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<script src="${res}/js/jquery.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-transition.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-alert.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-modal.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-dropdown.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-scrollspy.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-tab.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-tooltip.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-popover.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-button.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-collapse.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-carousel.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-typeahead.js">
+	<!-- eh -->
+		
+	</script>
+</div>

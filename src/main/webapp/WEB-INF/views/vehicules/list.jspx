@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_Vehicule" items="${vehicules}" z="TOZ6G4WGCifKUdds7O/UYWRdE4s=">
+        <table:table data="${vehicules}" id="l_com_nomade_domain_Vehicule" path="/vehicules" z="XGnvGW96S7fRA4msdKZdch5idEo=">
+            <table:column id="c_com_nomade_domain_Vehicule_vehiculeName" property="vehiculeName" z="A0VxQOJprqYed67nQh7Dx3n+tdE="/>
+            <table:column id="c_com_nomade_domain_Vehicule_photo" property="photo" z="Y7CAgx1uJ8Kobikl1+ftmy8BSys="/>
+            <table:column id="c_com_nomade_domain_Vehicule_vehiculeType" property="vehiculeType" z="vc+jASa3CgDKCnnhIDYX33j+p04="/>
+            <table:column id="c_com_nomade_domain_Vehicule_vehiculeState" property="vehiculeState" z="5Plb0mtalaP8FqwbFh675nMfANI="/>
+            <table:column id="c_com_nomade_domain_Vehicule_model" property="model" z="L6KB7fyoUoHHlUdRpWHiowFEXYw="/>
+            <table:column id="c_com_nomade_domain_Vehicule_couleur" property="couleur" z="aamAWpi89LZK28D6+O7ryte7vW4="/>
+        </table:table>
+    </page:list>
+</div>

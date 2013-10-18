@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_nomade_domain_Account" modelAttribute="account" path="/accounts" render="${empty dependencies}" z="TEtx4caW/VHMUYMb45cJ9ai7l1Q=">
+        <field:input field="email" id="c_com_nomade_domain_Account_email" required="true" validationMessageCode="field_invalid_email" validationRegex="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" z="GqSUbH17yqWwfYSW78wD58+hxBU="/>
+        <field:input field="fullName" id="c_com_nomade_domain_Account_fullName" z="uG2qFXnwsJ19vM4TbxUq8c9o23M="/>
+        <field:select field="gender" id="c_com_nomade_domain_Account_gender" items="${genders}" path="genders" z="QiNQQV+D0DZOIhIjnX0Ar4zS9Rg="/>
+        <field:datetime dateTimePattern="${account_birthdate_date_format}" field="birthDate" id="c_com_nomade_domain_Account_birthDate" z="gT94vhbq+rdEfQ8SQyt+rn2ezRY="/>
+        <field:select field="nationality" id="c_com_nomade_domain_Account_nationality" items="${nationalitys}" path="nationalitys" z="ksnMajMCjKQgGWQy2q8+GJFUKpg="/>
+        <field:input field="adress" id="c_com_nomade_domain_Account_adress" z="3cU08USrjk4dGjR6bxANlO5jckk="/>
+        <field:input field="phoneNumber" id="c_com_nomade_domain_Account_phoneNumber" z="H4HL+r3vT8OOOdecKH2c5vIi5Xk="/>
+        <field:select field="confidentiality" id="c_com_nomade_domain_Account_confidentiality" items="${confidentialitys}" path="confidentialitys" z="AEik4MWtBqPKFjb4r7MZll9dP9o="/>
+        <field:checkbox field="newsletter" id="c_com_nomade_domain_Account_newsletter" z="+TEI3EZSbpxUXWi+ZHl4RH/Rh34="/>
+        <field:checkbox field="notifications" id="c_com_nomade_domain_Account_notifications" z="eiwUy0e2fzS+ZUmWiuvh40LSAG0="/>
+        <field:checkbox field="commercialParteners" id="c_com_nomade_domain_Account_commercialParteners" z="hFOHrfz7ZoNkQ3khZRXlupm3Ijo="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Account" render="${not empty dependencies}" z="eUX15mJOgINHUue5II8Ld+6kxR8="/>
+</div>
