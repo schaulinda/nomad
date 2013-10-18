@@ -14,6 +14,8 @@ public class Profil {
     private String pseudo;
 
     private String website;
+    
+    private String file;
 
     private Set<Langue> langues = new HashSet<Langue>();
 

@@ -20,7 +20,10 @@
 		<spring:url value="/users/vehicule" var="vehicule_update_url"></spring:url>
 		<form:form modelAttribute="nomade.vehicule" enctype="multipart/form-data" method="POST"
 			action="${vehicule_update_url}" id="form_id" >
-			<p class="text-danger">${message}</p>
+			 <p class="text-danger">${message}</p>
+			<c:if test=" ${not empty message} " >
+			
+			</c:if>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="form-group">
@@ -81,10 +84,10 @@
 	<!-- eh -->	
 	</script>
 	<script type="text/javascript">
-	$(function() {
+	
 		$(".chosen-select").chosen();
 		$('.datepicker').datepicker();  
-	});
+	
 	</script>
 </div>
 

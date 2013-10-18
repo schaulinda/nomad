@@ -18,8 +18,8 @@
 		<div class="row">
 		<spring:url value="/users/compte" var="compte_update_url"></spring:url>
 			<form:form modelAttribute="nomade.compte" action="${compte_update_url}" method="POST">
-			<p class="text-danger">${message}</p>
 				<div class="col-lg-6">
+					<p class="text-danger">${message}</p>
 					<div class="form-group">
 						<label for="email">Email address</label>
 						<form:input type="email" cssClass="form-control" path="email"
@@ -84,10 +84,14 @@
 			</form:form>
 		</div>
 	</div>
+	<spring:url var="res" value="/resources" />
+	<script src="${res}/js/jquery.js">
+	<!-- eh -->	
+	</script>
 	<script type="text/javascript">
-	$(function() {
+	
 		$(".chosen-select").chosen();
 		$('.datepicker').datepicker();  
-	});
+	
 	</script>
 </div>

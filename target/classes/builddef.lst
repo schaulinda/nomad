@@ -65,6 +65,7 @@ UTF-8
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/BeanNewItineraire_Roo_Equals.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/EtapeVehiculeController.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/EtapeVoyage_Roo_ToString.aj
+/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/AuthentificationHandler.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/Account.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/EtapeVoyage.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/AlbumServiceImpl.java
@@ -122,8 +123,8 @@ UTF-8
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/repository/FileRepository.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/Profil.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/UserController.java
-/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/EtapeVehicule_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/VehiculeController_Roo_Controller.aj
+/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/EtapeVehicule_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/EtapeVoyage_Roo_JavaBean.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/AccountService_Roo_Service.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/appinit/ApplicationInitFilter.java

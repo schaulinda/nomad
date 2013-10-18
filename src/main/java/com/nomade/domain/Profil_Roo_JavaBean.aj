@@ -26,6 +26,14 @@ privileged aspect Profil_Roo_JavaBean {
         this.website = website;
     }
     
+    public String Profil.getFile() {
+        return this.file;
+    }
+    
+    public void Profil.setFile(String file) {
+        this.file = file;
+    }
+    
     public Set<Langue> Profil.getLangues() {
         return this.langues;
     }
