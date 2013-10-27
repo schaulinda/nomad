@@ -20,11 +20,16 @@
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
 <link href="${res}/css/chosen.css" rel="stylesheet" />
 <link href="${res}/css/datepicker.css" rel="stylesheet" />
+<link href="${res}/css/select2.css" rel="stylesheet" />
 <style type="text/css">
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
 	background-color: #f4f1dd;
+}
+
+.col-lg-2 {
+	width: 12%;
 }
 </style>
 <link href="${res}/css/custom.css" rel="stylesheet" />
@@ -46,6 +51,8 @@ body {
 <link rel="apple-touch-icon" sizes="114x114"
 	href="${res}/img/apple-touch-icon-114x114.png" />
 <link rel="shortcut icon" href="${res}/img/favicon.ico" />
+<link href="${res}/css/bootstrap-editable.css" rel="stylesheet" />
+<title>Nomades</title>
 </head>
 
 <body>
@@ -254,7 +261,7 @@ body {
 							${nomade.vehicule.vehiculeName}
 						</c:otherwise>
 							</c:choose>
-						</a><a href="${users_url}/private/vehicule" id="img_veh1" > <c:choose>
+						</a><a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
 								<c:when test="${empty nomade.vehicule.photo}">
 									<img data-src="holder.js/46x46" src="data:img/png;"
 										style="margin-left: 10px;" class="img-rounded" />
@@ -262,7 +269,8 @@ body {
 								<c:otherwise>
 									<img alt="user"
 										src="${res}/images/profil/${nomade.vehicule.photo}"
-										class="img-rounded" style="margin-left: 10px;" width="46px" height="46px" />
+										class="img-rounded" style="margin-left: 10px;" width="46px"
+										height="46px" />
 								</c:otherwise>
 							</c:choose>
 						</a>
@@ -271,43 +279,38 @@ body {
 			</div>
 		</div>
 		<!-- <hr> -->
-		<div class="row">
-			<div class="col-lg-1" style="padding-left: 2px; padding-right: 0px;">
+		<div class="row" style="padding: 20px;">
+			<div class="col-lg-2" style="">
 				<h3>Pubs</h3>
 				<div class="row">
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="${res}/js/holder.js/110x80" src="data:img/png;" />
+					<div class="col-lg-12 ">
+						<img data-src="${res}/js/holder.js/140x100" src="data:img/png;" /><br />
 						<a>brikabra.com</a>
 					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					<div class="col-lg-12">
+						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
 					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
-					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					<div class="col-lg-12">
+						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-10" style="padding-left: 2px; padding-right: 0px;">
+			<div class="col-lg-9" style="">
 				<!-- body  -->
 				<tiles:insertAttribute name="body" />
 			</div>
-			<div class="col-lg-1" style="padding-left: 2px; padding-right: 0px;">
+			<div class="col-lg-2" style="">
 				<h3>Pubs</h3>
 				<div class="row">
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					<div class="col-lg-12 ">
+						<img data-src="${res}/js/holder.js/140x100" src="data:img/png;" /><br />
+						<a>brikabra.com</a>
 					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					<div class="col-lg-12">
+						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
 					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
-					</div>
-					<div class="col-sm-3 col-6 col-lg-12">
-						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					<div class="col-lg-12">
+						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
 					</div>
 				</div>
 			</div>
@@ -323,12 +326,14 @@ body {
 				class="traitgauche">Développement / Traduction </a>
 		</footer>
 	</div>
-
+	<div class="modal" id="loading">
+		<img alt="" src="${res}/img/ajax-loader.gif" />
+	</div>
 </body>
 <!-- Le javascript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-
+<tiles:insertAttribute name="footer" />
 
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
@@ -384,5 +389,18 @@ body {
 		}
 	}));
 </script>
-<tiles:insertAttribute name="footer" />
+
+<script type="text/javascript">
+jQuery.noConflict();
+(function( $ ) {
+	$(document).ajaxStart(function() {
+		console.log("fjgjg");
+		$("#loading").show();
+	});
+	$(document).ajaxStop(function() {
+		$("#loading").hide();
+	});
+})(jQuery);
+</script>
+
 </html>

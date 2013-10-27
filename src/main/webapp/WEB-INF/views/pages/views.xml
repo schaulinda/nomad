@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 <tiles-definitions>
-    <definition extends="privateLayout" name="pages/profil">
+   <!--  <definition extends="privateLayout" name="pages/profil">
         <put-attribute name="body" value="/WEB-INF/views/pages/profil.jspx"/>
     </definition>
      <definition extends="privateLayout" name="pages/new">
@@ -9,8 +9,8 @@
     </definition>
      <definition extends="privateLayout" name="pages/compte">
         <put-attribute name="body" value="/WEB-INF/views/pages/compte.jspx"/>
-    </definition>
-     <definition extends="privateLayout" name="pages/vehicule">
+    </definition> -->
+     <definition extends="privateLayout" name="pages/vehiculekl">
         <put-attribute name="body" value="/WEB-INF/views/pages/vehicule.jspx"/>
     </definition>
    

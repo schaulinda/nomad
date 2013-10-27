@@ -50,6 +50,11 @@ public class UserController {
 	@RequestMapping("/register")
     public String register(@Valid BeanRegister beanRegister, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		
+		if(!beanRegister.getPassword().equals(beanRegister.getConfirmPassword())){
+			bindingResult.rejectValue("password", "password_diff_confirmPassword");
+			
+		}
+		
 		List<UserNomade> list = userService.findByUserName(beanRegister.getUserName());
 		if(list!=null && list.size()>0){
 			bindingResult.rejectValue("userName", "username_already_exist", "username already exist!");
@@ -65,7 +70,7 @@ public class UserController {
 			bindingResult.rejectValue("password", "password_as_username", "password can't be same as username");
 		}
         if (bindingResult.hasErrors()) {
-           
+           uiModel.addAttribute("beanRegister", beanRegister);
             return "login";
         }
         uiModel.asMap().clear();
@@ -73,20 +78,36 @@ public class UserController {
 		roleNames.add(RoleName.ROLE_SIMPLE_USER);
         UserNomade nomade = new UserNomade(beanRegister.getUserName(), beanRegister.getPassword(), true, false, roleNames);
         nomade.getCompte().setEmail(beanRegister.getEmail());
-        userService.saveUserNomade(nomade);
         StringBuilder stringBuilder = new StringBuilder().append("<b>Active your profil by cliking the link bellow</b>")
         				   .append("<br/>")
         				   .append("\n")
         				   .append("http://localhost:8900/users/activate/")
         				   .append(nomade.getUserName());
         				   
-        notificationService.sendMessage(beanRegister.getEmail(), stringBuilder.toString());
+        try {
+			notificationService.sendMessage(beanRegister.getEmail(), stringBuilder.toString());
+			
+			userService.saveUserNomade(nomade);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			nomade.setDisableLogin(false);
+			userService.saveUserNomade(nomade);
+		}
         return "succesRegister";
     }
 	
 	@RequestMapping("/activate/{username}")
     public String activate(@PathVariable("username") String username, Model uiModel, HttpServletRequest httpServletRequest) {
-		UserNomade nomade = userService.findByUserName(username).get(0);
+		UserNomade nomade;
+		try {
+			nomade = userService.findByUserName(username).get(0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			uiModel.addAttribute("error", "bad link!");
+			return "accountActivate";
+		}
 		nomade.setDisableLogin(false);
 		userService.updateUserNomade(nomade);
 		return "accountActivate";
@@ -99,7 +120,19 @@ public class UserController {
 		
 		uiModel.addAttribute("message", message);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		return "pages/"+page;
+		return "profil/"+page;
+		
+	}
+	
+	@RequestMapping("/updateField")
+    public String updateField(Model uiModel, HttpServletRequest httpServletRequest,
+    		@RequestParam("name") String name, @RequestParam("pk") String pk, @RequestParam("value") String value) {
+		System.out.print("name: "+name);
+		System.out.print("pk: "+pk);
+		System.out.print("value: "+value);
+		
+		
+		return "profil/";
 		
 	}
 	
@@ -183,19 +216,7 @@ public class UserController {
 	
 	
 	
-	@RequestMapping("/passwordResetForm")
-    public String passwordResetForm(Model uiModel, HttpServletRequest httpServletRequest) {
-		
-		return "passwordResetForm";
-		
-	}
-	@RequestMapping("/sendPassword")
-    public String sendpassword(@RequestParam("email") String email, Model uiModel, HttpServletRequest httpServletRequest) {
-		
-		
-		return "accountActivate";
-		
-	}
+	
 	
 	void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("userNomade_accountexpiration_date_format", "dd-MM-yyyy HH:mm");

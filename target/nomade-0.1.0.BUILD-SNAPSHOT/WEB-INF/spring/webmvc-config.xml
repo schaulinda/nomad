@@ -64,7 +64,7 @@
 <bean class="com.nomade.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
  
  <bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
-        <property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
+        <property name="viewClass" value="org.springframework.js.ajax.tiles2.AjaxTilesView"/>
     </bean>
     <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
     <property name="definitions">

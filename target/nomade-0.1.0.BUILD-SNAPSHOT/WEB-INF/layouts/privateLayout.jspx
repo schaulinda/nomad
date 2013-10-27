@@ -18,6 +18,8 @@
 <spring:url var="res" value="/resources" />
 <!-- Le styles -->
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
+<link href="${res}/css/chosen.css" rel="stylesheet" />
+<link href="${res}/css/datepicker.css" rel="stylesheet" />
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -161,7 +163,7 @@ body {
 				<ul class="nav navbar-nav pull-right">
 					<li>
 						<div class="input-group searchinput">
-							<input type="text" class="form-control" value="23" /> <span
+							<input type="text" class="form-control" /> <span
 								class="input-group-btn">
 								<button class="btn btn-default" type="button">
 									<i class="icon-search"> <!-- co -->
@@ -204,8 +206,23 @@ body {
 		<!-- block top -->
 		<div class="row">
 			<div class="col-lg-2 user col-sm-2">
-				<a><img alt="user" src="${res}/img/avatar.png"
-					class="img-rounded" /> guymoyo</a>
+				<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
+						<c:when test="${empty nomade.profil.file}">
+							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
+						</c:when>
+						<c:otherwise>
+							<img alt="user" src="${res}/images/profil/${nomade.profil.file}"
+								class="img-rounded" />
+						</c:otherwise>
+					</c:choose> <c:choose>
+						<c:when test="${empty nomade.profil.pseudo}">
+							${nomade.userName}
+						</c:when>
+						<c:otherwise>
+							${nomade.profil.pseudo}
+						</c:otherwise>
+					</c:choose>
+				</a>
 			</div>
 			<div class="col-lg-6 col-sm-6">
 				<!--affichage du menu pour les grands écrans-->
@@ -229,9 +246,26 @@ body {
 						</select>
 					</div>
 					<div class="col-lg-5 col-sm-5 col-6 pull-right">
-						<a href="gestionvehicule.html">Balloch</a><a><img
-							data-src="holder.js/46x46" src="data:img/png;"
-							style="margin-left: 10px;" /></a>
+						<a href="${users_url}/private/vehicule" id="img_veh"> <c:choose>
+								<c:when test="${empty nomade.vehicule.vehiculeName}">
+							nom vehicule
+						</c:when>
+								<c:otherwise>
+							${nomade.vehicule.vehiculeName}
+						</c:otherwise>
+							</c:choose>
+						</a><a href="${users_url}/private/vehicule" id="img_veh1" > <c:choose>
+								<c:when test="${empty nomade.vehicule.photo}">
+									<img data-src="holder.js/46x46" src="data:img/png;"
+										style="margin-left: 10px;" class="img-rounded" />
+								</c:when>
+								<c:otherwise>
+									<img alt="user"
+										src="${res}/images/profil/${nomade.vehicule.photo}"
+										class="img-rounded" style="margin-left: 10px;" width="46px" height="46px" />
+								</c:otherwise>
+							</c:choose>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -295,6 +329,7 @@ body {
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 
+
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "profil_id",
@@ -316,6 +351,33 @@ body {
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "vehicule_id",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_profil",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_veh",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_veh1",
 		event : "onclick",
 		params : {
 			fragments : "body"

@@ -20,6 +20,10 @@ public class BeanRegister {
     @NotNull
     @Size(min = 6, max = 20)
     private String password;
+    
+    @NotNull
+    @Size(min = 6, max = 20)
+    private String confirmPassword;
 
     @NotNull
     @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message="Invalid Email Adress")
@@ -39,6 +43,14 @@ public class BeanRegister {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getEmail() {

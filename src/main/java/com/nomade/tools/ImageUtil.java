@@ -21,7 +21,8 @@ public class ImageUtil {
 			/*File file = new File(httpServletRequest.getContextPath() + "/resources/" + filename);
 			FileUtils.writeByteArrayToFile(file, image.getBytes());*/
 			
-			File fileDIr = new File( "./src/main/webapp/images/profil/");
+			//System.getProperty("user.home")File fileDIr = new File( "./src/main/webapp/images/profil/");
+			File fileDIr = new File(System.getProperty("user.home")+"/");
 			/*fileDIr.mkdirs();*/
 			File diskFile = new File(fileDIr, filename);
 			FileOutputStream fileOutputStream = new FileOutputStream(diskFile);

@@ -306,7 +306,13 @@ ul.icons li [class*=" icon-"] {
 .icon-ok:before {
   content: "\f00c";
 }
+.glyphicon-ok:before {
+  content: "\f00c";
+}
 .icon-remove:before {
+  content: "\f00d";
+}
+.glyphicon-remove:before {
   content: "\f00d";
 }
 .icon-zoom-in:before {

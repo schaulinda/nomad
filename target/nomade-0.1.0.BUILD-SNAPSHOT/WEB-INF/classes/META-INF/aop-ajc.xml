@@ -4,15 +4,12 @@
 <aspect name="com.nomade.web.UserController_Roo_Controller"/>
 <aspect name="com.nomade.domain.EtapeVoyage_Roo_ToString"/>
 <aspect name="com.nomade.service.EtapeVehiculeService_Roo_Service"/>
-<aspect name="com.nomade.web.ProfilController_Roo_Controller"/>
 <aspect name="com.nomade.web.EtapeVehiculeController_Roo_Controller"/>
 <aspect name="com.nomade.web.AlbumController_Roo_Controller"/>
-<aspect name="com.nomade.repository.ProfilRepository_Roo_Mongo_Repository"/>
 <aspect name="com.nomade.domain.EtapeVoyage_Roo_Mongo_Entity"/>
 <aspect name="com.nomade.domain.BeanRegister_Roo_Equals"/>
 <aspect name="com.nomade.service.VehiculeService_Roo_Service"/>
 <aspect name="com.nomade.web.FileController_Roo_Controller"/>
-<aspect name="com.nomade.service.ProfilService_Roo_Service"/>
 <aspect name="com.nomade.repository.EtapeVehiculeRepository_Roo_Mongo_Repository"/>
 <aspect name="com.nomade.service.EtapeVoyageServiceImpl_Roo_Service"/>
 <aspect name="com.nomade.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
@@ -31,7 +28,6 @@
 <aspect name="com.nomade.service.AlbumService_Roo_Service"/>
 <aspect name="com.nomade.domain.BeanRegister_Roo_ToString"/>
 <aspect name="com.nomade.web.VehiculeController_Roo_Controller"/>
-<aspect name="com.nomade.service.ProfilServiceImpl_Roo_Service"/>
 <aspect name="com.nomade.domain.File_Roo_Mongo_Entity"/>
 <aspect name="com.nomade.domain.Profil_Roo_ToString"/>
 <aspect name="com.nomade.domain.EtapeVehicule_Roo_ToString"/>

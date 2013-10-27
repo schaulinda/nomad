@@ -89,18 +89,22 @@
 						modelAttribute="beanRegister">
 
 						<form:errors cssClass="errors" path="email" cssStyle="color:red;" />
-						<input class="form-control" name="email" placeholder="email"
+						<form:input class="form-control" path="email" placeholder="email"
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 							required="required" type="text" />
 
 						<form:errors cssClass="errors" path="userName"
 							cssStyle="color:red;" />
-						<input class="form-control" name="userName" placeholder="Username"
+						<form:input class="form-control" path="userName" placeholder="Username"
 							required="required" min="3" type="text" />
 
 						<form:errors cssClass="errors" path="password"
 							cssStyle="color:red;" />
-						<input class="form-control" name="password" placeholder="Password"
+						<form:input class="form-control" path="password" placeholder="Password"
+							required="required" min="6" type="password" />
+						<form:errors cssClass="errors" path="confirmPassword"
+							cssStyle="color:red;" />
+						<form:input class="form-control" path="confirmPassword" placeholder="confirm Password"
 							required="required" min="6" type="password" />
 						<br />
 						<button class="btn btn-warning btn-block" type="submit">Sign

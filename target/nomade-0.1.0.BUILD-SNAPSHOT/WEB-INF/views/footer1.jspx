@@ -7,11 +7,21 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
+	<spring:url var="res" value="/resources" />
+
 	<script src="${res}/js/jquery.js">
 	<!-- eh -->
 		
 	</script>
+	<script src="${res}/js/jquery-1.7.2.min.js">
+	<!-- eh -->
+		
+	</script>
 	<script src="${res}/js/bootstrap.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-datepicker.js">
 	<!-- eh -->
 		
 	</script>
@@ -63,4 +73,29 @@
 	<!-- eh -->
 		
 	</script>
+	<script src="${res}/js/chosen.jquery.js">
+	<!-- eh -->
+		
+	</script>
+	<script type="text/javascript" src="${res}/js/noty/jquery.noty.js"></script>
+	<script type="text/javascript" src="${res}/js/noty/layouts/topLeft.js"></script>
+
+	<script type="text/javascript">
+	function generate(type) {
+	  	var n = noty({
+	  		text: type,
+	  		type: type,
+	      dismissQueue: true,
+	      modal: true,
+	  		layout: 'topLeft',
+	  		theme: 'defaultTheme'
+	  	});
+	  	console.log('html: '+n.options.id);
+	  }
+		$(function() {
+			$(".chosen-select").chosen();
+			$('.datepicker').datepicker();
+		});
+	</script>
+
 </div>

@@ -21,6 +21,10 @@
 	<!-- eh -->
 		
 	</script>
+	<script src="${res}/js/bootstrap-editable.js">
+	<!-- eh -->
+		
+	</script>
 	<script src="${res}/js/bootstrap-datepicker.js">
 	<!-- eh -->
 		
@@ -77,25 +81,38 @@
 	<!-- eh -->
 		
 	</script>
-	<script type="text/javascript" src="${res}/js/noty/jquery.noty.js"></script>
-	<script type="text/javascript" src="${res}/js/noty/layouts/topLeft.js"></script>
+	<script src="${res}/js/select2.js">
+	<!-- eh -->
+		
+	</script>
+	<script type="text/javascript" src="${res}/js/noty/jquery.noty.js">
+	<!-- eh -->
+		
+	</script>
+	<script type="text/javascript" src="${res}/js/noty/layouts/topLeft.js">
+	<!-- eh -->
+		
+	</script>
 
 	<script type="text/javascript">
-	function generate(type) {
-	  	var n = noty({
-	  		text: type,
-	  		type: type,
-	      dismissQueue: true,
-	      modal: true,
-	  		layout: 'topLeft',
-	  		theme: 'defaultTheme'
-	  	});
-	  	console.log('html: '+n.options.id);
-	  }
-		$(function() {
-			$(".chosen-select").chosen();
-			$('.datepicker').datepicker();
-		});
+		jQuery.noConflict();
+		(function($) {
+			function generate(type) {
+				var n = noty({
+					text : type,
+					type : type,
+					dismissQueue : true,
+					modal : true,
+					layout : 'topLeft',
+					theme : 'defaultTheme'
+				});
+				console.log('html: ' + n.options.id);
+			}
+			$(function() {
+				$(".chosen-select").chosen();
+				$('.datepicker').datepicker();
+			});
+		})(jQuery);
 	</script>
 
 </div>
