@@ -3,9 +3,11 @@ package com.nomade.web;
 import java.util.Set;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nomade.domain.BeanRegister;
 import com.nomade.domain.RoleName;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.SecurityUtil;
@@ -15,7 +17,7 @@ import com.nomade.security.SecurityUtil;
 public class HomeController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String selectPage() {
+	public String selectPage(Model uiModel) {
 		UserNomade nomade = new SecurityUtil().getUserNomade();
 
 		if (nomade != null) {
@@ -29,6 +31,7 @@ public class HomeController {
 			}
 
 		}
+		
 		return "login";
 	}
 

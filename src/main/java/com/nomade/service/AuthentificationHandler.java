@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,8 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service(value="authentificationHandler")
-public class AuthentificationHandler extends SimpleUrlAuthenticationSuccessHandler implements LogoutSuccessHandler {
+public class AuthentificationHandler extends SimpleUrlAuthenticationSuccessHandler 
+implements LogoutSuccessHandler{
 	
 	
 	@Override
@@ -42,7 +44,8 @@ public class AuthentificationHandler extends SimpleUrlAuthenticationSuccessHandl
 
 
 	
-	/* (non-Javadoc)
+	/* (non-Javadoc)@Override
+    public void onAuthenticationFailure
 	 * @see org.springframework.security.web.authentication.logout.LogoutSuccessHandler#onLogoutSuccess(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.security.core.Authentication)
 	 */
 	@Override

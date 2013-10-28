@@ -79,8 +79,8 @@ UTF-8
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/ApplicationConversionServiceFactoryBean.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/BeanPasswordReset_Roo_Equals.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/EtapeVoyageServiceImpl_Roo_Service.aj
-/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/Vehicule_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/AlbumController.java
+/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/Vehicule_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/tools/IdGenerator.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/Profil_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/EtapeVehiculeServiceImpl_Roo_Service.aj
@@ -137,4 +137,5 @@ UTF-8
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/domain/File_Roo_ToString.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/EtapeVoyageService_Roo_Service.aj
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/EtapeVehiculeServiceImpl.java
+/home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/service/LoginPathInterceptor.java
 /home/adorsys/mongoWorkspace/nomade/src/main/java/com/nomade/web/EtapeVoyageController.java

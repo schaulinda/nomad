@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nomade.domain.BeanRegister;
@@ -34,6 +36,7 @@ import com.nomade.domain.VehiculeState;
 import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.SecurityUtil;
+import com.nomade.service.UserService;
 import com.nomade.tools.ImageUploadException;
 import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
@@ -124,16 +127,62 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping("/updateField")
-    public String updateField(Model uiModel, HttpServletRequest httpServletRequest,
-    		@RequestParam("name") String name, @RequestParam("pk") String pk, @RequestParam("value") String value) {
-		System.out.print("name: "+name);
-		System.out.print("pk: "+pk);
-		System.out.print("value: "+value);
+	@RequestMapping(method=RequestMethod.POST, value="updateField")
+    public @ResponseBody String updateField(Model uiModel, HttpServletRequest httpServletRequest, HttpServletResponse response,
+    		@RequestParam("name") String name, @RequestParam("pk") String pk,
+    		@RequestParam(value="value", required=false) String value,
+    		@RequestParam(value="value[]", required=false) String[] values) {
 		
+		UserNomade userNomade = securite.getUserNomade();
 		
-		return "profil/";
+		if(name.equals("username") && value!=null){
+			System.out.print("username...");
+			List<UserNomade> findByUserName = userService.findByUserName(value);
+			if(findByUserName!=null && findByUserName.size()>0 && !findByUserName.get(0).equals(userNomade.getUserName())){
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					return "username ready used";
+					
+			}else{
+				userNomade.setUserName(value);
+				userService.updateUserNomade(userNomade);
+				return"";
+			}
+		}
+		if(name.equals("website") && value!=null){
+			userNomade.getProfil().setWebsite(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("butVoyage") && value!=null){
+			userNomade.getProfil().setButVoyage(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("metier") && value!=null){
+			userNomade.getProfil().setMetier(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("visitedCountry") && values!=null){
+			Set<Country> visitedCountry = new HashSet<Country>();
+			for(String s:values){
+				visitedCountry.add(Country.valueOf(s));
+			}
+			userNomade.getProfil().setVisitedCountry(visitedCountry);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("langues") && values!=null){
+			Set<Langue> langues = new HashSet<Langue>();
+			for(String s:values){
+				langues.add(Langue.valueOf(s));
+			}
+			userNomade.getProfil().setLangues(langues);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
 		
+		return "";
 	}
 	
 	@RequestMapping("/profil")
