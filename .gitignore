@@ -1,0 +1,17 @@
+# ignore bin/ target/ setting/
+bin/
+target/
+.settings/
+
+#ignore ~ files
+
+*~
+*.~
+*.~**
+hs_err_pid**
+**.xls
+#ignore some hidden files
+
+.classpath
+.project
+
