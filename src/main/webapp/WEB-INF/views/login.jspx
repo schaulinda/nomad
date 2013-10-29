@@ -23,8 +23,8 @@
 					</b>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">French</a></li>
-						<li><a href="#">English</a></li>
+						<li><util:language label="French" locale="fr"/></li>
+						<li><util:language label="English" locale="en"/></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -129,5 +129,7 @@
 		document.getElementById('j_username').focus();
 	});
 	</script>
-
+<script src="${resources}/js/jquery.js">
+	<!-- eh -->	
+</script>
 </div>
