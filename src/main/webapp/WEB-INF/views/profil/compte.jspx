@@ -132,7 +132,7 @@
 								</tr>
 
 								<tr>
-									<td>Pays visites</td>
+									<td>birthDate</td>
 									<td><a href="#" id="birthDate" data-type="date"
 										data-name="birthDate" data-pk="1"
 										data-url="/users/updateField"
@@ -143,10 +143,10 @@
 								</tr>
 
 								<tr>
-									<td>Metier exerce durant le voyage</td>
+									<td>Adresse</td>
 									<td><a href="#" id="metier" data-type="text"
-										data-url="/users/updateField" data-pk="1" data-name="metier"
-										data-value="${nomade.profil.metier}"
+										data-url="/users/updateField" data-pk="1" data-name="adress"
+										data-value="${nomade.compte.adress}"  placeholder="cameroun douala rue 38"
 										class="editable editable-click"></a></td>
 
 								</tr>
