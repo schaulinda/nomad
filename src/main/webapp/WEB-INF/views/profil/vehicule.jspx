@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<div class="">
+		<!--affichage du menu pour les grands écrans-->
+		<spring:url value="/users" var="users_url"></spring:url>
+		<ul class="nav nav-tabs nav-justified">
+			<li><a href="${users_url}/private/profil" id="id_profil"><i
+					class="icon-user">
+						<!-- co -->
+				</i> Profil</a></li>
+			<li><a href="${users_url}/private/compte" id="id_compte"><i
+					class="	icon-briefcase">
+						<!-- co -->
+				</i> Compte</a></li>
+			<li class="active"><a href="${users_url}/private/vehicule"
+				id="id_vehicule"><i class="icon-truck "> <!-- co -->
+				</i> Vehicule</a></li>
+			<li><a href="${users_url}/private/passwordReset"
+				id="id_password"> <i class="icon-lock "> <!-- co -->
+				</i> Password
+			</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+		<div class="tab-pane active">
+			<div class="panel">vehicule</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_profil",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_compte",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_vehicule",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_password",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<spring:url var="res" value="/resources" />
+	<script src="${res}/js/jquery.js">
+	<!-- eh -->	
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(document).ajaxStart(function() {
+				$("#loading").show();
+			});
+			$(document).ajaxStop(function() {
+				$("#loading").hide();
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(".chosen-select").chosen();
+		$('.datepicker').datepicker();
+	</script>
+</div>

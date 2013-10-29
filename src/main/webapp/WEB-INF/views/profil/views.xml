@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="privateLayout" name="profil/profil">
+        <put-attribute name="body" value="/WEB-INF/views/profil/profil.jspx"/>
+    </definition>
+     <definition extends="privateLayout" name="profil/new">
+        <put-attribute name="body" value="/WEB-INF/views/profil/new.jspx"/>
+    </definition>
+     <definition extends="privateLayout" name="profil/compte">
+        <put-attribute name="body" value="/WEB-INF/views/profil/compte.jspx"/>
+    </definition>
+     <definition extends="privateLayout" name="profil/vehicule">
+        <put-attribute name="body" value="/WEB-INF/views/profil/vehicule.jspx"/>
+    </definition>
+   <definition extends="privateLayout" name="profil/passwordReset">
+        <put-attribute name="body" value="/WEB-INF/views/profil/passwordReset.jspx"/>
+    </definition>
+</tiles-definitions>

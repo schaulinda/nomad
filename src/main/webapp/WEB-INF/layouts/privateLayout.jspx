@@ -391,7 +391,7 @@ body {
 </script>
 
 <script type="text/javascript">
-jQuery.noConflict();
+/* jQuery.noConflict();
 (function( $ ) {
 	$(document).ajaxStart(function() {
 		console.log("fjgjg");
@@ -400,7 +400,7 @@ jQuery.noConflict();
 	$(document).ajaxStop(function() {
 		$("#loading").hide();
 	});
-})(jQuery);
+})(jQuery); */
 </script>
 
 </html>
