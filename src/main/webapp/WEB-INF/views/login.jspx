@@ -86,7 +86,7 @@
 					<legend>New to Petit Nomade?</legend>
 					<spring:url value="/users/register" var="register_url"></spring:url>
 					<form:form action="${register_url}" method="post"
-						modelAttribute="beanRegister">
+						modelAttribute="beanRegister" id="idform">
 
 						<form:errors cssClass="errors" path="email" cssStyle="color:red;" />
 						<form:input class="form-control" path="email" placeholder="email"
@@ -97,15 +97,15 @@
 							cssStyle="color:red;" />
 						<form:input class="form-control" path="userName" placeholder="Username"
 							required="required" min="3" type="text" />
-
+							
 						<form:errors cssClass="errors" path="password"
 							cssStyle="color:red;" />
 						<form:input class="form-control" path="password" placeholder="Password"
-							required="required" min="6" type="password" />
+							required="required" min="6" type="password" id="password" />
 						<form:errors cssClass="errors" path="confirmPassword"
 							cssStyle="color:red;" />
 						<form:input class="form-control" path="confirmPassword" placeholder="confirm Password"
-							required="required" min="6" type="password" />
+							required="required" min="6" type="password" id="confirmedPassword" />
 						<br />
 						<button class="btn btn-warning btn-block" type="submit">Sign
 							up</button>
@@ -132,4 +132,12 @@
 <script src="${resources}/js/jquery.js">
 	<!-- eh -->	
 </script>
+	<script type="text/javascript">
+	 $("#idform").submit(function(){
+	      if($("#password").val() != $("#confirmedPassword").val()){
+	    	  alert("Les mots de passe ne correspondent pas");
+	      }
+	      return false;
+	    });
+	</script>
 </div>
