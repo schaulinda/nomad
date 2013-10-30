@@ -122,7 +122,7 @@
 									<td><a href="#" id="gender" data-type="select2"
 										data-name="gender" data-pk="1" data-url="/users/updateField"
 										class="editable editable-click" style="color: gray;"
-										data-placeholder="click to selection languages"> <c:forEach
+										data-placeholder="click to select your gender"> <c:forEach
 												var="item" items="${nomade.compte.genders}" varStatus="loop">
 			                   				${item}
 			                    			<c:if test="${!loop.last}">,</c:if>
@@ -135,7 +135,7 @@
 									<td>birthDate</td>
 									<td><a href="#" id="birthDate" data-type="date"
 										data-name="birthDate" data-pk="1"
-										data-url="/users/updateField"
+										data-url="/users/updateField" data-value="birthDate"
 										class="editable editable-click " style="color: gray;">
 											
 										</a></td>
@@ -151,12 +151,38 @@
 
 								</tr>
 								<tr>
-									<td>But du voyage</td>
+									<td>phone Number</td>
 									<td><a href="#" id="butVoyage" data-type="textarea"
-										data-pk="1" data-name="butVoyage"
-										data-url="/users/updateField"
-										data-value="${nomade.profil.butVoyage}"
+										data-pk="1" data-name="phoneNumber"
+										data-url="/users/updateField" placeholder="+23796857425"
+										data-value="${nomade.compte.phoneNumber}"
 										class="editable editable-click"> <!-- co -->
+									</a></td>
+
+								</tr>
+								<tr>
+									<td>nationality</td>
+									<td><a href="#" id="nationality" data-type="select2"
+										data-name="nationality" data-pk="1" data-url="/users/updateField"
+										class="editable editable-click" style="color: gray;"
+										data-placeholder="click to selection nationality"> <c:forEach
+												var="item" items="${nationalitys}" varStatus="loop">
+			                   				${item}
+			                    			<c:if test="${!loop.last}">,</c:if>
+											</c:forEach>
+									</a></td>
+
+								</tr>
+								<tr>
+									<td>Gender</td>
+									<td><a href="#" id="confidentialitys" data-type="select2"
+										data-name="confidentialitys" data-pk="1" data-url="/users/updateField"
+										class="editable editable-click" style="color: gray;"
+										data-placeholder="click to selection confidentiality"> <c:forEach
+												var="item" items="${confidentialitys}" varStatus="loop">
+			                   				${item}
+			                    			<c:if test="${!loop.last}">,</c:if>
+											</c:forEach>
 									</a></td>
 
 								</tr>
