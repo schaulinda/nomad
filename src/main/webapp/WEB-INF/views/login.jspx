@@ -40,8 +40,8 @@
 		<div class="row">
 			<div
 				class="col-lg-5 col-lg-offset-2 front-welcome-text col-sm-5 col-sm-offset-1 col-12">
-				<h3>Welcome to Petit Nomade.</h3>
-				<p>Travel Together, lorem up um isodor market with popo mexico.</p>
+				<h3><spring:message code="h.welcome" /></h3>
+				<p><spring:message code="p.travel" /></p>
 			</div>
 
 			<div class="col-lg-3 col-sm-5 col-12">
@@ -65,25 +65,25 @@
 						var="form_url" />
 					<form name="f" action="${fn:escapeXml(form_url)}" method="POST">
 
+						<spring:message code="input.usernameOrEmail" var="inputUserNameOrEmail"/>
+						<spring:message code="input.password" var="inputPassword" />
 						<input type="text" id="j_username" name='j_username'
-							class="form-control" placeholder="Username or Email" /> <input
+							class="form-control" placeholder="${fn:escapeXml(inputUserNameOrEmail)}" /> <input
 							type="password" id="j_password" required="required"
-							class="form-control" name="j_password" placeholder="Password" />
+							class="form-control" name="j_password" placeholder="${inputPassword }" />
 
 						<label class="checkbox col-lg-6 col-sm-6 col-6"> <input
 							type="checkbox" name="_spring_security_remember_me" value="1" /><span
-							style="font-size: 13px; color: gray; font-weight: lighter;">
-								Remember Me </span>
+							style="font-size: 13px; color: gray; font-weight: lighter;"><spring:message code="span.remember" /></span>
 						</label> <a class="col-lg-6 col-sm-6 col-6" href=""
-							style="font-size: 13px; margin-top: 10px; cursor: pointer;">Forgot
-							password?</a>
+							style="font-size: 13px; margin-top: 10px; cursor: pointer;"><spring:message code="a.forgotPassword" /></a>
 
 						<button id="proceed" type="submit" name="submit"
-							class="btn btn-info btn-block">Sign in</button>
+							class="btn btn-info btn-block"><spring:message code="button.connection" /></button>
 					</form>
 				</div>
 				<div class="well">
-					<legend>New to Petit Nomade?</legend>
+					<legend><spring:message code="legend.newOnPN" /></legend>
 					<spring:url value="/users/register" var="register_url"></spring:url>
 					<form:form action="${register_url}" method="post"
 						modelAttribute="beanRegister" id="idform">
@@ -93,35 +93,37 @@
 							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 							required="required" type="text" />
 
+						<spring:message code="input.username" var="inputUserName" />
+						<spring:message code="input.confirmPassword" var="inputConfirmPassword" />
 						<form:errors cssClass="errors" path="userName"
 							cssStyle="color:red;" />
-						<form:input class="form-control" path="userName" placeholder="Username"
+						<form:input class="form-control" path="userName" placeholder="${fn:escapeXml(inputUserName)}"
 							required="required" min="3" type="text" />
 							
 						<form:errors cssClass="errors" path="password"
 							cssStyle="color:red;" />
-						<form:input class="form-control" path="password" placeholder="Password"
+						<form:input class="form-control" path="password" placeholder="${inputPassword}"
 							required="required" min="6" type="password" id="password" />
 						<form:errors cssClass="errors" path="confirmPassword"
 							cssStyle="color:red;" />
-						<form:input class="form-control" path="confirmPassword" placeholder="confirm Password"
+						<form:input class="form-control" path="confirmPassword" placeholder="${inputConfirmPassword}"
 							required="required" min="6" type="password" id="confirmedPassword" />
 						<br />
-						<button class="btn btn-warning btn-block" type="submit">Sign
-							up</button>
+						<button class="btn btn-warning btn-block" type="submit"><spring:message code="button.signUp" /></button>
 					</form:form>
 				</div>
 			</div>
 		</div>
 		<br />
 		<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 </a> | <a href="#" class="traitgauche">Contact
-			</a> | <a href="#" class="traitgauche">Confidentialité </a> | <a href="#"
-				class="traitgauche">Mentions légales </a> | <a href="#"
-				class="traitgauche">Aide / FAQ </a> | <a href="#"
-				class="traitgauche">Professionels </a> | <a href="#"
-				class="traitgauche">Annonceurs </a> | <a href="#"
-				class="traitgauche">Développement / Traduction </a>
+			<a href="#">© Petit Nomad 2238 <br /><spring:message code="a.whoAreWe" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.contact" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.confidentiality" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.userAgreement" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.helpFAQ" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.professionals" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.advertiser" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.developmentTranslation" /></a>
 		</footer>
 	</div>
 	<script type="text/javascript">
