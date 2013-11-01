@@ -13,27 +13,179 @@
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="${users_url}/private/profil" id="id_profil"><i
-					class="icon-user">
-						<!-- co -->
+					class="icon-user"> <!-- co -->
 				</i> Profil</a></li>
 			<li><a href="${users_url}/private/compte" id="id_compte"><i
-					class="	icon-briefcase">
-						<!-- co -->
+					class="	icon-briefcase"> <!-- co -->
 				</i> Compte</a></li>
 			<li class="active"><a href="${users_url}/private/vehicule"
 				id="id_vehicule"><i class="icon-truck "> <!-- co -->
 				</i> Vehicule</a></li>
 			<li><a href="${users_url}/private/passwordReset"
 				id="id_password"> <i class="icon-lock "> <!-- co -->
-				</i> Password
+				</i> Securite
 			</a></li>
 		</ul>
 	</div>
 	<div class="tab-content">
 		<div class="tab-pane active">
-			<div class="panel">vehicule</div>
+			<div class="panel">
+
+				<table id="user" class="table table-bordered table-striped"
+					style="clear: both">
+					<tbody>
+
+						<tr>
+							<td class="span3" width="40%">vehiculeName</td>
+							<td class="span4"><a href="#" id="vehiculeName"
+								data-placeholder="Christophe@gmail.com"
+								data-url="/users/updateField" data-type="text" data-pk="1"
+								data-name="vehiculeName" class="editable editable-click"
+								data-value="${nomade.vehicule.vehiculeName}"></a></td>
+
+						</tr>
+
+						<tr>
+							<td>vehiculeType</td>
+							<td><a href="#" id="vehiculeType" data-type="select2"
+								data-name="vehiculeType" data-pk="1"
+								data-url="/users/updateField" class="editable editable-click"
+								style="color: gray;"
+								data-placeholder="click to select your vehiculeState"> <c:forEach
+										var="item" items="${nomade.vehicule.vehiculeType}"
+										varStatus="loop">
+			                   				${item}
+			                    			<c:if test="${!loop.last}">,</c:if>
+									</c:forEach>
+							</a></td>
+						</tr>
+
+
+						<tr>
+							<td>vehiculeState</td>
+							<td><a href="#" id="vehiculeState" data-type="select2"
+								data-name="vehiculeState" data-pk="1"
+								data-url="/users/updateField" class="editable editable-click"
+								style="color: gray;"
+								data-placeholder="click to select your vehiculeState"> <c:forEach
+										var="item" items="${nomade.vehicule.vehiculeState}"
+										varStatus="loop">
+			                   				${item}
+			                    			<c:if test="${!loop.last}">,</c:if>
+									</c:forEach>
+							</a></td>
+
+						</tr>
+
+						<tr>
+							<td>model</td>
+							<td><a href="#" id="model" data-type="text"
+								data-url="/users/updateField" data-pk="1" data-name="model"
+								data-value="${nomade.vehicule.model}" placeholder="peugeot"
+								class="editable editable-click"></a></td>
+
+						</tr>
+						<tr>
+							<td>couleur</td>
+							<td><a href="#" id="couleur" data-type="text"
+								data-url="/users/updateField" data-pk="1" data-name="couleur"
+								data-value="${nomade.vehicule.couleur}" placeholder="jaune"
+								class="editable editable-click"></a></td>
+
+						</tr>
+
+						<tr>
+							<td>countrys</td>
+							<td><a href="#" id="country" data-type="select2"
+								data-name="country" data-pk="1" data-url="/users/updateField"
+								class="editable editable-click" style="color: gray;"
+								data-placeholder="click to select your vehiculeState"> <c:forEach
+										var="item" items="${nomade.vehicule.forSellCountry}" varStatus="loop">
+			                   				${item}
+			                    			<c:if test="${!loop.last}">,</c:if>
+									</c:forEach>
+							</a></td>
+
+						</tr>
+						<tr>
+							<td>anneMiseEnService</td>
+							<td><a href="#" id="anneMiseEnService" data-type="date"
+								data-viewformat="dd-mm-yyyy" data-pk="1"
+								data-name="anneMiseEnService" data-original-title="Select Date"
+								class="editable editable-click"
+								data-value="${nomade.vehicule.anneMiseEnService}"> </a></td>
+
+						</tr>
+						<tr>
+							<td>description</td>
+							<td><a href="#" id="description" data-type="textarea"
+								data-url="/users/updateField" data-pk="1"
+								data-name="description"
+								data-value="${nomade.vehicule.description}" placeholder="jaune"
+								class="editable editable-click"></a></td>
+
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	jQuery.noConflict();
+	(function( $ ) {
+		$(document).ready(function() {
+			
+			$.fn.editable.defaults.mode = 'inline';  
+			var vehiculeState = [
+			                  <c:forEach var="item" items="${vehiculeStates}" varStatus="loop">
+			                    '${item}'
+			                    <c:if test="${!loop.last}">,</c:if>
+			                  </c:forEach>
+			                ];
+			var vehiculeType = [
+				                  <c:forEach var="item" items="${vehiculeTypes}" varStatus="loop">
+				                    '${item}'
+				                    <c:if test="${!loop.last}">,</c:if>
+				                  </c:forEach>
+				                ];
+			var country = [
+				                  <c:forEach var="item" items="${countrys}" varStatus="loop">
+				                    '${item}'
+				                    <c:if test="${!loop.last}">,</c:if>
+				                  </c:forEach>
+				                ];
+			
+			$('#vehiculeName').editable({});
+			$('#model').editable({});
+			$('#couleur').editable({});
+			$('#description').editable({});
+			$('#anneMiseEnService').editable({});
+			$('#country').editable({
+				select2: {
+		            tags: country,
+		            tokenSeparators: [",", " "],
+		            width: 200
+		        }
+			});
+			$('#vehiculeState').editable({
+				select2: {
+		            tags: vehiculeState,
+		            tokenSeparators: [",", " "],
+		            width: 200
+		        }
+			});
+			$('#vehiculeType').editable({
+				select2: {
+		            tags: vehiculeType,
+		            tokenSeparators: [",", " "],
+		            width: 200
+		        }
+			});
+		});		
+	
+	})(jQuery);
+	</script>
 
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
@@ -71,22 +223,8 @@
 			}
 		}));
 	</script>
-	<spring:url var="res" value="/resources" />
-	<script src="${res}/js/jquery.js">
-	<!-- eh -->	
-	</script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$(document).ajaxStart(function() {
-				$("#loading").show();
-			});
-			$(document).ajaxStop(function() {
-				$("#loading").hide();
-			});
-		});
-	</script>
-	<script type="text/javascript">
-		$(".chosen-select").chosen();
+		
 		$('.datepicker').datepicker();
-	</script>
+</script>
 </div>

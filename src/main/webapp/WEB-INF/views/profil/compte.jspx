@@ -13,222 +13,170 @@
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li><a href="${users_url}/private/profil" id="id_profil"><i
-					class="icon-user">
-						<!-- co -->
+					class="icon-user"> <!-- co -->
 				</i> Profil</a></li>
-			<li class="active"><a href="${users_url}/private/compte" id="id_compte"><i
-					class="	icon-briefcase">
-						<!-- co -->
+			<li class="active"><a href="${users_url}/private/compte"
+				id="id_compte"><i class="	icon-briefcase"> <!-- co -->
 				</i> Compte</a></li>
-			<li ><a href="${users_url}/private/vehicule"
-				id="id_vehicule"><i class="icon-truck "> <!-- co -->
+			<li><a href="${users_url}/private/vehicule" id="id_vehicule"><i
+					class="icon-truck "> <!-- co -->
 				</i> Vehicule</a></li>
 			<li><a href="${users_url}/private/passwordReset"
 				id="id_password"> <i class="icon-lock "> <!-- co -->
-				</i> Password
+				</i> Securite
 			</a></li>
 		</ul>
 	</div>
 	<div class="tab-content">
 		<div class="tab-pane active">
 			<div class="panel">
-				<!-- <div class="col-lg-6">
-					<p class="text-danger">${message}</p>
-					<div class="form-group">
-						<label for="email">Email address</label>
-						<input type="email" cssClass="form-control" name="email"
-							placeholder="Christophe@gmail.com"
-							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" required="required" />
-					</div>
-					<div class="form-group">
-						<label for="fullName">full Name</label>
-						<input type="text" cssClass="form-control" name="fullName"
-							placeholder="Jean La fontaine" />
-					</div>
-					<div class="form-group">
-						<label for="gender">Gender</label>
-						<select name="gender" cssClass="form-control"
-							items="${genders}" placeholder="Male" />
-					</div>
-					<div class="form-group">
-						<label for="birthDate"> birth Date</label>
-						<input cssClass="datepicker form-control" name="birthDate" type="date"
-							placeholder="12-03-1991" data-date-format="dd-mm-yyyy" />
-					</div>
-					<div class="form-group">
-						<label for="adress">adress</label>
-						<input type="text" cssClass="form-control" name="adress"
-							placeholder="cameroun douala rue 38" />
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="form-group">
-						<label for="phoneNumber">phone Number</label>
-						<input type="text" cssClass="form-control" name="phoneNumber"
-							placeholder="+33968745213" />
-					</div>
-					<div class="form-group">
-						<label for="nationality">Nationality</label>
-						<select name="nationality" cssClass="form-control"
-							items="${nationalitys}" />
-					</div>
-					<div class="form-group">
-						<label for="confidentiality">confidentiality</label>
-						<select name="confidentiality" cssClass="form-control"
-							items="${confidentialitys}" />
-					</div>
-					<div class="checkbox">
-						<label><checkbox cssClass="form-control"
-								name="newsletter" /> newsletter </label>
-					</div>
-					<div class="checkbox">
-						<label> <checkbox cssClass="form-control"
-								name="notifications" /> notifications
-						</label>
-					</div>
-					<div class="checkbox">
-						<label> <checkbox cssClass="form-control"
-								name="commercialParteners" /> commercialParteners
-						</label>
-					</div>
-					<button type="submit" class="btn btn-warning btn-block">Modifier</button>
-					
-				</div> -->
+				
 				<table id="user" class="table table-bordered table-striped"
-							style="clear: both">
-							<tbody>
+					style="clear: both">
+					<tbody>
 
-								<tr>
-									<td class="span3" width="40%">Email Adress</td>
-									<td class="span4"><a href="#" id="email" data-placeholder="Christophe@gmail.com"
-										data-url="/users/updateField" data-type="text" data-pk="1"
-										data-name="email" class="editable editable-click"
-										data-value="${nomade.compte.email}"></a></td>
+						<tr>
+							<td class="span3" width="40%">Email Adress</td>
+							<td class="span4"><a href="#" id="email"
+								data-placeholder="Christophe@gmail.com"
+								data-url="/users/updateField" data-type="text" data-pk="1"
+								data-name="email" class="editable editable-click"
+								data-value="${nomade.compte.email}"></a></td>
 
-								</tr>
+						</tr>
 
-								<tr>
-									<td>Full Name</td>
-									<td><a href="#" id="fullName" data-type="text" data-pk="1"
-										data-name="fullName" data-placeholder="celis ave"
-										data-url="/users/updateField" class="editable editable-click"
-										data-value="${nomade.compte.fullName}"></a></td>
+						<tr>
+							<td>Full Name</td>
+							<td><a href="#" id="fullName" data-type="text" data-pk="1"
+								data-name="fullName" data-placeholder="celis ave"
+								data-url="/users/updateField" class="editable editable-click"
+								data-value="${nomade.compte.fullName}"></a></td>
 
-								</tr>
+						</tr>
 
 
-								<tr>
-									<td>Gender</td>
-									<td><a href="#" id="gender" data-type="select2"
-										data-name="gender" data-pk="1" data-url="/users/updateField"
-										class="editable editable-click" style="color: gray;"
-										data-placeholder="click to select your gender"> <c:forEach
-												var="item" items="${nomade.compte.genders}" varStatus="loop">
-			                   				${item}
-			                    			<c:if test="${!loop.last}">,</c:if>
-											</c:forEach>
-									</a></td>
+						<tr>
+							<td>Gender</td>
+							<td><a href="#" id="gender" data-type="select"
+								data-name="gender" data-pk="1" data-url="/users/updateField"
+								class="editable editable-click" style="color: gray;"
+								data-placeholder="click to select your gender"
+								data-value="${nomade.compte.gender}"
+								data-source="${genders}"> 
+								
+							</a></td>
 
-								</tr>
+						</tr>
 
-								<tr>
-									<td>birthDate</td>
-									<td><a href="#" id="birthDate" data-type="date"
-										data-name="birthDate" data-pk="1"
-										data-url="/users/updateField" data-value="birthDate"
-										class="editable editable-click " style="color: gray;">
-											
-										</a></td>
+						<tr>
+							<td>birthDate</td>
+							<td><a href="#" id="birthDate" data-type="date"
+								data-viewformat="dd-mm-yyyy" data-pk="1" data-name="birthDate"
+								data-original-title="Select Date of birth"
+								class="editable editable-click"
+								data-value="${nomade.compte.birthDate}"> </a></td>
 
-								</tr>
+						</tr>
 
-								<tr>
-									<td>Adresse</td>
-									<td><a href="#" id="metier" data-type="text"
-										data-url="/users/updateField" data-pk="1" data-name="adress"
-										data-value="${nomade.compte.adress}"  placeholder="cameroun douala rue 38"
-										class="editable editable-click"></a></td>
+						<tr>
+							<td>Adresse</td>
+							<td><a href="#" id="adress" data-type="textarea"
+								data-url="/users/updateField" data-pk="1" data-name="adress"
+								data-value="${nomade.compte.adress}"
+								placeholder="cameroun douala rue 38"
+								class="editable editable-click"></a></td>
 
-								</tr>
-								<tr>
-									<td>phone Number</td>
-									<td><a href="#" id="butVoyage" data-type="textarea"
-										data-pk="1" data-name="phoneNumber"
-										data-url="/users/updateField" placeholder="+23796857425"
-										data-value="${nomade.compte.phoneNumber}"
-										class="editable editable-click"> <!-- co -->
-									</a></td>
+						</tr>
+						<tr>
+							<td>phone Number</td>
+							<td><a href="#" id="phoneNumber" data-type="text"
+								data-pk="1" data-name="phoneNumber"
+								data-url="/users/updateField" placeholder="+23796857425"
+								data-value="${nomade.compte.phoneNumber}"
+								class="editable editable-click"> <!-- co -->
+							</a></td>
 
-								</tr>
-								<tr>
-									<td>nationality</td>
-									<td><a href="#" id="nationality" data-type="select2"
-										data-name="nationality" data-pk="1" data-url="/users/updateField"
-										class="editable editable-click" style="color: gray;"
-										data-placeholder="click to selection nationality"> <c:forEach
-												var="item" items="${nationalitys}" varStatus="loop">
-			                   				${item}
-			                    			<c:if test="${!loop.last}">,</c:if>
-											</c:forEach>
-									</a></td>
+						</tr>
+						<tr>
+							<td>nationality</td>
+							<td><a href="#" id="nationality" data-type="select"
+								data-name="nationality" data-pk="1" data-source="${nationalitys }"
+								data-url="/users/updateField" class="editable editable-click"
+								style="color: gray;" data-value="${nomade.compte.nationality}"
+								data-placeholder="click to selection nationality" >
+							</a></td>
 
-								</tr>
-								<tr>
-									<td>Gender</td>
-									<td><a href="#" id="confidentialitys" data-type="select2"
-										data-name="confidentialitys" data-pk="1" data-url="/users/updateField"
-										class="editable editable-click" style="color: gray;"
-										data-placeholder="click to selection confidentiality"> <c:forEach
-												var="item" items="${confidentialitys}" varStatus="loop">
-			                   				${item}
-			                    			<c:if test="${!loop.last}">,</c:if>
-											</c:forEach>
-									</a></td>
-
-								</tr>
-							</tbody>
-						</table>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
 	<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "id_profil",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "id_compte",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "id_vehicule",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "id_password",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
+	jQuery.noConflict();
+	(function( $ ) {
+		$(document).ready(function() {
+			$.fn.editable.defaults.mode = 'inline';  
 	
+	var gender = [
+	 	                  <c:forEach var="item" items="${genders}" varStatus="loop">
+	 	                    '${item}'
+	 	                    <c:if test="${!loop.last}">,</c:if>
+	 	                  </c:forEach>
+	 	                ];
+	$('#email').editable({});
+	$('#fullName').editable({});
+	$('#gender').editable({
+		source:gender
+	});
+	$('#birthDate').editable({});
+	$('#adress').editable({});
+	$('#phoneNumber').editable({});
+	$('#nationality').editable({
+		
+	});
+	
+	});		
+})(jQuery);
+
+	</script>
+
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_profil",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_compte",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_vehicule",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_password",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+
 </div>

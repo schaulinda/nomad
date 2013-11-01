@@ -1,7 +1,10 @@
 package com.nomade.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +32,7 @@ import com.nomade.domain.Country;
 import com.nomade.domain.Gender;
 import com.nomade.domain.Langue;
 import com.nomade.domain.Nationality;
+import com.nomade.domain.PasswordReset;
 import com.nomade.domain.Profil;
 import com.nomade.domain.RoleName;
 import com.nomade.domain.UserNomade;
@@ -48,8 +52,11 @@ public class UserController {
 	
 	@Autowired
 	NotificationService notificationService;
+	
 	SecurityUtil securite = new SecurityUtil();
 	
+
+
 	@RequestMapping("/register")
     public String register(@Valid BeanRegister beanRegister, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
 		
@@ -88,7 +95,7 @@ public class UserController {
         				   .append(nomade.getUserName());
         				   
         try {
-			notificationService.sendMessage(beanRegister.getEmail(), stringBuilder.toString());
+				notificationService.sendMessage(beanRegister.getEmail(), stringBuilder.toString());
 			
 			userService.saveUserNomade(nomade);
 		} catch (Exception e) {
@@ -123,6 +130,9 @@ public class UserController {
 		
 		uiModel.addAttribute("message", message);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
+		if(page.equals("passwordReset")){
+			uiModel.addAttribute("passwordReset",new PasswordReset());
+		}
 		return "profil/"+page;
 		
 	}
@@ -136,7 +146,6 @@ public class UserController {
 		UserNomade userNomade = securite.getUserNomade();
 		
 		if(name.equals("username") && value!=null){
-			System.out.print("username...");
 			List<UserNomade> findByUserName = userService.findByUserName(value);
 			if(findByUserName!=null && findByUserName.size()>0 && !findByUserName.get(0).equals(userNomade.getUserName())){
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -178,6 +187,67 @@ public class UserController {
 				langues.add(Langue.valueOf(s));
 			}
 			userNomade.getProfil().setLangues(langues);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		
+		if(name.equals("email") && value!=null){
+			System.out.print("email...");
+			List<UserNomade> findByEmail = userService.findByEmail(value);
+			if(findByEmail!=null && findByEmail.size()>0 && !findByEmail.get(0).equals(userNomade.getUserName())){
+					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+					return "email ready used";
+					
+			}else{
+				userNomade.getCompte().setEmail(value);
+				userService.updateUserNomade(userNomade);
+				return"";
+			}
+		}
+		
+		if(name.equals("fullName") && value!=null){
+			userNomade.getCompte().setFullName(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("gender") && value!=null){
+			userNomade.getCompte().setGender(Gender.valueOf(value));
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("birthDate") && value!=null){
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+			Date convertedDate;
+			try {
+				convertedDate = dateFormat.parse(value);
+				userNomade.getCompte().setBirthDate(convertedDate);
+				userService.updateUserNomade(userNomade);
+				return"";
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				return "bad date format";
+			} 
+			
+		}
+		if(name.equals("adress") && value!=null){
+			userNomade.getCompte().setAdress(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		if(name.equals("phoneNumber") && value!=null){
+			userNomade.getCompte().setPhoneNumber(value);
+			userService.updateUserNomade(userNomade);
+			return"";
+		}
+		
+		if(name.equals("nationality") && values!=null){
+			Set<Nationality> nationality = new HashSet<Nationality>();
+			for(String s:values){
+				nationality.add(Nationality.valueOf(s));
+			}
+			//userNomade.getCompte().setNationality(nationality);
 			userService.updateUserNomade(userNomade);
 			return"";
 		}

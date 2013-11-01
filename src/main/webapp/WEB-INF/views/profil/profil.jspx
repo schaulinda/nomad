@@ -24,7 +24,7 @@
 				</i> Vehicule</a></li>
 			<li><a href="${users_url}/private/passwordReset"
 				id="id_password"> <i class="icon-lock "> <!-- co -->
-				</i> Password
+				</i> Securite
 			</a></li>
 		</ul>
 	</div>

@@ -190,11 +190,6 @@ body {
 							<spring:url value="/users" var="users_url"></spring:url>
 							<li><a href="${users_url}/private/profil" id="profil_id">Gestion
 									profil</a></li>
-							<li><a href="${users_url}/private/compte" id="compte_id">Gestion
-									compte</a></li>
-							<li><a href="${users_url}/private/vehicule" id="vehicule_id">Gestion
-									véhicule</a></li>
-							<li><a href="#">Langues</a></li>
 							<li class="divider">
 								<!-- co -->
 							</li>
@@ -344,24 +339,7 @@ body {
 		}
 	}));
 </script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "compte_id",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "vehicule_id",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
+
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "img_profil",

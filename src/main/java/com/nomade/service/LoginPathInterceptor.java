@@ -12,7 +12,8 @@ public class LoginPathInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request,
     HttpServletResponse response, Object handler) throws Exception {
         String requestUrl = request.getRequestURI().substring(request.getContextPath().length());
-        if ("/login".equals(requestUrl)) {
+ 
+        if ("/login".equals(requestUrl) || requestUrl.contains("/login")) {
         	request.setAttribute("beanRegister", new BeanRegister());
         }
         	
