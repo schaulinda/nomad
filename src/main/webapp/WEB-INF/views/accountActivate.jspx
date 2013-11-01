@@ -10,18 +10,18 @@
 			<h3 class="panel-title">
 				<i class="icon-user">
 					<!-- co -->
-				</i> Account Activate
+				</i><spring:message code="h.accountActivate" />
 			</h3>
 		</div>
 
 		<div class="row">
 			<c:if test="${empty error}">
 			<p>
-				You can log in now, your account have been activate!
+				<spring:message code="p.uCanLogOn" />
 				<a class="btn" href="${home}">
 					<i class="icon-arrow-left">
 						<!-- co -->
-					</i> back
+					</i> <spring:message code="a.back" />
 				</a>
 			</p>
 			</c:if>
