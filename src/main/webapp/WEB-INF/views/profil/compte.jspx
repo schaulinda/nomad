@@ -4,6 +4,7 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -61,20 +62,22 @@
 								data-name="gender" data-pk="1" data-url="/users/updateField"
 								class="editable editable-click" style="color: gray;"
 								data-placeholder="click to select your gender"
-								data-value="${nomade.compte.gender}"
-								data-source="${genders}"> 
+								data-value="${nomade.compte.gender}" >
 								
 							</a></td>
 
 						</tr>
 
 						<tr>
+							
+
 							<td>birthDate</td>
 							<td><a href="#" id="birthDate" data-type="date"
 								data-viewformat="dd-mm-yyyy" data-pk="1" data-name="birthDate"
-								data-original-title="Select Date of birth"
-								class="editable editable-click"
-								data-value="${nomade.compte.birthDate}"> </a></td>
+								data-title="Select date" data-url="/users/updateField"
+								class="editable editable-click" data-format="dd-mm-yyyy">
+								 <fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy"/>
+								 </a></td>
 
 						</tr>
 
@@ -100,10 +103,11 @@
 						<tr>
 							<td>nationality</td>
 							<td><a href="#" id="nationality" data-type="select"
-								data-name="nationality" data-pk="1" data-source="${nationalitys }"
-								data-url="/users/updateField" class="editable editable-click"
-								style="color: gray;" data-value="${nomade.compte.nationality}"
-								data-placeholder="click to selection nationality" >
+								data-name="nationality" data-pk="1" data-url="/users/updateField"
+								class="editable editable-click" style="color: gray;"
+								data-placeholder="click to select your gender"
+								data-value="${nomade.compte.nationality}" >
+								
 							</a></td>
 
 						</tr>
@@ -121,20 +125,28 @@
 	
 	var gender = [
 	 	                  <c:forEach var="item" items="${genders}" varStatus="loop">
-	 	                    '${item}'
+	 	                     {value: '${item}', text: '${item}'}
 	 	                    <c:if test="${!loop.last}">,</c:if>
 	 	                  </c:forEach>
 	 	                ];
+	var nationality = [
+	                  <c:forEach var="item" items="${nationalitys}" varStatus="loop">
+	                     {value: '${item}', text: '${item}'}
+	                    <c:if test="${!loop.last}">,</c:if>
+	                  </c:forEach>
+	                ];
 	$('#email').editable({});
 	$('#fullName').editable({});
 	$('#gender').editable({
 		source:gender
 	});
-	$('#birthDate').editable({});
+	$('#birthDate').editable({
+		 
+	});
 	$('#adress').editable({});
 	$('#phoneNumber').editable({});
 	$('#nationality').editable({
-		
+		source:nationality
 	});
 	
 	});		

@@ -1,7 +1,5 @@
 package com.nomade.web;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -26,21 +24,23 @@ public class PasswordResetController {
 	
 	@Autowired
 	UserService userService;
+	SecurityUtil securite = new SecurityUtil();
 	
     @RequestMapping(method = RequestMethod.POST)
     public String update(@Valid PasswordReset passwordReset, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if(!passwordReset.passwordsEqual()){
-        	ObjectError error = new ObjectError("newPassword","Both password entered are not identical");
-			bindingResult.addError(error);
+        	bindingResult.rejectValue("newPassword", "pwd_not_same", "Both password entered are not identical");
+			
         }
         UserNomade user = new SecurityUtil().getUserNomade();
 
         if(!user.checkExistingPasword(passwordReset.getCurrentPassword())){
-        	ObjectError error = new ObjectError("currentPassword","Current password not matching our record.");
-			bindingResult.addError(error);
+        	bindingResult.rejectValue("currentPassword", "pwd_not_indb", "Current password not matching our record.");
+			
         }
     	if (bindingResult.hasErrors()) {
             uiModel.addAttribute("passwordReset", passwordReset);
+            uiModel.addAttribute("nomade", securite.getUserNomade());
             return "profil/passwordReset";
         }
         uiModel.asMap().clear();
@@ -48,6 +48,8 @@ public class PasswordResetController {
         userService.updateUserNomade(user);
         
         uiModel.addAttribute("msg", "password change succesfull!");
+        uiModel.addAttribute("passwordReset", new PasswordReset());
+        uiModel.addAttribute("nomade", securite.getUserNomade());
         return "profil/passwordReset";
     }
     

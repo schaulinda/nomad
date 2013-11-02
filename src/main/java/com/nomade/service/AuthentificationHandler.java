@@ -31,9 +31,6 @@ implements LogoutSuccessHandler{
 			throws ServletException, IOException {
 		
 		// 
-		String contextPath = request.getContextPath(); 
-		System.out.println("Context Path de la requete sur logon succes: "+contextPath);
-		
 		
 		/*super.onAuthenticationSuccess(request, response, authentication);*/
 		

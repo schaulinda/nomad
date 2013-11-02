@@ -135,11 +135,12 @@
 	<!-- eh -->	
 </script>
 	<script type="text/javascript">
-	 $("#idform").submit(function(){
+	console.log("hi");
+	/*  $("#idform").submit(function(){
 	      if($("#password").val() != $("#confirmedPassword").val()){
 	    	  alert("Les mots de passe ne correspondent pas");
 	      }
 	      return false;
-	    });
+	    }); */
 	</script>
 </div>
