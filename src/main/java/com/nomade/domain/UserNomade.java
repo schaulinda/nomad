@@ -115,4 +115,38 @@ public class UserNomade {
     public void changePassword(String password) {
         this.password = encodePassword(password);
     } 
+    
+    public int fieldNonNull(){
+    	int som = 0;
+    	if(profil.getButVoyage()!=null && !profil.getButVoyage().equals(""))
+    		som+=1;
+    	if(profil.getFile()!=null && !profil.getFile().equals(""))
+    		som+=1;
+    	if(profil.getLangues()!=null && !profil.getLangues().equals(""))
+    		som+=1;
+    	if(profil.getMetier()!=null && !profil.getMetier().equals(""))
+    		som+=1;
+    	if(profil.getPseudo()!=null && !profil.getPseudo().equals(""))
+    		som+=1;
+    	if(profil.getVisitedCountry()!=null && !profil.getVisitedCountry().equals(""))
+    		som+=1;
+    	if(profil.getWebsite()!=null && !profil.getWebsite().equals(""))
+    		som+=1;
+    	if(compte.getAdress()!=null && !compte.getAdress().equals(""))
+    		som+=1;
+    	if(compte.getBirthDate()!=null && !compte.getBirthDate().equals(""))
+    		som+=1;
+    	if(compte.getConfidentiality()!=null && !compte.getConfidentiality().equals(""))
+    		som+=1;
+    	if(compte.getEmail()!=null && !compte.getEmail().equals(""))
+    		som+=1;
+    	if(compte.getFullName()!=null && !compte.getFullName().equals(""))
+    		som+=1;
+    	if(compte.getGender()!=null && !compte.getGender().equals(""))
+    		som+=1;
+    	if(compte.getFullName()!=null && !compte.getFullName().equals(""))
+    		som+=1;
+    	
+    	return 2;
+    }
 }

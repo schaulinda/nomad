@@ -157,7 +157,6 @@
 	(function( $ ) {
 		$(document).ready(function() {
 			$.fn.editable.defaults.mode = 'inline';  
-			
 			$('#username').editable({
 				validate : function(value) {
 					if ($.trim(value) == '')
@@ -200,8 +199,6 @@
 			
 		});
 		
-		$(".chosen-select").chosen();
-		$('.datepicker').datepicker();
 	})(jQuery);
 	</script>
 </div>

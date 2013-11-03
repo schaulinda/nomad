@@ -13,14 +13,18 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,6 +50,7 @@ import com.nomade.domain.VehiculeState;
 import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.NomadeUserDetailsService;
+import com.nomade.security.Security;
 import com.nomade.security.SecurityUtil;
 import com.nomade.service.UserService;
 import com.nomade.tools.ImageUploadException;
@@ -61,9 +66,8 @@ public class UserController {
 	NotificationService notificationService;
 	@Autowired
 	NomadeUserDetailsService nomadeUserDetailsService;
-
-	SecurityUtil securite = new SecurityUtil();
-
+	@Autowired
+	Security securite ;
 	@RequestMapping("/register")
 	public String register(@Valid BeanRegister beanRegister,
 			BindingResult bindingResult, Model uiModel,
@@ -72,7 +76,7 @@ public class UserController {
 		if (!beanRegister.getPassword().equals(
 				beanRegister.getConfirmPassword())) {
 			bindingResult.rejectValue("password",
-					"password_diff_confirmPassword");
+					"password_diff_confirmPassword", "password_diff_confirmPassword");
 
 		}
 
@@ -126,7 +130,8 @@ public class UserController {
 		}
 		return "succesRegister";
 	}
-
+	
+	
 	@RequestMapping("/activate/{id}")
 	public String activate(@PathVariable("id") BigInteger id, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -141,10 +146,10 @@ public class UserController {
 		}
 		nomade.setDisableLogin(false);
 		userService.updateUserNomade(nomade);
-		autoLogin(nomade.getUserName());
+		boolean autoLogin = autoLogin(nomade.getUserName(), httpServletRequest);
 		// return "accountActivate";
 		String message = "complete your profile";
-		return "redirect:/users/private/profil?message=" + message;
+		return "redirect:/users/private/profil";
 	}
 
 	/**
@@ -152,14 +157,16 @@ public class UserController {
 	 * 
 	 * @param username
 	 */
-	public boolean autoLogin(String username) {
+	public boolean autoLogin(String username, HttpServletRequest httpServletRequest) {
 		try {
+			
 			UserDetails userDetails = nomadeUserDetailsService
 					.loadUserByUsername(username);
 			Authentication authentication = new UsernamePasswordAuthenticationToken(
 					userDetails, SecurityContextHolder.getContext()
-							.getAuthentication().getCredentials());
-
+							.getAuthentication().getCredentials(),userDetails.getAuthorities());
+			
+			
 			// Place the new Authentication object in the security context.
 			SecurityContextHolder.getContext()
 					.setAuthentication(authentication);
@@ -168,6 +175,7 @@ public class UserController {
 			e.printStackTrace();
 			return false;
 		}
+
 		return true;
 	}
 

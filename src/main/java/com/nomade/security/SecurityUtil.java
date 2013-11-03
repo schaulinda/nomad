@@ -8,17 +8,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import com.nomade.domain.UserNomade;
 import com.nomade.service.UserService;
 
-@Configurable
-public class SecurityUtil {
+@Service("securityUtil")
+public class SecurityUtil implements Security {
 
 	@Autowired
 	UserService userService;
 
-	public static UserDetails getUserDetails() {
+	public  UserDetails getUserDetails() {
 		SecurityContext context = SecurityContextHolder.getContext();
 		if (context == null)
 			return null;
@@ -35,7 +36,7 @@ public class SecurityUtil {
 		}
 	}
 
-	public static String getUserName() {
+	public  String getUserName() {
 		UserDetails userDetails = getUserDetails();
 		if (userDetails != null)
 			return userDetails.getUsername();

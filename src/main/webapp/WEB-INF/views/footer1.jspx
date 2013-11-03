@@ -9,9 +9,7 @@
 
 	<spring:url var="res" value="/resources" />
 
-	<script src="${res}/js/jquery.js">
-	<!-- eh -->	
-	</script>
+	
 	<script src="${res}/js/jquery-1.7.2.min.js">
 	<!-- eh -->
 		
@@ -20,14 +18,7 @@
 	<!-- eh -->
 		
 	</script>
-	<script src="${res}/js/bootstrap-editable.js">
-	<!-- eh -->
-		
-	</script>
-	<script src="${res}/js/bootstrap-datepicker.js">
-	<!-- eh -->
-		
-	</script>
+
 	<script src="${res}/js/bootstrap-transition.js">
 	<!-- eh -->
 		
@@ -76,6 +67,14 @@
 	<!-- eh -->
 		
 	</script>
+
+	<script src="${res}/js/bootstrap-editable.js">
+	<!-- eh -->	
+	</script>
+	<script src="${res}/js/bootstrap-datepicker.js">
+	<!-- eh -->
+		
+	</script>
 	<script src="${res}/js/chosen.jquery.js">
 	<!-- eh -->
 		
@@ -113,5 +112,4 @@
 			});
 		})(jQuery);
 	</script>
-
 </div>

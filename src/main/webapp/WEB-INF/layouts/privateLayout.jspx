@@ -36,8 +36,13 @@ body {
 <link href="${res}/css/icon.css" rel="stylesheet" />
 <script src="${res}/js//holder.js">
 <!-- co -->
-	
 </script>
+<script src="${res}/js/jquery.js">
+	<!-- eh -->	
+</script>
+<script src="${res}/js/bootstrap-editable.js">
+	<!-- eh -->	
+	</script>
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -206,7 +211,7 @@ body {
 	<!-- body conetnt -->
 	<div class="container2">
 		<!-- block top -->
-		<div class="row">
+		<div class="row" style="margin-left: 10px;">
 			<div class="col-lg-2 user col-sm-2">
 				<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
 						<c:when test="${empty nomade.profil.file}">
@@ -369,16 +374,16 @@ body {
 </script>
 
 <script type="text/javascript">
-/* jQuery.noConflict();
-(function( $ ) {
-	$(document).ajaxStart(function() {
-		console.log("fjgjg");
-		$("#loading").show();
-	});
-	$(document).ajaxStop(function() {
-		$("#loading").hide();
-	});
-})(jQuery); */
+	/* jQuery.noConflict();
+	 (function( $ ) {
+	 $(document).ajaxStart(function() {
+	 console.log("fjgjg");
+	 $("#loading").show();
+	 });
+	 $(document).ajaxStop(function() {
+	 $("#loading").hide();
+	 });
+	 })(jQuery); */
 </script>
 
 </html>
