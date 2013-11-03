@@ -144,9 +144,31 @@ public class UserNomade {
     		som+=1;
     	if(compte.getGender()!=null && !compte.getGender().equals(""))
     		som+=1;
-    	if(compte.getFullName()!=null && !compte.getFullName().equals(""))
+    	if(vehicule.getAnneMiseEnService()!=null && !vehicule.getAnneMiseEnService().equals(""))
+    		som+=1;
+    	if(vehicule.getCouleur()!=null && !vehicule.getCouleur().equals(""))
+    		som+=1;
+    	if(vehicule.getDescription()!=null && !vehicule.getDescription().equals(""))
+    		som+=1;
+    	if(vehicule.getForSellCountry()!=null && !vehicule.getForSellCountry().equals(""))
+    		som+=1;
+    	if(vehicule.getModel()!=null && !vehicule.getModel().equals(""))
+    		som+=1;
+    	if(vehicule.getPhoto()!=null && !vehicule.getPhoto().equals(""))
+    		som+=1;
+    	if(vehicule.getVehiculeName()!=null && !vehicule.getVehiculeName().equals(""))
+    		som+=1;
+    	if(vehicule.getVehiculeState()!=null && !vehicule.getVehiculeState().equals(""))
+    		som+=1;
+    	if(vehicule.getVehiculeType()!=null && !vehicule.getVehiculeType().equals(""))
     		som+=1;
     	
-    	return 2;
+    	return som;
+    }
+    
+    public int fieldPercent(){
+    	final int numberField = 22;
+    	int fieldNonNull = fieldNonNull();
+    	return fieldNonNull*100/numberField;
     }
 }

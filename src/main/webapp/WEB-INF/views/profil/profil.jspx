@@ -83,14 +83,13 @@
 										data-name="visitedCountry" data-pk="1"
 										data-url="/users/updateField"
 										data-placeholder="click to selection countries"
-										
-										class="editable editable-click " style="color: gray;">
-											<c:forEach
-												var="item" items="${nomade.profil.visitedCountry}" varStatus="loop">
+										class="editable editable-click " style="color: gray;"> <c:forEach
+												var="item" items="${nomade.profil.visitedCountry}"
+												varStatus="loop">
 			                   				${item}
 			                    			<c:if test="${!loop.last}">,</c:if>
 											</c:forEach>
-										</a></td>
+									</a></td>
 
 								</tr>
 

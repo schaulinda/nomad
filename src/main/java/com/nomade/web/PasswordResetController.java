@@ -15,6 +15,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.nomade.domain.PasswordReset;
 import com.nomade.domain.UserNomade;
+import com.nomade.security.Security;
 import com.nomade.security.SecurityUtil;
 import com.nomade.service.UserService;
 
@@ -24,7 +25,8 @@ public class PasswordResetController {
 	
 	@Autowired
 	UserService userService;
-	SecurityUtil securite = new SecurityUtil();
+	@Autowired
+	Security securite ;
 	
     @RequestMapping(method = RequestMethod.POST)
     public String update(@Valid PasswordReset passwordReset, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {

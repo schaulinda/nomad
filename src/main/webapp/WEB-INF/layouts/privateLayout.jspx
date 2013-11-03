@@ -13,14 +13,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
-
-<util:load-scripts />
 <spring:url var="res" value="/resources" />
+<script src="${res}/js/jquery.js">
+<!-- eh -->
+</script>
+<script src="${res}/js/bootstrap.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-editable.js">
+	<!-- eh -->	
+</script>
+<util:load-scripts />
+
 <!-- Le styles -->
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
 <link href="${res}/css/chosen.css" rel="stylesheet" />
 <link href="${res}/css/datepicker.css" rel="stylesheet" />
 <link href="${res}/css/select2.css" rel="stylesheet" />
+<link href="${res}/css/bootstrap-editable.css" rel="stylesheet" />
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -36,13 +47,9 @@ body {
 <link href="${res}/css/icon.css" rel="stylesheet" />
 <script src="${res}/js//holder.js">
 <!-- co -->
+	
 </script>
-<script src="${res}/js/jquery.js">
-	<!-- eh -->	
-</script>
-<script src="${res}/js/bootstrap-editable.js">
-	<!-- eh -->	
-	</script>
+
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,7 +63,6 @@ body {
 <link rel="apple-touch-icon" sizes="114x114"
 	href="${res}/img/apple-touch-icon-114x114.png" />
 <link rel="shortcut icon" href="${res}/img/favicon.ico" />
-<link href="${res}/css/bootstrap-editable.css" rel="stylesheet" />
 <title>Nomades</title>
 </head>
 
@@ -188,19 +194,19 @@ body {
 							class="icon-plus"> <!-- co -->
 						</i></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Forum</a></li>
+							<li><a href="#"><i class="icon-comment"><!-- co --></i> Forum</a></li>
 							<li class="divider">
 								<!-- co -->
 							</li>
 							<spring:url value="/users" var="users_url"></spring:url>
-							<li><a href="${users_url}/private/profil" id="profil_id">Gestion
+							<li><a href="${users_url}/private/profil" id="profil_id" ><i class="icon-user"><!-- co --></i> Gestion
 									profil</a></li>
 							<li class="divider">
 								<!-- co -->
 							</li>
 							<spring:url value="/resources/j_spring_security_logout"
 								var="logout" />
-							<li><a href="${logout}"><spring:message
+							<li><a href="${logout}"><i class="icon-lock"><!-- co --></i> <spring:message
 										code="security_logout" /></a></li>
 						</ul></li>
 				</ul>
@@ -211,7 +217,7 @@ body {
 	<!-- body conetnt -->
 	<div class="container2">
 		<!-- block top -->
-		<div class="row" style="margin-left: 10px;">
+		<div class="row">
 			<div class="col-lg-2 user col-sm-2">
 				<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
 						<c:when test="${empty nomade.profil.file}">
@@ -280,37 +286,41 @@ body {
 		</div>
 		<!-- <hr> -->
 		<div class="row" style="padding: 20px;">
-			<div class="col-lg-2" style="">
+			<div class="col-lg-1" style="margin-right: 12px; margin-left: -20px;">
 				<h3>Pubs</h3>
 				<div class="row">
-					<div class="col-lg-12 ">
-						<img data-src="${res}/js/holder.js/140x100" src="data:img/png;" /><br />
-						<a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
-					<div class="col-lg-12">
-						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
-					<div class="col-lg-12">
-						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					</div>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-9" style="">
+			<div class="col-lg-10" style="">
 				<!-- body  -->
 				<tiles:insertAttribute name="body" />
 			</div>
-			<div class="col-lg-2" style="">
+			<div class="col-lg-1" style="margin-left: -12px;">
 				<h3>Pubs</h3>
 				<div class="row">
-					<div class="col-lg-12 ">
-						<img data-src="${res}/js/holder.js/140x100" src="data:img/png;" /><br />
-						<a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
-					<div class="col-lg-12">
-						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
-					<div class="col-lg-12">
-						<img data-src="holder.js/140x100" src="data:img/png;" /><br /> <a>brikabra.com</a>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
+					</div>
+					<div class="col-sm-3 col-6 col-lg-12">
+						<img data-src="holder.js/110x80" src="data:img/png;" /> <a>brikabra.com</a>
 					</div>
 				</div>
 			</div>
@@ -371,19 +381,6 @@ body {
 			fragments : "body"
 		}
 	}));
-</script>
-
-<script type="text/javascript">
-	/* jQuery.noConflict();
-	 (function( $ ) {
-	 $(document).ajaxStart(function() {
-	 console.log("fjgjg");
-	 $("#loading").show();
-	 });
-	 $(document).ajaxStop(function() {
-	 $("#loading").hide();
-	 });
-	 })(jQuery); */
 </script>
 
 </html>

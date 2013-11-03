@@ -30,7 +30,8 @@
 	</div>
 	<div class="tab-content">
 		<div class="tab-pane active">
-			<div class="panel row">
+			<div class="panel">
+			<div class="row" >
 				<div class="col-lg-9">
 				<table id="user" class="table table-bordered table-striped"
 					style="clear: both">
@@ -123,6 +124,7 @@
 							style="z-index: 3; margin-bottom: -160px; margin-left: -150px;"><i
 							class="icon-edit"> <!-- co --> </i> edit</a>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>

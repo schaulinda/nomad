@@ -56,11 +56,6 @@ public class SecurityUtil implements Security {
 			List<UserNomade> resultList1 = userService.findByEmail(username);
 			return resultList1.get(0);
 		}
-	}
-
-	public SecurityUtil() {
-		super();
-	}
-	
+	}	
 
 }

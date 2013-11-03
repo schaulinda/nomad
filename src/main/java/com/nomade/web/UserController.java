@@ -1,7 +1,6 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
-import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -13,18 +12,14 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.security.access.prepost.PostFilter;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,7 +38,6 @@ import com.nomade.domain.Gender;
 import com.nomade.domain.Langue;
 import com.nomade.domain.Nationality;
 import com.nomade.domain.PasswordReset;
-import com.nomade.domain.Profil;
 import com.nomade.domain.RoleName;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.VehiculeState;
@@ -51,8 +45,6 @@ import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.NomadeUserDetailsService;
 import com.nomade.security.Security;
-import com.nomade.security.SecurityUtil;
-import com.nomade.service.UserService;
 import com.nomade.tools.ImageUploadException;
 import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
@@ -146,8 +138,6 @@ public class UserController {
 		}
 		nomade.setDisableLogin(false);
 		userService.updateUserNomade(nomade);
-		boolean autoLogin = autoLogin(nomade.getUserName(), httpServletRequest);
-		// return "accountActivate";
 		String message = "complete your profile";
 		return "redirect:/users/private/profil";
 	}
@@ -291,8 +281,6 @@ public class UserController {
 				convertedDate = dateFormat.parse(value);
 				userNomade.getCompte().setBirthDate(convertedDate);
 				userService.updateUserNomade(userNomade);
-				System.out.print("userNomade.getCompte(): "
-						+ userNomade.getCompte().getBirthDate());
 				return "";
 			} catch (ParseException e) {
 

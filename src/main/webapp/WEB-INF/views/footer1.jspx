@@ -9,7 +9,7 @@
 
 	<spring:url var="res" value="/resources" />
 
-	
+
 	<script src="${res}/js/jquery-1.7.2.min.js">
 	<!-- eh -->
 		
@@ -18,7 +18,9 @@
 	<!-- eh -->
 		
 	</script>
-
+	<script src="${res}/js/bootstrap-editable.js">
+	<!-- eh -->	
+</script>
 	<script src="${res}/js/bootstrap-transition.js">
 	<!-- eh -->
 		
@@ -68,9 +70,6 @@
 		
 	</script>
 
-	<script src="${res}/js/bootstrap-editable.js">
-	<!-- eh -->	
-	</script>
 	<script src="${res}/js/bootstrap-datepicker.js">
 	<!-- eh -->
 		
@@ -83,6 +82,7 @@
 	<!-- eh -->
 		
 	</script>
+	
 	<script type="text/javascript" src="${res}/js/noty/jquery.noty.js">
 	<!-- eh -->
 		
@@ -91,25 +91,5 @@
 	<!-- eh -->
 		
 	</script>
-
-	<script type="text/javascript">
-		jQuery.noConflict();
-		(function($) {
-			function generate(type) {
-				var n = noty({
-					text : type,
-					type : type,
-					dismissQueue : true,
-					modal : true,
-					layout : 'topLeft',
-					theme : 'defaultTheme'
-				});
-				console.log('html: ' + n.options.id);
-			}
-			$(function() {
-				$(".chosen-select").chosen();
-				$('.datepicker').datepicker();
-			});
-		})(jQuery);
-	</script>
+	<script type="text/javascript" src="${res}/js/noty/themes/default.js"></script>
 </div>
