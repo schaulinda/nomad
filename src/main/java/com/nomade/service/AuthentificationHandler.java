@@ -42,7 +42,6 @@ public class AuthentificationHandler extends
 		int fieldPercent = getUserNomade(authentication).fieldPercent();
 		HttpSession session = request.getSession();
 		session.setAttribute("fieldPercent", fieldPercent);
-		System.out.print("fieldPercent: " + fieldPercent);
 		super.onAuthenticationSuccess(request, response, authentication);
 		// response.sendRedirect(contextPath);
 

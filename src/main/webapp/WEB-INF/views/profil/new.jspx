@@ -5,7 +5,7 @@
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	
+
 	<spring:url var="res" value="/resources" />
 
 	<div class="panel">
@@ -17,38 +17,68 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 		(function($) {
-			
-			$(document).ready(function() {
-				
-				var fieldpercent = '${sessionScope.fieldPercent}';
-				if (50 > fieldpercent) {
-					
-					setTimeout(function generate() {
-						var n = noty({
-							text : '<div class="progress progress-info progress-striped"> <div class="bar" style="width: 20%;"></div></div><div>Complete your profile</div>',
-							type : 'alert',
-							dismissQueue : true,
-							modal : true,
-							layout : 'topLeft',
-							theme : 'defaultTheme'
-						});
-						console.log('html: ' + n.options.id);
-					}, 5000);
 
-				} 
-			});
+			$(document)
+					.ready(
+							function() {
+
+								var fieldpercent = '${fieldPercent}';
+								
+								if (fieldpercent != "") {
+									if (50 > fieldpercent) {
+										
+										setTimeout(
+												function generate() {
+												str='<div class="progress">'
+													  +'<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'
+													  +fieldpercent+'" aria-valuemin="0" aria-valuemax="100" style="width:'
+													  +fieldpercent+'%">'
+											   		 +'<span class="sr-only">'
+													  +fieldpercent+'% Complete</span></div></div>'
+													  +'<div>You have not fill all your profil, complete it!</div>';
+													  
+													var n = noty({
+														text : str,
+														type : 'alert',
+														//timeout: 5000,
+														modal : false,
+														layout : 'topRight',
+														closeWith: ['click'],
+														buttons: [
+														          {addClass: 'btn btn-default', text: 'Ok', onClick: function($noty) {
+
+														              // this = button element
+														              // $noty = $noty element
+
+														              $noty.close();
+														              document.getElementById('profil_id').click();
+														            }
+														          },
+														          {addClass: 'btn btn-default', text: 'Cancel', onClick: function($noty) {
+														              $noty.close();
+														             
+														            }
+														          }
+														        ]
+													});
+													
+												}, 5000);
+
+									}
+								}
+							});
 		})(jQuery);
 	</script>
 
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "profil_id",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "profil_id",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
 
 
 </div>

@@ -174,6 +174,7 @@ public class UserController {
 			Model uiModel, HttpServletRequest httpServletRequest,
 			@RequestParam(value = "message", required = false) String message) {
 
+
 		uiModel.addAttribute("message", message);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
 		if (page.equals("passwordReset")) {

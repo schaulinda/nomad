@@ -87,7 +87,7 @@
 	<!-- eh -->
 		
 	</script>
-	<script type="text/javascript" src="${res}/js/noty/layouts/topLeft.js">
+	<script type="text/javascript" src="${res}/js/noty/layouts/topRight.js">
 	<!-- eh -->
 		
 	</script>
