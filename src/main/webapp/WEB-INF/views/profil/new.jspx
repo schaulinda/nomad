@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="body" 
+	 xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	 xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+ 	 xmlns:spring="http://www.springframework.org/tags"
+	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
@@ -13,8 +14,10 @@
 		deconnection, acces de pages) creation de compte, gestion de profil,
 		gestion de compte, gestion de vehicule operationels
 	</div>
-
 	<script type="text/javascript">
+	var a = '<spring:message code="div.completeProfil" />';
+	var b = '<spring:message code="button.profile" />';
+	var c = '<spring:message code="button.cancel" />';
 		jQuery.noConflict();
 		(function($) {
 
@@ -35,7 +38,7 @@
 													  +fieldpercent+'%">'
 											   		 +'<span class="sr-only">'
 													  +fieldpercent+'% Complete</span></div></div>'
-													  +'<div>You have not fill all your profil, complete it!</div>';
+													  +'<div>'+a+'</div>';
 													  
 													var n = noty({
 														text : str,
@@ -45,7 +48,7 @@
 														layout : 'topRight',
 														closeWith: ['click'],
 														buttons: [
-														          {addClass: 'btn btn-default', text: 'Ok', onClick: function($noty) {
+														          {addClass: 'btn btn-default', text: b, onClick: function($noty) {
 
 														              // this = button element
 														              // $noty = $noty element
@@ -54,7 +57,7 @@
 														              document.getElementById('profil_id').click();
 														            }
 														          },
-														          {addClass: 'btn btn-default', text: 'Cancel', onClick: function($noty) {
+														          {addClass: 'btn btn-default', text: c, onClick: function($noty) {
 														              $noty.close();
 														             
 														            }
