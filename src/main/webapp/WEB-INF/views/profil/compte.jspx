@@ -1,122 +1,153 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body" xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="body" 
+	 xmlns:spring="http://www.springframework.org/tags"
+	 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	 xmlns:form="http://www.springframework.org/tags/form"
+	 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
-			<li><a href="${users_url}/private/profil" id="id_profil"><i
-					class="icon-user"> <!-- co -->
-				</i> Profil</a></li>
-			<li class="active"><a href="${users_url}/private/compte"
-				id="id_compte"><i class="	icon-briefcase"> <!-- co -->
-				</i> Compte</a></li>
-			<li><a href="${users_url}/private/vehicule" id="id_vehicule"><i
-					class="icon-truck "> <!-- co -->
-				</i> Vehicule</a></li>
-			<li><a href="${users_url}/private/passwordReset"
-				id="id_password"> <i class="icon-lock "> <!-- co -->
-				</i> Securite
-			</a></li>
+			<li>
+				<a href="${users_url}/private/profil" id="id_profil"><i class="icon-user"> <!-- co -->
+				</i><spring:message code="a.profile" /></a>
+			</li>
+			<li class="active">
+				<a href="${users_url}/private/compte" id="id_compte"><i class="	icon-briefcase"> <!-- co -->
+				</i><spring:message code="a.account" /></a>
+			</li>
+			<li>
+				<a href="${users_url}/private/vehicule" id="id_vehicule"><i class="icon-truck "> <!-- co -->
+				</i><spring:message code="a.vehicle" /></a>
+			</li>
+			<li>
+				<a href="${users_url}/private/passwordReset" id="id_password"><i class="icon-lock "> <!-- co -->
+				</i><spring:message code="a.security" /></a>
+			</li>
 		</ul>
 	</div>
 	<div class="tab-content">
 		<div class="tab-pane active">
-			<div class="panel">
-				
-				<table id="user" class="table table-bordered table-striped"
-					style="clear: both">
+			<div class="panel">				
+				<table id="user" class="table table-bordered table-striped">
 					<tbody>
-
 						<tr>
-							<td class="span3" width="40%">Email Adress</td>
-							<td class="span4"><a href="#" id="email"
-								data-placeholder="Christophe@gmail.com"
-								data-url="/users/updateField" data-type="text" data-pk="1"
-								data-name="email" class="editable editable-click"
-								data-value="${nomade.compte.email}"></a></td>
-
-						</tr>
-
-						<tr>
-							<td>Full Name</td>
-							<td><a href="#" id="fullName" data-type="text" data-pk="1"
-								data-name="fullName" data-placeholder="celis ave"
-								data-url="/users/updateField" class="editable editable-click"
-								data-value="${nomade.compte.fullName}"></a></td>
-
-						</tr>
-
-
-						<tr>
-							<td>Gender</td>
-							<td><a href="#" id="gender" data-type="select"
-								data-name="gender" data-pk="1" data-url="/users/updateField"
-								class="editable editable-click" style="color: gray;"
-								data-placeholder="click to select your gender"
-								data-value="${nomade.compte.gender}" >
-								
-							</a></td>
-
-						</tr>
-
-						<tr>
-							
-
-							<td>birthDate</td>
-							<td><a href="#" id="birthDate" data-type="date"
-								data-viewformat="dd-mm-yyyy" data-pk="1" data-name="birthDate"
-								data-title="Select date" data-url="/users/updateField"
-								class="editable editable-click" data-format="dd-mm-yyyy">
-								 <fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy"/>
-								 </a></td>
-
-						</tr>
-
-						<tr>
-							<td>Adresse</td>
-							<td><a href="#" id="adress" data-type="textarea"
-								data-url="/users/updateField" data-pk="1" data-name="adress"
-								data-value="${nomade.compte.adress}"
-								placeholder="cameroun douala rue 38"
-								class="editable editable-click"></a></td>
-
+							<td><spring:message code="td.mail" /></td>
+							<td>
+								<a href="#" 
+								   id="email"
+								   data-placeholder="Christophe@gmail.com"
+								   data-url="/users/updateField" 
+								   data-type="text" 
+								   data-pk="1"
+								   data-name="email" 
+								   class="editable editable-click"
+								   data-value="${nomade.compte.email}">
+								</a>
+							</td>
 						</tr>
 						<tr>
-							<td>phone Number</td>
-							<td><a href="#" id="phoneNumber" data-type="text"
-								data-pk="1" data-name="phoneNumber"
-								data-url="/users/updateField" placeholder="+23796857425"
-								data-value="${nomade.compte.phoneNumber}"
-								class="editable editable-click"> <!-- co -->
-							</a></td>
-
+							<td><spring:message code="td.fullName" /></td>
+							<td>
+								<a href="#" 
+							   	   id="fullName" 
+							       data-type="text" 
+							       data-pk="1"
+							       data-name="fullName" 
+							       data-placeholder="celis ave"
+							       data-url="/users/updateField" 
+							       class="editable editable-click"
+							       data-value="${nomade.compte.fullName}">
+							     </a>
+							</td>
 						</tr>
 						<tr>
-							<td>nationality</td>
-							<td><a href="#" id="nationality" data-type="select"
-								data-name="nationality" data-pk="1" data-url="/users/updateField"
-								class="editable editable-click" style="color: gray;"
-								data-placeholder="click to select your gender"
-								data-value="${nomade.compte.nationality}" >
-								
-							</a></td>
-
+							<td><spring:message code="td.gender" /></td>
+							<td>
+								<a href="#" 
+								   id="gender" 
+								   data-type="select"
+								   data-name="gender" 
+								   data-pk="1" 
+								   data-url="/users/updateField"
+								   class="editable editable-click"
+								   data-placeholder="click to select your gender"
+								   data-value="${nomade.compte.gender}" >								
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td><spring:message code="td.birthDate" /></td>
+							<td>
+								<a href="#" 
+								   id="birthDate" 
+								   data-type="date"
+								   data-viewformat="dd-mm-yyyy" 
+								   data-pk="1" 
+								   data-name="birthDate"
+								   data-title="Select date" 
+								   data-url="/users/updateField"
+								   class="editable editable-click" 
+								   data-format="dd-mm-yyyy">
+								 	<fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy"/>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td><spring:message code="td.adress" /></td>
+							<td>
+								<a href="#" 
+							       id="adress" 
+							       data-type="textarea"
+								   data-url="/users/updateField" 
+								   data-pk="1" 
+								   data-name="adress"
+								   data-value="${nomade.compte.adress}"
+								   placeholder="cameroun douala rue 38"
+								   class="editable editable-click">
+								 </a>
+							</td>
+						</tr>
+						<tr>
+							<td><spring:message code="td.phoneNumber" /></td>
+							<td>
+								<a href="#" 
+								   id="phoneNumber" 
+								   data-type="text"
+								   data-pk="1" 
+								   data-name="phoneNumber"
+								   data-url="/users/updateField" 
+								   placeholder="+23796857425"
+								   data-value="${nomade.compte.phoneNumber}"
+								   class="editable editable-click"> <!-- co -->
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td><spring:message code="td.nationality" /></td>
+							<td>
+								<a href="#" 
+								   id="nationality" 
+								   data-type="select"
+								   data-name="nationality" 
+								   data-pk="1" 
+								   data-url="/users/updateField"
+								   class="editable editable-click"
+								   data-placeholder="click to select your gender"
+								   data-value="${nomade.compte.nationality}" >								
+								</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
-
 	<script type="text/javascript">
 	jQuery.noConflict();
 	(function( $ ) {
@@ -152,7 +183,6 @@
 	});		
 })(jQuery);
 	</script>
-
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_profil",
@@ -189,5 +219,4 @@
 			}
 		}));
 	</script>
-
 </div>

@@ -1,128 +1,173 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body" xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="body" 
+	 xmlns:spring="http://www.springframework.org/tags"
+	 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+ 	 xmlns:form="http://www.springframework.org/tags/form"
+  	 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	<spring:url var="res" value="/resources" />
+	<spring:url var="res" value="/resources" />	
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
-			<li><a href="${users_url}/private/profil" id="id_profil"><i
-					class="icon-user"> <!-- co -->
-				</i> Profil</a></li>
-			<li><a href="${users_url}/private/compte" id="id_compte"><i
-					class="	icon-briefcase"> <!-- co -->
-				</i> Compte</a></li>
-			<li class="active"><a href="${users_url}/private/vehicule"
-				id="id_vehicule"><i class="icon-truck "> <!-- co -->
-				</i> Vehicule</a></li>
-			<li><a href="${users_url}/private/passwordReset"
-				id="id_password"> <i class="icon-lock "> <!-- co -->
-				</i> Securite
-			</a></li>
+			<li>
+				<a href="${users_url}/private/profil" id="id_profil"><i class="icon-user"> <!-- co -->
+				</i><spring:message code="a.profile" /></a>
+			</li>
+			<li>
+				<a href="${users_url}/private/compte" id="id_compte"><i class="	icon-briefcase"> <!-- co -->
+				</i><spring:message code="a.account" /></a>
+			</li>
+			<li class="active">
+				<a href="${users_url}/private/vehicule" id="id_vehicule"><i class="icon-truck "> <!-- co -->
+				</i><spring:message code="a.vehicle" /></a>
+			</li>
+			<li>
+				<a href="${users_url}/private/passwordReset" id="id_password"><i class="icon-lock "> <!-- co -->
+				</i><spring:message code="a.security" /></a>
+			</li>
 		</ul>
-	</div>
+	</div>	
 	<div class="tab-content">
 		<div class="tab-pane active">
 			<div class="panel">
-			<div class="row" >
-				<div class="col-lg-9">
-				<table id="user" class="table table-bordered table-striped"
-					style="clear: both">
-					<tbody>
-
-						<tr>
-							<td class="span3" width="40%">vehiculeName</td>
-							<td class="span4"><a href="#" id="vehiculeName"
-								data-placeholder="Christophe@gmail.com"
-								data-url="/users/updateField" data-type="text" data-pk="1"
-								data-name="vehiculeName" class="editable editable-click"
-								data-value="${nomade.vehicule.vehiculeName}"></a></td>
-
-						</tr>
-
-						<tr>
-							<td>vehiculeType</td>
-							<td><a href="#" id="vehiculeType" data-type="select"
-								data-name="vehiculeType" data-pk="1"
-								data-url="/users/updateField" class="editable editable-click"
-								style="color: gray;" data-value="${nomade.vehicule.vehiculeType}"
-								data-placeholder="click to select your vehiculeState">
-							</a></td>
-						</tr>
-
-
-						<tr>
-							<td>vehiculeState</td>
-							<td><a href="#" id="vehiculeState" data-type="select"
-								data-name="vehiculeState" data-pk="1"
-								data-url="/users/updateField" class="editable editable-click"
-								style="color: gray;" data-value="${nomade.vehicule.vehiculeState}"
-								data-placeholder="click to select your vehiculeState">
-							</a></td>
-
-						</tr>
-
-						<tr>
-							<td>model</td>
-							<td><a href="#" id="model" data-type="text"
-								data-url="/users/updateField" data-pk="1" data-name="model"
-								data-value="${nomade.vehicule.model}" placeholder="peugeot"
-								class="editable editable-click"></a></td>
-
-						</tr>
-						<tr>
-							<td>couleur</td>
-							<td><a href="#" id="couleur" data-type="text"
-								data-url="/users/updateField" data-pk="1" data-name="couleur"
-								data-value="${nomade.vehicule.couleur}" placeholder="jaune"
-								class="editable editable-click"></a></td>
-
-						</tr>
-
-						<tr>
-							<td>countrys</td>
-							<td><a href="#" id="country" data-type="select"
-								data-name="country" data-pk="1" data-url="/users/updateField"
-								class="editable editable-click" style="color: gray;"
-								data-placeholder="click to select your vehiculeState"
-								data-value="${nomade.vehicule.forSellCountry}"> 
-							</a></td>
-
-						</tr>
-						<tr>
-							<td>anneMiseEnService</td>
-							<td><a href="#" id="anneMiseEnService" data-type="date"
-								data-viewformat="dd-mm-yyyy" data-pk="1" data-format="dd-mm-yyyy"
-								data-name="anneMiseEnService" data-original-title="Select Date"
-								class="editable editable-click" data-url="/users/updateField" > 
-								<fmt:formatDate value="${nomade.vehicule.anneMiseEnService}" pattern="dd-MM-yyyy"/>
-								</a></td>
-
-						</tr>
-						<tr>
-							<td>description</td>
-							<td><a href="#" id="description" data-type="textarea"
-								data-url="/users/updateField" data-pk="1"
-								data-name="description"
-								data-value="${nomade.vehicule.description}" placeholder="jaune"
-								class="editable editable-click"></a></td>
-
-						</tr>
-					</tbody>
-				</table>
-				</div>
-				<div class="col-lg-3">
-						<IMG alt="" src="${res}/img/profil.png" width="210px"
-							height="240px;" /> <a class="btn btn-default"
-							style="z-index: 3; margin-bottom: -160px; margin-left: -150px;"><i
-							class="icon-edit"> <!-- co --> </i> edit</a>
+				<div class="row>"
+					<div class="col-lg-9">
+					<table id="user" class="table table-bordered table-striped">
+						<tbody>
+							<tr>
+								<td><spring:message code="td.vehicleName" /></td>
+								<td>
+									<a href="#" 
+									   id="vehiculeName"
+									   data-placeholder="Christophe@gmail.com"
+									   data-url="/users/updateField" 
+									   data-type="text" 
+									   data-pk="1"
+									   data-name="vehiculeName" 
+									   class="editable editable-click"
+								   	   data-value="${nomade.vehicule.vehiculeName}">
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.vehicleType" /></td>
+								<td>
+									<a href="#" 
+								   	   id="vehiculeType" 
+							    	   data-type="select"
+								       data-name="vehiculeType" 
+								       data-pk="1"
+									   data-url="/users/updateField" class="editable editable-click"
+									   data-value="${nomade.vehicule.vehiculeType}"
+									  data-placeholder="click to select your vehiculeState">
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.vehicleStatus" /></td>
+								<td>
+									<a href="#" 
+									   id="vehiculeState" 
+									   data-type="select"
+									   data-name="vehiculeState" 
+									   data-pk="1"
+									   data-url="/users/updateField" class="editable editable-click"
+									   style="color: gray;" data-value="${nomade.vehicule.vehiculeState}"
+									   data-placeholder="click to select your vehiculeState">
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.vehicleModel" /></td>
+								<td>
+									<a href="#" 
+									   id="model" 
+									   data-type="text"
+									   data-url="/users/updateField" 
+									   data-pk="1" 
+									   data-name="model"
+									   data-value="${nomade.vehicule.model}" 
+									   placeholder="peugeot"
+									   class="editable editable-click">
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.vehicleColor" /></td>
+								<td>
+									<a href="#" 
+									   id="couleur" 
+									   data-type="text"
+									   data-url="/users/updateField" 
+									   data-pk="1" 
+									   data-name="couleur"
+									   data-value="${nomade.vehicule.couleur}" 
+									   placeholder="jaune"
+									   class="editable editable-click">
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<spring:message code="alt.vehicleCountry" var="altVehicleCountry" />
+								<td><spring:message code="td.vehicleCountry" /><a href="" alt="${altVehicleCountry}">*</a></td>
+								<td>
+									<a href="#" 
+									   id="country" 
+									   data-type="select"
+									   data-name="country"
+									   data-pk="1" 
+									   data-url="/users/updateField"
+									   class="editable editable-click"
+									   data-placeholder="click to select your vehiculeState"
+									   data-value="${nomade.vehicule.forSellCountry}"> 
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.vehicleYear" /></td>
+								<td>
+									<a href="#" 
+									   id="anneMiseEnService" 
+									   data-type="date"
+									   data-viewformat="dd-mm-yyyy" 
+									   data-pk="1" 
+									   data-format="dd-mm-yyyy"
+									   data-name="anneMiseEnService" 
+									   data-original-title="Select Date"
+									   class="editable editable-click" 
+									   data-url="/users/updateField" > 
+									<fmt:formatDate value="${nomade.vehicule.anneMiseEnService}" pattern="dd-MM-yyyy"/>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td><spring:message code="td.description" /></td>
+								<td>
+									<a href="#" 
+									   id="description" 
+									   data-type="textarea"
+									   data-url="/users/updateField" data-pk="1"
+									   data-name="description"
+									   data-value="${nomade.vehicule.description}" 
+									   placeholder="jaune"
+									   class="editable editable-click">
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+					<div class="col-lg-3">
+						<IMG alt="" src="${res}/img/profil.png" width="210px" height="240px;" />
+						<a class="btn btn-default">
+							<i class="icon-edit"> <!-- co --> 
+							</i><spring:message code="a.edit" />
+						</a>
 					</div>
 				</div>
 			</div>
