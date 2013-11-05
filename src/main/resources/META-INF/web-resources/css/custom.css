@@ -43,3 +43,19 @@
 	width: 230px;
 	padding-top: 7px;
 }
+
+.loginInput > span {
+	font-size: 13px; 
+	color: gray; 
+	font-weight: lighter;
+}
+
+.linkForgotPassword {
+	font-size: 13px; 
+	margin-top: 10px; 
+	cursor: pointer;
+}
+
+.logoLink {
+	margin-left: 10px;
+}
