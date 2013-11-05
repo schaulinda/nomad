@@ -138,7 +138,7 @@ public class UserController {
 		}
 		nomade.setDisableLogin(false);
 		userService.updateUserNomade(nomade);
-		String message = "complete your profile";
+		boolean log = autoLogin(nomade.getUserName(), httpServletRequest);//do something with log later
 		return "redirect:/users/private/profil";
 	}
 

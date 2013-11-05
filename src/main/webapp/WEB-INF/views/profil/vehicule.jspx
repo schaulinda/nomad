@@ -35,7 +35,7 @@
 	<div class="tab-content">
 		<div class="tab-pane active">
 			<div class="panel">
-				<div class="row" >
+				<div class="row">
 					<div class="col-lg-9">
 					<table id="user" class="table table-bordered table-striped">
 						<tbody>
@@ -62,9 +62,10 @@
 							    	   data-type="select"
 								       data-name="vehiculeType" 
 								       data-pk="1"
-									   data-url="/users/updateField" class="editable editable-click"
+									   data-url="/users/updateField" 
+									   class="editable editable-click"
 									   data-value="${nomade.vehicule.vehiculeType}"
-									  data-placeholder="click to select your vehiculeState">
+									   data-placeholder="click to select your vehiculeState">
 									</a>
 								</td>
 							</tr>
@@ -76,8 +77,9 @@
 									   data-type="select"
 									   data-name="vehiculeState" 
 									   data-pk="1"
-									   data-url="/users/updateField" class="editable editable-click"
-									   style="color: gray;" data-value="${nomade.vehicule.vehiculeState}"
+									   data-url="/users/updateField" 
+									   class="editable editable-click"
+									   data-value="${nomade.vehicule.vehiculeState}"
 									   data-placeholder="click to select your vehiculeState">
 									</a>
 								</td>
@@ -166,7 +168,7 @@
 						<IMG alt="" src="${res}/img/profil.png" width="210px" height="240px;" />
 						<a class="btn btn-default">
 							<i class="icon-edit"> <!-- co --> 
-							</i><spring:message code="a.edit" />
+							</i> <spring:message code="a.edit" />
 						</a>
 					</div>
 				</div>

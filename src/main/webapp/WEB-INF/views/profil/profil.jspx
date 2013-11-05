@@ -38,7 +38,7 @@
 					<div class="col-lg-3">
 						<IMG alt="" src="${res}/img/profil.png" width="210px" height="240px;" />
 						<a class="btn btn-default">
-							<i class="icon-edit"></i><spring:message code="a.edit" />
+							<i class="icon-edit"><!-- co --></i> <spring:message code="a.edit" />
 						</a>
 					</div>
 					<div class="col-lg-9">
@@ -172,6 +172,16 @@
 		}));
 	</script>
 	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "profil_id",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
 	jQuery.noConflict();
 	(function( $ ) {
 		$(document).ready(function() {
@@ -218,9 +228,6 @@
 			$('#butVoyage').editable({});
 			
 		});
-		
-		$(".chosen-select").chosen();
-		$('.datepicker').datepicker();
 	})(jQuery);
 	</script>
 </div>
