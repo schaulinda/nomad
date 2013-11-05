@@ -71,7 +71,7 @@
 						<spring:message code="input.password" var="inputPassword" />
 						<input type="text" id="j_username" name='j_username'
 							class="form-control"
-							placeholder="${fn:escapeXml(inputUserNameOrEmail)}" /> <input
+							placeholder="${inputUserNameOrEmail}" /> <input
 							type="password" id="j_password" required="required"
 							class="form-control" name="j_password"
 							placeholder="${inputPassword }" /> <label
@@ -108,7 +108,7 @@
 						<form:errors cssClass="errors" path="userName"
 							cssStyle="color:red;" />
 						<form:input class="form-control" path="userName"
-							placeholder="${fn:escapeXml(inputUserName)}" required="required"
+							placeholder="${inputUserName}" required="required"
 							min="3" type="text" />
 
 						<form:errors cssClass="errors" path="password"

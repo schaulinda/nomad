@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.CharSet;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -34,6 +35,7 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 			applicationInitService.initApplication();
 			initialized = true;
 		}
+		
 		filterChain.doFilter(request, response);
 	}
 
