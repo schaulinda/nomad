@@ -1,9 +1,9 @@
 <div xmlns:spring="http://www.springframework.org/tags"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	 xmlns:form="http://www.springframework.org/tags/form"
+	 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	 xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="resources" value="/resources" />
@@ -11,24 +11,24 @@
 	<!-- header -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="nav-collapse collapse bs-navbar-collapse">
-
-			<a href="${home}" class="navbar-brand" style="margin-left: 10px;"><img
-				src="${resources}/img/navbarlogo.png"> <!-- eh --> </img></a>
+			<a href="${home}" class="navbar-brand logoLink">
+				<img src="${resources}/img/navbarlogo.png"> <!-- eh --> </img>
+			</a>
 			<ul class="nav navbar-nav col-lg-offset-8">
-				<li class="dropdown "><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> Language: <b class="caret">
-							<!--  com-->
-					</b>
-				</a>
-					<ul class="dropdown-menu">
+				<li class="dropdown ">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<spring:message code="a.language" />
+						<b class="caret"><!--  com--></b>
+					</a>
+						<ul class="dropdown-menu">
 						<li><util:language label="French" locale="fr" /></li>
 						<li><util:language label="English" locale="en" /></li>
-					</ul></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<!-- body conetnt -->
-
 	<div class="fond-bg">
 		<img alt="" src="${resources}/img/travel.jpg">
 		<!--  com-->
@@ -45,16 +45,13 @@
 					<spring:message code="p.travel" />
 				</p>
 			</div>
-
 			<div class="col-lg-3 col-sm-5 col-12">
 				<div class="well">
-
 					<c:if test="${not empty param.login_error}">
 						<div class="errors">
 							<div class="alert alert-danger">
-								bad credentials
+								<spring:message code="div.badCredentials" />
 							</div>
-
 						</div>
 					</c:if>
 					<c:if test="${empty param.login_error}">
@@ -62,29 +59,34 @@
 							<spring:message code="security_login_message" />
 						</legend>
 					</c:if>
-					<spring:url value="/resources/j_spring_security_check"
-						var="form_url" />
-					<form name="f" action="${fn:escapeXml(form_url)}" method="POST">
-
-						<spring:message code="input.usernameOrEmail"
-							var="inputUserNameOrEmail" />
+					<spring:url value="/resources/j_spring_security_check" var="form_url" />
+					<form name="f" action="${fn:escapeXml(form_url)}" method="POST" class="loginInput">
+						<spring:message code="input.usernameOrEmail" var="inputUserNameOrEmail" />
 						<spring:message code="input.password" var="inputPassword" />
-						<input type="text" id="j_username" name='j_username'
-							class="form-control"
-							placeholder="${inputUserNameOrEmail}" /> <input
-							type="password" id="j_password" required="required"
-							class="form-control" name="j_password"
-							placeholder="${inputPassword }" /> <label
-							class="checkbox col-lg-6 col-sm-6 col-6"> <input
-							type="checkbox" name="_spring_security_remember_me" value="1" /><span
-							style="font-size: 13px; color: gray; font-weight: lighter;"><spring:message
-									code="span.remember" /></span>
-						</label> <a class="col-lg-6 col-sm-6 col-6" href=""
-							style="font-size: 13px; margin-top: 10px; cursor: pointer;"><spring:message
-								code="a.forgotPassword" /></a>
 
-						<button id="proceed" type="submit" name="submit"
-							class="btn btn-info btn-block">
+						<input type="text" 
+							   id="j_username" 
+							   name='j_username'
+							   class="form-control"
+							   placeholder="${inputUserNameOrEmail}" />
+						<input type="password" 
+							   id="j_password" 
+							   required="required"
+							   class="form-control" 
+							   name="j_password"
+							   placeholder="${inputPassword }" />
+						<label class="checkbox col-lg-6 col-sm-6 col-6">
+							<input type="checkbox" 
+							   	   name="_spring_security_remember_me" 
+							       value="1" />
+							<span>
+								<spring:message code="span.remember" />
+							</span>
+						</label> 
+						<a class="col-lg-6 col-sm-6 col-6 linkForgotPassword" href="" >
+							<spring:message code="a.forgotPassword" />
+						</a>
+						<button id="proceed" type="submit" name="submit" class="btn btn-info btn-block">
 							<spring:message code="button.connection" />
 						</button>
 					</form>
@@ -94,33 +96,39 @@
 						<spring:message code="legend.newOnPN" />
 					</legend>
 					<spring:url value="/users/register" var="register_url"></spring:url>
-					<form:form action="${register_url}" method="post"
-						modelAttribute="beanRegister" id="idform">
-
+					<form:form action="${register_url}" method="post" modelAttribute="beanRegister" id="idform">
 						<form:errors cssClass="errors" path="email" cssStyle="color:red;" />
-						<form:input class="form-control" path="email" placeholder="email"
-							pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-							required="required" type="text" />
-
+						<form:input class="form-control" 
+									path="email" 
+									placeholder="email"
+									pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+									required="required" 
+									type="text" />
 						<spring:message code="input.username" var="inputUserName" />
-						<spring:message code="input.confirmPassword"
-							var="inputConfirmPassword" />
-						<form:errors cssClass="errors" path="userName"
-							cssStyle="color:red;" />
-						<form:input class="form-control" path="userName"
-							placeholder="${inputUserName}" required="required"
-							min="3" type="text" />
-
-						<form:errors cssClass="errors" path="password"
-							cssStyle="color:red;" />
-						<form:input class="form-control" path="password"
-							placeholder="${inputPassword}" required="required" min="6"
-							type="password" id="password" />
-						<form:errors cssClass="errors" path="confirmPassword"
-							cssStyle="color:red;" />
-						<form:input class="form-control" path="confirmPassword"
-							placeholder="${inputConfirmPassword}" required="required" min="6"
-							type="password" id="confirmedPassword" />
+						<spring:message code="input.confirmPassword" var="inputConfirmPassword" />
+						<form:errors cssClass="errors"  path="userName" cssStyle="color:red;" />
+						<form:input class="form-control" 
+									path="userName"
+									placeholder="${inputUserName}" 
+									required="required"
+									min="3" 
+									type="text" />
+						<form:errors cssClass="errors" path="password" cssStyle="color:red;" />
+						<form:input class="form-control" 
+									path="password"
+									placeholder="${inputPassword}" 
+									required="required" 
+									min="6"
+									type="password" 
+									id="password" />
+						<form:errors cssClass="errors" path="confirmPassword" cssStyle="color:red;" />
+						<form:input class="form-control" 
+									path="confirmPassword"
+									placeholder="${inputConfirmPassword}" 
+									required="required" 
+									min="6"
+									type="password" 
+									id="confirmedPassword" />
 						<br />
 						<button class="btn btn-warning btn-block" type="submit">
 							<spring:message code="button.signUp" />
@@ -131,16 +139,14 @@
 		</div>
 		<br />
 		<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 <br />
-			<spring:message code="a.whoAreWe" /></a> | <a href="#"
-				class="traitgauche"><spring:message code="a.contact" /></a> | <a
-				href="#" class="traitgauche"><spring:message
-					code="a.confidentiality" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.userAgreement" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.helpFAQ" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.professionals" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.advertiser" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.developmentTranslation" /></a>
+			<a href="#">© Petit Nomad 2238 <br /><spring:message code="a.whoAreWe" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.contact" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.confidentiality" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.userAgreement" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.helpFAQ" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.professionals" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.advertiser" /></a> | 
+			<a href="#" class="traitgauche"><spring:message code="a.developmentTranslation" /></a>
 		</footer>
 	</div>
 	<script type="text/javascript">
