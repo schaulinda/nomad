@@ -1,28 +1,23 @@
 <html xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">
-
-<jsp:output doctype-root-element="HTML"
-	doctype-system="about:legacy-compat" />
-
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	  xmlns:spring="http://www.springframework.org/tags"
+	  xmlns:util="urn:jsptagdir:/WEB-INF/tags/util">
+<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
 <jsp:directive.page pageEncoding="UTF-8" />
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=8" />
-
-<util:load-scripts />
-<spring:url var="res" value="/resources" />
-<!-- Le styles -->
-<link href="${res}/css/bootstrap.css" rel="stylesheet" />
-<style type="text/css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<util:load-scripts />
+	<spring:url var="res" value="/resources" />
+	<!-- Le styles -->
+	<link href="${res}/css/bootstrap.css" rel="stylesheet" />
+	<style type="text/css">
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
-	background-color: #f4f1dd;
+	background-color: #fffbe8;
 }
 
 .fond-bg {
@@ -46,27 +41,20 @@ footer>a {
 	color: rgba(255, 255, 255, 0.7);
 	text-shadow: 0 1px 2px #000000;
 }
-</style>
-<link href="${res}/css/custom.css" rel="stylesheet" />
-<link href="${res}/css/icon.css" rel="stylesheet" />
-
+	</style>
+	<link href="${res}/css/custom.css" rel="stylesheet" />
+	<link href="${res}/css/icon.css" rel="stylesheet" />
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
 <!-- Le fav and touch icons -->
-<link rel="shortcut icon" href="${res}/img/favicon.ico" />
-<link rel="apple-touch-icon" href="${res}/img/apple-touch-icon.png" />
-<link rel="apple-touch-icon" sizes="72x72"
-	href="${res}/img/apple-touch-icon-72x72.png" />
-<link rel="apple-touch-icon" sizes="114x114"
-	href="${res}/img/apple-touch-icon-114x114.png" />
-
+	<link rel="shortcut icon" href="${res}/img/favicon.ico" />
+	<link rel="apple-touch-icon" href="${res}/img/apple-touch-icon.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="${res}/img/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="${res}/img/apple-touch-icon-114x114.png" />
 </head>
-
 <body>
-
 	<tiles:insertAttribute name="body" />
 </body>
 <!-- Le javascript

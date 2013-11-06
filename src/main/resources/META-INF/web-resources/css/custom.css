@@ -1,4 +1,4 @@
- .user > a > img {
+.user > a > img {
     display: inline-block;
     height: 46px;
     vertical-align:center;
@@ -58,4 +58,21 @@
 
 .logoLink {
 	margin-left: 10px;
+}
+
+.avatarDropdown {
+	margin-left: 10px;
+}
+
+.friendInvitDropdown {
+	margin-left: -10px;
+}
+
+.defaultVehicleImg {
+	margin-left: 10px;
+}
+.userVehicleImg {
+	margin-left: 10px;
+	width: 46px;
+	height: 46px;
 }
