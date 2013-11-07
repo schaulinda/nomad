@@ -67,7 +67,7 @@
 							   id="j_username" 
 							   name='j_username'
 							   class="form-control"
-							   placeholder="${fn:escapeXml(inputUserNameOrEmail)}" />
+							   placeholder="${inputUserNameOrEmail}" />
 						<input type="password" 
 							   id="j_password" 
 							   required="required"
@@ -108,7 +108,7 @@
 						<form:errors cssClass="errors"  path="userName" cssStyle="color:red;" />
 						<form:input class="form-control" 
 									path="userName"
-									placeholder="${fn:escapeXml(inputUserName)}" 
+									placeholder="${inputUserName}" 
 									required="required"
 									min="3" 
 									type="text" />
