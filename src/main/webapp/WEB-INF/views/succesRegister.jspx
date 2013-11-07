@@ -1,6 +1,6 @@
 <div xmlns:spring="http://www.springframework.org/tags"
-	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
-	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
  <spring:url var="home" value="/" />
@@ -12,18 +12,14 @@
 				</i> Registration
 			</h3>
 		</div>
-
 		<div class="row">
 			<p>
-				Your registration is succesfull, please check your mail to activate
-				your account.
+				<spring:message code="a.back" />
 				<a class="btn" href="${home}">
-					<i class="icon-arrow-left">
-						<!-- co -->
-					</i> back
+					<i class="icon-arrow-left"><!-- co --></i> 
+					<spring:message code="p.registerMessage" />
 				</a>
 			</p>
 		</div>
 	</div>
-
 </div>
