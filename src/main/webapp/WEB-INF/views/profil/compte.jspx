@@ -34,67 +34,113 @@
 	<div class="tab-content">
 		<div class="tab-pane active">
 			<div class="panel">
-				<table id="user" class="table table-bordered table-striped">
-					<tbody>
-						<tr>
-							<td><spring:message code="td.mail" /></td>
-							<td><a href="#" id="email"
-								data-placeholder="Christophe@gmail.com"
-								data-url="${updateFieldUrl}" data-type="text" data-pk="1"
-								data-name="email" class="editable editable-click"
-								data-value="${nomade.compte.email}"> </a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.fullName" /></td>
-							<td><a href="#" id="fullName" data-type="text" data-pk="1"
-								data-name="fullName" data-placeholder="celis ave"
-								data-url="${updateFieldUrl}" class="editable editable-click"
-								data-value="${nomade.compte.fullName}"> </a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.gender" /></td>
-							<td><a href="#" id="gender" data-type="select"
-								data-name="gender" data-pk="1" data-url="${updateFieldUrl}"
-								class="editable editable-click"
-								data-placeholder="click to select your gender"
-								data-value="${nomade.compte.gender}"> </a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.birthDate" /></td>
-							<td><a href="#" id="birthDate" data-type="date"
-								data-viewformat="dd-mm-yyyy" data-pk="1" data-name="birthDate"
-								data-title="Select date" data-url="${updateFieldUrl}"
-								class="editable editable-click" data-format="dd-mm-yyyy"> <fmt:formatDate
-										value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy" />
-							</a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.adress" /></td>
-							<td><a href="#" id="adress" data-type="textarea"
-								data-url="${updateFieldUrl}" data-pk="1" data-name="adress"
-								data-value="${nomade.compte.adress}"
-								placeholder="cameroun douala rue 38"
-								class="editable editable-click"> </a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.phoneNumber" /></td>
-							<td><a href="#" id="phoneNumber" data-type="text"
-								data-pk="1" data-name="phoneNumber" data-url="${updateFieldUrl}"
-								placeholder="+23796857425"
-								data-value="${nomade.compte.phoneNumber}"
-								class="editable editable-click"> <!-- co -->
-							</a></td>
-						</tr>
-						<tr>
-							<td><spring:message code="td.nationality" /></td>
-							<td><a href="#" id="nationality" data-type="select"
-								data-name="nationality" data-pk="1" data-url="${updateFieldUrl}"
-								class="editable editable-click"
-								data-placeholder="click to select your gender"
-								data-value="${nomade.compte.nationality}"> </a></td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.mail" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="email"
+						   data-placeholder="Christophe@gmail.com"
+						   data-url="${updateFieldUrl}" 
+						   data-type="text" 
+						   data-pk="1"
+						   data-name="email" 
+						   class="editable editable-click"
+						   data-value="${nomade.compte.email}"><!-- com--> -->
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.fullName" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="fullName" 
+						   data-type="text" 
+						   data-pk="1"
+						   data-name="fullName" 
+						   data-placeholder="celis ave"
+						   data-url="${updateFieldUrl}" 
+						   class="editable editable-click"
+						   data-value="${nomade.compte.fullName}"><!-- com--> -->
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.gender" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="gender" 
+						   data-type="select"
+						   data-name="gender" 
+						   data-pk="1" 
+						   data-url="${updateFieldUrl}"
+						   class="editable editable-click"
+						   data-placeholder="click to select your gender"
+						   data-value="${nomade.compte.gender}"><!-- com--> --> 
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.birthDate" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="birthDate" 
+						   data-type="date"
+						   data-viewformat="dd-mm-yyyy" 
+						   data-pk="1" 
+						   data-name="birthDate"
+					   	   data-title="Select date" 
+					   	   data-url="${updateFieldUrl}"
+						   class="editable editable-click" 
+						   data-format="dd-mm-yyyy"> 
+							<fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy" /><!-- com--> -->
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.adress" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="adress" 
+						   data-type="textarea"
+						   data-url="${updateFieldUrl}" 
+						   data-pk="1" 
+						   data-name="adress"
+						   data-value="${nomade.compte.adress}"
+						   placeholder="cameroun douala rue 38"
+						   class="editable editable-click"><!-- com-->
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.phoneNumber" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="phoneNumber" 
+						   data-type="text"
+						   data-pk="1" 
+						   data-name="phoneNumber" 
+						   data-url="${updateFieldUrl}"
+						   placeholder="+23796857425"
+						   data-value="${nomade.compte.phoneNumber}"
+					       class="editable editable-click"> <!-- co -->
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6"><spring:message code="td.nationality" /></div>
+					<div class="col-lg-6">
+						<a href="#" 
+						   id="nationality" 
+						   data-type="select"
+						   data-name="nationality" 
+						   data-pk="1" 
+						   data-url="${updateFieldUrl}"
+						   class="editable editable-click"
+						   data-placeholder="click to select your gender"
+						   data-value="${nomade.compte.nationality}"><!-- com-->
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
