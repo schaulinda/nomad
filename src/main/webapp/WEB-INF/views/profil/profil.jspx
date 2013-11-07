@@ -12,6 +12,7 @@
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
+		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li class="active">
 				<a href="${users_url}/private/profil" id="id_profil"><i class="icon-user"> <!-- co -->
@@ -49,7 +50,7 @@
 									<td>
 										<a href="#" 
 										   id="username"
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   data-type="text" 
 										   data-pk="1"
 										   data-name="username" 
@@ -67,7 +68,7 @@
 										   data-pk="1" 
 										   data-name="website" 
 										   data-placeholder="facebook.com/john" 
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   class="editable editable-click" 
 										   data-value="${nomade.profil.website}">
 										</a>
@@ -81,7 +82,7 @@
 										   data-type="select2" 
 										   data-name="langues" 
 										   data-pk="1" 
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   class="editable editable-click" 
 										   style="color: gray;" 
 										   data-placeholder="click to selection languages"> 
@@ -100,7 +101,7 @@
 										   data-type="select2" 
 										   data-name="visitedCountry" 
 										   data-pk="1" 
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   data-placeholder="click to selection countries" 
 										   class="editable editable-click ">
 											<c:forEach var="item" items="${nomade.profil.visitedCountry}" varStatus="loop">
@@ -116,7 +117,7 @@
 										<a href="#" 
 										   id="metier" 
 										   data-type="text" 
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   data-pk="1" data-name="metier" 
 										   data-value="${nomade.profil.metier}" 
 										   class="editable editable-click">
@@ -131,7 +132,7 @@
 										   id="butVoyage" 
 										   data-type="textarea" 
 										   data-pk="1" data-name="butVoyage" 
-										   data-url="/users/updateField" 
+										   data-url="${updateFieldUrl}" 
 										   data-value="${nomade.profil.butVoyage}" 
 										   class="editable editable-click"> <!-- co -->
 										</a>

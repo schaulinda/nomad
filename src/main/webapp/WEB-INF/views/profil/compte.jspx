@@ -12,6 +12,7 @@
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
+		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li>
 				<a href="${users_url}/private/profil" id="id_profil"><i class="icon-user"> <!-- co -->
@@ -42,7 +43,7 @@
 								<a href="#" 
 								   id="email"
 								   data-placeholder="Christophe@gmail.com"
-								   data-url="/users/updateField" 
+								   data-url="${updateFieldUrl}" 
 								   data-type="text" 
 								   data-pk="1"
 								   data-name="email" 
@@ -60,7 +61,7 @@
 							       data-pk="1"
 							       data-name="fullName" 
 							       data-placeholder="celis ave"
-							       data-url="/users/updateField" 
+							       data-url="${updateFieldUrl}" 
 							       class="editable editable-click"
 							       data-value="${nomade.compte.fullName}">
 							     </a>
@@ -74,7 +75,7 @@
 								   data-type="select"
 								   data-name="gender" 
 								   data-pk="1" 
-								   data-url="/users/updateField"
+								   data-url="${updateFieldUrl}"
 								   class="editable editable-click"
 								   data-placeholder="click to select your gender"
 								   data-value="${nomade.compte.gender}" >								
@@ -91,7 +92,7 @@
 								   data-pk="1" 
 								   data-name="birthDate"
 								   data-title="Select date" 
-								   data-url="/users/updateField"
+								   data-url="${updateFieldUrl}"
 								   class="editable editable-click" 
 								   data-format="dd-mm-yyyy">
 								 	<fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy"/>
@@ -104,7 +105,7 @@
 								<a href="#" 
 							       id="adress" 
 							       data-type="textarea"
-								   data-url="/users/updateField" 
+								   data-url="${updateFieldUrl}" 
 								   data-pk="1" 
 								   data-name="adress"
 								   data-value="${nomade.compte.adress}"
@@ -121,7 +122,7 @@
 								   data-type="text"
 								   data-pk="1" 
 								   data-name="phoneNumber"
-								   data-url="/users/updateField" 
+								   data-url="${updateFieldUrl}" 
 								   placeholder="+23796857425"
 								   data-value="${nomade.compte.phoneNumber}"
 								   class="editable editable-click"> <!-- co -->
@@ -136,7 +137,7 @@
 								   data-type="select"
 								   data-name="nationality" 
 								   data-pk="1" 
-								   data-url="/users/updateField"
+								   data-url="${updateFieldUrl}"
 								   class="editable editable-click"
 								   data-placeholder="click to select your gender"
 								   data-value="${nomade.compte.nationality}" >								

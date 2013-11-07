@@ -12,6 +12,7 @@
 	<spring:url var="res" value="/resources" />	
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
+		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li>
@@ -45,7 +46,7 @@
 									<a href="#" 
 									   id="vehiculeName"
 									   data-placeholder="Christophe@gmail.com"
-									   data-url="/users/updateField" 
+									   data-url="${updateFieldUrl}" 
 									   data-type="text" 
 									   data-pk="1"
 									   data-name="vehiculeName" 
@@ -62,7 +63,7 @@
 							    	   data-type="select"
 								       data-name="vehiculeType" 
 								       data-pk="1"
-									   data-url="/users/updateField" 
+									   data-url="${updateFieldUrl}" 
 									   class="editable editable-click"
 									   data-value="${nomade.vehicule.vehiculeType}"
 									   data-placeholder="click to select your vehiculeState">
@@ -77,7 +78,7 @@
 									   data-type="select"
 									   data-name="vehiculeState" 
 									   data-pk="1"
-									   data-url="/users/updateField" 
+									   data-url="${updateFieldUrl}" 
 									   class="editable editable-click"
 									   data-value="${nomade.vehicule.vehiculeState}"
 									   data-placeholder="click to select your vehiculeState">
@@ -90,7 +91,7 @@
 									<a href="#" 
 									   id="model" 
 									   data-type="text"
-									   data-url="/users/updateField" 
+									   data-url="${updateFieldUrl}" 
 									   data-pk="1" 
 									   data-name="model"
 									   data-value="${nomade.vehicule.model}" 
@@ -105,7 +106,7 @@
 									<a href="#" 
 									   id="couleur" 
 									   data-type="text"
-									   data-url="/users/updateField" 
+									   data-url="${updateFieldUrl}" 
 									   data-pk="1" 
 									   data-name="couleur"
 									   data-value="${nomade.vehicule.couleur}" 
@@ -123,7 +124,7 @@
 									   data-type="select"
 									   data-name="country"
 									   data-pk="1" 
-									   data-url="/users/updateField"
+									   data-url="${updateFieldUrl}"
 									   class="editable editable-click"
 									   data-placeholder="click to select your vehiculeState"
 									   data-value="${nomade.vehicule.forSellCountry}"> 
@@ -142,7 +143,7 @@
 									   data-name="anneMiseEnService" 
 									   data-original-title="Select Date"
 									   class="editable editable-click" 
-									   data-url="/users/updateField" > 
+									   data-url="${updateFieldUrl}" > 
 									<fmt:formatDate value="${nomade.vehicule.anneMiseEnService}" pattern="dd-MM-yyyy"/>
 									</a>
 								</td>
@@ -153,7 +154,8 @@
 									<a href="#" 
 									   id="description" 
 									   data-type="textarea"
-									   data-url="/users/updateField" data-pk="1"
+									   data-url="${updateFieldUrl}" 
+									   data-pk="1"
 									   data-name="description"
 									   data-value="${nomade.vehicule.description}" 
 									   placeholder="jaune"
