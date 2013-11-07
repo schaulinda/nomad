@@ -21,6 +21,7 @@
   
   <definition name="privateLayout" template="/WEB-INF/layouts/privateLayout.jspx">
     	<put-attribute name="footer" value="/WEB-INF/views/footer1.jspx" />
+    	<put-attribute name="topheader" value="/WEB-INF/views/topheader.jspx" />
   </definition>
 
 </tiles-definitions>

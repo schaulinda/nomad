@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="id_subfooter"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<spring:url var="res" value="/resources" />
+
+	<div class="row">
+		<!--le fil chronologique sera affiché lors de la sélection d'un nomade et avec le carnet de voyage. Quand l'onglet Itinéraire sera alors la météo s'affichera-->
+
+		<div class="col-lg-5 col-lg-offset-1 col-6">
+			<div class="panel panel-default widget">
+				<div class="panel-heading">
+					<span class="icon icon-comment"></span>
+					<h3 class="panel-title"> Historique user</h3>
+					<span class="label label-info"> 78</span>
+				</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+						class="icon icon-refresh"></span> More</a>
+				</div>
+			</div>
+		</div>
+			<div class="col-lg-5 col-6">
+			<div class="panel panel-default widget">
+				<div class="panel-heading">
+					<span class="icon icon-comment"></span>
+					<h3 class="panel-title"> Historique vehicule</h3>
+					<span class="label label-info"> 78</span>
+				</div>
+				<div class="panel-body">
+					<ul class="list-group">
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div class="col-xs-2 col-md-1 col-lg-2">
+									<img alt="user" src="holder.js/80x80" class="img-rounded" />
+								</div>
+								<div class="col-xs-10 col-md-11 col-lg-9 col-lg-offset-1">
+									<div>
+										<a href="#">Cool
+											Sign Up</a>
+										<div class="mic-info">
+											By: <a href="#">Bhaumik Patel</a> on 11 Nov 2013
+										</div>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span
+						class="icon icon-refresh"></span> More</a>
+				</div>
+			</div>
+		</div>
+		</div>
+
+</div>
+

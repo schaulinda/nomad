@@ -78,11 +78,74 @@
 			elementId : "profil_id",
 			event : "onclick",
 			params : {
-				fragments : "body"
+				fragments : "body, topheader"
 			}
 		}));
 	</script>
 
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_profil",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_compte",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_vehicule",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_password",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_nomadeLink",
+			event : "onclick",
+			params : {
+				fragments : "body, topheader, id_subfooter"
+			}
+		}));
+</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_itineraireLink",
+			event : "onclick",
+			params : {
+				fragments : "body, topheader, id_subfooter"
+			}
+		}));
+</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "id_carnetLink",
+			event : "onclick",
+			params : {
+				fragments : "body, topheader, id_subfooter"
+			}
+		}));
+</script>
 
 </div>
 

@@ -3,17 +3,22 @@
 <tiles-definitions>
     <definition extends="privateLayout" name="profil/profil">
         <put-attribute name="body" value="/WEB-INF/views/profil/profil.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
      <definition extends="privateLayout" name="profil/new">
         <put-attribute name="body" value="/WEB-INF/views/profil/new.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
      <definition extends="privateLayout" name="profil/compte">
         <put-attribute name="body" value="/WEB-INF/views/profil/compte.jspx"/>
+         <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
      <definition extends="privateLayout" name="profil/vehicule">
         <put-attribute name="body" value="/WEB-INF/views/profil/vehicule.jspx"/>
+         <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
    <definition extends="privateLayout" name="profil/passwordReset">
         <put-attribute name="body" value="/WEB-INF/views/profil/passwordReset.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
 </tiles-definitions>
