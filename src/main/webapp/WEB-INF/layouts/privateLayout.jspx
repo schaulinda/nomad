@@ -292,34 +292,8 @@ body {
 			fragments : "body"
 		}
 	}));
+	
 </script>
 
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_profil",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_veh",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_veh1",
-		event : "onclick",
-		params : {
-			fragments : "body"
-		}
-	}));
-</script>
 
 </html>

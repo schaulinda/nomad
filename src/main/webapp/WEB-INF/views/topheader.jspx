@@ -9,6 +9,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
+	<spring:url value="/users" var="users_url"></spring:url>
 		<div class="col-lg-2 user col-sm-2">
 			<a href="${users_url}/private/profil" id="img_profil">
 				<c:choose>
@@ -109,5 +110,33 @@
 					</div>
 				</div>
 			</div>
-	</div>  
+	</div> 
+	<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_profil",
+		event : "onclick",
+		params : {
+			fragments : "body,topheader, id_subfooter"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_veh",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "img_veh1",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+</script>
+	 
 </div> 

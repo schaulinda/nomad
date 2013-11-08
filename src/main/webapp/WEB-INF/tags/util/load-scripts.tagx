@@ -16,7 +16,7 @@
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
   <c:set var="userLocale">
     <c:set var="plocale">${pageContext.response.locale}</c:set>
-    <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
+    <c:out value="${fn:replace(plocale, '_', '-')}" default="fr" />
   </c:set>
 
   <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>

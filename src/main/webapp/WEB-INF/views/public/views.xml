@@ -7,7 +7,7 @@
     </definition>
     <definition extends="privateLayout" name="public/itineraire">
         <put-attribute name="body" value="/WEB-INF/views/public/itineraire.jspx"/>
-        <put-attribute name="id_subfooter" value="/WEB-INF/views/public/historique.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
     <definition extends="privateLayout" name="public/carnet">
         <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>

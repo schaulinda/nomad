@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body" 
-	 xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	 xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
-	 xmlns:spring="http://www.springframework.org/tags"
-	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
@@ -23,7 +22,9 @@
 				</div>
 				<div class="col-lg-4">
 					<button class="btn btn-success">
-						<i class=" icon-info-sign"><!-- com --></i>
+						<i class=" icon-info-sign">
+							<!-- com -->
+						</i>
 						<spring:message code="button.practicalInformation" />
 					</button>
 				</div>
@@ -41,8 +42,7 @@
 				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="icon-user"> <!-- com --></i>
-							<a href="">User profil</a>
+							<i class="icon-user"> <!-- com --></i> <a href="">User profil</a>
 						</h3>
 					</div>
 					<div class="row">
@@ -54,13 +54,12 @@
 							Kaka<br /> <label>Site: </label>twitter/kaka.clement
 						</div>
 						<div class="col-lg-4 col-sm-4 col-12">
-							<a class="btn btn-default ">
-								<i class="icon-envelope"> <!-- com --></i>
+							<a class="btn btn-default "> <i class="icon-envelope"> <!-- com --></i>
 								<spring:message code="a.message" />
-							</a>
-							<a class="btn btn-default" style="margin-top: 3px; width: 105px;">
-								<i class="icon-plus-sign"> <!-- com --></i>
-								<spring:message code="a.add" />
+							</a> <a class="btn btn-default"
+								style="margin-top: 3px; width: 105px;"> <i
+								class="icon-plus-sign"> <!-- com --></i> <spring:message
+									code="a.add" />
 							</a>
 							<!-- checkbox pour suivre si déjà ami -->
 						</div>
@@ -75,8 +74,8 @@
 				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="icon-truck"> <!-- com --></i>
-							<a href="#">User vehicle</a>
+							<i class="icon-truck"> <!-- com --></i> <a href="#">User
+								vehicle</a>
 						</h3>
 					</div>
 					<div class="row">
@@ -92,11 +91,11 @@
 			</div>
 		</div>
 	</div>
-	
-<script type="text/javascript">
-	var a = '<spring:message code="div.completeProfil" />';
-	var b = '<spring:message code="button.profile" />';
-	var c = '<spring:message code="button.cancel" />';
+
+	<script type="text/javascript">
+		var a = '<spring:message code="div.completeProfil" />';
+		var b = '<spring:message code="button.profile" />';
+		var c = '<spring:message code="button.cancel" />';
 		jQuery.noConflict();
 		(function($) {
 
@@ -105,45 +104,62 @@
 							function() {
 
 								var fieldpercent = '${fieldPercent}';
-								
+
 								if (fieldpercent != "") {
 									if (50 > fieldpercent) {
-										
+
 										setTimeout(
 												function generate() {
-												str='<div class="progress">'
-													  +'<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'
-													  +fieldpercent+'" aria-valuemin="0" aria-valuemax="100" style="width:'
-													  +fieldpercent+'%">'
-											   		 +'<span class="sr-only">'
-													  +fieldpercent+'% Complete</span></div></div>'
-													  +'<div>'+a+'</div>';
-													  
+													str = '<div class="progress">'
+															+ '<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'
+															+ fieldpercent
+															+ '" aria-valuemin="0" aria-valuemax="100" style="width:'
+															+ fieldpercent
+															+ '%">'
+															+ '<span class="sr-only">'
+															+ fieldpercent
+															+ '% Complete</span></div></div>'
+															+ '<div>'
+															+ a
+															+ '</div>';
+
 													var n = noty({
 														text : str,
 														type : 'alert',
 														//timeout: 5000,
 														modal : false,
 														layout : 'topRight',
-														closeWith: ['click'],
-														buttons: [
-														          {addClass: 'btn btn-default', text: b, onClick: function($noty) {
+														closeWith : [ 'click' ],
+														buttons : [
+																{
+																	addClass : 'btn btn-default',
+																	text : b,
+																	onClick : function(
+																			$noty) {
 
-														              // this = button element
-														              // $noty = $noty element
+																		// this = button element
+																		// $noty = $noty element
 
-														              $noty.close();
-														              document.getElementById('profil_id').click();
-														            }
-														          },
-														          {addClass: 'btn btn-default', text: c, onClick: function($noty) {
-														              $noty.close();
-														             
-														            }
-														          }
-														        ]
+																		$noty
+																				.close();
+																		document
+																				.getElementById(
+																						'profil_id')
+																				.click();
+																	}
+																},
+																{
+																	addClass : 'btn btn-default',
+																	text : c,
+																	onClick : function(
+																			$noty) {
+																		$noty
+																				.close();
+
+																	}
+																} ]
 													});
-													
+
 												}, 5000);
 
 									}
@@ -152,7 +168,7 @@
 		})(jQuery);
 	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_nomadeLink",
 			event : "onclick",
@@ -160,8 +176,8 @@
 				fragments : "body, topheader"
 			}
 		}));
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_itineraireLink",
 			event : "onclick",
@@ -169,8 +185,8 @@
 				fragments : "body, topheader"
 			}
 		}));
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_carnetLink",
 			event : "onclick",
@@ -178,8 +194,8 @@
 				fragments : "body, topheader"
 			}
 		}));
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "profil_id",
 			event : "onclick",
@@ -187,6 +203,13 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
+		console.log("beforewindow.XMLHttpRequest: "+window.XMLHttpRequest);
+		dojo.connect(dojo.byId("profil_id"), "onclick", function() {
+			
+			console.log("window.XMLHttpRequest: "+window.XMLHttpRequest);
+			
+			});
+			
 	</script>
 
 
