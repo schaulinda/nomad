@@ -14,7 +14,7 @@
 					<div class="panel">
 						<div class="panel-heading">
 							<h3 class="panel-title">
-								<i class="icon-globe"> <!-- com -->
+								<i class="icon-globe"><!-- com -->
 								</i> Map
 							</h3>
 						</div>
@@ -23,26 +23,34 @@
 				</div>
 				<div class="col-lg-4">
 					<button class="btn btn-success">
-						<i class=" icon-info-sign"><!-- com --></i>
-						<spring:message code="button.practicalInformation" />
+						<i class=" icon-info-sign"> 
+							<!-- com-->
+						</i>
+						<spring:message code="button.practicalInformation" var="buttonPracticalInformation"/>
+						${buttonPracticalInformation}
 					</button>
 				</div>
 				<div class="col-lg-4 col-lg-offset-4">
 					<button class="btn btn-danger ">
-						<i class="icon-warning-sign"> <!-- com --></i>
-						<spring:message code="button.dangerInformation" />
+						<i class="icon-warning-sign"> 
+							<!-- com -->
+						</i>
+						<spring:message code="button.dangerInformation" var="buttonDangerInformation" />
+						${buttonDangerInformation}
 					</button>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6 tab-pane active fade in" id="id_nomadeContent"
-			style="margin-left: -16px;">
+		<div class="col-lg-6 tab-pane active fade in" id="id_nomadeContent" style="margin-left: -16px;">
 			<div class="tab-content">
 				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="icon-user"> <!-- com --></i>
-							<a href="">User profil</a>
+							<i class="icon-user">
+								<!-- com -->
+							</i>
+							<spring:message code="a.profileOf" var="aProfileOf" />
+							<a href="">${aProfileOf} user</a>
 						</h3>
 					</div>
 					<div class="row">
@@ -55,12 +63,18 @@
 						</div>
 						<div class="col-lg-4 col-sm-4 col-12">
 							<a class="btn btn-default ">
-								<i class="icon-envelope"> <!-- com --></i>
-								<spring:message code="a.message" />
+								<i class="icon-envelope"> 
+									<!-- com -->
+								</i>
+								<spring:message code="a.message" var="aMessage" />
+								${aMessage}
 							</a>
 							<a class="btn btn-default" style="margin-top: 3px; width: 105px;">
-								<i class="icon-plus-sign"> <!-- com --></i>
-								<spring:message code="a.add" />
+								<i class="icon-plus-sign"> 
+									<!-- com -->
+								</i>
+								<spring:message code="a.add" var="aAdd" />
+								${aAdd}
 							</a>
 							<!-- checkbox pour suivre si déjà ami -->
 						</div>
@@ -75,8 +89,11 @@
 				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="icon-truck"> <!-- com --></i>
-							<a href="#">User vehicle</a>
+							<i class="icon-truck"> 
+								<!-- com -->
+							</i>
+							<spring:message code="a.vehicleOf" var="aVehicleOf" />
+							<a href="#">${aVehicleOf} User</a>
 						</h3>
 					</div>
 					<div class="row">

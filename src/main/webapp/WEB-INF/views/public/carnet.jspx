@@ -23,14 +23,20 @@
 				</div>
 				<div class="col-lg-4">
 					<button class="btn btn-success">
-						<i class=" icon-info-sign"><!-- com --></i>
-						<spring:message code="button.practicalInformation" />
+						<i class=" icon-info-sign">
+							<!-- com-->
+						</i>
+						<spring:message code="button.practicalInformation" var="buttonPracticalInformation"/>
+						${buttonPracticalInformation}
 					</button>
 				</div>
 				<div class="col-lg-4 col-lg-offset-4">
 					<button class="btn btn-danger ">
-						<i class="icon-warning-sign"> <!-- com --></i>
-						<spring:message code="button.dangerInformation" />
+						<i class="icon-warning-sign"> 
+							<!-- com -->
+						</i>
+						<spring:message code="button.dangerInformation" var="buttonDangerInformation" />
+						${buttonDangerInformation}
 					</button>
 				</div>
 			</div>
@@ -41,29 +47,52 @@
 					<h3 class="panel-title">
 						<i class="icon-user">
 							<!-- co -->
-						</i> Carnet du voyageur
+						</i>
+						<spring:message code="h.notebookOfTraveler" var="hNotebookOfTraveler"/>
+						${hNotebookOfTraveler}
 					</h3>
 				</div>
-				<textarea class="form-control" row="8">Racontez votre étape</textarea>
+				<textarea class="form-control" row="8">
+					<spring:message code="textarea.tellUs" var="textareaTellUs" />
+					${textareaTellUs}
+				</textarea>
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li><a href="#"><button class="btn">
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-camera">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-calendar">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-screenshot">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">Valider</button></a></li>
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
+										<spring:message code="button.valid" />
+									</button>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -71,60 +100,101 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-truck"><!-- co --></i> Carnet du vehicule
+						<i class="icon-truck">
+							<!-- co -->
+						</i>
+						<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
+						${hNotebookOfVehicle}
 					</h3>
 				</div>
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Départ" /><span
-								class="input-group-addon"><a href="#"><i
-									class="icon-screenshot">
+							<spring:message code="input.start" var="inputStart" />
+							<input type="text" class="form-control" placeholder="${inputStart}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot">
 										<!-- co -->
-								</i></a></span>
+									</i>
+								</a>
+							</span>
 						</div>
 						<br />
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Etape" /><span
-								class="input-group-addon"><a href="#"><i
-									class="icon-screenshot">
+							<spring:message code="input.stopOver"var="inputStopOver" />
+							<input type="text" class="form-control" placeholder="${inputStopOver}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot">
 										<!-- co -->
-								</i></a></span>
+									</i>
+								</a>
+							</span>
 						</div>
 						<br />
 						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Arrivée" /><span
-								class="input-group-addon"><a href="#"><i
-									class="icon-screenshot">
+							<spring:message code="input.finish" var="inputFinish" />
+							<input type="text" class="form-control" placeholder="${inputFinish}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot">
 										<!-- co -->
-								</i></a></span>
+									</i>
+								</a>
+							</span>
 						</div>
 					</div>
 					<div class="col-lg-3">
-						<a href="#" class="pull-down"><button class="btn">Valider</button></a>
+						<a href="#" class="pull-down">
+							<button class="btn">
+								<spring:message code="button.valid" />
+							</button>
+						</a>
 					</div>
 				</div>
 				<br />
-				<textarea class="form-control" row="8">Racontez votre étape</textarea>
+				<textarea class="form-control" row="8">
+					<spring:message code="textarea.tellUs" var="textareaTellUs" />
+					${textareaTellUs}
+				</textarea>
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li><a href="#"><button class="btn">
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-camera">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-calendar">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
 										<i class="icon-screenshot">
 											<!-- co -->
 										</i>
-									</button></a></li>
-							<li><a href="#"><button class="btn">Valider</button></a></li>
+									</button>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<button class="btn">
+										<spring:message code="button.valid" />
+									</button>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>
