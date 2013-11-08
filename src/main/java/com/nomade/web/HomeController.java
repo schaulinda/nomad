@@ -35,7 +35,7 @@ public class HomeController {
 				uiModel.addAttribute("fieldPercent", request.getSession(false).getAttribute("fieldPercent"));
 				request.getSession(false).removeAttribute("fieldPercent");
 				uiModel.addAttribute("nomade", securite.getUserNomade());
-				uiModel.addAttribute("nomade", nomade);
+				uiModel.addAttribute("onglet", "nomad");
 				return "public/nomad";
 			}
 
