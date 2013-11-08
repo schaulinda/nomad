@@ -23,14 +23,20 @@
 				</div>
 				<div class="col-lg-4">
 					<button class="btn btn-success">
-						<i class=" icon-info-sign"><!-- com --></i>
-						<spring:message code="button.practicalInformation" />
+						<i class=" icon-info-sign">
+							<!-- com-->
+						</i>
+						<spring:message code="button.practicalInformation" var="buttonPracticalInformation"/>
+						${buttonPracticalInformation}
 					</button>
 				</div>
-				<div class="col-lg-4 col-lg-offset-4">
+				<div class="col-lg-4 col-lg-offset-3">
 					<button class="btn btn-danger ">
-						<i class="icon-warning-sign"> <!-- com --></i>
-						<spring:message code="button.dangerInformation" />
+						<i class="icon-warning-sign"> 
+							<!-- com -->
+						</i>
+						<spring:message code="button.dangerInformation" var="buttonDangerInformation" />
+						${buttonDangerInformation}
 					</button>
 				</div>
 			</div>
@@ -39,8 +45,11 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-plus"><!-- co --></i>
-						<spring:message code="h.newItinerary" />
+						<i class="icon-plus">
+							<!-- co -->
+						</i>
+						<spring:message code="h.newItinerary" var="hNewItinerary" />
+						${hNewItinerary}
 					</h3>
 				</div>
 				<div class="row">
@@ -87,8 +96,11 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-road"><!-- co --></i>
-						<spring:message code="h.itineraryOfTrip" />
+						<i class="icon-road">
+							<!-- co -->
+						</i>
+						<spring:message code="h.itineraryOfTrip" var="hItineraryOfTrip" />
+						${hItineraryOfTrip}
 					</h3>
 				</div>
 				Panel content
@@ -96,8 +108,11 @@
 			<div class="panel panel-success">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-info-sign"><!-- co --></i>
-						<spring:message code="h.practicalOnTrip" />
+						<i class="icon-info-sign">
+							<!-- co -->
+						</i>
+						<spring:message code="h.practicalOnTrip" var="hPracticalOnTrip" />
+						${hPracticalOnTrip}
 					</h3>
 				</div>
 				<div class="row panel">
@@ -124,8 +139,11 @@
 			<div class="panel panel-danger">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-warning-sign"><!-- co --></i>
-						<spring:message code="h.dangerOnTrip" />
+						<i class="icon-warning-sign">
+							<!-- co -->
+						</i>
+						<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
+						${hDangerOnTrip}
 					</h3>
 				</div>
 				Panel content

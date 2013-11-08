@@ -43,7 +43,7 @@
 					<c:set value="active" var="carnetOnglet" ></c:set>
 				</c:if>				
 					<li class="${nomadeOnglet}" >
-						<a href="${public_url}/nomad" id="id_nomadeLink" class="">
+						<a href="${public_url}/nomad" id="id_nomadeLink">
 							<spring:message code="a.nomads" />
 						</a>
 					</li>
@@ -90,7 +90,8 @@
 						<a href="${users_url}/private/vehicule" id="img_veh">
 							<c:choose>
 								<c:when test="${empty nomade.vehicule.vehiculeName}">
-									<spring:message code="td.vehicleName" />
+									<spring:message code="td.vehicleName" var="tdVehicleName" />
+									${tdVehicleName}
 								</c:when>
 								<c:otherwise>
 									${nomade.vehicule.vehiculeName}
@@ -106,11 +107,11 @@
 									<img alt="user" src="${res}/images/profil/${nomade.vehicule.photo}" class="img-rounded userVehicleImg" />
 								</c:otherwise>
 							</c:choose>
-						</a>
-					</div>
+					</a>
 				</div>
 			</div>
 	</div> 
+	</div>
 	<script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "img_profil",
@@ -138,5 +139,4 @@
 		}
 	}));
 </script>
-	 
 </div> 
