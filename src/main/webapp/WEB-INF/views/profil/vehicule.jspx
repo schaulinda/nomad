@@ -45,7 +45,7 @@
 								<td>
 									<a href="#" 
 									   id="vehiculeName"
-									   data-placeholder="Christophe@gmail.com"
+									   data-placeholder="Titine"
 									   data-url="${updateFieldUrl}" 
 									   data-type="text" 
 									   data-pk="1"
