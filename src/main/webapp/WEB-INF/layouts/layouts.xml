@@ -17,6 +17,7 @@
   </definition>
   
   <definition name="loginLayout" template="/WEB-INF/layouts/loginLayout.jspx">
+  	<put-attribute name="headerLogin" value="/WEB-INF/views/headerLogin.jspx" />
   </definition>
   
   <definition name="privateLayout" template="/WEB-INF/layouts/privateLayout.jspx">

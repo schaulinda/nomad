@@ -24,10 +24,12 @@
     
     <definition extends="loginLayout" name="succesRegister">
         <put-attribute name="body" value="/WEB-INF/views/succesRegister.jspx"/>
+        <put-attribute name="headerLogin" value="/WEB-INF/views/headerLogin.jspx" />
     </definition>
     
      <definition extends="loginLayout" name="accountActivate">
         <put-attribute name="body" value="/WEB-INF/views/accountActivate.jspx"/>
+        <put-attribute name="headerLogin" value="/WEB-INF/views/headerLogin.jspx" />
     </definition>
    
   <definition extends="loginLayout" name="landing">
