@@ -179,6 +179,8 @@ body {
 							</a></li>
 						</ul></li>
 				</ul>
+				<img  id="throbber" src="${res}/img/ajaxicon/ajax-loader-icon.gif" class="col-lg-offset-5" 
+				style="margin-top: 7px;display: none;position: fixed;" />
 				<ul class="nav navbar-nav pull-right">
 					<li>
 						<div class="input-group searchinput">
@@ -292,7 +294,6 @@ body {
 			fragments : "body"
 		}
 	}));
-	
 </script>
 
 

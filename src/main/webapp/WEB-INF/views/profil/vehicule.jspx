@@ -38,12 +38,12 @@
 			<div class="panel">
 				<div class="row">
 					<div class="col-lg-9">
-					<table id="user" class="table table-bordered table-striped">
+					<table id="user" class="table table-bordered table-striped table-responsive">
 						<tbody>
 							<tr>
 								<td><spring:message code="td.vehicleName" /></td>
 								<td>
-									<a href="#" 
+								<a href="#" 
 									   id="vehiculeName"
 									   data-placeholder="Titine"
 									   data-url="${updateFieldUrl}" 

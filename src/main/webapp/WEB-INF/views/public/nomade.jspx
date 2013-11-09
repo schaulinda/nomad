@@ -190,7 +190,7 @@
 			elementId : "id_nomadeLink",
 			event : "onclick",
 			params : {
-				fragments : "body, topheader"
+				fragments : "body, topheader, id_subfooter"
 			}
 		}));
 	</script>
@@ -199,7 +199,7 @@
 			elementId : "id_itineraireLink",
 			event : "onclick",
 			params : {
-				fragments : "body, topheader"
+				fragments : "body, topheader, id_subfooter"
 			}
 		}));
 	</script>
@@ -208,25 +208,18 @@
 			elementId : "id_carnetLink",
 			event : "onclick",
 			params : {
-				fragments : "body, topheader"
+				fragments : "body, topheader, id_subfooter"
 			}
 		}));
 	</script>
 	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
+		 Spring.addDecoration( spd = new Spring.AjaxEventDecoration({
 			elementId : "profil_id",
 			event : "onclick",
 			params : {
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-		
-		dojo.connect(dojo.byId("profil_id"), "onclick", function() {
-			
-			console.log(+window.XMLHttpRequest);
-			
-			});
-			
 	</script>
 
 
