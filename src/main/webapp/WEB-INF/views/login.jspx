@@ -104,7 +104,7 @@
 									pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 									required="required" 
 									type="text" />
-						<spring:message code="input.username" var="inputUserName" />
+						<spring:message code="input.username" var="inputUserName" htmlEscape="false" />
 						<spring:message code="input.confirmPassword" var="inputConfirmPassword" />
 						<form:errors cssClass="errors"  path="userName" cssStyle="color:red;" />
 						<form:input class="form-control" 

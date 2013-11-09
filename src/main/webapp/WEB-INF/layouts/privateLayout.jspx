@@ -210,9 +210,9 @@ body {
 								<!-- co -->
 							</li>
 							<spring:url value="/resources/j_spring_security_logout"
-								var="logout" />
+								var="logout" /><spring:message var="logout_msg" code="security_logout" htmlEscape="false" />
 							<li><a href="${logout}"><i class="icon-lock"> <!-- co -->
-								</i> <spring:message code="security_logout" /> </a></li>
+								</i> ${logout_msg}</a></li>
 						</ul></li>
 				</ul>
 			</div>
