@@ -13,4 +13,8 @@
 <definition extends="default" name="albums/update">
         <put-attribute name="body" value="/WEB-INF/views/albums/update.jspx"/>
     </definition>
+    <definition extends="privateLayout" name="albums/picManager">
+        <put-attribute name="body" value="/WEB-INF/views/albums/picManager.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
 </tiles-definitions>

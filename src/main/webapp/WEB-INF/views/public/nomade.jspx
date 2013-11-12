@@ -184,7 +184,6 @@
 							});
 		})(jQuery);
 	</script>
-
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_nomadeLink",
@@ -193,8 +192,8 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-	</script>
-	<script type="text/javascript">
+</script>
+<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_itineraireLink",
 			event : "onclick",
@@ -202,8 +201,8 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-	</script>
-	<script type="text/javascript">
+</script>
+<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_carnetLink",
 			event : "onclick",
@@ -211,9 +210,9 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-	</script>
+</script>
 	<script type="text/javascript">
-		 Spring.addDecoration( spd = new Spring.AjaxEventDecoration({
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "profil_id",
 			event : "onclick",
 			params : {
@@ -221,7 +220,6 @@
 			}
 		}));
 	</script>
-
-
+	
 </div>
 

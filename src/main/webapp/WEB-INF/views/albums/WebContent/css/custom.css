@@ -1,0 +1,45 @@
+ .user > a > img {
+    display: inline-block;
+    height: 46px;
+    vertical-align:center;
+    width: 46px;  
+    margin-right: 4px; 
+  }
+ 
+.user{
+	cursor: pointer;
+}
+
+.user > a:HOVER{
+	text-decoration: none;
+}
+
+.container2{
+	max-width: auto;
+	width:auto;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.container2 a, .dropdown-menu a{
+	cursor: pointer;
+}
+
+.xlarge{
+	min-width: 400px;
+}
+
+.xmoyen{
+	min-width: 300px;
+}
+
+.navbar-brand{
+	padding: 10px;
+	margin-left: -40px;
+	margin-right: 20px;
+}
+
+.searchinput {
+	width: 230px;
+	padding-top: 7px;
+}

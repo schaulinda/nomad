@@ -23,13 +23,35 @@
 <!-- eh -->
 	
 </script>
+<script src="${res}/js/jquery.colorbox.js">
+	<!-- eh -->
+		
+	</script>
+<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+<script src="${res}/js/jquery-1.7.2.min.js">
+	<!-- eh -->
+		
+	</script>
+<script src="${res}/js/jquery-ui-1.8.7.min.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/jquery.ui.addresspicker.js">
+	<!-- eh -->
+		
+	</script>
+	
 <util:load-scripts />
+ 
 <!-- Le styles -->
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
 <link href="${res}/css/chosen.css" rel="stylesheet" />
 <link href="${res}/css/datepicker.css" rel="stylesheet" />
 <link href="${res}/css/select2.css" rel="stylesheet" />
+<link href="${res}/css/colorbox.css" rel="stylesheet" />
 <link href="${res}/css/bootstrap-editable.css" rel="stylesheet" />
+<link href="${res}/css/themeui/jquery.ui.all.css" rel="stylesheet" />
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -171,7 +193,8 @@ body {
 							<i class="icon-camera"> <!--coment  --></i>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="gestionnairephoto.html"> <spring:message
+						<spring:url value="albums/myPic" var="picManager_url"></spring:url>
+							<li><a href="${picManager_url}" id="picManager_id" > <spring:message
 										code="a.photoVideoManager" />
 							</a></li>
 							<li><a href="#"> <spring:message

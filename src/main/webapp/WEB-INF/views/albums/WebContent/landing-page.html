@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--indentation fausse-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Petit Nomade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="guymoyo">
+
+<!-- Le styles -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+	background-color: #f4f1dd;
+}
+
+.fond-bg{
+	background: none repeat scroll 0 0 #000000;
+    position:fixed;
+    top:0;
+    
+   
+}
+
+.block-avant{
+	z-index: 99;
+	margin-top: 20px;
+	overflow: hidden;
+}
+
+.front-welcome-text{
+	text-shadow: 0 1px 2px #000000;
+	color: white;
+}
+footer > a {
+	color: rgba(255, 255, 255, 0.7);
+	text-shadow: 0 1px 2px #000000;
+}
+</style>
+<link href="css/custom.css" rel="stylesheet">
+<link href="css/icon.css" rel="stylesheet">
+<script src="js/holder.js"></script>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="img/favicon.ico">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72"
+	href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114"
+	href="img/apple-touch-icon-114x114.png">
+</head>
+
+<body>
+	<!-- header -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="nav-collapse collapse bs-navbar-collapse">
+	<a href="index.html" class="navbar-brand" style="margin-left: 10px;"><img
+				src="img/navbarlogo.png"></a>
+		<ul class="nav navbar-nav col-lg-offset-8">
+			<li class="dropdown ">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					Language:
+					<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="#">French</a>
+					</li>
+					<li>
+						<a href="#">English</a>
+					</li>
+				</ul>
+				</li>
+		</ul>
+		</div>
+	</div>
+
+	<!-- body conetnt -->
+	
+		<div class="fond-bg" >
+			<img alt="" src="img/travel.jpg">
+		</div>
+		<div class="block-avant">
+			<div class="row">
+					<div class="col-lg-5 col-lg-offset-2 front-welcome-text col-sm-5 col-sm-offset-1 col-12">
+						<h3>Welcome to Petit Nomade.</h3>
+						<p>Travel Together, lorem up um isodor market with popo mexico.</p>
+					</div>
+
+					<div class="col-lg-3 col-sm-5 col-12">	
+						<div class="well">
+							<form method="POST" action="" accept-charset="UTF-8">
+								<input type="text" id="username" class="form-control" name="username" placeholder="Username">
+								<input type="password" id="password" class="form-control" name="password" placeholder="Password">
+								<label class="checkbox col-lg-6 col-sm-6 col-6">
+									<input type="checkbox" name="remember" value="1"><span style="font-size: 13px;color: gray;font-weight: lighter;"> Remember Me </span>
+								</label>
+								<a class="col-lg-6 col-sm-6 col-6" style="font-size: 13px;margin-top: 10px;cursor: pointer;">Forgot password?</a>
+								<button type="submit" name="submit" class="btn btn-info btn-block">Sign in</button>
+							</form>
+						</div>
+					    <div class="well">
+						    <legend>New to Petit Nomade?</legend>
+						    <form accept-charset="UTF-8" action="" method="post">
+						    	<input class="form-control" name="name" placeholder="Full Name" type="text">
+						    	<input class="form-control" name="username" placeholder="Username" type="text">
+						    	<input class="form-control" name="password" placeholder="Password" type="password"><br/>
+						    	<button class="btn btn-warning btn-block" type="submit">Sign up</button>
+						    </form>
+						</div>
+					</div>
+			</div>
+			<br/>
+			<footer class="text-center" style="z-index: 99;position: relative;">
+				<a href="#">© Petit Nomad 2238 </a> | <a href="#" class="traitgauche">Contact
+				</a> | <a href="#" class="traitgauche">Confidentialité </a> | <a href="#"
+					class="traitgauche">Mentions légales </a> | <a href="#"
+					class="traitgauche">Aide / FAQ </a> | <a href="#"
+					class="traitgauche">Professionels </a> | <a href="#"
+					class="traitgauche">Annonceurs </a> | <a href="#"
+					class="traitgauche">Développement / Traduction </a>
+			</footer>
+		</div>
+
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+
+</body>
+</html>

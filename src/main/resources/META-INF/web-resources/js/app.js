@@ -21,5 +21,46 @@ dojo.ready(function() {
     	      break;
     	  }
     	});*/
+    
 
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "id_nomadeLink",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "id_itineraireLink",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "id_carnetLink",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+	
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "profil_id",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "picManager_id",
+		event : "onclick",
+		params : {
+			fragments : "body, topheader, id_subfooter"
+		}
+	}));
+	
 }); 
