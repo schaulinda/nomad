@@ -9,45 +9,28 @@
 	<spring:url var="res" value="/resources" />
 	<div class="row">
 		<div class="col-lg-3" style="">
-
-			<div class="input-group">
-				<input type="text" class="form-control"
-					placeholder="Enter album name" /> <span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-						<i class="icon-folder-open"> <!-- co -->
-						</i> Add
-					</button>
-				</span>
-			</div>
+			<spring:url value="/albums" var="album_url"></spring:url>
+			<form action="${album_url}/create">
+				<div class="input-group">
+				${errorAlbum}
+					<input type="text" class="form-control" id="albumName"
+						name="albumName" value="${albumName}"
+						placeholder="Enter album name" /> <span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="icon-folder-open"> <!-- co -->
+							</i> Add
+						</button>
+					</span>
+				</div>
+			</form>
 			<!-- /input-group -->
-
-			<div class="list-group"
-				style="overflow-y: scroll; max-height: 300px;">
-				<a href="#" class="list-group-item "> <span class="badge">3</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> LA plages
-				</a> <a href="#" class="list-group-item"> <span class="badge">15</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Arnold Vieux
-				</a> <a href="#" class="list-group-item active"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Brice Conpiere
-				</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Le Liguori
-				</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Pipo Archibal
-				</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Brice Conpiere
-				</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Le Liguori
-				</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
-					<i class="icon-folder-open"> <!--co  -->
-				</i> Pipo Archibal
-				</a>
+			<div class="list-group" style="overflow-y: scroll; max-height: 320pxh;height: 320px;background-color: white;" >
+				<c:forEach var="album" items="${nomade.albums}" >
+					<a href="#" id="${album.id}" class="list-group-item "> <span class="badge">${album.numPhoto}</span>
+						<i class="icon-folder-open"> <!--co  -->
+					</i><label id="${album.name}" >${album.name}</label> 
+					</a>
+				</c:forEach>
 			</div>
 
 		</div>
@@ -57,8 +40,9 @@
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="form-group">
-								<label>Upload a image file into album 1 </label> <input
-									type="file" name="photo" class="form-control" />
+								<label>Upload a image file into <span id="albumTitle"><!-- co --></span> <a href=""
+									id="deleteAlbum">delete</a></label> <input type="file" name="photo"
+									class="form-control" />
 								<p class="help-block">files with extentions: jpg, png, JPEG,
 									bmp.</p>
 							</div>
@@ -74,7 +58,8 @@
 								</a>
 								</span>
 							</div>
-							<p class="help-block">Drag and drop marker on the map to choose the rigth location</p>
+							<p class="help-block">Drag and drop marker on the map to
+								choose the rigth location</p>
 							<input id="lat" type="hidden" /> <input id="lng" type="hidden" />
 						</div>
 						<div class="col-lg-1" style="margin-top: 24px;">
@@ -98,132 +83,7 @@
 									</i></a>
 								</p>
 							</div></li>
-						<li id="image-2" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 2" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 2" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-1" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 1" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 1" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-2" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 2" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 2" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-1" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 1" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 1" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-2" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 2" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 2" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-1" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 1" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 1" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-2" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 2" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 2" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-1" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 1" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 1" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
-						<li id="image-2" class="thumbnail"><a
-							style="background: url(${res}/img/avatar.png)"
-							title="Sample Image 2" href="${res}/img/avatar.png"><img
-								class="grayscale" src="${res}/img/avatar.png"
-								alt="Sample Image 2" /></a>
-							<div class="gallery-controls">
-								<p>
-									<a href="#" class="gallery-edit btn"><i class="icon-edit">
-											<!--co  -->
-									</i></a> <a href="#" class="gallery-delete btn"><i
-										class="icon-remove"> <!-- co -->
-									</i></a>
-								</p>
-							</div></li>
+
 					</ul>
 				</div>
 				<ul class="pagination">
@@ -246,6 +106,23 @@
 			$(document)
 					.ready(
 							function() {
+
+								/* get id album */
+								$('.list-group > a').each(
+										function() {
+
+											this.click(function() {
+
+												$('#deleteAlbum').attr(
+														"href",
+														"${album_url}/delete/"
+																+ this.id);
+												
+												$('#albumTitle').append($('#'+this.id+'>label').id);
+											});
+
+										});
+								/* ---------- */
 
 								var gmarker = null;
 								var addresspickerMap = null;
@@ -308,13 +185,14 @@
 													$('#close')
 															.click(
 																	function() {
-																		
+
 																		addresspickerMap
-																		.addresspicker("destroy");
-																		
+																				.addresspicker("destroy");
+
 																		addresspickerMap = "a";
-																		
-																		$('#addresspicker_map')
+
+																		$(
+																				'#addresspicker_map')
 																				.popover(
 																						'hide');
 

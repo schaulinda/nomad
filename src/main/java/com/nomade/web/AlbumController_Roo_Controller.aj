@@ -29,7 +29,7 @@ privileged aspect AlbumController_Roo_Controller {
     @Autowired
     FileService AlbumController.fileService;
     
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
+   /* @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String AlbumController.create(@Valid Album album, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, album);
@@ -39,7 +39,7 @@ privileged aspect AlbumController_Roo_Controller {
         albumService.saveAlbum(album);
         return "redirect:/albums/" + encodeUrlPathSegment(album.getId().toString(), httpServletRequest);
     }
-    
+    */
     @RequestMapping(params = "form", produces = "text/html")
     public String AlbumController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Album());
@@ -84,7 +84,7 @@ privileged aspect AlbumController_Roo_Controller {
         return "albums/update";
     }
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+   /* @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String AlbumController.delete(@PathVariable("id") BigInteger id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Album album = albumService.findAlbum(id);
         albumService.deleteAlbum(album);
@@ -92,7 +92,7 @@ privileged aspect AlbumController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/albums";
-    }
+    }*/
     
     void AlbumController.populateEditForm(Model uiModel, Album album) {
         uiModel.addAttribute("album", album);

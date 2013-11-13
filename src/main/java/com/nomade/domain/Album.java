@@ -1,10 +1,17 @@
 package com.nomade.domain;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.bson.types.ObjectId;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -13,10 +20,39 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooMongoEntity
 public class Album {
+	
+	private ObjectId _id = new ObjectId();
 
     @NotNull
     private String name;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
+    private Date created;
+    
+    private int numPhoto = 0;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<File> files = new HashSet<File>();
+	public Album(String name, Date created) {
+		super();
+		this.name = name;
+		this.created = created;
+		
+	}
+
+	public Album() {
+		super();
+		
+	}
+
+	public int getNumPhoto() {
+		return numPhoto;
+	}
+
+	public void setNumPhoto(int numPhoto) {
+		this.numPhoto = numPhoto;
+	}
+    
+
+	
+	
 }

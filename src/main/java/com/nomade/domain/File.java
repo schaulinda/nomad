@@ -12,4 +12,10 @@ public class File {
 
     @NotNull
     private String fileName;
+    
+    private String fileSize;
+    private String fileType;
+ 
+    
+    private double[] location;
 }

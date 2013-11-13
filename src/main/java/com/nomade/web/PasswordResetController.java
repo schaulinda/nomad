@@ -37,7 +37,8 @@ public class PasswordResetController {
 	
     @RequestMapping(method = RequestMethod.POST)
     public String update(@Valid PasswordReset passwordReset, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if(!passwordReset.passwordsEqual()){
+      
+    	if(!passwordReset.passwordsEqual()){
         	bindingResult.rejectValue("newPassword", "pwd_not_same", "Both password entered are not identical");
 			
         }
@@ -48,7 +49,7 @@ public class PasswordResetController {
 			
         }
     	if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("passwordReset", new PasswordReset());
+            uiModel.addAttribute("passwordReset", passwordReset);
             uiModel.addAttribute("nomade", securite.getUserNomade());
             return "profil/passwordReset";
         }

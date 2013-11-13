@@ -17,12 +17,5 @@ privileged aspect Album_Roo_JavaBean {
         this.name = name;
     }
     
-    public Set<File> Album.getFiles() {
-        return this.files;
-    }
-    
-    public void Album.setFiles(Set<File> files) {
-        this.files = files;
-    }
     
 }

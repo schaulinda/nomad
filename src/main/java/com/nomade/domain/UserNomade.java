@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
@@ -26,6 +28,7 @@ public class UserNomade {
 	
 	private static Date accExp = DateUtils.addYears(new Date(), 50);
 	
+	@Indexed
     @Column(unique = true)
     private String userName;
 
@@ -93,6 +96,7 @@ public class UserNomade {
     public void prePersist() {
         this.password = encodePassword(password, getSalt());
     }
+	
 
     public String encodePassword(String password, String salt) {
         if (StringUtils.isEmpty(password) || salt == null) throw new NullPointerException("Neither password nor salt may not be null");
@@ -171,4 +175,15 @@ public class UserNomade {
     	int fieldNonNull = fieldNonNull();
     	return fieldNonNull*100/numberField;
     }
+    
+    public Album findAlbum(String albumName){
+    	for(Album a:this.albums){
+    		if(a.getName().equalsIgnoreCase(albumName)){
+    		
+    			return a;
+    		}
+    	}
+    	return null;
+    }    
+
 }
