@@ -456,12 +456,10 @@
 					<webAppConfig>
 						<contextPath>/</contextPath>
 						<virtualHosts>
-							<Array type="java.lang.String">
 								<Item>www.petitnomad.com</Item>
 								<Item>petitnomad.com</Item>
 								<Item>http://37.187.70.69</Item>
 								<Item>localhost</Item>
-							</Array>
 						</virtualHosts>
 					</webAppConfig>
 					
