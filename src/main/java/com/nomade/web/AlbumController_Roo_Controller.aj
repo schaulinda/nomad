@@ -5,7 +5,6 @@ package com.nomade.web;
 
 import com.nomade.domain.Album;
 import com.nomade.service.AlbumService;
-import com.nomade.service.FileService;
 import com.nomade.web.AlbumController;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -26,20 +25,6 @@ privileged aspect AlbumController_Roo_Controller {
     @Autowired
     AlbumService AlbumController.albumService;
     
-    @Autowired
-    FileService AlbumController.fileService;
-    
-   /* @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String AlbumController.create(@Valid Album album, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, album);
-            return "albums/create";
-        }
-        uiModel.asMap().clear();
-        albumService.saveAlbum(album);
-        return "redirect:/albums/" + encodeUrlPathSegment(album.getId().toString(), httpServletRequest);
-    }
-    */
     @RequestMapping(params = "form", produces = "text/html")
     public String AlbumController.createForm(Model uiModel) {
         populateEditForm(uiModel, new Album());
@@ -48,6 +33,7 @@ privileged aspect AlbumController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String AlbumController.show(@PathVariable("id") BigInteger id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("album", albumService.findAlbum(id));
         uiModel.addAttribute("itemId", id);
         return "albums/show";
@@ -64,6 +50,7 @@ privileged aspect AlbumController_Roo_Controller {
         } else {
             uiModel.addAttribute("albums", albumService.findAllAlbums());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "albums/list";
     }
     
@@ -84,19 +71,13 @@ privileged aspect AlbumController_Roo_Controller {
         return "albums/update";
     }
     
-   /* @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String AlbumController.delete(@PathVariable("id") BigInteger id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Album album = albumService.findAlbum(id);
-        albumService.deleteAlbum(album);
-        uiModel.asMap().clear();
-        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
-        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/albums";
-    }*/
+    void AlbumController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("album_created_date_format", "dd-MM-yyyy HH:mm");
+    }
     
     void AlbumController.populateEditForm(Model uiModel, Album album) {
         uiModel.addAttribute("album", album);
-        uiModel.addAttribute("files", fileService.findAllFiles());
+        addDateTimeFormatPatterns(uiModel);
     }
     
     String AlbumController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

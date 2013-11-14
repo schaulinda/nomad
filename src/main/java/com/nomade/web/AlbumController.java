@@ -10,6 +10,7 @@ import com.nomade.domain.Album;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.UserService;
+import com.nomade.tools.ImageUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping("/albums")
 @Controller
@@ -32,12 +34,14 @@ public class AlbumController {
 	UserService userService;
 	@Autowired
 	Security securite ;
+	@Autowired
+	ImageUtil imageUtil;
 	
 	
 	
 	@RequestMapping("/myPic")
     public String myPic( Model uiModel, HttpServletRequest httpServletRequest) {
-    	
+		 uiModel.addAttribute("nomade", securite.getUserNomade());
     	return "albums/picManager";
     }
 	
@@ -53,7 +57,7 @@ public class AlbumController {
 	        nomade.getAlbums().add(new Album(albumName, new Date()));
 	        userService.updateUserNomade(nomade);
 	        uiModel.addAttribute("nomade", nomade);
-	        System.out.print(nomade);
+	      
 	        return "albums/picManager";
 	    }
 	 
@@ -64,11 +68,27 @@ public class AlbumController {
 		 return "albums/picManager";
 	    }
 	 
-	 @ModelAttribute("nomade")
-	 public UserNomade nomadePopulate(){
+	 @RequestMapping(value = "/upload", method = RequestMethod.POST)
+		public String upload(Model uiModel,
+				HttpServletRequest httpServletRequest,
+				@RequestParam(value = "photo", required = true) MultipartFile photo,
+				@RequestParam("idAlbum") String idAlbum) {
 		 
-		 return securite!=null?null:securite.getUserNomade();
+		 UserNomade nomade = securite.getUserNomade();
+		 if(imageUtil.isValidate(photo)){
+			 
+			 uiModel.addAttribute("error", "votre fichier n'est pas valide!");
+		 }else{
+			 
+			 
+			 
+		 }
+		 
+		
+		 uiModel.addAttribute("nomade", nomade);
+		 return "albums/picManager";
 	 }
+	 
 	    
 	
 }

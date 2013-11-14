@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_nomade_domain_Album" modelAttribute="album" path="/albums" versionField="none" z="sKDQaxGN1ZAnipXNWI7mvYnoNEc=">
         <field:input field="name" id="c_com_nomade_domain_Album_name" required="true" z="5/zVpjsE40e56Heeu5ppTjq8dvk="/>
-        <field:select field="files" id="c_com_nomade_domain_Album_files" itemValue="id" items="${files}" multiple="true" path="/files" z="bFf4otJvhB8neb7G5/YUhzu0Ncc="/>
+        <field:input field="numPhoto" id="c_com_nomade_domain_Album_numPhoto" z="mXg0aQIEDfBKeGyZiKJzVjvb7Kg="/>
+        <field:input field="_id" id="c_com_nomade_domain_Album__id" z="kxC/z8ElROGG0GHHGppzi8bOxPU="/>
     </form:update>
 </div>

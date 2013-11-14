@@ -4,10 +4,18 @@
 package com.nomade.domain;
 
 import com.nomade.domain.Album;
-import com.nomade.domain.File;
-import java.util.Set;
+import java.util.Date;
+import org.bson.types.ObjectId;
 
 privileged aspect Album_Roo_JavaBean {
+    
+    public ObjectId Album.get_id() {
+        return this._id;
+    }
+    
+    public void Album.set_id(ObjectId _id) {
+        this._id = _id;
+    }
     
     public String Album.getName() {
         return this.name;
@@ -17,5 +25,12 @@ privileged aspect Album_Roo_JavaBean {
         this.name = name;
     }
     
+    public Date Album.getCreated() {
+        return this.created;
+    }
+    
+    public void Album.setCreated(Date created) {
+        this.created = created;
+    }
     
 }

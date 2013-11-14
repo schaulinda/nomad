@@ -4,5 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_nomade_domain_File" modelAttribute="file" path="/files" versionField="none" z="VBH5kaXDWcgqaSLHWK0kj4T0Mzw=">
         <field:input field="fileName" id="c_com_nomade_domain_File_fileName" required="true" z="yu/UM7hqg5NEEC9XOhx152kxYck="/>
+        <field:input field="fileSize" id="c_com_nomade_domain_File_fileSize" z="211FNjWFlgsg1rdk94KjlERc6Q0="/>
+        <field:input field="fileType" id="c_com_nomade_domain_File_fileType" z="bAjouFOOLvKDg3RjEBjUK5llKfg="/>
+        <field:input field="location" id="c_com_nomade_domain_File_location" z="g0RmO6rwiyO0vmB0SkcY7UEHYIk="/>
     </form:update>
 </div>

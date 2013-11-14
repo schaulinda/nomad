@@ -4,6 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_nomade_domain_File" modelAttribute="file" path="/files" render="${empty dependencies}" z="5L5C+vdoZRKesu9op/ZXwPA1Dd4=">
         <field:input field="fileName" id="c_com_nomade_domain_File_fileName" required="true" z="yu/UM7hqg5NEEC9XOhx152kxYck="/>
+        <field:input field="fileSize" id="c_com_nomade_domain_File_fileSize" z="211FNjWFlgsg1rdk94KjlERc6Q0="/>
+        <field:input field="fileType" id="c_com_nomade_domain_File_fileType" z="bAjouFOOLvKDg3RjEBjUK5llKfg="/>
+        <field:input field="location" id="c_com_nomade_domain_File_location" z="g0RmO6rwiyO0vmB0SkcY7UEHYIk="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_File" render="${not empty dependencies}" z="lXln/MN+jBydDA/cO02wJGRhUVA="/>
 </div>

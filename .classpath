@@ -29,5 +29,14 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/adorsys/.m2/repository/jmimemagic/jmimemagic/0.1.2/jmimemagic-0.1.2.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="jmimemagic"/>
+			<attribute name="maven.artifactId" value="jmimemagic"/>
+			<attribute name="maven.version" value="0.1.2"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

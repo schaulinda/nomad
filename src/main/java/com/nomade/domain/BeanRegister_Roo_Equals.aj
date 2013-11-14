@@ -17,11 +17,11 @@ privileged aspect BeanRegister_Roo_Equals {
             return true;
         }
         BeanRegister rhs = (BeanRegister) obj;
-        return new EqualsBuilder().append(email, rhs.email).append(password, rhs.password).append(userName, rhs.userName).isEquals();
+        return new EqualsBuilder().append(confirmPassword, rhs.confirmPassword).append(email, rhs.email).append(password, rhs.password).append(userName, rhs.userName).isEquals();
     }
     
     public int BeanRegister.hashCode() {
-        return new HashCodeBuilder().append(email).append(password).append(userName).toHashCode();
+        return new HashCodeBuilder().append(confirmPassword).append(email).append(password).append(userName).toHashCode();
     }
     
 }

@@ -15,4 +15,28 @@ privileged aspect File_Roo_JavaBean {
         this.fileName = fileName;
     }
     
+    public String File.getFileSize() {
+        return this.fileSize;
+    }
+    
+    public void File.setFileSize(String fileSize) {
+        this.fileSize = fileSize;
+    }
+    
+    public String File.getFileType() {
+        return this.fileType;
+    }
+    
+    public void File.setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+    
+    public double[] File.getLocation() {
+        return this.location;
+    }
+    
+    public void File.setLocation(double[] location) {
+        this.location = location;
+    }
+    
 }

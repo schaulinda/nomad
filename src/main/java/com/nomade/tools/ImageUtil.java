@@ -7,11 +7,61 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+import net.sf.jmimemagic.Magic;
+import net.sf.jmimemagic.MagicException;
+import net.sf.jmimemagic.MagicMatchNotFoundException;
+import net.sf.jmimemagic.MagicParseException;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+@Service
 public class ImageUtil {
+	
+	@Autowired
+	ServletContext servletContext;
+	
+	public boolean isValidate(MultipartFile file) {
+		
+		String fileName = file.getOriginalFilename();
+		String mimeType = servletContext.getMimeType(fileName);
+		if (mimeType.startsWith("image")) {
+		   
+			byte[] bytes;
+			try {
+				bytes = file.getBytes();
+				String mimeType2;
+				try {
+					mimeType2 = Magic.getMagicMatch(bytes, false).getMimeType();
+					if (mimeType2.startsWith("image")) {
+					    return true;
+					}
+				} catch (MagicParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MagicMatchNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MagicException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}	
+		return false;
+	}
+	
 	
 	private static final Set<String> imagesContentTypes = new HashSet<String>(
 			Arrays.asList("image/bmp", "image/gif", "image/jpeg", "image/png",

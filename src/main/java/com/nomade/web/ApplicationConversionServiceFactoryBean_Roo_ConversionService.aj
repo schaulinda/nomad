@@ -76,7 +76,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Album, String> ApplicationConversionServiceFactoryBean.getAlbumToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Album, java.lang.String>() {
             public String convert(Album album) {
-                return new StringBuilder().append(album.getName()).toString();
+                return new StringBuilder().append(album.getNumPhoto()).append(' ').append(album.get_id()).append(' ').append(album.getName()).append(' ').append(album.getCreated()).toString();
             }
         };
     }
@@ -148,7 +148,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<File, String> ApplicationConversionServiceFactoryBean.getFileToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.File, java.lang.String>() {
             public String convert(File file) {
-                return new StringBuilder().append(file.getFileName()).toString();
+                return new StringBuilder().append(file.getFileName()).append(' ').append(file.getFileSize()).append(' ').append(file.getFileType()).toString();
             }
         };
     }

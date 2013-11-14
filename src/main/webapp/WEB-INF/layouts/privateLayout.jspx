@@ -43,6 +43,8 @@
 	</script>
 	
 <util:load-scripts />
+<spring:url value="/resources/js/app.js" var="app_js_url" />
+ <script src="${app_js_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
  
 <!-- Le styles -->
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
@@ -299,9 +301,6 @@ body {
 					code="a.advertiser" /></a> | <a href="#" class="traitgauche"><spring:message
 					code="a.developmentTranslation" /></a>
 		</footer>
-	</div>
-	<div class="modal" id="loading">
-		<img alt="" src="${res}/img/ajax-loader.gif" />
 	</div>
 </body>
 <!-- Le javascript

@@ -5,6 +5,9 @@
     <page:list id="pl_com_nomade_domain_File" items="${files}" z="IBAC9HL6nx6W6ru+B05anN6bFp8=">
         <table:table data="${files}" id="l_com_nomade_domain_File" path="/files" z="BX0LYy6B5vtClYjXCQIjtnUgbn4=">
             <table:column id="c_com_nomade_domain_File_fileName" property="fileName" z="FkUH9ko5sBGjhPdZvfTQRpksc0g="/>
+            <table:column id="c_com_nomade_domain_File_fileSize" property="fileSize" z="+CTPvznOLBR8cxGlnAYPujlbyOs="/>
+            <table:column id="c_com_nomade_domain_File_fileType" property="fileType" z="WGkGU2iUftmkykBehMAwFjxyWhs="/>
+            <table:column id="c_com_nomade_domain_File_location" property="location" z="rGugsrjfQ/0S9k6QZf1T0LkqgX8="/>
         </table:table>
     </page:list>
 </div>

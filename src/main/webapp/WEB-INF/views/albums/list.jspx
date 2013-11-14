@@ -5,7 +5,9 @@
     <page:list id="pl_com_nomade_domain_Album" items="${albums}" z="AXfZjoGL7xc1hgU5tkbC3IuqBiA=">
         <table:table data="${albums}" id="l_com_nomade_domain_Album" path="/albums" z="8+iUSB8FlaRgmDA95SZ1FligtxU=">
             <table:column id="c_com_nomade_domain_Album_name" property="name" z="QuKEL9EjGQtE+iObShJv2re2F9I="/>
-            <table:column id="c_com_nomade_domain_Album_files" property="files" z="njDh/n2JkILCcxohePiHY+Xukl0="/>
+            <table:column id="c_com_nomade_domain_Album_numPhoto" property="numPhoto" z="A6Sih1KikGfLnnRk4CshqN3PHJg="/>
+            <table:column id="c_com_nomade_domain_Album__id" property="_id" z="+sMllmNNVOpllBqI9YOb+KuFYr8="/>
+            <table:column date="true" dateTimePattern="${album_created_date_format}" id="c_com_nomade_domain_Album_created" property="created" z="6aUdlh2CAbXuKJRFLlA/bo32Cwc="/>
         </table:table>
     </page:list>
 </div>

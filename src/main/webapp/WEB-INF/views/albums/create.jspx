@@ -4,7 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_nomade_domain_Album" modelAttribute="album" path="/albums" render="${empty dependencies}" z="93QUQ49214ys26FwFUM9DOqsD5g=">
         <field:input field="name" id="c_com_nomade_domain_Album_name" required="true" z="5/zVpjsE40e56Heeu5ppTjq8dvk="/>
-        <field:select field="files" id="c_com_nomade_domain_Album_files" itemValue="id" items="${files}" multiple="true" path="/files" z="bFf4otJvhB8neb7G5/YUhzu0Ncc="/>
+        <field:input field="numPhoto" id="c_com_nomade_domain_Album_numPhoto" z="mXg0aQIEDfBKeGyZiKJzVjvb7Kg="/>
+        <field:input field="_id" id="c_com_nomade_domain_Album__id" z="kxC/z8ElROGG0GHHGppzi8bOxPU="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Album" render="${not empty dependencies}" z="3cqEoBmHDEjz5nRoh0mBn7dB6oA="/>
 </div>

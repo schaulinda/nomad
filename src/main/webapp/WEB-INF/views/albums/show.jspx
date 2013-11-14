@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_nomade_domain_Album" object="${album}" path="/albums" z="J2ldsSyS93cP9w1ReSgFklkX4PE=">
         <field:display field="name" id="s_com_nomade_domain_Album_name" object="${album}" z="l5eQtjhefAotm8rvcHMIo7nuvVg="/>
-        <field:display field="files" id="s_com_nomade_domain_Album_files" object="${album}" z="NojLAcQLNwvlxxtUPpS6YNGOavA="/>
+        <field:display field="numPhoto" id="s_com_nomade_domain_Album_numPhoto" object="${album}" z="3bcYDtjbSGXbEwyuCaKlf3gqDho="/>
+        <field:display field="_id" id="s_com_nomade_domain_Album__id" object="${album}" z="3LjARUNVqsV4N9mDPwGlcTNQwWU="/>
     </page:show>
 </div>

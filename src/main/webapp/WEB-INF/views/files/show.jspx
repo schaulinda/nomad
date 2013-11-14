@@ -4,5 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_nomade_domain_File" object="${file}" path="/files" z="ZBRdSvY6S12O19E9sS3yU0mPS1o=">
         <field:display field="fileName" id="s_com_nomade_domain_File_fileName" object="${file}" z="VQYJ+0jziT9LJrhqNiEGU+D+KfE="/>
+        <field:display field="fileSize" id="s_com_nomade_domain_File_fileSize" object="${file}" z="gsaJzaFw0jMgqiGQqoliTTrDfsw="/>
+        <field:display field="fileType" id="s_com_nomade_domain_File_fileType" object="${file}" z="0m2VfsXa1iCreZ+90ZtEkx20+tM="/>
+        <field:display field="location" id="s_com_nomade_domain_File_location" object="${file}" z="SJOo38OumWus0pWoUUqbTffrnIc="/>
     </page:show>
 </div>
