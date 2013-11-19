@@ -3,6 +3,8 @@
 
     <mongo:db-factory dbname="${mongo.name}" host="${mongo.host}" 
     id="mongoDbFactory" port="${mongo.port}" username="${mongo.username}" password="${mongo.password}" />
+    
+    <mongo:mapping-converter id="converter" />
 
     <mongo:repositories base-package="com.nomade"/>
 
@@ -11,6 +13,12 @@
     <bean class="org.springframework.data.mongodb.core.MongoTemplate" id="mongoTemplate">
         <constructor-arg ref="mongoDbFactory"/>
     </bean>
+    
+    <bean name="gridFsTemplate"
+		class="org.springframework.data.mongodb.gridfs.GridFsTemplate">
+		<constructor-arg ref="mongoDbFactory" />
+		<constructor-arg ref="converter" />
+	</bean>
 
 </beans>
 

@@ -7,14 +7,12 @@ import com.nomade.domain.Account;
 import com.nomade.domain.Album;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
-import com.nomade.domain.File;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import com.nomade.service.AccountService;
 import com.nomade.service.AlbumService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
-import com.nomade.service.FileService;
 import com.nomade.service.UserService;
 import com.nomade.service.VehiculeService;
 import com.nomade.web.ApplicationConversionServiceFactoryBean;
@@ -39,9 +37,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     EtapeVoyageService ApplicationConversionServiceFactoryBean.etapeVoyageService;
-    
-    @Autowired
-    FileService ApplicationConversionServiceFactoryBean.fileService;
     
     @Autowired
     UserService ApplicationConversionServiceFactoryBean.userService;
@@ -145,30 +140,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<File, String> ApplicationConversionServiceFactoryBean.getFileToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.File, java.lang.String>() {
-            public String convert(File file) {
-                return new StringBuilder().append(file.getFileName()).append(' ').append(file.getFileSize()).append(' ').append(file.getFileType()).toString();
-            }
-        };
-    }
-    
-    public Converter<BigInteger, File> ApplicationConversionServiceFactoryBean.getIdToFileConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.File>() {
-            public com.nomade.domain.File convert(java.math.BigInteger id) {
-                return fileService.findFile(id);
-            }
-        };
-    }
-    
-    public Converter<String, File> ApplicationConversionServiceFactoryBean.getStringToFileConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.File>() {
-            public com.nomade.domain.File convert(String id) {
-                return getObject().convert(getObject().convert(id, BigInteger.class), File.class);
-            }
-        };
-    }
-    
     public Converter<UserNomade, String> ApplicationConversionServiceFactoryBean.getUserNomadeToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.UserNomade, java.lang.String>() {
             public String convert(UserNomade userNomade) {
@@ -230,9 +201,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getEtapeVoyageToStringConverter());
         registry.addConverter(getIdToEtapeVoyageConverter());
         registry.addConverter(getStringToEtapeVoyageConverter());
-        registry.addConverter(getFileToStringConverter());
-        registry.addConverter(getIdToFileConverter());
-        registry.addConverter(getStringToFileConverter());
         registry.addConverter(getUserNomadeToStringConverter());
         registry.addConverter(getIdToUserNomadeConverter());
         registry.addConverter(getStringToUserNomadeConverter());

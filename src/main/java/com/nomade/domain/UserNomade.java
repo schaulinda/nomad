@@ -176,14 +176,13 @@ public class UserNomade {
     	return fieldNonNull*100/numberField;
     }
     
-    public Album findAlbum(String albumName){
+    public void findAndRemAlbum(String albumId){
     	for(Album a:this.albums){
-    		if(a.getName().equalsIgnoreCase(albumName)){
-    		
-    			return a;
+    		if(a.get_id().toString().equals(albumId)){
+    			this.albums.remove(a);
+    			break;
     		}
     	}
-    	return null;
     }    
 
 }

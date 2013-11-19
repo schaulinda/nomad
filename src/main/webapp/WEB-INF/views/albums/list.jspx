@@ -8,6 +8,7 @@
             <table:column id="c_com_nomade_domain_Album_numPhoto" property="numPhoto" z="A6Sih1KikGfLnnRk4CshqN3PHJg="/>
             <table:column id="c_com_nomade_domain_Album__id" property="_id" z="+sMllmNNVOpllBqI9YOb+KuFYr8="/>
             <table:column date="true" dateTimePattern="${album_created_date_format}" id="c_com_nomade_domain_Album_created" property="created" z="6aUdlh2CAbXuKJRFLlA/bo32Cwc="/>
+            <table:column id="c_com_nomade_domain_Album_photos" property="photos" z="J2dPmQQeuwYX6zg9wzXdJbA3w6I="/>
         </table:table>
     </page:list>
 </div>

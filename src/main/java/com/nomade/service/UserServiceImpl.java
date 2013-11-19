@@ -26,15 +26,6 @@ public class UserServiceImpl implements UserService {
 		 return userRepository.findByCompteEmail(email);
 	 }
 	 
-	 public void removeAlbum(String albumId, String username){
-		
-		 WriteResult updateFirst = mongoTemplate.updateFirst(
-		            Query.query(Criteria.where("userName").is("username")
-		            		.andOperator(Criteria.where("albums._id").is("albumId"))),
-		            new Update().pull("albums", new BasicDBObject(null)),
-		            UserNomade.class);
-		 
-		 System.out.print(updateFirst);
-	 }
+	
 	 
 }

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="photoUpload" class="tab-pane ${beanPictureManager.tabPhoto}"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+
+	<spring:url var="res" value="/resources" />
+	<c:if test="${beanPictureManager.formInfoImg eq true}">
+		<c:set value="hidden"  var="hidef1" ></c:set>
+	</c:if>
+		<spring:url value="/albums/upload" var="upload_url"></spring:url>
+		<form:form method="POST" action="${upload_url}" 
+			cssStyle="margin-bottom: -23px" id="formUpload"
+			enctype="multipart/form-data">
+			<div class="row ${hidef1} tog">
+
+				<div class="form-group col-lg-5">
+					<label>upload a photo in the chosen album </label> <input type="file" name="fileImage"
+						class="form-control" required="required" />
+					<p class="help-block">Only image file.</p>
+					<c:if test="${empty error}">
+						<c:set value="hidden" var="cacheError" > </c:set>
+					</c:if>
+					<div id="error" class="" >
+						<div  class="alert alert-danger ${cacheError}" ><!-- co -->${error}</div>
+					</div>
+				</div>
+				<input id="idAlbum" name="idAlbum" type="hidden"
+					value="${beanPictureManager.idAlbum}" />
+				<div class="col-lg-3" style="margin-top: 26px;">
+					<button type="submit" id="btn_upload" 
+						class="btn btn-default btn-block">upload</button>
+				</div>
+			</div>
+		</form:form>
+	
+	<hr />
+	
+	
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+		<div class="row"  >
+			<div class="col-lg-6" id="imgPhoto" >
+				<img alt="" src="${imageRender_url}/${beanPictureManager.photoSave}"
+					style="max-height: 280px; max-width: 270px;" />
+				<input type="hidden" value="${beanPictureManager.photoSave}" id="imgUpload_id" />
+			</div>
+	<c:if test="${beanPictureManager.formInfoImg eq false}">
+		<c:set value="hidden"  var="hidef2" ></c:set>
+	</c:if>		
+			<div class="col-lg-6 ${hidef2} tog">
+				<spring:url value="/albums/saveImageInfo" var="saveImageInfo_url"></spring:url>
+				<form:form id="formDescrption" action="${saveImageInfo_url}"
+					method="POST">
+					<label>Localisation</label>
+					<div class="input-group">
+						<input type="text" name="addresspicker" class="form-control"
+							id="addresspicker_map" placeholder="enter the location"
+							rel="popover" value="${addresspicker}" /> <span class="input-group-addon"> <a
+							href="#"> <i class="icon-screenshot"> <!-- co -->
+							</i>
+						</a>
+						</span>
+					</div>
+					<div class="form-group">
+					<fmt:formatDate value="${datePhoto}" var="dateP" pattern="dd-MM-yyyy"  />
+						<label for="datePhoto">Date</label> <input value="${dateP}"
+							class="datepicker form-control" name="datePhoto" type="date"
+							placeholder="12-03-1991" data-date-format="dd-mm-yyyy" />
+					</div>
+					<input id="lat" type="hidden" name="lat" value="${lat}" />
+					<input id="lng" name="lng" type="hidden" value="${lng}" />
+					<input id="idPhoto" type="hidden" name="idPhoto"
+						value="${beanPictureManager.photoSave}" />
+					<label>description </label>
+					<div class="form-group">
+						<textarea name="description" cssClass="form-control"  ><!-- co -->${description}</textarea>
+					</div>
+					<button type="submit" id="btn_save"
+						class="btn btn-default btn-block">Save</button>
+					
+					<spring:url value="/albums/delete/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" var="delete_url"></spring:url>
+					<a id="btn_delete" href="${delete_url}"
+						class="btn btn-default btn-block">Delete</a>
+					<spring:url value="/albums/cancel/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" var="cancel_url"></spring:url>
+					<a id="btn_cancel" href="${cancel_url}"
+						class="btn btn-default btn-block">Cancel</a>
+					
+				</form:form>
+
+			</div>
+		</div>
+
+	
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_delete",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_cancel",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_save",
+			formId: "formDescrption",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	
+	
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			d = dojo.byId("formUpload");
+			dojo.connect(d, 'onsubmit', function(evt){
+				
+				dojo.io.iframe.send({
+					// The form node, which contains the
+					// data. We also pull the URL and METHOD from it:
+					url : '${upload_url}',
+
+					method : 'POST',
+
+					form : 'formUpload',
+
+					// The used data format:
+					handleAs : 'html',
+
+					// Callback on successful call:
+					load :function(response, ioArgs){
+										
+						 var newImg = dojo.query("#imgPhoto",response);
+						
+						
+						 dojo.query("#imgUpload_id",response).forEach(function(node, index, arr){
+							
+				            	dojo.attr(dojo.byId('idPhoto'), "value", node.value);
+				            	
+				            	var idphoto = node.value;
+				            	if(idphoto==""){
+				            		var error = dojo.query("#error",response);
+				            		dojo.empty("error");
+			            			error.place('#error');
+			            			//dojo.toggleClass(dojo.byId('error'), "hidden");
+				           			console.log(error);
+				            	}
+				            	
+				            	dojo.query(".tog").forEach(function(node, index, arr){
+					        		
+				            		if(idphoto!=""){
+				            			
+					            	 dojo.toggleClass(node, "hidden");
+				            		}
+				            			
+					            });       	
+				            	
+				            });
+						 
+						 dojo.query("#btn_delete",response).forEach(function(node, index, arr){
+							 
+							 dojo.attr(dojo.byId('btn_delete'), "href", dojo.attr(node,"href"));
+						 });
+						
+						 
+						 dojo.query("#btn_cancel",response).forEach(function(node, index, arr){
+							 
+							 dojo.attr(dojo.byId('btn_cancel'), "href", dojo.attr(node,"href"));
+						 });
+						 
+						 
+						 dojo.empty("imgPhoto");
+			            newImg.place('#imgPhoto');
+			 	
+						return response;	
+			}
+	
+		});
+		return false;		
+	});
+	});
+	</script>
+	
+	<script type="text/javascript">
+		//gallery controlls container animation
+		jQuery.noConflict();
+		(function($) {
+
+			$(document)
+					.ready(
+							function() {
+
+								$('.datepicker').datepicker();
+
+								/* ------adressepicker to be refactor---- */
+
+								var gmarker = null;
+								var addresspickerMap = null;
+
+								$('#addresspicker_map')
+										.popover(
+												{
+
+													placement : 'left',
+													title : '<a id="close" style="cursor:pointer" >close</a>',
+													html : true,
+													trigger : 'manual',
+													content : '<div id="map" style="height: 200px;width: 250px;" ><!-- co --></div>'
+
+												})
+										.focus(
+												function() {
+
+													if (addresspickerMap != null) {
+														console.log("nonn");
+
+													}
+
+													if (addresspickerMap == null
+															|| addresspickerMap == "a") {
+														console.log("1");
+
+														$('#addresspicker_map')
+																.popover('show');
+
+														addresspickerMap = $(
+																"#addresspicker_map")
+																.addresspicker(
+																		{
+																			regionBias : "fr",
+																			reverseGeocode : true,
+																			elements : {
+																				map : "#map",
+																				lat : "#lat",
+																				lng : "#lng",
+																			/*street_number: '#street_number',
+																			route: '#route',
+																			locality: '#locality',
+																			administrative_area_level_2: '#administrative_area_level_2',
+																			administrative_area_level_1: '#administrative_area_level_1',
+																			country:  '#country',
+																			postal_code: '#postal_code',
+																			type:    '#type' */
+																			}
+																		});
+
+														gmarker = addresspickerMap
+																.addresspicker("marker");
+														gmarker
+																.setVisible(true);
+														addresspickerMap
+																.addresspicker("updatePosition");
+													}
+
+													$('#close')
+															.click(
+																	function() {
+
+																		addresspickerMap
+																				.addresspicker("destroy");
+
+																		addresspickerMap = "a";
+
+																		$(
+																				'#addresspicker_map')
+																				.popover(
+																						'hide');
+
+																	});
+
+												});
+
+							});
+
+		})(jQuery);
+	</script>
+	
+</div>

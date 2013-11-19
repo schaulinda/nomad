@@ -6,6 +6,7 @@
         <field:input field="name" id="c_com_nomade_domain_Album_name" required="true" z="5/zVpjsE40e56Heeu5ppTjq8dvk="/>
         <field:input field="numPhoto" id="c_com_nomade_domain_Album_numPhoto" z="mXg0aQIEDfBKeGyZiKJzVjvb7Kg="/>
         <field:input field="_id" id="c_com_nomade_domain_Album__id" z="kxC/z8ElROGG0GHHGppzi8bOxPU="/>
+        <field:input field="photos" id="c_com_nomade_domain_Album_photos" z="0zNf7DTS3zQbm0Wqmq5yt+V95Ow="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Album" render="${not empty dependencies}" z="3cqEoBmHDEjz5nRoh0mBn7dB6oA="/>
 </div>

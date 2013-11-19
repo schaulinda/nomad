@@ -6,5 +6,6 @@
         <field:display field="name" id="s_com_nomade_domain_Album_name" object="${album}" z="l5eQtjhefAotm8rvcHMIo7nuvVg="/>
         <field:display field="numPhoto" id="s_com_nomade_domain_Album_numPhoto" object="${album}" z="3bcYDtjbSGXbEwyuCaKlf3gqDho="/>
         <field:display field="_id" id="s_com_nomade_domain_Album__id" object="${album}" z="3LjARUNVqsV4N9mDPwGlcTNQwWU="/>
+        <field:display field="photos" id="s_com_nomade_domain_Album_photos" object="${album}" z="Praw8N32szCH+FxZIKgcP/1lZDM="/>
     </page:show>
 </div>

@@ -11,5 +11,5 @@ public interface UserService {
 	
 	public List<UserNomade> findByUserName(String userName);
 	public List<UserNomade> findByEmail(String email);
-	 public void removeAlbum(String albumId, String username);
+
 }

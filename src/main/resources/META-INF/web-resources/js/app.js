@@ -63,4 +63,41 @@ dojo.ready(function() {
 		}
 	}));
 	
+	dojo.declare('stuff', null, {
+		
+	
+		replaceJs:function(_22){
+		
+		var _29 = "(?:<script(.|[\n|\r])*?>)((\n|\r|.)*?)(?:</script>)";
+		var _2a = [];
+		var _2b = new RegExp(_29, "img");
+		var _2c = new RegExp(_29, "im");
+		var _2d = _22.match(_2b);
+		if (_2d != null) {
+			for ( var i = 0; i < _2d.length; i++) {
+				var _2f = (_2d[i].match(_2c) || [ "", "", "" ])[2];
+				_2f = _2f.replace(/<!--/mg, "").replace(/\/\/-->/mg, "").replace(/<!\[CDATA\[(\/\/>)*/mg, "").replace(/(<!)*\]\]>/mg, "");
+				_2a.push(_2f);
+			}
+		}
+		_22 = _22
+				.replace(_2b,
+						"<script> // Original script removed to avoid re-execution </script>");
+		return _22;
+	}
+	
+	});
+	
 }); 
+
+jQuery.noConflict();
+(function($) {
+
+	$(document)
+			.ready(
+					function() {
+						
+						$('.datepicker').datepicker();
+						
+					});
+});

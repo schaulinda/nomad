@@ -10,7 +10,6 @@
 	<spring:url var="res" value="/resources" />
 
 
-	
 	<script src="${res}/js/bootstrap.js">
 	<!-- eh -->
 		
@@ -67,10 +66,7 @@
 		
 	</script>
 
-	<script src="${res}/js/bootstrap-datepicker.js">
-	<!-- eh -->
-		
-	</script>
+
 	<script src="${res}/js/chosen.jquery.js">
 	<!-- eh -->
 		

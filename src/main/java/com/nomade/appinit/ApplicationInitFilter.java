@@ -32,7 +32,7 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		
 		if (!initialized){
-			applicationInitService.initApplication();
+			//applicationInitService.initApplication();
 			initialized = true;
 		}
 		

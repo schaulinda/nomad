@@ -31,6 +31,16 @@ public class Album {
     private Date created;
     
     private int numPhoto = 0;
+    
+    private String[] photos;
+
+	public String[] getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String[] photos) {
+		this.photos = photos;
+	}
 
 	public Album(String name, Date created) {
 		super();

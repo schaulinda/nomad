@@ -1,11 +1,11 @@
 package com.nomade.repository;
 
-import com.nomade.domain.File;
+import com.nomade.domain.ImageInfo;
 import java.util.List;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
 
-@RooMongoRepository(domainType = File.class)
+@RooMongoRepository(domainType = ImageInfo.class)
 public interface FileRepository {
 
-    List<com.nomade.domain.File> findAll();
+    List<com.nomade.domain.ImageInfo> findAll();
 }

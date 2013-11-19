@@ -15,6 +15,7 @@
     </definition>
     <definition extends="privateLayout" name="albums/picManager">
         <put-attribute name="body" value="/WEB-INF/views/albums/picManager.jspx"/>
-        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+        <put-attribute name="photoUpload" value="/WEB-INF/views/albums/photoTile.jspx" cascade="true" />
+        <put-attribute   name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
 </tiles-definitions>

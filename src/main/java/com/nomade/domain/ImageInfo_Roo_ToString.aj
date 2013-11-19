@@ -3,13 +3,13 @@
 
 package com.nomade.domain;
 
-import com.nomade.domain.File;
+import com.nomade.domain.ImageInfo;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect File_Roo_ToString {
+privileged aspect ImageInfo_Roo_ToString {
     
-    public String File.toString() {
+    public String ImageInfo.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
