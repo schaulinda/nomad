@@ -28,7 +28,7 @@ public class Album {
     
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-    private Date created;
+    private Date created = new Date();
     
     private int numPhoto = 0;
     

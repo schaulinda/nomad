@@ -26,6 +26,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
 import com.nomade.domain.ImageInfo;
 import com.nomade.domain.UserNomade;
+import com.nomade.service.UserService;
 
 @Service
 public class ImageUtil implements ImageUtilInterface {
@@ -34,6 +35,8 @@ public class ImageUtil implements ImageUtilInterface {
 	ServletContext servletContext;
 	@Autowired
 	GridFsTemplate gridFsTemplate;
+	@Autowired
+	UserService userService;
 
 	public boolean isValidate(MultipartFile file) {
 
@@ -154,6 +157,7 @@ public class ImageUtil implements ImageUtilInterface {
 	 public void removeAlbum(String albumId, UserNomade nomade){
 		 
 		 nomade.findAndRemAlbum(albumId);
+		 userService.updateUserNomade(nomade);
 		 delePhotoByIdAlbum(albumId);
 			
 	 }

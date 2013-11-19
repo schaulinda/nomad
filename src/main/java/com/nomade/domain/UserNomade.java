@@ -3,6 +3,7 @@ package com.nomade.domain;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
@@ -14,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.event.BeforeSaveEvent;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
@@ -177,7 +177,7 @@ public class UserNomade {
     }
     
     public void findAndRemAlbum(String albumId){
-    	for(Album a:this.albums){
+    	for(Album a:this.albums){	
     		if(a.get_id().toString().equals(albumId)){
     			this.albums.remove(a);
     			break;

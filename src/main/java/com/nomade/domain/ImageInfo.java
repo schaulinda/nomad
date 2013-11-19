@@ -50,19 +50,35 @@ public class ImageInfo {
 	public ImageInfo(DBObject metaData) {
 		super();
 		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-		this.adress = metaData.get("adress").toString();
+		try {
+			this.adress = metaData.get("adress").toString();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			this.adress="";
+		}
 		
-			this.datePhoto =(Date)metaData.get("datePhoto");
+			try {
+				this.datePhoto =(Date)metaData.get("datePhoto");
+			} catch (Exception e2) {
+				// TODO Auto-generated catch block
+				
+			}
 		
-		this.description = metaData.get("description").toString();
+		try {
+			this.description = metaData.get("description").toString();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			this.description="";
+		}
+		
 		this.albumId = metaData.get("albumId").toString();
 		
 		try {
 			this.lat = Double.parseDouble(metaData.get("lat").toString());
 			this.lng = Double.parseDouble(metaData.get("lng").toString());
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.lat=0;
+			this.lng=0;
 		}
 	}
 

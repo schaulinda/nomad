@@ -4,7 +4,6 @@ import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventLis
 
 import com.mongodb.DBObject;
 import com.nomade.domain.UserNomade;
-import java.util.Collections;
 
 public class NomadeEventListener extends AbstractMongoEventListener<UserNomade> {
 	
@@ -15,5 +14,7 @@ public class NomadeEventListener extends AbstractMongoEventListener<UserNomade> 
 		//Collections.reverse(source.getAlbums().);
 		super.onBeforeSave(source, dbo);
 	}
+	
+	
 
 }

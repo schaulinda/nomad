@@ -64,7 +64,7 @@
 										var="photo">
 										<li id="image-1" class="thumbnail"><spring:url
 												var="viewImg" value="/albums/viewImg"></spring:url> 
-										<a href="${viewImg}/${photo}"> 
+										<a href="${viewImg}/${photo}" id="${photo}" class="imgClass" > 
 										<img width="91px" height="91px"
 											alt="" src="${imageRender_url}/${photo}" class="grayscale" />
 										</a></li>
@@ -91,7 +91,35 @@
 		</div>
 	</div>
 
-
+<script type="text/javascript">
+	dojo.addOnLoad(function() {
+	
+		dojo.query(".list-group-item").forEach(function(node, index, arr){
+				
+			var idNode = dojo.attr(node,"id");
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : idNode,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
+		});
+		
+		dojo.query(".imgClass").forEach(function(node, index, arr){
+			
+			var idNode = dojo.attr(node,"id");
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : idNode,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
+		});
+	
+	});
+</script>
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_nomadeLink",
