@@ -3,7 +3,12 @@ package com.nomade.tools;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 
@@ -24,6 +29,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
+import com.nomade.domain.Album;
 import com.nomade.domain.ImageInfo;
 import com.nomade.domain.UserNomade;
 import com.nomade.service.UserService;
@@ -38,13 +44,13 @@ public class ImageUtil implements ImageUtilInterface {
 	@Autowired
 	UserService userService;
 
+	@Override
 	public boolean isValidate(MultipartFile file) {
 
 		if (file == null)
 			return false;
 
 		String fileName = file.getOriginalFilename();
-	
 
 		String mimeType = servletContext.getMimeType(fileName);
 		if (mimeType != null) {
@@ -94,7 +100,7 @@ public class ImageUtil implements ImageUtilInterface {
 		metaData.put("location", imageInfo.getLocation());
 		metaData.put("lat", imageInfo.getLat());
 		metaData.put("lng", imageInfo.getLng());
-		
+
 		GridFSFile gridFSFile = gridFsTemplate.store(inputStream, filename,
 				contentType, metaData);
 
@@ -115,31 +121,47 @@ public class ImageUtil implements ImageUtilInterface {
 
 	@Override
 	public List<GridFSDBFile> getByAlbum(String albumId) {
-		return gridFsTemplate.find(new Query(Criteria.where(
-				"metadata.albumId").is(albumId)));
+		return gridFsTemplate.find(new Query(Criteria.where("metadata.albumId")
+				.is(albumId)));
 	}
 
 	@Override
 	public List<String> getPhotoIdByAlbum(String albumId) {
 		List<String> idPhoto = new ArrayList<String>();
-		
-		Query query = new Query(Criteria.where(
-				"metadata.albumId").is(albumId));
-		
+
+		Query query = new Query(Criteria.where("metadata.albumId").is(albumId));
+
 		List<GridFSDBFile> list = gridFsTemplate.find(query);
-		
+
 		for (GridFSDBFile file : list) {
 			idPhoto.add(file.getId().toString());
 		}
 		return idPhoto;
 	}
-	
-	
+
+	@Override
 	public void delePhotoByIdAlbum(String albumId) {
-		
-		
-		gridFsTemplate.delete(new Query(Criteria.where(
-				"metadata.albumId").is(albumId)));		
+
+		gridFsTemplate.delete(new Query(Criteria.where("metadata.albumId").is(
+				albumId)));
+	}
+
+	@Override
+	public UserNomade countPhotoByIdAlbum(UserNomade nomade) {
+		Iterator<Album> iterator = nomade.getAlbums().iterator();
+		Set<Album> set = new HashSet<Album>();
+		while(iterator.hasNext()) {
+			Album next = iterator.next();
+			List<GridFSDBFile> list = gridFsTemplate.find(new Query(Criteria
+					.where("metadata.albumId").is(next.get_id())));
+			if(list!=null)
+				next.setNumPhoto(list.size());
+			
+			set.add(next);
+
+		}
+		nomade.setAlbums(set);
+		return nomade;
 	}
 
 	@Override
@@ -148,19 +170,20 @@ public class ImageUtil implements ImageUtilInterface {
 		return gridFsTemplate.find(null);
 	}
 
+	@Override
 	public void delete(String id) {
 		gridFsTemplate.delete(new Query(Criteria.where("_id").is(
 				new ObjectId(id))));
 	}
-	
-	
-	 public void removeAlbum(String albumId, UserNomade nomade){
-		 
-		 nomade.findAndRemAlbum(albumId);
-		 userService.updateUserNomade(nomade);
-		 delePhotoByIdAlbum(albumId);
-			
-	 }
+
+	@Override
+	public void removeAlbum(String albumId, UserNomade nomade) {
+
+		nomade.findAndRemAlbum(albumId);
+		userService.updateUserNomade(nomade);
+		delePhotoByIdAlbum(albumId);
+
+	}
 
 	/*
 	 * private static final Set<String> imagesContentTypes = new

@@ -83,6 +83,7 @@ public class AlbumController {
 			uiModel.addAttribute("albumName", albumName);
 			
 			UserNomade nomade = securite.getUserNomade();
+			uiModel.addAttribute("nomade", nomade);
 			uiModel.addAttribute("beanPictureManager", dataPic(nomade));
 			uiModel.addAttribute("errorAlbum", "name can not be null");	
 			return "albums/picManager";
@@ -91,6 +92,7 @@ public class AlbumController {
 		UserNomade nomade = securite.getUserNomade();
 		Album album = new Album(albumName, new Date());
 		nomade.getAlbums().add(album);
+		nomade.orderAlbumByDate();
 		userService.updateUserNomade(nomade);
 		
 		BeanPictureManager beanPictureManager = new BeanPictureManager("active", false, album.get_id().toString(), "", null, "");
@@ -105,7 +107,7 @@ public class AlbumController {
 		imageUtil.delePhotoByIdAlbum(albumId);
 		imageUtil.removeAlbum(albumId, securite.getUserNomade());
 		UserNomade nomade = securite.getUserNomade();
-		uiModel.addAttribute("nomade", securite.getUserNomade());
+		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("beanPictureManager", dataPic(nomade));
 		return "albums/picManager";
 	}
@@ -159,13 +161,15 @@ public class AlbumController {
 			 BeanPictureManager beanPictureManager = new BeanPictureManager("", false, idAlbum, "active", photoIdByAlbum, "");
 			 uiModel.addAttribute("beanPictureManager", beanPictureManager);
 		 }else{
-			 	System.out.print("photo valide");
+			 	
 			 try {
 				 ImageInfo imageInfo = new ImageInfo();
 				 imageInfo.setAlbumId(idAlbum);
 				 
 				String idPhotoSsave = imageUtil.save(fileImage.getInputStream(), fileImage.getContentType(), fileImage.getOriginalFilename(), imageInfo);
-	
+				nomade.findAndModifAlbum(idAlbum, 1);
+				userService.updateUserNomade(nomade);
+				uiModel.addAttribute("nomade", securite.getUserNomade());
 				 BeanPictureManager beanPictureManager = new BeanPictureManager("", true, idAlbum, "active", photoIdByAlbum, idPhotoSsave);
 				 uiModel.addAttribute("beanPictureManager", beanPictureManager);
 			} catch (IOException e) {
@@ -187,6 +191,9 @@ public class AlbumController {
 			Model uiModel) {
 
 		imageUtil.delete(photoId);
+		UserNomade nomade = securite.getUserNomade();
+		nomade.findAndModifAlbum(albumId, -1);
+		userService.updateUserNomade(nomade);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
 		BeanPictureManager beanPictureManager = new BeanPictureManager("", false, albumId, "active", imageUtil.getPhotoIdByAlbum(albumId), "");
 		 uiModel.addAttribute("beanPictureManager", beanPictureManager);

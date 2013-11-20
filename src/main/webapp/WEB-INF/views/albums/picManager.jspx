@@ -40,7 +40,7 @@
 						<a href="${imageAlbum_url}/${album._id}" id="${album._id}"
 							class="list-group-item ${active}"> <spring:url
 								value="/albums/delete" var="deleteAlbum_url"></spring:url> <span
-							class="badge">x</span>
+							class="badge">${album.numPhoto}</span>
 							<i class="icon-folder-open"> <!--co  -->
 						</i> <label id="${album.name}"> ${album.name} </label>
 						</a>
@@ -55,7 +55,9 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane ${beanPictureManager.tabManager}" id="manager">
-					<a href="${deleteAlbum_url}/${beanPictureManager.idAlbum}" id="deleteAlbumId" >delete this album</a>
+					<c:if  test="${not empty nomade.albums}"  >
+						<a href="${deleteAlbum_url}/${beanPictureManager.idAlbum}" id="deleteAlbumId" >delete this album</a>
+					</c:if>
 						<c:if test="${not empty beanPictureManager.listIdPhoto }">
 							<div class="picManager">
 								<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>

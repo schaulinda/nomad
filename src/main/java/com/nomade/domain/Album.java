@@ -48,6 +48,18 @@ public class Album {
 		this.created = created;
 		
 	}
+	
+	
+
+	public Album(ObjectId _id, String name, Date created, int numPhoto,
+			String[] photos) {
+		super();
+		this._id = _id;
+		this.name = name;
+		this.created = created;
+		this.numPhoto = numPhoto;
+		this.photos = photos;
+	}
 
 	public Album() {
 		super();

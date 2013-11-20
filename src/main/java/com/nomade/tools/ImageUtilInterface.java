@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mongodb.gridfs.GridFSDBFile;
 import com.nomade.domain.ImageInfo;
+import com.nomade.domain.UserNomade;
 
 public interface ImageUtilInterface {
 	
@@ -23,5 +24,13 @@ public interface ImageUtilInterface {
 	public List<GridFSDBFile> listFiles();
 
 	List<String> getPhotoIdByAlbum(String albumId);
+
+	UserNomade countPhotoByIdAlbum(UserNomade nomade);
+
+	void delePhotoByIdAlbum(String albumId);
+
+	void delete(String id);
+
+	void removeAlbum(String albumId, UserNomade nomade);
 
 }

@@ -68,6 +68,7 @@
 						</a>
 						</span>
 					</div>
+					<p class="help-block">Drag and drop marker on the map</p>
 					<div class="form-group">
 					<fmt:formatDate value="${datePhoto}" var="dateP" pattern="dd-MM-yyyy"  />
 						<label for="datePhoto">Date</label> <input value="${dateP}"
@@ -131,6 +132,15 @@
 	
 	<script type="text/javascript">
 		dojo.addOnLoad(function() {
+			
+			 dojo.connect(dojo.byId('addresspicker_map'), 'onkeydown', function(event){
+				 if (event.keyCode == dojo.keys.ENTER) {
+				 // CALL AJAX CODE HERE
+				  
+				 		dojo.stopEvent(event);
+				 }
+				 });
+			
 			d = dojo.byId("formUpload");
 			dojo.connect(d, 'onsubmit', function(evt){
 				
@@ -286,6 +296,51 @@
 																						'hide');
 
 																	});
+													$('#btn_cancel')
+													.click(
+															function() {
+
+																addresspickerMap
+																		.addresspicker("destroy");
+
+																addresspickerMap = "a";
+
+																$(
+																		'#addresspicker_map')
+																		.popover(
+																				'hide');
+
+															});
+													$('#btn_save')
+													.click(
+															function() {
+
+																addresspickerMap
+																		.addresspicker("destroy");
+
+																addresspickerMap = "a";
+
+																$(
+																		'#addresspicker_map')
+																		.popover(
+																				'hide');
+
+															});
+													$('#btn_delete')
+													.click(
+															function() {
+
+																addresspickerMap
+																		.addresspicker("destroy");
+
+																addresspickerMap = "a";
+
+																$(
+																		'#addresspicker_map')
+																		.popover(
+																				'hide');
+
+															});
 
 												});
 

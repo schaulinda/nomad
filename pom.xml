@@ -467,7 +467,11 @@
 							<Item>localhost</Item>
 						</virtualHosts>
 					</webAppConfig>
-
+					<Configure id="Server" class="org.mortbay.setuid.SetUIDServer">
+						<Set name="startServerAsPrivileged">true</Set>
+						<Set name="umask">18</Set>
+						<Set name="uid">USERID</Set>
+					</Configure>
 				</configuration>
 			</plugin>
 		</plugins>

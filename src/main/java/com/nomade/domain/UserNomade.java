@@ -1,7 +1,11 @@
 package com.nomade.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -183,6 +187,36 @@ public class UserNomade {
     			break;
     		}
     	}
-    }    
+    }
+    
+    public void findAndModifAlbum(String albumId, int nb){
+    	for(Album a:this.albums){	
+    		if(a.get_id().toString().equals(albumId)){
+    			Album b = new Album(a.get_id(), a.getName(), a.getCreated(), a.getNumPhoto()+nb, a.getPhotos());
+    			this.albums.remove(a);
+    			this.albums.add(b);
+    			break;
+    		}
+    	}
+    }
+    
+    public void orderAlbumByDate(){
+    	
+    	List<Album> tmp = new ArrayList<Album>(this.albums);
+		
+    	Collections.sort(tmp, new Comparator<Album>(){
+            public int compare(Album a1,Album a2){
+               
+            	if(a1.getCreated().after(a2.getCreated()))
+            		return -1;
+            	else
+            		if(a1.getCreated().before(a2.getCreated()))
+            			return 1;
+            	return 0;
+          }});
+		
+		this.albums = new HashSet<Album>(tmp);
+    	
+    }
 
 }

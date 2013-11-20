@@ -16,6 +16,16 @@ public class BeanPictureManager {
 	
 	private String photoSave;
 	
+	private String albumName;
+	
+	
+	private String name(UserNomade nomade){
+		
+		//nomade
+		return "";
+		
+	}
+	
 	
 
 	public BeanPictureManager(String tabManager, boolean formInfoImg,
@@ -32,6 +42,14 @@ public class BeanPictureManager {
 
 	public String getTabManager() {
 		return tabManager;
+	}
+
+	public String getAlbumName() {
+		return albumName;
+	}
+
+	public void setAlbumName(String albumName) {
+		this.albumName = albumName;
 	}
 
 	public void setTabManager(String tabManager) {
