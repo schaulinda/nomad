@@ -92,7 +92,7 @@ public class AlbumController {
 		UserNomade nomade = securite.getUserNomade();
 		Album album = new Album(albumName, new Date());
 		nomade.getAlbums().add(album);
-		nomade.orderAlbumByDate();
+		//nomade.orderAlbumByDate();
 		userService.updateUserNomade(nomade);
 		
 		BeanPictureManager beanPictureManager = new BeanPictureManager("active", false, album.get_id().toString(), "", null, "");
