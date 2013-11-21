@@ -470,6 +470,7 @@
 					 <connectors>
 			            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
 			                <port>8080</port>
+			                <forwarded>true</forwarded>
 			                <maxIdleTime>60000</maxIdleTime>
 			            </connector>
 			         </connectors>   
