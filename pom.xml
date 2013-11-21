@@ -467,11 +467,12 @@
 							<Item>localhost</Item>
 						</virtualHosts>
 					</webAppConfig>
-					<Configure id="Server" class="org.mortbay.setuid.SetUIDServer">
-						<Set name="startServerAsPrivileged">true</Set>
-						<Set name="umask">18</Set>
-						<Set name="uid">USERID</Set>
-					</Configure>
+					 <connectors>
+			            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+			                <port>8080</port>
+			                <maxIdleTime>60000</maxIdleTime>
+			            </connector>
+			         </connectors>   
 				</configuration>
 			</plugin>
 		</plugins>
