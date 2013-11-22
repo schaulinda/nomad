@@ -58,6 +58,7 @@
 					<c:if  test="${not empty nomade.albums}"  >
 						<a href="${deleteAlbum_url}/${beanPictureManager.idAlbum}" id="deleteAlbumId" >delete this album</a>
 					</c:if>
+					<c:if  test="${empty nomade.albums}"  ><input type="hidden" id="deleteAlbumId" /><!-- to refact, just to protect ajaxdecoration  -->  </c:if>
 						<c:if test="${not empty beanPictureManager.listIdPhoto }">
 							<div class="picManager">
 								<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
@@ -69,7 +70,12 @@
 										<a href="${viewImg}/${photo}" id="${photo}" class="imgClass" > 
 										<img width="91px" height="91px"
 											alt="" src="${imageRender_url}/${photo}" class="grayscale" />
-										</a></li>
+										</a>
+										<c:if test="${beanPictureManager.isBackLink() eq true}" >
+										<spring:url value="/users/selectImg" var="selectImg" ></spring:url>
+											<a  class="btn btnSelect" id="select_${photo}" href="${selectImg}/${photo}" ><i class="icon-ok"> select</i></a>
+										</c:if>
+										</li>
 									</c:forEach>
 								</ul>
 								<ul class="pagination">
@@ -95,7 +101,20 @@
 
 <script type="text/javascript">
 	dojo.addOnLoad(function() {
-	
+		
+		
+		dojo.query(".btnSelect").forEach(function(node, index, arr){
+			
+			var idNode = dojo.attr(node,"id");
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : idNode,
+				event : "onclick",
+				params : {
+					fragments : "body, topheader"
+				}
+			}));
+		});
+		
 		dojo.query(".list-group-item").forEach(function(node, index, arr){
 				
 			var idNode = dojo.attr(node,"id");

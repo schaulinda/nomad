@@ -2,6 +2,8 @@ package com.nomade.domain;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class BeanPictureManager {
 	
 	private String tabManager;
@@ -18,19 +20,27 @@ public class BeanPictureManager {
 	
 	private String albumName;
 	
+	private boolean isBackLink;
 	
-	private String name(UserNomade nomade){
+	private HttpServletRequest httpServletRequest;
+	
+
+	public boolean isBackLink() {
 		
-		//nomade
-		return "";
-		
+		Object attribute = httpServletRequest.getSession(true).getAttribute("backLink");
+		if(attribute==null)
+			return false;
+		else
+			return true;
 	}
-	
-	
+
+	public void setBackLink(boolean isBackLink) {
+		this.isBackLink = isBackLink;
+	}
 
 	public BeanPictureManager(String tabManager, boolean formInfoImg,
 			String idAlbum, String tabPhoto, List<String> listIdPhoto,
-			String photoSave) {
+			String photoSave,HttpServletRequest httpServletRequest) {
 		super();
 		this.tabManager = tabManager;
 		this.formInfoImg = formInfoImg;
@@ -38,6 +48,7 @@ public class BeanPictureManager {
 		this.tabPhoto = tabPhoto;
 		this.listIdPhoto = listIdPhoto;
 		this.photoSave = photoSave;
+		this.httpServletRequest = httpServletRequest;
 	}
 
 	public String getTabManager() {

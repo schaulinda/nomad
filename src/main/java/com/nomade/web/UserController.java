@@ -107,8 +107,8 @@ public class UserController {
 		StringBuilder stringBuilder = new StringBuilder()
 				.append("we are glad to see you between our communeauty, Active your profil by cliking the link bellow.")
 				.append("\n\n").append("http://")
-				.append(httpServletRequest.getServerName()).append(":")
-				.append(httpServletRequest.getServerPort())
+				.append(httpServletRequest.getServerName())
+				//.append(":").append(httpServletRequest.getServerPort())
 				.append("/users/activate/").append(nomade.getId());
 
 		try {
@@ -387,6 +387,35 @@ public class UserController {
 		uiModel.addAttribute("msg1", "security parameter update!");
 		return "profil/passwordReset";
 
+	}
+	
+	
+	@RequestMapping("/selectImg/{id}")
+	public String selectImg(@PathVariable("id") String id, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		
+		UserNomade nomade = securite.getUserNomade();
+		String stringPage = httpServletRequest.getSession(true).getAttribute("backLink").toString();
+		
+		if(stringPage==null){
+			return "/";
+		}
+		
+		if(stringPage.equals("profil")){
+			nomade.getProfil().setFile(id);
+			userService.updateUserNomade(nomade);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			return "profil/profil";
+		}
+		
+		if(stringPage.equals("vehicule")){
+			nomade.getVehicule().setPhoto(id);
+			userService.updateUserNomade(nomade);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			return "profil/vehicule";
+		}
+		
+		return "/";
 	}
 
 

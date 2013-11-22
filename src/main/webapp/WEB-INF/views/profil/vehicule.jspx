@@ -167,10 +167,19 @@
 					</table>
 					</div>
 					<div class="col-lg-3">
-						<IMG alt="" src="${res}/img/profil.png" width="210px" height="240px;" />
-						<a class="btn btn-default">
-							<i class="icon-edit"> <!-- co --> 
-							</i> <spring:message code="a.edit" />
+						<c:if test="${empty nomade.vehicule.photo}" >
+							<IMG alt="" src="${res}/img/profil.png" width="210px"
+							height="240px;" /> 
+						</c:if>
+						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+						<c:if test="${not empty nomade.vehicule.photo}" >
+							<IMG alt="" src="${imageRender_url}/${nomade.vehicule.photo}" width="210px"
+							height="240px;" /> 
+						</c:if>
+							<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
+							<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=vehicule" > <i
+							class="icon-edit"> <!-- co -->
+						</i> <spring:message code="a.edit" />
 						</a>
 					</div>
 				</div>
@@ -219,6 +228,16 @@
 		});		
 	
 	})(jQuery);
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "modifImg",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
 	</script>
 
 	<script type="text/javascript">

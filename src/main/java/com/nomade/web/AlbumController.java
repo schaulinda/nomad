@@ -43,34 +43,37 @@ public class AlbumController {
 	Security securite;
 	@Autowired
 	ImageUtil imageUtil;
-	
-	private BeanPictureManager dataPic(UserNomade nomade){
-		
+
+	private BeanPictureManager dataPic(UserNomade nomade,HttpServletRequest httpServletRequest) {
+
 		String idAlbum;
 		List<String> listIdPhoto;
 		Set<Album> albums = nomade.getAlbums();
-		if(albums!=null && albums.size()>0){
-			
+		if (albums != null && albums.size() > 0) {
+
 			Album album = albums.iterator().next();
 			idAlbum = album.get_id().toString();
-		   listIdPhoto = imageUtil.getPhotoIdByAlbum(idAlbum);
-			
-		}else{
-			 idAlbum = null;
-			 listIdPhoto = null;
+			listIdPhoto = imageUtil.getPhotoIdByAlbum(idAlbum);
+
+		} else {
+			idAlbum = null;
+			listIdPhoto = null;
 		}
-			
-		return new BeanPictureManager("active", false, idAlbum, "", listIdPhoto, "");
-				
+
+		return new BeanPictureManager("active", false, idAlbum, "",
+				listIdPhoto, "",httpServletRequest);
+
 	}
 
 	// arrive to piture manager
 	@RequestMapping("/myPic")
-	public String myPic(Model uiModel, HttpServletRequest httpServletRequest) {
-		
-		
+	public String myPic(
+			@RequestParam(value = "backLink", required = false) String backLink,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+
+		httpServletRequest.getSession(true).setAttribute("backLink", backLink);
 		UserNomade nomade = securite.getUserNomade();
-		uiModel.addAttribute("beanPictureManager", dataPic(nomade));
+		uiModel.addAttribute("beanPictureManager", dataPic(nomade,httpServletRequest));
 		uiModel.addAttribute("nomade", nomade);
 		return "albums/picManager";
 	}
@@ -81,21 +84,22 @@ public class AlbumController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		if (albumName == "" || albumName == null) {
 			uiModel.addAttribute("albumName", albumName);
-			
+
 			UserNomade nomade = securite.getUserNomade();
 			uiModel.addAttribute("nomade", nomade);
-			uiModel.addAttribute("beanPictureManager", dataPic(nomade));
-			uiModel.addAttribute("errorAlbum", "name can not be null");	
+			uiModel.addAttribute("beanPictureManager", dataPic(nomade,httpServletRequest));
+			uiModel.addAttribute("errorAlbum", "name can not be null");
 			return "albums/picManager";
 		}
 		uiModel.asMap().clear();
 		UserNomade nomade = securite.getUserNomade();
 		Album album = new Album(albumName, new Date());
 		nomade.getAlbums().add(album);
-		nomade.orderAlbumByDate();
+		// nomade.orderAlbumByDate();
 		userService.updateUserNomade(nomade);
-		
-		BeanPictureManager beanPictureManager = new BeanPictureManager("active", false, album.get_id().toString(), "", null, "");
+
+		BeanPictureManager beanPictureManager = new BeanPictureManager(
+				"active", false, album.get_id().toString(), "", null, "",httpServletRequest);
 		uiModel.addAttribute("beanPictureManager", beanPictureManager);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
 		return "albums/picManager";
@@ -103,112 +107,121 @@ public class AlbumController {
 
 	// delete album
 	@RequestMapping(value = "delete/{albumId}")
-	public String delete(@PathVariable("albumId") String albumId, Model uiModel) {
+	public String delete(@PathVariable("albumId") String albumId, Model uiModel,HttpServletRequest httpServletRequest) {
 		imageUtil.delePhotoByIdAlbum(albumId);
 		imageUtil.removeAlbum(albumId, securite.getUserNomade());
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("nomade", nomade);
-		uiModel.addAttribute("beanPictureManager", dataPic(nomade));
+		uiModel.addAttribute("beanPictureManager", dataPic(nomade,httpServletRequest));
 		return "albums/picManager";
 	}
 
 	// images of an album
 	@RequestMapping(value = "image/{albumId}")
 	public String photoAlbum(@PathVariable("albumId") String albumId,
-			Model uiModel) {
+			Model uiModel,HttpServletRequest httpServletRequest) {
 
 		List<String> photoIdByAlbum = imageUtil.getPhotoIdByAlbum(albumId);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		BeanPictureManager beanPictureManager = new BeanPictureManager("active", false, albumId, "", photoIdByAlbum, "");
+		BeanPictureManager beanPictureManager = new BeanPictureManager(
+				"active", false, albumId, "", photoIdByAlbum, "",httpServletRequest);
 		uiModel.addAttribute("beanPictureManager", beanPictureManager);
 		return "albums/picManager";
 	}
 
 	// upload an image file
-	@RequestMapping(value="/upload", method = RequestMethod.POST)
-		public String upload(Model uiModel,
-				HttpServletRequest httpServletRequest,
-				@RequestParam("fileImage") MultipartFile fileImage,
-				@RequestParam("idAlbum") String idAlbum) {
-		
-		
-		
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+	public String upload(Model uiModel, HttpServletRequest httpServletRequest,
+			@RequestParam("fileImage") MultipartFile fileImage,
+			@RequestParam("idAlbum") String idAlbum) {
+
 		UserNomade nomade = securite.getUserNomade();
-		 uiModel.addAttribute("nomade", nomade);
-		 
-		 if(idAlbum==null || StringUtils.isEmpty(idAlbum) || StringUtils.isBlank(idAlbum)){
-			 BeanPictureManager beanPictureManager = new BeanPictureManager("", false, idAlbum, "active", null, "");
-			 uiModel.addAttribute("beanPictureManager", beanPictureManager);
+		uiModel.addAttribute("nomade", nomade);
+
+		if (idAlbum == null || StringUtils.isEmpty(idAlbum)
+				|| StringUtils.isBlank(idAlbum)) {
+			BeanPictureManager beanPictureManager = new BeanPictureManager("",
+					false, idAlbum, "active", null, "",httpServletRequest);
+			uiModel.addAttribute("beanPictureManager", beanPictureManager);
 			uiModel.addAttribute("error", "select or create a new album!");
-			 return "albums/picManager";
-			 
-		 }
-		 //id non null
-		 List<String> photoIdByAlbum = imageUtil.getPhotoIdByAlbum(idAlbum);
-		
-		if(fileImage.getSize()>900000){
-			
-			BeanPictureManager beanPictureManager = new BeanPictureManager("", false, idAlbum, "active", photoIdByAlbum, "");
-			 uiModel.addAttribute("beanPictureManager", beanPictureManager);
-			uiModel.addAttribute("error", "max size permited is 2M!");
-			 return "albums/picManager";
-			
+			return "albums/picManager";
+
 		}
-		 
-		 if(!imageUtil.isValidate(fileImage)){
-			 
-			 uiModel.addAttribute("error", "votre fichier n'est pas valide!");
-			 BeanPictureManager beanPictureManager = new BeanPictureManager("", false, idAlbum, "active", photoIdByAlbum, "");
-			 uiModel.addAttribute("beanPictureManager", beanPictureManager);
-		 }else{
-			 	
-			 try {
-				 ImageInfo imageInfo = new ImageInfo();
-				 imageInfo.setAlbumId(idAlbum);
-				 
-				String idPhotoSsave = imageUtil.save(fileImage.getInputStream(), fileImage.getContentType(), fileImage.getOriginalFilename(), imageInfo);
+		// id non null
+		List<String> photoIdByAlbum = imageUtil.getPhotoIdByAlbum(idAlbum);
+
+		if (fileImage.getSize() > 900000) {
+
+			BeanPictureManager beanPictureManager = new BeanPictureManager("",
+					false, idAlbum, "active", photoIdByAlbum, "",httpServletRequest);
+			uiModel.addAttribute("beanPictureManager", beanPictureManager);
+			uiModel.addAttribute("error", "max size permited is 2M!");
+			return "albums/picManager";
+
+		}
+
+		if (!imageUtil.isValidate(fileImage)) {
+
+			uiModel.addAttribute("error", "votre fichier n'est pas valide!");
+			BeanPictureManager beanPictureManager = new BeanPictureManager("",
+					false, idAlbum, "active", photoIdByAlbum, "",httpServletRequest);
+			uiModel.addAttribute("beanPictureManager", beanPictureManager);
+		} else {
+
+			try {
+				ImageInfo imageInfo = new ImageInfo();
+				imageInfo.setAlbumId(idAlbum);
+
+				String idPhotoSsave = imageUtil.save(
+						fileImage.getInputStream(), fileImage.getContentType(),
+						fileImage.getOriginalFilename(), imageInfo);
 				nomade.findAndModifAlbum(idAlbum, 1);
 				userService.updateUserNomade(nomade);
 				uiModel.addAttribute("nomade", securite.getUserNomade());
-				 BeanPictureManager beanPictureManager = new BeanPictureManager("", true, idAlbum, "active", photoIdByAlbum, idPhotoSsave);
-				 uiModel.addAttribute("beanPictureManager", beanPictureManager);
+				BeanPictureManager beanPictureManager = new BeanPictureManager(
+						"", true, idAlbum, "active", photoIdByAlbum,
+						idPhotoSsave,httpServletRequest);
+				uiModel.addAttribute("beanPictureManager", beanPictureManager);
 			} catch (IOException e) {
 				uiModel.addAttribute("error", "votre fichier n'est pas valide!");
-				BeanPictureManager beanPictureManager = new BeanPictureManager("", false, idAlbum, "active", photoIdByAlbum, "");
-				 uiModel.addAttribute("beanPictureManager", beanPictureManager);
+				BeanPictureManager beanPictureManager = new BeanPictureManager(
+						"", false, idAlbum, "active", photoIdByAlbum, "",httpServletRequest);
+				uiModel.addAttribute("beanPictureManager", beanPictureManager);
 				e.printStackTrace();
 			}
-			 
-		 }
-		 
-		
-	
-		 return "albums/picManager";
-	 }
-	
+
+		}
+
+		return "albums/picManager";
+	}
+
 	@RequestMapping(value = "delete/{albumId}/{photoId}")
-	public String deleteSavePhoto(@PathVariable("photoId") String photoId, @PathVariable("albumId") String albumId,
-			Model uiModel) {
+	public String deleteSavePhoto(@PathVariable("photoId") String photoId,
+			@PathVariable("albumId") String albumId, Model uiModel,HttpServletRequest httpServletRequest) {
 
 		imageUtil.delete(photoId);
 		UserNomade nomade = securite.getUserNomade();
 		nomade.findAndModifAlbum(albumId, -1);
 		userService.updateUserNomade(nomade);
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		BeanPictureManager beanPictureManager = new BeanPictureManager("", false, albumId, "active", imageUtil.getPhotoIdByAlbum(albumId), "");
-		 uiModel.addAttribute("beanPictureManager", beanPictureManager);
-		
+		BeanPictureManager beanPictureManager = new BeanPictureManager("",
+				false, albumId, "active", imageUtil.getPhotoIdByAlbum(albumId),
+				"",httpServletRequest);
+		uiModel.addAttribute("beanPictureManager", beanPictureManager);
+
 		return "albums/picManager";
 	}
-	
+
 	@RequestMapping(value = "cancel/{albumId}/{photoId}")
-	public String cancelSavePhoto(@PathVariable("photoId") String photoId, @PathVariable("albumId") String albumId,
-			Model uiModel) {
+	public String cancelSavePhoto(@PathVariable("photoId") String photoId,
+			@PathVariable("albumId") String albumId, Model uiModel,HttpServletRequest httpServletRequest) {
 
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		BeanPictureManager beanPictureManager = new BeanPictureManager("", false, albumId, "active", imageUtil.getPhotoIdByAlbum(albumId), "");
-		 uiModel.addAttribute("beanPictureManager", beanPictureManager);
-		
+		BeanPictureManager beanPictureManager = new BeanPictureManager("",
+				false, albumId, "active", imageUtil.getPhotoIdByAlbum(albumId),
+				"",httpServletRequest);
+		uiModel.addAttribute("beanPictureManager", beanPictureManager);
+
 		return "albums/picManager";
 	}
 
@@ -223,22 +236,22 @@ public class AlbumController {
 			@RequestParam("description") String description,
 			@RequestParam("datePhoto") @DateTimeFormat(pattern = "dd-MM-yyyy") Date datePhoto) {
 
-		double double1=0;
-		double double2=0;
+		double double1 = 0;
+		double double2 = 0;
 		try {
 			double1 = Double.parseDouble(lng);
 			double2 = Double.parseDouble(lat);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			double1=0;
-			double2=0;
+			// e.printStackTrace();
+			double1 = 0;
+			double2 = 0;
 		}
 		GridFSDBFile gridFSDBFile = imageUtil.get(idPhoto);
 
-		 DBObject metaData = gridFSDBFile.getMetaData();
-		 String stringId = metaData.get("albumId").toString();
-		
+		DBObject metaData = gridFSDBFile.getMetaData();
+		String stringId = metaData.get("albumId").toString();
+
 		ImageInfo imageInfo = new ImageInfo(addresspicker, datePhoto,
 				description, stringId, double1, double2);
 
@@ -246,34 +259,35 @@ public class AlbumController {
 				gridFSDBFile.getContentType(), gridFSDBFile.getFilename(),
 				imageInfo);
 		imageUtil.delete(idPhoto);
-		
+
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		BeanPictureManager beanPictureManager = new BeanPictureManager("", false, stringId, "active", imageUtil.getPhotoIdByAlbum(stringId), "");
-		 uiModel.addAttribute("beanPictureManager", beanPictureManager);
+		BeanPictureManager beanPictureManager = new BeanPictureManager("",
+				false, stringId, "active",
+				imageUtil.getPhotoIdByAlbum(stringId), "",httpServletRequest);
+		uiModel.addAttribute("beanPictureManager", beanPictureManager);
 		return "albums/picManager";
 
 	}
-	
+
 	@RequestMapping(value = "viewImg/{imgId}")
-	public String viewImg(@PathVariable("imgId") String imgId,
-			Model uiModel) {
+	public String viewImg(@PathVariable("imgId") String imgId, Model uiModel,HttpServletRequest httpServletRequest) {
 
 		DBObject metaData = imageUtil.get(imgId).getMetaData();
-		
+
 		ImageInfo imageInfo = new ImageInfo(metaData);
-		
+
 		uiModel.addAttribute("nomade", securite.getUserNomade());
-		BeanPictureManager beanPictureManager = new BeanPictureManager("", true, imageInfo.getAlbumId(), "active", imageUtil.getPhotoIdByAlbum(imageInfo.getAlbumId()), imgId);
-		 uiModel.addAttribute("beanPictureManager", beanPictureManager);
-		 
-		 uiModel.addAttribute("datePhoto", imageInfo.getDatePhoto());
-		 uiModel.addAttribute("description", imageInfo.getDescription());
-		 uiModel.addAttribute("lat", imageInfo.getLat());
-		 uiModel.addAttribute("lng", imageInfo.getLng());
-		 uiModel.addAttribute("addresspicker", imageInfo.getAdress());
-		 
-		 
-		 
+		BeanPictureManager beanPictureManager = new BeanPictureManager("",
+				true, imageInfo.getAlbumId(), "active",
+				imageUtil.getPhotoIdByAlbum(imageInfo.getAlbumId()), imgId,httpServletRequest);
+		uiModel.addAttribute("beanPictureManager", beanPictureManager);
+
+		uiModel.addAttribute("datePhoto", imageInfo.getDatePhoto());
+		uiModel.addAttribute("description", imageInfo.getDescription());
+		uiModel.addAttribute("lat", imageInfo.getLat());
+		uiModel.addAttribute("lng", imageInfo.getLng());
+		uiModel.addAttribute("addresspicker", imageInfo.getAdress());
+
 		return "albums/picManager";
 	}
 

@@ -10,6 +10,7 @@
 	<spring:url var="res" value="/resources" />
 	<div class="row">
 	<spring:url value="/users" var="users_url"></spring:url>
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 		<div class="col-lg-2 user col-sm-2">
 			<a href="${users_url}/private/profil" id="img_profil">
 				<c:choose>
@@ -17,7 +18,8 @@
 						<img alt="user" src="${res}/img/avatar.png" class="img-rounded" title="username" />
 					</c:when>
 					<c:otherwise>
-						<img alt="user" src="${res}/images/profil/${nomade.profil.file}" class="img-rounded" title="username" />
+					
+						<img alt="user" src="${imageRender_url}/${nomade.profil.file}" class="img-rounded" title="username" />
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
@@ -104,7 +106,7 @@
 									<img data-src="${res}/js/holder.js/46x46" src="data:img/png;" class="img-rounded defaultvehicleimg" />
 								</c:when>
 								<c:otherwise>
-									<img alt="user" src="${res}/images/profil/${nomade.vehicule.photo}" class="img-rounded userVehicleImg" />
+									<img alt="user" src="${imageRender_url}/${nomade.vehicule.photo}" class="img-rounded userVehicleImg" />
 								</c:otherwise>
 							</c:choose>
 					</a>
