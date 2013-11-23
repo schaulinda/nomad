@@ -1,39 +1,39 @@
-.user > a > img {
-    display: inline-block;
-    height: 46px;
-    vertical-align:center;
-    width: 46px;  
-    margin-right: 4px; 
-  }
- 
-.user{
+.user>a>img {
+	display: inline-block;
+	height: 46px;
+	vertical-align: center;
+	width: 46px;
+	margin-right: 4px;
+}
+
+.user {
 	cursor: pointer;
 }
 
-.user > a:HOVER{
+.user>a:HOVER {
 	text-decoration: none;
 }
 
-.container2{
+.container2 {
 	max-width: auto;
-	width:auto;
+	width: auto;
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
-.container2 a, .dropdown-menu a{
+.container2 a,.dropdown-menu a {
 	cursor: pointer;
 }
 
-.xlarge{
+.xlarge {
 	min-width: 400px;
 }
 
-.xmoyen{
+.xmoyen {
 	min-width: 300px;
 }
 
-.navbar-brand{
+.navbar-brand {
 	padding: 10px;
 	margin-left: -40px;
 	margin-right: 20px;
@@ -44,15 +44,15 @@
 	padding-top: 7px;
 }
 
-.loginInput > span {
-	font-size: 13px; 
-	color: gray; 
+.loginInput>span {
+	font-size: 13px;
+	color: gray;
 	font-weight: lighter;
 }
 
 .linkForgotPassword {
-	font-size: 13px; 
-	margin-top: 10px; 
+	font-size: 13px;
+	margin-top: 10px;
 	cursor: pointer;
 }
 
@@ -71,31 +71,65 @@
 .defaultVehicleImg {
 	margin-left: 10px;
 }
+
 .userVehicleImg {
 	margin-left: 10px;
 	width: 46px;
 	height: 46px;
 }
 
-.widget .panel-body { padding:0px; }
-.widget .list-group { margin-bottom: 0; }
-.widget .panel-title { display:inline }
-.widget .label-info { float: right; }
-.widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
-.widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
-.widget .mic-info { color: #666666;font-size: 11px; }
-.widget .action { margin-top:5px; }
-.widget .comment-text { font-size: 12px; }
-.widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+.widget .panel-body {
+	padding: 0px;
+}
 
-.picManager> .thumbnail {
+.widget .list-group {
+	margin-bottom: 0;
+}
+
+.widget .panel-title {
+	display: inline
+}
+
+.widget .label-info {
+	float: right;
+}
+
+.widget li.list-group-item {
+	border-radius: 0;
+	border: 0;
+	border-top: 1px solid #ddd;
+}
+
+.widget li.list-group-item:hover {
+	background-color: rgba(86, 61, 124, .1);
+}
+
+.widget .mic-info {
+	color: #666666;
+	font-size: 11px;
+}
+
+.widget .action {
+	margin-top: 5px;
+}
+
+.widget .comment-text {
+	font-size: 12px;
+}
+
+.widget .btn-block {
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.picManager>.thumbnail {
 	background-color: white;
 	z-index: 2;
 	position: relative;
 	margin-bottom: 40px !important;
 }
 
-.picManager > .thumbnails>li {
+.picManager>.thumbnails>li {
 	margin-left: 15px;
 	height: 100px;
 	width: 100px;
@@ -103,7 +137,7 @@
 	list-style: none;
 }
 
-.picManager > .thumbnail img,.picManager > .thumbnail>a {
+.picManager>.thumbnail img,.picManager>.thumbnail>a {
 	z-index: 2;
 	height: 100px;
 	width: 100px;
@@ -111,7 +145,7 @@
 	display: block;
 }
 
-.picManager > .img.grayscale {
+.picManager>.img.grayscale {
 	-webkit-filter: grayscale(1);
 	-webkit-filter: grayscale(100%);
 	-moz-filter: grayscale(100%);
@@ -122,7 +156,7 @@ filter: gray;
 filter: grayscale(100%); */
 }
 
-.picManager > .thumbnail {
+.picManager>.thumbnail {
 	position: absolute;
 	z-index: 1;
 	margin-top: -30px;
@@ -132,8 +166,16 @@ filter: grayscale(100%); */
 	padding: 9px;
 }
 
-.picManager > .thumbnail .picManager > .gallery-controls p {
+.picManager>.thumbnail .picManager>.gallery-controls p {
 	display: block;
 	margin: auto;
 	width: 100%;
+}
+
+.bs-callout {
+	border-left: 3px solid #434343;
+	margin: 20px 0;
+	padding: 20px;
+	background-color: #E3E3E3;
+	border-color: none repeat scroll 0 0 #464646;
 }

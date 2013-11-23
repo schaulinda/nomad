@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="body" 
-	 xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	 xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
-	 xmlns:spring="http://www.springframework.org/tags"
-	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+
 	<div class="row">
 		<div class="col-lg-6" style="margin-left: 10px;" id="id_map">
 			<div class="row">
@@ -23,32 +23,33 @@
 				</div>
 				<div class="col-lg-4">
 					<button class="btn btn-success">
-						<i class=" icon-info-sign">
-							<!-- com-->
+						<i class=" icon-info-sign"> <!-- com-->
 						</i>
-						<spring:message code="button.practicalInformation" var="buttonPracticalInformation"/>
+						<spring:message code="button.practicalInformation"
+							var="buttonPracticalInformation" />
 						${buttonPracticalInformation}
 					</button>
 				</div>
 				<div class="col-lg-4 col-lg-offset-3">
 					<button class="btn btn-danger ">
-						<i class="icon-warning-sign"> 
-							<!-- com -->
+						<i class="icon-warning-sign"> <!-- com -->
 						</i>
-						<spring:message code="button.dangerInformation" var="buttonDangerInformation" />
+						<spring:message code="button.dangerInformation"
+							var="buttonDangerInformation" />
 						${buttonDangerInformation}
 					</button>
 				</div>
 			</div>
 		</div>
-		<div id="id_carnetContent" class="tab-pane fade in active col-lg-6" style="margin-left: -16px;">
+		<div id="id_carnetContent" class="tab-pane fade in active col-lg-6"
+			style="margin-left: -16px;">
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-user">
-							<!-- co -->
+						<i class="icon-user"> <!-- co -->
 						</i>
-						<spring:message code="h.notebookOfTraveler" var="hNotebookOfTraveler"/>
+						<spring:message code="h.notebookOfTraveler"
+							var="hNotebookOfTraveler" />
 						${hNotebookOfTraveler}
 					</h3>
 				</div>
@@ -56,43 +57,39 @@
 					<spring:message code="textarea.tellUs" var="textareaTellUs" />
 					${textareaTellUs}
 				</textarea>
+				<div class="bs-callout">
+					<div class="form-group">
+						<input type="date" class="datepicker form-control" />
+						<p class="help-block">Date of Your trip.</p>
+					</div>
+					
+				</div>
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li>
-								<a href="#">
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-camera">
-											<!-- co -->
+										<i class="icon-camera"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-calendar">
-											<!-- co -->
+										<i class="icon-calendar"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-screenshot">
-											<!-- co -->
+										<i class="icon-screenshot"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
 										<spring:message code="button.valid" />
 									</button>
-								</a>
-							</li>
+							</a></li>
 						</ul>
 					</div>
 				</div>
@@ -100,10 +97,10 @@
 			<div class="panel">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-truck">
-							<!-- co -->
+						<i class="icon-truck"> <!-- co -->
 						</i>
-						<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
+						<spring:message code="h.notebookOfVehicle"
+							var="hNotebookOfVehicle" />
 						${hNotebookOfVehicle}
 					</h3>
 				</div>
@@ -111,37 +108,32 @@
 					<div class="col-lg-9">
 						<div class="input-group">
 							<spring:message code="input.start" var="inputStart" />
-							<input type="text" class="form-control" placeholder="${inputStart}" />
-							<span class="input-group-addon">
-								<a href="#">
-									<i class="icon-screenshot">
-										<!-- co -->
-									</i>
-								</a>
+							<input type="text" class="form-control"
+								placeholder="${inputStart}" /> <span class="input-group-addon">
+								<a href="#"> <i class="icon-screenshot"> <!-- co -->
+								</i>
+							</a>
 							</span>
 						</div>
 						<br />
 						<div class="input-group">
 							<spring:message code="input.stopOver" var="inputStopOver" />
-							<input type="text" class="form-control" placeholder="${inputStopOver}" />
-							<span class="input-group-addon">
-								<a href="#">
-									<i class="icon-screenshot">
-										<!-- co -->
-									</i>
-								</a>
+							<input type="text" class="form-control"
+								placeholder="${inputStopOver}" /> <span
+								class="input-group-addon"> <a href="#"> <i
+									class="icon-screenshot"> <!-- co -->
+								</i>
+							</a>
 							</span>
 						</div>
 						<br />
 						<div class="input-group">
 							<spring:message code="input.finish" var="inputFinish" />
-							<input type="text" class="form-control" placeholder="${inputFinish}" />
-							<span class="input-group-addon">
-								<a href="#">
-									<i class="icon-screenshot">
-										<!-- co -->
-									</i>
-								</a>
+							<input type="text" class="form-control"
+								placeholder="${inputFinish}" /> <span class="input-group-addon">
+								<a href="#"> <i class="icon-screenshot"> <!-- co -->
+								</i>
+							</a>
 							</span>
 						</div>
 					</div>
@@ -161,40 +153,29 @@
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li>
-								<a href="#">
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-camera">
-											<!-- co -->
+										<i class="icon-camera"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-calendar">
-											<!-- co -->
+										<i class="icon-calendar"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
-										<i class="icon-screenshot">
-											<!-- co -->
+										<i class="icon-screenshot"> <!-- co -->
 										</i>
 									</button>
-								</a>
-							</li>
-							<li>
-								<a href="#">
+							</a></li>
+							<li><a href="#">
 									<button class="btn">
 										<spring:message code="button.valid" />
 									</button>
-								</a>
-							</li>
+							</a></li>
 						</ul>
 					</div>
 				</div>
@@ -209,8 +190,8 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_itineraireLink",
 			event : "onclick",
@@ -218,8 +199,8 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-</script>
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_carnetLink",
 			event : "onclick",
@@ -227,7 +208,7 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-</script>
+	</script>
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "profil_id",
@@ -237,5 +218,12 @@
 			}
 		}));
 	</script>
-	
+	<script type="text/javascript">
+		jQuery.noConflict();
+		(function($) {
+			$(document).ready(function() {
+				$('.datepicker').datepicker();
+			});
+		});
+	</script>
 </div>

@@ -103,7 +103,7 @@
 						<a href="${users_url}/private/vehicule" id="img_veh1">
 							<c:choose>
 								<c:when test="${empty nomade.vehicule.photo}">
-									<img data-src="${res}/js/holder.js/46x46" src="data:img/png;" class="img-rounded defaultvehicleimg" />
+									<img data-src="holder.js/46x46" src="data:img/png;" class="img-rounded defaultvehicleimg" />
 								</c:when>
 								<c:otherwise>
 									<img alt="user" src="${imageRender_url}/${nomade.vehicule.photo}" class="img-rounded userVehicleImg" />
