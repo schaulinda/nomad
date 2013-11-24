@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Country;
+import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Gender;
 import com.nomade.domain.Langue;
 import com.nomade.domain.Nationality;
@@ -117,7 +118,7 @@ public class UserController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			nomade.setDisableLogin(false);
+			//nomade.setDisableLogin(true);
 			userService.saveUserNomade(nomade);
 		}
 		return "succesRegister";
@@ -413,6 +414,15 @@ public class UserController {
 			userService.updateUserNomade(nomade);
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			return "profil/vehicule";
+		}
+		
+		if(stringPage.equals("carnet")){
+			EtapeVoyage voyage = new EtapeVoyage();
+			voyage.setUserPhoto(id);
+			uiModel.addAttribute("etapeVoyage", voyage);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			uiModel.addAttribute("onglet", "carnet");
+			return "public/carnet";
 		}
 		
 		return "/";

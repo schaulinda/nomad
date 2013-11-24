@@ -79,6 +79,10 @@
 	<!-- eh -->
 		
 	</script>
+	<script src="${res}/js/jquery.session.js">
+	<!-- eh -->
+		
+	</script>
 	
 	<script type="text/javascript" src="${res}/js/noty/jquery.noty.js">
 	<!-- eh -->

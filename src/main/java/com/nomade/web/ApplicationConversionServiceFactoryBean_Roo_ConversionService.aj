@@ -119,7 +119,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<EtapeVoyage, String> ApplicationConversionServiceFactoryBean.getEtapeVoyageToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.EtapeVoyage, java.lang.String>() {
             public String convert(EtapeVoyage etapeVoyage) {
-                return new StringBuilder().append(etapeVoyage.getDescription()).append(' ').append(etapeVoyage.getDateEtape()).append(' ').append(etapeVoyage.getPhoto()).append(' ').append(etapeVoyage.getLocation()).toString();
+                return new StringBuilder().append(etapeVoyage.get_id()).append(' ').append(etapeVoyage.getDescription()).append(' ').append(etapeVoyage.getDateEtape()).append(' ').append(etapeVoyage.getUserPhoto()).toString();
             }
         };
     }

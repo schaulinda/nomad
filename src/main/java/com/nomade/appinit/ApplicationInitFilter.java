@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.CharSet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -23,6 +25,8 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 
 	@Resource
 	private ApplicationInitService applicationInitService;
+	@Autowired
+	private MongoTemplate mongoTemplate;
 	
 	private boolean initialized;
 	
@@ -32,6 +36,7 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		
 		if (!initialized){
+			mongoTemplate.getDb().dropDatabase();
 			applicationInitService.initApplication();
 			initialized = true;
 		}

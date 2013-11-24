@@ -5,8 +5,11 @@
     <form:create id="fc_com_nomade_domain_EtapeVoyage" modelAttribute="etapeVoyage" path="/etapevoyages" render="${empty dependencies}" z="CyeyOaTFj5DvnpOIXI93ay2339c=">
         <field:input field="description" id="c_com_nomade_domain_EtapeVoyage_description" z="hYnS8z9S0N0OzKchP5VHnJIkE7o="/>
         <field:datetime dateTimePattern="${etapeVoyage_dateetape_date_format}" field="dateEtape" id="c_com_nomade_domain_EtapeVoyage_dateEtape" z="P07HrX7Xg6yudhXbHsJHZsAPfXI="/>
-        <field:input field="photo" id="c_com_nomade_domain_EtapeVoyage_photo" z="LOiMWvmWgnrMJfU/teG9nLR5VGk="/>
         <field:input field="location" id="c_com_nomade_domain_EtapeVoyage_location" z="qAVQYF8DlzoHLTprai1JRpefCSc="/>
+        <field:input field="_id" id="c_com_nomade_domain_EtapeVoyage__id" z="Rh/5rjEHkvV+TXl1u6LLPu37w9Q="/>
+        <field:input field="userPhoto" id="c_com_nomade_domain_EtapeVoyage_userPhoto" z="l8ag1q2G7loCwg+ivWS1rbaZh2k="/>
+        <field:input field="userlat" id="c_com_nomade_domain_EtapeVoyage_userlat" z="ABbGc5b/DJunIyGCfnuF4ws3LG4="/>
+        <field:input field="userlng" id="c_com_nomade_domain_EtapeVoyage_userlng" z="ir16n11fkD4wRwkL9aSZjA9t8a8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_EtapeVoyage" render="${not empty dependencies}" z="RgOcvsr5MsdofzLs10wficnJPxE="/>
 </div>

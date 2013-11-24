@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
 	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -53,46 +57,105 @@
 						${hNotebookOfTraveler}
 					</h3>
 				</div>
-				<textarea class="form-control" row="8">
+				<form:form modelAttribute="etapeVoyage">
 					<spring:message code="textarea.tellUs" var="textareaTellUs" />
-					${textareaTellUs}
-				</textarea>
-				<div class="bs-callout">
-					<div class="form-group">
-						<input type="date" class="datepicker form-control" />
-						<p class="help-block">Date of Your trip.</p>
+					<textarea class="form-control" row="8" id="description" name="description"
+						placeholder="${textareaTellUs}">
+						<!-- co -->
+					</textarea>
+					<div class="bs-callout" id="btnCalBox">
+						<div class="row">
+							<div class="col-lg-10 col-lg-offset-1">
+								<div class="form-group">
+									<input id="dateEtape" class="datepicker form-control"
+										name="dateEtape" type="date" placeholder="12-03-1991"
+										data-date-format="dd-mm-yyyy" />
+									<p class="help-block">Date of Your trip.</p>
+								</div>
+							</div>
+							<div class="col-lg-1">
+								<a title="close" class="closeLink"><i
+									class="icon-remove-circle"> <!-- co -->
+								</i> </a>
+							</div>
+						</div>
 					</div>
-					
-				</div>
-				<div class="row">
-					<div class="col-lg-8 col-lg-offset-4 col-12">
-						<ul class="nav nav-tabs nav-justified">
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-camera"> <!-- co -->
+					<div class="bs-callout" id="btnLocationBox">
+						<div class="row">
+							<form:hidden id="userlat" path="userlat" />
+							<form:hidden id="userlng" path="userlng" />
+							<div class="col-lg-10 col-lg-offset-1">
+								<div class="input-group">
+									<input type="text" id="addresspiker" name="location"
+										class="form-control" placeholder="" /> <span
+										class="input-group-addon"> <a href="#"> <i
+											class="icon-screenshot"> <!-- co -->
 										</i>
-									</button>
-							</a></li>
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-calendar"> <!-- co -->
-										</i>
-									</button>
-							</a></li>
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-screenshot"> <!-- co -->
-										</i>
-									</button>
-							</a></li>
-							<li><a href="#">
+									</a>
+									</span>
+								</div>
+								<p class="help-block">Enter your location or Drag and drop
+									marker on the map.</p>
+							</div>
+							<div class="col-lg-1">
+								<a title="close" class="closeLink"><i
+									class="icon-remove-circle"> <!-- co -->
+								</i> </a>
+							</div>
+						</div>
+					</div>
+					<div class="bs-callout" id="btnPhotoBox">
+						<form:hidden path="userPhoto" id="userPhoto" />
+						<div class="row">
+							<div class="col-lg-4 col-lg-offset-1">
+								<c:if test="${empty etapeVoyage.userPhoto}">
+									<IMG alt="" src="${res}/img/profil.png" width="100px"
+										height="100px;" />
+								</c:if>
+								<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+								<c:if test="${not empty etapeVoyage.userPhoto}">
+									<IMG alt="" src="${imageRender_url}/${etapeVoyage.userPhoto}"
+										width="100px" height="100px;" />
+								</c:if>
+							</div>
+							<div class="col-lg-4">
+								<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+								<a class="btn btn-default" id="selectImg"
+									href="${selectPhoto_url}?backLink=carnet"><i
+									class="icon-edit"> <!-- com  -->
+								</i> Select a picture</a>
+							</div>
+							<div class="col-lg-1 col-lg-offset-2">
+								<a title="close" class="closeLink"><i
+									class="icon-remove-circle"> <!-- co -->
+								</i> </a>
+							</div>
+						</div>
+					</div>
+					<div class="row grpBtn">
+						<div class="col-lg-8 col-lg-offset-4 col-12">
+							<ul class="nav nav-tabs nav-justified">
+								<li><a class="" id="btnPhoto"> <i class="icon-camera">
+											<!-- co -->
+									</i>
+								</a></li>
+								<li><a class="" id="btnCal"> <i class="icon-calendar">
+											<!-- co -->
+									</i>
+								</a></li>
+								<li><a class="" id="btnLocation"> <i
+										class="icon-screenshot"> <!-- co -->
+									</i>
+								</a></li>
+								<li>
 									<button class="btn">
 										<spring:message code="button.valid" />
 									</button>
-							</a></li>
-						</ul>
+								</li>
+							</ul>
+						</div>
 					</div>
-				</div>
+				</form:form>
 			</div>
 			<div class="panel">
 				<div class="panel-heading">
@@ -153,35 +216,119 @@
 				<div class="row">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-camera"> <!-- co -->
-										</i>
-									</button>
+							<li><a class=""> <i class="icon-camera"> <!-- co --></i>
 							</a></li>
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-calendar"> <!-- co -->
-										</i>
-									</button>
+							<li><a class=""> <i class="icon-calendar"> <!-- co -->
+								</i>
 							</a></li>
-							<li><a href="#">
-									<button class="btn">
-										<i class="icon-screenshot"> <!-- co -->
-										</i>
-									</button>
+							<li><a class=""> <i class="icon-screenshot"> <!-- co -->
+								</i>
 							</a></li>
-							<li><a href="#">
-									<button class="btn">
-										<spring:message code="button.valid" />
-									</button>
-							</a></li>
+							<li>
+								<button class="btn" type="submit">
+									<spring:message code="button.valid" />
+								</button>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			$(document).ready(
+					function() {
+
+						$('.datepicker').datepicker();
+
+						/* --------------------------on load take session---------------------------- */
+						if ($.session.get('addresspiker') != null
+								|| $.session.get('dateEtape') != null
+								|| $.session.get('userlat') != null
+								|| $.session.get('userlng') != null
+								|| $.session.get('description') != null) {
+
+							$("#addresspiker").val($.session.get('addresspiker'));
+							$("#dateEtape").val($.session.get('dateEtape'));
+							$("#userlat").val($.session.get('userlat'));
+							$("#userlng").val($.session.get('userlng'));
+									$("#description").val($.session.get('description'));
+
+							$.session.remove('addresspiker');
+							$.session.remove('dateEtape');
+							$.session.remove('userlat');
+							$.session.remove('userlng');
+							$.session.remove('description');
+
+						}
+						/*------------------------event click on select image-------------*/
+						$("#selectImg").click(
+								
+								function(e) {
+									e.preventDefault();
+									$.session.set('addresspiker', $("#addresspiker").val());
+									$.session.set('dateEtape', $("#dateEtape").val());console.log($("#dateEtape").val());
+									$.session.set('userlat', $("#userlat").val());
+									$.session.set('userlng', $("#userlng").val());
+									var b =$.session.set('description', $("#description").val());console.log($("#description").val());
+									
+									console.log(b);
+									 $(this).unbind('click').click();
+								});
+
+						/*-------------------------hide and show btn----------------------*/
+						$(".bs-callout").each(function() {
+							$(this).hide();
+						});
+						
+						if($('#userPhoto').val()!=""){
+							
+							$('#btnPhotoBox').toggle();
+							$(".grpBtn").toggle();
+							
+						}
+
+						$(".grpBtn a").each(function() {
+
+							$(this).click(function() {
+
+								$(".grpBtn").toggle("blind", 1000);
+
+								var id = $(this).attr("id");
+								id = "#" + id + "Box";
+								$(id).toggle("blind", 1000);
+
+							});
+						});
+
+						$(".closeLink").each(
+								function() {
+									$(this).click(
+											function() {
+												$(this).closest(".bs-callout")
+														.toggle("blind", 1000);
+												$(".grpBtn").toggle("blind",
+														1000);
+											});
+								});
+
+					});
+		})(jQuery);
+	</script>
+
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "selectImg",
+			event : "onclick",
+			params : {
+				fragments : "body,topheader"
+			}
+		}));
+	</script>
+
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "id_nomadeLink",
@@ -217,13 +364,5 @@
 				fragments : "body, topheader, id_subfooter"
 			}
 		}));
-	</script>
-	<script type="text/javascript">
-		jQuery.noConflict();
-		(function($) {
-			$(document).ready(function() {
-				$('.datepicker').datepicker();
-			});
-		});
 	</script>
 </div>

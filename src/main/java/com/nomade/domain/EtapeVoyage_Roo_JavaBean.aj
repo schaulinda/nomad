@@ -5,8 +5,17 @@ package com.nomade.domain;
 
 import com.nomade.domain.EtapeVoyage;
 import java.util.Date;
+import org.bson.types.ObjectId;
 
 privileged aspect EtapeVoyage_Roo_JavaBean {
+    
+    public ObjectId EtapeVoyage.get_id() {
+        return this._id;
+    }
+    
+    public void EtapeVoyage.set_id(ObjectId _id) {
+        this._id = _id;
+    }
     
     public String EtapeVoyage.getDescription() {
         return this.description;
@@ -24,12 +33,12 @@ privileged aspect EtapeVoyage_Roo_JavaBean {
         this.dateEtape = dateEtape;
     }
     
-    public String EtapeVoyage.getPhoto() {
-        return this.photo;
+    public String EtapeVoyage.getUserPhoto() {
+        return this.userPhoto;
     }
     
-    public void EtapeVoyage.setPhoto(String photo) {
-        this.photo = photo;
+    public void EtapeVoyage.setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
     
     public String EtapeVoyage.getLocation() {
@@ -38,6 +47,22 @@ privileged aspect EtapeVoyage_Roo_JavaBean {
     
     public void EtapeVoyage.setLocation(String location) {
         this.location = location;
+    }
+    
+    public double EtapeVoyage.getUserlat() {
+        return this.userlat;
+    }
+    
+    public void EtapeVoyage.setUserlat(double userlat) {
+        this.userlat = userlat;
+    }
+    
+    public double EtapeVoyage.getUserlng() {
+        return this.userlng;
+    }
+    
+    public void EtapeVoyage.setUserlng(double userlng) {
+        this.userlng = userlng;
     }
     
 }
