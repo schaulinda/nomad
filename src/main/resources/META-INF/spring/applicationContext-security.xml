@@ -10,6 +10,7 @@
         authentication-success-handler-ref="authentificationHandler" />
         <logout logout-url="/resources/j_spring_security_logout" logout-success-url="/login" />
         
+        
         <!-- Configure these elements to secure URIs in your application -->
        <!--  <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />

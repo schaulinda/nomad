@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div class="col-lg-6 tab-pane active fade in" id="smallTile"
+	style="margin-left: -16px;"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="tab-content">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-user"> <!-- com -->
+					</i>
+					<spring:message code="a.profileOf" var="aProfileOf" />
+					<a href="">${aProfileOf} user</a>
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-lg-2 col-sm-2 col-4">
+					<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
+				</div>
+				<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-8">
+					<label>Nationalite: </label>Francais<br /> <label>Nom: </label>Clement
+					Kaka<br /> <label>Site: </label>twitter/kaka.clement
+				</div>
+				<div class="col-lg-4 col-sm-4 col-12">
+					<a class="btn btn-default "> <i class="icon-envelope"> <!-- com -->
+					</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}
+					</a> <a class="btn btn-default" style="margin-top: 3px; width: 105px;">
+						<i class="icon-plus-sign"> <!-- com -->
+					</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
+					</a>
+					<!-- checkbox pour suivre si déjà ami -->
+				</div>
+			</div>
+			<br /> <label>Langues parlees: </label>Francais, Italien<br /> <label>Pays
+				visites: </label>Italie, Cameroun, France, Chilie, Burkina<br /> <br /> <label>Infos
+				supplémentaires / but du voyage:</label>Lorem ipsum dolor sit amet,
+			consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+			exercitation ullamco laboris nisi
+		</div>
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-truck"> <!-- com -->
+					</i>
+					<spring:message code="a.vehicleOf" var="aVehicleOf" />
+					<a href="#">${aVehicleOf} User</a>
+				</h3>
+			</div>
+			<div class="row">
+				<div class="col-lg-2 col-sm-2 col-4">
+					<img alt="user" data-src="holder.js/80x80" class="img-rounded" />
+				</div>
+				<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
+					<label>Nationalite: </label>Allemand<br /> <label>Nom: </label>Car
+					Kaka<br /> <label>Modele: </label>Mercedes
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		dojo.ready(function() {
+			new stuff().addAjaxPublicPage();
+		});
+	</script>
+
+</div>
+

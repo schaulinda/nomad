@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="smallTile" class="tab-pane fade in active col-lg-6"
+	style="margin-left: -16px;" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-user"> <!-- co -->
+				</i>
+				<spring:message code="h.notebookOfTraveler"
+					var="hNotebookOfTraveler" />
+				${hNotebookOfTraveler}
+			</h3>
+		</div>
+		<form:form commandName="beanNoteBookManager.etapeVoyage" action="/etapevoyages/save" method="GET" id="form_etapeVoy" >
+			<spring:message code="textarea.tellUs" var="textareaTellUs" />
+			<form:textarea cssClass="form-control" row="8" id="description" 
+				path="description" placeholder="${textareaTellUs}" />
+						
+			<div class="bs-callout" id="btnCalBox">
+				<div class="row">
+					<div class="col-lg-10 col-lg-offset-1">
+						<div class="form-group">
+							<form:input id="dateEtape" cssClass="datepicker form-control"
+								path="dateEtape" type="date" placeholder="12-03-1991"
+								data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
+							<p class="help-block">Date of Your trip.</p>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<a title="close" class="closeLink"><i
+							class="icon-remove-circle"> <!-- co -->
+						</i> </a>
+					</div>
+				</div>
+			</div>
+			<div class="bs-callout" id="btnLocationBox">
+				<div class="row">
+					<form:hidden id="locationLat" path="userlat" />
+					<form:hidden id="locationLng" path="userlng" />
+					<div class="col-lg-10 col-lg-offset-1">
+						<div class="input-group">
+							<form:input id="location" path="location"
+								cssClass="form-control adress" placeholder="" /> <span
+								class="input-group-addon"> <a href="#"> <i
+									class="icon-screenshot"> <!-- co -->
+								</i>
+							</a>
+							</span>
+						</div>
+						<p class="help-block">Click and select the location on the map.</p>
+					</div>
+					<div class="col-lg-1">
+						<a title="close" class="closeLink"><i
+							class="icon-remove-circle"> <!-- co -->
+						</i> </a>
+					</div>
+				</div>
+			</div>
+			<div class="bs-callout" id="btnPhotoBox">
+				<form:hidden path="userPhoto" id="userPhoto" />
+				<div class="row">
+					<div class="col-lg-4 col-lg-offset-1">
+						<c:if test="${empty beanNoteBookManager.etapeVoyage.userPhoto}">
+							<IMG alt="" src="${res}/img/profil.png" width="100px"
+								height="100px;" />
+						</c:if>
+						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+						<c:if test="${not empty beanNoteBookManager.etapeVoyage.userPhoto}">
+							<IMG alt="" src="${imageRender_url}/${beanNoteBookManager.etapeVoyage.userPhoto}"
+								width="100px" height="100px;" />
+						</c:if>
+					</div>
+					<div class="col-lg-4">
+						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+						<a class="btn btn-default" id="selectImg"
+							href="${selectPhoto_url}?backLink=carnet"><i
+							class="icon-edit"> <!-- com  -->
+						</i> Select a picture</a>
+					</div>
+					<div class="col-lg-1 col-lg-offset-2">
+						<a title="close" class="closeLink"><i
+							class="icon-remove-circle"> <!-- co -->
+						</i> </a>
+					</div>
+				</div>
+			</div>
+			<div class="row grpBtn">
+				<div class="col-lg-8 col-lg-offset-4 col-12">
+					<ul class="nav nav-tabs nav-justified">
+						<li><a class="" id="btnPhoto"> <i class="icon-camera">
+									<!-- co -->
+							</i>
+						</a></li>
+						<li><a class="" id="btnCal"> <i class="icon-calendar">
+									<!-- co -->
+							</i>
+						</a></li>
+						<li><a class="" id="btnLocation"> <i
+								class="icon-screenshot"> <!-- co -->
+							</i>
+						</a></li>
+						<li>
+							<button class="btn" type="submit" id="btn_etapeVoy" >
+								<spring:message code="button.valid" />
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</form:form>
+	</div>
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-truck"> <!-- co -->
+				</i>
+				<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
+				${hNotebookOfVehicle}
+			</h3>
+		</div>
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="input-group">
+					<spring:message code="input.start" var="inputStart" />
+					<input type="text" class="form-control adress" placeholder="${inputStart}" />
+					<span class="input-group-addon"> <a href="#"> <i
+							class="icon-screenshot"> <!-- co -->
+						</i>
+					</a>
+					</span>
+				</div>
+				<br />
+				<div class="input-group">
+					<spring:message code="input.stopOver" var="inputStopOver" />
+					<input type="text" class="form-control adress"
+						placeholder="${inputStopOver}" /> <span class="input-group-addon">
+						<a href="#"> <i class="icon-screenshot"> <!-- co -->
+						</i>
+					</a>
+					</span>
+				</div>
+				<br />
+				<div class="input-group">
+					<spring:message code="input.finish" var="inputFinish" />
+					<input type="text" class="form-control adress"
+						placeholder="${inputFinish}" /> <span class="input-group-addon">
+						<a href="#"> <i class="icon-screenshot"> <!-- co -->
+						</i>
+					</a>
+					</span>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<a href="#" class="pull-down">
+					<button class="btn">
+						<spring:message code="button.valid" />
+					</button>
+				</a>
+			</div>
+		</div>
+		<br />
+		<textarea class="form-control" row="8">
+					<spring:message code="textarea.tellUs" var="textareaTellUs" />
+					${textareaTellUs}
+				</textarea>
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-4 col-12">
+				<ul class="nav nav-tabs nav-justified">
+					<li><a class=""> <i class="icon-camera"> <!-- co --></i>
+					</a></li>
+					<li><a class=""> <i class="icon-calendar"> <!-- co -->
+						</i>
+					</a></li>
+					<li><a class=""> <i class="icon-screenshot"> <!-- co -->
+						</i>
+					</a></li>
+					<li>
+						<button class="btn" type="submit">
+							<spring:message code="button.valid" />
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			$(document).ready(
+					function() {
+						
+						/* ----------------------------noty for save etape------------------------------------- */
+						
+						var save = '${beanNoteBookManager.notify}';
+						if(save!=""){
+							setTimeout(function generate() {
+								
+								 noty({
+									text : "save...",
+									type : "alert",
+									timeout: 3000,
+									modal : false,
+									layout : 'topRight',
+								});
+
+							},1000);
+						}
+
+						$('.datepicker').datepicker();
+
+						/* --------------------------on load recup session---------------------------- */
+						if ($.session.get('location') != null
+								|| $.session.get('dateEtape') != null
+								|| $.session.get('locationLat') != null
+								|| $.session.get('locationLng') != null
+								|| $.session.get('description') != null) {
+
+							$("#location").val($.session.get('location'));
+							$("#dateEtape").val($.session.get('dateEtape'));
+							$("#locationLat").val($.session.get('locationLat'));
+							$("#locationLng").val($.session.get('locationLng'));
+									$("#description").val($.session.get('description'));
+
+							$.session.remove('location');
+							$.session.remove('dateEtape');
+							$.session.remove('locationLat');
+							$.session.remove('locationLng');
+							$.session.remove('description');
+
+						}
+						/*------------------------event click on select image-------------*/
+						$("#selectImg").click(
+								
+								function(e) {
+									e.preventDefault();
+									$.session.set('location', $("#location").val());
+									$.session.set('dateEtape', $("#dateEtape").val());
+									$.session.set('locationLat', $("#locationLat").val());
+									$.session.set('locationLng', $("#locationLng").val());
+									$.session.set('description', $("#description").val());
+									
+									 $(this).unbind('click').click();
+								});
+
+						/*-------------------------hide and show btn----------------------*/
+						$(".bs-callout").each(function() {
+							$(this).hide();
+						});
+						
+						if($('#userPhoto').val()!=""){
+							
+							$('#btnPhotoBox').toggle();
+							$(".grpBtn").toggle();
+							
+						}
+
+						$(".grpBtn a").each(function() {
+
+							$(this).click(function() {
+
+								$(".grpBtn").toggle("blind", 1000);
+
+								var id = $(this).attr("id");
+								id = "#" + id + "Box";
+								$(id).toggle("blind", 1000);
+
+							});
+						});
+
+						$(".closeLink").each(
+								function() {
+									$(this).click(
+											function() {
+												$(this).closest(".bs-callout")
+														.toggle("blind", 1000);
+												$(".grpBtn").toggle("blind",
+														1000);
+											});
+								});
+
+					});
+		})(jQuery);
+	</script>
+	
+	<script type="text/javascript">
+	dojo.ready(function() {
+		new stuff().addAjaxPublicPage();
+	});
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "selectImg",
+			event : "onclick",
+			params : {
+				fragments : "body,topheader"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_etapeVoy",
+			event : "onclick",
+			formId: "form_etapeVoy",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
+	
+
+</div>
+

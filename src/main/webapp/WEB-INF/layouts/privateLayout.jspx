@@ -41,6 +41,12 @@
 	<!-- eh -->
 		
 	</script>
+	
+	<script src="${res}/js/gmap3.js">
+	<!-- eh -->
+		
+	</script>
+	
 	<script src="${res}/js/jquery.ui.addresspicker.js">
 	<!-- eh -->
 		

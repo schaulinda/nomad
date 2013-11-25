@@ -179,8 +179,13 @@ filter: grayscale(100%); */
 	background-color: #E3E3E3;
 	border-color: none repeat scroll 0 0 #B4B0B5;
 }
-.bs-callout > a:HOVER, a:FOCUS{
+
+.bs-callout>a:HOVER,a:FOCUS {
 	text-decoration: none;
 	color: black;
-	
+}
+
+#map {
+	width: 480px;
+	height: 360px;
 }

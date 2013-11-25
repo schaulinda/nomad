@@ -29,12 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Country;
-import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Gender;
 import com.nomade.domain.Langue;
 import com.nomade.domain.Nationality;
@@ -46,8 +45,6 @@ import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.NomadeUserDetailsService;
 import com.nomade.security.Security;
-import com.nomade.tools.ImageUploadException;
-import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
 
 @RequestMapping("/users")
@@ -417,9 +414,9 @@ public class UserController {
 		}
 		
 		if(stringPage.equals("carnet")){
-			EtapeVoyage voyage = new EtapeVoyage();
-			voyage.setUserPhoto(id);
-			uiModel.addAttribute("etapeVoyage", voyage);
+			BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+			beanNoteBookManager.getEtapeVoyage().setUserPhoto(id);
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			uiModel.addAttribute("onglet", "carnet");
 			return "public/carnet";

@@ -1,4 +1,30 @@
-jQuery.noConflict();
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="mapTile" class="panel"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="icon-globe"> <!-- com -->
+			</i> Map
+		</h3>
+	</div>
+	<div>
+		<input type="text" class="form-control adress" id="addresspicker_map"
+			placeholder="enter the location" />
+	</div>
+	<div id="map" class="">
+		<!-- co -->
+	</div>
+
+	<script type="text/javascript">
+		jQuery.noConflict();
 		(function($) {
 			$(document)
 					.ready(
@@ -21,12 +47,8 @@ jQuery.noConflict();
 												events : {
 													dragend : function(marker,
 															event, context) {
-														console
-																.log(event.latLng);
-														console
-														.log(event.latLng.pb);
-														console
-														.log(event.latLng.ob);
+														
+														
 														geocoder
 																.geocode(
 																		{
@@ -36,11 +58,18 @@ jQuery.noConflict();
 																				results,
 																				status) {
 																			if (status == google.maps.GeocoderStatus.OK) {
-																				$(
-																						'#addresspicker_map')
-																						.val(
-																								results[0].formatted_address);
-																				
+																				if($(".adress:focus")!=null){
+																					$(".adress:focus").val(results[0].formatted_address);
+																					
+																					var idInput = $(".adress:focus").attr("id");
+																					$('#'+idInput+'Lat').val(event.latLng.lat());
+																					$('#'+idInput+'Lng').val(event.latLng.lng());
+																					
+																				}else{
+																					$('#addresspicker_map')
+																					.val(results[0].formatted_address);
+																			
+																				}
 
 																			}
 																		});
@@ -101,3 +130,7 @@ jQuery.noConflict();
 							});
 
 		})(jQuery);
+	</script>
+
+</div>
+

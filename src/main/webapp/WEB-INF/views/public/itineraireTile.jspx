@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="smallTile" class="tab-pane fade in active col-lg-6" style="margin-left: -16px;" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+	
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-plus">
+							<!-- co -->
+						</i>
+						<spring:message code="h.newItinerary" var="hNewItinerary" />
+						${hNewItinerary}
+					</h3>
+				</div>
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="input-group">
+							<spring:message code="input.start" var="inputStart" />
+							<input type="text" class="form-control" placeholder="${inputStart}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot"><!-- co --></i>
+								</a>
+							</span>
+						</div>
+						<br />
+						<div class="input-group">
+							<spring:message code="input.stopOver" var="inputStopOver" />
+							<input type="text" class="form-control" placeholder="${inputStopOver}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot"><!-- co --></i>
+								</a>
+							</span>
+						</div>
+						<br />
+						<div class="input-group">
+							<spring:message code="input.finish" var="inputFinish" />
+							<input type="text" class="form-control" placeholder="${inputFinish}" />
+							<span class="input-group-addon">
+								<a href="#">
+									<i class="icon-screenshot"><!-- co --></i>
+								</a>
+							</span>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<a href="#" class="pull-down">
+							<button class="btn">
+								<spring:message code="button.valid" />
+							</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-road">
+							<!-- co -->
+						</i>
+						<spring:message code="h.itineraryOfTrip" var="hItineraryOfTrip" />
+						${hItineraryOfTrip}
+					</h3>
+				</div>
+				Panel content
+			</div>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-info-sign">
+							<!-- co -->
+						</i>
+						<spring:message code="h.practicalOnTrip" var="hPracticalOnTrip" />
+						${hPracticalOnTrip}
+					</h3>
+				</div>
+				<div class="row panel">
+					<div class="col-lg-2">
+						<p>Icône</p>
+					</div>
+					<div class="col-lg-7" style="border-left: solid 1px;">
+						<p>résumé</p>
+					</div>
+					<div class="col-lg-3" style="border-left: solid 1px;">
+						<ul class="nav nav-tabs nav-justified">
+							<li><p>0</p></li>
+							<li>
+								<i class="icon-thumbs-down"><!-- co --></i>
+							</li>
+							<li><p>| 0</p></li>
+							<li>
+								<i class="icon-thumbs-up"><!-- co --></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<i class="icon-warning-sign">
+							<!-- co -->
+						</i>
+						<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
+						${hDangerOnTrip}
+					</h3>
+				</div>
+				Panel content
+			</div>
+			
+			<script type="text/javascript">
+			dojo.ready(function() {
+				new stuff().addAjaxPublicPage();
+			});
+			</script>
+</div>
+

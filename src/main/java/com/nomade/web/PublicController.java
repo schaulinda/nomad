@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
@@ -40,7 +41,7 @@ public class PublicController {
 	public String carnet(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
 		
-		uiModel.addAttribute("etapeVoyage", new EtapeVoyage());
+		uiModel.addAttribute("beanNoteBookManager", new BeanNoteBookManager());
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
 		return "public/carnet";
