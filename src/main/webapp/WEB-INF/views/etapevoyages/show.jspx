@@ -6,9 +6,11 @@
         <field:display field="description" id="s_com_nomade_domain_EtapeVoyage_description" object="${etapevoyage}" z="nen3DBrMq8KjU9VqdQZu7vEVQik="/>
         <field:display date="true" dateTimePattern="${etapeVoyage_dateetape_date_format}" field="dateEtape" id="s_com_nomade_domain_EtapeVoyage_dateEtape" object="${etapevoyage}" z="GPvwUIp4imGfkBLxodrRdvvZ+Sw="/>
         <field:display field="location" id="s_com_nomade_domain_EtapeVoyage_location" object="${etapevoyage}" z="gG/efHHZb1MvtZxfd/EAbK4lp9k="/>
-        <field:display field="_id" id="s_com_nomade_domain_EtapeVoyage__id" object="${etapevoyage}" z="8fvptg8/i8JbxqgrOG/3yO723AE="/>
         <field:display field="userPhoto" id="s_com_nomade_domain_EtapeVoyage_userPhoto" object="${etapevoyage}" z="D6CiqVxKWFwyR+Hniea+MffKZYs="/>
         <field:display field="userlat" id="s_com_nomade_domain_EtapeVoyage_userlat" object="${etapevoyage}" z="IItksK1S2l3YU/55yRFMPoliqgI="/>
         <field:display field="userlng" id="s_com_nomade_domain_EtapeVoyage_userlng" object="${etapevoyage}" z="AapgLQzDta2WgrNdpfCQJKKk8h8="/>
+        <field:display field="geolocation" id="s_com_nomade_domain_EtapeVoyage_geolocation" object="${etapevoyage}" z="0SWoZx8j0jEuTUIJN6+PLp6GXoY="/>
+        <field:display field="nomade" id="s_com_nomade_domain_EtapeVoyage_nomade" object="${etapevoyage}" z="XyLcPpDsEi4Rok9KF9u3lQ4ekIw="/>
+        <field:display field="comments" id="s_com_nomade_domain_EtapeVoyage_comments" object="${etapevoyage}" z="+r+CyH0AJUPb8O6+c6UkQQChlFc="/>
     </page:show>
 </div>

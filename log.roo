@@ -189,3 +189,15 @@ mongo setup --cloudFoundry true
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-16 02:16:15
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-23 20:51:00
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-23 20:54:06
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-26 12:46:23
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-26 12:47:58
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-26 13:46:57
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-27 19:49:31
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-29 10:47:51
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-29 11:57:43
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-30 17:16:51
+repository mongo --interface ~.repository.InfoPratiqueRepository --entity ~.domain.InfoPratique
+service --interface ~.service.InfoPratiqueService --entity ~.domain.InfoPratique
+web mvc controller --class ~.web.InfoPratiqueController
+web mvc scaffold --class ~.web.InfoPratiqueController --backingType ~.domain.InfoPratique
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-30 20:08:41

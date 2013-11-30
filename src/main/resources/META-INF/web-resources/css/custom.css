@@ -172,7 +172,7 @@ filter: grayscale(100%); */
 	width: 100%;
 }
 
-.bs-callout {
+.bs-calloutVeh, .bs-callout {
 	border-left: 3px solid #434343;
 	margin: 20px 0;
 	padding: 20px 20px 0px 20px;
@@ -180,7 +180,7 @@ filter: grayscale(100%); */
 	border-color: none repeat scroll 0 0 #B4B0B5;
 }
 
-.bs-callout>a:HOVER,a:FOCUS {
+.bs-calloutVeh,.bs-callout>a:HOVER,a:FOCUS {
 	text-decoration: none;
 	color: black;
 }

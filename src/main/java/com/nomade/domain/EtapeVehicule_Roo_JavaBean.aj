@@ -3,10 +3,21 @@
 
 package com.nomade.domain;
 
+import com.nomade.domain.Comment;
 import com.nomade.domain.EtapeVehicule;
+import com.nomade.domain.UserNomade;
 import java.util.Date;
+import java.util.List;
 
 privileged aspect EtapeVehicule_Roo_JavaBean {
+    
+    public double[] EtapeVehicule.getGeolocation() {
+        return this.geolocation;
+    }
+    
+    public void EtapeVehicule.setGeolocation(double[] geolocation) {
+        this.geolocation = geolocation;
+    }
     
     public String EtapeVehicule.getDescription() {
         return this.description;
@@ -24,12 +35,12 @@ privileged aspect EtapeVehicule_Roo_JavaBean {
         this.dateEtape = dateEtape;
     }
     
-    public String EtapeVehicule.getPhoto() {
-        return this.photo;
+    public String EtapeVehicule.getUserPhoto() {
+        return this.userPhoto;
     }
     
-    public void EtapeVehicule.setPhoto(String photo) {
-        this.photo = photo;
+    public void EtapeVehicule.setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
     
     public String EtapeVehicule.getLocation() {
@@ -38,6 +49,46 @@ privileged aspect EtapeVehicule_Roo_JavaBean {
     
     public void EtapeVehicule.setLocation(String location) {
         this.location = location;
+    }
+    
+    public double EtapeVehicule.getUserlat() {
+        return this.userlat;
+    }
+    
+    public void EtapeVehicule.setUserlat(double userlat) {
+        this.userlat = userlat;
+    }
+    
+    public double EtapeVehicule.getUserlng() {
+        return this.userlng;
+    }
+    
+    public void EtapeVehicule.setUserlng(double userlng) {
+        this.userlng = userlng;
+    }
+    
+    public Date EtapeVehicule.getCreated() {
+        return this.created;
+    }
+    
+    public void EtapeVehicule.setCreated(Date created) {
+        this.created = created;
+    }
+    
+    public UserNomade EtapeVehicule.getNomade() {
+        return this.nomade;
+    }
+    
+    public void EtapeVehicule.setNomade(UserNomade nomade) {
+        this.nomade = nomade;
+    }
+    
+    public List<Comment> EtapeVehicule.getComments() {
+        return this.comments;
+    }
+    
+    public void EtapeVehicule.setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
 }

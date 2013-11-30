@@ -19,11 +19,14 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.query.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+
+import com.nomade.plugin.OrderBy;
 
 @RooJavaBean
 @RooToString
@@ -59,15 +62,15 @@ public class UserNomade {
 	private Account compte = new Account();
 
 	private Vehicule vehicule = new Vehicule();
+	
+	@OrderBy(value = "created", order=Order.DESCENDING)
+	private List<Album> albums = new ArrayList<Album>();
+	
+	@OrderBy(value = "created", order=Order.DESCENDING)
+	private List<EtapeVoyage> etapeVoyages = new ArrayList<EtapeVoyage>();
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<Album> albums = new HashSet<Album>();
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<EtapeVoyage> etapeVoyages = new HashSet<EtapeVoyage>();
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<EtapeVehicule> etapeVehicules = new HashSet<EtapeVehicule>();
+	@OrderBy(value = "created", order=Order.DESCENDING)
+	private List<EtapeVehicule> etapeVehicules = new ArrayList<EtapeVehicule>();
 
 	public UserNomade(String userName, String password, boolean accountLocked,
 			Set<RoleName> roleNames) {
@@ -225,7 +228,7 @@ public class UserNomade {
 				}
 			});
 
-			this.albums = new HashSet<Album>(tmp);
+			this.albums = tmp;
 		}
 
 	}

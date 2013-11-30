@@ -7,9 +7,9 @@
             <table:column id="c_com_nomade_domain_EtapeVoyage_description" property="description" z="fhTq4cOR0fUvjCzRBKhP+RKxPPo="/>
             <table:column date="true" dateTimePattern="${etapeVoyage_dateetape_date_format}" id="c_com_nomade_domain_EtapeVoyage_dateEtape" property="dateEtape" z="H3hbiYcnRtCgDl9uXptihEQCKSc="/>
             <table:column id="c_com_nomade_domain_EtapeVoyage_location" property="location" z="HZ3uLuPadL72+UiPqGU9J4fIB2w="/>
-            <table:column id="c_com_nomade_domain_EtapeVoyage__id" property="_id" z="q1XXVoeBOSQuCPO76klC9Nj6yTE="/>
             <table:column id="c_com_nomade_domain_EtapeVoyage_userPhoto" property="userPhoto" z="2qhUScG24EMQIllhZSft4sDb/EY="/>
             <table:column id="c_com_nomade_domain_EtapeVoyage_userlat" property="userlat" z="Pl0Crcb1C22SrkO4MLZSpMEBskg="/>
+            <table:column id="c_com_nomade_domain_EtapeVoyage_geolocation" property="geolocation" z="hGlnoLpiKaLmY1/P6SjZjilOCsk="/>
         </table:table>
     </page:list>
 </div>

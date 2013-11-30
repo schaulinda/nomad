@@ -1,15 +1,19 @@
 package com.nomade.web;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.StringUtils;
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -48,7 +52,7 @@ public class AlbumController {
 
 		String idAlbum;
 		List<String> listIdPhoto;
-		Set<Album> albums = nomade.getAlbums();
+		List<Album> albums = nomade.getAlbums();
 		if (albums != null && albums.size() > 0) {
 
 			Album album = albums.iterator().next();
@@ -291,17 +295,45 @@ public class AlbumController {
 		return "albums/picManager";
 	}
 
-	// return an image
-	@RequestMapping(value = "imageRender/{id}")
+	@RequestMapping(value = "imageRenderNet/{id}")
 	@ResponseBody
-	public byte[] getImage(@PathVariable("id") String id, Model uiModel) {
+	public byte[] getImageGrdFormat(@PathVariable("id") String id, Model uiModel) {
 		byte[] byteArray;
 		InputStream inputStream = imageUtil.get(id).getInputStream();
+
 		try {
 			byteArray = IOUtils.toByteArray(inputStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 			return null;
+		}
+
+		return byteArray;
+
+	}
+	
+	// return an image
+	@RequestMapping(value = "imageRender/{id}")
+	@ResponseBody
+	public byte[] getImage(@PathVariable("id") String id, Model uiModel) {
+		byte[] byteArray;
+		GridFSDBFile gridFSDBFile = imageUtil.get(id);
+		InputStream inputStream = gridFSDBFile.getInputStream();
+		String contentType = gridFSDBFile.getContentType();
+		contentType = StringUtils.split(contentType, "/")[1];
+		
+		try {//render thumbnail
+			BufferedImage imBuff = ImageIO.read(inputStream);
+			BufferedImage scaledImg = Scalr.resize(imBuff, Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
+		               150, 100, Scalr.OP_ANTIALIAS);
+			ByteArrayOutputStream bas = new ByteArrayOutputStream();
+			ImageIO.write(scaledImg, contentType, bas);
+			byteArray = bas.toByteArray();
+			
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			byteArray=null;
 		}
 
 		return byteArray;

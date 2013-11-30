@@ -6,8 +6,10 @@
         <table:table data="${etapevehicules}" id="l_com_nomade_domain_EtapeVehicule" path="/etapevehicules" z="Gh0fcrijIXacILtAto7BBnHTeN0=">
             <table:column id="c_com_nomade_domain_EtapeVehicule_description" property="description" z="8iwEgCJSwPY1ENlQlU80mhJHeLM="/>
             <table:column date="true" dateTimePattern="${etapeVehicule_dateetape_date_format}" id="c_com_nomade_domain_EtapeVehicule_dateEtape" property="dateEtape" z="WWrffF+IPlLAbkojeBPUIECYhxk="/>
-            <table:column id="c_com_nomade_domain_EtapeVehicule_photo" property="photo" z="T1x+uHVuH91TWokWstBYBnRrbII="/>
             <table:column id="c_com_nomade_domain_EtapeVehicule_location" property="location" z="ExlkeJwKQttmu5fRBJ+WRemnDmg="/>
+            <table:column id="c_com_nomade_domain_EtapeVehicule_userPhoto" property="userPhoto" z="GyXXs45Z6FUhsgrbH2se9TdYaxI="/>
+            <table:column id="c_com_nomade_domain_EtapeVehicule_userlat" property="userlat" z="DqdAaDHtDHsHL/muSMKTZzPoxLw="/>
+            <table:column id="c_com_nomade_domain_EtapeVehicule_geolocation" property="geolocation" z="puHLg4/7G8FSNtXiZ+RTwLarR7M="/>
         </table:table>
     </page:list>
 </div>

@@ -12,6 +12,7 @@ import com.nomade.domain.RoleName;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 privileged aspect UserNomade_Roo_JavaBean {
@@ -96,27 +97,27 @@ privileged aspect UserNomade_Roo_JavaBean {
         this.vehicule = vehicule;
     }
     
-    public Set<Album> UserNomade.getAlbums() {
+    public List<Album> UserNomade.getAlbums() {
         return this.albums;
     }
     
-    public void UserNomade.setAlbums(Set<Album> albums) {
+    public void UserNomade.setAlbums(List<Album> albums) {
         this.albums = albums;
     }
     
-    public Set<EtapeVoyage> UserNomade.getEtapeVoyages() {
+    public List<EtapeVoyage> UserNomade.getEtapeVoyages() {
         return this.etapeVoyages;
     }
     
-    public void UserNomade.setEtapeVoyages(Set<EtapeVoyage> etapeVoyages) {
+    public void UserNomade.setEtapeVoyages(List<EtapeVoyage> etapeVoyages) {
         this.etapeVoyages = etapeVoyages;
     }
     
-    public Set<EtapeVehicule> UserNomade.getEtapeVehicules() {
+    public List<EtapeVehicule> UserNomade.getEtapeVehicules() {
         return this.etapeVehicules;
     }
     
-    public void UserNomade.setEtapeVehicules(Set<EtapeVehicule> etapeVehicules) {
+    public void UserNomade.setEtapeVehicules(List<EtapeVehicule> etapeVehicules) {
         this.etapeVehicules = etapeVehicules;
     }
     

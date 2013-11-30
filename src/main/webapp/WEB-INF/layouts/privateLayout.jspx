@@ -47,10 +47,7 @@
 		
 	</script>
 	
-	<script src="${res}/js/jquery.ui.addresspicker.js">
-	<!-- eh -->
 		
-	</script>	
 <util:load-scripts />
 <spring:url value="/resources/js/app.js" var="app_js_url" />
  <script src="${app_js_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
@@ -232,7 +229,8 @@ body {
 							<i class="icon-plus"> <!-- co --></i>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="#"><i class="icon-comment"> <!-- co -->
+						<spring:url value="/public/forum" var="forum_url"></spring:url>
+							<li><a href="${forum_url}" id="forum_id" ><i class="icon-comment"> <!-- co -->
 								</i> <spring:message code="a.forum" /> </a></li>
 							<li class="divider">
 								<!-- co -->
@@ -324,6 +322,16 @@ body {
 		event : "onclick",
 		params : {
 			fragments : "body"
+		}
+	}));
+</script>
+
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "forum_id",
+		event : "onclick",
+		params : {
+			fragments : "body,topheader,id_subfooter"
 		}
 	}));
 </script>

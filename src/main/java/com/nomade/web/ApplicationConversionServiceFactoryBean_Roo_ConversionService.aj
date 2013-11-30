@@ -7,12 +7,14 @@ import com.nomade.domain.Account;
 import com.nomade.domain.Album;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
+import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import com.nomade.service.AccountService;
 import com.nomade.service.AlbumService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.UserService;
 import com.nomade.service.VehiculeService;
 import com.nomade.web.ApplicationConversionServiceFactoryBean;
@@ -37,6 +39,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     EtapeVoyageService ApplicationConversionServiceFactoryBean.etapeVoyageService;
+    
+    @Autowired
+    InfoPratiqueService ApplicationConversionServiceFactoryBean.infoPratiqueService;
     
     @Autowired
     UserService ApplicationConversionServiceFactoryBean.userService;
@@ -95,7 +100,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<EtapeVehicule, String> ApplicationConversionServiceFactoryBean.getEtapeVehiculeToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.EtapeVehicule, java.lang.String>() {
             public String convert(EtapeVehicule etapeVehicule) {
-                return new StringBuilder().append(etapeVehicule.getDescription()).append(' ').append(etapeVehicule.getDateEtape()).append(' ').append(etapeVehicule.getPhoto()).append(' ').append(etapeVehicule.getLocation()).toString();
+                return new StringBuilder().append(etapeVehicule.getDescription()).append(' ').append(etapeVehicule.getDateEtape()).append(' ').append(etapeVehicule.getUserPhoto()).append(' ').append(etapeVehicule.getLocation()).toString();
             }
         };
     }
@@ -119,7 +124,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<EtapeVoyage, String> ApplicationConversionServiceFactoryBean.getEtapeVoyageToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.EtapeVoyage, java.lang.String>() {
             public String convert(EtapeVoyage etapeVoyage) {
-                return new StringBuilder().append(etapeVoyage.get_id()).append(' ').append(etapeVoyage.getDescription()).append(' ').append(etapeVoyage.getDateEtape()).append(' ').append(etapeVoyage.getUserPhoto()).toString();
+                return new StringBuilder().append(etapeVoyage.getDescription()).append(' ').append(etapeVoyage.getDateEtape()).append(' ').append(etapeVoyage.getUserPhoto()).append(' ').append(etapeVoyage.getLocation()).toString();
             }
         };
     }
@@ -136,6 +141,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.EtapeVoyage>() {
             public com.nomade.domain.EtapeVoyage convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), EtapeVoyage.class);
+            }
+        };
+    }
+    
+    public Converter<InfoPratique, String> ApplicationConversionServiceFactoryBean.getInfoPratiqueToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.InfoPratique, java.lang.String>() {
+            public String convert(InfoPratique infoPratique) {
+                return new StringBuilder().append(infoPratique.getTitle()).append(' ').append(infoPratique.getSelecteur()).append(' ').append(infoPratique.getSelecteur1()).append(' ').append(infoPratique.getLocation()).toString();
+            }
+        };
+    }
+    
+    public Converter<BigInteger, InfoPratique> ApplicationConversionServiceFactoryBean.getIdToInfoPratiqueConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.InfoPratique>() {
+            public com.nomade.domain.InfoPratique convert(java.math.BigInteger id) {
+                return infoPratiqueService.findInfoPratique(id);
+            }
+        };
+    }
+    
+    public Converter<String, InfoPratique> ApplicationConversionServiceFactoryBean.getStringToInfoPratiqueConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.InfoPratique>() {
+            public com.nomade.domain.InfoPratique convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), InfoPratique.class);
             }
         };
     }
@@ -201,6 +230,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getEtapeVoyageToStringConverter());
         registry.addConverter(getIdToEtapeVoyageConverter());
         registry.addConverter(getStringToEtapeVoyageConverter());
+        registry.addConverter(getInfoPratiqueToStringConverter());
+        registry.addConverter(getIdToInfoPratiqueConverter());
+        registry.addConverter(getStringToInfoPratiqueConverter());
         registry.addConverter(getUserNomadeToStringConverter());
         registry.addConverter(getIdToUserNomadeConverter());
         registry.addConverter(getStringToUserNomadeConverter());

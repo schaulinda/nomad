@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_InfoPratique" object="${infopratique}" path="/infopratiques" z="NXGIffRChCg2hxUDZR4bCj5rigo=">
+        <field:display field="title" id="s_com_nomade_domain_InfoPratique_title" object="${infopratique}" z="YB3YWP1wfvDKEfz3l65T+vKOwHI="/>
+        <field:display field="selecteur" id="s_com_nomade_domain_InfoPratique_selecteur" object="${infopratique}" z="UlLsN/k62KWTQV0vZUBvYYxXWfM="/>
+        <field:display field="selecteur1" id="s_com_nomade_domain_InfoPratique_selecteur1" object="${infopratique}" z="23j22zBx1hPZbHfgGt7bMefgDxk="/>
+        <field:display field="location" id="s_com_nomade_domain_InfoPratique_location" object="${infopratique}" z="/YGHEArxRPNIcT2kaWgCciodT3I="/>
+        <field:display field="locationLat" id="s_com_nomade_domain_InfoPratique_locationLat" object="${infopratique}" z="l10ZsHifzBTvSYnnL5rFgqTCZOg="/>
+        <field:display field="locationLng" id="s_com_nomade_domain_InfoPratique_locationLng" object="${infopratique}" z="oxk3UFKtr4sR6uRPzAo1TOWFums="/>
+        <field:display field="geoLocation" id="s_com_nomade_domain_InfoPratique_geoLocation" object="${infopratique}" z="/3Pt27hfupnEa5MJJRj8Ni6vla4="/>
+        <field:display field="photo" id="s_com_nomade_domain_InfoPratique_photo" object="${infopratique}" z="kpFfXBVQCt7pzzAIMGHu/1NHkRw="/>
+        <field:display field="dure" id="s_com_nomade_domain_InfoPratique_dure" object="${infopratique}" z="53GgAQwgKgWHTYvOh3gMJbqdPsE="/>
+        <field:display field="infoVerif" id="s_com_nomade_domain_InfoPratique_infoVerif" object="${infopratique}" z="ZR9uWj5PaKs/EOfCj5eolbmlPUY="/>
+        <field:display field="estimationValidite" id="s_com_nomade_domain_InfoPratique_estimationValidite" object="${infopratique}" z="R2ROy7SXEDxZzzzjjc0rP8EUiUk="/>
+        <field:display field="comment" id="s_com_nomade_domain_InfoPratique_comment" object="${infopratique}" z="FkTPfipG+//i7BtIddIaIRjbx8o="/>
+        <field:display field="votePositif" id="s_com_nomade_domain_InfoPratique_votePositif" object="${infopratique}" z="P2lKwH7N7fwAc9q85h6TBLqmpO0="/>
+        <field:display field="voteNegatif" id="s_com_nomade_domain_InfoPratique_voteNegatif" object="${infopratique}" z="qv7/WnMztgTXVmBCsgxFbj/Pl34="/>
+        <field:display date="true" dateTimePattern="${infoPratique_dateetape_date_format}" field="dateEtape" id="s_com_nomade_domain_InfoPratique_dateEtape" object="${infopratique}" z="PxTxt795ywOlih0XqRtbayYFxlA="/>
+        <field:display field="nomade" id="s_com_nomade_domain_InfoPratique_nomade" object="${infopratique}" z="XXC7/DDKUch8SOtybhxLsWrjNzE="/>
+    </page:show>
+</div>

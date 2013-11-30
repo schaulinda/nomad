@@ -5,8 +5,13 @@
     <form:create id="fc_com_nomade_domain_EtapeVehicule" modelAttribute="etapeVehicule" path="/etapevehicules" render="${empty dependencies}" z="TyRsH5ZbeyXPvUnJlyA0lkwkTKA=">
         <field:input field="description" id="c_com_nomade_domain_EtapeVehicule_description" z="o00HnyFVEvQTzu47mSFbfAycplY="/>
         <field:datetime dateTimePattern="${etapeVehicule_dateetape_date_format}" field="dateEtape" id="c_com_nomade_domain_EtapeVehicule_dateEtape" z="LnH0cDQdBf39PyaCZkoQWF9nVKA="/>
-        <field:input field="photo" id="c_com_nomade_domain_EtapeVehicule_photo" z="NzItq43iFVGEtS/qDDvgbkL7wcI="/>
         <field:input field="location" id="c_com_nomade_domain_EtapeVehicule_location" z="olxmbMODL3mRTxoEAe8AKpEYqto="/>
+        <field:input field="userPhoto" id="c_com_nomade_domain_EtapeVehicule_userPhoto" z="jABp1lt3cS4fh0WLVO2Izixx73E="/>
+        <field:input field="userlat" id="c_com_nomade_domain_EtapeVehicule_userlat" z="2kpAyi0/cq2OPf1i623UM2+ZNtU="/>
+        <field:input field="userlng" id="c_com_nomade_domain_EtapeVehicule_userlng" z="76Un8nGSyWT9AqZs/YavE4K2qhc="/>
+        <field:input field="geolocation" id="c_com_nomade_domain_EtapeVehicule_geolocation" z="yjN4AcA9otsr80jdu+qr0C6VbcI="/>
+        <field:input field="nomade" id="c_com_nomade_domain_EtapeVehicule_nomade" z="j3xusNBPPKxMzFYT/VCIYtqAmKc="/>
+        <field:input field="comments" id="c_com_nomade_domain_EtapeVehicule_comments" z="8h1EFKAqhA5LRJl9wlT3pLQ7FaA="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_EtapeVehicule" render="${not empty dependencies}" z="OaY4s3kozuaiwN4uJbtMazaEuTM="/>
 </div>

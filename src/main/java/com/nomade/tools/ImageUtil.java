@@ -149,7 +149,7 @@ public class ImageUtil implements ImageUtilInterface {
 	@Override
 	public UserNomade countPhotoByIdAlbum(UserNomade nomade) {
 		Iterator<Album> iterator = nomade.getAlbums().iterator();
-		Set<Album> set = new HashSet<Album>();
+		List<Album> set = new ArrayList<Album>();
 		while(iterator.hasNext()) {
 			Album next = iterator.next();
 			List<GridFSDBFile> list = gridFsTemplate.find(new Query(Criteria

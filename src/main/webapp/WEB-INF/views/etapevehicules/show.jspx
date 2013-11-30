@@ -5,7 +5,12 @@
     <page:show id="ps_com_nomade_domain_EtapeVehicule" object="${etapevehicule}" path="/etapevehicules" z="HKUIvVJiUpUB9ABTtPDnsiaEdGo=">
         <field:display field="description" id="s_com_nomade_domain_EtapeVehicule_description" object="${etapevehicule}" z="o2+iCJwuMxB9HvLchcVxPrPNRrk="/>
         <field:display date="true" dateTimePattern="${etapeVehicule_dateetape_date_format}" field="dateEtape" id="s_com_nomade_domain_EtapeVehicule_dateEtape" object="${etapevehicule}" z="SzqqhV1sgu5BQqCkjw/M7YzT4Zg="/>
-        <field:display field="photo" id="s_com_nomade_domain_EtapeVehicule_photo" object="${etapevehicule}" z="zxLDvBBz1z6L5Y/in8nPyl7PnNM="/>
         <field:display field="location" id="s_com_nomade_domain_EtapeVehicule_location" object="${etapevehicule}" z="gZIPRYOpTj3EcwbTEMnNCluE38s="/>
+        <field:display field="userPhoto" id="s_com_nomade_domain_EtapeVehicule_userPhoto" object="${etapevehicule}" z="s8DlK7b2//swy0yqlf3a3Jh94VU="/>
+        <field:display field="userlat" id="s_com_nomade_domain_EtapeVehicule_userlat" object="${etapevehicule}" z="AU6iprHrzgafhZf8OqKXQ+S1eCE="/>
+        <field:display field="userlng" id="s_com_nomade_domain_EtapeVehicule_userlng" object="${etapevehicule}" z="9qCQfc54ZdPgru7DVPEwE7TVkr0="/>
+        <field:display field="geolocation" id="s_com_nomade_domain_EtapeVehicule_geolocation" object="${etapevehicule}" z="TC2nL5uC0yLdKh9M1YipOEKZJIE="/>
+        <field:display field="nomade" id="s_com_nomade_domain_EtapeVehicule_nomade" object="${etapevehicule}" z="+5Fl70Bs74Snff1MR7oUNfevIn4="/>
+        <field:display field="comments" id="s_com_nomade_domain_EtapeVehicule_comments" object="${etapevehicule}" z="sqfKEfyYCp3iTTc/seW0GBYQaaM="/>
     </page:show>
 </div>

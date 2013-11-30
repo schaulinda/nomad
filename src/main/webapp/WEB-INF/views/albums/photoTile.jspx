@@ -44,7 +44,7 @@
 	<hr />
 	
 	
-	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+	<spring:url value="/albums/imageRenderNet" var="imageRender_url"></spring:url>
 		<div class="row"  >
 			<div class="col-lg-6" id="imgPhoto" >
 				<img alt="" src="${imageRender_url}/${beanPictureManager.photoSave}"

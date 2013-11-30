@@ -3,18 +3,20 @@
 
 package com.nomade.domain;
 
+import com.nomade.domain.Comment;
 import com.nomade.domain.EtapeVoyage;
+import com.nomade.domain.UserNomade;
 import java.util.Date;
-import org.bson.types.ObjectId;
+import java.util.List;
 
 privileged aspect EtapeVoyage_Roo_JavaBean {
     
-    public ObjectId EtapeVoyage.get_id() {
-        return this._id;
+    public double[] EtapeVoyage.getGeolocation() {
+        return this.geolocation;
     }
     
-    public void EtapeVoyage.set_id(ObjectId _id) {
-        this._id = _id;
+    public void EtapeVoyage.setGeolocation(double[] geolocation) {
+        this.geolocation = geolocation;
     }
     
     public String EtapeVoyage.getDescription() {
@@ -63,6 +65,30 @@ privileged aspect EtapeVoyage_Roo_JavaBean {
     
     public void EtapeVoyage.setUserlng(double userlng) {
         this.userlng = userlng;
+    }
+    
+    public Date EtapeVoyage.getCreated() {
+        return this.created;
+    }
+    
+    public void EtapeVoyage.setCreated(Date created) {
+        this.created = created;
+    }
+    
+    public UserNomade EtapeVoyage.getNomade() {
+        return this.nomade;
+    }
+    
+    public void EtapeVoyage.setNomade(UserNomade nomade) {
+        this.nomade = nomade;
+    }
+    
+    public List<Comment> EtapeVoyage.getComments() {
+        return this.comments;
+    }
+    
+    public void EtapeVoyage.setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
 }

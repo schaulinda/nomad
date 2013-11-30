@@ -39,5 +39,12 @@
             <menu:item id="i_usernomade_new" messageCode="global_menu_new" url="/users?form" z="1sBwFZQrrNOCIVN+qhb0V8+HGVM="/>
             <menu:item id="i_usernomade_list" messageCode="global_menu_list" url="/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="uYECowgVgHD+4N4KuijMEzd3vyY="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__infopratiqueindex_id" messageCode="global_generic" url="/infopratique/index" z="k2PJ3vxQ2bdKN5yBLpZko+i2AYo="/>
+        </menu:category>
+        <menu:category id="c_infopratique" z="JtfmfbvOCIH6JCZdht2ZdpKZcb8=">
+            <menu:item id="i_infopratique_new" messageCode="global_menu_new" url="/infopratiques?form" z="j4t0ODs96GM1naJltqYAyp1ub0I="/>
+            <menu:item id="i_infopratique_list" messageCode="global_menu_list" url="/infopratiques?page=1&amp;size=${empty param.size ? 10 : param.size}" z="PC6L/eMF+SorytMUdF/kD7eDJ20="/>
+        </menu:category>
     </menu:menu>
 </div>

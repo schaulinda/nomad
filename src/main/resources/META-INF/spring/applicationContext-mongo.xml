@@ -19,7 +19,8 @@
 		<constructor-arg ref="mongoDbFactory" />
 		<constructor-arg ref="converter" />
 	</bean>
-
+	
+	 <bean class="com.nomade.plugin.SortingMongoEventListener"  />
 </beans>
 
 <!-- <?xml version="1.0" encoding="UTF-8" standalone="no"?>

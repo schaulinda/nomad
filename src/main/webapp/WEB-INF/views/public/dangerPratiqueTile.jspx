@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="smallTile" class="tab-pane fade in active col-lg-6"
+	style="margin-left: -16px;"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-truck"> <!-- co -->
+				</i>
+				<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
+				${hNotebookOfVehicle}
+				<!--ici tu ecrira info danger avec sa traduction, ta lexemple la :)  -->
+			</h3>
+		</div>
+		<div class="row">code will go here</div>
+
+	</div>
+
+	<script type="text/javascript">
+		dojo.ready(function() {
+			new stuff().addAjaxPublicPage();
+		});
+	</script>
+</div>
+

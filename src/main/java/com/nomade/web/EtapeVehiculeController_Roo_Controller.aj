@@ -94,11 +94,13 @@ privileged aspect EtapeVehiculeController_Roo_Controller {
     
     void EtapeVehiculeController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("etapeVehicule_dateetape_date_format", "dd-MM-yyyy");
+        uiModel.addAttribute("etapeVehicule_created_date_format", "dd-MM-yyyy HH:mm");
     }
     
     void EtapeVehiculeController.populateEditForm(Model uiModel, EtapeVehicule etapeVehicule) {
         uiModel.addAttribute("etapeVehicule", etapeVehicule);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("usernomades", userService.findAllUserNomades());
     }
     
     String EtapeVehiculeController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

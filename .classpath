@@ -47,5 +47,14 @@
 			<attribute name="maven.scope" value="compile"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/home/adorsys/.m2/repository/org/imgscalr/imgscalr-lib/4.2/imgscalr-lib-4.2.jar">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="maven.groupId" value="org.imgscalr"/>
+			<attribute name="maven.artifactId" value="imgscalr-lib"/>
+			<attribute name="maven.version" value="4.2"/>
+			<attribute name="maven.scope" value="compile"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

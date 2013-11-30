@@ -9,23 +9,45 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="col-lg-4">
-		<button class="btn btn-success">
+		<spring:url value="/public/info" var="info_url" ></spring:url>
+		<a class="btn btn-success" href="${info_url}" id="btn_info" >
 			<i class=" icon-info-sign"> <!-- com-->
 			</i>
 			<spring:message code="button.practicalInformation"
 				var="buttonPracticalInformation" />
 			${buttonPracticalInformation}
-		</button>
+		</a>
 	</div>
 	<div class="col-lg-4 col-lg-offset-3">
-		<button class="btn btn-danger ">
+	<spring:url value="/public/danger" var="danger_url" ></spring:url>
+		<a class="btn btn-danger" href="${danger_url}" id="btn_danger" >
 			<i class="icon-warning-sign"> <!-- com -->
 			</i>
 			<spring:message code="button.dangerInformation"
 				var="buttonDangerInformation" />
 			${buttonDangerInformation}
-		</button>
+		</a>
 	</div>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_danger",
+			event : "onclick",
+			params : {
+				fragments : "smallTile,topheader"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_info",
+			event : "onclick",
+			params : {
+				fragments : "smallTile,topheader"
+			}
+		}));
+	</script>
 
 </div>
 

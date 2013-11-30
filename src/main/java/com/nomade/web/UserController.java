@@ -35,6 +35,7 @@ import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Country;
 import com.nomade.domain.Gender;
+import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Langue;
 import com.nomade.domain.Nationality;
 import com.nomade.domain.PasswordReset;
@@ -392,9 +393,10 @@ public class UserController {
 	public String selectImg(@PathVariable("id") String id, Model uiModel,
 			HttpServletRequest httpServletRequest) {
 		
+		
 		UserNomade nomade = securite.getUserNomade();
 		String stringPage = httpServletRequest.getSession(true).getAttribute("backLink").toString();
-		
+
 		if(stringPage==null){
 			return "/";
 		}
@@ -420,6 +422,23 @@ public class UserController {
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			uiModel.addAttribute("onglet", "carnet");
 			return "public/carnet";
+		}
+		if(stringPage.equals("carnetVeh")){
+			BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+			beanNoteBookManager.getEtapeVehicule().setUserPhoto(id);
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			uiModel.addAttribute("onglet", "carnet");
+			return "public/carnet";
+		}
+		
+		if(stringPage.equals("infoPratique")){
+			InfoPratique infoPratique = new InfoPratique();
+			infoPratique.setPhoto(id);
+			uiModel.addAttribute("infoPratique", infoPratique);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			
+			return "public/info";
 		}
 		
 		return "/";

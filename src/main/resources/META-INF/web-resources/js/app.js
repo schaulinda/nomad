@@ -11,8 +11,10 @@ dojo.ready(function() {
         dojo.style(throbberNode, "display", "none");
     });
     
-   /* d.subscribe("/dojo/io/error", function(err, ioArgs){
-    	  switch(ioArgs.xhr.status){
+    /*dojo.subscribe("/dojo/io/error", function(err, ioArgs){
+    	 
+    	
+    	switch(err.ioArgs.xhr.status){
     	    case 403:
     	      alert("Your session expired!");
     	      break;

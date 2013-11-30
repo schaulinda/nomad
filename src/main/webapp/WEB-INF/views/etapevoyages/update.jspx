@@ -6,9 +6,11 @@
         <field:input field="description" id="c_com_nomade_domain_EtapeVoyage_description" z="hYnS8z9S0N0OzKchP5VHnJIkE7o="/>
         <field:datetime dateTimePattern="${etapeVoyage_dateetape_date_format}" field="dateEtape" id="c_com_nomade_domain_EtapeVoyage_dateEtape" z="P07HrX7Xg6yudhXbHsJHZsAPfXI="/>
         <field:input field="location" id="c_com_nomade_domain_EtapeVoyage_location" z="qAVQYF8DlzoHLTprai1JRpefCSc="/>
-        <field:input field="_id" id="c_com_nomade_domain_EtapeVoyage__id" z="Rh/5rjEHkvV+TXl1u6LLPu37w9Q="/>
         <field:input field="userPhoto" id="c_com_nomade_domain_EtapeVoyage_userPhoto" z="l8ag1q2G7loCwg+ivWS1rbaZh2k="/>
         <field:input field="userlat" id="c_com_nomade_domain_EtapeVoyage_userlat" z="ABbGc5b/DJunIyGCfnuF4ws3LG4="/>
         <field:input field="userlng" id="c_com_nomade_domain_EtapeVoyage_userlng" z="ir16n11fkD4wRwkL9aSZjA9t8a8="/>
+        <field:input field="geolocation" id="c_com_nomade_domain_EtapeVoyage_geolocation" z="czLnwHfhsIpwufY+G1wvXixMId8="/>
+        <field:input field="nomade" id="c_com_nomade_domain_EtapeVoyage_nomade" z="66Ow2ochyX0lu4ym48uK+ETOuNs="/>
+        <field:input field="comments" id="c_com_nomade_domain_EtapeVoyage_comments" z="wSMXYsWq0GImLbfL/pSPjxEdi2Y="/>
     </form:update>
 </div>

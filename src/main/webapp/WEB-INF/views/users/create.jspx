@@ -13,9 +13,9 @@
         <field:input field="profil" id="c_com_nomade_domain_UserNomade_profil" z="QsP305SP+pWTNX/6+qsn+q6Wa5I="/>
         <field:input field="compte" id="c_com_nomade_domain_UserNomade_compte" z="HPiCrr45H1y0JuezOSyzR/Xs0RA="/>
         <field:input field="vehicule" id="c_com_nomade_domain_UserNomade_vehicule" z="l7JtxtR6NqS68twX8JgCPBdBoqk="/>
-        <field:select field="albums" id="c_com_nomade_domain_UserNomade_albums" itemValue="id" items="${albums}" multiple="true" path="/albums" z="Yse45nYpyXcMcr0j/jR+eQ2IBTM="/>
-        <field:select field="etapeVoyages" id="c_com_nomade_domain_UserNomade_etapeVoyages" itemValue="id" items="${etapevoyages}" multiple="true" path="/etapevoyages" z="y6H9w0/mz7wH8R78LnfmRFighvk="/>
-        <field:select field="etapeVehicules" id="c_com_nomade_domain_UserNomade_etapeVehicules" itemValue="id" items="${etapevehicules}" multiple="true" path="/etapevehicules" z="qu0y0jSdEseRf1Awglo/cpNhX5k="/>
+        <field:input field="albums" id="c_com_nomade_domain_UserNomade_albums" z="G3syrjCdVHVZOwmmBlrOwG0hOiw="/>
+        <field:input field="etapeVoyages" id="c_com_nomade_domain_UserNomade_etapeVoyages" z="YEdFxJtpBv8R4EIWtwC17N2JfV8="/>
+        <field:input field="etapeVehicules" id="c_com_nomade_domain_UserNomade_etapeVehicules" z="mrK0pZNU8f8ubz0vUdkc+e2p0G4="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_UserNomade" render="${not empty dependencies}" z="GDaGStylUbztanE5ZjK6Q9oyav8="/>
 </div>

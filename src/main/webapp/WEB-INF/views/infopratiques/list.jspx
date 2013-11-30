@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_InfoPratique" items="${infopratiques}" z="vcQQldC7cMWtQm+FqoFjgUEM0fE=">
+        <table:table data="${infopratiques}" id="l_com_nomade_domain_InfoPratique" path="/infopratiques" z="QekRuliBVafkiW/vK/r+uv1o3nI=">
+            <table:column id="c_com_nomade_domain_InfoPratique_title" property="title" z="uciODHFelaSpCc6u2Sjff5xCnMk="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_selecteur" property="selecteur" z="Kuo7TYIA01gDE/82ij752c4eiro="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_selecteur1" property="selecteur1" z="xIwwiaa6+EA8cNvzCsfKSQNlxV8="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_location" property="location" z="ezeza5FvEE36uz7Kg2VegZXyL0I="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_locationLat" property="locationLat" z="B/O2GRQdBj3IYLVvdQopzh4/LUg="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_locationLng" property="locationLng" z="rWf1qLSDy/tJuh5+le2wcfuCX/w="/>
+        </table:table>
+    </page:list>
+</div>
