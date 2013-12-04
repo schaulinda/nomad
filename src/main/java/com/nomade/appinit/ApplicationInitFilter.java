@@ -36,8 +36,8 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		
 		if (!initialized){
-			//mongoTemplate.getDb().dropDatabase();
-			//applicationInitService.initApplication();
+			mongoTemplate.getDb().dropDatabase();
+			applicationInitService.initApplication();
 			initialized = true;
 		}
 		
