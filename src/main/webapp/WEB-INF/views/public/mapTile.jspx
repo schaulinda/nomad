@@ -23,7 +23,7 @@
 		<!-- co -->
 	</div>
 
-	<!-- <script type="text/javascript">
+	<script type="text/javascript">
 		jQuery.noConflict();
 		(function($) {
 			$(document)
@@ -130,7 +130,7 @@
 							});
 
 		})(jQuery);
-	</script> -->
+	</script>
 
 </div>
 
