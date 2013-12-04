@@ -4,11 +4,14 @@ import java.util.List;
 
 public class BeanManagerItineraire {
 	
-	private double[] start;
+	private double startLng;
+	private double startLat;
 	
-	private double[] stepOver;
+	private double stepOverLng;
+	private double stepOverLat;
 	
-	private double[] end;
+	private double endLng;
+	private double endLat;
 	
 	private String itineraire;
 	
@@ -16,30 +19,7 @@ public class BeanManagerItineraire {
 	
 	private List<DangerPratique> dangerPratiques;
 
-	public double[] getStart() {
-		return start;
-	}
-
-	public void setStart(double[] start) {
-		this.start = start;
-	}
-
-	public double[] getStepOver() {
-		return stepOver;
-	}
-
-	public void setStepOver(double[] stepOver) {
-		this.stepOver = stepOver;
-	}
-
-	public double[] getEnd() {
-		return end;
-	}
-
-	public void setEnd(double[] end) {
-		this.end = end;
-	}
-
+	
 	public String getItineraire() {
 		return itineraire;
 	}
@@ -62,6 +42,54 @@ public class BeanManagerItineraire {
 
 	public void setDangerPratiques(List<DangerPratique> dangerPratiques) {
 		this.dangerPratiques = dangerPratiques;
+	}
+
+	public double getStartLng() {
+		return startLng;
+	}
+
+	public void setStartLng(double startLng) {
+		this.startLng = startLng;
+	}
+
+	public double getStartLat() {
+		return startLat;
+	}
+
+	public void setStartLat(double startLat) {
+		this.startLat = startLat;
+	}
+
+	public double getStepOverLng() {
+		return stepOverLng;
+	}
+
+	public void setStepOverLng(double stepOverLng) {
+		this.stepOverLng = stepOverLng;
+	}
+
+	public double getStepOverLat() {
+		return stepOverLat;
+	}
+
+	public void setStepOverLat(double stepOverLat) {
+		this.stepOverLat = stepOverLat;
+	}
+
+	public double getEndLng() {
+		return endLng;
+	}
+
+	public void setEndLng(double endLng) {
+		this.endLng = endLng;
+	}
+
+	public double getEndLat() {
+		return endLat;
+	}
+
+	public void setEndLat(double endLat) {
+		this.endLat = endLat;
 	}
 
 }

@@ -48,9 +48,20 @@ public class InfoPratique {
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date dateEtape;
+    private Date created = new Date();
 	
 	@DBRef
 	private UserNomade nomade;
+	
+	
+	public void incrementVotePositif(){
+		
+		this.votePositif=this.votePositif+1;
+	}
+	
+	public void incrementVoteNegatif(){
+		
+		this.voteNegatif=this.voteNegatif+1;
+	}
 
 }

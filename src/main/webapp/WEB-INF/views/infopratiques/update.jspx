@@ -17,7 +17,6 @@
         <field:input field="comment" id="c_com_nomade_domain_InfoPratique_comment" z="cEn6faVDXS2O/ggr7SwqB1ZcV7Q="/>
         <field:input field="votePositif" id="c_com_nomade_domain_InfoPratique_votePositif" z="I7r12kQ6kGMu0hGpz5/Mv5RURfU="/>
         <field:input field="voteNegatif" id="c_com_nomade_domain_InfoPratique_voteNegatif" z="8MaWTN8CkWYRXTHQYpHhJlEm7aY="/>
-        <field:datetime dateTimePattern="${infoPratique_dateetape_date_format}" field="dateEtape" id="c_com_nomade_domain_InfoPratique_dateEtape" z="pvIYPtSg1O84ev0Z/SFi6b1KNHo="/>
         <field:input field="nomade" id="c_com_nomade_domain_InfoPratique_nomade" z="LqGjsNqIq5R4B6fcRfhgA19S/DE="/>
     </form:update>
 </div>

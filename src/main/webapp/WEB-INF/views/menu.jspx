@@ -46,5 +46,9 @@
             <menu:item id="i_infopratique_new" messageCode="global_menu_new" url="/infopratiques?form" z="j4t0ODs96GM1naJltqYAyp1ub0I="/>
             <menu:item id="i_infopratique_list" messageCode="global_menu_list" url="/infopratiques?page=1&amp;size=${empty param.size ? 10 : param.size}" z="PC6L/eMF+SorytMUdF/kD7eDJ20="/>
         </menu:category>
+        <menu:category id="c_dangerpratique" z="9vxC8NaH2puXIZ1u5AiEXOV7HPk=">
+            <menu:item id="i_dangerpratique_new" messageCode="global_menu_new" url="/dangerpratiques?form" z="XegJhJGbLc4Zn47TMMCEeLvX9L0="/>
+            <menu:item id="i_dangerpratique_list" messageCode="global_menu_list" url="/dangerpratiques?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DovNzjeh163UJCruijKuv48hfMo="/>
+        </menu:category>
     </menu:menu>
 </div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_nomade_domain_DangerPratique" modelAttribute="dangerPratique" path="/dangerpratiques" render="${empty dependencies}" z="n5Bk6fbEa/dd0SL8TsqhiZmmPgc=">
+        <field:input field="title" id="c_com_nomade_domain_DangerPratique_title" z="HRO4eMHlI1V5Sa+Lsy9gBj/VHs8="/>
+        <field:input field="selecteur" id="c_com_nomade_domain_DangerPratique_selecteur" z="gB8aeHv3N6OKmXtyEfENqxo8lag="/>
+        <field:input field="selecteur1" id="c_com_nomade_domain_DangerPratique_selecteur1" z="ogGvpsNoE1weWhV5BUprOkex7L4="/>
+        <field:input field="location" id="c_com_nomade_domain_DangerPratique_location" z="VuBIWKXeR/g1LZLphl3xXK276jk="/>
+        <field:input field="locationLat" id="c_com_nomade_domain_DangerPratique_locationLat" z="y9LXl/GatRwCKouoGPF4dmlUfIU="/>
+        <field:input field="locationLng" id="c_com_nomade_domain_DangerPratique_locationLng" z="6C9wYNOIQeY22tZssCm1DEOcoi0="/>
+        <field:input field="geoLocation" id="c_com_nomade_domain_DangerPratique_geoLocation" z="4U2W7ZftsMWxiu2kb8jq3Zkx5uM="/>
+        <field:input field="photo" id="c_com_nomade_domain_DangerPratique_photo" z="dXceVz1aoOrAFm4oX4e9ahlfWEY="/>
+        <field:input field="dure" id="c_com_nomade_domain_DangerPratique_dure" z="ESBrj4jAS+VyCIDv5CGyTKvl+5g="/>
+        <field:checkbox field="infoVerif" id="c_com_nomade_domain_DangerPratique_infoVerif" z="WZYS1upTiTQvCgAS/bKGc2BIr84="/>
+        <field:input field="estimationValidite" id="c_com_nomade_domain_DangerPratique_estimationValidite" z="M2u5cEwLNSrwAKw48wEAKG0eTko="/>
+        <field:input field="comment" id="c_com_nomade_domain_DangerPratique_comment" z="5RcGyQ9bSZAN4Danla4lEf+Y6ks="/>
+        <field:input field="votePositif" id="c_com_nomade_domain_DangerPratique_votePositif" z="fSxPdjS+Wz9ozK/BBJ7CfDIZhAQ="/>
+        <field:input field="voteNegatif" id="c_com_nomade_domain_DangerPratique_voteNegatif" z="rU4Hg6c3ZtQdK9ECKmi6+kdOpMg="/>
+        <field:input field="nomade" id="c_com_nomade_domain_DangerPratique_nomade" z="Ha9/c4HIhREqBHcCB0g0acJPoyI="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_DangerPratique" render="${not empty dependencies}" z="6+uNmufpVENNuLQB0sgGUBbYdQQ="/>
+</div>

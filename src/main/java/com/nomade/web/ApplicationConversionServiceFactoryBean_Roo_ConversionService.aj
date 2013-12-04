@@ -5,6 +5,7 @@ package com.nomade.web;
 
 import com.nomade.domain.Account;
 import com.nomade.domain.Album;
+import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
@@ -12,6 +13,7 @@ import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import com.nomade.service.AccountService;
 import com.nomade.service.AlbumService;
+import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
@@ -33,6 +35,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     AlbumService ApplicationConversionServiceFactoryBean.albumService;
+    
+    @Autowired
+    DangerPratiqueService ApplicationConversionServiceFactoryBean.dangerPratiqueService;
     
     @Autowired
     EtapeVehiculeService ApplicationConversionServiceFactoryBean.etapeVehiculeService;
@@ -93,6 +98,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Album>() {
             public com.nomade.domain.Album convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), Album.class);
+            }
+        };
+    }
+    
+    public Converter<DangerPratique, String> ApplicationConversionServiceFactoryBean.getDangerPratiqueToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.DangerPratique, java.lang.String>() {
+            public String convert(DangerPratique dangerPratique) {
+                return new StringBuilder().append(dangerPratique.getTitle()).append(' ').append(dangerPratique.getSelecteur()).append(' ').append(dangerPratique.getSelecteur1()).append(' ').append(dangerPratique.getLocation()).toString();
+            }
+        };
+    }
+    
+    public Converter<BigInteger, DangerPratique> ApplicationConversionServiceFactoryBean.getIdToDangerPratiqueConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.DangerPratique>() {
+            public com.nomade.domain.DangerPratique convert(java.math.BigInteger id) {
+                return dangerPratiqueService.findDangerPratique(id);
+            }
+        };
+    }
+    
+    public Converter<String, DangerPratique> ApplicationConversionServiceFactoryBean.getStringToDangerPratiqueConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.DangerPratique>() {
+            public com.nomade.domain.DangerPratique convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), DangerPratique.class);
             }
         };
     }
@@ -224,6 +253,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getAlbumToStringConverter());
         registry.addConverter(getIdToAlbumConverter());
         registry.addConverter(getStringToAlbumConverter());
+        registry.addConverter(getDangerPratiqueToStringConverter());
+        registry.addConverter(getIdToDangerPratiqueConverter());
+        registry.addConverter(getStringToDangerPratiqueConverter());
         registry.addConverter(getEtapeVehiculeToStringConverter());
         registry.addConverter(getIdToEtapeVehiculeConverter());
         registry.addConverter(getStringToEtapeVehiculeConverter());

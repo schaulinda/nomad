@@ -13,17 +13,109 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-	<div class="panel">
+	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-truck"> <!-- co -->
+				<i class="icon-warning-sign"> <!-- co -->
 				</i>
-				<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
-				${hNotebookOfVehicle}
-				<!--ici tu ecrira info danger avec sa traduction, ta lexemple la :)  -->
+				<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
+				${hDangerOnTrip}
 			</h3>
 		</div>
-		<div class="row">code will go here</div>
+		<div class="">
+			<spring:url value="/dangerpratiques/save" var="save_info_url" ></spring:url>
+			<form:form commandName="dangerPratique" method="GET" action="${save_info_url}" id="form_danger" >
+				<div class="form-group">
+					<label>Title</label>
+					<form:input cssClass="form-control" id="title"
+						placeholder="Enter title " path="title" required="required" />
+				</div>
+				<div class="row">
+					<div class="col-lg-6 form-group">
+						<label>select</label>
+						<select class="form-control" required="required"
+							placeholder="select type of info" id="select" name="select" >
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+					<div class="col-lg-6 form-group">
+						<label>select2</label>
+						<select class="form-control" required="required"
+							placeholder="select type of info" id="select1" name="select1" >
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>location</label>
+					<form:input cssClass="adress form-control" id="location"
+						placeholder="Enter location" required="required" path="location" />
+					<form:hidden id="locationLat" path="locationLat" /> 
+					<form:hidden id="locationLng" path="locationLng" />
+				</div>
+				<div class="form-group">
+					<label for="duree" class="col-lg-6 control-label">Duree de
+						validite</label>
+					<div class="col-lg-5">
+						<form:input class="form-control" id="dure" pattern="[0-9]*" path="dure" />
+					</div>
+				</div>
+				<br />
+				<br />
+				<div class="row">
+					<div class="col-lg-6 form-group">
+						<div class="checkbox">
+							<label> <form:checkbox id="verif" path="infoVerif" /> Info a verifier
+							</label>
+						</div>
+					</div>
+					<div class="col-lg-5 form-group">
+						<form:input cssClass="form-control" disabled="true"
+							id="dureVerification" path="estimationValidite"
+							placeholder="Estimation de validite" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 form-group">
+					<form:textarea class="form-control" placeholder="Enter a comment" 
+						path="comment" id="comment" rows="4" />
+						
+					</div>
+					<div class="col-lg-3 form-group">
+					<form:hidden id="photo" path="photo"/>
+						<c:if test="${empty dangerPratique.photo}">
+							<IMG alt="" src="${res}/img/profil.png" width="100px"
+								height="100px;" />
+						</c:if>
+						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+						<c:if
+							test="${not empty dangerPratique.photo}">
+							<IMG alt=""
+								src="${imageRender_url}/${dangerPratique.photo}"
+								width="100px" height="100px;" />
+						</c:if>
+					</div>
+					<div class="col-lg-1">
+						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+						<a class="btn btn-default" id="selectImg"
+							href="${selectPhoto_url}?backLink=dangerPratique"><i
+							class="icon-edit"> <!-- com  -->
+						</i></a>
+					</div>
+				</div>
+
+				<button type="submit" id="btn_savedanger" class="btn btn-default">Submit</button>
+			</form:form>
+
+		</div>
 
 	</div>
 
@@ -32,5 +124,122 @@
 			new stuff().addAjaxPublicPage();
 		});
 	</script>
+	
+	<script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			$(document).ready(function() {
+			
+				$('#verif').click(function(){
+					
+					 var bol = $('#verif').attr("checked");
+					console.log(bol);
+					if(bol=="checked"){
+						$('#dureVerification').attr("disabled",false);
+					}else{
+						$('#dureVerification').attr("disabled",true);
+					} 
+				});
+				
+				/* ----------------------------noty for save etape------------------------------------- */
+
+				var save = '${saveInfoDanger}';
+				console.log(save);
+				if (save != "") {
+					setTimeout(function generate() {
+
+						noty({
+							text : "save...",
+							type : "alert",
+							timeout : 2000,
+							modal : false,
+							layout : 'topRight',
+						});
+
+					}, 1000);
+				}
+				
+				/*----------------------verif session and recup----------------------------------  */
+				if ($.session.get('title') != null
+											|| $.session.get('select') != null
+											|| $.session.get('select1') != null
+											|| $.session.get('location') != null
+											|| $.session.get('locationLat') != null
+											|| $.session.get('locationLng') != null
+											|| $.session.get('dure') != null
+											|| $.session.get('verif') != null
+											|| $.session.get('dureVerification') != null
+											|| $.session.get('comment') != null
+											) {
+
+										$("#title").val($.session.get('title'));
+										$("#select").val($.session.get('select'));
+										$("#select1").val($.session.get('select1'));
+										$("#location").val($.session.get('location'));
+										$("#locationLat").val($.session.get('locationLat'));
+										$("#locationLng").val($.session.get('locationLng'));
+										$("#dure").val($.session.get('dure'));
+										$("#verif").val($.session.get('verif'));/* a modifier */
+										$("#dureVerification").val($.session.get('dureVerification'));
+										$("#comment").val($.session.get('comment'));
+										
+										$.session.remove('title');
+										$.session.remove('select');
+										$.session.remove('select1');
+										$.session.remove('location');
+										$.session.remove('locationLat');
+										$.session.remove('locationLng');
+										$.session.remove('dure');
+										$.session.remove('verif');
+										$.session.remove('dureVerification');
+										$.session.remove('comment');
+										
+									
+				}
+				
+				/* --------------------save session----------------------- */
+				$("#selectImg").click(
+
+										function(e) {
+											e.preventDefault();
+											$.session.set('title', $("#title").val());
+											$.session.set('select', $("#select").val());
+											$.session.set('select1', $("#select1").val());
+											$.session.set('location', $("#location").val());
+											$.session.set('locationLat', $("#locationLat").val());
+											$.session.set('locationLng', $("#locationLng").val());
+											$.session.set('dure', $("#dure").val());
+											$.session.set('verif', $("#verif").val());
+											$.session.set('dureVerification', $("#dureVerification").val());
+											$.session.set('comment', $("#comment").val());
+											
+											$(this).unbind('click').click();
+										});
+				
+				
+			});
+		})(jQuery);
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "selectImg",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_savedanger",
+			event : "onclick",
+			formId : "form_danger",
+			params : {
+				fragments : "smallTile, id_subfooter"
+			}
+		}));
+	</script>
+	
+	
 </div>
 

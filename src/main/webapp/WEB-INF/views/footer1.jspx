@@ -25,10 +25,6 @@
 	<!-- eh -->
 		
 	</script>
-	<script src="${res}/js/bootstrap-modal.js">
-	<!-- eh -->
-		
-	</script>
 	<script src="${res}/js/bootstrap-dropdown.js">
 	<!-- eh -->
 		

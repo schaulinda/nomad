@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nomade.domain.BeanManagerItineraire;
 import com.nomade.domain.BeanNoteBookManager;
+import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
+import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.InfoPratiqueService;
 
 @RequestMapping({ "/public" })
 @Controller
@@ -20,6 +23,10 @@ public class PublicController {
 
 	@Autowired
 	Security securite ;
+	@Autowired
+	InfoPratiqueService infoPratiqueService;
+	@Autowired
+	DangerPratiqueService dangerPratiqueService;
 	
 	@RequestMapping("/nomad")
 	public String nomad(HttpServletRequest request, Model uiModel) {
@@ -45,6 +52,8 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		
 		uiModel.addAttribute("nomade", nomade);
+		beanManagerItineraire.setInfoPratiques(infoPratiqueService.findInfoByLocation());
+		beanManagerItineraire.setDangerPratiques(dangerPratiqueService.findByLocation());
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";
@@ -65,7 +74,7 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		
 		uiModel.addAttribute("nomade", nomade);
-		
+		uiModel.addAttribute("dangerPratique", new DangerPratique());
 		return "public/danger";
 	}
 	

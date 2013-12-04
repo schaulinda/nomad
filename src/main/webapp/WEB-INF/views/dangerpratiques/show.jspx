@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_DangerPratique" object="${dangerpratique}" path="/dangerpratiques" z="yX7EyfcBdn642jD1If5nqzex7KY=">
+        <field:display field="title" id="s_com_nomade_domain_DangerPratique_title" object="${dangerpratique}" z="PhgWgJX7DvkvvgfUDdh+5189Dbs="/>
+        <field:display field="selecteur" id="s_com_nomade_domain_DangerPratique_selecteur" object="${dangerpratique}" z="1vZ194Wcx4Y9mI0MLWkqEcIEX0s="/>
+        <field:display field="selecteur1" id="s_com_nomade_domain_DangerPratique_selecteur1" object="${dangerpratique}" z="u5n64VT/Uu+FSPlzrzOp6LhWyoo="/>
+        <field:display field="location" id="s_com_nomade_domain_DangerPratique_location" object="${dangerpratique}" z="yH0otKK+GGxRb411Ok8An/mrMTY="/>
+        <field:display field="locationLat" id="s_com_nomade_domain_DangerPratique_locationLat" object="${dangerpratique}" z="TEzhzTUsOWN9uwccSCpc2U2/iTU="/>
+        <field:display field="locationLng" id="s_com_nomade_domain_DangerPratique_locationLng" object="${dangerpratique}" z="P6AeD8ZSppvUW0IDqsk27bWh+Hw="/>
+        <field:display field="geoLocation" id="s_com_nomade_domain_DangerPratique_geoLocation" object="${dangerpratique}" z="G10DQPF7Mmc3++zUsWn0g73mX3M="/>
+        <field:display field="photo" id="s_com_nomade_domain_DangerPratique_photo" object="${dangerpratique}" z="UfmyN7QjZiWQsjfBS/ipBMv1e2o="/>
+        <field:display field="dure" id="s_com_nomade_domain_DangerPratique_dure" object="${dangerpratique}" z="m3s+HNEzweDu77W4AwXv+aiGN3w="/>
+        <field:display field="infoVerif" id="s_com_nomade_domain_DangerPratique_infoVerif" object="${dangerpratique}" z="gOXM0nAICfbLdpOBE3gVRSuJJiA="/>
+        <field:display field="estimationValidite" id="s_com_nomade_domain_DangerPratique_estimationValidite" object="${dangerpratique}" z="LULYIGU9n1vYSsM7nTM7kaHDKn0="/>
+        <field:display field="comment" id="s_com_nomade_domain_DangerPratique_comment" object="${dangerpratique}" z="IoHyUkY9+j8pTP7nfoeD1WH+z8c="/>
+        <field:display field="votePositif" id="s_com_nomade_domain_DangerPratique_votePositif" object="${dangerpratique}" z="Z4YLzMTMo/kLrAF62gJZOYWBiSA="/>
+        <field:display field="voteNegatif" id="s_com_nomade_domain_DangerPratique_voteNegatif" object="${dangerpratique}" z="VKiuzGOEmeZpOa/0JOG6ApE0ty0="/>
+        <field:display field="nomade" id="s_com_nomade_domain_DangerPratique_nomade" object="${dangerpratique}" z="gDayWzswddRLfj3OypuievPGl7k="/>
+    </page:show>
+</div>

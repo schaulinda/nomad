@@ -121,12 +121,12 @@ privileged aspect DangerPratique_Roo_JavaBean {
         this.voteNegatif = voteNegatif;
     }
     
-    public Date DangerPratique.getDateEtape() {
-        return this.dateEtape;
+    public Date DangerPratique.getCreated() {
+        return this.created;
     }
     
-    public void DangerPratique.setDateEtape(Date dateEtape) {
-        this.dateEtape = dateEtape;
+    public void DangerPratique.setCreated(Date created) {
+        this.created = created;
     }
     
     public UserNomade DangerPratique.getNomade() {

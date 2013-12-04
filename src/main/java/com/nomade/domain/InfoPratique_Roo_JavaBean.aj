@@ -121,12 +121,12 @@ privileged aspect InfoPratique_Roo_JavaBean {
         this.voteNegatif = voteNegatif;
     }
     
-    public Date InfoPratique.getDateEtape() {
-        return this.dateEtape;
+    public Date InfoPratique.getCreated() {
+        return this.created;
     }
     
-    public void InfoPratique.setDateEtape(Date dateEtape) {
-        this.dateEtape = dateEtape;
+    public void InfoPratique.setCreated(Date created) {
+        this.created = created;
     }
     
     public UserNomade InfoPratique.getNomade() {

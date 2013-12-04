@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_DangerPratique" items="${dangerpratiques}" z="YK19utVGEPTF5u9dUi3+qqAG9is=">
+        <table:table data="${dangerpratiques}" id="l_com_nomade_domain_DangerPratique" path="/dangerpratiques" z="f5Zwve5mJg3xvgpzy3zGBbsz08s=">
+            <table:column id="c_com_nomade_domain_DangerPratique_title" property="title" z="WfJON+qGp3vek5XQXdnyuuw+mdk="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_selecteur" property="selecteur" z="Mh0t3NPGBhh/pANzgm3/OJMVmAk="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_selecteur1" property="selecteur1" z="aeInb4l7VPcOZN1KgdunVoysw7Y="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_location" property="location" z="DXI2+Tqssbvjh3tCEkG2Ll3nn64="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_locationLat" property="locationLat" z="77rvZIMrs7/MCdsFRHcq2MT/Hvo="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_locationLng" property="locationLng" z="QlhlhmWRCxkzjqauBXbiSWcI0rs="/>
+        </table:table>
+    </page:list>
+</div>

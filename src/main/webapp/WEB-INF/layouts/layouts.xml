@@ -24,5 +24,8 @@
     	<put-attribute name="footer" value="/WEB-INF/views/footer1.jspx" />
     	<put-attribute name="topheader" value="/WEB-INF/views/topheader.jspx" />
   </definition>
+	
+ <definition name="viergeLayout" template="/WEB-INF/layouts/viergeLayout.jspx">
+  </definition>
 
 </tiles-definitions>

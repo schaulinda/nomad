@@ -40,5 +40,11 @@
         <put-attribute name="body" value="/WEB-INF/views/public/forum.jspx"/>
         <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
+    <definition extends="viergeLayout" name="public/infoDetail">
+        <put-attribute name="body" value="/WEB-INF/views/public/infoDetail.jspx"/>
+    </definition>
+     <definition extends="viergeLayout" name="public/dangerDetail">
+        <put-attribute name="body" value="/WEB-INF/views/public/dangerDetail.jspx"/>
+    </definition>
     
 </tiles-definitions>

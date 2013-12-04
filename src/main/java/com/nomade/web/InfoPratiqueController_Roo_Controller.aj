@@ -97,7 +97,7 @@ privileged aspect InfoPratiqueController_Roo_Controller {
     }
     
     void InfoPratiqueController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("infoPratique_dateetape_date_format", "dd-MM-yyyy");
+        uiModel.addAttribute("infoPratique_created_date_format", "dd-MM-yyyy");
     }
     
     void InfoPratiqueController.populateEditForm(Model uiModel, InfoPratique infoPratique) {

@@ -34,6 +34,7 @@ import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Country;
+import com.nomade.domain.DangerPratique;
 import com.nomade.domain.Gender;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Langue;
@@ -439,6 +440,14 @@ public class UserController {
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			
 			return "public/info";
+		}
+		if(stringPage.equals("dangerPratique")){
+			DangerPratique dangerPratique = new DangerPratique();
+			dangerPratique.setPhoto(id);
+			uiModel.addAttribute("dangerPratique", dangerPratique);
+			uiModel.addAttribute("nomade", securite.getUserNomade());
+			
+			return "public/danger";
 		}
 		
 		return "/";

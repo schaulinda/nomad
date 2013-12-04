@@ -46,7 +46,9 @@
 	<!-- eh -->
 		
 	</script>
-	
+<script src="${res}/js/bootstrap-modal.js">
+	<!-- eh -->	
+	</script>	
 		
 <util:load-scripts />
 <spring:url value="/resources/js/app.js" var="app_js_url" />
