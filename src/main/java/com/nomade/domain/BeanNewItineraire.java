@@ -13,7 +13,5 @@ public class BeanNewItineraire {
 
     private String depart;
 
-    private String etape;
-
     private String arrive;
 }

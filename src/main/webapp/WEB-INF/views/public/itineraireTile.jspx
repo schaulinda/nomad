@@ -29,23 +29,10 @@
 				<div class="col-lg-9">
 					<div class="input-group">
 						<spring:message code="input.start" var="inputStart" />
-						<input type="text" class="form-control adress"
-							placeholder="${inputStart}" />
-						<form:hidden id="location1Lat" path="startLng" />
-						<form:hidden id="location1Lng" path="startLat" />
-						<span class="input-group-addon"> <a href="#"> <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						</a>
-						</span>
-					</div>
-					<br />
-					<div class="input-group">
-						<spring:message code="input.stopOver" var="inputStopOver" />
-						<input type="text" class="form-control adress"
-							placeholder="${inputStopOver}" />
-						<form:hidden id="location2Lat" path="stepOverLng" />
-						<form:hidden id="location2Lng" path="stepOverLat" />
+						<form:input type="text" id="start" cssClass="form-control adress"
+							placeholder="${inputStart}" path="start" autocomplete="off" />
+						<form:hidden id="startLat" path="startLng" />
+						<form:hidden id="startLng" path="startLat" />
 						<span class="input-group-addon"> <a href="#"> <i
 								class="icon-screenshot"> <!-- co -->
 							</i>
@@ -55,10 +42,10 @@
 					<br />
 					<div class="input-group">
 						<spring:message code="input.finish" var="inputFinish" />
-						<input type="text" class="form-control adress"
-							placeholder="${inputFinish}" />
-						<form:hidden id="location3Lat" path="endLng" />
-						<form:hidden id="location3Lng" path="endLat" />
+						<form:input type="text" id="end" cssClass="form-control adress"
+							placeholder="${inputFinish}" path="end" autocomplete="off" />
+						<form:hidden id="endLat" path="endLng" />
+						<form:hidden id="endLng" path="endLat" />
 						<!--please change end not finish -->
 						<span class="input-group-addon"> <a href="#"> <i
 								class="icon-screenshot"> <!-- co -->
@@ -76,17 +63,6 @@
 				</div>
 			</div>
 		</form:form>
-	</div>
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i>
-				<spring:message code="h.itineraryOfTrip" var="hItineraryOfTrip" />
-				${hItineraryOfTrip}
-			</h3>
-		</div>
-		Panel content
 	</div>
 	<div class="panel panel-success">
 		<div class="panel-heading">
@@ -120,7 +96,8 @@
 				</i>
 				<fmt:formatDate value="${info.created}" var="dateC"
 					pattern="dd-MM-yyyy hh:mm" />
-				<span style="color: #999999;"> ${dateC} </span>| <a id="${info.id}"
+				<span style="color: #999999;"> ${dateC} </span>|
+				<span ><i class="icon-comment"><!-- co --></i> 8</span> |<a id="${info.id}"
 					class="detailsInfo" >details</a>
 			</div>
 		</c:forEach>
@@ -156,7 +133,8 @@
 				</div>
 				<br /> <a href="#"><i class="icon-user"> <!-- co -->
 				</i> ${danger.nomade.userName}</a> | <i class="icon-calendar"> <!-- co -->
-				</i><span style="color: #999999;"> ${danger.created} </span>| <a id="${danger.id}"
+				</i><span style="color: #999999;"> ${danger.created} </span>|
+				<span ><i class="icon-comment"><!-- co --></i> 8</span> | <a id="${danger.id}"
 				 class="detailsDanger" >details</a>
 			</div>
 		</c:forEach>
@@ -211,7 +189,92 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-
+				
+				 
+					
+				/* render with new itineraire */
+				var bol ='${beanManagerItineraire.bol}';
+				if(bol!=""){
+					$('#direction').html("");
+					$('#panelDirection').removeClass("hide");
+				/* the map----------------------------- */	
+				console.log('${beanManagerItineraire.makers}');
+				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
+				console.log(mapdata);
+				/* -----clear marker and directions but not clear the picker------------ */
+				
+					$("#map").gmap3({
+					    get: {
+					     		 name: "marker",
+					     		all:true,
+					     		full:true,
+					     		callback: function(objs){
+					     				var arrayId=[];
+					     			 $.each(objs, function(i, obj){
+					     				if(obj.id!="indicator"){
+					     				
+					     					var markObj = obj;
+					     					arrayId.push(markObj.id);		
+						     			}
+					     	          });
+					     			console.log(arrayId);
+					     			
+					     			$(this).gmap3({
+			     				        clear:{
+			     				          id:arrayId
+			     				        }
+			     				      });
+					     			
+					     		}
+					    },
+					 clear:{
+						 name:["directionsrenderer"]
+					 }	
+					
+					});
+							
+				/*------------------ render direction ----------------------------*/	
+				
+					$("#map").gmap3({
+						
+						    marker:{
+						        values:mapdata,
+						        bounds:true
+						    },
+						      
+						 getroute:{
+							    options:{
+							        origin:'${beanManagerItineraire.start}',
+							        destination:'${beanManagerItineraire.end}',
+							        travelMode: google.maps.DirectionsTravelMode.DRIVING
+							    },
+							    callback: function(results){
+							      if (!results) return;
+							      console.log(results);
+							      $(this).gmap3({
+							        map:{
+							          options:{
+							            zoom: 5,
+							            mapTypeId : google.maps.MapTypeId.ROADMAP,
+							            //center: [-33.879, 151.235]
+							          }
+							        },
+							        directionsrenderer:{
+							          divId:"direction",
+							          options:{
+							            directions:results
+							          } 
+							        }
+							      });
+							    }
+							  },
+				
+					});
+				
+					
+				
+				}
+					
 				/* --------------------enable modal on click detail for each info------------- */
 				$('.detailsInfo').each(function() {
 

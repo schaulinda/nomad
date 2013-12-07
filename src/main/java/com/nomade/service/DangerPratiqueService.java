@@ -9,5 +9,5 @@ import com.nomade.domain.DangerPratique;
 @RooService(domainTypes = { com.nomade.domain.DangerPratique.class })
 public interface DangerPratiqueService {
 	
-	public List<DangerPratique> findByLocation();
+	public List<DangerPratique> findByLocation(double[] loc1, double[] loc2);
 }

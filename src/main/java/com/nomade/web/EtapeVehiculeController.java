@@ -8,6 +8,7 @@ import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.EtapeVehiculeService;
+import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class EtapeVehiculeController {
 	UserService userService;
 	@Autowired
 	EtapeVehiculeService vehiculeService;
+	@Autowired
+	EtapeVoyageService voyageService;
 	
 	@RequestMapping("/save")
 	public String save(BeanNoteBookManager beanNoteBookManager,
@@ -40,6 +43,8 @@ public class EtapeVehiculeController {
 		vehiculeService.saveEtapeVehicule(etapeVeh);
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
+		bookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
 		bookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);

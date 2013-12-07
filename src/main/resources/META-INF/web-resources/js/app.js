@@ -31,6 +31,7 @@ dojo.ready(function() {
 		
 		addAjax:function(){
 			
+			
 			Spring.addDecoration(new Spring.AjaxEventDecoration({
 				elementId : "id_nomadeLink",
 				event : "onclick",

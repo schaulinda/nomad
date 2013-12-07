@@ -34,23 +34,28 @@
 					<div class="col-lg-6 form-group">
 						<label>select</label>
 						<select class="form-control" required="required"
-							placeholder="select type of info" id="select" name="select" >
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+							placeholder="select type of info" id="select0" name="select" >
+							<option value="route">cote route</option>
+							<option value="administratif">cote Administraif</option>
+							<option value="risque">cote risque</option>
 						</select>
 					</div>
 					<div class="col-lg-6 form-group">
 						<label>select2</label>
 						<select class="form-control" required="required"
 							placeholder="select type of info" id="select1" name="select1" >
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+							<option value="impraticable">impraticable</option>
+							<option value="chausséeentresmauvaisetat">chaussée en très mauvais état</option>
+							<option value="pisteterrenongoudronné" >piste terre -non goudronné</option>
+							<option value="bandesableuse">bande sableuse</option>
+							<option value="boueorniere">boue ,ornière</option>
+							<option value="routeenneigee">route enneigée, verglacée</option>
+							<option value="fortdenivele">fort dénivelé, col 4000m</option>
+							<option value="effondrement">effondrement, chute de pierre</option>
+							<option value="risqueinondations">risque d'inondations</option>
+							<option value="poidsmax">poids max</option>
+							<option value="hauteurmax">hauteur max</option>
+							<option value="entravaux">en travaux</option>
 						</select>
 					</div>
 				</div>
@@ -129,7 +134,55 @@
 		jQuery.noConflict($);
 		(function($) {
 			$(document).ready(function() {
+				
+				/* change select1 based on select0  */
+				var routeDisplay = ["impraticable","chaussée en très mauvais état","piste terre -non goudronné",
+				                        "bande sableuse","boue ,ornière","route enneigée, verglacée,","fort dénivelé, col 4000m",
+				                        "effondrement, chute de pierre","risque d'inondations","poids max","hauteur max","en travaux"];
+			var routeValue = ["impraticable","chausséeentresmauvaisetat","pisteterrenongoudronné",
+		                        "bandesableuse","boueorniere","routeenneigee","fortdenivele",
+		                        "effondrement","risqueinondations","poidsmax","hauteurmax","entravaux"];
 			
+			var administratifDisplay = ["douane difficile","information: permis pour véhicule/carnet de douane","immigration",
+			                            "nombreux barrage policier","grève, blocage"];
+			var administratifValue = ["douanedifficile","informationpermis","immigration","barragepolicier","greveblocage"];
+			
+			var risqueDisplay = ["agressions fréquentes","agression à main armée","escroquerie,vol"];
+			var risqueValue = ["agressionsfrequentes","agressionmainarmee","escroquerievol"];
+			
+			$("#select0").change(function(e) {
+				$("#select1").empty();
+				console.log(this.value);
+				var val = this.value;
+				if(val=="route"){
+					
+					$.each(routeDisplay, function( index, value ) {
+						
+						$("#select1").append($('<option></option>').attr("value", routeValue[index]).text(value));
+						
+					});
+				}
+				
+				if(val=="administratif"){
+					
+					$.each(administratifDisplay, function( index, value ) {
+						
+						$("#select1").append($('<option></option>').attr("value", administratifValue[index]).text(value));
+						
+					});
+				}
+				if(val=="risque"){
+					
+					$.each(risqueDisplay, function( index, value ) {
+						
+						$("#select1").append($('<option></option>').attr("value", risqueValue[index]).text(value));
+						
+					});
+				}
+				
+			});
+				
+			/* --------------------disable or enable field dureV based on check box--------------------- */
 				$('#verif').click(function(){
 					
 					 var bol = $('#verif').attr("checked");

@@ -17,11 +17,11 @@ privileged aspect BeanNewItineraire_Roo_Equals {
             return true;
         }
         BeanNewItineraire rhs = (BeanNewItineraire) obj;
-        return new EqualsBuilder().append(arrive, rhs.arrive).append(depart, rhs.depart).append(etape, rhs.etape).isEquals();
+        return new EqualsBuilder().append(arrive, rhs.arrive).append(depart, rhs.depart).isEquals();
     }
     
     public int BeanNewItineraire.hashCode() {
-        return new HashCodeBuilder().append(arrive).append(depart).append(etape).toHashCode();
+        return new HashCodeBuilder().append(arrive).append(depart).toHashCode();
     }
     
 }

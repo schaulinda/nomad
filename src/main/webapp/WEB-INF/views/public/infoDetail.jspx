@@ -12,6 +12,6 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="">
-		${infoPratique.title}
+		${infoPratique.title}, ${infoPratique.locationLat}
 	</div>
 </div>

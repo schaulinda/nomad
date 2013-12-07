@@ -15,14 +15,6 @@ privileged aspect BeanNewItineraire_Roo_JavaBean {
         this.depart = depart;
     }
     
-    public String BeanNewItineraire.getEtape() {
-        return this.etape;
-    }
-    
-    public void BeanNewItineraire.setEtape(String etape) {
-        this.etape = etape;
-    }
-    
     public String BeanNewItineraire.getArrive() {
         return this.arrive;
     }

@@ -141,4 +141,24 @@
 		}
 	}));
 </script>
+
+<script type="text/javascript">
+
+jQuery.noConflict();
+(function($) {
+	$(document)
+			.ready(
+					function() {
+						
+						var onglet ='${onglet}';
+						if(onglet!='itineraire'){
+							
+							$('#panelDirection').addClass("hide");
+						}
+						
+					});
+})(jQuery);
+
+</script>
+
 </div> 

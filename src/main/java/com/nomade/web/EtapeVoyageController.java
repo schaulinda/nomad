@@ -9,6 +9,7 @@ import com.nomade.security.Security;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.UserService;
+import com.nomade.service.VehiculeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -27,6 +28,8 @@ public class EtapeVoyageController {
 	UserService userService;
 	@Autowired
 	EtapeVoyageService voyageService;
+	@Autowired
+	EtapeVehiculeService vehiculeService;
 
 	@RequestMapping("/save")
 	public String save(BeanNoteBookManager beanNoteBookManager,
@@ -39,6 +42,8 @@ public class EtapeVoyageController {
 		voyageService.saveEtapeVoyage(etapeVoyage);
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
+		bookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
 		bookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);

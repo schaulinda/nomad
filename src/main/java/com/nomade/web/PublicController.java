@@ -1,5 +1,7 @@
 package com.nomade.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +54,14 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		
 		uiModel.addAttribute("nomade", nomade);
-		beanManagerItineraire.setInfoPratiques(infoPratiqueService.findInfoByLocation());
-		beanManagerItineraire.setDangerPratiques(dangerPratiqueService.findByLocation());
+		double[] loc1 = new double[]{beanManagerItineraire.getStartLng(), beanManagerItineraire.getStartLat()};
+		double[] loc2 = new double[]{beanManagerItineraire.getEndLng(), beanManagerItineraire.getEndLat()};
+		List<InfoPratique> listInfo = infoPratiqueService.findByLocation(loc1,loc2);
+		beanManagerItineraire.setInfoPratiques(listInfo);
+		List<DangerPratique> listDanger = dangerPratiqueService.findByLocation(loc1,loc2);
+		beanManagerItineraire.setDangerPratiques(listDanger);
+		beanManagerItineraire.setBol("true");
+		beanManagerItineraire.buildMakers();
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";

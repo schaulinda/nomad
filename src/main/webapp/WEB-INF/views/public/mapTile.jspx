@@ -41,8 +41,10 @@
 											},
 											marker : {
 												address : "France, Paris",
+												id:"indicator",
 												options : {
 													draggable : true,
+													icon: "http://maps.google.com/mapfiles/marker_purple.png",
 												},
 												events : {
 													dragend : function(marker,

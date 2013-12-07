@@ -23,8 +23,9 @@
 			</h3>
 		</div>
 		<div class="">
-			<spring:url value="/infopratiques/save" var="save_info_url" ></spring:url>
-			<form:form commandName="infoPratique" method="GET" action="${save_info_url}" id="form_info" >
+			<spring:url value="/infopratiques/save" var="save_info_url"></spring:url>
+			<form:form commandName="infoPratique" method="GET"
+				action="${save_info_url}" id="form_info">
 				<div class="form-group">
 					<label>Title</label>
 					<form:input cssClass="form-control" id="title"
@@ -32,25 +33,22 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 form-group">
-						<label>select</label>
-						<select class="form-control" required="required"
-							placeholder="select type of info" id="select" name="select" >
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+						<label>Categorie d'information</label> <select class="form-control"
+							required="required" placeholder="select type of info" id="select0"
+							name="select">
+							<option value="quotidien">pour le quotidien</option>
+							<option value="bivouac">pour le bivouac</option>
+							<option value="tourisme">pour le tourisme</option>
+							<option value="vehicule">pour le véhicule</option>
 						</select>
 					</div>
 					<div class="col-lg-6 form-group">
-						<label>select2</label>
-						<select class="form-control" required="required"
-							placeholder="select type of info" id="select1" name="select1" >
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
+						<label>Type d'information</label> <select class="form-control"
+							required="required" placeholder="select type of info"
+							id="select1" name="select1">
+							<option value="pointEau">point d'eau</option>
+							<option value="toilettes">toilettes</option>
+							<option value="douches">douches</option>
 						</select>
 					</div>
 				</div>
@@ -58,14 +56,15 @@
 					<label>location</label>
 					<form:input cssClass="adress form-control" id="location"
 						placeholder="Enter location" required="required" path="location" />
-					<form:hidden id="locationLat" path="locationLat" /> 
+					<form:hidden id="locationLat" path="locationLat" />
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
 				<div class="form-group">
 					<label for="duree" class="col-lg-6 control-label">Duree de
 						validite</label>
 					<div class="col-lg-5">
-						<form:input class="form-control" id="dure" pattern="[0-9]*" path="dure" />
+						<form:input class="form-control" id="dure" pattern="[0-9]*"
+							path="dure" />
 					</div>
 				</div>
 				<br />
@@ -73,7 +72,8 @@
 				<div class="row">
 					<div class="col-lg-6 form-group">
 						<div class="checkbox">
-							<label> <form:checkbox id="verif" path="infoVerif" /> Info a verifier
+							<label> <form:checkbox id="verif" path="infoVerif" />
+								Info a verifier
 							</label>
 						</div>
 					</div>
@@ -85,21 +85,19 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 form-group">
-					<form:textarea class="form-control" placeholder="Enter a comment" 
-						path="comment" id="comment" rows="4" />
-						
+						<form:textarea class="form-control" placeholder="Enter a comment"
+							path="comment" id="comment" rows="4" />
+
 					</div>
 					<div class="col-lg-3 form-group">
-					<form:hidden id="photo" path="photo"/>
+						<form:hidden id="photo" path="photo" />
 						<c:if test="${empty infoPratique.photo}">
 							<IMG alt="" src="${res}/img/profil.png" width="100px"
 								height="100px;" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if
-							test="${not empty infoPratique.photo}">
-							<IMG alt=""
-								src="${imageRender_url}/${infoPratique.photo}"
+						<c:if test="${not empty infoPratique.photo}">
+							<IMG alt="" src="${imageRender_url}/${infoPratique.photo}"
 								width="100px" height="100px;" />
 						</c:if>
 					</div>
@@ -127,96 +125,172 @@
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
-			$(document).ready(function() {
-			
-				$('#verif').click(function(){
-					
-					 var bol = $('#verif').attr("checked");
-					console.log(bol);
-					if(bol=="checked"){
-						$('#dureVerification').attr("disabled",false);
-					}else{
-						$('#dureVerification').attr("disabled",true);
-					} 
-				});
-				
-				/* ----------------------------noty for save etape------------------------------------- */
-
-				var save = '${saveInfoDanger}';
-				console.log(save);
-				if (save != "") {
-					setTimeout(function generate() {
-
-						noty({
-							text : "save...",
-							type : "alert",
-							timeout : 2000,
-							modal : false,
-							layout : 'topRight',
-						});
-
-					}, 1000);
-				}
-				
-				/*----------------------verif session and recup----------------------------------  */
-				if ($.session.get('title') != null
-											|| $.session.get('select') != null
-											|| $.session.get('select1') != null
-											|| $.session.get('location') != null
-											|| $.session.get('locationLat') != null
-											|| $.session.get('locationLng') != null
-											|| $.session.get('dure') != null
-											|| $.session.get('verif') != null
-											|| $.session.get('dureVerification') != null
-											|| $.session.get('comment') != null
-											) {
-
-										$("#title").val($.session.get('title'));
-										$("#select").val($.session.get('select'));
-										$("#select1").val($.session.get('select1'));
-										$("#location").val($.session.get('location'));
-										$("#locationLat").val($.session.get('locationLat'));
-										$("#locationLng").val($.session.get('locationLng'));
-										$("#dure").val($.session.get('dure'));
-										$("#verif").val($.session.get('verif'));
-										$("#dureVerification").val($.session.get('dureVerification'));
-										$("#comment").val($.session.get('comment'));
+			$(document)
+					.ready(
+							function() {
+								
+								/* change select1 in ftion of select0 */
+								
+								var quotidienDisplay = ["point d'eau","toilettes","douches"];
+								var quotidienValue = ["pointEau","toilettes","douches"];
+								
+								var bivouacDisplay = ["aire de stationnement gratuite","aire de stationnement payant",
+								                      "voyageur proposant une place dans son jardin","camping appartenant au réseau petitnomad",
+								                      "point de rencontre voyageurs"];
+								var bivouacValue = ["stationnementGratuite","stationnementPayant","jardin","camping","pointRencontre"];
+								
+								var vehiculeDisplay = ["station essence","vidange camping-car","shipping","rassemblement convoi","garage"];
+								var vehiculeValue = ["station","vidange","shipping","rassemblement","garage"];
+								
+								var tourismeDisplay = ["curiosité faune","curiosité flore","curiosité géologique",
+								                       "curiosité historique, monuments","fonds marins","lac, lagunes","plage","départ randonnée"];
+								var tourismeValue = ["faune","flore","géologique","historique, monuments","marins","lac","plage","randonnée"];
+								
+								$("#select0").change(function(e) {
+									$("#select1").empty();
+									var val = this.value;
+									if(val=="quotidien"){
 										
-										$.session.remove('title');
-										$.session.remove('select');
-										$.session.remove('select1');
-										$.session.remove('location');
-										$.session.remove('locationLat');
-										$.session.remove('locationLng');
-										$.session.remove('dure');
-										$.session.remove('verif');
-										$.session.remove('dureVerification');
-										$.session.remove('comment');
-										
+										$.each(quotidienDisplay, function( index, value ) {
+											
+											$("#select1").append($('<option></option>').attr("value", quotidienValue[index]).text(value));
+											
+										});
+									}
 									
-				}
-				
-				/* --------------------save session----------------------- */
-				$("#selectImg").click(
+									if(val=="vehicule"){
+										
+										$.each(vehiculeDisplay, function( index, value ) {
+											
+											$("#select1").append($('<option></option>').attr("value", vehiculeValue[index]).text(value));
+											
+										});
+									}
+									if(val=="tourisme"){
+										
+										$.each(tourismeDisplay, function( index, value ) {
+											
+											$("#select1").append($('<option></option>').attr("value", tourismeValue[index]).text(value));
+											
+										});
+									}
+									
+									if(val=="bivouac"){
+										
+										$.each(bivouacDisplay, function( index, value ) {
+											
+											$("#select1").append($('<option></option>').attr("value", bivouacValue[index]).text(value));
+											
+										});
+									}
+									
+								});
+
+								/* ------------------disable and enable dureVerification------------------------------- */
+								$('#verif').click(
+										function() {
+
+											var bol = $('#verif').attr(
+													"checked");
+											console.log(bol);
+											if (bol == "checked") {
+												$('#dureVerification').attr(
+														"disabled", false);
+											} else {
+												$('#dureVerification').attr(
+														"disabled", true);
+											}
+										});
+
+								/* ----------------------------noty for save etape------------------------------------- */
+
+								var save = '${saveInfoDanger}';
+								console.log(save);
+								if (save != "") {
+									setTimeout(function generate() {
+
+										noty({
+											text : "save...",
+											type : "alert",
+											timeout : 2000,
+											modal : false,
+											layout : 'topRight',
+										});
+
+									}, 1000);
+								}
+
+								/*----------------------verif session and recup----------------------------------  */
+								if ($.session.get('title') != null
+										|| $.session.get('select') != null
+										|| $.session.get('select1') != null
+										|| $.session.get('location') != null
+										|| $.session.get('locationLat') != null
+										|| $.session.get('locationLng') != null
+										|| $.session.get('dure') != null
+										|| $.session.get('verif') != null
+										|| $.session.get('dureVerification') != null
+										|| $.session.get('comment') != null) {
+
+									$("#title").val($.session.get('title'));
+									$("#select").val($.session.get('select'));
+									$("#select1").val($.session.get('select1'));
+									$("#location").val(
+											$.session.get('location'));
+									$("#locationLat").val(
+											$.session.get('locationLat'));
+									$("#locationLng").val(
+											$.session.get('locationLng'));
+									$("#dure").val($.session.get('dure'));
+									$("#verif").val($.session.get('verif'));
+									$("#dureVerification").val(
+											$.session.get('dureVerification'));
+									$("#comment").val($.session.get('comment'));
+
+									$.session.remove('title');
+									$.session.remove('select');
+									$.session.remove('select1');
+									$.session.remove('location');
+									$.session.remove('locationLat');
+									$.session.remove('locationLng');
+									$.session.remove('dure');
+									$.session.remove('verif');
+									$.session.remove('dureVerification');
+									$.session.remove('comment');
+
+								}
+
+								/* --------------------save session----------------------- */
+								$("#selectImg").click(
 
 										function(e) {
 											e.preventDefault();
-											$.session.set('title', $("#title").val());
-											$.session.set('select', $("#select").val());
-											$.session.set('select1', $("#select1").val());
-											$.session.set('location', $("#location").val());
-											$.session.set('locationLat', $("#locationLat").val());
-											$.session.set('locationLng', $("#locationLng").val());
-											$.session.set('dure', $("#dure").val());
-											$.session.set('verif', $("#verif").val());
-											$.session.set('dureVerification', $("#dureVerification").val());
-											$.session.set('comment', $("#comment").val());
-											
+											$.session.set('title', $("#title")
+													.val());
+											$.session.set('select',
+													$("#select").val());
+											$.session.set('select1', $(
+													"#select1").val());
+											$.session.set('location', $(
+													"#location").val());
+											$.session.set('locationLat', $(
+													"#locationLat").val());
+											$.session.set('locationLng', $(
+													"#locationLng").val());
+											$.session.set('dure', $("#dure")
+													.val());
+											$.session.set('verif', $("#verif")
+													.val());
+											$.session.set('dureVerification',
+													$("#dureVerification")
+															.val());
+											$.session.set('comment', $(
+													"#comment").val());
+
 											$(this).unbind('click').click();
 										});
-				
-				
-			});
+
+							});
 		})(jQuery);
 	</script>
 	<script type="text/javascript">
