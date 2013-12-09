@@ -8,6 +8,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="resources" value="/resources" />
 	<spring:url var="home" value="/" />
+    
 	<!-- header -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="nav-collapse collapse bs-navbar-collapse">
