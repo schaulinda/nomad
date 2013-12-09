@@ -12,5 +12,6 @@
         <field:display field="geolocation" id="s_com_nomade_domain_EtapeVoyage_geolocation" object="${etapevoyage}" z="0SWoZx8j0jEuTUIJN6+PLp6GXoY="/>
         <field:display field="nomade" id="s_com_nomade_domain_EtapeVoyage_nomade" object="${etapevoyage}" z="XyLcPpDsEi4Rok9KF9u3lQ4ekIw="/>
         <field:display field="comments" id="s_com_nomade_domain_EtapeVoyage_comments" object="${etapevoyage}" z="+r+CyH0AJUPb8O6+c6UkQQChlFc="/>
+        <field:display field="parcours" id="s_com_nomade_domain_EtapeVoyage_parcours" object="${etapevoyage}" z="6LaWv35aOD78nqDzqRY6G8ZnAsw="/>
     </page:show>
 </div>

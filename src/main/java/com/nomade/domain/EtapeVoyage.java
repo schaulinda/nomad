@@ -43,5 +43,8 @@ public class EtapeVoyage {
     @DBRef
 	private UserNomade nomade;
     
+    @DBRef
+    private Parcours parcours;
+    
     private List<Comment> comments;
 }

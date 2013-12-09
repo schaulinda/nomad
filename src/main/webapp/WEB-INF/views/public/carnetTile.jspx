@@ -13,6 +13,58 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-road"> <!-- co -->
+				</i> Parcours
+			</h3>
+		</div>
+		<spring:url value="/etapevoyages/saveParcours" var="parcours_url"></spring:url>
+		<form:form commandName="beanNoteBookManager" method="GET"
+			action="${parcours_url}" id="form_parcours">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="input-group">
+						<spring:message code="input.start" var="inputStart" />
+						<form:input type="text" id="start" cssClass="form-control adress"
+							placeholder="${inputStart}" path="start" autocomplete="off" />
+						<form:hidden id="startLat" path="startLng" />
+						<form:hidden id="startLng" path="startLat" />
+						<span class="input-group-addon"> <a href="#"> <i
+								class="icon-screenshot"> <!-- co -->
+							</i>
+						</a>
+						</span>
+					</div>
+					<br />
+					<div class="input-group">
+						<spring:message code="input.finish" var="inputFinish" />
+						<form:input type="text" id="end" cssClass="form-control adress"
+							placeholder="${inputFinish}" path="end" autocomplete="off" />
+						<form:hidden id="endLat" path="endLng" />
+						<form:hidden id="endLng" path="endLat" />
+						<!--please change end not finish -->
+						<span class="input-group-addon"> <a href="#"> <i
+								class="icon-screenshot"> <!-- co -->
+							</i>
+						</a>
+						</span>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<a href="#" class="pull-down">
+						<button class="btn" type="submit" id="btn_parcours">
+							<spring:message code="button.valid" />
+						</button>
+					</a>
+				</div>
+			</div>
+		</form:form>
+		<p class="help-block">Apres la creation d'un parcours, vous pouvez y associer des etapes</p>
+	</div>
+
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -125,51 +177,9 @@
 				</div>
 			</div>
 		</form:form>
+		<p class="help-block">l'etape fera partie automatiquement du dernier parcours enregistre</p>
 	</div>
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i> Parcours
-			</h3>
-		</div>
-		<div class="row">
-			<div class="col-lg-9">
-				<input type="hidden" name="count" value="1" />
-
-				<div class="form-group" id="fields">
-					<div class="controls" id="profs">
-						<div class="control-group" id="fields">
-							<form class="input-append" id="form">
-								<input type="hidden" id="count" name="count" value="1" />
-								<div class="input-group" id="field">
-									<input type="hidden" id="location1Lat" name="location1Lat" />
-									<input type="hidden" id="location1Lng" name="location1Lng" />
-									<input type="text" class="form-control" id="location1"
-										autocomplete="off" data-items="8" name="location1" />
-										 <span class="input-group-btn">
-										<button class="btn btn-default add-more" type="button">
-											<i class="icon-plus"> <!-- co -->
-											</i>
-										</button>
-									</span>
-								</div>
-							</form>
-						</div>
-						<br /> <small>Press + to add another adress field </small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<a href="#" class="pull-down">
-					<button class="btn">
-						<spring:message code="button.valid" />
-					</button>
-				</a>
-			</div>
-		</div>
-
-	</div>
+	
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -294,7 +304,7 @@
 								/* ----------------------------noty for save etape------------------------------------- */
 
 								var save = '${beanNoteBookManager.notify}';
-								if (save != "") {
+								if (save == "yep") {
 									setTimeout(function generate() {
 
 										noty({
@@ -307,7 +317,20 @@
 
 									}, 1000);
 								}
+							/* --------------------noty for inform user to create befor the parcours----------------------- */
+							if (save == "nope") {
+									setTimeout(function generate() {
 
+										noty({
+											text : "you must create a parcours first...",
+											type : "warning",
+											timeout : 4000,
+											modal : false,
+											layout : 'topRight',
+										});
+
+									}, 1000);
+								}
 								$('.datepicker').datepicker();
 
 								/* --------------------------on load recup session voy---------------------------- */
@@ -576,6 +599,17 @@
 			formId : "form_etapeVeh",
 			params : {
 				fragments : "smallTile, id_subfooter"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_parcours",
+			event : "onclick",
+			formId : "form_parcours",
+			params : {
+				fragments : "smallTile"
 			}
 		}));
 	</script>

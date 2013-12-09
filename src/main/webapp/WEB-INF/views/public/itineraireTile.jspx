@@ -201,6 +201,19 @@
 				console.log('${beanManagerItineraire.makers}');
 				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
 				console.log(mapdata);
+				/* --------------agrandir la map------------- */
+								$('#smallTile').hide();
+								$('#id_map').removeClass("col-lg-6");
+								$('#id_map').addClass("col-lg-12");
+								$('.closemap').addClass("hide");
+								$('.open').removeClass("hide");
+								
+								map = $("#map").gmap3('get');
+								google.maps.event.trigger(map, 'resize');					
+								map.setZoom(map.getZoom());
+								map.setCenter(map.getCenter());
+								map.panToBounds(map.getBounds());
+				
 				/* -----clear marker and directions but not clear the picker------------ */
 				
 					$("#map").gmap3({
@@ -252,13 +265,6 @@
 							      if (!results) return;
 							      console.log(results);
 							      $(this).gmap3({
-							        map:{
-							          options:{
-							            zoom: 5,
-							            mapTypeId : google.maps.MapTypeId.ROADMAP,
-							            //center: [-33.879, 151.235]
-							          }
-							        },
 							        directionsrenderer:{
 							          divId:"direction",
 							          options:{
