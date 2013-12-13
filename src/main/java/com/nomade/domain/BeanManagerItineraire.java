@@ -21,18 +21,28 @@ public class BeanManagerItineraire {
 	private List<InfoPratique> infoPratiques;
 	
 	private List<DangerPratique> dangerPratiques;
+	
+	private List<InfoPratique> infoPratiquesAll;
+	
+	private List<DangerPratique> dangerPratiquesAll;
 
 	private String makers;
 	
 	public void buildMakers(){
 		List<Marker> listMarkers = new ArrayList<Marker>();
 		Marker mark = null;
-		for(InfoPratique info:this.infoPratiques){
-			 mark = new Marker(info.getLocation(), info.getTitle());
+		for(InfoPratique info:this.infoPratiquesAll){
+			 mark = new Marker(info.getLocation(), info.toString());
+			 mark.setTag("info");
+				mark.setId(info.getId().toString());
+				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_yellowI.png");
 			listMarkers.add(mark);
 		}
-		for(DangerPratique danger:this.dangerPratiques){
-			 mark = new Marker(danger.getLocation(), danger.getTitle());
+		for(DangerPratique danger:this.dangerPratiquesAll){
+			 mark = new Marker(danger.getLocation(), danger.toString());
+			 mark.setTag("danger");
+				mark.setId(danger.getId().toString());
+				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_blackD.png");
 			listMarkers.add(mark);
 		}
 		this.makers = Marker.toJsonArray(listMarkers);
@@ -126,6 +136,22 @@ public class BeanManagerItineraire {
 
 	public void setMakers(String makers) {
 		this.makers = makers;
+	}
+
+	public List<InfoPratique> getInfoPratiquesAll() {
+		return infoPratiquesAll;
+	}
+
+	public void setInfoPratiquesAll(List<InfoPratique> infoPratiquesAll) {
+		this.infoPratiquesAll = infoPratiquesAll;
+	}
+
+	public List<DangerPratique> getDangerPratiquesAll() {
+		return dangerPratiquesAll;
+	}
+
+	public void setDangerPratiquesAll(List<DangerPratique> dangerPratiquesAll) {
+		this.dangerPratiquesAll = dangerPratiquesAll;
 	}
 
 }

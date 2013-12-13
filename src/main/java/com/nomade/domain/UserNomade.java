@@ -22,6 +22,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.query.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -31,6 +32,7 @@ import com.nomade.plugin.OrderBy;
 @RooJavaBean
 @RooToString
 @RooMongoEntity
+@RooJson
 public class UserNomade {
 
 	private static Date accExp = DateUtils.addYears(new Date(), 50);

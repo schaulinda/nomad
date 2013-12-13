@@ -211,3 +211,6 @@ service --interface ~.service.DangerPratiqueService --entity ~.domain.DangerPrat
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-09 12:03:39
 repository mongo --entity ~.domain.Parcours --interface ParcoursRepository
 service --entity ~.domain.Parcours --interface ParcoursService
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-11 11:55:03
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-13 00:21:22
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-13 00:57:48

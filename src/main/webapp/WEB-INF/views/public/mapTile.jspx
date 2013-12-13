@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-10">
 				<input type="text" class="form-control adress" id="addresspicker_map"
-				placeholder="enter the location" />
+				placeholder="ex: France, paris" />
 			</div>
 			<div class="col-lg-2">
 				<a class="closemap hide"><i id="icon" class="icon-circle-arrow-right"><!-- co --></i></a>
@@ -37,6 +37,8 @@
 						
 								
 			/* ---------------------map------------------------ */
+			
+			
 								var $map = $('#map');
 								$map
 										.gmap3({
@@ -96,6 +98,8 @@
 										}
 									}
 								});
+								
+								/*autocompletion  */
 								var geocoder = new google.maps.Geocoder();
 								$('#addresspicker_map')
 										.autocomplete(
@@ -137,12 +141,7 @@
 													}
 												});
 								
-								/* --------ogment map on document ready------ *//*  */
-								$('#smallTile').hide();
-								$('#id_map').removeClass("col-lg-6");
-								$('#id_map').addClass("col-lg-12");
-							
-							
+								
 								
 					/* ------------augment the map----------------------- */
 					
@@ -156,8 +155,7 @@
 							$(this).addClass("hide");
 							$('.open').removeClass("hide");
 							
-							map = $("#map").gmap3('get');
-							
+							map = $("#map").gmap3('get');	
 							google.maps.event.trigger(map, 'resize');					
 							map.setZoom(map.getZoom());
 							map.setCenter(map.getCenter());

@@ -44,7 +44,7 @@ public class EtapeVoyageController {
 		double[] location = new double[]{etapeVoyage.getUserlng(), etapeVoyage.getUserlat()};
 		etapeVoyage.setGeolocation(location);
 		
-		Parcours lastParcours = parcoursService.lastParcours();
+		Parcours lastParcours = parcoursService.lastParcours(nomade);
 		if(lastParcours==null){
 			beanNoteBookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
 			beanNoteBookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
@@ -76,7 +76,12 @@ public class EtapeVoyageController {
 		double[] location1 = new double[]{beanNoteBookManager.getStartLng(), beanNoteBookManager.getStartLat()};
 		double[] location2 = new double[]{beanNoteBookManager.getEndLng(), beanNoteBookManager.getEndLat()};
 		
+		UserNomade userNomade = securite.getUserNomade();
+		
 		Parcours parcours = new Parcours(location1, location2);
+		parcours.setStartAdress(beanNoteBookManager.getStart());
+		parcours.setEndAdress(beanNoteBookManager.getEnd());
+		parcours.setNomad(userNomade);
 		parcoursService.saveParcours(parcours);
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
@@ -84,7 +89,8 @@ public class EtapeVoyageController {
 		bookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
 		bookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
-		uiModel.addAttribute("nomade", securite.getUserNomade());
+		
+		uiModel.addAttribute("nomade", userNomade);
 		uiModel.addAttribute("onglet", "carnet");
 		return "public/carnet";
 		

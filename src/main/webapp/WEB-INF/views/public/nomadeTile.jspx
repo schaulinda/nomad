@@ -2,13 +2,19 @@
 <div class="col-lg-6 tab-pane active fade in" id="smallTile"
 	style="margin-left: -16px;"
 	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
 	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
+	<c:if test="${beanNomadeManager.me ne true}">
 	<div class="tab-content">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -16,16 +22,24 @@
 					<i class="icon-user"> <!-- com -->
 					</i>
 					<spring:message code="a.profileOf" var="aProfileOf" />
-					<a href="">${aProfileOf} user</a>
+					<a href="">${aProfileOf} ${nomad.userName}</a>
 				</h3>
 			</div>
 			<div class="row">
 				<div class="col-lg-2 col-sm-2 col-4">
-					<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
+					<c:if test="${empty nomad.profil.file}" >
+							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
+						</c:if>
+						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+						<c:if test="${not empty nomad.profil.file}" >
+							<IMG alt="" src="${imageRender_url}/${nomad.profil.file}" class="img-rounded" width="90px;" /> 
+						</c:if>
+					
 				</div>
 				<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-8">
-					<label>Nationalite: </label>Francais<br /> <label>Nom: </label>Clement
-					Kaka<br /> <label>Site: </label>twitter/kaka.clement
+					<label>Nationalite: </label> ${nomad.compte.nationality}<br /> 
+					<label>Nom: </label> ${nomad.compte.fullName}
+					<br /> <label>Site: </label> ${nomad.profil.website}
 				</div>
 				<div class="col-lg-4 col-sm-4 col-12">
 					<a class="btn btn-default "> <i class="icon-envelope"> <!-- com -->
@@ -37,12 +51,9 @@
 					<!-- checkbox pour suivre si déjà ami -->
 				</div>
 			</div>
-			<br /> <label>Langues parlees: </label>Francais, Italien<br /> <label>Pays
-				visites: </label>Italie, Cameroun, France, Chilie, Burkina<br /> <br /> <label>Infos
-				supplémentaires / but du voyage:</label>Lorem ipsum dolor sit amet,
-			consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-			labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-			exercitation ullamco laboris nisi
+			<br /> <label>Langues parlees: </label> ${nomad.profil.langues}<br /> <label>Pays
+				visites: </label> ${nomad.profil.visitedCountry}<br /> <br /> <label>Infos
+				supplémentaires / but du voyage:</label> ${nomad.profil.butVoyage}
 		</div>
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -55,21 +66,134 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-2 col-sm-2 col-4">
-					<img alt="user" data-src="holder.js/80x80" class="img-rounded" />
+					<c:if test="${empty nomad.vehicule.photo}" >
+							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
+						</c:if>
+						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+						<c:if test="${not empty nomad.vehicule.photo}" >
+							<IMG alt="" src="${imageRender_url}/${nomad.vehicule.photo}" class="img-rounded" /> 
+						</c:if>
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
-					<label>Nationalite: </label>Allemand<br /> <label>Nom: </label>Car
-					Kaka<br /> <label>Modele: </label>Mercedes
+					<label>vehicule State: </label> ${nomad.vehicule.vehiculeState}<br /> 
+					<label>Nom: </label> ${nomad.vehicule.vehiculeName}<br /> 
+					<label>Modele: </label> ${nomad.vehicule.model}<br />
+					<label>vehicule Type: </label> ${nomad.vehicule.vehiculeType}
+					
 				</div>
 			</div>
 		</div>
 	</div>
-
+</c:if>
+<c:if test="${beanNomadeManager.me eq true}">
+	<div class="tab-content">
+		<div class="panel panel-warning">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-help"> <!-- com -->
+					</i>
+					<spring:message code="a.profileOf" var="aProfileOf" />
+					Help
+				</h3>
+			</div>
+			<div class="row">
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
+				</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
+				</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
+				</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
+				</p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
+				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
+				</p>
+			</div>
+		</div>
+	</div>
+</c:if>
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
 		});
 	</script>
+	
+	<script type="text/javascript">
+	
+	jQuery.noConflict();
+	(function($) {
+		$(document).ready(function() {
+			
+	/* -----clear marker and directions but not clear the picker------------ */
+	
+	$("#map").gmap3({
+	    get: {
+	     		 name: "marker",
+	     		all:true,
+	     		full:true,
+	     		callback: function(objs){
+	     				var arrayId=[];
+	     			 $.each(objs, function(i, obj){
+	     				if(obj.id!="indicator"){
+	     				
+	     					var markObj = obj;
+	     					arrayId.push(markObj.id);		
+		     			}
+	     	          });
+	     			console.log(arrayId);
+	     			
+	     			$(this).gmap3({
+ 				        clear:{
+ 				          id:arrayId
+ 				        }
+ 				      });
+	     			
+	     		}
+	    },
+	 clear:{
+		 name:["directionsrenderer"]
+	 }	
+	
+	});
+			
+	/* ------------put marker from server------------ */
+	var mapdata = jQuery.parseJSON('${beanNomadeManager.makers}');
+	console.log(mapdata);
+	$("#map").gmap3({
+		
+	    marker:{
+	        values:mapdata,
+	        options:{
+	            draggable: false
+	          },
+	          events:{
+	            mouseover: function(marker, event, context){
+	              var map = $(this).gmap3("get"),
+	                infowindow = $(this).gmap3({get:{name:"infowindow"}});
+	              if (infowindow){
+	                infowindow.open(map, marker);
+	            
+	                infowindow.setContent(context.data);
+	              } else {
+	                $(this).gmap3({
+	                  infowindow:{
+	                    anchor:marker, 
+	                    options:{content: context.data}
+	                  }
+	                });
+	              }
+	            },
+	          }
+	    }
+	});
+	
+		});
+	})(jQuery);
+</script>
 
 </div>
 

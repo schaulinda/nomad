@@ -33,4 +33,7 @@ public interface ImageUtilInterface {
 
 	void removeAlbum(String albumId, UserNomade nomade);
 
+	String savethumbail(InputStream inputStream, String contentType,
+			String filename);
+
 }
