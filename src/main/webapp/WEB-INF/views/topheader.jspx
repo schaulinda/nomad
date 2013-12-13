@@ -67,8 +67,7 @@
 						<select class="pull-right form-control" >
 							<option>
 								<spring:message code="option.withoutvehicle" />
-							</option>
-							<option>
+							</option>							<option>
 								<spring:message code="option.lookingForBuy" />
 							</option>
 							<option>

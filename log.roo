@@ -208,3 +208,4 @@ web mvc scaffold --class ~.web.DangerPratiqueController --backingType ~.domain.D
 service --interface ~.service.DangerPratiqueService --entity ~.domain.DangerPratique
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-05 13:50:14
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-06 23:53:40
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-12-13 09:36:52

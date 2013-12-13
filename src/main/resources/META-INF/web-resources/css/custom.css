@@ -82,10 +82,6 @@
 	padding: 0px;
 }
 
-.widget .list-group {
-	margin-bottom: 0;
-}
-
 .widget .panel-title {
 	display: inline
 }
@@ -109,12 +105,30 @@
 	font-size: 11px;
 }
 
+.widget .parcour{
+	color:#b57a35;
+	font-size:11px;
+}
+
+.widget .user-etape{
+	margin-right:2%;
+}
+
+#historique_user hr{
+	margin:0;
+}
+
+#historique_vehicule hr{
+	margin:0;
+}
+
 .widget .action {
 	margin-top: 5px;
 }
 
 .widget .comment-text {
 	font-size: 12px;
+	color:#000;
 }
 
 .widget .btn-block {
@@ -172,7 +186,7 @@ filter: grayscale(100%); */
 	width: 100%;
 }
 
-.bs-calloutVeh, .bs-callout {
+.bs-calloutVeh,.bs-callout {
 	border-left: 3px solid #434343;
 	margin: 20px 0;
 	padding: 20px 20px 0px 20px;
@@ -188,4 +202,9 @@ filter: grayscale(100%); */
 #map {
 	width: 480px;
 	height: 360px;
+}
+
+/************** Bootstrap remake********/
+.panel-footer{
+	text-align:right;
 }
