@@ -9,8 +9,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 privileged aspect UserNomade_Roo_ToString {
     
-    public String UserNomade.toString() {
+    /*public String UserNomade.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+    }*/
     
 }

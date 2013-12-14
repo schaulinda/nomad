@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.query.Order;
@@ -234,5 +236,15 @@ public class UserNomade {
 		}
 
 	}
+	
+	public String toString() {
+		
+		StringBuilder str = new StringBuilder();
+		str.append(this.profil.getFile())
+		.append(",")
+		.append(this.userName);
+        
+		return str.toString();
+    }
 
 }

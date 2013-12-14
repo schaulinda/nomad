@@ -12,9 +12,11 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+	<spring:url var="nomad_url" value="/public/nomad" />
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
-	<c:if test="${beanNomadeManager.me ne true}">
+	<c:if test="${beanNomadeManager.me eq false}">
 	<div class="tab-content">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -42,9 +44,11 @@
 					<br /> <label>Site: </label> ${nomad.profil.website}
 				</div>
 				<div class="col-lg-4 col-sm-4 col-12">
-					<a class="btn btn-default "> <i class="icon-envelope"> <!-- com -->
+					<a class="btn_cancel btn btn-default " id="btn_msg" >
+					 <i class="icon-envelope"> <!-- com -->
 					</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}
-					</a> <a class="btn btn-default" style="margin-top: 3px; width: 105px;">
+					</a> 
+					<a class="btn btn-default" style="margin-top: 3px; width: 105px;">
 						<i class="icon-plus-sign"> <!-- com -->
 					</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
 					</a>
@@ -71,7 +75,7 @@
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty nomad.vehicule.photo}" >
-							<IMG alt="" src="${imageRender_url}/${nomad.vehicule.photo}" class="img-rounded" /> 
+							<IMG alt="" src="${imageRender_url}/${nomad.vehicule.photo}" class="img-rounded" width="100px;" /> 
 						</c:if>
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
@@ -96,7 +100,7 @@
 					Help
 				</h3>
 			</div>
-			<div class="row">
+			<div class="row"  >
 				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, 
 				sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim
 				</p>
@@ -116,6 +120,7 @@
 		</div>
 	</div>
 </c:if>
+<div  class="hide" id="grpLink"><!--link for nomad  --></div>
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
@@ -128,6 +133,17 @@
 	(function($) {
 		$(document).ready(function() {
 			
+				$('#btn_msg').popover({
+					
+					html:'true',
+					trigger:'click',
+					 placement : 'bottom',
+					 title : 'Send message',
+					 content :'<form id="formMsg" ><p><textarea><!-- com --></textarea></p>'
+					 +'<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >Cancel</button>'
+					+' <button class="btn btn-primary" >Send</button></form>'
+				});
+
 	/* -----clear marker and directions but not clear the picker------------ */
 	
 	$("#map").gmap3({
@@ -160,9 +176,34 @@
 	
 	});
 			
-	/* ------------put marker from server------------ */
+	
+	var url ='${imageRender_url}';
 	var mapdata = jQuery.parseJSON('${beanNomadeManager.makers}');
-	console.log(mapdata);
+	/*dracula code form links for nomad*/	
+	$.each(mapdata, function( index, value ) {
+		var hreflink='${nomad_url}'+"/"+value.id;
+		var html='<a href="'+hreflink+'" id="'+value.id+'" class="'+value.id+'" >'+value.id+'</a>';
+		$('#grpLink').append(html);
+		$('#'+value.id).click(function(event){
+			event.stopPropagation();
+			if($('#id_map').hasClass("col-lg-12")){
+				/* reduice map */
+				$('#id_map').removeClass("col-lg-12");
+				$('#id_map').addClass("col-lg-6");
+				
+				$('#smallTile').show();
+				$('.open').addClass("hide");
+				$('.closemap').removeClass("hide");
+				
+				map = $("#map").gmap3('get');
+				google.maps.event.trigger(map, 'resize');
+				map.setZoom(map.getZoom());
+				map.setCenter(map.getCenter());
+				map.panToBounds(map.getBounds());
+			}
+		});
+	});
+	/* ------------put marker from server------------ */
 	$("#map").gmap3({
 		
 	    marker:{
@@ -174,19 +215,34 @@
 	            mouseover: function(marker, event, context){
 	              var map = $(this).gmap3("get"),
 	                infowindow = $(this).gmap3({get:{name:"infowindow"}});
+	              
+	              	var dataWindow = context.data.split(",");
+	              	var link;
+	              	if(dataWindow[0]!=""){
+	              		 link = url+"/"+dataWindow[0];
+	              	}else{
+	              		link='${res}'+"/img/avatar.png";
+	              	}
+	              	
+	               var hrefnomad='${nomad_url}'+"/"+context.id;
+	              
+	                var html ='<div ><img class="img-rounded" style="height: 46px;width: 46px" src="'+link+'" /></div><div><a href="'+hrefnomad+'" id="'+context.id+'" onclick="event.stopPropagation();document.getElementsByClassName(this.id)[0].click();return false;" class="mapLink" >'+dataWindow[1]+'</a></div>';
+	                
 	              if (infowindow){
-	                infowindow.open(map, marker);
-	            
-	                infowindow.setContent(context.data);
+	                infowindow.open(map, marker);	
+	                infowindow.setContent(html);
 	              } else {
 	                $(this).gmap3({
 	                  infowindow:{
 	                    anchor:marker, 
-	                    options:{content: context.data}
+	                    options:{content: html}
 	                  }
 	                });
 	              }
 	            },
+	            mouseout: function(marker, event, context){
+	                
+	              }
 	          }
 	    }
 	});
@@ -194,6 +250,26 @@
 		});
 	})(jQuery);
 </script>
+
+<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			var mapdata = JSON.parse('${beanNomadeManager.makers}');	
+			
+			dojo.forEach(mapdata, function(item, i){
+				var id = item.id;
+				
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "smallTile, id_subfooter"
+						}
+					}));
+				
+			});
+
+		});
+	</script>
 
 </div>
 

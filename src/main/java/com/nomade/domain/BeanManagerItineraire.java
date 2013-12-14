@@ -32,14 +32,14 @@ public class BeanManagerItineraire {
 		List<Marker> listMarkers = new ArrayList<Marker>();
 		Marker mark = null;
 		for(InfoPratique info:this.infoPratiquesAll){
-			 mark = new Marker(info.getLocation(), info.toString());
+			 mark = new Marker(info.getLocation(), info.getTitle());
 			 mark.setTag("info");
 				mark.setId(info.getId().toString());
 				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_yellowI.png");
 			listMarkers.add(mark);
 		}
 		for(DangerPratique danger:this.dangerPratiquesAll){
-			 mark = new Marker(danger.getLocation(), danger.toString());
+			 mark = new Marker(danger.getLocation(), danger.getTitle());
 			 mark.setTag("danger");
 				mark.setId(danger.getId().toString());
 				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_blackD.png");

@@ -49,6 +49,14 @@
 <script src="${res}/js/bootstrap-modal.js">
 	<!-- eh -->	
 	</script>	
+<script src="${res}/js/bootstrap-tooltip.js">
+	<!-- eh -->
+		
+	</script>
+	<script src="${res}/js/bootstrap-popover.js">
+	<!-- eh -->
+		
+	</script>
 		
 <util:load-scripts />
 <spring:url value="/resources/js/app.js" var="app_js_url" />
