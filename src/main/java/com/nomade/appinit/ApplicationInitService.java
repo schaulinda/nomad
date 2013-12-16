@@ -1,14 +1,18 @@
 package com.nomade.appinit;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nomade.domain.RoleName;
-import com.nomade.domain.UserNomade;
+import com.nomade.dataTest.DangerPratiqueDataOnDemand;
+import com.nomade.dataTest.EtapeVehiculeDataOnDemand;
+import com.nomade.dataTest.EtapeVoyageDataOnDemand;
+import com.nomade.dataTest.InfoPratiqueDataOnDemand;
+import com.nomade.dataTest.ParcoursDataOnDemand;
+import com.nomade.dataTest.UserNomadeDataOnDemand;
 import com.nomade.service.UserService;
 
 @Service
@@ -18,7 +22,37 @@ public class ApplicationInitService {
 	@Autowired
 	UserService userService;
 	
-	public void initApplication() {
+	@Autowired
+	private MongoTemplate mongoTemplate;
+	
+	@Autowired
+	UserNomadeDataOnDemand nomadeDod;
+	@Autowired
+	ParcoursDataOnDemand parcoursDataOnDemand;
+	@Autowired
+	EtapeVoyageDataOnDemand voyageDataOnDemand;
+	@Autowired
+	EtapeVehiculeDataOnDemand vehiculeDataOnDemand;
+	@Autowired
+	DangerPratiqueDataOnDemand pratiqueDataOnDemand;
+	@Autowired
+	InfoPratiqueDataOnDemand infoPratiqueDataOnDemand;
+		
+    public  void initData() throws IOException{
+		
+		mongoTemplate.getDb().dropDatabase();
+		
+		nomadeDod.init();
+		parcoursDataOnDemand.init();
+		/*voyageDataOnDemand.init();
+		vehiculeDataOnDemand.init();
+		pratiqueDataOnDemand.init();
+		infoPratiqueDataOnDemand.init();*/
+		
+	}
+	
+	
+	/*public void initApplication() {
 		
 		Set<RoleName> roleNames = new HashSet<RoleName>();
 		roleNames.add(RoleName.ROLE_SIMPLE_USER);
@@ -31,6 +65,6 @@ public class ApplicationInitService {
 		UserNomade nomade2 = new UserNomade("hermine", "yougo", false, roleNames);
 		nomade2.setDisableLogin(true);
 		userService.saveUserNomade(nomade2);
-	}
+	}*/
 
 }

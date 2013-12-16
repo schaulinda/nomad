@@ -4,11 +4,11 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_nomade_domain_Profil" modelAttribute="profil" path="/profils" versionField="none" z="7oLL7W4u8zv38T2pV2OsZVOwTpU=">
         <field:input field="pseudo" id="c_com_nomade_domain_Profil_pseudo" z="1cO2Y20htLtlmocWn/P7H0t3wxg="/>
-        <field:input field="photo" id="c_com_nomade_domain_Profil_photo" z="FR9H1dcyryU+zl2aBbytb3TLa7Q="/>
         <field:input field="website" id="c_com_nomade_domain_Profil_website" z="7CnhNKgO6tNGKDXf3D+hQTcmkn4="/>
         <field:select field="langues" id="c_com_nomade_domain_Profil_langues" items="${langues}" path="langues" z="gYJeqadI5fZE6X0TkHuMfn+jEi8="/>
         <field:select field="visitedCountry" id="c_com_nomade_domain_Profil_visitedCountry" items="${countrys}" path="countrys" z="l9GISa7KsDYitrmHIN4WIl5HNis="/>
         <field:input field="butVoyage" id="c_com_nomade_domain_Profil_butVoyage" z="f/NpkER/FUsgskMkHpqd25allZ0="/>
         <field:input field="metier" id="c_com_nomade_domain_Profil_metier" z="MQt9dqCRemCi1GOEYmiAIa9jSjM="/>
+        <field:input field="file" id="c_com_nomade_domain_Profil_file" z="FWnDGSPOD/zNLOCOrMAe1OJat+E="/>
     </form:update>
 </div>

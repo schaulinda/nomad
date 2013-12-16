@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_nomade_domain_Profil" modelAttribute="profil" path="/profils" render="${empty dependencies}" z="YF1YTzk/SBGhhyRzfce2dBFm+/w=">
         <field:input field="pseudo" id="c_com_nomade_domain_Profil_pseudo" z="1cO2Y20htLtlmocWn/P7H0t3wxg="/>
-        <field:input field="photo" id="c_com_nomade_domain_Profil_photo" z="FR9H1dcyryU+zl2aBbytb3TLa7Q="/>
         <field:input field="website" id="c_com_nomade_domain_Profil_website" z="7CnhNKgO6tNGKDXf3D+hQTcmkn4="/>
         <field:select field="langues" id="c_com_nomade_domain_Profil_langues" items="${langues}" path="langues" z="gYJeqadI5fZE6X0TkHuMfn+jEi8="/>
         <field:select field="visitedCountry" id="c_com_nomade_domain_Profil_visitedCountry" items="${countrys}" path="countrys" z="l9GISa7KsDYitrmHIN4WIl5HNis="/>
         <field:input field="butVoyage" id="c_com_nomade_domain_Profil_butVoyage" z="f/NpkER/FUsgskMkHpqd25allZ0="/>
         <field:input field="metier" id="c_com_nomade_domain_Profil_metier" z="MQt9dqCRemCi1GOEYmiAIa9jSjM="/>
+        <field:input field="file" id="c_com_nomade_domain_Profil_file" z="FWnDGSPOD/zNLOCOrMAe1OJat+E="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Profil" render="${not empty dependencies}" z="dsQ0k5G2/A2xyTdvvH/DMF40qF0="/>
 </div>

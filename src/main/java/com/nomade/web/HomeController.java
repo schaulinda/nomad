@@ -75,7 +75,7 @@ public class HomeController {
 
 		}
 		
-		return "login";
+		return "/login";
 	}
 
 }

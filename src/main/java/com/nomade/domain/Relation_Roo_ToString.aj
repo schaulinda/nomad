@@ -3,14 +3,14 @@
 
 package com.nomade.domain;
 
-import com.nomade.domain.UserNomade;
+import com.nomade.domain.Relation;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect UserNomade_Roo_ToString {
+privileged aspect Relation_Roo_ToString {
     
-    /*public String UserNomade.toString() {
+    public String Relation.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }*/
+    }
     
 }

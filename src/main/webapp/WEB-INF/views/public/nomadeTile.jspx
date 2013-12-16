@@ -16,6 +16,7 @@
 	<spring:url var="nomad_url" value="/public/nomad" />
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
+	<spring:url var="friend_url" value="/relations/add" />
 	<c:if test="${beanNomadeManager.me eq false}">
 	<div class="tab-content">
 		<div class="panel panel-warning">
@@ -48,7 +49,7 @@
 					 <i class="icon-envelope"> <!-- com -->
 					</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}
 					</a> 
-					<a class="btn btn-default" style="margin-top: 3px; width: 105px;">
+					<a class="btn btn-default" id="btn_add" style="margin-top: 3px; width: 105px;">
 						<i class="icon-plus-sign"> <!-- com -->
 					</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
 					</a>
@@ -132,7 +133,7 @@
 	jQuery.noConflict();
 	(function($) {
 		$(document).ready(function() {
-			
+			/* popover ftion */
 				$('#btn_msg').popover({
 					
 					html:'true',
@@ -144,6 +145,19 @@
 					+' <button class="btn btn-primary" >Send</button></form>'
 				});
 
+			/* add friend */
+			$('#btn_add').click(function(){
+				
+				var elt = this.id;
+				var url = '${friend_url}'+"/"+'${nomade.id}';
+				$.get(url, function(data) {
+					if(data=true){
+						$('#'+elt).addClass("disable");
+					}
+				});
+				
+			});
+			
 	/* -----clear marker and directions but not clear the picker------------ */
 	
 	$("#map").gmap3({

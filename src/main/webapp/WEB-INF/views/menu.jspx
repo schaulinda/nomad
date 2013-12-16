@@ -50,5 +50,12 @@
             <menu:item id="i_dangerpratique_new" messageCode="global_menu_new" url="/dangerpratiques?form" z="XegJhJGbLc4Zn47TMMCEeLvX9L0="/>
             <menu:item id="i_dangerpratique_list" messageCode="global_menu_list" url="/dangerpratiques?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DovNzjeh163UJCruijKuv48hfMo="/>
         </menu:category>
+        <menu:category id="c_relation" z="PWt/xiUTfDpef9gdKKGEJC5+1VE=">
+            <menu:item id="i_relation_new" messageCode="global_menu_new" url="/relations?form" z="gkJ0rAnvOnbr3tijf4/QO0whf3Y="/>
+            <menu:item id="i_relation_list" messageCode="global_menu_list" url="/relations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="1ynOzG7SUW4or4MTJzCsO7Utfos="/>
+        </menu:category>
+        <menu:category id="c_seleniumtests" z="PPLMd2yNB6/LSbjIWogAacRPU+Q=">
+            <menu:item id="si_seleniumtests_test" messageCode="selenium_menu_test_suite" url="/resources/selenium/test-suite.xhtml" z="wwunW/IPDcunN97u41MvMJZQ2to="/>
+        </menu:category>
     </menu:menu>
 </div>

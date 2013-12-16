@@ -121,7 +121,7 @@ public class UserNomade {
 		return StringUtils.equals(password, md5EncodedPassword);
 	}
 
-	private String encodePassword(String input) {
+	public String encodePassword(String input) {
 		Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
 		md5PasswordEncoder.setEncodeHashAsBase64(false);
 		return md5PasswordEncoder.encodePassword(input, getSalt());

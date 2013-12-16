@@ -26,6 +26,7 @@ import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 
 @RequestMapping({ "/public" })
@@ -46,6 +47,8 @@ public class PublicController {
 	UserService userService;
 	@Autowired
 	ParcoursService parcoursService;
+	@Autowired
+	RelationService relationService;
 	
 	@RequestMapping("/nomad") 
 	public String nomad(HttpServletRequest request, Model uiModel) {
@@ -83,7 +86,10 @@ public class PublicController {
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);	
 		beanNomadeManager.setMe(false);
-		beanNomadeManager.setNomade(userService.findUserNomade(new BigInteger(id)));
+		
+		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id));
+		beanNomadeManager.setAmie(relationService.friendschip(nomade, findUserNomade));
+		beanNomadeManager.setNomade(findUserNomade);
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 		
