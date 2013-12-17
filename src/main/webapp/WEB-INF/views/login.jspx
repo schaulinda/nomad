@@ -130,6 +130,16 @@
 									type="password" 
 									id="confirmedPassword" />
 						<br />
+						<label class="checkbox col-lg-12 col-sm-12 col-sm-12 col-xs-12">
+							<input type="checkbox" 
+							   	   name="" 
+							       value="1" />
+							<a href="#">
+							   <spring:message code="input.termsOfService" var="inputTermsOfService" />
+				               ${inputTermsOfService}
+							</a>
+						</label> 
+						<br />
 						<button class="btn btn-warning btn-block" type="submit">
 							<spring:message code="button.signUp" />
 						</button>

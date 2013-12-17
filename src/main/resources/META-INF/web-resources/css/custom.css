@@ -114,6 +114,11 @@
 	margin-right:2%;
 }
 
+.scroll{
+	max-height:450px;
+	overflow-y:scroll;
+}
+
 #historique_user hr{
 	margin:0;
 }
