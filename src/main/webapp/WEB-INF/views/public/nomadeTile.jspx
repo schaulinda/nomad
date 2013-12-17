@@ -246,7 +246,7 @@
 	              	
 	               var hrefnomad='${nomad_url}'+"/"+context.id;
 	              
-	                var html ='<div ><img class="img-rounded" style="height: 46px;width: 46px" src="'+link+'" /></div><div><a href="'+hrefnomad+'" id="'+context.id+'" onclick="event.stopPropagation();document.getElementsByClassName(this.id)[0].click();return false;" class="mapLink" >'+dataWindow[1]+'</a></div>';
+	                var html ='<a href="'+hrefnomad+'" id="'+context.id+'" onclick="event.stopPropagation();document.getElementsByClassName(this.id)[0].click();return false;" class="mapLink" ><div ><img class="img-rounded" style="height: 46px;width: 46px" src="'+link+'" /></div><div>'+dataWindow[1]+'</div></a>';
 	                
 	              if (infowindow){
 	                infowindow.open(map, marker);	
