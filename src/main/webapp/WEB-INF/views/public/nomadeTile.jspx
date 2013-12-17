@@ -212,7 +212,13 @@
 				map = $("#map").gmap3('get');
 				google.maps.event.trigger(map, 'resize');
 				map.setZoom(map.getZoom());
-				map.setCenter(map.getCenter());
+				map.setZoom(map.getZoom());
+				var markIndic = $("#map").gmap3({
+				      get:{
+				        	id:"indicator"
+				      }
+				    });
+				map.setCenter(markIndic.getPosition());
 				map.panToBounds(map.getBounds());
 			}
 		});

@@ -99,10 +99,10 @@ public class UserNomade {
 		super();
 	}
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.password = encodePassword(password, getSalt());
-	}
+	}*/
 
 	public String encodePassword(String password, String salt) {
 		if (StringUtils.isEmpty(password) || salt == null)

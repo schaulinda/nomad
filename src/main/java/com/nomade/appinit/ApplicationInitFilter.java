@@ -37,7 +37,6 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 		if (!initialized){
 			
 			applicationInitService.initData();
-			System.out.print("init");
 			initialized = true;
 		}
 		

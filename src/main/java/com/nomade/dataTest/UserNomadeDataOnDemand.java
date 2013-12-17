@@ -20,6 +20,8 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.roo.addon.dod.RooDataOnDemand;
@@ -35,6 +37,8 @@ public class UserNomadeDataOnDemand {
 	ProfilDataOnDemand dataOnDemand;
 	@Autowired
 	VehiculeDataOnDemand vehiculeDataOnDemand;
+	
+	private static Date accExp = DateUtils.addYears(new Date(), 50);
 	
 	 public void setDisableLogin(UserNomade obj, int index) {
 	        Boolean disableLogin = false;
@@ -91,12 +95,12 @@ public class UserNomadeDataOnDemand {
     }
 
 	public void setAccountExpiration(UserNomade obj, int index) {
-        Date accountExpiration = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        Date accountExpiration = accExp;
         obj.setAccountExpiration(accountExpiration);
     }
 
 	public void setCredentialExpiration(UserNomade obj, int index) {
-        Date credentialExpiration = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
+        Date credentialExpiration = accExp;
         obj.setCredentialExpiration(credentialExpiration);
     }
 
@@ -146,7 +150,7 @@ public class UserNomadeDataOnDemand {
         }
         
         data = new ArrayList<UserNomade>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 10; i++) {
             UserNomade obj = getNewTransientUserNomade(i);
             try {
                 userService.saveUserNomade(obj);
