@@ -17,11 +17,14 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.query.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
+import org.springframework.roo.addon.json.RooJson;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -31,6 +34,7 @@ import com.nomade.plugin.OrderBy;
 @RooJavaBean
 @RooToString
 @RooMongoEntity
+@RooJson
 public class UserNomade {
 
 	private static Date accExp = DateUtils.addYears(new Date(), 50);
@@ -95,10 +99,10 @@ public class UserNomade {
 		super();
 	}
 
-	@PrePersist
+	/*@PrePersist
 	public void prePersist() {
 		this.password = encodePassword(password, getSalt());
-	}
+	}*/
 
 	public String encodePassword(String password, String salt) {
 		if (StringUtils.isEmpty(password) || salt == null)
@@ -117,7 +121,7 @@ public class UserNomade {
 		return StringUtils.equals(password, md5EncodedPassword);
 	}
 
-	private String encodePassword(String input) {
+	public String encodePassword(String input) {
 		Md5PasswordEncoder md5PasswordEncoder = new Md5PasswordEncoder();
 		md5PasswordEncoder.setEncodeHashAsBase64(false);
 		return md5PasswordEncoder.encodePassword(input, getSalt());
@@ -232,5 +236,15 @@ public class UserNomade {
 		}
 
 	}
+	
+	public String toString() {
+		
+		StringBuilder str = new StringBuilder();
+		str.append(this.profil.getFile())
+		.append(",")
+		.append(this.userName);
+        
+		return str.toString();
+    }
 
 }

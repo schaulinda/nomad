@@ -37,14 +37,6 @@
 	<!-- eh -->
 		
 	</script>
-	<script src="${res}/js/bootstrap-tooltip.js">
-	<!-- eh -->
-		
-	</script>
-	<script src="${res}/js/bootstrap-popover.js">
-	<!-- eh -->
-		
-	</script>
 	<script src="${res}/js/bootstrap-button.js">
 	<!-- eh -->
 		

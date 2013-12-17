@@ -155,6 +155,10 @@ jQuery.noConflict();
 							$('#panelDirection').addClass("hide");
 						}
 						
+						if($('#id_map').hasClass("col-lg-12")){
+							$('#smallTile').hide();
+						}
+						
 					});
 })(jQuery);
 

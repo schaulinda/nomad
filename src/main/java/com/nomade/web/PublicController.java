@@ -1,23 +1,33 @@
 package com.nomade.web;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nomade.ParcoursService;
 import com.nomade.domain.BeanManagerItineraire;
+import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.EtapeVehiculeService;
+import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.RelationService;
+import com.nomade.service.UserService;
 
 @RequestMapping({ "/public" })
 @Controller
@@ -29,11 +39,61 @@ public class PublicController {
 	InfoPratiqueService infoPratiqueService;
 	@Autowired
 	DangerPratiqueService dangerPratiqueService;
+	@Autowired
+	EtapeVoyageService etapeVoyageService;
+	@Autowired
+	EtapeVehiculeService etapeVehiculeService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	ParcoursService parcoursService;
+	@Autowired
+	RelationService relationService;
 	
-	@RequestMapping("/nomad")
+	@RequestMapping("/nomad") 
 	public String nomad(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 		
+		Page<EtapeVoyage> findByNomade = etapeVoyageService.findByNomade(nomade, 0);
+		Page<EtapeVehicule> findByNomade2 = etapeVehiculeService.findByNomade(nomade, 0);
+		beanNomadeManager.setListEtapeVoy(findByNomade);
+		beanNomadeManager.setListEtapeVeh(findByNomade2);
+		
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		beanNomadeManager.setNomads(findAllUserNomades);	
+		beanNomadeManager.setMe(true);
+		beanNomadeManager.setNomade(nomade);
+		String makers = parcoursService.buildMakers(findAllUserNomades);
+		beanNomadeManager.setMakers(makers);
+		
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("onglet", "nomad");
+		return "public/nomad";
+	}
+	
+	@RequestMapping("/nomad/{id}") 
+	public String selectNomad(@PathVariable("id") String id, HttpServletRequest request, Model uiModel) {
+		UserNomade nomade = securite.getUserNomade();
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
+		
+		Page<EtapeVoyage> findByNomade = etapeVoyageService.findByNomade(nomade, 0);
+		Page<EtapeVehicule> findByNomade2 = etapeVehiculeService.findByNomade(nomade, 0);
+		beanNomadeManager.setListEtapeVoy(findByNomade);
+		beanNomadeManager.setListEtapeVeh(findByNomade2);
+		
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		beanNomadeManager.setNomads(findAllUserNomades);	
+		beanNomadeManager.setMe(false);
+		
+		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id));
+		beanNomadeManager.setAmie(relationService.friendschip(nomade, findUserNomade));
+		beanNomadeManager.setNomade(findUserNomade);
+		String makers = parcoursService.buildMakers(findAllUserNomades);
+		beanNomadeManager.setMakers(makers);
+		
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");
 		return "public/nomad";
@@ -44,7 +104,11 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		
 		uiModel.addAttribute("nomade", nomade);
-		uiModel.addAttribute("beanManagerItineraire", new BeanManagerItineraire());
+		BeanManagerItineraire beanManagerItineraire = new BeanManagerItineraire();
+		beanManagerItineraire.setInfoPratiquesAll(infoPratiqueService.findAllInfoPratiques());
+		beanManagerItineraire.setDangerPratiquesAll(dangerPratiqueService.findAllDangerPratiques());
+		beanManagerItineraire.buildMakers();
+		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";
 	}
@@ -61,6 +125,8 @@ public class PublicController {
 		List<DangerPratique> listDanger = dangerPratiqueService.findByLocation(loc1,loc2);
 		beanManagerItineraire.setDangerPratiques(listDanger);
 		beanManagerItineraire.setBol("true");
+		beanManagerItineraire.setInfoPratiquesAll(infoPratiqueService.findAllInfoPratiques());
+		beanManagerItineraire.setDangerPratiquesAll(dangerPratiqueService.findAllDangerPratiques());
 		beanManagerItineraire.buildMakers();
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");

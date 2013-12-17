@@ -106,6 +106,15 @@ public class ImageUtil implements ImageUtilInterface {
 
 		return gridFSFile.getId().toString();
 	}
+	
+	@Override
+	public String savethumbail(InputStream inputStream, String contentType,String filename) {
+		  
+		GridFSFile gridFSFile = gridFsTemplate.store(inputStream, filename, contentType);
+		
+		return gridFSFile.getId().toString();
+	}
+	
 
 	@Override
 	public GridFSDBFile get(String id) {

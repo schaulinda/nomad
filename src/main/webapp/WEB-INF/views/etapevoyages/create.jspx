@@ -12,6 +12,7 @@
         <field:input field="geolocation" id="c_com_nomade_domain_EtapeVoyage_geolocation" z="czLnwHfhsIpwufY+G1wvXixMId8="/>
         <field:input field="nomade" id="c_com_nomade_domain_EtapeVoyage_nomade" z="66Ow2ochyX0lu4ym48uK+ETOuNs="/>
         <field:input field="comments" id="c_com_nomade_domain_EtapeVoyage_comments" z="wSMXYsWq0GImLbfL/pSPjxEdi2Y="/>
+        <field:input field="parcours" id="c_com_nomade_domain_EtapeVoyage_parcours" z="Ba39UxZDDr7XrTEsxvZDk9kWU5g="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_EtapeVoyage" render="${not empty dependencies}" z="RgOcvsr5MsdofzLs10wficnJPxE="/>
 </div>

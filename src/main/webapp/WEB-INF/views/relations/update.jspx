@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_nomade_domain_Relation" modelAttribute="relation" path="/relations" versionField="none" z="F8IT1IUtf9d9hfoIkflejkJ3TVw=">
+        <field:input field="nomade" id="c_com_nomade_domain_Relation_nomade" z="IytiMR/Tc+zPmGJJ6eMkbb9Tyu4="/>
+        <field:input field="nomade2" id="c_com_nomade_domain_Relation_nomade2" z="0ipPqxpSh/ljnf/upwDRdt1AUk4="/>
+        <field:select field="friendState" id="c_com_nomade_domain_Relation_friendState" items="${friendstates}" path="friendstates" z="mRUDYuuB611tHhyG72SS8pDNYzA="/>
+    </form:update>
+</div>

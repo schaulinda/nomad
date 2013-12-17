@@ -1,5 +1,9 @@
 package com.nomade.web;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,10 +14,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.commons.lang3.StringUtils;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mongodb.gridfs.GridFSDBFile;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
@@ -47,6 +56,7 @@ import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.NomadeUserDetailsService;
 import com.nomade.security.Security;
+import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
 
 @RequestMapping("/users")
@@ -60,6 +70,9 @@ public class UserController {
 	NomadeUserDetailsService nomadeUserDetailsService;
 	@Autowired
 	Security securite ;
+	@Autowired
+	ImageUtil imageUtil;
+	
 	@RequestMapping("/register")
 	public String register(@Valid BeanRegister beanRegister,
 			BindingResult bindingResult, Model uiModel,
@@ -403,14 +416,16 @@ public class UserController {
 		}
 		
 		if(stringPage.equals("profil")){
-			nomade.getProfil().setFile(id);
+			String thumbailImg = thumbailImg(id);
+			nomade.getProfil().setFile(thumbailImg);
 			userService.updateUserNomade(nomade);
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			return "profil/profil";
 		}
 		
 		if(stringPage.equals("vehicule")){
-			nomade.getVehicule().setPhoto(id);
+			String thumbailImg = thumbailImg(id);
+			nomade.getVehicule().setPhoto(thumbailImg);
 			userService.updateUserNomade(nomade);
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			return "profil/vehicule";
@@ -453,6 +468,32 @@ public class UserController {
 		return "/";
 	}
 
+	
+	private String thumbailImg(String id){
+		
+		GridFSDBFile gridFSDBFile = imageUtil.get(id);
+		InputStream inputStream = gridFSDBFile.getInputStream();
+		String filename = gridFSDBFile.getFilename();
+		String contentType = gridFSDBFile.getContentType();
+		contentType = StringUtils.split(contentType, "/")[1];
+		
+		String savethumbail;
+		try {//render thumbnail
+			BufferedImage imBuff = ImageIO.read(inputStream);
+			BufferedImage scaledImg = Scalr.resize(imBuff, Scalr.Method.SPEED, Scalr.Mode.FIT_TO_WIDTH,
+		               150, 100, Scalr.OP_ANTIALIAS);
+			ByteArrayOutputStream bas = new ByteArrayOutputStream();
+			ImageIO.write(scaledImg, contentType, bas);
+			InputStream isImg = new ByteArrayInputStream(bas.toByteArray());
+			 savethumbail = imageUtil.savethumbail(isImg, contentType, filename);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			savethumbail=null;
+		}
+		
+		return savethumbail;
+	}
 
 	void addDateTimeFormatPatterns(Model uiModel) {
 		uiModel.addAttribute("userNomade_accountexpiration_date_format",

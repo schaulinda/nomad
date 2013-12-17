@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RooJavaBean
 @RooToString
+@RooMongoEntity
 public class Profil {
 
     private String pseudo;

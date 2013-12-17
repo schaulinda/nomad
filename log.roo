@@ -208,4 +208,35 @@ web mvc scaffold --class ~.web.DangerPratiqueController --backingType ~.domain.D
 service --interface ~.service.DangerPratiqueService --entity ~.domain.DangerPratique
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-05 13:50:14
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-06 23:53:40
-// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-12-13 09:36:52
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-09 12:03:39
+repository mongo --entity ~.domain.Parcours --interface ParcoursRepository
+service --entity ~.domain.Parcours --interface ParcoursService
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-11 11:55:03
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-13 00:21:22
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-13 00:57:48
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-14 22:35:56
+repository mongo --entity ~.domain.Relation --interface ~.repository.RelationRepository
+service --entity ~.domain.Relation --interface ~.service.RelationService
+web mvc scaffold --backingType ~.domain.Relation --class ~.web.FriendController
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-14 23:24:31
+dod --entity ~.domain.UserNomade
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-15 12:14:58
+selenium test --controller ~.web.UserController --name UserSelenium
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-15 13:27:22
+// [failed] dod --entity 
+// [failed] dod --entity ~.domain
+dod --entity ~.domain.Account
+dod --entity ~.domain.EtapeVoyage
+dod --entity ~.domain.EtapeVehicule
+// [failed] dod --entity ~.domain.Profil
+dod --entity ~.domain.Album
+dod --entity ~.domain.InfoPratique
+dod --entity ~.domain.DangerPratique
+dod --entity ~.domain.Profil
+dod --entity ~.domain.Vehicule
+dod --entity ~.domain.UserNomade
+dod --entity ~.domain.Comment
+dod --entity ~.domain.Parcours
+dod --entity ~.domain.Relation
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-16 00:07:40
+test integration --entity ~.domain.UserNomade --transactional 

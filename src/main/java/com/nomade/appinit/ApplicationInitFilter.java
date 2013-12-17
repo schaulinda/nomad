@@ -25,8 +25,7 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 
 	@Resource
 	private ApplicationInitService applicationInitService;
-	@Autowired
-	private MongoTemplate mongoTemplate;
+	
 	
 	private boolean initialized;
 	
@@ -36,8 +35,8 @@ public class ApplicationInitFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		
 		if (!initialized){
-			mongoTemplate.getDb().dropDatabase();
-			applicationInitService.initApplication();
+			
+			applicationInitService.initData();
 			initialized = true;
 		}
 		

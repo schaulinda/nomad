@@ -9,6 +9,8 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.Profil;
+import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import com.nomade.service.AccountService;
@@ -17,6 +19,8 @@ import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.ProfilService;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 import com.nomade.service.VehiculeService;
 import com.nomade.web.ApplicationConversionServiceFactoryBean;
@@ -47,6 +51,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     InfoPratiqueService ApplicationConversionServiceFactoryBean.infoPratiqueService;
+    
+    @Autowired
+    ProfilService ApplicationConversionServiceFactoryBean.profilService;
+    
+    @Autowired
+    RelationService ApplicationConversionServiceFactoryBean.relationService;
     
     @Autowired
     UserService ApplicationConversionServiceFactoryBean.userService;
@@ -198,6 +208,54 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Profil, String> ApplicationConversionServiceFactoryBean.getProfilToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Profil, java.lang.String>() {
+            public String convert(Profil profil) {
+                return new StringBuilder().append(profil.getPseudo()).append(' ').append(profil.getWebsite()).append(' ').append(profil.getFile()).append(' ').append(profil.getButVoyage()).toString();
+            }
+        };
+    }
+    
+    public Converter<BigInteger, Profil> ApplicationConversionServiceFactoryBean.getIdToProfilConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.Profil>() {
+            public com.nomade.domain.Profil convert(java.math.BigInteger id) {
+                return profilService.findProfil(id);
+            }
+        };
+    }
+    
+    public Converter<String, Profil> ApplicationConversionServiceFactoryBean.getStringToProfilConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Profil>() {
+            public com.nomade.domain.Profil convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), Profil.class);
+            }
+        };
+    }
+    
+    public Converter<Relation, String> ApplicationConversionServiceFactoryBean.getRelationToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Relation, java.lang.String>() {
+            public String convert(Relation relation) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<BigInteger, Relation> ApplicationConversionServiceFactoryBean.getIdToRelationConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.Relation>() {
+            public com.nomade.domain.Relation convert(java.math.BigInteger id) {
+                return relationService.findRelation(id);
+            }
+        };
+    }
+    
+    public Converter<String, Relation> ApplicationConversionServiceFactoryBean.getStringToRelationConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Relation>() {
+            public com.nomade.domain.Relation convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), Relation.class);
+            }
+        };
+    }
+    
     public Converter<UserNomade, String> ApplicationConversionServiceFactoryBean.getUserNomadeToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.UserNomade, java.lang.String>() {
             public String convert(UserNomade userNomade) {
@@ -265,6 +323,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getInfoPratiqueToStringConverter());
         registry.addConverter(getIdToInfoPratiqueConverter());
         registry.addConverter(getStringToInfoPratiqueConverter());
+        registry.addConverter(getProfilToStringConverter());
+        registry.addConverter(getIdToProfilConverter());
+        registry.addConverter(getStringToProfilConverter());
+        registry.addConverter(getRelationToStringConverter());
+        registry.addConverter(getIdToRelationConverter());
+        registry.addConverter(getStringToRelationConverter());
         registry.addConverter(getUserNomadeToStringConverter());
         registry.addConverter(getIdToUserNomadeConverter());
         registry.addConverter(getStringToUserNomadeConverter());

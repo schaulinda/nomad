@@ -37,7 +37,7 @@ public class LoginPathInterceptor extends HandlerInterceptorAdapter {
 		// TODO Auto-generated method stub
 		
 		UserNomade userNomade = securite.getUserNomade();
-		if(userNomade==null){
+		if(userNomade!=null){
 			modelAndView.addObject("nomade", userNomade);
 		}
 		

@@ -8,10 +8,13 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.query.Order;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import com.nomade.plugin.OrderBy;
 
 @RooJavaBean
 @RooToString
@@ -42,5 +45,9 @@ public class EtapeVehicule {
     @DBRef
 	private UserNomade nomade;
     
+    @DBRef
+    private Parcours parcours;
+    
+    @OrderBy(value = "created", order=Order.DESCENDING)
     private List<Comment> comments;
 }

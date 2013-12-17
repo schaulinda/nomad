@@ -100,6 +100,7 @@ privileged aspect EtapeVehiculeController_Roo_Controller {
     void EtapeVehiculeController.populateEditForm(Model uiModel, EtapeVehicule etapeVehicule) {
         uiModel.addAttribute("etapeVehicule", etapeVehicule);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("parcourses", parcoursService.findAllParcourses());
         uiModel.addAttribute("usernomades", userService.findAllUserNomades());
     }
     
