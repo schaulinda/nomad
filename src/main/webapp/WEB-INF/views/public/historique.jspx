@@ -14,16 +14,16 @@
 	<div class="row">
       <!-- Historique user -->
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_user">
-			<div class="panel panel-default widget scroll">
+			<div class="panel panel-default widget">
 				<div class="panel-heading">
-					<span class="icon icon-comment"></span>
+					<span class="icon icon-user"></span>
 					<h3 class="panel-title"> 
 					   <spring:message code="h.historiqueUser" var="hHistoriqueUser" />
 				       ${hHistoriqueUser}
 					</h3>
 					<span class="label label-info"> 78</span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body scroll">
 				   <div class="row">
 				      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 				         <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
@@ -69,52 +69,50 @@
 				    </div>
 				  </div>
 				 </li>
-				 <li class="list-group-item"> 
-				   <div class="row">
-				      <div class="col-xs-1 col-sm-1 col-md-1 col-md-1 col-lg-1 user-etape">
-				         <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
-				      </div>
-				      <div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
-				         <div class="mic-info">
-				            <a href="#">Bhaumik Patel</a>
-				         </div>
-				         <div class="comment-text">
-				            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed 
-				            diam nonummy nibh euismod tincidunt ut laoreet dolore magna 
-				            aliquam erat volutpat. Ut wisi enim
-				         </div>
-				         <div class="mic-info"> on 12 Nov 2013 </div>
-				    </div>
-				  </div>
-				 </li>
 				</ul>
 			</div>
 			<div class="panel-footer">
-			   <div class="btn-group">
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">3</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
-			   </div>
+			   <div class="row">
+			      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+				     <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
+				  </div>
+			      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:5px;">
+			         <form name="c" action="" method="POST" class="">
+					    <spring:message code="input.addNewComment" var="inputAddNewComment" />
+						<input type="text" 
+							   id="c_comment" 
+							   name='c_comment'
+							   class="form-control"
+							   placeholder="${inputAddNewComment}" />
+					</form>
+				 </div>
+				 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:10px;">
+			        <div class="btn-group">
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
+			        </div>
+			     </div>
+			 </div>
 			</div>
-			</div>
+	     </div>
 		 </div>
 		 
 		 <!-- Historique vehicule -->
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_vehicule">
-			<div class="panel panel-default widget scroll">
+			<div class="panel panel-default widget">
 				<div class="panel-heading">
-					<span class="icon icon-comment"></span>
+					<span class="icon icon-bus"></span>
 					<h3 class="panel-title"> 
 					   <spring:message code="h.historiqueVehicle" var="hHistoriqueVehicle" />
 				       ${hHistoriqueVehicle}
 					</h3>
 					<span class="label label-info"> 78</span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body scroll">
 				   <div class="row">
 				      <div class="col-xs-1 col-sm-1 col-md-1 col-md-1 col-lg-1 user-etape">
 				         <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
@@ -181,15 +179,31 @@
 				</ul>
 			</div>
 			<div class="panel-footer">
-			   <div class="btn-group">
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">3</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
-			   </div>
+			   <div class="row">
+			      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+				     <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
+				  </div>
+			      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:5px;">
+			         <form name="c" action="" method="POST" class="">
+					    <spring:message code="input.addNewComment" var="inputAddNewComment" />
+						<input type="text" 
+							   id="c_comment" 
+							   name='c_comment'
+							   class="form-control"
+							   placeholder="${inputAddNewComment}" />
+					</form>
+				 </div>
+				 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:10px;">
+			        <div class="btn-group">
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
+			        </div>
+			     </div>
+			 </div>
 			</div>
 			</div>
 		 </div>
@@ -199,16 +213,16 @@
 		<div class="row">
 		   <!-- Historique Infos pratiques -->
 		    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_infos-pratiques">
-			<div class="panel panel-default widget scroll">
+			<div class="panel panel-default widget">
 				<div class="panel-heading">
-					<span class="icon icon-comment"></span>
+					<span class="icon icon-info-sign"></span>
 					<h3 class="panel-title"> 
 					   <spring:message code="h.historiquePraticalInformation" var="hHistoriquePraticalInformation" />
 				       ${hHistoriquePraticalInformation}
 					</h3>
 					<span class="label label-info"> 78</span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body scroll">
 				   <div class="row">
 				      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 				         <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
@@ -283,31 +297,47 @@
 				</ul>
 				</div>
 				<div class="panel-footer">
-			   <div class="btn-group">
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">3</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
-			   </div>
+			   <div class="row">
+			      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+				     <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
+				  </div>
+			      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:5px;">
+			         <form name="c" action="" method="POST" class="">
+					    <spring:message code="input.addNewComment" var="inputAddNewComment" />
+						<input type="text" 
+							   id="c_comment" 
+							   name='c_comment'
+							   class="form-control"
+							   placeholder="${inputAddNewComment}" />
+					</form>
+				 </div>
+				 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:10px;">
+			        <div class="btn-group">
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
+			        </div>
+			     </div>
+			 </div>
 			</div>
 			</div>
 		</div>
 
 		    <!-- Historique Infos dangers -->
 		     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_infos-dangers">
-			<div class="panel panel-default widget scroll">
+			<div class="panel panel-default widget">
 				<div class="panel-heading">
-					<span class="icon icon-comment"></span>
+					<span class="icon icon-warning-sign"></span>
 					<h3 class="panel-title"> 
 					   <spring:message code="h.historiqueDangerInformation" var="hHistoriqueDangerInformation" />
 				       ${hHistoriqueDangerInformation}
 					</h3>
 					<span class="label label-info"> 78</span>
 				</div>
-				<div class="panel-body">
+				<div class="panel-body scroll">
 				   <div class="row">
 				      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 				         <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
@@ -382,15 +412,31 @@
 				</ul>
 				</div>
 				<div class="panel-footer">
-			   <div class="btn-group">
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button">3</a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
-			      <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
-			   </div>
+			   <div class="row">
+			      <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+				     <img alt="user" data-src="holder.js/50x50" class="img-rounded"  />
+				  </div>
+			      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-top:5px;">
+			         <form name="c" action="" method="POST" class="">
+					    <spring:message code="input.addNewComment" var="inputAddNewComment" />
+						<input type="text" 
+							   id="c_comment" 
+							   name='c_comment'
+							   class="form-control"
+							   placeholder="${inputAddNewComment}" />
+					</form>
+				 </div>
+				 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:10px;">
+			        <div class="btn-group">
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-backward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">1</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button">2</a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-forward"></span></a>
+			           <a href="#" class="btn btn-primary btn-xs" role="button"><span class="icon icon-fast-forward"></span></a>
+			        </div>
+			     </div>
+			 </div>
 			</div>
 			</div>
 		  </div>

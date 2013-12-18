@@ -115,8 +115,9 @@
 }
 
 .scroll{
-	max-height:450px;
-	overflow-y:scroll;
+	height:400px;
+	overflow-y:auto;
+	overflow-x:hidden;
 }
 
 #historique_user hr{
@@ -210,6 +211,9 @@ filter: grayscale(100%); */
 }
 
 /************** Bootstrap remake********/
-.panel-footer{
-	text-align:right;
+@media (min-width: 768px)  and (max-width: 991px){
+.pubs{
+   display: none !important;
+}
+
 }

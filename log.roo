@@ -240,3 +240,6 @@ dod --entity ~.domain.Parcours
 dod --entity ~.domain.Relation
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-12-16 00:07:40
 test integration --entity ~.domain.UserNomade --transactional 
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-12-17 10:57:38
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log closed at 2013-12-17 14:58:30
+// Spring Roo 1.2.3.RELEASE [rev 7fd62b6] log opened at 2013-12-18 09:57:49

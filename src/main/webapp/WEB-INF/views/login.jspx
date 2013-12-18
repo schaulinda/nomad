@@ -134,9 +134,9 @@
 							<input type="checkbox" 
 							   	   name="" 
 							       value="1" />
-							<a href="#">
-							   <spring:message code="input.termsOfService" var="inputTermsOfService" />
-				               ${inputTermsOfService}
+							<a href="#" target="_blank">
+							   <spring:message code="input.termsOfUse" var="inputTermsOfUse" />
+				               ${inputTermsOfUse}
 							</a>
 						</label> 
 						<br />
