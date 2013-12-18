@@ -217,3 +217,22 @@ filter: grayscale(100%); */
 }
 
 }
+
+#myModal{
+	border-radius:6px 6px 6px 6px;
+}
+.modal .modal-header {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  border-radius:6px 6px 0 0;
+}
+.modal .modal-header .btn {
+
+}
+.modal .modal-body {
+
+}
+.modal .modal-footer {
+   
+}

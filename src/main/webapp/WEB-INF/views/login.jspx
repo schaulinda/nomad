@@ -130,20 +130,39 @@
 									type="password" 
 									id="confirmedPassword" />
 						<br />
+	                    
 						<label class="checkbox col-lg-12 col-sm-12 col-sm-12 col-xs-12">
-							<input type="checkbox" 
-							   	   name="" 
-							       value="1" />
-							<a href="#" target="_blank">
-							   <spring:message code="input.termsOfUse" var="inputTermsOfUse" />
-				               ${inputTermsOfUse}
-							</a>
+					       <input type="checkbox" 
+							   	name="" 
+							    value="1" />
+						   <a href="" data-toggle="modal" data-target="#myModal">
+						      <spring:message code="input.termsOfUse" var="inputTermsOfUse" />
+				              ${inputTermsOfUse}
+						   </a>
 						</label> 
+		               
 						<br />
 						<button class="btn btn-warning btn-block" type="submit">
 							<spring:message code="button.signUp" />
 						</button>
 					</form:form>
+				</div>
+			    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				   <div class="modal-dialog">
+				      <div class="modal-content">
+				         <div class="modal-header">
+				             <a href="#" class="close" data-dismiss="modal" aria-hidden="true" role="button"><span class="icon icon-remove"></span></a>
+           			         <h4 class="modal-title" id="myModalLabel">	${inputTermsOfUse}</h4>
+				         </div>
+				         <div class="modal-body">
+                            ...
+                         </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Validate</button>
+                         </div>
+				      </div>
+				   </div>
 				</div>
 			</div>
 		</div>
@@ -165,6 +184,12 @@
 		});
 	</script>
 	<script src="${resources}/js/jquery.js">
+	
+	<!-- eh -->
+		
+	</script>
+	<script src="${resources}/js/bootstrap-modal.js">
+	
 	<!-- eh -->
 		
 	</script>
@@ -177,4 +202,5 @@
 		      return false;
 		    }); */
 	</script>
+	 
 </div>
