@@ -61,6 +61,7 @@ public class HomeController {
 				
 				List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 				beanNomadeManager.setNomads(findAllUserNomades);	
+				beanNomadeManager.setHome(true);
 				beanNomadeManager.setMe(true);
 				beanNomadeManager.setNomade(nomade);
 				String makers = parcoursService.buildMakers(findAllUserNomades);

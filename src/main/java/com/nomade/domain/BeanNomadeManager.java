@@ -20,6 +20,8 @@ public class BeanNomadeManager {
 	private boolean me;
 	
 	private String makers;
+	
+	private boolean home;
 
 	
 	public UserNomade getNomade() {
@@ -76,6 +78,14 @@ public class BeanNomadeManager {
 
 	public void setNomads(List<UserNomade> nomads) {
 		this.nomads = nomads;
+	}
+
+	public boolean getHome() {
+		return home;
+	}
+
+	public void setHome(boolean home) {
+		this.home = home;
 	}
 	
 }

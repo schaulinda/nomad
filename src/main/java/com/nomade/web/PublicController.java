@@ -86,8 +86,12 @@ public class PublicController {
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);	
 		beanNomadeManager.setMe(false);
-		
+		beanNomadeManager.setHome(false);
 		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id));
+		if(nomade.getUserName().equals(findUserNomade.getUserName())){
+			beanNomadeManager.setMe(true);
+		}
+		
 		beanNomadeManager.setAmie(relationService.friendschip(nomade, findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
 		String makers = parcoursService.buildMakers(findAllUserNomades);
