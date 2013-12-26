@@ -12,7 +12,270 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-	<div class="row">forum</div>
+	<div class="row" id="forum">
+	   <div class="forumTitle">
+	      <spring:message code="h.welcome" var="hWelcome" />
+		  ${hWelcome} forum!
+	   </div>
+	   <div class="forumMessage">
+	     <spring:message code="div.forumMessage" var="divForumMessage" />
+		 ${divForumMessage}    
+	   </div>
+	
+	  <div class="table-responsive forumTable">
+	     <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Destinations
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Afrique du Nord</p>
+                     <p><a href="#">Algérie</a> - <a href="#">Egypte</a> - <a href="#">Libye</a> - <a href="#">Maroc</a> - <a href="#">Tunisie</a></p>
+                  </td>
+                  <td>20 095</td>
+                  <td>240 060</td>
+                  <td>22 décembre 2013 à 19:58 de <a href="#">Linda</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Afrique de l'Est et Australe</p>
+                     <p>
+                        <a href="#">Afrique du Sud</a> - <a href="#">Angola</a> - <a href="#">Ascension, Sainte-Hélène, Tristan de Cunha</a> - 
+                        <a href="#">Botswana</a> - <a href="#">Burundi</a> - <a href="#">Djibouti</a> - <a href="#">Erythrée</a>
+                         - <a href="#">Ethiopie</a> - <a href="#">Kenya</a> - <a href="#">Lesotho</a> - <a href="#">Malawi</a>
+                         - <a href="#">Mozambique</a> - <a href="#">Namibie</a> - <a href="#">Ouganda</a> - <a href="#">Rwanda</a>
+                         - <a href="#">Somalie</a> - <a href="#">Soudan</a> - <a href="#">Swaziland</a> - <a href="#">Tanzanie</a>
+                         - <a href="#">Zambie</a> - <a href="#">Zimbabwe</a>
+                     </p>
+                  </td>
+                  <td class="discForum">7 224</td>
+                  <td class="msgForum">76 927</td>
+                  <td class="lastMsg">22 décembre 2013 à 19:54 de <a href="#">Guy moyo</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Amérique du Nord </p>
+                     <p>
+                        <a href="#">Alaska</a> - <a href="#">Canada</a> - <a href="#">Etats-unis</a> - <a href="#">Groenland</a>
+                        - <a href="#">Mexique</a> - <a href="#">Québec</a> - <a href="#">Saint-Pierre-et-Miquelon</a>
+                     </p>
+                  </td>
+                  <td class="discForum">37 663</td>
+                  <td class="msgForum">446 331</td>
+                  <td class="lastMsg">22 décembre 2013 à 19:51 de <a href="#">Tulsène</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	     
+	     <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Thèmes
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Hôtels et forfaits tout-inclus</p>
+                     <p>Discussion, suggestions, critiques et comparaisons d'hôtels et de forfaits tout-inclus</p>
+                  </td>
+                  <td>37 001</td>
+                  <td>295 358</td>
+                  <td>22 décembre 2013 à 16:47 de <a href="#">Linda</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Voyager au féminin</p>
+                     <p>
+                        Rubrique dédiée aux voyageuses. Conseils pratiques, moeurs et coutumes des pays visités, sécurité, etc.
+                     </p>
+                  </td>
+                  <td class="discForum">3 532</td>
+                  <td class="msgForum">42 941</td>
+                  <td class="lastMsg">22 décembre 2013 à 18:00 de <a href="#">Winnie</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Voyager à petits prix</p>
+                     <p>
+                        Discutez des trucs et astuces pour voyager économiquement à travers le monde.
+                     </p>
+                  </td>
+                  <td class="discForum">8 342</td>
+                  <td class="msgForum">64 313</td>
+                  <td class="lastMsg">22 décembre 2013 à 19:28 de <a href="#">Tulsène</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	     
+	      <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Entre deux voyages
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Carnets de voyage, textes de voyageurs</p>
+                     <p>Carnets de voyage, descriptions de souvenirs mémorables, textes inspirés de voyages, reportages, comptes rendus de voyages, etc.</p>
+                  </td>
+                  <td>2 738</td>
+                  <td>66 671</td>
+                  <td>22 décembre 2013 à 19:54 de <a href="#">Linda</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Musiques du monde</p>
+                     <p>
+                        Suggestions de disques et d'artistes étrangers, suggestions de méthodes linguistiques, suggestions d'organismes ou de particuliers offrant des cours de langues, etc.
+                     </p>
+                  </td>
+                  <td class="discForum">1 265</td>
+                  <td class="msgForum">10 830</td>
+                  <td class="lastMsg">21 décembre 2013 à 18:58 de <a href="#">Winnie</a></td>
+               </tr>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Langues du monde</p>
+                     <p>
+                        Discussions sur les langues étrangères, suggestions de méthodes linguistiques, suggestions d'organismes ou de particuliers offrant des cours de langues, etc.
+                     </p>
+                  </td>
+                  <td class="discForum">2 732</td>
+                  <td class="msgForum">22 528</td>
+                  <td class="lastMsg">20 décembre 2013 à 18:10 de <a href="#">Tulsène</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	     
+	      <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Petites annonces
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Compagnons de voyage</p>
+                     <p>Recherchez et trouvez dans cette rubrique un ou des compagnons pour votre prochain voyage</p>
+                  </td>
+                  <td>11 754</td>
+                  <td>42 251</td>
+                  <td>22 décembre 2013 à 19:48 de <a href="#">Linda</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	     
+	     <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Informations pratiques
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Compagnons de voyage</p>
+                     <p>Recherchez et trouvez dans cette rubrique un ou des compagnons pour votre prochain voyage</p>
+                  </td>
+                  <td>11 754</td>
+                  <td>42 251</td>
+                  <td>22 décembre 2013 à 19:48 de <a href="#">Linda</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	     
+	     <table class="table table-bordered table-striped">
+	        <thead class="categorieForum">
+               <tr>
+                  <th class="nomCatForum">
+                     Dangers
+                  </th>
+                  <th class="nbreDiscForum">
+                     Discussions
+                  </th>
+                  <th class="nbreMsgForum">
+                     Messages
+                  </th>
+                  <th class="lastMsgForum">
+                     Dernier message
+                  </th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>
+                     <p class="catForum"><span class="icon icon-folder-open"></span> Compagnons de voyage</p>
+                     <p>Recherchez et trouvez dans cette rubrique un ou des compagnons pour votre prochain voyage</p>
+                  </td>
+                  <td>11 754</td>
+                  <td>42 251</td>
+                  <td>22 décembre 2013 à 19:48 de <a href="#">Linda</a></td>
+               </tr>
+            </tbody>
+	     </table>
+	  </div>
+</div>
 
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({

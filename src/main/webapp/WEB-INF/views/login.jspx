@@ -8,6 +8,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="resources" value="/resources" />
 	<spring:url var="home" value="/" />
+	
 	<!-- header -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="nav-collapse collapse bs-navbar-collapse">
@@ -134,15 +135,16 @@
 						<label class="checkbox col-lg-12 col-sm-12 col-sm-12 col-xs-12">
 					       <input type="checkbox" 
 							   	name="" 
-							    value="1" />
+							    id="checkTerm"/>
 						   <a href="" data-toggle="modal" data-target="#myModal">
 						      <spring:message code="input.termsOfUse" var="inputTermsOfUse" />
 				              ${inputTermsOfUse}
 						   </a>
 						</label> 
-		               
+		                <spring:message code="label_accept_terms_use" var="labelAcceptTermsUse" />
+                        ${labelAcceptTermsUse} 
 						<br />
-						<button class="btn btn-warning btn-block" type="submit">
+						<button class="btn btn-warning btn-block" type="submit" id="registerButton">
 							<spring:message code="button.signUp" />
 						</button>
 					</form:form>
@@ -192,14 +194,17 @@
 	<!-- eh -->
 		
 	</script>
+	
 	<script type="text/javascript">
-		console.log("hi");
-		/*  $("#idform").submit(function(){
-		      if($("#password").val() != $("#confirmedPassword").val()){
-		    	  alert("Les mots de passe ne correspondent pas");
-		      }
-		      return false;
-		    }); */
+	   $("#idform").submit(function(){
+ 		  if($('#checkTerm').attr('checked')){
+		     return true;
+ 		  } 
+ 		  else{
+ 			 alert("${labelAcceptTermsUse}");
+ 		     return false;
+ 		  }
+	   });
 	</script>
 	 
 </div>

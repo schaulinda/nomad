@@ -236,3 +236,72 @@ filter: grayscale(100%); */
 .modal .modal-footer {
    
 }
+
+#forum{
+	padding:10px;
+	height:auto;
+}
+.forumTitle{
+	font-weight:bold;
+	font-size:12pt;
+}
+
+.forumMessage{
+	display:block;
+	font-size:10pt;
+	margin-top:20px;
+}
+
+.forumTable{
+	margin-top:20px;
+}
+
+.forumTable .table thead>tr>th
+	{
+	padding: 4px;
+	line-height: 1.428571429;
+	vertical-align: top;
+	border-top: 1px solid #dddddd;
+	background-color:#b57a35;
+	color:#fff;
+}
+
+.forumTable .table tbody>tr>td{
+	color:#000;
+	padding:2px 5px 2px 10px;
+}
+
+.forumTable .table tbody>tr>td p{
+	margin-bottom:0;
+	text-align:justify;
+}
+
+.forumTable .table tbody>tr>td .catForum{
+	font-weight:bold;
+	color:#b57a35;
+}
+
+.forumTable .table tbody>tr>td .catForum, .forumTable .table tbody>tr>td .discForum, .forumTable .table tbody>tr>td .msgForum, .forumTable .table tbody>tr>td .lastMsg{
+	font-size:10pt;
+}
+
+.forumTable .table tbody>tr>td>p>a{
+	font-size:9pt;
+	color:#000;
+}
+
+.forumTable .table tbody>tr>td>p>a:hover, .forumTable .table tbody>tr>td>p>a:focus, .forumTable .table tbody>tr>td>p>a:active{
+	color:#2a6496;
+}
+
+.nomCatForum{
+	width:60%;
+}
+
+.nbreDiscForum, .nbreMsgForum{
+	width:10%;
+}
+
+.lastMsgForum{
+	width:20%;
+}
