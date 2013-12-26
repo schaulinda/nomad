@@ -6,12 +6,12 @@ import com.nomade.domain.UserNomade;
 
 import java.util.List;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
-import org.springframework.security.core.userdetails.User;
 
 @RooMongoRepository(domainType = Relation.class)
 public interface RelationRepository {
 
     List<com.nomade.domain.Relation> findAll();
+
     
     List<Relation> findByNomadeAndNomade2(UserNomade nomade, UserNomade nomade2);
     

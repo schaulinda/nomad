@@ -2,7 +2,6 @@ package com.nomade.web;
 
 import java.math.BigInteger;
 
-import com.nomade.domain.DangerPratique;
 import com.nomade.domain.FriendState;
 import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
@@ -27,7 +26,7 @@ public class FriendController {
 	@Autowired
 	Security security;
 	
-	@RequestMapping(value = "/add/{idUser}")
+	@RequestMapping(value = "add/{idUser}")
    	@ResponseBody
    	public String add(@PathVariable("idUser") String idUser, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idUser);

@@ -11,6 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <spring:url var="res" value="/resources" />
+
 <spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 <spring:url var="friend_url" value="/relations" />
 
@@ -29,6 +30,7 @@
   })();
 
 </script> -->
+
 
 <script src="${res}/js/jquery.js">
 <!-- eh -->
@@ -158,12 +160,14 @@ body {
 											<c:choose>
 												<c:when test="${empty demand.nomade.profil.file}">
 													<img alt="user" src="${res}/img/avatar.png"
-														class="img-rounded" title="" style="width: 30px;height: 30px;" />
+														class="img-rounded" title=""
+														style="width: 30px; height: 30px;" />
 												</c:when>
 												<c:otherwise>
 													<img alt="user"
 														src="${imageRender_url}/${demand.nomade.profil.file}"
-														class="img-rounded" title="" style="width: 30px;height: 30px;" />
+														class="img-rounded" title=""
+														style="width: 30px; height: 30px;" />
 												</c:otherwise>
 											</c:choose>
 										</div>

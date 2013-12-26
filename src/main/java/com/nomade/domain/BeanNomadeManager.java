@@ -19,9 +19,9 @@ public class BeanNomadeManager {
 	
 	private boolean me;
 	
-	private String makers;
-	
 	private boolean home;
+	
+	private String makers;
 
 	
 	public UserNomade getNomade() {
@@ -80,7 +80,7 @@ public class BeanNomadeManager {
 		this.nomads = nomads;
 	}
 
-	public boolean getHome() {
+	public boolean isHome() {
 		return home;
 	}
 

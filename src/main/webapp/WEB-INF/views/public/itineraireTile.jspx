@@ -189,28 +189,8 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-				/* agrandir la map on click sur itineraire */
-				if($('#id_map').hasClass("col-lg-12")){
-					/* reduice map */
-					$('#id_map').removeClass("col-lg-12");
-					$('#id_map').addClass("col-lg-6");
-					
-					$('#smallTile').show();
-					$('.open').addClass("hide");
-					$('.closemap').removeClass("hide");
-					
-					map = $("#map").gmap3('get');
-					google.maps.event.trigger(map, 'resize');
-					map.setZoom(map.getZoom());
-					map.setZoom(map.getZoom());
-					var markIndic = $("#map").gmap3({
-					      get:{
-					        	id:"indicator"
-					      }
-					    });
-					map.setCenter(markIndic.getPosition());
-					map.panToBounds(map.getBounds());
-				}
+				
+				 
 					
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
