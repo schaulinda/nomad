@@ -4,9 +4,6 @@
     <definition extends="default" name="relations/list">
         <put-attribute name="body" value="/WEB-INF/views/relations/list.jspx"/>
     </definition>
-    <definition extends="default" name="relations/friends">
-        <put-attribute name="body" value="/WEB-INF/views/relations/list.jspx"/>
-    </definition>
 <definition extends="default" name="relations/show">
         <put-attribute name="body" value="/WEB-INF/views/relations/show.jspx"/>
     </definition>

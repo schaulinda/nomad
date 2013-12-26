@@ -196,12 +196,6 @@
 
 									
 							});	
-				
-				/* event draggend map 
-					google.maps.event.addListener(map,'center_changed',function(event) {
-				       console.log("drag");
-				    
-				});*/
 
 							});
 

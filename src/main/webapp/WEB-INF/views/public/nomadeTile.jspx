@@ -17,7 +17,7 @@
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
 	<spring:url var="friend_url" value="/relations/add" />
-	<c:if test="${beanNomadeManager.home eq false}">
+	<c:if test="${beanNomadeManager.me eq false}">
 	<div class="tab-content">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -44,27 +44,17 @@
 					<label>Nom: </label> ${nomad.compte.fullName}
 					<br /> <label>Site: </label> ${nomad.profil.website}
 				</div>
-				<c:if test="${beanNomadeManager.me eq false}">
 				<div class="col-lg-4 col-sm-4 col-12">
 					<a class="btn_cancel btn btn-default " id="btn_msg" >
 					 <i class="icon-envelope"> <!-- com -->
 					</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}
-					</a>
-					<c:if test="${beanNomadeManager.amie eq false}"> 
+					</a> 
 					<a class="btn btn-default" id="btn_add" style="margin-top: 3px; width: 105px;">
 						<i class="icon-plus-sign"> <!-- com -->
 					</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
 					</a>
-					</c:if>
-					<c:if test="${beanNomadeManager.amie eq true}"> 
-					<a class="btn btn-default" id="btn_add" disabled="true" style="margin-top: 3px; width: 105px;">
-						<i class="icon-ok"> <!-- com -->
-					</i> 
-					</a>
-					</c:if>
 					<!-- checkbox pour suivre si déjà ami -->
 				</div>
-				</c:if>
 			</div>
 			<br /> <label>Langues parlees: </label> ${nomad.profil.langues}<br /> <label>Pays
 				visites: </label> ${nomad.profil.visitedCountry}<br /> <br /> <label>Infos
@@ -100,7 +90,7 @@
 		</div>
 	</div>
 </c:if>
-<c:if test="${beanNomadeManager.home eq true}">
+<c:if test="${beanNomadeManager.me eq true}">
 	<div class="tab-content">
 		<div class="panel panel-warning">
 			<div class="panel-heading">
@@ -143,7 +133,7 @@
 	jQuery.noConflict();
 	(function($) {
 		$(document).ready(function() {
-			/* popover ftion for msg */
+			/* popover ftion */
 				$('#btn_msg').popover({
 					
 					html:'true',
@@ -158,11 +148,11 @@
 			/* add friend */
 			$('#btn_add').click(function(){
 				
-				var url = '${friend_url}'+"/"+'${beanNomadeManager.nomade.id}';
+				var elt = this.id;
+				var url = '${friend_url}'+"/"+'${nomade.id}';
 				$.get(url, function(data) {
 					if(data=true){
-						$('#btn_add').html('<i class="icon-ok"> <!-- com --></i>');
-						$('#btn_add').attr('disabled', true);
+						$('#'+elt).addClass("disable");
 					}
 				});
 				
@@ -281,7 +271,6 @@
 	})(jQuery);
 </script>
 
-<!--add spring decoration on each marker  -->
 <script type="text/javascript">
 		dojo.addOnLoad(function() {
 			var mapdata = JSON.parse('${beanNomadeManager.makers}');	

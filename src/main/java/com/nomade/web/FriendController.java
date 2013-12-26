@@ -27,38 +27,9 @@ public class FriendController {
 	@Autowired
 	Security security;
 	
-	@RequestMapping(value = "/add/{idUser}")
+	@RequestMapping(value = "add/{idUser}")
    	@ResponseBody
-   	public String add(@PathVariable("idUser") String idUser, Model uiModel) {
-       	BigInteger bigInteger = new BigInteger(idUser);
-       	UserNomade userNomade = userservice.findUserNomade(bigInteger);
-       	Relation relation = new Relation(security.getUserNomade(), userNomade, FriendState.EN_ATTENTE);
-       	relationService.saveRelation(relation);
-       	
-       	return "true";
-       }
-	
-	@RequestMapping(value = "/listFriends")
-   	public String listFriends(Model uiModel) {
-		UserNomade nomade = security.getUserNomade();
-		uiModel.addAttribute("listFriends", relationService.findByNomadeOrNomade2(nomade, nomade));
-		return "relations/friends";
-	}
-	
-	@RequestMapping(value = "/remove/{idUser}")
-   	@ResponseBody
-   	public String remove(@PathVariable("idUser") String idUser, Model uiModel) {
-       	BigInteger bigInteger = new BigInteger(idUser);
-       	UserNomade userNomade = userservice.findUserNomade(bigInteger);
- 
-       	//relationService.saveRelation(relation);
-       	
-       	return "true";
-       }
-	
-	@RequestMapping(value = "/accept/{idUser}")
-   	@ResponseBody
-   	public String accept(@PathVariable("idUser") String idUser, Model uiModel) {
+   	public String voteMinus(@PathVariable("idUser") String idUser, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idUser);
        	UserNomade userNomade = userservice.findUserNomade(bigInteger);
        	Relation relation = new Relation(security.getUserNomade(), userNomade, FriendState.EN_ATTENTE);
