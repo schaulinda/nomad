@@ -18,7 +18,7 @@
 			</div>
 			<div class="col-lg-2">
 				<a class="closemap hide"><i id="icon" class="icon-circle-arrow-right"><!-- co --></i></a>
-				<a class="open "><i id="icon" class="icon-circle-arrow-left"><!-- co --></i></a>
+				<a class="open btn_open"><i id="icon" class="icon-circle-arrow-left"><!-- co --></i></a>
 			</div>
 		</div>			
 		</h3>

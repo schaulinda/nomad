@@ -4,8 +4,9 @@
     <definition extends="default" name="relations/list">
         <put-attribute name="body" value="/WEB-INF/views/relations/list.jspx"/>
     </definition>
-    <definition extends="default" name="relations/friends">
-        <put-attribute name="body" value="/WEB-INF/views/relations/list.jspx"/>
+    <definition extends="privateLayout" name="relations/friends">
+        <put-attribute name="body" value="/WEB-INF/views/relations/friends.jspx"/>
+         <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
 <definition extends="default" name="relations/show">
         <put-attribute name="body" value="/WEB-INF/views/relations/show.jspx"/>
@@ -16,4 +17,13 @@
 <definition extends="default" name="relations/update">
         <put-attribute name="body" value="/WEB-INF/views/relations/update.jspx"/>
     </definition>
+    
+    <definition extends="privateLayout" name="relations/friends">
+        <put-attribute name="body" value="/WEB-INF/views/relations/friends.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/relations/subfooter.jspx"/>
+        <put-attribute name="smallTile" value="/WEB-INF/views/relations/friendsTile.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
+    
 </tiles-definitions>

@@ -1,10 +1,7 @@
-package com.nomade;
+package com.nomade.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 
 import com.nomade.domain.Marker;
 import com.nomade.domain.Parcours;

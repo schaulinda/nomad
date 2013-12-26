@@ -38,32 +38,45 @@ public class FriendController {
        	return "true";
        }
 	
-	@RequestMapping(value = "/listFriends")
+	@RequestMapping(value = "/friends")
    	public String listFriends(Model uiModel) {
 		UserNomade nomade = security.getUserNomade();
-		uiModel.addAttribute("listFriends", relationService.findByNomadeOrNomade2(nomade, nomade));
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("friends", relationService.findMyFriends(nomade));
+		uiModel.addAttribute("demands", relationService.findReceivedDemand(nomade));
 		return "relations/friends";
 	}
 	
 	@RequestMapping(value = "/remove/{idUser}")
    	@ResponseBody
    	public String remove(@PathVariable("idUser") String idUser, Model uiModel) {
-       	BigInteger bigInteger = new BigInteger(idUser);
+		UserNomade nomade = security.getUserNomade();
+		BigInteger bigInteger = new BigInteger(idUser);
        	UserNomade userNomade = userservice.findUserNomade(bigInteger);
- 
-       	//relationService.saveRelation(relation);
-       	
+       	try {
+			Relation relation = relationService.findMyFriendUnique(userNomade, nomade).get(0);
+			relationService.deleteRelation(relation);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
        	return "true";
        }
 	
 	@RequestMapping(value = "/accept/{idUser}")
    	@ResponseBody
    	public String accept(@PathVariable("idUser") String idUser, Model uiModel) {
-       	BigInteger bigInteger = new BigInteger(idUser);
+		UserNomade nomade = security.getUserNomade();
+		BigInteger bigInteger = new BigInteger(idUser);
        	UserNomade userNomade = userservice.findUserNomade(bigInteger);
-       	Relation relation = new Relation(security.getUserNomade(), userNomade, FriendState.EN_ATTENTE);
-       	relationService.saveRelation(relation);
-       	
+       	try {
+			Relation relation = relationService.findByNomadeAndNomade2(userNomade, nomade).get(0);
+			relation.setFriendState(FriendState.AMI);
+			relationService.updateRelation(relation);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
        	return "true";
        }
 }

@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nomade.ParcoursService;
+
 import com.nomade.domain.BeanManagerItineraire;
 import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
@@ -26,6 +26,7 @@ import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 

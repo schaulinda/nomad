@@ -64,7 +64,14 @@ dojo.ready(function() {
 				}
 			}));
 
-			
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "allFriend",
+				event : "onclick",
+				params : {
+					fragments : "smallTile, topheader"
+				}
+			}));
+		
 			
 		},
 		

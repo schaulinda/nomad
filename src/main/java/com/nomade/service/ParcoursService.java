@@ -1,4 +1,4 @@
-package com.nomade;
+package com.nomade.service;
 
 import java.util.List;
 

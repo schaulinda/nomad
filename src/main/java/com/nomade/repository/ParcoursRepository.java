@@ -1,4 +1,4 @@
-package com.nomade;
+package com.nomade.repository;
 
 import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;

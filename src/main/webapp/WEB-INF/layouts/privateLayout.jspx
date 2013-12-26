@@ -11,9 +11,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <spring:url var="res" value="/resources" />
+<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+<spring:url var="friend_url" value="/relations" />
 
 
- <script type="text/javascript">
+<!-- <script type="text/javascript">
 
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-46557916-1']);
@@ -26,7 +28,7 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
+</script> -->
 
 <script src="${res}/js/jquery.js">
 <!-- eh -->
@@ -41,44 +43,48 @@
 	
 </script>
 <script src="${res}/js/jquery.colorbox.js">
-	<!-- eh -->
-		
-	</script>
-	<script src="${res}/js/bootstrap-datepicker.js">
-	<!-- eh -->
-		
-	</script>
+<!-- eh -->
+	
+</script>
+<script src="${res}/js/bootstrap-datepicker.js">
+<!-- eh -->
+	
+</script>
 <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 <script src="${res}/js/jquery-1.7.2.min.js">
-	<!-- eh -->
-		
-	</script>
-<script src="${res}/js/jquery-ui-1.8.7.min.js">
-	<!-- eh -->
-		
-	</script>
+<!-- eh -->
 	
-	<script src="${res}/js/gmap3.js">
-	<!-- eh -->
-		
-	</script>
+</script>
+<script src="${res}/js/jquery-ui-1.8.7.min.js">
+<!-- eh -->
+	
+</script>
+
+<script src="${res}/js/gmap3.js">
+<!-- eh -->
+	
+</script>
 <script src="${res}/js/bootstrap-modal.js">
-	<!-- eh -->	
-	</script>	
+<!-- eh -->
+	
+</script>
 <script src="${res}/js/bootstrap-tooltip.js">
-	<!-- eh -->
-		
-	</script>
-	<script src="${res}/js/bootstrap-popover.js">
-	<!-- eh -->
-		
-	</script>
-		
+<!-- eh -->
+	
+</script>
+<script src="${res}/js/bootstrap-popover.js">
+<!-- eh -->
+	
+</script>
+
 <util:load-scripts />
 <spring:url value="/resources/js/app.js" var="app_js_url" />
- <script src="${app_js_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
- 
+<script src="${app_js_url}" type="text/javascript">
+<!-- required for FF3 and Opera -->
+	
+</script>
+
 <!-- Le styles -->
 <link href="${res}/css/bootstrap.css" rel="stylesheet" />
 <link href="${res}/css/chosen.css" rel="stylesheet" />
@@ -123,18 +129,20 @@ body {
 	<!-- navBar -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-<!-- 		 <div class="navbar-header"> -->
-			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".nav-collapse">
-				<span class="icon-bar"> <!--coment  --></span> 
-				<span class="icon-bar"> <!--coment  --></span> 
-				<span class="icon-bar"> <!--coment  --></span>
+			<!-- 		 <div class="navbar-header"> -->
+			<button class="navbar-toggle" type="button" data-toggle="collapse"
+				data-target=".nav-collapse">
+				<span class="icon-bar"> <!--coment  --></span> <span
+					class="icon-bar"> <!--coment  --></span> <span class="icon-bar">
+					<!--coment  -->
+				</span>
 			</button>
 			<spring:url var="home" value="/" />
-			<a href="${home}" class="navbar-brand">
-			   <img src="${res}/img/navbarlogo.png" title="Petit Nomad" />
+			<a href="${home}" class="navbar-brand"> <img
+				src="${res}/img/navbarlogo.png" title="Petit Nomad" />
 			</a>
-<!-- 		 </div> -->
-		 
+			<!-- 		 </div> -->
+
 			<div class="nav-collapse collapse bs-navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="#"><i class=" icon-globe"> <!--coment  --></i></a></li>
@@ -142,50 +150,50 @@ body {
 						data-toggle="dropdown"> <i class="icon-group"> <!--coment  --></i>
 					</a>
 						<ul class="dropdown-menu xlarge">
-							<li>
-								<div class="row">
-									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 avatarDropdown">
-										<img data-src="holder.js/40x40" class="img-rounded"
-											src="data:img/png;" title="username" />
+							<c:forEach items="${demands}" var="demand">
+								<li>
+									<div class="row">
+										<div
+											class="col-lg-2 col-md-2 col-sm-2 col-xs-6 avatarDropdown">
+											<c:choose>
+												<c:when test="${empty demand.nomade.profil.file}">
+													<img alt="user" src="${res}/img/avatar.png"
+														class="img-rounded" title="" style="width: 30px;height: 30px;" />
+												</c:when>
+												<c:otherwise>
+													<img alt="user"
+														src="${imageRender_url}/${demand.nomade.profil.file}"
+														class="img-rounded" title="" style="width: 30px;height: 30px;" />
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div class="col-lg-5 col-sm-5 col-4 friendInvitDropdown">
+											<a>${demand.nomade.userName} </a>
+											<spring:message code="div.requestSend" />
+										</div>
+										<div class="col-lg-5 col-sm-5 col-5">
+											<a class="btn btn-default add"
+												href="${friend_url}/accept/${demand.nomade.id}"><i
+												class="icon-plus-sign"> <!--coment  -->
+											</i> <spring:message code="a.add" /> </a> <a
+												class="btn btn-default remove"
+												href="${friend_url}/remove/${demand.nomade.id}"><i
+												class="icon-minus-sign"> <!--coment  --></i></a>
+										</div>
 									</div>
-									<div class="col-lg-5 col-sm-5 col-4 friendInvitDropdown">
-										<a>Username </a>
-										<spring:message code="div.requestSend" />
-									</div>
-									<div class="col-lg-5 col-sm-5 col-5">
-										<a class="btn btn-default"><i class="icon-plus-sign">
-												<!--coment  -->
-										</i> <spring:message code="a.add" /> </a> <a class="btn btn-default"><i
-											class="icon-minus-sign"> <!--coment  --></i></a>
-									</div>
-								</div>
-							</li>
-							<li class="divider">
-								<!--coment  -->
-							</li>
-							<li>
-								<div class="row">
-									<div class="col-lg-2 col-sm-2 col-3 avatarDropdown">
-										<img data-src="holder.js/40x40" class="img-rounded"
-											src="data:img/png;" title="username" />
-									</div>
-									<div class="col-lg-5 col-sm-5 col-4 friendInvitDropdown">
-										<a>Username </a>
-										<spring:message code="div.requestSend" />
-									</div>
-									<div class="col-lg-5 col-sm-5 col-5">
-										<a class="btn btn-default"><i class="icon-plus-sign">
-												<!--coment  -->
-										</i> <spring:message code="a.add" /> </a> <a class="btn btn-default"><i
-											class="icon-minus-sign"> <!--coment  --></i></a>
-									</div>
-								</div>
-							</li>
-							<li class="divider">
-								<!--coment  -->
-							</li>
-							<li><a href="#"><spring:message code="a.allFriends" /></a>
-							</li>
+								</li>
+								<li class="divider">
+									<!--coment  -->
+								</li>
+							</c:forEach>
+							<c:if test="${empty demands}">
+								<li class="divider">
+									<!--coment  -->
+								</li>
+							</c:if>
+							<spring:url value="/relations/friends" var="friends"></spring:url>
+							<li><a href="${friends}" id="allFriend"><spring:message
+										code="a.allFriends" /></a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class=" icon-envelope-alt"> <!--coment  --></i>
@@ -223,6 +231,7 @@ body {
 							<li class="divider">
 								<!--coment  -->
 							</li>
+
 							<li><a href="message.html"><spring:message
 										code="a.allMessages" /></a></li>
 						</ul></li>
@@ -230,8 +239,8 @@ body {
 							<i class="icon-camera"> <!--coment  --></i>
 					</a>
 						<ul class="dropdown-menu">
-						<spring:url value="albums/myPic" var="picManager_url"></spring:url>
-							<li><a href="${picManager_url}" id="picManager_id" > <spring:message
+							<spring:url value="albums/myPic" var="picManager_url"></spring:url>
+							<li><a href="${picManager_url}" id="picManager_id"> <spring:message
 										code="a.photoVideoManager" />
 							</a></li>
 							<li><a href="#"> <spring:message
@@ -239,8 +248,9 @@ body {
 							</a></li>
 						</ul></li>
 				</ul>
-				<img  id="throbber" src="${res}/img/ajaxicon/ajax-loader-icon.gif" class="col-lg-offset-5" 
-				style="margin-top: 7px;display: none;position: fixed;" />
+				<img id="throbber" src="${res}/img/ajaxicon/ajax-loader-icon.gif"
+					class="col-lg-offset-5"
+					style="margin-top: 7px; display: none; position: fixed;" />
 				<ul class="nav navbar-nav pull-right">
 					<li>
 						<div class="input-group searchinput">
@@ -257,8 +267,9 @@ body {
 							<i class="icon-plus"> <!-- co --></i>
 					</a>
 						<ul class="dropdown-menu">
-						<spring:url value="/public/forum" var="forum_url"></spring:url>
-							<li><a href="${forum_url}" id="forum_id" ><i class="icon-comment"> <!-- co -->
+							<spring:url value="/public/forum" var="forum_url"></spring:url>
+							<li><a href="${forum_url}" id="forum_id"><i
+									class="icon-comment"> <!-- co -->
 								</i> <spring:message code="a.forum" /> </a></li>
 							<li class="divider">
 								<!-- co -->
@@ -271,7 +282,9 @@ body {
 								<!-- co -->
 							</li>
 							<spring:url value="/resources/j_spring_security_logout"
-								var="logout" /><spring:message var="logout_msg" code="security_logout" htmlEscape="false" />
+								var="logout" />
+							<spring:message var="logout_msg" code="security_logout"
+								htmlEscape="false" />
 							<li><a href="${logout}"><i class="icon-lock"> <!-- co -->
 								</i> ${logout_msg}</a></li>
 						</ul></li>
@@ -285,80 +298,82 @@ body {
 		<tiles:insertAttribute name="topheader" />
 		<!-- <hr> -->
 		<div class="row" style="padding: 20px;">
-			<div class="col-lg-1 col-md-1 hidden-xs hidden-sm pubs" style="margin-right: 12px; margin-left: -20px;">
+			<div class="col-lg-1 col-md-1 hidden-xs hidden-sm pubs"
+				style="margin-right: 12px; margin-left: -20px;">
 				<h3>Pubs</h3>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
-						</div>
-					</div>
-					<div class="col-lg-12 col-md-12">
-						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
-						</div>
-						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12">
+						<div>
+							<img data-src="holder.js/110x80" src="data:img/png;" />
+						</div>
+						<div>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" style=""> 
+			<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" style="">
 				<!-- body  -->
 				<tiles:insertAttribute name="body" />
 			</div>
-			<div class="col-lg-1 col-md-1 hidden-xs hidden-sm pubs" style="margin-left: -12px;">
+			<div class="col-lg-1 col-md-1 hidden-xs hidden-sm pubs"
+				style="margin-left: -12px;">
 				<h3>Pubs</h3>
 				<div class="row">
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
-						</div>
-					</div>
-					<div class="col-lg-12 col-md-12">
-						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
-						</div>
-						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 					<div class="col-lg-12 col-md-12">
 						<div>
-						   <img data-src="holder.js/110x80" src="data:img/png;" /> 
+							<img data-src="holder.js/110x80" src="data:img/png;" />
 						</div>
 						<div>
-						   <a>brikabra.com</a>
+							<a>brikabra.com</a>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12">
+						<div>
+							<img data-src="holder.js/110x80" src="data:img/png;" />
+						</div>
+						<div>
+							<a>brikabra.com</a>
 						</div>
 					</div>
 				</div>
@@ -396,12 +411,60 @@ body {
 
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "allFriend",
+		event : "onclick",
+		params : {
+			fragments : "smallTile, topheader"
+		}
+	}));
+</script>
+
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "forum_id",
 		event : "onclick",
 		params : {
 			fragments : "body,topheader,id_subfooter"
 		}
 	}));
+</script>
+
+<script type="text/javascript">
+	jQuery.noConflict();
+	(function($) {
+		$(document).ready(function() {
+
+			/* accept friends  */
+
+			$(".add").click(function() {
+				console.log(this);
+				var url = $(this).attr("href");
+				var link = this;
+				$.get(url, function(data) {
+					if (data = true) {
+						$(link).html('<i class="icon-ok"> <!-- com --></i>');
+						$(link).attr('disabled', true);
+					}
+				});
+				return false;
+			});
+
+			/* remove friend */
+
+			$(".remove").click(function() {
+				console.log(this);
+				var url = $(this).attr("href");
+				var link = this;
+				$.get(url, function(data) {
+					if (data = true) {
+						$(link).closest('li').remove();
+					}
+				});
+				return false;
+			});
+
+		});
+	})(jQuery);
 </script>
 
 

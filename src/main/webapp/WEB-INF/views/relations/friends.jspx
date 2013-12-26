@@ -1,38 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div class="col-lg-6 tab-pane active fade in" id="smallTile"
-	style="margin-left: -16px;"
-	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
-	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-	
-	<div class="panel panel-warning">
-			<div class="panel-heading">
-				<h3 class="panel-title">
-					<i class="icon-group"> <!-- com -->
-					</i>
-					Nomads
-				</h3>
-			</div>
-		<c:if test="${not empty friends}">
-			<c:forEach items="${friends}" var="friend" >
-				<c:set value=""></c:set>	
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-7"></div>
-					<div class="col-lg-3"></div>
+
+	<div class="row">
+		<div class="col-lg-6" style="margin-left: 10px;" id="id_map">
+			<div class="row">
+				<div class="col-lg-12">
+					<tiles:insertAttribute  name="mapTile"  />
 				</div>
-			</c:forEach>
-		</c:if>	
+				<tiles:insertAttribute  name="infoTile"  />
+			</div>
+		</div>
+		<tiles:insertAttribute  name="smallTile"  />
 	</div>
-	
-	
-	</div>
+</div>

@@ -2,7 +2,12 @@ package com.nomade.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.nomade.ParcoursService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Parcours;
@@ -10,14 +15,8 @@ import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
-import com.nomade.service.VehiculeService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/etapevoyages")
 @Controller

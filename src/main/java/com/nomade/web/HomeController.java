@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.nomade.ParcoursService;
 import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
@@ -21,6 +20,8 @@ import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.ParcoursService;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 
 @RequestMapping({ "/", "/index", "home" })
@@ -37,6 +38,8 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	ParcoursService parcoursService;
+	@Autowired
+	RelationService relationService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String selectPage(HttpServletRequest request, Model uiModel) {
@@ -70,6 +73,8 @@ public class HomeController {
 				uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "nomad");
+				
+				uiModel.addAttribute("demands", relationService.findReceivedDemand(nomade));
 				
 				return "public/nomad";
 			}

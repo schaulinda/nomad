@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.Parcours;
-import com.nomade.ParcoursService;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
 
 @RequestMapping("/etapevehicules")
