@@ -62,17 +62,18 @@ public class SortingMongoEventListener extends AbstractMongoEventListener {
       }
 
       private void sort(Object fieldValue, OrderBy orderBy) {
-          if (ClassUtils.isAssignable(List.class, fieldValue.getClass())) {
-              final List list = (List) fieldValue;
-              
-              if (orderBy.order() == Order.ASCENDING) {
-                  Collections.sort(list, new BeanComparator(orderBy.value()));
-              } else {
-                  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
-                 
-              }
-          }
-
+    	  if(fieldValue!=null){
+	          if (ClassUtils.isAssignable(List.class, fieldValue.getClass())) {
+	              final List list = (List) fieldValue;
+	              
+	              if (orderBy.order() == Order.ASCENDING) {
+	                  Collections.sort(list, new BeanComparator(orderBy.value()));
+	              } else {
+	                  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
+	                 
+	              }
+	          }
+    	  }
       }
   }
 }

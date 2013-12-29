@@ -9,10 +9,6 @@ public class BeanNomadeManager {
 	
 	private UserNomade nomade;
 	
-	private Page<EtapeVoyage> listEtapeVoy;
-	
-	private Page<EtapeVehicule> listEtapeVeh;
-	
 	List<UserNomade> nomads;
 	
 	private boolean amie;
@@ -30,22 +26,6 @@ public class BeanNomadeManager {
 
 	public void setNomade(UserNomade nomade) {
 		this.nomade = nomade;
-	}
-
-	public Page<EtapeVoyage> getListEtapeVoy() {
-		return listEtapeVoy;
-	}
-
-	public void setListEtapeVoy(Page<EtapeVoyage> listEtapeVoy) {
-		this.listEtapeVoy = listEtapeVoy;
-	}
-
-	public Page<EtapeVehicule> getListEtapeVeh() {
-		return listEtapeVeh;
-	}
-
-	public void setListEtapeVeh(Page<EtapeVehicule> listEtapeVeh) {
-		this.listEtapeVeh = listEtapeVeh;
 	}
 
 	public boolean isAmie() {

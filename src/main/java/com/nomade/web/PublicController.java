@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanManagerItineraire;
 import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
@@ -55,12 +56,13 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
-		Page<EtapeVoyage> findByNomade = etapeVoyageService.findByNomade(
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
 				nomade, 0);
-		Page<EtapeVehicule> findByNomade2 = etapeVehiculeService.findByNomade(
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
 				nomade, 0);
-		beanNomadeManager.setListEtapeVoy(findByNomade);
-		beanNomadeManager.setListEtapeVeh(findByNomade2);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
 
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);
@@ -69,6 +71,7 @@ public class PublicController {
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
+		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");
@@ -81,12 +84,13 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
-		Page<EtapeVoyage> findByNomade = etapeVoyageService.findByNomade(
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
 				nomade, 0);
-		Page<EtapeVehicule> findByNomade2 = etapeVehiculeService.findByNomade(
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
 				nomade, 0);
-		beanNomadeManager.setListEtapeVoy(findByNomade);
-		beanNomadeManager.setListEtapeVeh(findByNomade2);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
 
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);
@@ -106,6 +110,7 @@ public class PublicController {
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
+		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");

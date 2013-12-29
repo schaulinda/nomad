@@ -3,12 +3,15 @@ package com.nomade.web;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNoteBookManager;
+import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;
@@ -38,6 +41,7 @@ public class EtapeVoyageController {
 	public String save(BeanNoteBookManager beanNoteBookManager,
 			HttpServletRequest request, Model uiModel) {
 		EtapeVoyage etapeVoyage = beanNoteBookManager.getEtapeVoyage();
+		System.out.print("etapeVoyage: "+etapeVoyage);
 		UserNomade nomade = securite.getUserNomade();
 		etapeVoyage.setNomade(nomade);
 		double[] location = new double[]{etapeVoyage.getUserlng(), etapeVoyage.getUserlat()};
@@ -45,12 +49,20 @@ public class EtapeVoyageController {
 		
 		Parcours lastParcours = parcoursService.lastParcours(nomade);
 		if(lastParcours==null){
-			beanNoteBookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
-			beanNoteBookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
 			beanNoteBookManager.setNotify("nope");
 			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("nomade", nomade);
 			uiModel.addAttribute("onglet", "carnet");
+			
+			Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
+					nomade, 0);
+			Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
+					nomade, 0);
+			BeanHistorique beanHistorique = new BeanHistorique();
+			beanHistorique.setListEtapeVoy(listEtapeVoy);
+			beanHistorique.setListEtapeVeh(listEtapeVeh);
+			uiModel.addAttribute("beanHistorique", beanHistorique);
+			
 			return "public/carnet";
 			
 		}else{
@@ -58,9 +70,16 @@ public class EtapeVoyageController {
 		}
 		voyageService.saveEtapeVoyage(etapeVoyage);
 		
+		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
+				nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
+				nomade, 0);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		bookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
-		bookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
 		bookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);

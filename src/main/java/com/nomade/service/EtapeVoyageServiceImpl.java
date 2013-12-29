@@ -19,6 +19,8 @@ public class EtapeVoyageServiceImpl implements EtapeVoyageService {
 			    new Order(Direction.DESC, "comments.created"), 
 			    new Order(Direction.DESC, "created")
 			  ));
+		
+		//PageRequest pageRequest = new PageRequest(page, NUMBER_PER_PAGE, new Sort(Direction.DESC, "created"));
 
 		
 		return etapeVoyageRepository.findByNomade(nomade, pageRequest);

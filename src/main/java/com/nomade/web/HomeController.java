@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
@@ -22,6 +23,7 @@ import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
+
 
 import com.nomade.service.UserService;
 
@@ -58,19 +60,22 @@ public class HomeController {
 				
 				BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 				
-				Page<EtapeVoyage> findByNomade = etapeVoyageService.findByNomade(nomade, 0);
-				Page<EtapeVehicule> findByNomade2 = etapeVehiculeService.findByNomade(nomade, 0);
-				beanNomadeManager.setListEtapeVoy(findByNomade);
-				beanNomadeManager.setListEtapeVeh(findByNomade2);
+				Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(nomade, 0);
+				Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(nomade, 0);
+				
+				BeanHistorique beanHistorique = new BeanHistorique();
+				beanHistorique.setListEtapeVoy(listEtapeVoy);//listEtapeVoy.getContent().get(0).getComments().s
+				beanHistorique.setListEtapeVeh(listEtapeVeh);
 				
 				List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 				beanNomadeManager.setNomads(findAllUserNomades);	
 				beanNomadeManager.setMe(true);
-				beanNomadeManager.setHome(true);
+				//beanNomadeManager.setHome(true);
 				beanNomadeManager.setNomade(nomade);
 				String makers = parcoursService.buildMakers(findAllUserNomades);
 				beanNomadeManager.setMakers(makers);
 				
+				uiModel.addAttribute("beanHistorique", beanHistorique);
 				uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "nomad");
