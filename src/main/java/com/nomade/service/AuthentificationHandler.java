@@ -43,7 +43,9 @@ public class AuthentificationHandler extends
 		
 		UserDetails userDetails = getUserDetails(authentication);
 		Cookie myCookie = new Cookie("jforumUserInfo", userDetails.getUsername());
+		myCookie.setPath("/");
 		response.addCookie(myCookie);
+		
 		//response.
 		super.onAuthenticationSuccess(request, response, authentication);
 		// response.sendRedirect(contextPath);
