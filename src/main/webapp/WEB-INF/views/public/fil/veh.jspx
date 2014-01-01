@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="subveh"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+			id="historique_vehicule">
+			<div class="panel panel-default widget">
+				<div class="panel-heading">
+					<span class="icon icon-plane"></span>
+					<h3 class="panel-title">
+						<spring:message code="h.historiqueVehicle"
+							var="hHistoriqueVehicle" />
+						${hHistoriqueVehicle}
+					</h3>
+					<span class="label label-info"> 78</span>
+				</div>
+				<div class="panel-body scroll">
+					<div class="row">
+						<div
+							class="col-xs-1 col-sm-1 col-md-1 col-md-1 col-lg-1 user-etape">
+							<img alt="user" data-src="holder.js/50x50" class="img-rounded" />
+						</div>
+						<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+							<div class="mic-info">
+								<a href="#">Bhaumik Patel</a>
+							</div>
+							<div class="comment-text">Lorem ipsum dolor sit amet,
+								consectetuer adipiscing elit, sed diam nonummy nibh euismod
+								tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi
+								enim</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape">
+							<img alt="Etape" data-src="holder.js/400x200"
+								class="img-rounded img-responsive" />
+						</div>
+						<div
+							class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
+							<a href="#">Comment</a> * on 11 Nov 2013 * <a href="#"
+								class="parcour">from Yaounde to Garoua</a> <span
+								class="label label-info"> 4 Comments</span>
+						</div>
+					</div>
+					<!-- comments -->
+					<ul class="list-group">
+						<li class="list-group-item">
+							<div class="row">
+								<div
+									class="col-xs-1 col-sm-1 col-md-1 col-md-1 col-lg-1 user-etape">
+									<img alt="user" data-src="holder.js/50x50" class="img-rounded" />
+								</div>
+								<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+									<div class="mic-info">
+										<a href="#">Bhaumik Patel</a>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+									<div class="mic-info">on 12 Nov 2013</div>
+								</div>
+							</div>
+						</li>
+						<li class="list-group-item">
+							<div class="row">
+								<div
+									class="col-xs-1 col-sm-1 col-md-1 col-md-1 col-lg-1 user-etape">
+									<img alt="user" data-src="holder.js/50x50" class="img-rounded" />
+								</div>
+								<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+									<div class="mic-info">
+										<a href="#">Bhaumik Patel</a>
+									</div>
+									<div class="comment-text">Lorem ipsum dolor sit amet,
+										consectetuer adipiscing elit, sed diam nonummy nibh euismod
+										tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+										wisi enim</div>
+									<div class="mic-info">on 12 Nov 2013</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="panel-footer">
+					<div class="row">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"
+							style="margin-top: 5px;">
+							<form name="c" action="" method="POST" class="">
+								<spring:message code="input.addNewComment"
+									var="inputAddNewComment" />
+								<input type="text" id="c_comment" name='c_comment'
+									class="form-control" placeholder="${inputAddNewComment}" />
+							</form>
+						</div>
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+							style="margin-top: 10px;">
+							<div class="btn-group">
+								<a href="#" class="btn btn-primary btn-xs" role="button"><span
+									class="icon icon-fast-backward"></span></a> <a href="#"
+									class="btn btn-primary btn-xs" role="button"><span
+									class="icon icon-backward"></span></a> <a href="#"
+									class="btn btn-primary btn-xs" role="button">1</a> <a href="#"
+									class="btn btn-primary btn-xs" role="button">2</a> <a href="#"
+									class="btn btn-primary btn-xs" role="button"><span
+									class="icon icon-forward"></span></a> <a href="#"
+									class="btn btn-primary btn-xs" role="button"><span
+									class="icon icon-fast-forward"></span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+

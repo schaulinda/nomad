@@ -271,7 +271,7 @@ body {
 							<i class="icon-plus"> <!-- co --></i>
 					</a>
 						<ul class="dropdown-menu">
-							<spring:url value="/public/forum" var="forum_url"></spring:url>
+							<spring:url value="/forum" var="forum_url"></spring:url>
 							<li><a href="${forum_url}" id="forum_id"><i
 									class="icon-comment"> <!-- co -->
 								</i> <spring:message code="a.forum" /> </a></li>
