@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -39,6 +40,11 @@ public class AuthentificationHandler extends
 		int fieldPercent = getUserNomade(authentication).fieldPercent();
 		HttpSession session = request.getSession();
 		session.setAttribute("fieldPercent", fieldPercent);
+		
+		UserDetails userDetails = getUserDetails(authentication);
+		Cookie myCookie = new Cookie("jforumUserInfo", userDetails.getUsername());
+		response.addCookie(myCookie);
+		//response.
 		super.onAuthenticationSuccess(request, response, authentication);
 		// response.sendRedirect(contextPath);
 
