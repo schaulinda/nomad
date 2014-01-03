@@ -10,44 +10,44 @@
 	<spring:url var="home" value="/" />
 	
 	<!-- header -->
-	<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="nav-collapse collapse bs-navbar-collapse">
-			<a href="${home}" class="navbar-brand logoLink">
-				<img src="${resources}/img/navbarlogo.png"> <!-- eh --> </img>
-			</a>
-			<ul class="nav navbar-nav col-lg-offset-8">
-				<li class="dropdown ">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<spring:message code="a.language" />
-						<b class="caret"><!--  com--></b>
-					</a>
-						<ul class="dropdown-menu">
-						<li><util:language label="French" locale="fr" /></li>
-						<li><util:language label="English" locale="en" /></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+   <div class="navbar-header">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+	     <div class="container">
+	        <div class="navbar-header">
+	           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	           </button>
+	           <a href="${home}" class="navbar-brand logoLink">
+			      <img src="${resources}/img/navbarlogo.png"> <!-- eh --> </img>
+			   </a>
+	        </div>
+		    <div class="collapse navbar-collapse">
+			   <ul class="nav navbar-nav pull-right">
+                  <spring:message code="label.language_french" var="labelLanguageFrench" />
+			      <spring:message code="label.language_english" var="labelLanguageEnglish" />
+                  <li><util:language locale="fr" label="${labelLanguageFrench}"></util:language></li>
+                  <li><util:language locale="en" label="${labelLanguageEnglish}"></util:language></li>
+			   </ul>
+		    </div>
+	     </div>
+      </div>
+   </div>
+	<!-- body content -->
+	<div class="row">
+	   <div class="global_block">
+	      <img src="${resources}/img/petitNOMAD.png" width="1400" height="700" class="img-responsive"> </img>
+	   </div>
 	</div>
-	<!-- body conetnt -->
-	<div class="fond-bg">
-		<img alt="" src="${resources}/img/travel.jpg">
-		<!--  com-->
-		</img>
-	</div>
+	
 	<div class="block-avant">
-		<div class="row">
-			<div
-				class="col-lg-5 col-lg-offset-2 front-welcome-text col-sm-5 col-sm-offset-1 col-12">
-				<h3>
-					<spring:message code="h.welcome" />
-				</h3>
-				<p>
-					<spring:message code="p.travel" />
-				</p>
-			</div>
-			<div class="col-lg-3 col-sm-5 col-12">
-				<div class="well">
+		<div class="row login_content">
+		    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 logo-page">
+		       <img src="${resources}/img/travel.png" class="img-responsive transparent"> </img>
+		    </div> 
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<div class="well loginForm">
 					<c:if test="${not empty param.login_error}">
 						<div class="errors">
 							<div class="alert alert-danger">
@@ -75,7 +75,7 @@
 							   class="form-control" 
 							   name="j_password"
 							   placeholder="${inputPassword }" />
-						<label class="checkbox col-lg-6 col-sm-6 col-6">
+						<label class="checkbox_remember col-lg-6 col-md-6 col-sm-6 col-xs-6">
 							<input type="checkbox" 
 							   	   name="_spring_security_remember_me" 
 							       value="1" />
@@ -92,7 +92,7 @@
 						</button>
 					</form>
 				</div>
-				<div class="well">
+				<div class="well registerForm">
 					<legend>
 						<spring:message code="legend.newOnPN" />
 					</legend>
@@ -130,9 +130,7 @@
 									min="6"
 									type="password" 
 									id="confirmedPassword" />
-						<br />
-	                    
-						<label class="checkbox col-lg-12 col-sm-12 col-sm-12 col-xs-12">
+						<label class="checkbox_terms col-lg-12 col-sm-12 col-sm-12 col-xs-12">
 					       <input type="checkbox" 
 							   	name="" 
 							    id="checkTerm"/>
@@ -142,8 +140,6 @@
 						   </a>
 						</label> 
 		                <spring:message code="label_accept_terms_use" var="labelAcceptTermsUse" />
-                        ${labelAcceptTermsUse} 
-						<br />
 						<button class="btn btn-warning btn-block" type="submit" id="registerButton">
 							<spring:message code="button.signUp" />
 						</button>
@@ -169,8 +165,8 @@
 			</div>
 		</div>
 		<br />
-		<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 <br /><spring:message code="a.whoAreWe" /></a> | 
+		<footer class="text-center login-footer" style="z-index: 99; position: relative;">
+			<a href="#" class="copyright">© Petit Nomad 2238 <spring:message code="a.whoAreWe" /></a> <br /> 
 			<a href="#" class="traitgauche"><spring:message code="a.contact" /></a> | 
 			<a href="#" class="traitgauche"><spring:message code="a.confidentiality" /></a> | 
 			<a href="#" class="traitgauche"><spring:message code="a.userAgreement" /></a> | 
@@ -207,5 +203,4 @@
  		  }
 	   });
 	</script>
-	 
 </div>

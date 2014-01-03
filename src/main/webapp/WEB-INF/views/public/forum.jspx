@@ -24,7 +24,7 @@
 	
 	  <div class="table-responsive forumTable">
 	     <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Destinations
@@ -82,7 +82,7 @@
 	     </table>
 	     
 	     <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Thèmes
@@ -134,7 +134,7 @@
 	     </table>
 	     
 	      <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Entre deux voyages
@@ -186,7 +186,7 @@
 	     </table>
 	     
 	      <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Petites annonces
@@ -216,7 +216,7 @@
 	     </table>
 	     
 	     <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Informations pratiques
@@ -246,7 +246,7 @@
 	     </table>
 	     
 	     <table class="table table-bordered table-striped">
-	        <thead class="categorieForum">
+	        <thead class="rubriqueForum">
                <tr>
                   <th class="nomCatForum">
                      Dangers
