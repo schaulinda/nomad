@@ -83,11 +83,12 @@ public class PublicController {
 			HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
-
+		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id)); 
+		
 		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
+				findUserNomade, 0);
 		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
+				findUserNomade, 0);
 		BeanHistorique beanHistorique = new BeanHistorique();
 		beanHistorique.setListEtapeVoy(listEtapeVoy);
 		beanHistorique.setListEtapeVeh(listEtapeVeh);
@@ -97,7 +98,6 @@ public class PublicController {
 		beanNomadeManager.setMe(false);
 		beanNomadeManager.setHome(false);
 
-		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id));
 
 		if (nomade.getUserName().equals(findUserNomade.getUserName())) {
 

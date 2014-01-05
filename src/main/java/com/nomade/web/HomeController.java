@@ -1,5 +1,6 @@
 package com.nomade.web;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -89,5 +91,50 @@ public class HomeController {
 		
 		return "/login";
 	}
+	
+	/*@RequestMapping("/{username}")
+	public String nomad(@PathVariable("username") String username, HttpServletRequest request, Model uiModel) {
+		
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
+		List<UserNomade> findByUserName = userService.findByUserName(username);
+		
+		if(findByUserName!=null && findByUserName.size()>0){
+			
+			UserNomade findUserNomade = findByUserName.get(0);
+			
+			Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
+				findUserNomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
+				findUserNomade, 0);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		beanNomadeManager.setNomads(findAllUserNomades);
+		beanNomadeManager.setMe(false);
+		beanNomadeManager.setHome(false);
+
+
+		if (nomade.getUserName().equals(findUserNomade.getUserName())) {
+
+			beanNomadeManager.setMe(true);
+
+		}
+		beanNomadeManager.setAmie(relationService.friendschip(nomade,
+				findUserNomade));
+		beanNomadeManager.setNomade(findUserNomade);
+		String makers = parcoursService.buildMakers(findAllUserNomades);
+		beanNomadeManager.setMakers(makers);
+
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("onglet", "nomad");
+		
+		}
+		return "public/nomad";
+		
+	}*/
 
 }
