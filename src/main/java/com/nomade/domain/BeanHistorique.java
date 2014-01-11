@@ -11,6 +11,10 @@ public class BeanHistorique {
 	private Page<DangerPratique> listDanger;
 	
 	private Page<InfoPratique> listInfo;
+	
+	private UserNomade nomade;
+	
+	private Comment comment = new Comment();
 
 	public Page<EtapeVoyage> getListEtapeVoy() {
 		return listEtapeVoy;
@@ -42,6 +46,22 @@ public class BeanHistorique {
 
 	public void setListInfo(Page<InfoPratique> listInfo) {
 		this.listInfo = listInfo;
+	}
+
+	public UserNomade getNomade() {
+		return nomade;
+	}
+
+	public void setNomade(UserNomade nomade) {
+		this.nomade = nomade;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 }

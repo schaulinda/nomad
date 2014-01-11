@@ -28,7 +28,7 @@
 				<div class="col-lg-9">
 					<div class="input-group">
 						<spring:message code="input.start" var="inputStart" />
-						<form:input type="text" id="start" cssClass="form-control adress"
+						<form:input type="text" id="start" required="required" cssClass="form-control adress"
 							placeholder="${inputStart}" path="start" autocomplete="off" />
 						<form:hidden id="startLat" path="startLng" />
 						<form:hidden id="startLng" path="startLat" />
@@ -42,7 +42,7 @@
 					<div class="input-group">
 						<spring:message code="input.finish" var="inputFinish" />
 						<form:input type="text" id="end" cssClass="form-control adress"
-							placeholder="${inputFinish}" path="end" autocomplete="off" />
+							placeholder="${inputFinish}" required="required" path="end" autocomplete="off" />
 						<form:hidden id="endLat" path="endLng" />
 						<form:hidden id="endLng" path="endLat" />
 						<!--please change end not finish -->
@@ -300,6 +300,38 @@
 			$(document)
 					.ready(
 							function() {
+								
+								/* -----clear marker and directions but not clear the picker------------ */
+								
+								$("#map").gmap3({
+								    get: {
+								     		 name: "marker",
+								     		all:true,
+								     		full:true,
+								     		callback: function(objs){
+								     				var arrayId=[];
+								     			 $.each(objs, function(i, obj){
+								     				if(obj.id!="indicator"){
+								     				
+								     					var markObj = obj;
+								     					arrayId.push(markObj.id);		
+									     			}
+								     	          });
+								     			console.log(arrayId);
+								     			
+								     			$(this).gmap3({
+						     				        clear:{
+						     				          id:arrayId
+						     				        }
+						     				      });
+								     			
+								     		}
+								    },
+								 clear:{
+									 name:["directionsrenderer"]
+								 }	
+								
+								});
 
 								/* ----------------------------noty for save etape------------------------------------- */
 
@@ -587,7 +619,7 @@
 			event : "onclick",
 			formId : "form_etapeVoy",
 			params : {
-				fragments : "smallTile, id_subfooter"
+				fragments : "smallTile, subuser"
 			}
 		}));
 	</script>
@@ -598,7 +630,7 @@
 			event : "onclick",
 			formId : "form_etapeVeh",
 			params : {
-				fragments : "smallTile, id_subfooter"
+				fragments : "smallTile, subveh"
 			}
 		}));
 	</script>

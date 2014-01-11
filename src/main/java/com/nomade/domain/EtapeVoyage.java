@@ -1,5 +1,6 @@
 package com.nomade.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,5 +51,5 @@ public class EtapeVoyage {
     private Parcours parcours;
     
     @OrderBy(value = "created", order=Order.DESCENDING)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<Comment>();
 }

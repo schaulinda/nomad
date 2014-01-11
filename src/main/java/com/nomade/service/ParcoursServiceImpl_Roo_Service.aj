@@ -3,15 +3,14 @@
 
 package com.nomade.service;
 
+import com.nomade.domain.Parcours;
+import com.nomade.repository.ParcoursRepository;
+import com.nomade.service.ParcoursServiceImpl;
 import java.math.BigInteger;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.nomade.domain.Parcours;
-import com.nomade.repository.ParcoursRepository;
 
 privileged aspect ParcoursServiceImpl_Roo_Service {
     

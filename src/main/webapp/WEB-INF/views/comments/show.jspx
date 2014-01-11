@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_Comment" object="${comment}" path="/comments" z="urGljmDJm+08gMWYmvYuj1GY8pk=">
+        <field:display field="commentaire" id="s_com_nomade_domain_Comment_commentaire" object="${comment}" z="v2PP5UgXca6ikA2WtVU1bZnV7I4="/>
+        <field:display field="nomade" id="s_com_nomade_domain_Comment_nomade" object="${comment}" z="uZbY4xf8PvUYv0JC/yz9s/o2v6g="/>
+    </page:show>
+</div>

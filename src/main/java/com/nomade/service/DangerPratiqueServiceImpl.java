@@ -3,6 +3,11 @@ package com.nomade.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.geo.Box;
 import org.springframework.data.mongodb.core.geo.Point;
@@ -10,12 +15,16 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.EtapeVehicule;
+import com.nomade.domain.UserNomade;
+import com.nomade.repository.DangerPratiqueRepository;
 
 
 public class DangerPratiqueServiceImpl implements DangerPratiqueService {
 	
 	@Autowired
 	MongoTemplate mongoTemplate;
+	protected static final int NUMBER_PER_PAGE = 1;
 	
 	public List<DangerPratique> findByLocation(double[] loc1, double[] loc2){
 		
@@ -28,4 +37,19 @@ public class DangerPratiqueServiceImpl implements DangerPratiqueService {
 		return dangerPratiqueRepository.findAll();
 		
 	}
+	
+
+	
+	public Page<DangerPratique> findByNomade(UserNomade nomade, int page){
+		
+		PageRequest pageRequest = new PageRequest(page, NUMBER_PER_PAGE, new Sort(
+			    new Order(Direction.DESC, "comments.created"), 
+			    new Order(Direction.DESC, "created")
+			  ));
+
+		
+		return dangerPratiqueRepository.findByNomade(nomade, pageRequest);
+	}
+	
+
 }

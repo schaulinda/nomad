@@ -83,6 +83,7 @@
 					<div class="form-group">
 						<textarea name="description" cssClass="form-control"  ><!-- co -->${description}</textarea>
 					</div>
+					<p class="help-block">just save! if you don't have more info</p>
 					<button type="submit" id="btn_save"
 						class="btn btn-default btn-block">Save</button>
 					

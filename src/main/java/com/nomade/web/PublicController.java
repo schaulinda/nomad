@@ -54,15 +54,10 @@ public class PublicController {
 	@RequestMapping("/nomad")
 	public String nomad(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
+		
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistoriqueDecoration(uiModel, nomade);
 
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);
@@ -71,12 +66,32 @@ public class PublicController {
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
-		uiModel.addAttribute("beanHistorique", beanHistorique);
+		
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");
 		return "public/nomad";
 	}
+
+
+	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
+				nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
+				nomade, 0);
+		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
+		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListDanger(listDanger);
+		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+	}
+
 
 	@RequestMapping("/nomad/{id}")
 	public String selectNomad(@PathVariable("id") String id,
@@ -85,13 +100,7 @@ public class PublicController {
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id)); 
 		
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				findUserNomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				findUserNomade, 0);
-		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistoriqueDecoration(uiModel, findUserNomade);
 
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
 		beanNomadeManager.setNomads(findAllUserNomades);
@@ -110,7 +119,6 @@ public class PublicController {
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
-		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");
@@ -163,7 +171,8 @@ public class PublicController {
 	@RequestMapping("/carnet")
 	public String carnet(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
-
+		
+		beanHistoriqueDecoration(uiModel, nomade);
 		uiModel.addAttribute("beanNoteBookManager", new BeanNoteBookManager());
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");

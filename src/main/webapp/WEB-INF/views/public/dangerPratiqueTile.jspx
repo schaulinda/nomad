@@ -32,7 +32,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 form-group">
-						<label>select</label>
+						<label>Categorie danger</label>
 						<select class="form-control" required="required"
 							placeholder="select type of info" id="select0" name="select" >
 							<option value="route">cote route</option>
@@ -41,7 +41,7 @@
 						</select>
 					</div>
 					<div class="col-lg-6 form-group">
-						<label>select2</label>
+						<label>Type danger</label>
 						<select class="form-control" required="required"
 							placeholder="select type of info" id="select1" name="select1" >
 							<option value="impraticable">impraticable</option>
@@ -288,7 +288,7 @@
 			event : "onclick",
 			formId : "form_danger",
 			params : {
-				fragments : "smallTile, id_subfooter"
+				fragments : "smallTile, subdanger"
 			}
 		}));
 	</script>

@@ -3,9 +3,11 @@
 
 package com.nomade.domain;
 
+import com.nomade.domain.Comment;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
+import java.util.List;
 
 privileged aspect InfoPratique_Roo_JavaBean {
     
@@ -119,6 +121,14 @@ privileged aspect InfoPratique_Roo_JavaBean {
     
     public void InfoPratique.setVoteNegatif(int voteNegatif) {
         this.voteNegatif = voteNegatif;
+    }
+    
+    public List<Comment> InfoPratique.getComments() {
+        return this.comments;
+    }
+    
+    public void InfoPratique.setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
     public Date InfoPratique.getCreated() {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div id="subuser"
-	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+<div id="subuser" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:form="http://www.springframework.org/tags/form"
@@ -13,41 +12,45 @@
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 
-	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-			id="historique_user">
-			<div class="panel panel-default widget">
-				<div class="panel-heading">
-					<span class="icon icon-user"></span>
-					<h3 class="panel-title">
-						<spring:message code="h.historiqueUser" var="hHistoriqueUser" />
-						${hHistoriqueUser}
-					</h3>
-					<span class="label label-info">
-						<c:if test="${beanHistorique.listEtapeVoy.hasContent()}">
+
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_user">
+		<div class="panel panel-default widget">
+			<div class="panel-heading">
+				<span class="icon icon-user"></span>
+				<h3 class="panel-title">
+					<spring:message code="h.historiqueUser" var="hHistoriqueUser" />
+					${hHistoriqueUser}
+				</h3>
+				<span class="label label-info"> <c:if
+						test="${beanHistorique.listEtapeVoy.hasContent()}">
 							${beanHistorique.listEtapeVoy.number+1} / ${beanHistorique.listEtapeVoy.totalPages}
-						</c:if>
-						<c:if test="${!beanHistorique.listEtapeVoy.hasContent()}">
+						</c:if> <c:if test="${!beanHistorique.listEtapeVoy.hasContent()}">
 							${beanHistorique.listEtapeVoy.number} / ${beanHistorique.listEtapeVoy.totalPages}
 						</c:if>
-					</span>
-				</div>
-				<c:if test="${!beanHistorique.listEtapeVoy.hasContent()}">
+				</span>
+			</div>
+			<c:if test="${!beanHistorique.listEtapeVoy.hasContent()}">
 					Pubs google Adsense
 					
 				</c:if>
-				<c:if test="${beanHistorique.listEtapeVoy.hasContent()}">
+			<c:if test="${beanHistorique.listEtapeVoy.hasContent()}">
+
 				<div class="panel-body scroll">
-					<c:forEach var="etape" items="${beanHistorique.listEtapeVoy.content}">
+					<c:forEach var="etape"
+						items="${beanHistorique.listEtapeVoy.content}">
 						<div class="row">
 							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 								<c:choose>
 									<c:when test="${empty etape.nomade.profil.file}">
 										<img alt="user" src="${res}/img/avatar.png"
-										   style="width: 50px;height: 50px"	class="img-rounded" title="username" />
+											style="width: 50px; height: 50px" class="img-rounded"
+											title="username" />
 									</c:when>
 									<c:otherwise>
-										<img alt="user" src="${imageRender_url}/${etape.nomade.profil.file}"
-										style="width: 50px;height: 50px"	class="img-rounded" title="username" />
+										<img alt="user"
+											src="${imageRender_url}/${etape.nomade.profil.file}"
+											style="width: 50px; height: 50px" class="img-rounded"
+											title="username" />
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -61,91 +64,157 @@
 						<br />
 						<div class="row">
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape">
-								<c:if test="${not empty etape.userPhoto}" >
+								<c:if test="${not empty etape.userPhoto}">
 									<img alt="Etape" src="${imageRender_url}/${etape.userPhoto}"
-									class="img-rounded img-responsive" style="width: 400px;height: 200px;" />
-								</c:if>	
+										class="img-rounded img-responsive"
+										style="width: 400px; height: 200px;" />
+								</c:if>
 							</div>
 							<div
 								class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
 								<a href="#"></a> * ${etape.dateEtape} * <a href="#"
-									class="parcour"> ${etape.location}</a> 
-									<c:if test="${not empty etape.comments}">
-										<span class="label label-info">${etape.comments.size()} Comments</span>
-									</c:if>
-									<c:if test="${empty etape.comments}">
-										<span class="label label-info">0 Comments</span>
-									</c:if>
+									class="parcour"> ${etape.location}</a>
+								<c:if test="${not empty etape.comments}">
+									<span class="label label-info">${etape.comments.size()}
+										Comments</span>
+								</c:if>
+								<c:if test="${empty etape.comments}">
+									<span class="label label-info">0 Comments</span>
+								</c:if>
 							</div>
 						</div>
 						<!-- comments -->
 						<ul class="list-group">
-							<c:forEach var="comment" items="${etape.comments}" >
-							<li class="list-group-item">
-								<div class="row">
-									<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
-										<img alt="user" data-src="holder.js/50x50" class="img-rounded" />
-									</div>
-									<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
-										<div class="mic-info">
-											<a href="#">${comment.nomade.userName}</a>
+							<c:forEach var="comment" items="${etape.comments}">
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+											<c:choose>
+												<c:when test="${empty comment.nomade.profil.file}">
+													<img alt="user" src="${res}/img/avatar.png"
+														style="width: 50px; height: 50px" class="img-rounded"
+														title="username" />
+												</c:when>
+												<c:otherwise>
+													<img alt="user"
+														src="${imageRender_url}/${comment.nomade.profil.file}"
+														style="width: 50px; height: 50px" class="img-rounded"
+														title="username" />
+												</c:otherwise>
+											</c:choose>
 										</div>
-										<div class="comment-text">
-											${comment.commentaire}
+										<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+											<div class="mic-info">
+												<a href="#">${comment.nomade.userName}</a>
+											</div>
+											<div class="comment-text">${comment.commentaire}</div>
+											<div class="mic-info">${comment.created}</div>
 										</div>
-										<div class="mic-info">${comment.created}</div>
 									</div>
-								</div>
-							</li>
+								</li>
 							</c:forEach>
 						</ul>
+						<c:set value="${etape.id}" var="etape_id" ></c:set>
 					</c:forEach>
 				</div>
-				
+
 				<div class="panel-footer">
 					<div class="row">
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"
 							style="margin-top: 5px;">
-							<spring:url value="/comment/add" var="comment_url"></spring:url>
-							<form name="c" action="${comment_url}" method="POST" class="">
-								<spring:message code="input.addNewComment"
-									var="inputAddNewComment" />
-								<input type="hidden" value="${etape.id}" name="etapeId" />
-								<TEXTAREA  id="c_comment" name='c_comment'
-									class="form-control" placeholder="${inputAddNewComment}" ><!--co  --></TEXTAREA>
+							<spring:url value="/comments/addEtapeVoy" var="comment_url"></spring:url>
+							<form id="comment_form" action="${comment_url}" method="GET" >
+								<spring:message code="input.addNewComment" var="inputAddNewComment" />
+								<input type="hidden" value="${etape_id}" name="etapeId" />
+								<input type="hidden" value="${beanHistorique.listEtapeVoy.number}" name="page" />
+								<textarea id="commentaire" name="commentaire" class="form-control"
+									placeholder="${inputAddNewComment}" ><!--co  --></textarea>
+								<input type="submit" id="btn_comment" value="send" class="btn btn-default" style="display: none;"/>
 							</form>
 						</div>
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: -14px;" >
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+							style="margin-top: -14px;">
+							<spring:url value="/etapevoyages/etapeVoySuiv/${beanHistorique.nomade.id}"
+								var="etapeVoySuiv_url"></spring:url>
 							<ul class="pagination">
-							  
-							  	<c:if test="${beanHistorique.listEtapeVoy.hasPreviousPage() eq true}">
-							  		<li  >
-							  			<a href="#"><i class="icon-chevron-left"><!--  --></i></a>
-							  		</li>
-							  	</c:if>
-							  	<c:if test="${beanHistorique.listEtapeVoy.hasPreviousPage() eq false}">
-							  		<li class="disabled">
-							  			<a href="#" ><i class="icon-chevron-left"><!--  --></i></a>
-							  		</li>
-							  	</c:if>
-							  	<c:if test="${beanHistorique.listEtapeVoy.hasNextPage() eq true}">
-							  		<li>
-							  			<a href="#"><i class="icon-chevron-right"><!--  --></i></a>
-							  		</li>
-							  	</c:if>
-							  	<c:if test="${beanHistorique.listEtapeVoy.hasNextPage() eq false}">
-							  		<li class="disabled" >
-							  			<a href="#" ><i class="icon-chevron-right"><!--  --></i></a>
-							  		</li>
-							  	</c:if>
-							  
+
+								<c:if
+									test="${beanHistorique.listEtapeVoy.hasPreviousPage() eq true}">
+									<li><a id="prec"
+										href="${etapeVoySuiv_url}/${beanHistorique.listEtapeVoy.number-1}"><i
+											class="icon-chevron-left"> <!--  -->
+										</i></a></li>
+								</c:if>
+								<c:if
+									test="${beanHistorique.listEtapeVoy.hasPreviousPage() eq false}">
+									<li class="disabled"><a id="prec" href="#"><i
+											class="icon-chevron-left"> <!--  -->
+										</i></a></li>
+								</c:if>
+								<c:if
+									test="${beanHistorique.listEtapeVoy.hasNextPage() eq true}">
+									<li><a id="suiv"
+										href="${etapeVoySuiv_url}/${beanHistorique.listEtapeVoy.number+1}"><i
+											class="icon-chevron-right"> <!--  -->
+										</i></a></li>
+								</c:if>
+								<c:if
+									test="${beanHistorique.listEtapeVoy.hasNextPage() eq false}">
+									<li class="disabled"><a id="suiv" href="#"><i
+											class="icon-chevron-right"> <!--  -->
+										</i></a></li>
+								</c:if>
+
 							</ul>
 
 						</div>
 					</div>
 				</div>
 			</c:if>
-			</div>
 		</div>
+	</div>
+
+	<script type="text/javascript">
+	
+	 dojo.connect(dojo.byId('commentaire'), 'onkeydown', function(event){
+		 if (event.keyCode == dojo.keys.ENTER) {
+		 	if(dojo.byId('commentaire')!=''){
+		 		console.log("hello");
+		 		document.getElementById("btn_comment").click();
+		 		dojo.stopEvent(event);
+		 	}
+		 }
+	 });
+	
+		if(dojo.byId('prec')!=null){
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : "prec",
+					event : "onclick",
+					params : {
+						fragments : "subuser"
+					}
+				}));
+		}
+		if(dojo.byId('suiv')!=null){	
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "suiv",
+				event : "onclick",
+				params : {
+					fragments : "subuser"
+				}
+			}));
+		}
+		if(dojo.byId('btn_comment')!=null){
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "btn_comment",
+				event : "onclick",
+				formId : "comment_form",
+				params : {
+					fragments : "subuser"
+				}
+			}));
+		}
+		
+	</script>
 </div>
 

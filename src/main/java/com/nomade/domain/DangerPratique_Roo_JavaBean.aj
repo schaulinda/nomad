@@ -3,9 +3,11 @@
 
 package com.nomade.domain;
 
+import com.nomade.domain.Comment;
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
+import java.util.List;
 
 privileged aspect DangerPratique_Roo_JavaBean {
     
@@ -127,6 +129,14 @@ privileged aspect DangerPratique_Roo_JavaBean {
     
     public void DangerPratique.setCreated(Date created) {
         this.created = created;
+    }
+    
+    public List<Comment> DangerPratique.getComments() {
+        return this.comments;
+    }
+    
+    public void DangerPratique.setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
     public UserNomade DangerPratique.getNomade() {

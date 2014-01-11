@@ -1,6 +1,5 @@
 package com.nomade.domain;
 
-import java.util.List;
 
 public class BeanNoteBookManager {
 	
@@ -17,9 +16,6 @@ public class BeanNoteBookManager {
 	
 	private EtapeVehicule etapeVehicule= new EtapeVehicule();
 	
-	private List<EtapeVoyage> listEtapeVoy;
-	
-	private List<EtapeVehicule> listEtapeVeh;
 	
 	private String notify;
 
@@ -37,22 +33,6 @@ public class BeanNoteBookManager {
 
 	public void setEtapeVehicule(EtapeVehicule etapeVehicule) {
 		this.etapeVehicule = etapeVehicule;
-	}
-
-	public List<EtapeVoyage> getListEtapeVoy() {
-		return listEtapeVoy;
-	}
-
-	public void setListEtapeVoy(List<EtapeVoyage> listEtapeVoy) {
-		this.listEtapeVoy = listEtapeVoy;
-	}
-
-	public List<EtapeVehicule> getListEtapeVeh() {
-		return listEtapeVeh;
-	}
-
-	public void setListEtapeVeh(List<EtapeVehicule> listEtapeVeh) {
-		this.listEtapeVeh = listEtapeVeh;
 	}
 
 	public String getNotify() {

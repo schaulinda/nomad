@@ -308,7 +308,7 @@
 			event : "onclick",
 			formId : "form_info",
 			params : {
-				fragments : "smallTile, id_subfooter"
+				fragments : "smallTile, subinfo"
 			}
 		}));
 	</script>

@@ -3,12 +3,11 @@
 
 package com.nomade.repository;
 
+import com.nomade.domain.Parcours;
+import com.nomade.repository.ParcoursRepository;
 import java.math.BigInteger;
-
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
-
-import com.nomade.domain.Parcours;
 
 privileged aspect ParcoursRepository_Roo_Mongo_Repository {
     

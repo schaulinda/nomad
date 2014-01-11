@@ -23,6 +23,7 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -39,11 +40,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mongodb.gridfs.GridFSDBFile;
+import com.nomade.domain.BeanHistorique;
+import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.BeanRegister;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Country;
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.EtapeVehicule;
+import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Gender;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Langue;
@@ -56,6 +61,12 @@ import com.nomade.domain.VehiculeType;
 import com.nomade.email.NotificationService;
 import com.nomade.security.NomadeUserDetailsService;
 import com.nomade.security.Security;
+import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.EtapeVehiculeService;
+import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.ParcoursService;
+import com.nomade.service.UserService;
 import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
 
@@ -72,6 +83,17 @@ public class UserController {
 	Security securite ;
 	@Autowired
 	ImageUtil imageUtil;
+	
+	@Autowired
+	EtapeVoyageService etapeVoyageService;
+	@Autowired
+	EtapeVehiculeService etapeVehiculeService;
+	@Autowired
+	InfoPratiqueService infoPratiqueService;
+	@Autowired
+	DangerPratiqueService dangerPratiqueService;
+	@Autowired
+	ParcoursService parcoursService;
 	
 	@RequestMapping("/register")
 	public String register(@Valid BeanRegister beanRegister,
@@ -410,7 +432,35 @@ public class UserController {
 		
 		UserNomade nomade = securite.getUserNomade();
 		String stringPage = httpServletRequest.getSession(true).getAttribute("backLink").toString();
+		
+		//render previous page with marker an historik
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
+				nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
+				nomade, 0);
+		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
+		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListDanger(listDanger);
+		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setNomade(nomade);
+
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		beanNomadeManager.setNomads(findAllUserNomades);
+		beanNomadeManager.setMe(true);
+		beanNomadeManager.setNomade(nomade);
+		String makers = parcoursService.buildMakers(findAllUserNomades);
+		beanNomadeManager.setMakers(makers);
+
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		//---------------end----------
+		
 		if(stringPage==null){
 			return "/";
 		}

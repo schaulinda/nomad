@@ -1,20 +1,30 @@
 package com.nomade.web;
 
+import java.math.BigInteger;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNoteBookManager;
+import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
+import com.nomade.domain.EtapeVoyage;
+import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
+import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
 
@@ -32,7 +42,28 @@ public class EtapeVehiculeController {
 	@Autowired
 	EtapeVoyageService voyageService;
 	@Autowired
+	DangerPratiqueService dangerPratiqueService;
+	@Autowired
+	InfoPratiqueService infoPratiqueService;
+	@Autowired
 	ParcoursService parcoursService;
+	
+	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
+		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
+				nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
+				nomade, 0);
+		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
+		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListDanger(listDanger);
+		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+	}
 	
 	@RequestMapping("/save")
 	public String save(BeanNoteBookManager beanNoteBookManager,
@@ -45,8 +76,7 @@ public class EtapeVehiculeController {
 		etapeVeh.setGeolocation(location);
 		Parcours lastParcours = parcoursService.lastParcours(nomade);
 		if(lastParcours==null){
-			beanNoteBookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
-			beanNoteBookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
+			beanHistoriqueDecoration(uiModel,nomade);
 			beanNoteBookManager.setNotify("nope");
 			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("nomade", nomade);
@@ -59,13 +89,24 @@ public class EtapeVehiculeController {
 		vehiculeService.saveEtapeVehicule(etapeVeh);
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		bookManager.setListEtapeVoy(voyageService.findAllEtapeVoyages());
-		bookManager.setListEtapeVeh(vehiculeService.findAllEtapeVehicules());
+		beanHistoriqueDecoration(uiModel,nomade);
 		bookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
 		return "public/carnet";
+	}
+	
+	@RequestMapping("/etapeVehSuiv/{id}/{page}")
+	public String nomad(@PathVariable("id")String id, @PathVariable("page")int page ,HttpServletRequest request, Model uiModel) {
+		UserNomade nomade = userService.findUserNomade(new BigInteger(id)); 
+		Page<EtapeVehicule> listEtapeVoy = vehiculeService.findByNomade(
+				nomade, page);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVeh(listEtapeVoy);
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		return "public/nomad";
 	}
 	
 }

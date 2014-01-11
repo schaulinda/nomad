@@ -34,7 +34,11 @@
 					.ready(
 							function() {
 								
-						
+								if($('#id_map').hasClass("col-lg-6")){
+									
+									$('.open').addClass("hide");
+									$('.closemap').removeClass("hide");
+								}
 								
 			/* ---------------------map------------------------ */
 			

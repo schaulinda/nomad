@@ -26,5 +26,5 @@ public class EtapeVoyageServiceImpl implements EtapeVoyageService {
 		return etapeVoyageRepository.findByNomade(nomade, pageRequest);
 	}
 	
-
+	
 }

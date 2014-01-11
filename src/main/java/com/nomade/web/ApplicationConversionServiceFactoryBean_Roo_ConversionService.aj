@@ -5,6 +5,7 @@ package com.nomade.web;
 
 import com.nomade.domain.Account;
 import com.nomade.domain.Album;
+import com.nomade.domain.Comment;
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
@@ -108,6 +109,22 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Album>() {
             public com.nomade.domain.Album convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), Album.class);
+            }
+        };
+    }
+    
+    public Converter<Comment, String> ApplicationConversionServiceFactoryBean.getCommentToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Comment, java.lang.String>() {
+            public String convert(Comment comment) {
+                return new StringBuilder().append(comment.getCommentaire()).append(' ').append(comment.getCreated()).toString();
+            }
+        };
+    }
+    
+    public Converter<String, Comment> ApplicationConversionServiceFactoryBean.getStringToCommentConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Comment>() {
+            public com.nomade.domain.Comment convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), Comment.class);
             }
         };
     }
@@ -311,6 +328,8 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getAlbumToStringConverter());
         registry.addConverter(getIdToAlbumConverter());
         registry.addConverter(getStringToAlbumConverter());
+        registry.addConverter(getCommentToStringConverter());
+        registry.addConverter(getStringToCommentConverter());
         registry.addConverter(getDangerPratiqueToStringConverter());
         registry.addConverter(getIdToDangerPratiqueConverter());
         registry.addConverter(getStringToDangerPratiqueConverter());

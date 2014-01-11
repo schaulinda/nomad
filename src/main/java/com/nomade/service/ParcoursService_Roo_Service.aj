@@ -3,10 +3,10 @@
 
 package com.nomade.service;
 
+import com.nomade.domain.Parcours;
+import com.nomade.service.ParcoursService;
 import java.math.BigInteger;
 import java.util.List;
-
-import com.nomade.domain.Parcours;
 
 privileged aspect ParcoursService_Roo_Service {
     

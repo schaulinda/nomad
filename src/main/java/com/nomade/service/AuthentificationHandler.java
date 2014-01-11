@@ -95,7 +95,10 @@ public class AuthentificationHandler extends
 			HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
 
-		System.out.println("logout");
+		Cookie myCookie = new Cookie("jforumUserInfo", "");
+		myCookie.setMaxAge(0);
+		myCookie.setPath("/");
+	    response.addCookie(myCookie);
 
 		response.sendRedirect(request.getContextPath() + "/login");
 

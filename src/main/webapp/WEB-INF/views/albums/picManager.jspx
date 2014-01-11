@@ -208,6 +208,15 @@
 				fragments : "body"
 			}
 		}));
+		
+		dojo.connect(dojo.byId('albumName'), 'onkeydown', function(event){
+			 if (event.keyCode == dojo.keys.ENTER) {
+			 	if(dojo.byId('albumName')!=''){
+			 		document.getElementById("createAlbum_id").click();
+			 		dojo.stopEvent(event);
+			 	}
+			 }
+		 });
 	</script>
 
 </div>
