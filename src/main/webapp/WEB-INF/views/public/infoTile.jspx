@@ -34,7 +34,7 @@
 				${hItineraryOfTrip}
 			</h3>
 		</div>
-		<div id="direction">
+		<div id="direction" style="max-height: 500px;overflow-x: scroll;">
 			<!-- co -->
 		</div>
 	</div>

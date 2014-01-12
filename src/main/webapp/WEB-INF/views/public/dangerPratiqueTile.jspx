@@ -135,6 +135,11 @@
 		(function($) {
 			$(document).ready(function() {
 				
+				$('.adress').tooltip({
+					trigger: 'focus',
+					title: 'drag and drop violet marker, to get location'
+				});
+				
 				/* change select1 based on select0  */
 				var routeDisplay = ["impraticable","chaussée en très mauvais état","piste terre -non goudronné",
 				                        "bande sableuse","boue ,ornière","route enneigée, verglacée,","fort dénivelé, col 4000m",

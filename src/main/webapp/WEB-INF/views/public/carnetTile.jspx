@@ -300,6 +300,12 @@
 			$(document)
 					.ready(
 							function() {
+								/* -------------tooltip for adresspicker--------------- */
+								$('.adress').tooltip({
+									trigger: 'focus',
+									title: 'drag and drop violet marker, to get location'
+								});
+
 								
 								/* -----clear marker and directions but not clear the picker------------ */
 								

@@ -86,19 +86,27 @@
 						<li id="${info.id}vn">${info.voteNegatif}</li>
 						<li><a id="${info.id}" class="voteMinus"><i
 								class="icon-thumbs-down"> <!-- co --></i></a></li>
-						<li id="${info.id}vp">| ${info.votePositif}</li>
+								<li> | </li>
+						<li id="${info.id}vp" style="padding-left: 15px;">${info.votePositif}</li>
 						<li><a id="${info.id}" class="voteplus"><i
 								class="icon-thumbs-up"> <!-- co --></i></a></li>
 					</ul>
 				</div>
-				<br /> <a href="#"><i class="icon-user"> <!-- co -->
-				</i> ${info.nomade.userName}</a> | <i class="icon-calendar"> <!-- co -->
-				</i>
-				<fmt:formatDate value="${info.created}" var="dateC"
-					pattern="dd-MM-yyyy hh:mm" />
-				<span style="color: #999999;"> ${dateC} </span>|
-				<span ><i class="icon-comment"><!-- co --></i> 8</span> |<a id="${info.id}"
-					class="detailsInfo" >details</a>
+				<div>
+					 <a href="#"> 
+					 	${info.nomade.userName}
+					 </a> | <i class="icon-calendar"> <!-- co --></i>
+					<fmt:formatDate value="${info.created}" var="dateC" pattern="dd-MM-yyyy hh:mm" />
+					<span style="color: #999999;"> ${dateC} </span>|
+					<span ><i class="icon-comment"><!-- co --></i> 
+					<c:if test="${not empty info.comments}">
+									${info.comments.size()}
+					</c:if>
+								<c:if test="${empty info.comments}">
+									0
+								</c:if>
+						</span> |<a id="${info.id}" class="detailsInfo" >details</a>
+				</div>
 			</div>
 		</c:forEach>
 	</div>
@@ -126,15 +134,24 @@
 						<li id="${danger.id}vn">${danger.voteNegatif}</li>
 						<li><a id="${danger.id}" class="voteDMinus"><i
 								class="icon-thumbs-down"> <!-- co --></i></a></li>
-						<li id="${danger.id}vp">| ${danger.votePositif}</li>
+								<li> | </li>
+						<li id="${danger.id}vp" style="padding-left: 15px;" >${danger.votePositif}</li>
 						<li><a id="${danger.id}" class="voteDplus"><i
 								class="icon-thumbs-up"> <!-- co --></i></a></li>
 					</ul>
 				</div>
-				<br /> <a href="#"><i class="icon-user"> <!-- co -->
-				</i> ${danger.nomade.userName}</a> | <i class="icon-calendar"> <!-- co -->
-				</i><span style="color: #999999;"> ${danger.created} </span>|
-				<span ><i class="icon-comment"><!-- co --></i> 8</span> | <a id="${danger.id}"
+				<br /> <a href="#"> ${danger.nomade.userName}</a> | <i class="icon-calendar"> <!-- co -->
+				</i><fmt:formatDate value="${danger.created}" var="dateCreation" pattern="dd-MM-yyyy hh:mm" />
+				<span style="color: #999999;">${dateCreation} </span>|
+				<span >
+					<i class="icon-comment"><!-- co --></i>
+					<c:if test="${not empty info.comments}">
+									${info.comments.size()}
+					</c:if>
+								<c:if test="${empty info.comments}">
+									0
+					</c:if>
+				</span> | <a id="${danger.id}"
 				 class="detailsDanger" >details</a>
 			</div>
 		</c:forEach>
@@ -189,9 +206,11 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-				
-				 
-					
+				$('.adress').tooltip({
+					trigger: 'focus',
+					title: 'drag and drop violet marker, to get location'
+				});
+				 	
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
 				if(bol!=""){

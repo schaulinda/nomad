@@ -218,6 +218,17 @@ public class UserController {
 		return "profil/" + page;
 
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "updateVehState")
+	public @ResponseBody
+	String updateVehState(Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse response, @RequestParam("vehState") String vehState){
+		
+		UserNomade userNomade = securite.getUserNomade();
+		userNomade.getVehicule().setVehiculeState(VehiculeState.valueOf(vehState));
+		userService.updateUserNomade(userNomade);
+		return "good";
+	}
 
 	// this function has to be refactoring in another class
 	@RequestMapping(method = RequestMethod.POST, value = "updateField")

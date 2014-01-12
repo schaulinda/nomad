@@ -131,17 +131,10 @@
 																		});
 													},
 													select : function(event, ui) {
-														var map = $map
-																.gmap3('get');
-														console
-														.log(ui.item.location.ob);
-														console
-														.log(ui.item.location.pb);
-														map
-																.setCenter(ui.item.location);
+														var map = $map.gmap3('get');
+														map.setCenter(ui.item.location);
 														map.setZoom(5);
-														marker
-																.setPosition(ui.item.location);
+														marker.setPosition(ui.item.location);
 													}
 												});
 								

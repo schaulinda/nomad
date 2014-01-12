@@ -129,6 +129,11 @@
 					.ready(
 							function() {
 								
+								$('.adress').tooltip({
+									trigger: 'focus',
+									title: 'drag and drop violet marker, to get location'
+								});
+								
 								/* change select1 in ftion of select0 */
 								
 								var quotidienDisplay = ["point d'eau","toilettes","douches"];

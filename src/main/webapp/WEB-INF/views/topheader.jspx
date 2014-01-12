@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="topheader"
-	 xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	 xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
-	 xmlns:c="http://java.sun.com/jsp/jstl/core"
-	 xmlns:spring="http://www.springframework.org/tags"
-	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
-	<spring:url value="/users" var="users_url"></spring:url>
-	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+		<spring:url value="/users" var="users_url"></spring:url>
+		<spring:url value="/users/updateVehState" var="updateVehState"></spring:url>
+		<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 user">
-			<a href="${users_url}/private/profil" id="img_profil">
-				<c:choose>
+			<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
 					<c:when test="${empty nomade.profil.file}">
-						<img alt="user" src="${res}/img/avatar.png" class="img-rounded" title="username" />
+						<img alt="user" src="${res}/img/avatar.png" class="img-rounded"
+							title="username" />
 					</c:when>
 					<c:otherwise>
-						<img alt="user" src="${imageRender_url}/${nomade.profil.file}" class="img-rounded" title="username" />
+						<img alt="user" src="${imageRender_url}/${nomade.profil.file}"
+							class="img-rounded" title="username" />
 					</c:otherwise>
-				</c:choose>
-				<c:choose>
+				</c:choose> <c:choose>
 					<c:when test="${empty nomade.profil.pseudo}">
 						${nomade.userName}
 					</c:when>
@@ -31,160 +32,216 @@
 				</c:choose>
 			</a>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><!--affichage du menu pour les grands écrans-->
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			<!--affichage du menu pour les grands écrans-->
 			<spring:url var="public_url" value="/public" />
 			<ul class="nav nav-tabs nav-justified">
-				<c:if test="${onglet == 'nomad'}" >
-					<c:set value="active" var="nomadeOnglet" ></c:set>
+				<c:if test="${onglet == 'nomad'}">
+					<c:set value="active" var="nomadeOnglet"></c:set>
 				</c:if>
-				<c:if test="${onglet == 'itineraire'}" >
-					<c:set value="active" var="itineraireOnglet" ></c:set>
+				<c:if test="${onglet == 'itineraire'}">
+					<c:set value="active" var="itineraireOnglet"></c:set>
 				</c:if>
-				<c:if test="${onglet == 'carnet'}" >
-					<c:set value="active" var="carnetOnglet" ></c:set>
-				</c:if>				
-					<li class="${nomadeOnglet}" >
-						<a href="${public_url}/nomad" id="id_nomadeLink">
-							<spring:message code="a.nomads" />
-						</a>
-					</li>
-					<li class="${itineraireOnglet}">
-						<a href="${public_url}/itineraire" id="id_itineraireLink" >
-							<spring:message code="a.itinerary" />
-						</a>
-					</li>
-					<li class="${carnetOnglet}">
-						<a href="${public_url}/carnet" id="id_carnetLink" >
-							<spring:message code="a.logBook" />
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<select class="pull-right form-control" >
-							<option>
-								<spring:message code="option.withoutvehicle" />
-							</option>							<option>
-								<spring:message code="option.lookingForBuy" />
+				<c:if test="${onglet == 'carnet'}">
+					<c:set value="active" var="carnetOnglet"></c:set>
+				</c:if>
+				<li class="${nomadeOnglet}"><a href="${public_url}/nomad"
+					id="id_nomadeLink"> <spring:message code="a.nomads" />
+				</a></li>
+				<li class="${itineraireOnglet}"><a
+					href="${public_url}/itineraire" id="id_itineraireLink"> <spring:message
+							code="a.itinerary" />
+				</a></li>
+				<li class="${carnetOnglet}"><a href="${public_url}/carnet"
+					id="id_carnetLink"> <spring:message code="a.logBook" />
+				</a></li>
+			</ul>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+					<!--  SansVehicule, EnRechercheAchat, AVendre, SurLaRoute, EnEtape, EnReparation, RentreAlaMaison -->
+
+					<select id="vehiculeState" class="pull-right form-control">
+						<c:if test="${nomade.vehicule.vehiculeState == 'SansVehicule'}">
+							<option value="SansVehicule" selected="selected">
+							<spring:message code="option.withoutvehicle" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'EnRechercheAchat'}">
+							<option value="EnRechercheAchat" selected="selected">
+							<spring:message code="option.lookingForBuy" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'AVendre'}">
+							<option value="AVendre" selected="selected">
+							<spring:message code="option.lookingForSale" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'SurLaRoute'}">
+							<option value="SurLaRoute" selected="selected">
+									<spring:message code="option.onTheRoad" />
 							</option>
-							<option>
-								<spring:message code="option.lookingForSale" />
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'EnEtape'}">
+							<option value="EnEtape" selected="selected">
+							<spring:message code="option.stopOver" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'EnReparation'}">
+							<option value="EnReparation" selected="selected">
+							<spring:message code="option.inRepair" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState == 'RentreAlaMaison'}">
+							<option value="RentreAlaMaison" selected="selected">
+							<spring:message code="option.backToHome" />
+						</option>
+						</c:if>
+						
+						<c:if test="${nomade.vehicule.vehiculeState != 'SansVehicule'}">
+							<option value="SansVehicule" >
+							<spring:message code="option.withoutvehicle" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'EnRechercheAchat'}">
+							<option value="EnRechercheAchat" >
+							<spring:message code="option.lookingForBuy" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'AVendre'}">
+							<option value="AVendre" >
+							<spring:message code="option.lookingForSale" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'SurLaRoute'}">
+							<option value="SurLaRoute" >
+									<spring:message code="option.onTheRoad" />
 							</option>
-							<option>
-								<spring:message code="option.onTheRoad" />
-							</option>
-							<option>
-								<spring:message code="option.stopOver" />
-							</option>
-							<option>
-								<spring:message code="option.inRepair" />
-							</option>
-							<option>
-								<spring:message code="option.backToHome" />
-							</option>
-						</select>
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
-						<a href="${users_url}/private/vehicule" id="img_veh">
-							<c:choose>
-								<c:when test="${empty nomade.vehicule.vehiculeName}">
-									<spring:message code="td.vehicleName" var="tdVehicleName" />
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'EnEtape'}">
+							<option value="EnEtape" >
+							<spring:message code="option.stopOver" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'EnReparation'}">
+							<option value="EnReparation">
+							<spring:message code="option.inRepair" />
+						</option>
+						</c:if>
+						<c:if test="${nomade.vehicule.vehiculeState != 'RentreAlaMaison'}">
+							<option value="RentreAlaMaison" >
+							<spring:message code="option.backToHome" />
+						</option>
+						</c:if>
+					</select>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+					<a href="${users_url}/private/vehicule" id="img_veh"> <c:choose>
+							<c:when test="${empty nomade.vehicule.vehiculeName}">
+								<spring:message code="td.vehicleName" var="tdVehicleName" />
 									${tdVehicleName}
 								</c:when>
-								<c:otherwise>
+							<c:otherwise>
 									${nomade.vehicule.vehiculeName}
 								</c:otherwise>
-							</c:choose>
-						</a>
-						<a href="${users_url}/private/vehicule" id="img_veh1">
-							<c:choose>
-								<c:when test="${empty nomade.vehicule.photo}">
-									<img data-src="holder.js/46x46" src="data:img/png;" class="img-rounded defaultvehicleimg" />
-								</c:when>
-								<c:otherwise>
-									<img alt="user" src="${imageRender_url}/${nomade.vehicule.photo}" class="img-rounded userVehicleImg" />
-								</c:otherwise>
-							</c:choose>
+						</c:choose>
+					</a> <a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
+							<c:when test="${empty nomade.vehicule.photo}">
+								<img data-src="holder.js/46x46" src="data:img/png;"
+									class="img-rounded defaultvehicleimg" />
+							</c:when>
+							<c:otherwise>
+								<img alt="user"
+									src="${imageRender_url}/${nomade.vehicule.photo}"
+									class="img-rounded userVehicleImg" />
+							</c:otherwise>
+						</c:choose>
 					</a>
 				</div>
 			</div>
-	</div> 
+		</div>
 	</div>
 	<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_profil",
-		event : "onclick",
-		params : {
-			fragments : "body,topheader, id_subfooter"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_veh",
-		event : "onclick",
-		params : {
-			fragments : "body, topheader, id_subfooter"
-		}
-	}));
-</script>
-<script type="text/javascript">
-	Spring.addDecoration(new Spring.AjaxEventDecoration({
-		elementId : "img_veh1",
-		event : "onclick",
-		params : {
-			fragments : "body, topheader, id_subfooter"
-		}
-	}));
-</script>
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "img_profil",
+			event : "onclick",
+			params : {
+				fragments : "body,topheader, id_subfooter"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "img_veh",
+			event : "onclick",
+			params : {
+				fragments : "body, topheader, id_subfooter"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "img_veh1",
+			event : "onclick",
+			params : {
+				fragments : "body, topheader, id_subfooter"
+			}
+		}));
+	</script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
+		jQuery.noConflict();
+		(function($) {
+			$(document).ready(function() {
 
-jQuery.noConflict();
-(function($) {
-	$(document)
-			.ready(
-					function() {
-						
-						var onglet ='${onglet}';
-						if(onglet!='itineraire'){
-							
-							$('#panelDirection').addClass("hide");
-						}
-						if(onglet!='nomad'){
-							if($('#id_map').hasClass("col-lg-12")){
+				$('#vehiculeState').on('change', function() {
+					console.log(this.value);
+					var val = this.value;
+					$.get("${updateVehState}", {
+						vehState : val
 
-							$('#id_map').removeClass("col-lg-12");
-							$('#id_map').addClass("col-lg-6");
-							
-							
-							$('#smallTile').show();
-							
-							$('.open').addClass("hide");
-							$('.closemap').removeClass("hide");
-							
-							map = $("#map").gmap3('get');
-							google.maps.event.trigger(map, 'resize');
-							map.setZoom(map.getZoom());
-							var markIndic = $("#map").gmap3({
-							      get:{
-							        	id:"indicator"
-							      }
-							    });
-							map.setCenter(markIndic.getPosition());
-							map.panToBounds(map.getBounds());
-							}
-						}
-						
-						if($('#id_map').hasClass("col-lg-12")){
-							$('#smallTile').hide();
-						}
-						
+					}, function(data, status) {
+						console.log(data);
 					});
-})(jQuery);
+				});
 
-</script>
+				var onglet = '${onglet}';
+				if (onglet != 'itineraire') {
 
-</div> 
+					$('#panelDirection').addClass("hide");
+				}
+				if (onglet != 'nomad') {
+					if ($('#id_map').hasClass("col-lg-12")) {
+
+						$('#id_map').removeClass("col-lg-12");
+						$('#id_map').addClass("col-lg-6");
+
+						$('#smallTile').show();
+
+						$('.open').addClass("hide");
+						$('.closemap').removeClass("hide");
+
+						map = $("#map").gmap3('get');
+						google.maps.event.trigger(map, 'resize');
+						map.setZoom(map.getZoom());
+						var markIndic = $("#map").gmap3({
+							get : {
+								id : "indicator"
+							}
+						});
+						map.setCenter(markIndic.getPosition());
+						map.panToBounds(map.getBounds());
+					}
+				}
+
+				if ($('#id_map').hasClass("col-lg-12")) {
+					$('#smallTile').hide();
+				}
+
+			});
+		})(jQuery);
+	</script>
+
+</div>

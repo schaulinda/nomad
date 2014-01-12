@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -101,8 +102,15 @@ public class HomeController {
 		return "/login";
 	}
 	
-	/*@RequestMapping("/{username}")
+	
+	@RequestMapping("/@{username}")
 	public String nomad(@PathVariable("username") String username, HttpServletRequest request, Model uiModel) {
+		
+		if(username=="login"){
+			return "/login";
+		}
+		
+		UserNomade nomade = securite.getUserNomade();
 		
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 		List<UserNomade> findByUserName = userService.findByUserName(username);
@@ -111,24 +119,22 @@ public class HomeController {
 			
 			UserNomade findUserNomade = findByUserName.get(0);
 			
-			Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				findUserNomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				findUserNomade, 0);
-		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+			beanHistoriqueDecoration(uiModel, findUserNomade);
 
-		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-		beanNomadeManager.setNomads(findAllUserNomades);
-		beanNomadeManager.setMe(false);
-		beanNomadeManager.setHome(false);
+			List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+			beanNomadeManager.setNomads(findAllUserNomades);
+			beanNomadeManager.setMe(false);
+			beanNomadeManager.setHome(false);
 
 
-		if (nomade.getUserName().equals(findUserNomade.getUserName())) {
+		try {
+			if (nomade.getUserName().equals(findUserNomade.getUserName())) {
 
-			beanNomadeManager.setMe(true);
+				beanNomadeManager.setMe(true);
 
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
@@ -136,7 +142,6 @@ public class HomeController {
 		String makers = parcoursService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
-		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "nomad");
@@ -144,6 +149,23 @@ public class HomeController {
 		}
 		return "public/nomad";
 		
-	}*/
+	}
+	
+	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
+				nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
+				nomade, 0);
+		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
+		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListDanger(listDanger);
+		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+	}
 
 }
