@@ -11,7 +11,7 @@
 		<logout logout-url="/resources/j_spring_security_logout"
 			logout-success-url="/login" />
 
-		<intercept-url pattern="/**" requires-channel="https"/>
+		<intercept-url pattern="/login" requires-channel="https"/>
 	
 			<port-mappings>
 				<port-mapping http="80" https="443" />
