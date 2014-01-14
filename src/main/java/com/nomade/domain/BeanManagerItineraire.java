@@ -3,6 +3,8 @@ package com.nomade.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class BeanManagerItineraire {
 	
 	private String start;
@@ -28,14 +30,97 @@ public class BeanManagerItineraire {
 
 	private String makers;
 	
-	public void buildMakers(){
+	private String linkBase(HttpServletRequest httpServletRequest){
+		
+		StringBuilder stringBuilder = new StringBuilder()
+		.append("http://")
+		.append(httpServletRequest.getServerName())
+		.append(":").append(httpServletRequest.getServerPort())
+		.append("/resources/img")
+		.append("/mapicon");
+		
+		return stringBuilder.toString();
+		
+	}
+	
+	public void buildMakers(HttpServletRequest httpServletRequest){
 		List<Marker> listMarkers = new ArrayList<Marker>();
 		Marker mark = null;
 		for(InfoPratique info:this.infoPratiquesAll){
 			 mark = new Marker(info.getLocation(), info.getTitle());
 			 mark.setTag("info");
 				mark.setId(info.getId().toString());
-				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_yellowI.png");
+				String typeInfo = info.getSelecteur1();
+				/*"pointEau","toilettes","douches"
+				"stationnementGratuite","stationnementPayant","jardin","camping","pointRencontre"
+				station","vidange","shipping","rassemblement","garage
+				faune","flore","géologique","historique, monuments","marins","lac","plage","randonnée"*/
+				String linkBase = linkBase(httpServletRequest);
+				String linkIcon=linkBase+"/info";
+				if(typeInfo.equals("toilettes")){
+					linkIcon = linkIcon+"/toilette.png";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau.png";
+				}
+				if(typeInfo.equals("faune")){
+					linkIcon = linkIcon+"/curiositeFone.png";
+				}
+				if(typeInfo.equals("douches")){
+					linkIcon = linkIcon+"/douche.png";
+				}
+				if(typeInfo.equals("stationnementGratuite")){
+					linkIcon = linkIcon+"/stationnementGratuite";
+				}
+				if(typeInfo.equals("stationnementPayant")){
+					linkIcon = linkIcon+"/stationnementPayant";
+				}
+				if(typeInfo.equals("jardin")){
+					linkIcon = linkIcon+"/jardin";
+				}
+				if(typeInfo.equals("camping")){
+					linkIcon = linkIcon+"/camping";
+				}
+				if(typeInfo.equals("pointRencontre")){
+					linkIcon = linkIcon+"/pointRencontre";
+				}
+				if(typeInfo.equals("station")){
+					linkIcon = linkIcon+"/station";
+				}
+				if(typeInfo.equals("vidange")){
+					linkIcon = linkIcon+"/vidange";
+				}
+				if(typeInfo.equals("shipping")){
+					linkIcon = linkIcon+"/shipping";
+				}
+				if(typeInfo.equals("rassemblement")){
+					linkIcon = linkIcon+"/rassemblement";
+				}
+				if(typeInfo.equals("garage")){
+					linkIcon = linkIcon+"/garage.png";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				if(typeInfo.equals("pointEau")){
+					linkIcon = linkIcon+"/pointEau";
+				}
+				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
 		}
 		for(DangerPratique danger:this.dangerPratiquesAll){
@@ -46,7 +131,7 @@ public class BeanManagerItineraire {
 			listMarkers.add(mark);
 		}
 		this.makers = Marker.toJsonArray(listMarkers);
-		System.out.print("markers: "+this.makers);
+		
 	}
 	
 	public String getItineraire() {

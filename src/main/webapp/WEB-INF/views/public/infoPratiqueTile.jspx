@@ -35,8 +35,8 @@
 					<div class="col-lg-6 form-group">
 						<label>Categorie d'information</label> <select class="form-control"
 							required="required" placeholder="select type of info" id="select0"
-							name="select">
-							<option value="quotidien">pour le quotidien</option>
+							name="selecteur">
+							<option value="quotidien" selected="selected" >pour le quotidien</option>
 							<option value="bivouac">pour le bivouac</option>
 							<option value="tourisme">pour le tourisme</option>
 							<option value="vehicule">pour le véhicule</option>
@@ -45,8 +45,8 @@
 					<div class="col-lg-6 form-group">
 						<label>Type d'information</label> <select class="form-control"
 							required="required" placeholder="select type of info"
-							id="select1" name="select1">
-							<option value="pointEau">point d'eau</option>
+							id="select1" name="selecteur1">
+							<option value="pointEau" selected="selected" >point d'eau</option>
 							<option value="toilettes">toilettes</option>
 							<option value="douches">douches</option>
 						</select>
@@ -149,7 +149,7 @@
 								
 								var tourismeDisplay = ["curiosité faune","curiosité flore","curiosité géologique",
 								                       "curiosité historique, monuments","fonds marins","lac, lagunes","plage","départ randonnée"];
-								var tourismeValue = ["faune","flore","géologique","historique, monuments","marins","lac","plage","randonnée"];
+								var tourismeValue = ["faune","flore","geologique","monuments","marins","lac","plage","randonnee"];
 								
 								$("#select0").change(function(e) {
 									$("#select1").empty();
@@ -158,7 +158,12 @@
 										
 										$.each(quotidienDisplay, function( index, value ) {
 											
-											$("#select1").append($('<option></option>').attr("value", quotidienValue[index]).text(value));
+											if(index==1){
+												$("#select1").append($('<option selected="selected" ></option>').attr("value", quotidienValue[index]).text(value));
+											}else{
+												$("#select1").append($('<option></option>').attr("value", quotidienValue[index]).text(value));
+											}
+											
 											
 										});
 									}
@@ -166,16 +171,25 @@
 									if(val=="vehicule"){
 										
 										$.each(vehiculeDisplay, function( index, value ) {
-											
-											$("#select1").append($('<option></option>').attr("value", vehiculeValue[index]).text(value));
+											if(index==1){
+												$("#select1").append($('<option selected="selected" ></option>').attr("value", vehiculeValue[index]).text(value));
+											}else{
+												$("#select1").append($('<option></option>').attr("value", vehiculeValue[index]).text(value));
+											}
+												
 											
 										});
 									}
 									if(val=="tourisme"){
 										
+										
 										$.each(tourismeDisplay, function( index, value ) {
+											if(index==1){
+												$("#select1").append($('<option selected="selected" ></option>').attr("value", tourismeValue[index]).text(value));
+											}else{
+												$("#select1").append($('<option></option>').attr("value", tourismeValue[index]).text(value));
+											}
 											
-											$("#select1").append($('<option></option>').attr("value", tourismeValue[index]).text(value));
 											
 										});
 									}
@@ -183,8 +197,11 @@
 									if(val=="bivouac"){
 										
 										$.each(bivouacDisplay, function( index, value ) {
-											
-											$("#select1").append($('<option></option>').attr("value", bivouacValue[index]).text(value));
+											if(index==1){
+												$("#select1").append($('<option selected="selected" ></option>').attr("value", bivouacValue[index]).text(value));
+											}else{
+												$("#select1").append($('<option></option>').attr("value", bivouacValue[index]).text(value));
+											}	
 											
 										});
 									}
@@ -313,7 +330,7 @@
 			event : "onclick",
 			formId : "form_info",
 			params : {
-				fragments : "smallTile, subinfo"
+				fragments : "subinfo,smallTile"
 			}
 		}));
 	</script>

@@ -135,7 +135,7 @@ public class PublicController {
 				.findAllInfoPratiques());
 		beanManagerItineraire.setDangerPratiquesAll(dangerPratiqueService
 				.findAllDangerPratiques());
-		beanManagerItineraire.buildMakers();
+		beanManagerItineraire.buildMakers(request);
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";
@@ -162,7 +162,7 @@ public class PublicController {
 				.findAllInfoPratiques());
 		beanManagerItineraire.setDangerPratiquesAll(dangerPratiqueService
 				.findAllDangerPratiques());
-		beanManagerItineraire.buildMakers();
+		beanManagerItineraire.buildMakers(request);
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";

@@ -6,6 +6,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:sec="http://www.springframework.org/security/tags"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
@@ -47,6 +48,7 @@
 						${nomad.profil.website}
 					</div>
 					<c:if test="${beanNomadeManager.me eq false}">
+						<sec:authorize access="isAuthenticated()" >
 						<div class="col-lg-4 col-sm-4 col-12">
 							<a class="btn_cancel btn btn-default " id="btn_msg"> <i
 								class="icon-envelope"> <!-- com -->
@@ -68,6 +70,7 @@
 		
 						</c:if>
 						 </div>
+						 </sec:authorize>
 					</c:if>
 							
 						

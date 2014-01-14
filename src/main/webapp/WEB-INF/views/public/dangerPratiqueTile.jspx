@@ -34,7 +34,7 @@
 					<div class="col-lg-6 form-group">
 						<label>Categorie danger</label>
 						<select class="form-control" required="required"
-							placeholder="select type of info" id="select0" name="select" >
+							placeholder="select type of info" id="select0" name="selecteur" >
 							<option value="route">cote route</option>
 							<option value="administratif">cote Administraif</option>
 							<option value="risque">cote risque</option>
@@ -43,7 +43,7 @@
 					<div class="col-lg-6 form-group">
 						<label>Type danger</label>
 						<select class="form-control" required="required"
-							placeholder="select type of info" id="select1" name="select1" >
+							placeholder="select type of info" id="select1" name="selecteur1" >
 							<option value="impraticable">impraticable</option>
 							<option value="chausséeentresmauvaisetat">chaussée en très mauvais état</option>
 							<option value="pisteterrenongoudronné" >piste terre -non goudronné</option>
