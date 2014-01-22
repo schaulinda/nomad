@@ -70,55 +70,58 @@ public class BeanManagerItineraire {
 					linkIcon = linkIcon+"/douche.png";
 				}
 				if(typeInfo.equals("stationnementGratuite")){
-					linkIcon = linkIcon+"/stationnementGratuite";
+					linkIcon = linkIcon+"/stationnementGratuite.png";
 				}
 				if(typeInfo.equals("stationnementPayant")){
-					linkIcon = linkIcon+"/stationnementPayant";
+					linkIcon = linkIcon+"/stationnementPayant.png";
 				}
 				if(typeInfo.equals("jardin")){
-					linkIcon = linkIcon+"/jardin";
+					linkIcon = linkIcon+"/jardin.png";
 				}
 				if(typeInfo.equals("camping")){
-					linkIcon = linkIcon+"/camping";
+					linkIcon = linkIcon+"/camping.png";
 				}
 				if(typeInfo.equals("pointRencontre")){
-					linkIcon = linkIcon+"/pointRencontre";
+					linkIcon = linkIcon+"/pointRencontre.png";
 				}
 				if(typeInfo.equals("station")){
-					linkIcon = linkIcon+"/station";
+					linkIcon = linkIcon+"/station.png";
 				}
 				if(typeInfo.equals("vidange")){
-					linkIcon = linkIcon+"/vidange";
+					linkIcon = linkIcon+"/vidange.png";
 				}
 				if(typeInfo.equals("shipping")){
-					linkIcon = linkIcon+"/shipping";
+					linkIcon = linkIcon+"/shipping.png";
 				}
 				if(typeInfo.equals("rassemblement")){
-					linkIcon = linkIcon+"/rassemblement";
+					linkIcon = linkIcon+"/rassemblement.png";
 				}
 				if(typeInfo.equals("garage")){
 					linkIcon = linkIcon+"/garage.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("flore")){
+					linkIcon = linkIcon+"/flore.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("geologique")){
+					linkIcon = linkIcon+"/geologique.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("historique")){
+					linkIcon = linkIcon+"/historique.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("monuments")){
+					linkIcon = linkIcon+"/monuments.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("marins")){
+					linkIcon = linkIcon+"/marins.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("lac")){
+					linkIcon = linkIcon+"/lac.png";
 				}
-				if(typeInfo.equals("pointEau")){
-					linkIcon = linkIcon+"/pointEau";
+				if(typeInfo.equals("plage")){
+					linkIcon = linkIcon+"/plage.png";
+				}
+				if(typeInfo.equals("randonnee")){
+					linkIcon = linkIcon+"/randonnée.png";
 				}
 				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
