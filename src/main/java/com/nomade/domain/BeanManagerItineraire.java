@@ -58,7 +58,7 @@ public class BeanManagerItineraire {
 				String linkBase = linkBase(httpServletRequest);
 				String linkIcon=linkBase+"/info";
 				if(typeInfo.equals("toilettes")){
-					linkIcon = linkIcon+"/toilette.png";
+					linkIcon = linkIcon+"/toillete.png";
 				}
 				if(typeInfo.equals("pointEau")){
 					linkIcon = linkIcon+"/pointEau.png";
@@ -73,22 +73,22 @@ public class BeanManagerItineraire {
 					linkIcon = linkIcon+"/stationnementGratuite.png";
 				}
 				if(typeInfo.equals("stationnementPayant")){
-					linkIcon = linkIcon+"/stationnementPayant.png";
+					linkIcon = linkIcon+"/aireStationementPayant.png";
 				}
 				if(typeInfo.equals("jardin")){
-					linkIcon = linkIcon+"/jardin.png";
+					linkIcon = linkIcon+"/plage.png";
 				}
 				if(typeInfo.equals("camping")){
-					linkIcon = linkIcon+"/camping.png";
+					linkIcon = linkIcon+"/reseauNomad.png";
 				}
 				if(typeInfo.equals("pointRencontre")){
 					linkIcon = linkIcon+"/pointRencontre.png";
 				}
 				if(typeInfo.equals("station")){
-					linkIcon = linkIcon+"/station.png";
+					linkIcon = linkIcon+"/stationEssence.png";
 				}
 				if(typeInfo.equals("vidange")){
-					linkIcon = linkIcon+"/vidange.png";
+					linkIcon = linkIcon+"/vidangeCampingCar.png";
 				}
 				if(typeInfo.equals("shipping")){
 					linkIcon = linkIcon+"/shipping.png";
@@ -100,28 +100,28 @@ public class BeanManagerItineraire {
 					linkIcon = linkIcon+"/garage.png";
 				}
 				if(typeInfo.equals("flore")){
-					linkIcon = linkIcon+"/flore.png";
+					linkIcon = linkIcon+"/curiositeFlore.png";
 				}
 				if(typeInfo.equals("geologique")){
-					linkIcon = linkIcon+"/geologique.png";
+					linkIcon = linkIcon+"/curiositeGeologiaue.png";
 				}
 				if(typeInfo.equals("historique")){
 					linkIcon = linkIcon+"/historique.png";
 				}
 				if(typeInfo.equals("monuments")){
-					linkIcon = linkIcon+"/monuments.png";
+					linkIcon = linkIcon+"/curiositeMonument.png";
 				}
 				if(typeInfo.equals("marins")){
-					linkIcon = linkIcon+"/marins.png";
+					linkIcon = linkIcon+"/curiositeFond.png";
 				}
 				if(typeInfo.equals("lac")){
-					linkIcon = linkIcon+"/lac.png";
+					linkIcon = linkIcon+"/curiositeLac.png";
 				}
 				if(typeInfo.equals("plage")){
 					linkIcon = linkIcon+"/plage.png";
 				}
 				if(typeInfo.equals("randonnee")){
-					linkIcon = linkIcon+"/randonnée.png";
+					linkIcon = linkIcon+"/departRandonne.png";
 				}
 				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
@@ -134,6 +134,7 @@ public class BeanManagerItineraire {
 			listMarkers.add(mark);
 		}
 		this.makers = Marker.toJsonArray(listMarkers);
+		System.out.print(makers);
 		
 	}
 	

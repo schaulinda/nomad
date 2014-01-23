@@ -63,12 +63,12 @@ public class InfoPratiqueController {
     public String save(InfoPratique infoPratique,  Model uiModel, HttpServletRequest request) {
     	
     	UserNomade userNomade = securite.getUserNomade(); 
-    	beanHistoriqueDecoration(uiModel,userNomade);
-    	
+    		
     	double[] location = new double[]{infoPratique.getLocationLng(), infoPratique.getLocationLat()};
     	infoPratique.setGeoLocation(location);
 		infoPratique.setNomade(userNomade);
     	infoPratiqueService.saveInfoPratique(infoPratique);
+    	beanHistoriqueDecoration(uiModel,userNomade);
     	uiModel.addAttribute("infoPratique", new InfoPratique());
     	uiModel.addAttribute("saveInfoDanger", "saveInfoDanger");
     	return "public/info";

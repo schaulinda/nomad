@@ -217,6 +217,7 @@
 					$('#direction').html("");
 					$('#panelDirection').removeClass("hide");
 				/* the map data ----------------------------- */	
+				console.log('${beanManagerItineraire.makers}');
 				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//to something if mapdata is null 
 				/* --------------agrandir la map------------- */
 								$('#smallTile').hide();

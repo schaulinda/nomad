@@ -194,7 +194,32 @@
 									
 							});	
 
-							});
+				/* event on map zoom */
+				map = $("#map").gmap3('get');
+				google.maps.event.addListener(map, 'zoom_changed', function() {
+					
+					var markIndic = $("#map").gmap3({
+					      get:{
+					        	id:"indicator"
+					      }
+					    });
+					
+					markIndic.setPosition(map.getCenter());
+				});
+				
+				/* evet on map draggeng */
+				google.maps.event.addListener(map, 'dragend', function() {
+
+					var markIndic = $("#map").gmap3({
+					      get:{
+					        	id:"indicator"
+					      }
+					    });
+					
+					markIndic.setPosition(map.getCenter());
+				});
+							
+			});
 
 		})(jQuery);
 	</script>

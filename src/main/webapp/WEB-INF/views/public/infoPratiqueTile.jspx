@@ -325,6 +325,7 @@
 		}));
 	</script>
 	<script type="text/javascript">
+	if (dojo.byId('subinfo') != null) {
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_saveinfo",
 			event : "onclick",
@@ -333,6 +334,7 @@
 				fragments : "subinfo,smallTile"
 			}
 		}));
+	}
 	</script>
 
 </div>
