@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -70,17 +71,29 @@ public class EtapeVoyageController {
 	@RequestMapping("/save")
 	public String save(BeanNoteBookManager beanNoteBookManager,
 			HttpServletRequest request, Model uiModel) {
+		
+		System.out.print("beanNoteBookManager: "+beanNoteBookManager);
+		saveParcours(beanNoteBookManager);
+		
 		EtapeVoyage etapeVoyage = beanNoteBookManager.getEtapeVoyage();
-		System.out.print("etapeVoyage: "+etapeVoyage);
+		
+		if(etapeVoyage.getDateEtape()==null){
+			etapeVoyage.setDateEtape(new Date());
+		}
+		
 		UserNomade nomade = securite.getUserNomade();
 		etapeVoyage.setNomade(nomade);
+		
 		double[] location = new double[]{etapeVoyage.getUserlng(), etapeVoyage.getUserlat()};
 		etapeVoyage.setGeolocation(location);
+		
+		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		
 		Parcours lastParcours = parcoursService.lastParcours(nomade);
 		if(lastParcours==null){
 			beanNoteBookManager.setNotify("nope");
-			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			bookManager.setListParcours(parcoursService.drawParcours(nomade));
+			uiModel.addAttribute("beanNoteBookManager", bookManager);
 			uiModel.addAttribute("nomade", nomade);
 			uiModel.addAttribute("onglet", "carnet");
 			
@@ -95,39 +108,30 @@ public class EtapeVoyageController {
 		
 		beanHistoriqueDecoration(uiModel, nomade);
 		
-		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setNotify("yep");
+		bookManager.setListParcours(parcoursService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
 		return "public/carnet";
 	}
 	
-	@RequestMapping("/saveParcours")
-	public String saveParcours(BeanNoteBookManager beanNoteBookManager,
-			HttpServletRequest request, Model uiModel) {
+	
+	private void saveParcours(BeanNoteBookManager beanNoteBookManager) {
 		
-		double[] location1 = new double[]{beanNoteBookManager.getStartLng(), beanNoteBookManager.getStartLat()};
-		double[] location2 = new double[]{beanNoteBookManager.getEndLng(), beanNoteBookManager.getEndLat()};
-		
-		UserNomade userNomade = securite.getUserNomade();
-		
-		Parcours parcours = new Parcours(location1, location2);
-		parcours.setStartAdress(beanNoteBookManager.getStart());
-		parcours.setEndAdress(beanNoteBookManager.getEnd());
-		parcours.setNomad(userNomade);
-		parcoursService.saveParcours(parcours);
-		
-		beanHistoriqueDecoration(uiModel, userNomade);
-		
-		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		
-		bookManager.setNotify("yep");
-		uiModel.addAttribute("beanNoteBookManager", bookManager);
-		
-		uiModel.addAttribute("nomade", userNomade);
-		uiModel.addAttribute("onglet", "carnet");
-		return "public/carnet";
+		if(beanNoteBookManager.getStart()!=null && beanNoteBookManager.getEnd()!=null){
+				
+			double[] location1 = new double[]{beanNoteBookManager.getStartLng(), beanNoteBookManager.getStartLat()};
+			double[] location2 = new double[]{beanNoteBookManager.getEndLng(), beanNoteBookManager.getEndLat()};
+			
+			UserNomade userNomade = securite.getUserNomade();
+			
+			Parcours parcours = new Parcours(location1, location2);
+			parcours.setStartAdress(beanNoteBookManager.getStart());
+			parcours.setEndAdress(beanNoteBookManager.getEnd());
+			parcours.setNomad(userNomade);
+			parcoursService.saveParcours(parcours);
+		}
 		
 	}
 	

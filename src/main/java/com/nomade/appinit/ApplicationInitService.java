@@ -43,8 +43,8 @@ public class ApplicationInitService {
 		mongoTemplate.getDb().dropDatabase();
 		
 		nomadeDod.init();
-		parcoursDataOnDemand.init();
-		/*voyageDataOnDemand.init();
+		/*parcoursDataOnDemand.init();
+		voyageDataOnDemand.init();
 		vehiculeDataOnDemand.init();
 		pratiqueDataOnDemand.init();
 		infoPratiqueDataOnDemand.init();*/

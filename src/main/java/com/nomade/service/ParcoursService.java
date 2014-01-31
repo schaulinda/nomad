@@ -14,4 +14,6 @@ public interface ParcoursService {
 	
 	public String buildMakers(List<UserNomade> nomads);
 	
+	public List<Parcours> drawParcours(UserNomade nomad);
+	
 }

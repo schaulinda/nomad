@@ -173,7 +173,9 @@ public class PublicController {
 		UserNomade nomade = securite.getUserNomade();
 		
 		beanHistoriqueDecoration(uiModel, nomade);
-		uiModel.addAttribute("beanNoteBookManager", new BeanNoteBookManager());
+		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListParcours(parcoursService.drawParcours(nomade));
+		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
 		return "public/carnet";

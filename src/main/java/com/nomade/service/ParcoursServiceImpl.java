@@ -42,4 +42,9 @@ public class ParcoursServiceImpl implements ParcoursService {
 		}
 		return Marker.toJsonArray(listMarkers);
 	}
+	
+	public List<Parcours> drawParcours(UserNomade nomad){
+		
+		return parcoursRepository.findByNomadOrderByCreatedDesc(nomad);
+	}
 }

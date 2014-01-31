@@ -1,5 +1,7 @@
 package com.nomade.domain;
 
+import java.util.List;
+
 
 public class BeanNoteBookManager {
 	
@@ -18,6 +20,8 @@ public class BeanNoteBookManager {
 	
 	
 	private String notify;
+	
+	private List<Parcours> listParcours;
 
 	public EtapeVoyage getEtapeVoyage() {
 		return etapeVoyage;
@@ -89,6 +93,14 @@ public class BeanNoteBookManager {
 
 	public void setEndLat(double endLat) {
 		this.endLat = endLat;
+	}
+
+	public List<Parcours> getListParcours() {
+		return listParcours;
+	}
+
+	public void setListParcours(List<Parcours> listParcours) {
+		this.listParcours = listParcours;
 	}
 
 }

@@ -58,12 +58,12 @@
 				<spring:url value="/albums/saveImageInfo" var="saveImageInfo_url"></spring:url>
 				<form:form id="formDescrption" action="${saveImageInfo_url}"
 					method="POST">
-					<label>Localisation</label>
+					 <label>Localisation</label>
 					<div class="input-group">
 						<input type="text" name="addresspicker" class="form-control"
 							id="addresspicker_map" placeholder="enter the location"
 							rel="popover" value="${addresspicker}" /> <span class="input-group-addon"> <a
-							href="#"> <i class="icon-screenshot"> <!-- co -->
+							href="#"> <i class="icon-screenshot"> 
 							</i>
 						</a>
 						</span>

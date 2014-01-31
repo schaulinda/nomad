@@ -13,17 +13,26 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i> Parcours
+				<i class="icon-user"> <!-- co -->
+				</i>
+				<spring:message code="h.notebookOfTraveler"
+					var="hNotebookOfTraveler" />
+				${hNotebookOfTraveler}
 			</h3>
 		</div>
-		<spring:url value="/etapevoyages/saveParcours" var="parcours_url"></spring:url>
-		<form:form commandName="beanNoteBookManager" method="GET"
-			action="${parcours_url}" id="form_parcours">
+		
+		<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
+		<form:form commandName="beanNoteBookManager"
+			action="${etapVoy_url}" method="GET" id="form_etapeVoy">
+			
+		<!-- fieldset parcours -->	
+			<fieldset>
+			<legend><i class="icon-road"> <!-- co -->
+				</i> Parcours
+			</legend>
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="input-group">
@@ -53,41 +62,23 @@
 						</span>
 					</div>
 				</div>
-				<div class="col-lg-3">
-					<a href="#" class="pull-down">
-						<button class="btn" type="submit" id="btn_parcours">
-							<spring:message code="button.valid" />
-						</button>
-					</a>
-				</div>
 			</div>
-		</form:form>
-		<p class="help-block">Apres la creation d'un parcours, vous pouvez y associer des etapes</p>
-	</div>
-
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-user"> <!-- co -->
-				</i>
-				<spring:message code="h.notebookOfTraveler"
-					var="hNotebookOfTraveler" />
-				${hNotebookOfTraveler}
-			</h3>
-		</div>
-		<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
-		<form:form commandName="beanNoteBookManager.etapeVoyage"
-			action="${etapVoy_url}" method="GET" id="form_etapeVoy">
+		</fieldset>
+		<br/>
+		<fieldset>
+			<legend><i class="icon-plane"> <!-- co -->
+				</i> Share your Trip experience
+			</legend>
 			<spring:message code="textarea.tellUs" var="textareaTellUs" />
 			<form:textarea cssClass="form-control" row="8" id="description"
-				path="description" required="required" placeholder="${textareaTellUs}" />
+				path="etapeVoyage.description" required="required" placeholder="${textareaTellUs}" />
 
 			<div class="bs-callout" id="btnCalBox">
 				<div class="row">
 					<div class="col-lg-10 col-lg-offset-1">
 						<div class="form-group">
 							<form:input  id="dateEtape" cssClass="datepicker form-control"
-								path="dateEtape" type="date" placeholder="12-03-1991"
+								path="etapeVoyage.dateEtape" type="date" placeholder="12-03-1991"
 								data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
 							<p class="help-block">Date of Your trip.</p>
 						</div>
@@ -101,11 +92,11 @@
 			</div>
 			<div class="bs-callout" id="btnLocationBox">
 				<div class="row">
-					<form:hidden id="locationLat" path="userlat" />
-					<form:hidden id="locationLng" path="userlng" />
+					<form:hidden id="locationLat" path="etapeVoyage.userlat" />
+					<form:hidden id="locationLng" path="etapeVoyage.userlng" />
 					<div class="col-lg-10 col-lg-offset-1">
 						<div class="input-group">
-							<form:input id="location" path="location"
+							<form:input id="location" path="etapeVoyage.location"
 								cssClass="form-control adress" placeholder="" />
 							<span class="input-group-addon"> <a href="#"> <i
 									class="icon-screenshot"> <!-- co -->
@@ -124,7 +115,7 @@
 				</div>
 			</div>
 			<div class="bs-callout" id="btnPhotoBox">
-				<form:hidden path="userPhoto" id="userPhoto" />
+				<form:hidden path="etapeVoyage.userPhoto" id="userPhoto" />
 				<div class="row">
 					<div class="col-lg-4 col-lg-offset-1">
 						<c:if test="${empty beanNoteBookManager.etapeVoyage.userPhoto}">
@@ -176,124 +167,16 @@
 					</ul>
 				</div>
 			</div>
+		</fieldset>
 		</form:form>
-		<p class="help-block">l'etape fera partie automatiquement du dernier parcours enregistre</p>
+		<p class="help-block">Vous pouvez enregistrer juste votre parcours et/ou partagez vos experiences.</p>
+		<c:if test="${not empty beanNoteBookManager.listParcours}">
+			<c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" >
+				
+			</c:forEach>	
+		</c:if>
 	</div>
 	
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-truck"> <!-- co -->
-				</i>
-				<spring:message code="h.notebookOfVehicle" var="hNotebookOfVehicle" />
-				${hNotebookOfVehicle}
-			</h3>
-		</div>
-		<!--box carnet veh  -->
-		<spring:url value="/etapevehicules/save" var="etapVeh_url"></spring:url>
-		<form:form commandName="beanNoteBookManager.etapeVehicule"
-			action="${etapVeh_url}" method="GET" id="form_etapeVeh">
-			<spring:message code="textarea.tellUs" var="textareaTellUs" />
-			<form:textarea required="required" cssClass="form-control" row="8" id="descriptionVeh"
-				path="description" placeholder="${textareaTellUs}" />
-
-			<div class="bs-calloutVeh" id="btnCalVehBoxVeh">
-				<div class="row">
-					<div class="col-lg-10 col-lg-offset-1">
-						<div class="form-group">
-							<form:input id="dateEtapeVeh" cssClass="datepicker form-control"
-								path="dateEtape" type="date" placeholder="12-03-1991"
-								data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
-							<p class="help-block">Date of Your trip.</p>
-						</div>
-					</div>
-					<div class="col-lg-1">
-						<a title="close" class="closeLinkVeh"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
-					</div>
-				</div>
-			</div>
-			<div class="bs-calloutVeh" id="btnLocationVehBoxVeh">
-				<div class="row">
-					<form:hidden id="locationVehLat" path="userlat" />
-					<form:hidden id="locationVehLng" path="userlng" />
-					<div class="col-lg-10 col-lg-offset-1">
-						<div class="input-group">
-							<form:input id="locationVeh" path="location"
-								cssClass="form-control adress" placeholder="" />
-							<span class="input-group-addon"> <a href="#"> <i
-									class="icon-screenshot"> <!-- co -->
-								</i>
-							</a>
-							</span>
-						</div>
-						<p class="help-block">Click and select the location on the
-							map.</p>
-					</div>
-					<div class="col-lg-1">
-						<a title="close" class="closeLinkVeh"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
-					</div>
-				</div>
-			</div>
-			<div class="bs-calloutVeh" id="btnPhotoVehBoxVeh">
-				<form:hidden path="userPhoto" id="userPhotoVeh" />
-				<div class="row">
-					<div class="col-lg-4 col-lg-offset-1">
-						<c:if test="${empty beanNoteBookManager.etapeVehicule.userPhoto}">
-							<IMG alt="" src="${res}/img/profil.png" width="100px"
-								height="100px;" />
-						</c:if>
-						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if
-							test="${not empty beanNoteBookManager.etapeVehicule.userPhoto}">
-							<IMG alt=""
-								src="${imageRender_url}/${beanNoteBookManager.etapeVehicule.userPhoto}"
-								width="100px" height="100px;" />
-						</c:if>
-					</div>
-					<div class="col-lg-4">
-						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-						<a class="btn btn-default" id="selectImgVeh"
-							href="${selectPhoto_url}?backLink=carnetVeh"><i
-							class="icon-edit"> <!-- com  -->
-						</i> Select a picture</a>
-					</div>
-					<div class="col-lg-1 col-lg-offset-2">
-						<a title="close" class="closeLinkVeh"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
-					</div>
-				</div>
-			</div>
-			<div class="row grpBtnVeh">
-				<div class="col-lg-8 col-lg-offset-4 col-12">
-					<ul class="nav nav-tabs nav-justified">
-						<li><a class="" id="btnPhotoVeh"> <i class="icon-camera">
-									<!-- co -->
-							</i>
-						</a></li>
-						<li><a class="" id="btnCalVeh"> <i class="icon-calendar">
-									<!-- co -->
-							</i>
-						</a></li>
-						<li><a class="" id="btnLocationVeh"> <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						</a></li>
-						<li>
-							<button class="btn" type="submit" id="btn_etapeVeh">
-								<spring:message code="button.valid" />
-							</button>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</form:form>
-	</div>
-
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
@@ -305,7 +188,22 @@
 									trigger: 'focus',
 									title: 'drag and drop violet marker, to get location'
 								});
+								
+								/* construct polyline for  */
+								<c:if test="${not empty beanNoteBookManager.listParcours}">
 
+									var arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" varStatus="loop" >
+															
+																["${parcours.start[0]}","${parcours.start[1]}"],
+																["${parcours.end[0]}","${parcours.end[1]}"]
+																
+																<c:if test="${!loop.last}">,</c:if>
+																
+														 </c:forEach>
+													];
+									console.log(arrayParcours);
+								</c:if>
+								
 								
 								/* -----clear marker and directions but not clear the picker------------ */
 								
@@ -335,8 +233,15 @@
 								    },
 								 clear:{
 									 name:["directionsrenderer"]
-								 }	
-								
+								 },
+								 polyline:{
+									    options:{
+									      strokeColor: "#FF0000",
+									      strokeOpacity: 1.0,
+									      strokeWeight: 2,
+									      path:arrayParcours
+									    }
+									  } 	
 								});
 
 								/* ----------------------------noty for save etape------------------------------------- */
@@ -388,6 +293,13 @@
 											$.session.get('locationLng'));
 									$("#description").val(
 											$.session.get('description'));
+									
+									$("#start").val($.session.get('start'));
+									$("#startLat").val($.session.get('startLat'));
+									$("#startLng").val($.session.get('startLng'));
+									$("#end").val($.session.get('end'));
+									$("#endLat").val($.session.get('endLat'));
+									$("#endLng").val($.session.get('endLng'));
 
 									$.session.remove('location');
 									$.session.remove('dateEtape');
@@ -395,33 +307,16 @@
 									$.session.remove('locationLng');
 									$.session.remove('description');
 									
+									$.session.remove('start');
+									$.session.remove('startLat');
+									$.session.remove('startLng');
+									$.session.remove('end');
+									$.session.remove('endLat');
+									$.session.remove('endLng');
+									
 								}
 									
-									/* --------------------------on load recup session veh---------------------------- */
-									if ($.session.get('locationVeh') != null
-											|| $.session.get('dateEtapeVeh') != null
-											|| $.session.get('locationVehLat') != null
-											|| $.session.get('locationVehLng') != null
-											|| $.session.get('descriptionVeh') != null) {
-
-										$("#locationVeh").val(
-												$.session.get('locationVeh'));
-										$("#dateEtapeVeh").val(
-												$.session.get('dateEtapeVeh'));
-										$("#locationLatVeh").val(
-												$.session.get('locationVehLat'));
-										$("#locationLngVeh").val(
-												$.session.get('locationVehLng'));
-										$("#descriptionVeh").val(
-												$.session.get('descriptionVeh'));
-
-										$.session.remove('locationVeh');
-										$.session.remove('dateEtapeVeh');
-										$.session.remove('locationVehLat');
-										$.session.remove('locationVehLng');
-										$.session.remove('descriptionVeh');
-
-								}
+									
 								/*------------------------event click on select image voy-------------*/
 								$("#selectImg").click(
 
@@ -437,29 +332,23 @@
 													"#locationLng").val());
 											$.session.set('description', $(
 													"#description").val());
+											
+											$.session.set('start', $(
+											"#start").val());
+											$.session.set('startLat', $(
+											"#startLat").val());
+											$.session.set('startLng', $(
+											"#startLng").val());
+											$.session.set('end', $(
+											"#end").val());
+											$.session.set('endLat', $(
+											"#endLat").val());
+											$.session.set('endLng', $(
+											"#endLng").val());
 
 											$(this).unbind('click').click();
 										});
 								
-								/*------------------------event click on select image veh-------------*/
-								$("#selectImgVeh").click(
-
-										function(e) {
-											e.preventDefault();
-											$.session.set('locationVeh', $(
-													"#locationVeh").val());
-											$.session.set('dateEtapeVeh', $(
-													"#dateEtapeVeh").val());
-											$.session.set('locationVehLat', $(
-													"#locationVehLat").val());
-											$.session.set('locationVehLng', $(
-													"#locationVehLng").val());
-											$.session.set('descriptionVeh', $(
-													"#descriptionVeh").val());
-
-											$(this).unbind('click').click();
-										});
-
 								/*-------------------------hide and show btn for Etap Voy----------------------*/
 								$(".bs-callout").each(function() {
 									$(this).hide();
@@ -506,88 +395,7 @@
 												});
 								
 								
-				/* ------------------------hide and show btn for etape veh------------------------------------------ */
-				
-				
-				
-				$(".bs-calloutVeh").each(function() {
-									$(this).hide();
-								});
-
-								if ($('#userPhotoVeh').val() != "") {
-
-									$('#btnPhotoVehBoxVeh').toggle();
-									$(".grpBtnVeh").toggle();
-
-								}
-
-								$(".grpBtnVeh a").each(function() {
-
-									$(this).click(function() {
-
-										$(".grpBtnVeh").toggle("blind", 1000);
-
-										var id = $(this).attr("id");
-										id = "#" + id + "BoxVeh";
-										$(id).toggle("blind", 1000);
-
-									});
-								});
-
-								$(".closeLinkVeh")
-										.each(
-												function() {
-													$(this)
-															.click(
-																	function() {
-																		$(this)
-																				.closest(
-																						".bs-calloutVeh")
-																				.toggle(
-																						"blind",
-																						1000);
-																		$(
-																				".grpBtnVeh")
-																				.toggle(
-																						"blind",
-																						1000);
-																	});
-												});
-				
-
-				/* ---------------------------add field adress dynamicaly----------------------------------- */	
-								$( "#form" ).keypress(function(e) {
-								      if ( e.which == 13 ) {
-								         e.preventDefault();
-								      }
-								    });
-				
-				
-								var next = 1;
-							    $(".add-more").click(function(e){
-							        e.preventDefault();
-							        next=next+1;
-							        var newId = "field" + next;
-							        var newContent = '<div class="input-group" style="margin-bottom: 3px;" id="field'+newId+'" >'
-							        	+'<input type="hidden" id="location'+newId+'Lat" name ="location'+newId+'Lat" />'
-									+'<input type="hidden" id="location'+newId+'Lng" name="location'+newId+'Lng" />'
-										+'<input type="text" class="form-control" id="location'+newId+'" name="location'+newId+'" autocomplete="off" data-items="8" />'
-											 +'<span class="input-group-btn">'
-											+'<button class="btn btn-danger remove-me" id="'+newId+'" type="button">'
-											+'<i class="icon-minus"> <!-- co --></i></button></span><br/></div>';
-							        var n = $("#count").val();
-									$("#count").val(next);  
-							        $("#field").before(newContent);
-							        
-							            $('.remove-me').click(function(e){
-							                e.preventDefault();
-							                $("#count").val($("#count").val()-1);
-							                var idRem = $(this).attr("id");
-							                
-							                $("#field"+idRem).remove();
-							               
-							            });
-							    });
+			
 								   
 							
 							});
@@ -609,16 +417,7 @@
 		}));
 	</script>
 	
-	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "selectImgVeh",
-			event : "onclick",
-			params : {
-				fragments : "body,topheader"
-			}
-		}));
-	</script>
-
+	
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_etapeVoy",
@@ -629,29 +428,6 @@
 			}
 		}));
 	</script>
-	
-	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "btn_etapeVeh",
-			event : "onclick",
-			formId : "form_etapeVeh",
-			params : {
-				fragments : "smallTile, subveh"
-			}
-		}));
-	</script>
-	
-	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "btn_parcours",
-			event : "onclick",
-			formId : "form_parcours",
-			params : {
-				fragments : "smallTile"
-			}
-		}));
-	</script>
-
 
 </div>
 

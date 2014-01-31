@@ -124,4 +124,39 @@ var $map = $('#map');
 						});
 				}
 				
+				
+				// ---------------------------add field adress dynamicaly----------------------------------- 
+								$( "#form" ).keypress(function(e) {
+								      if ( e.which == 13 ) {
+								         e.preventDefault();
+								      }
+								    });
+				
+				
+								var next = 1;
+							    $(".add-more").click(function(e){
+							        e.preventDefault();
+							        next=next+1;
+							        var newId = "field" + next;
+							        var newContent = '<div class="input-group" style="margin-bottom: 3px;" id="field'+newId+'" >'
+							        	+'<input type="hidden" id="location'+newId+'Lat" name ="location'+newId+'Lat" />'
+									+'<input type="hidden" id="location'+newId+'Lng" name="location'+newId+'Lng" />'
+										+'<input type="text" class="form-control" id="location'+newId+'" name="location'+newId+'" autocomplete="off" data-items="8" />'
+											 +'<span class="input-group-btn">'
+											+'<button class="btn btn-danger remove-me" id="'+newId+'" type="button">'
+											+'<i class="icon-minus"> <!-- co --></i></button></span><br/></div>';
+							        var n = $("#count").val();
+									$("#count").val(next);  
+							        $("#field").before(newContent);
+							        
+							            $('.remove-me').click(function(e){
+							                e.preventDefault();
+							                $("#count").val($("#count").val()-1);
+							                var idRem = $(this).attr("id");
+							                
+							                $("#field"+idRem).remove();
+							               
+							            });
+							    });
+				
 */
