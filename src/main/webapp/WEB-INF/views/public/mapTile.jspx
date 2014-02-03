@@ -128,26 +128,18 @@
 									}
 								});
 								
-								/*autocompletion  */
+								/*autocompletion adress picker */
 								var geocoder = new google.maps.Geocoder();
-								$('#addresspicker_map')
-										.autocomplete(
+								$('.adress').autocomplete(
 												{
-													source : function(request,
-															response) {
-														geocoder
-																.geocode(
-																		{
+													source : function(request,response) {
+														geocoder.geocode({
 																			'address' : request.term
 																		},
 																		function(
 																				results,
 																				status) {
-																			response($
-																					.map(
-																							results,
-																							function(
-																									item) {
+																			response($.map(results,function(item) {
 																								return {
 																									value : item.formatted_address,
 																									location : item.geometry.location
@@ -160,6 +152,7 @@
 														map.setCenter(ui.item.location);
 														map.setZoom(5);
 														marker.setPosition(ui.item.location);
+														console.log(ui.item.location.lat());
 													}
 												});
 								

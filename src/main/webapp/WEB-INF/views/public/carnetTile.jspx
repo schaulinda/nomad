@@ -23,160 +23,166 @@
 				${hNotebookOfTraveler}
 			</h3>
 		</div>
-		
-		<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
-		<form:form commandName="beanNoteBookManager"
-			action="${etapVoy_url}" method="GET" id="form_etapeVoy">
-			
-		<!-- fieldset parcours -->	
-			<fieldset>
-			<legend><i class="icon-road"> <!-- co -->
-				</i> Parcours
-			</legend>
-			<div class="row">
-				<div class="col-lg-9">
-					<div class="input-group">
-						<spring:message code="input.start" var="inputStart" />
-						<form:input type="text" id="start" disabled="true" required="required" cssClass="form-control adress"
-							placeholder="${inputStart}" path="start" autocomplete="off" />
-						<form:hidden id="startLat" path="startLng" />
-						<form:hidden id="startLng" path="startLat" />
-						<a href="#" class="mapPicker input-group-addon" id="start-picker" > 
-							<span class="" >
-							<i class="icon-screenshot"><!--co  --></i>
-							</span>
-						</a>
-					</div>
-					<br />
-					<div class="input-group">
-						<spring:message code="input.finish" var="inputFinish" />
-						<form:input type="text" id="end" disabled="true" cssClass="form-control adress"
-							placeholder="${inputFinish}" required="required" path="end" autocomplete="off" />
-						<form:hidden id="endLat" path="endLng" />
-						<form:hidden id="endLng" path="endLat" />
-						<!--please change end not finish -->
-						<a href="#" class="mapPicker input-group-addon" id="end-picker">
-						<span class=""> 
-						 <i class="icon-screenshot"> <!-- co --></i>	
-						</span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-		<br/>
-		<fieldset>
-			<legend><i class="icon-plane"> <!-- co -->
-				</i> Share your Trip experience
-			</legend>
-			<spring:message code="textarea.tellUs" var="textareaTellUs" />
-			<form:textarea cssClass="form-control" row="8" id="description"
-				path="etapeVoyage.description" required="required" placeholder="${textareaTellUs}" />
 
-			<div class="bs-callout" id="btnCalBox">
+		<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
+		<form:form commandName="beanNoteBookManager" action="${etapVoy_url}"
+			method="GET" id="form_etapeVoy">
+
+			<!-- fieldset parcours -->
+			<fieldset>
+				<legend>
+					<i class="icon-road"> <!-- co -->
+					</i> Parcours
+				</legend>
 				<div class="row">
-					<div class="col-lg-10 col-lg-offset-1">
-						<div class="form-group">
-							<form:input  id="dateEtape" cssClass="datepicker form-control"
-								path="etapeVoyage.dateEtape" type="date" placeholder="12-03-1991"
-								data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
-							<p class="help-block">Date of Your trip.</p>
-						</div>
-					</div>
-					<div class="col-lg-1">
-						<a title="close" class="closeLink"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
-					</div>
-				</div>
-			</div>
-			<div class="bs-callout" id="btnLocationBox">
-				<div class="row">
-					<form:hidden id="locationLat" path="etapeVoyage.userlat" />
-					<form:hidden id="locationLng" path="etapeVoyage.userlng" />
-					<div class="col-lg-10 col-lg-offset-1">
+					<div class="col-lg-9 parent_container">
 						<div class="input-group">
-							<form:input id="location" disabled="true" path="etapeVoyage.location"
-								cssClass="form-control adress" placeholder="" />
-								<a href="#" class="input-group-addon mapPicker" id="location-picker" >
-									<span class="" >  
-									<i class="icon-screenshot"> <!-- co --></i>
-									</span>
-								</a>
+							<spring:message code="input.start" var="inputStart" />
+							<form:input type="text" id="start" required="required" cssClass="form-control adress"
+								placeholder="${inputStart}" path="start" autocomplete="off" />
+							<form:hidden id="startLat" path="startLng" />
+							<form:hidden id="startLng" path="startLat" />
+							<a href="#" class="mapPicker input-group-addon" id="start-picker">
+								<span class=""> <i class="icon-screenshot"> <!--co  -->
+								</i>
+							</span>
+							</a>
 						</div>
-						<p class="help-block">Click and select the location on the
-							map.</p>
-					</div>
-					<div class="col-lg-1">
-						<a title="close" class="closeLink"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
-					</div>
-				</div>
-			</div>
-			<div class="bs-callout" id="btnPhotoBox">
-				<form:hidden path="etapeVoyage.userPhoto" id="userPhoto" />
-				<div class="row">
-					<div class="col-lg-4 col-lg-offset-1">
-						<c:if test="${empty beanNoteBookManager.etapeVoyage.userPhoto}">
-							<IMG alt="" src="${res}/img/profil.png" width="100px"
-								height="100px;" />
-						</c:if>
-						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if
-							test="${not empty beanNoteBookManager.etapeVoyage.userPhoto}">
-							<IMG alt=""
-								src="${imageRender_url}/${beanNoteBookManager.etapeVoyage.userPhoto}"
-								width="100px" height="100px;" />
-						</c:if>
-					</div>
-					<div class="col-lg-4">
-						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-						<a class="btn btn-default" id="selectImg"
-							href="${selectPhoto_url}?backLink=carnet"><i
-							class="icon-edit"> <!-- com  -->
-						</i> Select a picture</a>
-					</div>
-					<div class="col-lg-1 col-lg-offset-2">
-						<a title="close" class="closeLink"><i
-							class="icon-remove-circle"> <!-- co -->
-						</i> </a>
+						<br />
+						<div class="input-group">
+							<spring:message code="input.finish" var="inputFinish" />
+							<form:input type="text" id="end" cssClass="form-control adress" placeholder="${inputFinish}"
+								required="required" path="end" autocomplete="off" />
+							<form:hidden id="endLat" path="endLng" />
+							<form:hidden id="endLng" path="endLat" />
+							<!--please change end not finish -->
+							<a href="#" class="mapPicker input-group-addon" id="end-picker">
+								<span class=""> <i class="icon-screenshot"> <!-- co --></i>
+							</span>
+							</a>
+						</div>
+
+						
 					</div>
 				</div>
-			</div>
-			<div class="row grpBtn">
-				<div class="col-lg-8 col-lg-offset-4 col-12">
-					<ul class="nav nav-tabs nav-justified">
-						<li><a class="" id="btnPhoto"> <i class="icon-camera">
-									<!-- co -->
-							</i>
-						</a></li>
-						<li><a class="" id="btnCal"> <i class="icon-calendar">
-									<!-- co -->
-							</i>
-						</a></li>
-						<li><a class="" id="btnLocation"> <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						</a></li>
-						<li>
-							<button class="btn" type="submit" id="btn_etapeVoy">
-								<spring:message code="button.valid" />
-							</button>
-						</li>
-					</ul>
+			</fieldset>
+			<br />
+			<fieldset>
+				<legend>
+					<i class="icon-plane"> <!-- co -->
+					</i> Share your Trip experience
+				</legend>
+				<spring:message code="textarea.tellUs" var="textareaTellUs" />
+				<form:textarea cssClass="form-control" row="8" id="description"
+					path="etapeVoyage.description" required="required"
+					placeholder="${textareaTellUs}" />
+
+				<div class="bs-callout" id="btnCalBox">
+					<div class="row">
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="form-group">
+								<form:input id="dateEtape" cssClass="datepicker form-control"
+									path="etapeVoyage.dateEtape" type="date"
+									placeholder="12-03-1991" data-date-format="dd-mm-yyyy"
+									format="dd-mm-yyyy" />
+								<p class="help-block">Date of Your trip.</p>
+							</div>
+						</div>
+						<div class="col-lg-1">
+							<a title="close" class="closeLink"><i
+								class="icon-remove-circle"> <!-- co -->
+							</i> </a>
+						</div>
+					</div>
 				</div>
-			</div>
-		</fieldset>
+				<div class="bs-callout" id="btnLocationBox">
+					<div class="row">
+						<form:hidden id="locationLat" path="etapeVoyage.userlat" />
+						<form:hidden id="locationLng" path="etapeVoyage.userlng" />
+						<div class="col-lg-10 col-lg-offset-1">
+							<div class="input-group">
+								<form:input id="location" path="etapeVoyage.location" cssClass="form-control adress"
+									placeholder="" />
+								<a href="#" class="input-group-addon mapPicker"
+									id="location-picker"> <span class=""> <i
+										class="icon-screenshot"> <!-- co --></i>
+								</span>
+								</a>
+							</div>
+							<p class="help-block">Click and select the location on the
+								map.</p>
+						</div>
+						<div class="col-lg-1">
+							<a title="close" class="closeLink"><i
+								class="icon-remove-circle"> <!-- co -->
+							</i> </a>
+						</div>
+					</div>
+				</div>
+				<div class="bs-callout" id="btnPhotoBox">
+					<form:hidden path="etapeVoyage.userPhoto" id="userPhoto" />
+					<div class="row">
+						<div class="col-lg-4 col-lg-offset-1">
+							<c:if test="${empty beanNoteBookManager.etapeVoyage.userPhoto}">
+								<IMG alt="" src="${res}/img/profil.png" width="100px"
+									height="100px;" />
+							</c:if>
+							<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+							<c:if
+								test="${not empty beanNoteBookManager.etapeVoyage.userPhoto}">
+								<IMG alt=""
+									src="${imageRender_url}/${beanNoteBookManager.etapeVoyage.userPhoto}"
+									width="100px" height="100px;" />
+							</c:if>
+						</div>
+						<div class="col-lg-4">
+							<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+							<a class="btn btn-default" id="selectImg"
+								href="${selectPhoto_url}?backLink=carnet"><i
+								class="icon-edit"> <!-- com  -->
+							</i> Select a picture</a>
+						</div>
+						<div class="col-lg-1 col-lg-offset-2">
+							<a title="close" class="closeLink"><i
+								class="icon-remove-circle"> <!-- co -->
+							</i> </a>
+						</div>
+					</div>
+				</div>
+				<div class="row grpBtn">
+					<div class="col-lg-8 col-lg-offset-4 col-12">
+						<ul class="nav nav-tabs nav-justified">
+							<li><a class="" id="btnPhoto"> <i class="icon-camera">
+										<!-- co -->
+								</i>
+							</a></li>
+							<li><a class="" id="btnCal"> <i class="icon-calendar">
+										<!-- co -->
+								</i>
+							</a></li>
+							<li><a class="" id="btnLocation"> <i
+									class="icon-screenshot"> <!-- co -->
+								</i>
+							</a></li>
+							<li>
+								<button class="btn" type="submit" id="btn_etapeVoy">
+									<spring:message code="button.valid" />
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</fieldset>
 		</form:form>
-		<p class="help-block">Vous pouvez enregistrer juste votre parcours et/ou partagez vos experiences.</p>
+		<p class="help-block">Vous pouvez enregistrer juste votre parcours
+			et/ou partagez vos experiences.</p>
 		<c:if test="${not empty beanNoteBookManager.listParcours}">
-			<c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" >
-				
-			</c:forEach>	
+			<c:forEach items="${beanNoteBookManager.listParcours}" var="parcours">
+
+			</c:forEach>
 		</c:if>
 	</div>
-	
+
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
@@ -210,6 +216,38 @@
 									map.setZoom(map.getZoom());
 									
 								});
+								
+								/*autocompletion adress picker */
+								var geocoder = new google.maps.Geocoder();
+								$('.adress').autocomplete(
+												{
+													source : function(request,response) {
+														geocoder.geocode({
+																			'address' : request.term
+																		},
+																		function(
+																				results,
+																				status) {
+																			response($.map(results,function(item) {
+																								return {
+																									value : item.formatted_address,
+																									location : item.geometry.location
+																								};
+																							}));
+																		});
+													},
+													select : function(event, ui) {
+														var map = $("#map").gmap3('get');
+														map.setCenter(ui.item.location);
+														map.setZoom(5);
+														
+														var idInput = $(".adress:focus").attr("id");
+														$('#'+idInput+'Lat').val(ui.item.location.lat());
+														$('#'+idInput+'Lng').val(ui.item.location.lng());
+													}
+												});
+								
+								
 								
 								/* construct polyline for  */
 								
@@ -469,8 +507,8 @@
 			}
 		}));
 	</script>
-	
-	
+
+
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_etapeVoy",
