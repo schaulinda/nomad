@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect ImageInfo_Roo_Json {
     
     public String ImageInfo.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String ImageInfo.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static ImageInfo ImageInfo.fromJsonToImageInfo(String json) {
-        return new JSONDeserializer<ImageInfo>().use(null, ImageInfo.class).deserialize(json);
+        return new JSONDeserializer<ImageInfo>()
+        .use(null, ImageInfo.class).deserialize(json);
     }
     
     public static String ImageInfo.toJsonArray(Collection<ImageInfo> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String ImageInfo.toJsonArray(Collection<ImageInfo> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<ImageInfo> ImageInfo.fromJsonArrayToImageInfoes(String json) {
-        return new JSONDeserializer<List<ImageInfo>>().use(null, ArrayList.class).use("values", ImageInfo.class).deserialize(json);
+        return new JSONDeserializer<List<ImageInfo>>()
+        .use("values", ImageInfo.class).deserialize(json);
     }
     
 }

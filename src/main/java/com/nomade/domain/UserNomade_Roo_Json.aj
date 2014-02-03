@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect UserNomade_Roo_Json {
     
     public String UserNomade.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String UserNomade.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static UserNomade UserNomade.fromJsonToUserNomade(String json) {
-        return new JSONDeserializer<UserNomade>().use(null, UserNomade.class).deserialize(json);
+        return new JSONDeserializer<UserNomade>()
+        .use(null, UserNomade.class).deserialize(json);
     }
     
     public static String UserNomade.toJsonArray(Collection<UserNomade> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String UserNomade.toJsonArray(Collection<UserNomade> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<UserNomade> UserNomade.fromJsonArrayToUserNomades(String json) {
-        return new JSONDeserializer<List<UserNomade>>().use(null, ArrayList.class).use("values", UserNomade.class).deserialize(json);
+        return new JSONDeserializer<List<UserNomade>>()
+        .use("values", UserNomade.class).deserialize(json);
     }
     
 }

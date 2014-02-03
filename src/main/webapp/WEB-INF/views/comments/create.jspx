@@ -5,6 +5,7 @@
     <form:create id="fc_com_nomade_domain_Comment" modelAttribute="comment" path="/comments" render="${empty dependencies}" z="K0ZBeB9p38qJFh4IxybdsqOnYAo=">
         <field:input field="commentaire" id="c_com_nomade_domain_Comment_commentaire" z="4H1cywLHZfNeysYAiHdAlgVAXQ4="/>
         <field:input field="nomade" id="c_com_nomade_domain_Comment_nomade" z="/cmeB5MN+CMZouit8qjUR0pt1hg="/>
+        <field:input field="id" id="c_com_nomade_domain_Comment_id" required="true" validationMessageCode="field_invalid_integer" z="Y19969ldzcNYKqgTUCCR9+bS9i0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Comment" render="${not empty dependencies}" z="r8514rWZ623MRRJgzaZcL/T236Q="/>
 </div>

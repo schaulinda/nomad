@@ -16,6 +16,7 @@
         <field:input field="albums" id="c_com_nomade_domain_UserNomade_albums" z="G3syrjCdVHVZOwmmBlrOwG0hOiw="/>
         <field:input field="etapeVoyages" id="c_com_nomade_domain_UserNomade_etapeVoyages" z="YEdFxJtpBv8R4EIWtwC17N2JfV8="/>
         <field:input field="etapeVehicules" id="c_com_nomade_domain_UserNomade_etapeVehicules" z="mrK0pZNU8f8ubz0vUdkc+e2p0G4="/>
+        <field:input field="id" id="c_com_nomade_domain_UserNomade_id" required="true" validationMessageCode="field_invalid_integer" z="XWYWFGoToyyeBaJjCZkylomkCTg="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_UserNomade" render="${not empty dependencies}" z="GDaGStylUbztanE5ZjK6Q9oyav8="/>
 </div>

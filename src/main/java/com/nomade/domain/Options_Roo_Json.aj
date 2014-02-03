@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect Options_Roo_Json {
     
     public String Options.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String Options.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Options Options.fromJsonToOptions(String json) {
-        return new JSONDeserializer<Options>().use(null, Options.class).deserialize(json);
+        return new JSONDeserializer<Options>()
+        .use(null, Options.class).deserialize(json);
     }
     
     public static String Options.toJsonArray(Collection<Options> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String Options.toJsonArray(Collection<Options> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Options> Options.fromJsonArrayToOptionses(String json) {
-        return new JSONDeserializer<List<Options>>().use(null, ArrayList.class).use("values", Options.class).deserialize(json);
+        return new JSONDeserializer<List<Options>>()
+        .use("values", Options.class).deserialize(json);
     }
     
 }

@@ -14,6 +14,7 @@
         <field:checkbox field="newsletter" id="c_com_nomade_domain_Account_newsletter" z="+TEI3EZSbpxUXWi+ZHl4RH/Rh34="/>
         <field:checkbox field="notifications" id="c_com_nomade_domain_Account_notifications" z="eiwUy0e2fzS+ZUmWiuvh40LSAG0="/>
         <field:checkbox field="commercialParteners" id="c_com_nomade_domain_Account_commercialParteners" z="hFOHrfz7ZoNkQ3khZRXlupm3Ijo="/>
+        <field:input field="id" id="c_com_nomade_domain_Account_id" required="true" validationMessageCode="field_invalid_integer" z="sfllSfJhzjqgcbD2heA4P9B1W5s="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Account" render="${not empty dependencies}" z="eUX15mJOgINHUue5II8Ld+6kxR8="/>
 </div>

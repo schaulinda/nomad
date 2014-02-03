@@ -13,6 +13,7 @@
         <field:input field="nomade" id="c_com_nomade_domain_EtapeVehicule_nomade" z="j3xusNBPPKxMzFYT/VCIYtqAmKc="/>
         <field:input field="comments" id="c_com_nomade_domain_EtapeVehicule_comments" z="8h1EFKAqhA5LRJl9wlT3pLQ7FaA="/>
         <field:input field="parcours" id="c_com_nomade_domain_EtapeVehicule_parcours" z="VuzhHIzqol58wMtliskIRSCgWHk="/>
+        <field:input field="id" id="c_com_nomade_domain_EtapeVehicule_id" required="true" validationMessageCode="field_invalid_integer" z="tRrn85Y35yR88aobUO/WS44QP1w="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_EtapeVehicule" render="${not empty dependencies}" z="OaY4s3kozuaiwN4uJbtMazaEuTM="/>
 </div>

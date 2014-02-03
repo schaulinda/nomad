@@ -10,6 +10,7 @@
         <field:input field="butVoyage" id="c_com_nomade_domain_Profil_butVoyage" z="f/NpkER/FUsgskMkHpqd25allZ0="/>
         <field:input field="metier" id="c_com_nomade_domain_Profil_metier" z="MQt9dqCRemCi1GOEYmiAIa9jSjM="/>
         <field:input field="file" id="c_com_nomade_domain_Profil_file" z="FWnDGSPOD/zNLOCOrMAe1OJat+E="/>
+        <field:input field="id" id="c_com_nomade_domain_Profil_id" required="true" validationMessageCode="field_invalid_integer" z="q5tEJvU9F39rqGI8/DnXLo7cIK8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Profil" render="${not empty dependencies}" z="dsQ0k5G2/A2xyTdvvH/DMF40qF0="/>
 </div>

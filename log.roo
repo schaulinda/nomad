@@ -247,3 +247,4 @@ test integration --entity ~.domain.UserNomade --transactional
 web mvc scaffold --class ~.web.CommentController --backingType ~.domain.Comment
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-11 12:50:39
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-31 14:01:09
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-03 19:49:18

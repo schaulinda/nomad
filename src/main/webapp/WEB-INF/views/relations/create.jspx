@@ -6,6 +6,7 @@
         <field:input field="nomade" id="c_com_nomade_domain_Relation_nomade" z="IytiMR/Tc+zPmGJJ6eMkbb9Tyu4="/>
         <field:input field="nomade2" id="c_com_nomade_domain_Relation_nomade2" z="0ipPqxpSh/ljnf/upwDRdt1AUk4="/>
         <field:select field="friendState" id="c_com_nomade_domain_Relation_friendState" items="${friendstates}" path="friendstates" z="mRUDYuuB611tHhyG72SS8pDNYzA="/>
+        <field:input field="id" id="c_com_nomade_domain_Relation_id" required="true" validationMessageCode="field_invalid_integer" z="UsJDFngC1ZM40g7pObGCPsGuJls="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Relation" render="${not empty dependencies}" z="0UVXLgFe0/oWqMYldMub+tX69o8="/>
 </div>

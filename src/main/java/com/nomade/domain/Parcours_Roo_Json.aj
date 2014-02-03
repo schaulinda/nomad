@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect Parcours_Roo_Json {
     
     public String Parcours.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String Parcours.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Parcours Parcours.fromJsonToParcours(String json) {
-        return new JSONDeserializer<Parcours>().use(null, Parcours.class).deserialize(json);
+        return new JSONDeserializer<Parcours>()
+        .use(null, Parcours.class).deserialize(json);
     }
     
     public static String Parcours.toJsonArray(Collection<Parcours> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String Parcours.toJsonArray(Collection<Parcours> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Parcours> Parcours.fromJsonArrayToParcourses(String json) {
-        return new JSONDeserializer<List<Parcours>>().use(null, ArrayList.class).use("values", Parcours.class).deserialize(json);
+        return new JSONDeserializer<List<Parcours>>()
+        .use("values", Parcours.class).deserialize(json);
     }
     
 }
