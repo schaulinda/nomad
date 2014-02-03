@@ -30,28 +30,30 @@
 					<div class="input-group">
 						<spring:message code="input.start" var="inputStart" />
 						<form:input type="text" id="start" cssClass="form-control adress"
-							placeholder="${inputStart}" path="start" autocomplete="off" />
+							placeholder="${inputStart}" disabled="true" path="start" autocomplete="off" />
 						<form:hidden id="startLat" path="startLng" />
 						<form:hidden id="startLng" path="startLat" />
-						<span class="input-group-addon"> <a href="#"> <i
+						<a href="#" class="input-group-addon mapPicker" id="start-picker" > <span > <i
 								class="icon-screenshot"> <!-- co -->
 							</i>
-						</a>
 						</span>
+						</a>
 					</div>
 					<br />
 					<div class="input-group">
 						<spring:message code="input.finish" var="inputFinish" />
-						<form:input type="text" id="end" cssClass="form-control adress"
+						<form:input type="text" id="end" disabled="true" cssClass="form-control adress"
 							placeholder="${inputFinish}" path="end" autocomplete="off" />
 						<form:hidden id="endLat" path="endLng" />
 						<form:hidden id="endLng" path="endLat" />
 						<!--please change end not finish -->
-						<span class="input-group-addon"> <a href="#"> <i
+						<a href="#" class="input-group-addon mapPicker" id="end-picker" >
+						<span >  <i
 								class="icon-screenshot"> <!-- co -->
 							</i>
-						</a>
+						
 						</span>
+						</a>
 					</div>
 				</div>
 				<div class="col-lg-3">
@@ -206,9 +208,31 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-				$('.adress').tooltip({
-					trigger: 'focus',
-					title: 'drag and drop violet marker, to get location'
+				
+				$('.mapPicker').tooltip({
+					trigger: 'hover',
+					title: 'click and drag and drop violet marker, to get location'
+				});
+				
+				/* ------------------click on mapPicker----------------- */
+				$('.mapPicker').click(function(){
+					var id = $(this).attr("id");
+					var tab = id.split("-");
+					$.session.set('mapPicker', tab[0]);
+					
+					/*ogment map -------------- */
+					$('#smallTile').hide();
+					
+					$('#id_map').removeClass("col-lg-6");
+					$('#id_map').addClass("col-lg-12");
+					
+					$('.closemap').addClass("hide");
+					$('.open').removeClass("hide");
+					
+					map = $("#map").gmap3('get');	
+					google.maps.event.trigger(map, 'resize');					
+					map.setZoom(map.getZoom());
+					
 				});
 				 	
 				/* render with new itineraire */

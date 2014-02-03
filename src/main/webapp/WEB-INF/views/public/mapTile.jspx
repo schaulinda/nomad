@@ -61,20 +61,16 @@
 												},
 												autofit:{},
 												events : {
-													dragend : function(marker,
-															event, context) {
+													dragend : function(marker, event, context) {
 														
-														
-														geocoder
-																.geocode(
-																		{
+														geocoder.geocode({
 																			'latLng' : event.latLng
 																		},
-																		function(
-																				results,
-																				status) {
+																		function(results,status) {
+																			
 																			if (status == google.maps.GeocoderStatus.OK) {
-																				if($(".adress:focus")!=null){
+																				if($(".adress:focus").length > 0){
+																					
 																					$(".adress:focus").val(results[0].formatted_address);
 																					
 																					var idInput = $(".adress:focus").attr("id");
@@ -82,13 +78,42 @@
 																					$('#'+idInput+'Lng').val(event.latLng.lng());
 																					
 																				}else{
-																					$('#addresspicker_map')
-																					.val(results[0].formatted_address);
+																					if ($.session.get('mapPicker') != null || $.session.get('mapPicker') != ""){
+																						var mapPicker = $.session.get('mapPicker');
+																						console.log(mapPicker);
+																						$('#'+mapPicker).val(results[0].formatted_address);
+																						$('#'+mapPicker+'Lat').val(event.latLng.lat());
+																						$('#'+mapPicker+'Lng').val(event.latLng.lng());
+																					}else{
+																						
+																						$('#addresspicker_map')
+																						.val(results[0].formatted_address);
+																					}
 																			
 																				}
 
 																			}
 																		});
+														/* reduice marker if it is large when you pick adress */
+														if($('#id_map').hasClass("col-lg-12")){
+
+															$('#id_map').removeClass("col-lg-12");
+															$('#id_map').addClass("col-lg-6");
+															
+															
+															$('#smallTile').show();
+															
+															$('.open').addClass("hide");
+															$('.closemap').removeClass("hide");
+															
+															map = $("#map").gmap3('get');
+															google.maps.event.trigger(map, 'resize');
+															map.setZoom(map.getZoom());
+															map.setCenter(marker.getPosition());
+															map.panToBounds(map.getBounds());
+
+											         	}
+														
 													},
 												},
 											},
@@ -194,28 +219,25 @@
 									
 							});	
 
+				
 				/* event on map zoom */
 				map = $("#map").gmap3('get');
 				google.maps.event.addListener(map, 'zoom_changed', function() {
-					
 					var markIndic = $("#map").gmap3({
 					      get:{
 					        	id:"indicator"
 					      }
 					    });
-					
 					markIndic.setPosition(map.getCenter());
 				});
 				
 				/* evet on map draggeng */
 				google.maps.event.addListener(map, 'dragend', function() {
-
 					var markIndic = $("#map").gmap3({
 					      get:{
 					        	id:"indicator"
 					      }
 					    });
-					
 					markIndic.setPosition(map.getCenter());
 				});
 							

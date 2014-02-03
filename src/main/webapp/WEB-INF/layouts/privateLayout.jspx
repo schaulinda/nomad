@@ -81,6 +81,8 @@
 	
 </script>
 
+<script type="text/javascript" src="${res}/js/jquery-addable.js" ><!-- eh --></script>
+
 <util:load-scripts />
 <spring:url value="/resources/js/app.js" var="app_js_url" />
 <script src="${app_js_url}" type="text/javascript">

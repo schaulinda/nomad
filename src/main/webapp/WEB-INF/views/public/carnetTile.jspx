@@ -37,29 +37,29 @@
 				<div class="col-lg-9">
 					<div class="input-group">
 						<spring:message code="input.start" var="inputStart" />
-						<form:input type="text" id="start" required="required" cssClass="form-control adress"
+						<form:input type="text" id="start" disabled="true" required="required" cssClass="form-control adress"
 							placeholder="${inputStart}" path="start" autocomplete="off" />
 						<form:hidden id="startLat" path="startLng" />
 						<form:hidden id="startLng" path="startLat" />
-						<span class="input-group-addon"> <a href="#"> <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
+						<a href="#" class="mapPicker input-group-addon" id="start-picker" > 
+							<span class="" >
+							<i class="icon-screenshot"><!--co  --></i>
+							</span>
 						</a>
-						</span>
 					</div>
 					<br />
 					<div class="input-group">
 						<spring:message code="input.finish" var="inputFinish" />
-						<form:input type="text" id="end" cssClass="form-control adress"
+						<form:input type="text" id="end" disabled="true" cssClass="form-control adress"
 							placeholder="${inputFinish}" required="required" path="end" autocomplete="off" />
 						<form:hidden id="endLat" path="endLng" />
 						<form:hidden id="endLng" path="endLat" />
 						<!--please change end not finish -->
-						<span class="input-group-addon"> <a href="#"> <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						</a>
+						<a href="#" class="mapPicker input-group-addon" id="end-picker">
+						<span class=""> 
+						 <i class="icon-screenshot"> <!-- co --></i>	
 						</span>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -96,13 +96,13 @@
 					<form:hidden id="locationLng" path="etapeVoyage.userlng" />
 					<div class="col-lg-10 col-lg-offset-1">
 						<div class="input-group">
-							<form:input id="location" path="etapeVoyage.location"
+							<form:input id="location" disabled="true" path="etapeVoyage.location"
 								cssClass="form-control adress" placeholder="" />
-							<span class="input-group-addon"> <a href="#"> <i
-									class="icon-screenshot"> <!-- co -->
-								</i>
-							</a>
-							</span>
+								<a href="#" class="input-group-addon mapPicker" id="location-picker" >
+									<span class="" >  
+									<i class="icon-screenshot"> <!-- co --></i>
+									</span>
+								</a>
 						</div>
 						<p class="help-block">Click and select the location on the
 							map.</p>
@@ -184,28 +184,55 @@
 					.ready(
 							function() {
 								/* -------------tooltip for adresspicker--------------- */
-								$('.adress').tooltip({
-									trigger: 'focus',
-									title: 'drag and drop violet marker, to get location'
+								
+								$('.mapPicker').tooltip({
+									trigger: 'hover',
+									title: 'click and drag and drop violet marker, to get location'
+								});
+								
+								/* ------------------click on mapPicker----------------- */
+								$('.mapPicker').click(function(){
+									var id = $(this).attr("id");
+									var tab = id.split("-");
+									$.session.set('mapPicker', tab[0]);
+									
+									/*ogment map -------------- */
+									$('#smallTile').hide();
+									
+									$('#id_map').removeClass("col-lg-6");
+									$('#id_map').addClass("col-lg-12");
+									
+									$('.closemap').addClass("hide");
+									$('.open').removeClass("hide");
+									
+									map = $("#map").gmap3('get');	
+									google.maps.event.trigger(map, 'resize');					
+									map.setZoom(map.getZoom());
+									
 								});
 								
 								/* construct polyline for  */
-								<c:if test="${not empty beanNoteBookManager.listParcours}">
-
-									var arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" varStatus="loop" >
+								
+									var arrayParcours=null;
+									 arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" varStatus="loop" >
 															
-																["${parcours.start[0]}","${parcours.start[1]}"],
-																["${parcours.end[0]}","${parcours.end[1]}"]
+																['${parcours.start[0]}','${parcours.start[1]}'],
+																['${parcours.end[0]}','${parcours.end[1]}']
 																
 																<c:if test="${!loop.last}">,</c:if>
 																
 														 </c:forEach>
 													];
 									console.log(arrayParcours);
-								</c:if>
+								
 								
 								
 								/* -----clear marker and directions but not clear the picker------------ */
+								var lineSymbol = {
+										path: 'M 0,-1 0,1',
+										strokeOpacity: 1,
+									    scale: 4
+							    };
 								
 								$("#map").gmap3({
 								    get: {
@@ -233,16 +260,42 @@
 								    },
 								 clear:{
 									 name:["directionsrenderer"]
-								 },
-								 polyline:{
-									    options:{
-									      strokeColor: "#FF0000",
-									      strokeOpacity: 1.0,
-									      strokeWeight: 2,
-									      path:arrayParcours
-									    }
-									  } 	
+								 }	
 								});
+								
+								/*---------------- draw parcours -------------------*/
+								if(arrayParcours!=""){
+								$("#map").gmap3({
+									
+									 polyline:{
+										    options:{
+										    	geodesic: true,
+										        strokeColor: '#FF0000',
+										        strokeOpacity: 0,
+										        strokeWeight: 3,
+										       path:arrayParcours,
+										       icons: [{
+										    	   		icon: lineSymbol,
+										    	      offset: 0,
+										    	      repeat: '20px'
+
+										     }]
+										    },
+										    tag:["line"]
+										  } 
+									
+								});
+							}
+						/*----------------- make a bound for map fit this bound ----------------------------------*/
+								
+								var bounds = new google.maps.LatLngBounds();
+								for (var i = 0; arrayParcours.length > i; i++) {
+								    bounds.extend(new google.maps.LatLng(arrayParcours[i][0],arrayParcours[i][1]));
+								    
+								}
+								var map = $("#map").gmap3('get');
+								map.fitBounds(bounds);
+								map.setZoom(3);
 
 								/* ----------------------------noty for save etape------------------------------------- */
 
