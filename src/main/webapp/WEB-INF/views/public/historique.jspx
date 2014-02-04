@@ -11,18 +11,25 @@
 	<!--le fil chronologique sera affiché lors de la sélection d'un nomade et avec le carnet de voyage. Quand l'onglet Itinéraire sera alors la météo s'affichera-->
 
 	<div class="row">
-		<!-- Historique user -->
-		<tiles:insertAttribute  name="subuser"  />
-		<!-- Historique vehicule -->
-		<tiles:insertAttribute  name="subveh"  />
+	   <div class="col-lg-5 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+	      <!-- Historique user -->
+		  <tiles:insertAttribute  name="subuser" />
+	   </div>
+	   <div class="col-lg-5 col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+	      <!-- Historique vehicule -->
+		  <tiles:insertAttribute  name="subveh" />
+	   </div>
 	</div>
 
-
-	<div class="row">
-		<!-- Historique Infos pratiques -->
-		<tiles:insertAttribute  name="subinfo"  />
-		<!-- Historique Infos dangers -->
-		<tiles:insertAttribute  name="subdanger"  />
+    <div class="row">
+       <div class="col-lg-5 col-lg-offset-1 col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+	      <!-- Historique Infos pratiques -->
+		  <tiles:insertAttribute  name="subinfo" />
+	   </div>
+	   <div class="col-lg-5 col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+	      <!-- Historique Infos dangers -->
+		  <tiles:insertAttribute  name="subdanger" />
+	   </div>
 	</div>
 
 

@@ -30,7 +30,7 @@
 					<div class="input-group">
 						<spring:message code="input.start" var="inputStart" />
 						<form:input type="text" id="start" cssClass="form-control adress"
-							placeholder="${inputStart}" disabled="true" path="start" autocomplete="off" />
+							placeholder="${inputStart}" path="start" autocomplete="off" />
 						<form:hidden id="startLat" path="startLng" />
 						<form:hidden id="startLng" path="startLat" />
 						<a href="#" class="input-group-addon mapPicker" id="start-picker" > <span > <i
@@ -42,7 +42,7 @@
 					<br />
 					<div class="input-group">
 						<spring:message code="input.finish" var="inputFinish" />
-						<form:input type="text" id="end" disabled="true" cssClass="form-control adress"
+						<form:input type="text" id="end" cssClass="form-control adress"
 							placeholder="${inputFinish}" path="end" autocomplete="off" />
 						<form:hidden id="endLat" path="endLng" />
 						<form:hidden id="endLng" path="endLat" />
@@ -234,6 +234,38 @@
 					map.setZoom(map.getZoom());
 					
 				});
+				
+				/*autocompletion adress picker */
+				var geocoder = new google.maps.Geocoder();
+				$('.adress').autocomplete(
+								{
+									source : function(request,response) {
+										geocoder.geocode({
+															'address' : request.term
+														},
+														function(
+																results,
+																status) {
+															response($.map(results,function(item) {
+																				return {
+																					value : item.formatted_address,
+																					location : item.geometry.location
+																				};
+																			}));
+														});
+									},
+									select : function(event, ui) {
+										var map = $("#map").gmap3('get');
+										map.setCenter(ui.item.location);
+										map.setZoom(5);
+										
+										var idInput = $(".adress:focus").attr("id");
+										$('#'+idInput+'Lat').val(ui.item.location.lat());
+										$('#'+idInput+'Lng').val(ui.item.location.lng());
+									}
+								});
+				
+				
 				 	
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
