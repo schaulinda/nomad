@@ -6,12 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-
 import org.apache.commons.lang3.StringUtils;
-import com.nomade.domain.UserNomade;
-import com.nomade.domain.RoleName;
-import com.nomade.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +17,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.nomade.domain.RoleName;
+import com.nomade.domain.UserNomade;
+import com.nomade.service.UserService;
 
 @Service
 @Transactional

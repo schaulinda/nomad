@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.layers.service.RooService;
 
-import com.nomade.domain.DangerPratique;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 
