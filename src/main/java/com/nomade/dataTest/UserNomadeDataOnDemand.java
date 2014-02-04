@@ -1,17 +1,9 @@
 package com.nomade.dataTest;
 
-import com.nomade.domain.Account;
-import com.nomade.domain.Profil;
-import com.nomade.domain.RoleName;
-import com.nomade.domain.UserNomade;
-import com.nomade.domain.Vehicule;
-import com.nomade.service.UserService;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -24,8 +16,14 @@ import javax.validation.ConstraintViolationException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.dod.RooDataOnDemand;
 import org.springframework.stereotype.Component;
+
+import com.nomade.domain.Account;
+import com.nomade.domain.Profil;
+import com.nomade.domain.RoleName;
+import com.nomade.domain.UserNomade;
+import com.nomade.domain.Vehicule;
+import com.nomade.service.UserService;
 
 @Component
 @Configurable

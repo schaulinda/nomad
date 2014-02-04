@@ -1,6 +1,5 @@
 package com.nomade.domain;
 
-import org.springframework.roo.addon.dod.RooDataOnDemand;
 import org.springframework.roo.addon.json.RooJson;
 
 @RooJson

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import com.nomade.domain.PasswordReset;
 import com.nomade.domain.UserNomade;
 import com.nomade.email.NotificationService;
 import com.nomade.security.Security;
-import com.nomade.security.SecurityUtil;
 import com.nomade.service.UserService;
 import com.nomade.tools.ValideEmailUtil;
 

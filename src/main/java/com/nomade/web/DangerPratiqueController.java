@@ -4,19 +4,6 @@ import java.math.BigInteger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.nomade.domain.BeanHistorique;
-import com.nomade.domain.DangerPratique;
-import com.nomade.domain.EtapeVehicule;
-import com.nomade.domain.EtapeVoyage;
-import com.nomade.domain.InfoPratique;
-import com.nomade.domain.UserNomade;
-import com.nomade.security.Security;
-import com.nomade.service.DangerPratiqueService;
-import com.nomade.service.EtapeVehiculeService;
-import com.nomade.service.EtapeVoyageService;
-import com.nomade.service.InfoPratiqueService;
-import com.nomade.service.ParcoursService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -25,6 +12,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.nomade.domain.BeanHistorique;
+import com.nomade.domain.DangerPratique;
+import com.nomade.domain.EtapeVehicule;
+import com.nomade.domain.EtapeVoyage;
+import com.nomade.domain.InfoPratique;
+import com.nomade.domain.UserNomade;
+import com.nomade.security.Security;
+import com.nomade.service.EtapeVehiculeService;
+import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.InfoPratiqueService;
 
 @RequestMapping("/dangerpratiques")
 @Controller

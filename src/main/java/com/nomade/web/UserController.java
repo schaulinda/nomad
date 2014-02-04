@@ -66,7 +66,6 @@ import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
-import com.nomade.service.UserService;
 import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
 

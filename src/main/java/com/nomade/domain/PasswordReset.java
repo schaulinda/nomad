@@ -1,7 +1,6 @@
 package com.nomade.domain;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.roo.addon.javabean.RooJavaBean;
 
 
 public class PasswordReset {

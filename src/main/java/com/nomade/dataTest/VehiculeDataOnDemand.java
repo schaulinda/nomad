@@ -1,10 +1,5 @@
 package com.nomade.dataTest;
 
-import com.nomade.domain.Country;
-import com.nomade.domain.Vehicule;
-import com.nomade.domain.VehiculeState;
-import com.nomade.domain.VehiculeType;
-import com.nomade.service.VehiculeService;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -14,12 +9,19 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.roo.addon.dod.RooDataOnDemand;
 import org.springframework.stereotype.Component;
+
+import com.nomade.domain.Country;
+import com.nomade.domain.Vehicule;
+import com.nomade.domain.VehiculeState;
+import com.nomade.domain.VehiculeType;
+import com.nomade.service.VehiculeService;
 
 @Component
 @Configurable

@@ -23,7 +23,6 @@ import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
-import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 
 @RequestMapping("/infopratiques")
