@@ -8,6 +8,7 @@
 
 .user {
 	cursor: pointer;
+	padding-left: 30px;
 }
 
 .user>a:HOVER {
@@ -398,9 +399,21 @@ footer{
 .copyright{
 	color:#5BC0DE;
 	text-shadow: none !important;
-}
+}	
 
 .transparent{
 	opacity:0.6;
 	filter(opacity=60);
+}
+
+#topheader{
+	margin-bottom:-10px;
+}
+
+#subuser div, #subveh div, #subinfo div, #subdanger div{
+	width:100%;
+}
+
+#subuser div .panel, #subveh div .panel, #subinfo div .panel, #subdanger div .panel{
+	padding-right:0;
 }

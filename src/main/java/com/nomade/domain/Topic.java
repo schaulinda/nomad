@@ -10,6 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToMany;
 
 @RooJavaBean
 @RooToString
@@ -45,4 +49,10 @@ public class Topic {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private Date created = new Date();
+
+    /**
+     * a set of subtopics related to this topic
+     */
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<SubTopic> subTopics = new HashSet<SubTopic>();
 }

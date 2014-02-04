@@ -61,20 +61,20 @@ privileged aspect SubTopic_Roo_JavaBean {
         this.parentTopic = parentTopic;
     }
     
-    public SubTopic SubTopic.getSubTopics() {
-        return this.subTopics;
-    }
-    
-    public void SubTopic.setSubTopics(SubTopic subTopics) {
-        this.subTopics = subTopics;
-    }
-    
     public Set<Discussion> SubTopic.getDiscussions() {
         return this.discussions;
     }
     
     public void SubTopic.setDiscussions(Set<Discussion> discussions) {
         this.discussions = discussions;
+    }
+    
+    public Set<SubTopic> SubTopic.getSubTopics() {
+        return this.subTopics;
+    }
+    
+    public void SubTopic.setSubTopics(Set<SubTopic> subTopics) {
+        this.subTopics = subTopics;
     }
     
 }

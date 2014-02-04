@@ -58,13 +58,13 @@ public class SubTopic {
     private Topic parentTopic;
 
     /**
-     * The list of subtopics contained in this subtopic
-     */
-    @ManyToOne
-    private SubTopic subTopics;
-
-    /**
      */
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Discussion> discussions = new HashSet<Discussion>();
+
+    /**
+     * a set of subtopics related to this subtopic
+     */
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<SubTopic> subTopics = new HashSet<SubTopic>();
 }

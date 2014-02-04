@@ -1,6 +1,7 @@
 package com.nomade.appinit;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -13,7 +14,14 @@ import com.nomade.dataTest.EtapeVoyageDataOnDemand;
 import com.nomade.dataTest.InfoPratiqueDataOnDemand;
 import com.nomade.dataTest.ParcoursDataOnDemand;
 import com.nomade.dataTest.UserNomadeDataOnDemand;
+import com.nomade.domain.Confidentiality;
+import com.nomade.domain.Discussion;
+import com.nomade.domain.Topic;
+import com.nomade.domain.UserNomade;
+import com.nomade.service.TopicService;
 import com.nomade.service.UserService;
+import com.nomade.tools.SubTopicBuilder;
+import com.nomade.tools.TopicBuilder;
 
 @Service
 @Transactional
@@ -37,12 +45,14 @@ public class ApplicationInitService {
 	DangerPratiqueDataOnDemand pratiqueDataOnDemand;
 	@Autowired
 	InfoPratiqueDataOnDemand infoPratiqueDataOnDemand;
-		
+	@Autowired
+	TopicService topicService;
     public  void initData() throws IOException{
 		System.out.print("init");
 		mongoTemplate.getDb().dropDatabase();
 		
 		nomadeDod.init();
+		initTopics();
 		/*parcoursDataOnDemand.init();
 		voyageDataOnDemand.init();
 		vehiculeDataOnDemand.init();
@@ -51,7 +61,17 @@ public class ApplicationInitService {
 		
 	}
 	
-	
+	protected void initTopics() {
+		UserNomade nomade = userService.findAllUserNomades().iterator().next();
+		TopicBuilder topicBuilder = TopicBuilder.get().addTopic("Africa Travels", "travales to africa", Confidentiality.Publique, nomade)
+			.addTopic("Europa", "Travels accross europe", Confidentiality.Publique,nomade )
+			.addTopic("Asia", "Travels Across Asia", Confidentiality.Publique, nomade)
+			.addTopic("Antartica", "Visit agross antartica", Confidentiality.Publique, nomade);
+		List<Topic> topics = topicBuilder.getTopics();
+		for (Topic topic : topics) {
+			topicService.saveTopic(topic);
+		}
+	}
 	/*public void initApplication() {
 		
 		Set<RoleName> roleNames = new HashSet<RoleName>();

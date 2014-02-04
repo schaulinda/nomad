@@ -4,9 +4,11 @@
 package com.nomade.domain;
 
 import com.nomade.domain.Confidentiality;
+import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
+import java.util.Set;
 
 privileged aspect Topic_Roo_JavaBean {
     
@@ -48,6 +50,14 @@ privileged aspect Topic_Roo_JavaBean {
     
     public void Topic.setCreated(Date created) {
         this.created = created;
+    }
+    
+    public Set<SubTopic> Topic.getSubTopics() {
+        return this.subTopics;
+    }
+    
+    public void Topic.setSubTopics(Set<SubTopic> subTopics) {
+        this.subTopics = subTopics;
     }
     
 }

@@ -10,10 +10,8 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
-import com.nomade.domain.Parcours;
 import com.nomade.domain.Profil;
 import com.nomade.domain.Relation;
-import com.nomade.domain.SubTopic;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
 import com.nomade.service.AccountService;
@@ -22,10 +20,8 @@ import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
-import com.nomade.service.ParcoursService;
 import com.nomade.service.ProfilService;
 import com.nomade.service.RelationService;
-import com.nomade.service.SubTopicService;
 import com.nomade.service.UserService;
 import com.nomade.service.VehiculeService;
 import com.nomade.web.ApplicationConversionServiceFactoryBean;
@@ -58,16 +54,10 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     InfoPratiqueService ApplicationConversionServiceFactoryBean.infoPratiqueService;
     
     @Autowired
-    ParcoursService ApplicationConversionServiceFactoryBean.parcoursService;
-    
-    @Autowired
     ProfilService ApplicationConversionServiceFactoryBean.profilService;
     
     @Autowired
     RelationService ApplicationConversionServiceFactoryBean.relationService;
-    
-    @Autowired
-    SubTopicService ApplicationConversionServiceFactoryBean.subTopicService;
     
     @Autowired
     UserService ApplicationConversionServiceFactoryBean.userService;
@@ -235,30 +225,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Parcours, String> ApplicationConversionServiceFactoryBean.getParcoursToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Parcours, java.lang.String>() {
-            public String convert(Parcours parcours) {
-                return new StringBuilder().append(parcours.getStartAdress()).append(' ').append(parcours.getEndAdress()).append(' ').append(parcours.getCreated()).toString();
-            }
-        };
-    }
-    
-    public Converter<BigInteger, Parcours> ApplicationConversionServiceFactoryBean.getIdToParcoursConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.Parcours>() {
-            public com.nomade.domain.Parcours convert(java.math.BigInteger id) {
-                return parcoursService.findParcours(id);
-            }
-        };
-    }
-    
-    public Converter<String, Parcours> ApplicationConversionServiceFactoryBean.getStringToParcoursConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Parcours>() {
-            public com.nomade.domain.Parcours convert(String id) {
-                return getObject().convert(getObject().convert(id, BigInteger.class), Parcours.class);
-            }
-        };
-    }
-    
     public Converter<Profil, String> ApplicationConversionServiceFactoryBean.getProfilToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Profil, java.lang.String>() {
             public String convert(Profil profil) {
@@ -303,30 +269,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Relation>() {
             public com.nomade.domain.Relation convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), Relation.class);
-            }
-        };
-    }
-    
-    public Converter<SubTopic, String> ApplicationConversionServiceFactoryBean.getSubTopicToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.SubTopic, java.lang.String>() {
-            public String convert(SubTopic subTopic) {
-                return new StringBuilder().append(subTopic.getTitle()).append(' ').append(subTopic.getContent()).append(' ').append(subTopic.getCreated()).toString();
-            }
-        };
-    }
-    
-    public Converter<BigInteger, SubTopic> ApplicationConversionServiceFactoryBean.getIdToSubTopicConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.SubTopic>() {
-            public com.nomade.domain.SubTopic convert(java.math.BigInteger id) {
-                return subTopicService.findSubTopic(id);
-            }
-        };
-    }
-    
-    public Converter<String, SubTopic> ApplicationConversionServiceFactoryBean.getStringToSubTopicConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.SubTopic>() {
-            public com.nomade.domain.SubTopic convert(String id) {
-                return getObject().convert(getObject().convert(id, BigInteger.class), SubTopic.class);
             }
         };
     }
@@ -400,18 +342,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getInfoPratiqueToStringConverter());
         registry.addConverter(getIdToInfoPratiqueConverter());
         registry.addConverter(getStringToInfoPratiqueConverter());
-        registry.addConverter(getParcoursToStringConverter());
-        registry.addConverter(getIdToParcoursConverter());
-        registry.addConverter(getStringToParcoursConverter());
         registry.addConverter(getProfilToStringConverter());
         registry.addConverter(getIdToProfilConverter());
         registry.addConverter(getStringToProfilConverter());
         registry.addConverter(getRelationToStringConverter());
         registry.addConverter(getIdToRelationConverter());
         registry.addConverter(getStringToRelationConverter());
-        registry.addConverter(getSubTopicToStringConverter());
-        registry.addConverter(getIdToSubTopicConverter());
-        registry.addConverter(getStringToSubTopicConverter());
         registry.addConverter(getUserNomadeToStringConverter());
         registry.addConverter(getIdToUserNomadeConverter());
         registry.addConverter(getStringToUserNomadeConverter());
