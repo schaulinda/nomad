@@ -259,3 +259,9 @@ focus --class ~.domain.SubTopic
 field set --fieldName subTopics --type ~.domain.SubTopic --comment "a set of subtopics related to this subtopic"
 focus --class ~.domain.Topic
 field set --fieldName subTopics --type ~.domain.SubTopic --comment "a set of subtopics related to this topic"
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-05 00:11:10
+class --class ~.domain.BeanTopicManager --rooAnnotations 
+field reference --fieldName topic --type ~.domain.Topic
+field number --fieldName nbDiscussion --type int
+field number --fieldName nbOfMessages --type int
+field date --fieldName lastMessageDate --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"

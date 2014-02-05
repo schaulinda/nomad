@@ -3,11 +3,11 @@
 
 package com.nomade.domain;
 
-import com.nomade.domain.BeanForumManager;
+import com.nomade.domain.BeanTopicManager;
 import java.io.Serializable;
 
-privileged aspect BeanForumManager_Roo_Serializable {
+privileged aspect BeanTopicManager_Roo_Serializable {
     
-    declare parents: BeanForumManager implements Serializable;
+    declare parents: BeanTopicManager implements Serializable;
     
 }

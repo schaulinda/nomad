@@ -13,35 +13,35 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="row">
-			<div>
-				<h4>Bienvenu Dans le forum de Petit Nomade</h4>
-				<p>Joignez-vous à la plus grande communauté de nomades dans le
-					monde. C'est facile, rapide et gratuit!</p>
-			</div>
-	
+		<div>
+			<h4>Bienvenu Dans le forum de Petit Nomade</h4>
+			<p>Joignez-vous à la plus grande communauté de nomades dans le
+				monde. C'est facile, rapide et gratuit!</p>
+		</div>
+
 		<table>
-			<th>
-				Topic Principal
-			</th>
-			<th>
-				Discussion
-			</th>
-			<th>
-				Nombres de messages
-			</th>
-			<th>
-				Last post
-			</th>
+			<thead>
+				<th>Topic Principal</th>
+				<th>Discussion</th>
+				<th>Nombres de messages</th>
+				<th>Last post</th>
+			</thead>
 			<tbody>
-				<c:forEach  items="${beanForumManager.topics }" var="topic" >
-				<spring:url value="/forum/topics/${topic.id }" var="topic_url" />
+				<c:forEach items="${topicBeans }" var="topicBean">
 					<tr>
 						<td>
-							<a href="${topic_url }" title="${topic.content }">${topic.title }</a>
-						</td>
-						<td>1000</td>
-						<td>7000</td>
-						<td>22/04/2010</td>
+							<span> <b> 
+								<spring:url value="/forum/topics/${topicBean.topic.id }" var="topic_url" />
+								<a href="${topic_url }" title="${topicBean.topic.content }">${topicBean.topic.title }</a>
+							 </b> </span> <br />
+							<c:forEach items="${topicBean.topic.subTopics }"
+								var="subTopic">
+								<spring:url value="/forum/topics/${subTopic.id }" var="topic_url" />
+								<a href="${topic_url }" title="${subTopic.content }">${subTopic.title }</a>
+							</c:forEach></td>
+						<td>${topicBean.nbOfDiscussion }</td>
+						<td>${topicBean.nbOfMessages }</td>
+						<td>${topicBean.lastMessageDate }</td>
 					</tr>
 				</c:forEach>
 			</tbody>

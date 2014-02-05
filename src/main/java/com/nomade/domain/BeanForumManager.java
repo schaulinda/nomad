@@ -8,13 +8,24 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 
+/**
+ * This class has been deprecated in profit of {@link BeanTopicManager BeanTopicManager}
+ * @author bwa
+ *
+ */
 @RooJavaBean
 @RooToString
 @RooEquals
 @RooSerializable
+@Deprecated
 public class BeanForumManager {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * a collection of topics
      */
     @ManyToMany(cascade = CascadeType.ALL)

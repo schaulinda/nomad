@@ -1,19 +1,21 @@
 package com.nomade.domain;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
-import javax.validation.constraints.NotNull;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
 
 @RooJavaBean
 @RooToString
@@ -39,7 +41,7 @@ public class Topic {
     /**
      */
     @NotNull
-    @ManyToOne
+    @DBRef
     private UserNomade nomade;
 
     /**
@@ -54,5 +56,6 @@ public class Topic {
      * a set of subtopics related to this topic
      */
     @ManyToMany(cascade = CascadeType.ALL)
+    @DBRef
     private Set<SubTopic> subTopics = new HashSet<SubTopic>();
 }

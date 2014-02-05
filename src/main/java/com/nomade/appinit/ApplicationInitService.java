@@ -1,8 +1,10 @@
 package com.nomade.appinit;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,13 @@ import com.nomade.dataTest.ParcoursDataOnDemand;
 import com.nomade.dataTest.UserNomadeDataOnDemand;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
+import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
+import com.nomade.service.SubTopicService;
 import com.nomade.service.TopicService;
 import com.nomade.service.UserService;
+import com.nomade.tools.DiscussionBuilder;
 import com.nomade.tools.SubTopicBuilder;
 import com.nomade.tools.TopicBuilder;
 
@@ -47,12 +52,15 @@ public class ApplicationInitService {
 	InfoPratiqueDataOnDemand infoPratiqueDataOnDemand;
 	@Autowired
 	TopicService topicService;
+	@Autowired
+	SubTopicService subTopicService;
     public  void initData() throws IOException{
 		System.out.print("init");
 		mongoTemplate.getDb().dropDatabase();
 		
 		nomadeDod.init();
 		initTopics();
+		initSubTopics(topicService.findAllTopics().iterator().next(),userService.findAllUserNomades().iterator().next());
 		/*parcoursDataOnDemand.init();
 		voyageDataOnDemand.init();
 		vehiculeDataOnDemand.init();
@@ -65,12 +73,31 @@ public class ApplicationInitService {
 		UserNomade nomade = userService.findAllUserNomades().iterator().next();
 		TopicBuilder topicBuilder = TopicBuilder.get().addTopic("Africa Travels", "travales to africa", Confidentiality.Publique, nomade)
 			.addTopic("Europa", "Travels accross europe", Confidentiality.Publique,nomade )
-			.addTopic("Asia", "Travels Across Asia", Confidentiality.Publique, nomade)
-			.addTopic("Antartica", "Visit agross antartica", Confidentiality.Publique, nomade);
+			.addTopic("Asia", "Travels Across Asia", Confidentiality.FriendsOnly, nomade)
+			.addTopic("Antartica", "Visit agross antartica", Confidentiality.NomadesOnly, nomade);
 		List<Topic> topics = topicBuilder.getTopics();
 		for (Topic topic : topics) {
 			topicService.saveTopic(topic);
 		}
+	}
+	protected void initSubTopics(Topic topic,UserNomade nomade){
+		SubTopicBuilder subTopicBuilder = SubTopicBuilder.get().addSubTopic("Afrique du Nord", "Forum relatif a l'Afrique du nord", Confidentiality.Publique, nomade, topic, initDiscussion(nomade))
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4) , Confidentiality.Publique, nomade, topic, initDiscussion(nomade))
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic, initDiscussion(nomade))
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic, initDiscussion(nomade))
+			.addSubTopic("Afrique de L'Ouest", "Forum relatif a l'Afrique l'ouest", Confidentiality.Publique, nomade, topic, initDiscussion(nomade));
+		List<SubTopic> subTopics = subTopicBuilder.getSubTopics();
+		for (SubTopic subTopic : subTopics) {
+			subTopicService.saveSubTopic(subTopic);
+		}
+	}
+	protected HashSet<Discussion> initDiscussion(UserNomade userNomade) {
+		List<Discussion> discussions = DiscussionBuilder.get().addDiscussion(Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
+			.addDiscussion(Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
+			.addDiscussion(Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
+			.addDiscussion(Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
+			.addDiscussion(Confidentiality.NomadesOnly, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7)).getDiscussions();
+		return new HashSet<Discussion>(discussions);
 	}
 	/*public void initApplication() {
 		

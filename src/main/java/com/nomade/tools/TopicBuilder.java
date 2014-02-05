@@ -27,8 +27,9 @@ public class TopicBuilder {
 		topics.add(topic);
 		return this;
 	}
-
+	
 	public List<Topic> getTopics() {
 		return topics;
 	}
+	
 }

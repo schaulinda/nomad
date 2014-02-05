@@ -1,5 +1,6 @@
 package com.nomade.web;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.nomade.domain.BeanForumManager;
+import com.nomade.domain.BeanTopicManager;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.service.DiscussionService;
@@ -37,12 +38,19 @@ public class ForumController {
 	public String showForumMainPage(HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Model uiModel) {
 		List<Topic> topics = topicService.findAllTopics();
-		List<SubTopic> subTopics = subTopicService.findAllSubTopics();
-		BeanForumManager beanForumManager = new BeanForumManager();
-		beanForumManager.setTopics(new HashSet<Topic>(topics));
-		beanForumManager.setSubTopics(new HashSet<SubTopic>(subTopics));
+		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
+		for (Topic topic : topics) {
+			List<SubTopic> subTopics = subTopicService.findByParentTopic(topic);
+			topic.setSubTopics(new HashSet<SubTopic>(subTopics));
+			BeanTopicManager beanTopicManager = new BeanTopicManager();
+			beanTopicManager.setTopic(topic);
+			beanTopicManager.setNbOfDiscussion(topicService.countDiscussion(topic));
+			beanTopicManager.setNbOfMessages(topicService.countMessages(topic));
+			beanTopicManager.setLastMessageDate(topicService.getLastMessageDate(topic));
+			topicBeans.add(beanTopicManager);
+		}
+		uiModel.addAttribute("topicBeans", topicBeans);
 		uiModel.addAttribute("message", HELLO_WORLD_FORUM_MESSAGED);
-		uiModel.addAttribute("beanForumManager", beanForumManager);
 		return "public/forum/mainpage";
 	}
 }

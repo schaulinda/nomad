@@ -44,7 +44,14 @@ public class SubTopicBuilder {
 		subTopic.setDiscussions(new HashSet<Discussion>(discussions));
 		subTopic.setNomade(nomade);
 		subTopic.setParentTopic(parentTopic);
-		subTopics.add(subTopic);
+		subTopic.setTitle(title);
+		getSubTopics().add(subTopic);
 		return this;
+	}
+	/**
+	 * @return the subTopics
+	 */
+	public List<SubTopic> getSubTopics() {
+		return subTopics;
 	}
 }
