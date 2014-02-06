@@ -29,15 +29,18 @@
 			<tbody>
 				<c:forEach items="${topicBeans }" var="topicBean">
 					<tr>
-						<td>
-							<span> <b> 
-								<spring:url value="/forum/topics/${topicBean.topic.id }" var="topic_url" />
-								<a href="${topic_url }" title="${topicBean.topic.content }">${topicBean.topic.title }</a>
-							 </b> </span> <br />
-							<c:forEach items="${topicBean.topic.subTopics }"
-								var="subTopic">
-								<spring:url value="/forum/topics/${subTopic.id }" var="topic_url" />
-								<a href="${topic_url }" title="${subTopic.content }">${subTopic.title }</a>
+						<td><span> <b> <spring:url
+										value="/forum/topics/${topicBean.topic.id }" var="topic_url" />
+									<u> <a href="${topic_url }"
+										title="${topicBean.topic.content }">${topicBean.topic.title }</a>
+								</u>
+							</b>
+						</span> <br /> 
+						<c:forEach items="${topicBean.topic.subTopics }" var="subTopic">
+								<spring:url value="/forum/topics/${subTopic.id }"	var="topic_url" />
+								<u>
+									<a style="margin-right: 8px;" href="${topic_url }"	title="${subTopic.content }">${subTopic.title }</a>
+								</u>
 							</c:forEach></td>
 						<td>${topicBean.nbOfDiscussion }</td>
 						<td>${topicBean.nbOfMessages }</td>
