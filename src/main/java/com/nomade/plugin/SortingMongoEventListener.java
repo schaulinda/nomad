@@ -12,7 +12,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 import com.mongodb.DBObject;
-import com.nomade.domain.EtapeVoyage;
 
 /**
  * MongoEventListener that intercepts object before its converted to BasicDBObject (before it is saved into MongoDB)

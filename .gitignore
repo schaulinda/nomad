@@ -11,7 +11,7 @@ target/
 hs_err_pid**
 **.xls
 #ignore some hidden files
-
 .classpath
 .project
 
+/target

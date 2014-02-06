@@ -2,10 +2,10 @@ package com.nomade.domain;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
-import org.springframework.web.multipart.MultipartFile;
 
 @RooJavaBean
 @RooToString

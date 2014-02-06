@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nomade.domain.BeanHistorique;
-import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;

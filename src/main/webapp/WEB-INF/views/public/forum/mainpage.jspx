@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="row">
+		<div>
+			<h4>Bienvenu Dans le forum de Petit Nomade</h4>
+			<p>Joignez-vous à la plus grande communauté de nomades dans le
+				monde. C'est facile, rapide et gratuit!</p>
+		</div>
+
+		<table>
+			<thead>
+				<th>Topic Principal</th>
+				<th>Discussion</th>
+				<th>Nombres de messages</th>
+				<th>Last post</th>
+			</thead>
+			<tbody>
+				<c:forEach items="${topicBeans }" var="topicBean">
+					<tr>
+						<td><span> <b> <spring:url
+										value="/forum/topics/${topicBean.topic.id }" var="topic_url" />
+									<u> <a href="${topic_url }"
+										title="${topicBean.topic.content }">${topicBean.topic.title }</a>
+								</u>
+							</b>
+						</span> <br /> 
+						<c:forEach items="${topicBean.topic.subTopics }" var="subTopic">
+								<spring:url value="/forum/topics/${subTopic.id }"	var="topic_url" />
+								<u>
+									<a style="margin-right: 8px;" href="${topic_url }"	title="${subTopic.content }">${subTopic.title }</a>
+								</u>
+							</c:forEach></td>
+						<td>${topicBean.nbOfDiscussion }</td>
+						<td>${topicBean.nbOfMessages }</td>
+						<td>${topicBean.lastMessageDate }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>

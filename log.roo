@@ -248,3 +248,20 @@ web mvc scaffold --class ~.web.CommentController --backingType ~.domain.Comment
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-11 12:50:39
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-31 14:01:09
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-03 19:49:18
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-04 17:09:24
+class --class ~.domain.BeanForumManager --rooAnnotations true
+field set --fieldName topics --type ~.domain.Topic --comment "a collection of topics"
+field set --fieldName subTopics --type ~.domain.SubTopic --comment "a collection of subtopics"
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-02-04 17:17:08
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-04 18:20:15
+focus --class ~.domain.SubTopic
+// [failed] field set --fieldName subTopics --type ~.domain.SubTopic --comment "a set of subtopics related to this subtopic"
+field set --fieldName subTopics --type ~.domain.SubTopic --comment "a set of subtopics related to this subtopic"
+focus --class ~.domain.Topic
+field set --fieldName subTopics --type ~.domain.SubTopic --comment "a set of subtopics related to this topic"
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-05 00:11:10
+class --class ~.domain.BeanTopicManager --rooAnnotations 
+field reference --fieldName topic --type ~.domain.Topic
+field number --fieldName nbDiscussion --type int
+field number --fieldName nbOfMessages --type int
+field date --fieldName lastMessageDate --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"

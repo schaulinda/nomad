@@ -1,7 +1,5 @@
 package com.nomade.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
