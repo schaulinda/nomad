@@ -4,11 +4,15 @@
 	vertical-align: center;
 	width: 46px;
 	margin-right: 4px;
+	margin-left:0;
 }
 
 .user {
 	cursor: pointer;
-	padding-left: 30px;
+}
+
+#topheader .user{
+   margin-left:7.005%;	
 }
 
 .user>a:HOVER {
@@ -208,7 +212,6 @@ filter: grayscale(100%); */
 
 #map {
 	
-	height: 360px;
 }
 
 /************** Bootstrap remake********/

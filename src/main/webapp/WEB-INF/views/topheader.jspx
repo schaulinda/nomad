@@ -14,7 +14,9 @@
 		<spring:url value="/users/updateVehState" var="updateVehState"></spring:url>
 		<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 		
-		<div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-xs-4 user">
+   <div class="row">
+      <div class="container">
+		<div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-12 col-xs-12 user">
 			<sec:authorize access="isAuthenticated()" >
 			<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
 					<c:when test="${empty nomade.profil.file}">
@@ -36,7 +38,7 @@
 			</a>
 			</sec:authorize>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<!--affichage du menu pour les grands écrans-->
 			<spring:url var="public_url" value="/public" />
 			<ul class="nav nav-tabs nav-justified">
@@ -61,9 +63,33 @@
 				</a></li>
 			</ul>
 		</div>
-		<div class="col-lg-2 col-lg-offset-1 col-md-2 col-md-offset-1 col-sm-2 col-xs-2">
-			<div class="row">
-				<div>
+		<div class="col-lg-3 col-md-3 col-sm-10  col-xs-10">
+		   <div class="row">
+		      <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+						<select class="pull-right form-control" >
+							<option>
+								<spring:message code="option.withoutvehicle" />
+							</option>							<option>
+								<spring:message code="option.lookingForBuy" />
+							</option>
+							<option>
+								<spring:message code="option.lookingForSale" />
+							</option>
+							<option>
+								<spring:message code="option.onTheRoad" />
+							</option>
+							<option>
+								<spring:message code="option.stopOver" />
+							</option>
+							<option>
+								<spring:message code="option.inRepair" />
+							</option>
+							<option>
+								<spring:message code="option.backToHome" />
+							</option>
+						</select>
+					</div>
+					<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 pull-right">
 					<sec:authorize access="isAuthenticated()" >
 					<a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
 							<c:when test="${empty nomade.vehicule.photo}">
@@ -79,7 +105,9 @@
 					</a>
 					</sec:authorize>
 				</div>
-			</div>
+		   </div>
+		</div>
+		</div>
 		</div>
 	</div>
 	<script type="text/javascript">
