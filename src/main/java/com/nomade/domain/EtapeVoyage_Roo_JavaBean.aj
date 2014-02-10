@@ -5,7 +5,6 @@ package com.nomade.domain;
 
 import com.nomade.domain.Comment;
 import com.nomade.domain.EtapeVoyage;
-import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
 import java.util.List;
@@ -82,14 +81,6 @@ privileged aspect EtapeVoyage_Roo_JavaBean {
     
     public void EtapeVoyage.setNomade(UserNomade nomade) {
         this.nomade = nomade;
-    }
-    
-    public Parcours EtapeVoyage.getParcours() {
-        return this.parcours;
-    }
-    
-    public void EtapeVoyage.setParcours(Parcours parcours) {
-        this.parcours = parcours;
     }
     
     public List<Comment> EtapeVoyage.getComments() {

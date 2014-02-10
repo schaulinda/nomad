@@ -47,9 +47,6 @@ public class EtapeVoyage {
     @DBRef
 	private UserNomade nomade;
     
-    @DBRef
-    private Parcours parcours;
-    
     @OrderBy(value = "created", order=Order.DESCENDING)
     private List<Comment> comments = new ArrayList<Comment>();
 }

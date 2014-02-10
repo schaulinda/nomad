@@ -248,3 +248,6 @@ web mvc scaffold --class ~.web.CommentController --backingType ~.domain.Comment
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-11 12:50:39
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-01-31 14:01:09
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-03 23:14:09
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-10 13:28:51
+repository mongo --interface ~.repository.EtapeRepository --entity ~.domain.Etape
+service --interface ~.service.EtapeService --entity ~.domain.Etape
