@@ -121,15 +121,6 @@
 	</script>
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "img_veh",
-			event : "onclick",
-			params : {
-				fragments : "body, topheader, id_subfooter"
-			}
-		}));
-	</script>
-	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "img_veh1",
 			event : "onclick",
 			params : {
