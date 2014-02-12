@@ -13,7 +13,10 @@
 		<spring:url value="/users" var="users_url"></spring:url>
 		<spring:url value="/users/updateVehState" var="updateVehState"></spring:url>
 		<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-		<div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 user">
+		
+   <div class="row">
+      <div class="container">
+		<div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-12 col-xs-12 user">
 			<sec:authorize access="isAuthenticated()" >
 			<a href="${users_url}/private/profil" id="img_profil"> <c:choose>
 					<c:when test="${empty nomade.profil.file}">
@@ -35,7 +38,7 @@
 			</a>
 			</sec:authorize>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<!--affichage du menu pour les grands écrans-->
 			<spring:url var="public_url" value="/public" />
 			<ul class="nav nav-tabs nav-justified">
@@ -60,98 +63,35 @@
 				</a></li>
 			</ul>
 		</div>
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-
-					<!--  SansVehicule, EnRechercheAchat, AVendre, SurLaRoute, EnEtape, EnReparation, RentreAlaMaison -->
-
-					<select id="vehiculeState" class="pull-right form-control">
-						<c:if test="${nomade.vehicule.vehiculeState == 'SansVehicule'}">
-							<option value="SansVehicule" selected="selected">
-							<spring:message code="option.withoutvehicle" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'EnRechercheAchat'}">
-							<option value="EnRechercheAchat" selected="selected">
-							<spring:message code="option.lookingForBuy" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'AVendre'}">
-							<option value="AVendre" selected="selected">
-							<spring:message code="option.lookingForSale" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'SurLaRoute'}">
-							<option value="SurLaRoute" selected="selected">
-									<spring:message code="option.onTheRoad" />
+		<div class="col-lg-3 col-md-3 col-sm-10  col-xs-10">
+		   <div class="row">
+		      <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
+						<select class="pull-right form-control" >
+							<option>
+								<spring:message code="option.withoutvehicle" />
+							</option>							<option>
+								<spring:message code="option.lookingForBuy" />
 							</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'EnEtape'}">
-							<option value="EnEtape" selected="selected">
-							<spring:message code="option.stopOver" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'EnReparation'}">
-							<option value="EnReparation" selected="selected">
-							<spring:message code="option.inRepair" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState == 'RentreAlaMaison'}">
-							<option value="RentreAlaMaison" selected="selected">
-							<spring:message code="option.backToHome" />
-						</option>
-						</c:if>
-						
-						<c:if test="${nomade.vehicule.vehiculeState != 'SansVehicule'}">
-							<option value="SansVehicule" >
-							<spring:message code="option.withoutvehicle" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'EnRechercheAchat'}">
-							<option value="EnRechercheAchat" >
-							<spring:message code="option.lookingForBuy" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'AVendre'}">
-							<option value="AVendre" >
-							<spring:message code="option.lookingForSale" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'SurLaRoute'}">
-							<option value="SurLaRoute" >
-									<spring:message code="option.onTheRoad" />
+							<option>
+								<spring:message code="option.lookingForSale" />
 							</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'EnEtape'}">
-							<option value="EnEtape" >
-							<spring:message code="option.stopOver" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'EnReparation'}">
-							<option value="EnReparation">
-							<spring:message code="option.inRepair" />
-						</option>
-						</c:if>
-						<c:if test="${nomade.vehicule.vehiculeState != 'RentreAlaMaison'}">
-							<option value="RentreAlaMaison" >
-							<spring:message code="option.backToHome" />
-						</option>
-						</c:if>
-					</select>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+							<option>
+								<spring:message code="option.onTheRoad" />
+							</option>
+							<option>
+								<spring:message code="option.stopOver" />
+							</option>
+							<option>
+								<spring:message code="option.inRepair" />
+							</option>
+							<option>
+								<spring:message code="option.backToHome" />
+							</option>
+						</select>
+					</div>
+					<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 pull-right">
 					<sec:authorize access="isAuthenticated()" >
-					<a href="${users_url}/private/vehicule" id="img_veh"> <c:choose>
-							<c:when test="${empty nomade.vehicule.vehiculeName}">
-								<spring:message code="td.vehicleName" var="tdVehicleName" />
-									${tdVehicleName}
-								</c:when>
-							<c:otherwise>
-									${nomade.vehicule.vehiculeName}
-								</c:otherwise>
-						</c:choose>
-					</a> <a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
+					<a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
 							<c:when test="${empty nomade.vehicule.photo}">
 								<img data-src="holder.js/46x46" src="data:img/png;"
 									class="img-rounded defaultvehicleimg" />
@@ -165,7 +105,9 @@
 					</a>
 					</sec:authorize>
 				</div>
-			</div>
+		   </div>
+		</div>
+		</div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -200,17 +142,6 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-
-				$('#vehiculeState').on('change', function() {
-					console.log(this.value);
-					var val = this.value;
-					$.get("${updateVehState}", {
-						vehState : val
-
-					}, function(data, status) {
-						console.log(data);
-					});
-				});
 
 				var onglet = '${onglet}';
 				if (onglet != 'itineraire') {

@@ -4,10 +4,15 @@
 	vertical-align: center;
 	width: 46px;
 	margin-right: 4px;
+	margin-left:0;
 }
 
 .user {
 	cursor: pointer;
+}
+
+#topheader .user{
+   margin-left:7.005%;	
 }
 
 .user>a:HOVER {
@@ -207,7 +212,6 @@ filter: grayscale(100%); */
 
 #map {
 	
-	height: 360px;
 }
 
 /************** Bootstrap remake********/
@@ -398,9 +402,21 @@ footer{
 .copyright{
 	color:#5BC0DE;
 	text-shadow: none !important;
-}
+}	
 
 .transparent{
 	opacity:0.6;
 	filter(opacity=60);
+}
+
+#topheader{
+	margin-bottom:-10px;
+}
+
+#subuser div, #subveh div, #subinfo div, #subdanger div{
+	width:100%;
+}
+
+#subuser div .panel, #subveh div .panel, #subinfo div .panel, #subdanger div .panel{
+	padding-right:0;
 }
