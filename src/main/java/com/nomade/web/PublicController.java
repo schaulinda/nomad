@@ -23,6 +23,7 @@ import com.nomade.domain.InfoPratique;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.EtapeService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
@@ -50,6 +51,8 @@ public class PublicController {
 	ParcoursService parcoursService;
 	@Autowired
 	RelationService relationService;
+	@Autowired
+	EtapeService etapeService;
 
 	@RequestMapping("/nomad")
 	public String nomad(HttpServletRequest request, Model uiModel) {
@@ -63,7 +66,7 @@ public class PublicController {
 		beanNomadeManager.setNomads(findAllUserNomades);
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
+		String makers = etapeService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
 		
@@ -116,7 +119,7 @@ public class PublicController {
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
+		String makers = etapeService.buildMakers(findAllUserNomades);
 		beanNomadeManager.setMakers(makers);
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
@@ -174,7 +177,7 @@ public class PublicController {
 		
 		beanHistoriqueDecoration(uiModel, nomade);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		bookManager.setListParcours(parcoursService.drawParcours(nomade));
+		bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");

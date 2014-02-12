@@ -32,30 +32,32 @@
 						placeholder="Enter title " path="title" required="required" />
 				</div>
 				<div class="row">
-					<div class="col-lg-6 form-group">
-						<label>Categorie d'information</label> <select class="form-control"
+					<div class="col-lg-5 form-group">
+						 <select class="form-control"
 							required="required" placeholder="select type of info" id="select0"
 							name="selecteur">
-							<option value="quotidien" selected="selected" >pour le quotidien</option>
-							<option value="bivouac">pour le bivouac</option>
-							<option value="tourisme">pour le tourisme</option>
-							<option value="vehicule">pour le véhicule</option>
+							<option value="quotidien" data-description="pour le quotidien" selected="selected" >pour le quotidien</option>
+							<option value="bivouac" data-description="pour le bivouac" >pour le bivouac</option>
+							<option value="tourisme" data-description="pour le tourisme" >pour le tourisme</option>
+							<option value="vehicule" data-description="pour le véhicule" >pour le véhicule</option>
 						</select>
 					</div>
-					<div class="col-lg-6 form-group">
-						<label>Type d'information</label> <select class="form-control"
-							required="required" placeholder="select type of info"
-							id="select1" name="selecteur1">
-							<option value="pointEau" selected="selected" >point d'eau</option>
-							<option value="toilettes">toilettes</option>
-							<option value="douches">douches</option>
-						</select>
+					<div class="col-lg-7 form-group">
+						<input type="hidden" name="selecteur1" id="selecteur1" />
+						<div id="myDropdown"><!-- co --></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label>location</label>
-					<form:input cssClass="adress form-control" id="location"
-						placeholder="Enter location" required="required" path="location" />
+					<div class="input-group">
+								<form:input id="location" required="required" path="location" cssClass="form-control adress"
+									placeholder="" />
+								<a href="#" class="input-group-addon mapPicker"
+									id="location-picker"> <span class=""> <i
+										class="icon-screenshot"> <!-- co --></i>
+								</span>
+								</a>
+					</div>
 					<form:hidden id="locationLat" path="locationLat" />
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
@@ -64,7 +66,7 @@
 						validite</label>
 					<div class="col-lg-5">
 						<form:input class="form-control" id="dure" pattern="[0-9]*"
-							path="dure" />
+							path="dure" placeholder="en jour" />
 					</div>
 				</div>
 				<br />
@@ -121,7 +123,7 @@
 			new stuff().addAjaxPublicPage();
 		});
 	</script>
-
+<spring:url value="/resources/img/mapicon/info" var="icon_url"></spring:url>
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
@@ -136,76 +138,255 @@
 								
 								/* change select1 in ftion of select0 */
 								
-								var quotidienDisplay = ["point d'eau","toilettes","douches"];
-								var quotidienValue = ["pointEau","toilettes","douches"];
+								var ddData = [
+								              {
+								                  text: "point d'eau",
+								                  value: "pointEau",
+								                  selected: true,
+								                  description: "Tout point d'eau",
+								                  imageSrc: "${icon_url}/pointEau.png"
+								              },
+								              {
+								                  text: "toilettes",
+								                  value: "toilettes",
+								                  selected: false,
+								                  description: "toilettes",
+								                  imageSrc: "${icon_url}/toillete.png"
+								              },
+								              {
+								                  text: "douches",
+								                  value: "douches",
+								                  selected: false,
+								                  description: "douches",
+								                  imageSrc: "${icon_url}/douche.png"
+								              }
+								          ];
 								
-								var bivouacDisplay = ["aire de stationnement gratuite","aire de stationnement payant",
-								                      "voyageur proposant une place dans son jardin","camping appartenant au réseau petitnomad",
-								                      "point de rencontre voyageurs"];
-								var bivouacValue = ["stationnementGratuite","stationnementPayant","jardin","camping","pointRencontre"];
+								var ddData1 = [
+								              {
+								                  text: "aire de stationnement",
+								                  value: "stationnementGratuite",
+								                  selected: true,
+								                  description: "aire de stationnement gratuite",
+								                  imageSrc: "${icon_url}/airStationementGratuit.png"
+								              },
+								              {
+								                  text: "aire de stationnement",
+								                  value: "stationnementPayant",
+								                  selected: false,
+								                  description: "aire de stationnement payant",
+								                  imageSrc: "${icon_url}/aireStationementPayant.png"
+								              },
+								              {
+								                  text: "voyageur jardin",
+								                  value: "jardin",
+								                  selected: false,
+								                  description: "voyageur proposant une place dans son jardin",
+								                  imageSrc: "${icon_url}/plage.png"
+								              },
+								              {
+								                  text: "camping petitnomad",
+								                  value: "camping",
+								                  selected: false,
+								                  description: "camping appartenant au réseau petitnomad",
+								                  imageSrc: "${icon_url}/reseauNomad.png"
+								              },
+								              {
+								                  text: "point de rencontre",
+								                  value: "pointRencontre",
+								                  selected: false,
+								                  description: "point de rencontre voyageurs",
+								                  imageSrc: "${icon_url}/pointRencontre.png"
+								              }
+								          ];
+								var ddData2 = [
+									              {
+									                  text: "station essence",
+									                  value: "station",
+									                  selected: true,
+									                  description: "station essence",
+									                  imageSrc: "${icon_url}/stationEssence.png"
+									              },
+									              {
+									                  text: "vidange camping-car",
+									                  value: "vidange",
+									                  selected: false,
+									                  description: "vidange camping-car",
+									                  imageSrc: "${icon_url}/vidangeCampingCar.png"
+									              },
+									              {
+									                  text: "shipping",
+									                  value: "shipping",
+									                  selected: false,
+									                  description: "shipping",
+									                  imageSrc: "${icon_url}/shipping.png"
+									              },
+									              {
+									                  text: "rassemblement convoi",
+									                  value: "rassemblement",
+									                  selected: false,
+									                  description: "rassemblement convoi",
+									                  imageSrc: "${icon_url}/rassemblement.png"
+									              },
+									              {
+									                  text: "garage",
+									                  value: "garage",
+									                  selected: false,
+									                  description: "garage",
+									                  imageSrc: "${icon_url}/garage.png"
+									              }
+									          ];
 								
-								var vehiculeDisplay = ["station essence","vidange camping-car","shipping","rassemblement convoi","garage"];
-								var vehiculeValue = ["station","vidange","shipping","rassemblement","garage"];
+								var ddData3 = [
+									              {
+									                  text: "curiosité faune",
+									                  value: "faune",
+									                  selected: true,
+									                  description: "curiosité faune",
+									                  imageSrc: "${icon_url}/curiositeFone.png"
+									              },
+									              {
+									                  text: "curiosité flore",
+									                  value: "flore",
+									                  selected: false,
+									                  description: "curiosité flore",
+									                  imageSrc: "${icon_url}/curiositeFlore.png"
+									              },
+									              {
+									                  text: "curiosité géologique",
+									                  value: "geologique",
+									                  selected: false,
+									                  description: "curiosité géologique",
+									                  imageSrc: "${icon_url}/curiositeGeologiaue.png"
+									              },
+									              {
+									                  text: "plage",
+									                  value: "plage",
+									                  selected: false,
+									                  description: "plage",
+									                  imageSrc: "${icon_url}/plage.png"
+									              },
+									              {
+									                  text: "monuments",
+									                  value: "monuments",
+									                  selected: false,
+									                  description: "monuments",
+									                  imageSrc: "${icon_url}/curiositeMonument.png"
+									              },
+									              {
+									                  text: "fonds marins",
+									                  value: "marins",
+									                  selected: false,
+									                  description: "fonds marins",
+									                  imageSrc: "${icon_url}/curiositeFond.png"
+									              },
+									              {
+									                  text: "lac, lagunes",
+									                  value: "lac",
+									                  selected: false,
+									                  description: "lac, lagunes",
+									                  imageSrc: "${icon_url}/curiositeLac.png"
+									              },
+									              {
+									                  text: "départ randonnée",
+									                  value: "randonnee",
+									                  selected: false,
+									                  description: "départ randonnée",
+									                  imageSrc: "${icon_url}/departRandonne.png"
+									              }
+									          ];
 								
-								var tourismeDisplay = ["curiosité faune","curiosité flore","curiosité géologique",
-								                       "curiosité historique, monuments","fonds marins","lac, lagunes","plage","départ randonnée"];
-								var tourismeValue = ["faune","flore","geologique","monuments","marins","lac","plage","randonnee"];
 								
-								$("#select0").change(function(e) {
-									$("#select1").empty();
-									var val = this.value;
+								
+								/* ddslick for select1 */
+								$('#myDropdown').ddslick({
+								    data:ddData,
+								    width:250,
+								    selectText: "Quotidien",
+								    imagePosition:"right",
+								    onSelected: function(selectedData){
+								    	$('#myDropdown .dd-selected-value').each(function(){
+								    		console.log($(this).val());
+								    		$('#selecteur1').val($(this).val());
+								    	});
+								       
+								    }   
+								});
+								
+								/* ddslick for select0 */
+								$('#select0').ddslick({
+								    width:200,
+								    onSelected: function(selectedData){
+								    	$('#select0 .dd-selected-value').each(function(){
+								    		console.log($(this).val());
+								    		var val =$(this).val();
+								    	
+									
 									if(val=="quotidien"){
-										
-										$.each(quotidienDisplay, function( index, value ) {
-											
-											if(index==1){
-												$("#select1").append($('<option selected="selected" ></option>').attr("value", quotidienValue[index]).text(value));
-											}else{
-												$("#select1").append($('<option></option>').attr("value", quotidienValue[index]).text(value));
-											}
-											
-											
+										$('#myDropdown').ddslick('destroy');
+										$('#myDropdown').ddslick({
+										    data:ddData,
+										    width:250,
+										    selectText: "Quotidien",
+										    imagePosition:"right",
+										    onSelected: function(selectedData){
+										    	$('#myDropdown .dd-selected-value').each(function(){
+										    		console.log($(this).val());
+										    		$('#selecteur1').val($(this).val());
+										    	});
+										    }   
 										});
 									}
 									
 									if(val=="vehicule"){
-										
-										$.each(vehiculeDisplay, function( index, value ) {
-											if(index==1){
-												$("#select1").append($('<option selected="selected" ></option>').attr("value", vehiculeValue[index]).text(value));
-											}else{
-												$("#select1").append($('<option></option>').attr("value", vehiculeValue[index]).text(value));
-											}
-												
-											
+										$('#myDropdown').ddslick('destroy');
+										$('#myDropdown').ddslick({
+										    data:ddData1,
+										    width:250,
+										    selectText: "Vehicule",
+										    imagePosition:"right",
+										    onSelected: function(selectedData){
+										    	$('#myDropdown .dd-selected-value').each(function(){
+										    		console.log($(this).val());
+										    		$('#selecteur1').val($(this).val());
+										    	});
+										    }   
 										});
 									}
 									if(val=="tourisme"){
-										
-										
-										$.each(tourismeDisplay, function( index, value ) {
-											if(index==1){
-												$("#select1").append($('<option selected="selected" ></option>').attr("value", tourismeValue[index]).text(value));
-											}else{
-												$("#select1").append($('<option></option>').attr("value", tourismeValue[index]).text(value));
-											}
-											
-											
+										$('#myDropdown').ddslick('destroy');
+										$('#myDropdown').ddslick({
+										    data:ddData2,
+										    width:250,
+										    selectText: "Tourisme",
+										    imagePosition:"right",
+										    onSelected: function(selectedData){
+										    	$('#myDropdown .dd-selected-value').each(function(){
+										    		console.log($(this).val());
+										    		$('#selecteur1').val($(this).val());
+										    	});
+										    }   
 										});
 									}
 									
 									if(val=="bivouac"){
-										
-										$.each(bivouacDisplay, function( index, value ) {
-											if(index==1){
-												$("#select1").append($('<option selected="selected" ></option>').attr("value", bivouacValue[index]).text(value));
-											}else{
-												$("#select1").append($('<option></option>').attr("value", bivouacValue[index]).text(value));
-											}	
-											
+										$('#myDropdown').ddslick('destroy');
+										$('#myDropdown').ddslick({
+										    data:ddData3,
+										    width:250,
+										    selectText: "Bivouac",
+										    imagePosition:"right",
+										    onSelected: function(selectedData){
+										    	$('#myDropdown .dd-selected-value').each(function(){
+										    		console.log($(this).val());
+										    		$('#selecteur1').val($(this).val());
+										    	});
+										    }   
 										});
 									}
 									
+								    	});  
+								    }   
 								});
 
 								/* ------------------disable and enable dureVerification------------------------------- */
@@ -245,7 +426,7 @@
 								/*----------------------verif session and recup----------------------------------  */
 								if ($.session.get('title') != null
 										|| $.session.get('select') != null
-										|| $.session.get('select1') != null
+										|| $.session.get('selecteur1') != null
 										|| $.session.get('location') != null
 										|| $.session.get('locationLat') != null
 										|| $.session.get('locationLng') != null
@@ -256,7 +437,7 @@
 
 									$("#title").val($.session.get('title'));
 									$("#select").val($.session.get('select'));
-									$("#select1").val($.session.get('select1'));
+									$("#selecteur1").val($.session.get('selecteur1'));
 									$("#location").val(
 											$.session.get('location'));
 									$("#locationLat").val(
@@ -271,7 +452,7 @@
 
 									$.session.remove('title');
 									$.session.remove('select');
-									$.session.remove('select1');
+									$.session.remove('selecteur1');
 									$.session.remove('location');
 									$.session.remove('locationLat');
 									$.session.remove('locationLng');
@@ -291,8 +472,8 @@
 													.val());
 											$.session.set('select',
 													$("#select").val());
-											$.session.set('select1', $(
-													"#select1").val());
+											$.session.set('selecteur1', $(
+													"#selecteur1").val());
 											$.session.set('location', $(
 													"#location").val());
 											$.session.set('locationLat', $(
@@ -311,7 +492,68 @@
 
 											$(this).unbind('click').click();
 										});
-
+				
+								/* -------------tooltip for adresspicker--------------- */
+								
+								
+								$('.mapPicker').tooltip({
+									trigger: 'hover',
+									title: 'click and drag and drop violet marker, to get location'
+								});
+								
+								/* ------------------click on mapPicker----------------- */
+								$('.mapPicker').click(function(){
+									var id = $(this).attr("id");
+									var tab = id.split("-");
+									$.session.set('mapPicker', tab[0]);
+									
+									
+									/*ogment map -------------- */
+									$('#smallTile').hide();
+									
+									$('#id_map').removeClass("col-lg-6");
+									$('#id_map').addClass("col-lg-12");
+									
+									$('.closemap').addClass("hide");
+									$('.open').removeClass("hide");
+									
+									map = $("#map").gmap3('get');	
+									google.maps.event.trigger(map, 'resize');					
+									map.setZoom(map.getZoom());
+									
+								});
+								
+								/*autocompletion adress picker */
+								var geocoder = new google.maps.Geocoder();
+								$('.adress').autocomplete(
+												{
+													source : function(request,response) {
+														geocoder.geocode({
+																			'address' : request.term
+																		},
+																		function(
+																				results,
+																				status) {
+																			response($.map(results,function(item) {
+																								return {
+																									value : item.formatted_address,
+																									location : item.geometry.location
+																								};
+																							}));
+																		});
+													},
+													select : function(event, ui) {
+														var map = $("#map").gmap3('get');
+														map.setCenter(ui.item.location);
+														map.setZoom(5);
+														
+														var idInput = $(".adress:focus").attr("id");
+														$('#'+idInput+'Lat').val(ui.item.location.lat());
+														$('#'+idInput+'Lng').val(ui.item.location.lng());
+													}
+												});
+						
+								
 							});
 		})(jQuery);
 	</script>

@@ -89,7 +89,7 @@ public class EtapeVoyageController {
 		etapeVoyage.setNomade(nomade);
 		
 		//location
-		double[] location = new double[]{etapeVoyage.getUserlng(), etapeVoyage.getUserlat()};
+		double[] location = new double[]{etapeVoyage.getUserlat(), etapeVoyage.getUserlng()};
 		etapeVoyage.setGeolocation(location);
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
@@ -100,7 +100,7 @@ public class EtapeVoyageController {
 		beanHistoriqueDecoration(uiModel, nomade);
 		
 		bookManager.setNotify("yep");
-		bookManager.setListParcours(parcoursService.drawParcours(nomade));
+		bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
@@ -154,7 +154,7 @@ public class EtapeVoyageController {
 		    beanHistoriqueDecoration(uiModel, nomade);
 			
 			bookManager.setNotify("yep");
-			//bookManager.setListParcours(parcoursService.drawParcours(nomade));
+			bookManager.setListParcours(etapeService.drawParcours(nomade));
 			uiModel.addAttribute("beanNoteBookManager", bookManager);
 			uiModel.addAttribute("nomade", nomade);
 			uiModel.addAttribute("onglet", "carnet");

@@ -70,13 +70,13 @@ public class BeanManagerItineraire {
 					linkIcon = linkIcon+"/douche.png";
 				}
 				if(typeInfo.equals("stationnementGratuite")){
-					linkIcon = linkIcon+"/stationnementGratuite.png";
+					linkIcon = linkIcon+"/airStationementGratuit.png";
 				}
 				if(typeInfo.equals("stationnementPayant")){
 					linkIcon = linkIcon+"/aireStationementPayant.png";
 				}
 				if(typeInfo.equals("jardin")){
-					linkIcon = linkIcon+"/plage.png";
+					linkIcon = linkIcon+"/plage.png";//to be change with the real jardin icon 
 				}
 				if(typeInfo.equals("camping")){
 					linkIcon = linkIcon+"/reseauNomad.png";
@@ -129,8 +129,77 @@ public class BeanManagerItineraire {
 		for(DangerPratique danger:this.dangerPratiquesAll){
 			 mark = new Marker(danger.getLocation(), danger.getTitle());
 			 mark.setTag("danger");
-				mark.setId(danger.getId().toString());
-				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_blackD.png");
+			 mark.setId(danger.getId().toString());
+				String typeInfo = danger.getSelecteur1();
+				/*["impraticable","chausse","piste","bande","boue","route","denivelation",
+                 "effondrement","inondations","poids","hauteur","travaux"]
+                 
+                 var administratifValue = ["douane","information","immigration","barrage","greve"]; 
+                 var risqueValue = ["agressions","agressionMain","escroquerie"];  
+                 */
+				String linkBase = linkBase(httpServletRequest);
+				String linkIcon=linkBase+"/danger";
+				if(typeInfo.equals("impraticable")){
+					linkIcon = linkIcon+"/impraticable.png";
+				}
+				if(typeInfo.equals("chausse")){
+					linkIcon = linkIcon+"/chausse.png";
+				}
+				if(typeInfo.equals("piste")){
+					linkIcon = linkIcon+"/piste.png";
+				}
+				if(typeInfo.equals("bande")){
+					linkIcon = linkIcon+"/bande.png";
+				}
+				if(typeInfo.equals("boue")){
+					linkIcon = linkIcon+"/boue.png";
+				}
+				if(typeInfo.equals("route")){
+					linkIcon = linkIcon+"/route.png";
+				}
+				if(typeInfo.equals("denivelation")){
+					linkIcon = linkIcon+"/denivelation.png";
+				}
+				if(typeInfo.equals("effondrement")){
+					linkIcon = linkIcon+"/effondrement.png";
+				}
+				if(typeInfo.equals("inondations")){
+					linkIcon = linkIcon+"/inondations.png";
+				}
+				if(typeInfo.equals("poids")){
+					linkIcon = linkIcon+"/poids.png";
+				}
+				if(typeInfo.equals("hauteur")){
+					linkIcon = linkIcon+"/hauteur.png";
+				}
+				if(typeInfo.equals("travaux")){
+					linkIcon = linkIcon+"/travaux.png";
+				}
+				if(typeInfo.equals("douane")){
+					linkIcon = linkIcon+"/douane.png";
+				}
+				if(typeInfo.equals("information")){
+					linkIcon = linkIcon+"/information.png";
+				}
+				if(typeInfo.equals("immigration")){
+					linkIcon = linkIcon+"/immigration.png";
+				}
+				if(typeInfo.equals("barrage")){
+					linkIcon = linkIcon+"/barrage.png";
+				}
+				if(typeInfo.equals("greve")){
+					linkIcon = linkIcon+"/greve.png";
+				}
+				if(typeInfo.equals("agressions")){
+					linkIcon = linkIcon+"/agressions.png";
+				}
+				if(typeInfo.equals("agressionMain")){
+					linkIcon = linkIcon+"/agressionMain.png";
+				}
+				if(typeInfo.equals("escroquerie")){
+					linkIcon = linkIcon+"/escroquerie.png";
+				}
+				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
 		}
 		this.makers = Marker.toJsonArray(listMarkers);

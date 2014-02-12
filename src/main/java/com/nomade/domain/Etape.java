@@ -25,7 +25,7 @@ public class Etape {
 	private double[] coord;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-	private Date dateEtape = new Date();
+	private Date day = new Date();
 	private UserNomade nomad;
 
 	
@@ -33,26 +33,26 @@ public class Etape {
 	        this.lat = lat;
 	    }
 	 
-	 public void setDateEtape(Date dateEtape) {
-	        this.dateEtape = dateEtape;
+	 public void setDateEtape(Date day) {
+	        this.day = day;
 	    }
 	 
 	 public void setLng(double lng) {
 	        this.lng = lng;
 	    }
 	 
-	 public void setDateEtape(String dateEtape) {
+	 public void setDateEtape(String day) {
 		
 		
 			 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 		 	Date date;
 			try {
-				date = sdf.parse(dateEtape);
-				this.dateEtape = date;
+				date = sdf.parse(day);
+				this.day = date;
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				this.dateEtape= new Date();
+				this.day= new Date();
 			}	
 
 	    

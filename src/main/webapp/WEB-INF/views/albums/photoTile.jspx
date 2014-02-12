@@ -58,8 +58,8 @@
 				<spring:url value="/albums/saveImageInfo" var="saveImageInfo_url"></spring:url>
 				<form:form id="formDescrption" action="${saveImageInfo_url}"
 					method="POST">
-					 <label>Localisation</label>
-					<div class="input-group">
+					 <!--<label>Localisation</label>
+					 <div class="input-group">
 						<input type="text" name="addresspicker" class="form-control"
 							id="addresspicker_map" placeholder="enter the location"
 							rel="popover" value="${addresspicker}" /> <span class="input-group-addon"> <a
@@ -68,7 +68,7 @@
 						</a>
 						</span>
 					</div>
-					<p class="help-block">Drag and drop marker on the map</p>
+					<p class="help-block">Drag and drop marker on the map</p> -->
 					<div class="form-group">
 					<fmt:formatDate value="${datePhoto}" var="dateP" pattern="dd-MM-yyyy"  />
 						<label for="datePhoto">Date</label> <input value="${dateP}"

@@ -243,9 +243,16 @@
 			$(document)
 					.ready(
 							function() {
+								
+								/*put date on datepicker  */
+								$(".datepicker").each(function() {	
+									
+									$(this).val($.datepicker.formatDate('mm/dd/yy', new Date()));
+								});
 							
 							decoration =function(){
 								/* -------------tooltip for adresspicker--------------- */
+								
 								
 								$('.mapPicker').tooltip({
 									trigger: 'hover',
@@ -312,16 +319,34 @@
 									
 									decoration();
 									$('.datepicker').datepicker();
+									
+									/*put date on datepicker  */
+									
+									var date = $(".datepicker");
+									var l =date.length - 2;
+									var obj = date[l];
+									$(obj).val($('#etape0Date').val());
+									
 								});
+								
+
+
+								$('#etape0Date').change(function() { 
+								    var newDate = $(this).val();
+								    $('.datepicker').each(function(){
+								    	$(this).val(newDate);
+								    });
+								});
+
+
 								
 								
 								/* construct polyline for  */
 								
 									var arrayParcours=null;
-									 arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="parcours" varStatus="loop" >
+									 arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="etape" varStatus="loop" >
 															
-																['${parcours.start[0]}','${parcours.start[1]}'],
-																['${parcours.end[0]}','${parcours.end[1]}']
+																['${etape.lat}','${etape.lng}']
 																
 																<c:if test="${!loop.last}">,</c:if>
 																

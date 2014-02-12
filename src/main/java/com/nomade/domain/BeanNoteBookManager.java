@@ -15,7 +15,7 @@ public class BeanNoteBookManager {
 	
 	private String notify;
 	
-	private List<Parcours> listParcours;
+	private List<Etape> listParcours;
 
 	public EtapeVoyage getEtapeVoyage() {
 		return etapeVoyage;
@@ -41,11 +41,11 @@ public class BeanNoteBookManager {
 		this.notify = notify;
 	}
 
-	public List<Parcours> getListParcours() {
+	public List<Etape> getListParcours() {
 		return listParcours;
 	}
 
-	public void setListParcours(List<Parcours> listParcours) {
+	public void setListParcours(List<Etape> listParcours) {
 		this.listParcours = listParcours;
 	}
 

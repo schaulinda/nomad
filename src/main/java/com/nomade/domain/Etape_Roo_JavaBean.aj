@@ -33,8 +33,12 @@ privileged aspect Etape_Roo_JavaBean {
         this.coord = coord;
     }
     
-    public Date Etape.getDateEtape() {
-        return this.dateEtape;
+    public Date Etape.getDay() {
+        return this.day;
+    }
+    
+    public void Etape.setDay(Date day) {
+        this.day = day;
     }
     
     public UserNomade Etape.getNomad() {

@@ -31,38 +31,32 @@
 						placeholder="Enter title " path="title" required="required" />
 				</div>
 				<div class="row">
-					<div class="col-lg-6 form-group">
-						<label>Categorie danger</label>
+					<div class="col-lg-5 form-group">
 						<select class="form-control" required="required"
 							placeholder="select type of info" id="select0" name="selecteur" >
-							<option value="route">cote route</option>
-							<option value="administratif">cote Administraif</option>
-							<option value="risque">cote risque</option>
+							<option value="route" data-description="cote route" >cote route</option>
+							<option value="administratif" data-description="cote Administratif" >cote Administratif</option>
+							<option value="risque" data-description="cote risque" >cote risque</option>
 						</select>
 					</div>
-					<div class="col-lg-6 form-group">
-						<label>Type danger</label>
-						<select class="form-control" required="required"
-							placeholder="select type of info" id="select1" name="selecteur1" >
-							<option value="impraticable">impraticable</option>
-							<option value="chausséeentresmauvaisetat">chaussée en très mauvais état</option>
-							<option value="pisteterrenongoudronné" >piste terre -non goudronné</option>
-							<option value="bandesableuse">bande sableuse</option>
-							<option value="boueorniere">boue ,ornière</option>
-							<option value="routeenneigee">route enneigée, verglacée</option>
-							<option value="fortdenivele">fort dénivelé, col 4000m</option>
-							<option value="effondrement">effondrement, chute de pierre</option>
-							<option value="risqueinondations">risque d'inondations</option>
-							<option value="poidsmax">poids max</option>
-							<option value="hauteurmax">hauteur max</option>
-							<option value="entravaux">en travaux</option>
-						</select>
+					<div class="col-lg-7 form-group">
+						<div class="col-lg-7 form-group">
+						<input type="hidden" name="selecteur1" id="selecteur1" />
+						<div id="myDropdown"><!-- co --></div>
+					</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label>location</label>
-					<form:input cssClass="adress form-control" id="location"
-						placeholder="Enter location" required="required" path="location" />
+					<div class="input-group">
+								<form:input id="location" required="required" path="location" cssClass="form-control adress"
+									placeholder="" />
+								<a href="#" class="input-group-addon mapPicker"
+									id="location-picker"> <span class=""> <i
+										class="icon-screenshot"> <!-- co --></i>
+								</span>
+								</a>
+					</div>
 					<form:hidden id="locationLat" path="locationLat" /> 
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
@@ -123,7 +117,7 @@
 		</div>
 
 	</div>
-
+<spring:url value="/resources/img/mapicon/danger" var="icon_url"></spring:url>
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
@@ -142,18 +136,164 @@
 				
 				/* change select1 based on select0  */
 				var routeDisplay = ["impraticable","chaussée en très mauvais état","piste terre -non goudronné",
-				                        "bande sableuse","boue ,ornière","route enneigée, verglacée,","fort dénivelé, col 4000m",
+				                        "bande sableuse","boue ,ornière","route enneigée, verglacée","fort dénivelé, col 4000m",
 				                        "effondrement, chute de pierre","risque d'inondations","poids max","hauteur max","en travaux"];
-			var routeValue = ["impraticable","chausséeentresmauvaisetat","pisteterrenongoudronné",
-		                        "bandesableuse","boueorniere","routeenneigee","fortdenivele",
-		                        "effondrement","risqueinondations","poidsmax","hauteurmax","entravaux"];
+			var routeValue = ["impraticable","chausse","piste","bande","boue","route","denivelation",
+		                        "effondrement","inondations","poids","hauteur","travaux"];
+			var ddData = [
+			              {
+			                  text: "impraticable",
+			                  value: "impraticable",
+			                  selected: true,
+			                  description: "impraticable",
+			                  imageSrc: "${icon_url}/impraticable.png"
+			              },
+			              {
+			                  text: "chaussée mauvaise",
+			                  value: "chausse",
+			                  selected: false,
+			                  description: "chaussée en très mauvais état",
+			                  imageSrc: "${icon_url}/chausse.png"
+			              },
+			              {
+			                  text: "piste terre",
+			                  value: "piste",
+			                  selected: false,
+			                  description: "piste terre -non goudronné",
+			                  imageSrc: "${icon_url}/piste.png"
+			              },
+			              {
+			                  text: "bande sableuse",
+			                  value: "bande",
+			                  selected: false,
+			                  description: "bande sableuse",
+			                  imageSrc: "${icon_url}/bande.png"
+			              },
+			              {
+			                  text: "boue ,ornière",
+			                  value: "boue",
+			                  selected: false,
+			                  description: "boue ,ornière",
+			                  imageSrc: "${icon_url}/boue.png"
+			              },
+			              {
+			                  text: "route enneigée",
+			                  value: "route",
+			                  selected: false,
+			                  description: "route enneigée, verglacée",
+			                  imageSrc: "${icon_url}/route.png"
+			              },
+			              {
+			                  text: "fort dénivelé",
+			                  value: "denivelation",
+			                  selected: false,
+			                  description: "fort dénivelé, col 4000m",
+			                  imageSrc: "${icon_url}/denivelation.png"
+			              },
+			              {
+			                  text: "effondrement",
+			                  value: "effondrement",
+			                  selected: false,
+			                  description: "effondrement, chute de pierre",
+			                  imageSrc: "${icon_url}/effondrement.png"
+			              },
+			              {
+			                  text: "risque d'inondations",
+			                  value: "inondations",
+			                  selected: false,
+			                  description: "risque d'inondations",
+			                  imageSrc: "${icon_url}/inondations.png"
+			              },
+			              {
+			                  text: "poids max",
+			                  value: "poids",
+			                  selected: false,
+			                  description: "poids max",
+			                  imageSrc: "${icon_url}/poids.png"
+			              },
+			              {
+			                  text: "hauteur max",
+			                  value: "hauteur",
+			                  selected: false,
+			                  description: "hauteur max",
+			                  imageSrc: "${icon_url}/hauteur.png"
+			              },
+			              {
+			                  text: "en travaux",
+			                  value: "travaux",
+			                  selected: false,
+			                  description: "en travaux",
+			                  imageSrc: "${icon_url}/travaux.png"
+			              }
+			          ];
 			
 			var administratifDisplay = ["douane difficile","information: permis pour véhicule/carnet de douane","immigration",
 			                            "nombreux barrage policier","grève, blocage"];
-			var administratifValue = ["douanedifficile","informationpermis","immigration","barragepolicier","greveblocage"];
+			var administratifValue = ["douane","information","immigration","barrage","greve"];
+			
+			var ddData1 = [
+			              {
+			                  text: "douane difficile",
+			                  value: "douane",
+			                  selected: true,
+			                  description: "douane difficile",
+			                  imageSrc: "${icon_url}/douane.png"
+			              },
+			              {
+			                  text: "information",
+			                  value: "information",
+			                  selected: false,
+			                  description: "information: permis pour véhicule/carnet de douane",
+			                  imageSrc: "${icon_url}/information.png"
+			              },
+			              {
+			                  text: "immigration",
+			                  value: "immigration",
+			                  selected: false,
+			                  description: "immigration",
+			                  imageSrc: "${icon_url}/immigration.png"
+			              },
+			              {
+			                  text: "barrage policier",
+			                  value: "barrage",
+			                  selected: false,
+			                  description: "nombreux barrage policier",
+			                  imageSrc: "${icon_url}/barrage.png"
+			              },
+			              {
+			                  text: "grève, blocage",
+			                  value: "greve",
+			                  selected: false,
+			                  description: "grève, blocage",
+			                  imageSrc: "${icon_url}/greve.png"
+			              }
+			          ];
 			
 			var risqueDisplay = ["agressions fréquentes","agression à main armée","escroquerie,vol"];
-			var risqueValue = ["agressionsfrequentes","agressionmainarmee","escroquerievol"];
+			var risqueValue = ["agressions","agressionMain","escroquerie"];
+			var ddData2 = [
+				              {
+				                  text: "agressions fréquentes",
+				                  value: "agressions",
+				                  selected: true,
+				                  description: "agressions fréquentes",
+				                  imageSrc: "${icon_url}/agressions.png"
+				              },
+				              {
+				                  text: "agression main",
+				                  value: "agressionMain",
+				                  selected: false,
+				                  description: "agression à main armée",
+				                  imageSrc: "${icon_url}/agressionMain.png"
+				              },
+				              {
+				                  text: "escroquerie,vol",
+				                  value: "escroquerie",
+				                  selected: false,
+				                  description: "escroquerie,vol",
+				                  imageSrc: "${icon_url}/escroquerie.png"
+				              }
+				          ];
 			
 			$("#select0").change(function(e) {
 				$("#select1").empty();
@@ -185,6 +325,81 @@
 					});
 				}
 				
+			});
+			
+			/* ddslick for select1 */
+			$('#myDropdown').ddslick({
+			    data:ddData,
+			    width:250,
+			    selectText: "Quotidien",
+			    imagePosition:"right",
+			    onSelected: function(selectedData){
+			    	$('#myDropdown .dd-selected-value').each(function(){
+			    		console.log($(this).val());
+			    		$('#selecteur1').val($(this).val());
+			    	});
+			       
+			    }   
+			});
+			
+			/* ddslick for select0 */
+			$('#select0').ddslick({
+			    width:200,
+			    onSelected: function(selectedData){
+			    	$('#select0 .dd-selected-value').each(function(){
+			    		console.log($(this).val());
+			    		var val =$(this).val();
+			    	
+				
+				if(val=="route"){
+					$('#myDropdown').ddslick('destroy');
+					$('#myDropdown').ddslick({
+					    data:ddData,
+					    width:250,
+					    selectText: "Route",
+					    imagePosition:"right",
+					    onSelected: function(selectedData){
+					    	$('#myDropdown .dd-selected-value').each(function(){
+					    		console.log($(this).val());
+					    		$('#selecteur1').val($(this).val());
+					    	});
+					    }   
+					});
+				}
+				
+				if(val=="administratif"){
+					$('#myDropdown').ddslick('destroy');
+					$('#myDropdown').ddslick({
+					    data:ddData1,
+					    width:250,
+					    selectText: "Administratif",
+					    imagePosition:"right",
+					    onSelected: function(selectedData){
+					    	$('#myDropdown .dd-selected-value').each(function(){
+					    		console.log($(this).val());
+					    		$('#selecteur1').val($(this).val());
+					    	});
+					    }   
+					});
+				}
+				if(val=="risque"){
+					$('#myDropdown').ddslick('destroy');
+					$('#myDropdown').ddslick({
+					    data:ddData2,
+					    width:250,
+					    selectText: "Risque",
+					    imagePosition:"right",
+					    onSelected: function(selectedData){
+					    	$('#myDropdown .dd-selected-value').each(function(){
+					    		console.log($(this).val());
+					    		$('#selecteur1').val($(this).val());
+					    	});
+					    }   
+					});
+				}
+		
+			    	});  
+			    }   
 			});
 				
 			/* --------------------disable or enable field dureV based on check box--------------------- */
@@ -220,7 +435,7 @@
 				/*----------------------verif session and recup----------------------------------  */
 				if ($.session.get('title') != null
 											|| $.session.get('select') != null
-											|| $.session.get('select1') != null
+											|| $.session.get('selecteur1') != null
 											|| $.session.get('location') != null
 											|| $.session.get('locationLat') != null
 											|| $.session.get('locationLng') != null
@@ -232,7 +447,7 @@
 
 										$("#title").val($.session.get('title'));
 										$("#select").val($.session.get('select'));
-										$("#select1").val($.session.get('select1'));
+										$("#selecteur1").val($.session.get('selecteur1'));
 										$("#location").val($.session.get('location'));
 										$("#locationLat").val($.session.get('locationLat'));
 										$("#locationLng").val($.session.get('locationLng'));
@@ -243,7 +458,7 @@
 										
 										$.session.remove('title');
 										$.session.remove('select');
-										$.session.remove('select1');
+										$.session.remove('selecteur1');
 										$.session.remove('location');
 										$.session.remove('locationLat');
 										$.session.remove('locationLng');
@@ -262,7 +477,7 @@
 											e.preventDefault();
 											$.session.set('title', $("#title").val());
 											$.session.set('select', $("#select").val());
-											$.session.set('select1', $("#select1").val());
+											$.session.set('selecteur1', $("#selecteur1").val());
 											$.session.set('location', $("#location").val());
 											$.session.set('locationLat', $("#locationLat").val());
 											$.session.set('locationLng', $("#locationLng").val());
@@ -273,6 +488,68 @@
 											
 											$(this).unbind('click').click();
 										});
+				
+
+				/* -------------tooltip for adresspicker--------------- */
+				
+				
+				$('.mapPicker').tooltip({
+					trigger: 'hover',
+					title: 'click and drag and drop violet marker, to get location'
+				});
+				
+				/* ------------------click on mapPicker----------------- */
+				$('.mapPicker').click(function(){
+					var id = $(this).attr("id");
+					var tab = id.split("-");
+					$.session.set('mapPicker', tab[0]);
+					
+					
+					/*ogment map -------------- */
+					$('#smallTile').hide();
+					
+					$('#id_map').removeClass("col-lg-6");
+					$('#id_map').addClass("col-lg-12");
+					
+					$('.closemap').addClass("hide");
+					$('.open').removeClass("hide");
+					
+					map = $("#map").gmap3('get');	
+					google.maps.event.trigger(map, 'resize');					
+					map.setZoom(map.getZoom());
+					
+				});
+				
+				/*autocompletion adress picker */
+				var geocoder = new google.maps.Geocoder();
+				$('.adress').autocomplete(
+								{
+									source : function(request,response) {
+										geocoder.geocode({
+															'address' : request.term
+														},
+														function(
+																results,
+																status) {
+															response($.map(results,function(item) {
+																				return {
+																					value : item.formatted_address,
+																					location : item.geometry.location
+																				};
+																			}));
+														});
+									},
+									select : function(event, ui) {
+										var map = $("#map").gmap3('get');
+										map.setCenter(ui.item.location);
+										map.setZoom(5);
+										
+										var idInput = $(".adress:focus").attr("id");
+										$('#'+idInput+'Lat').val(ui.item.location.lat());
+										$('#'+idInput+'Lng').val(ui.item.location.lng());
+									}
+								});
+		
 				
 				
 			});
