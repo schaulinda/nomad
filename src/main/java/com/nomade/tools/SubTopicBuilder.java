@@ -1,13 +1,10 @@
 package com.nomade.tools;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 import com.nomade.domain.Confidentiality;
-import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
@@ -36,12 +33,11 @@ public class SubTopicBuilder {
 	 * @param discussions
 	 * @return {@link SubTopicBuilder SubTopicBuilder}
 	 */
-	public SubTopicBuilder addSubTopic(String title,String content, Confidentiality confidentiality,UserNomade nomade, Topic parentTopic, Collection<Discussion> discussions){
+	public SubTopicBuilder addSubTopic(String title,String content, Confidentiality confidentiality,UserNomade nomade, Topic parentTopic){
 		SubTopic subTopic = new SubTopic();
 		subTopic.setConfidentiality(confidentiality);
 		subTopic.setContent(content);
 		subTopic.setCreated(new Date());
-		subTopic.setDiscussions(new HashSet<Discussion>(discussions));
 		subTopic.setNomade(nomade);
 		subTopic.setParentTopic(parentTopic);
 		subTopic.setTitle(title);

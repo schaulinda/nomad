@@ -6,6 +6,7 @@
         <field:input field="commentaire" id="c_com_nomade_domain_Comment_commentaire" z="4H1cywLHZfNeysYAiHdAlgVAXQ4="/>
         <field:input field="nomade" id="c_com_nomade_domain_Comment_nomade" z="/cmeB5MN+CMZouit8qjUR0pt1hg="/>
         <field:input field="id" id="c_com_nomade_domain_Comment_id" required="true" validationMessageCode="field_invalid_integer" z="Y19969ldzcNYKqgTUCCR9+bS9i0="/>
+        <field:input field="businessId" id="c_com_nomade_domain_Comment_businessId" z="z5oIy5Vkz+mRwXEZxY0RpM6Qjjw="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Comment" render="${not empty dependencies}" z="r8514rWZ623MRRJgzaZcL/T236Q="/>
 </div>

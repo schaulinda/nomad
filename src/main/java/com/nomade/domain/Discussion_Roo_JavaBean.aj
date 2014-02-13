@@ -6,6 +6,7 @@ package com.nomade.domain;
 import com.nomade.domain.Comment;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
+import com.nomade.domain.SubTopic;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
 import java.util.Set;
@@ -58,6 +59,14 @@ privileged aspect Discussion_Roo_JavaBean {
     
     public void Discussion.setCreated(Date created) {
         this.created = created;
+    }
+    
+    public SubTopic Discussion.getSubTopic() {
+        return this.subTopic;
+    }
+    
+    public void Discussion.setSubTopic(SubTopic subTopic) {
+        this.subTopic = subTopic;
     }
     
 }

@@ -14,5 +14,4 @@ public class IdGenerator {
 	public static final String generateId(){
 		return UUID.randomUUID().toString();
 	}
-
 }

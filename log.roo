@@ -265,3 +265,23 @@ field reference --fieldName topic --type ~.domain.Topic
 field number --fieldName nbDiscussion --type int
 field number --fieldName nbOfMessages --type int
 field date --fieldName lastMessageDate --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-06 22:22:43
+focus --class ~.domain.BeanTopicManager
+focus --class ~.domain.BeanTopicManager
+field boolean --fieldName isTopic --comment "tell wether or not this bean is a topic or a subtopic"
+field other --fieldName subTopic --type ~.domain.SubTopic
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-08 13:09:11
+focus --class ~.domain.SubTopic
+field reference --fieldName parentSubTopic --type ~.domain.SubTopic --comment "The subtopic in which this subpic is included"
+focus --class ~.domain.Discussion
+field reference --fieldName subTopic --type ~.domain.SubTopic --comment "The subtopic of this discussion"
+class --class ~.domain.BeanSubTopicView --rooAnnotations 
+field other --fieldName subTopic --type ~.domain.SubTopic
+field number --fieldName numberOfDiscussion --type int
+field number --fieldName numberOfMessage --type int
+field date --fieldName lastMessageDate --type java.util.Date --dateTimeFormatPattern "dd-MM-yyyy HH:mm"
+class --class ~.domain.BeanDiscussionView --rooAnnotations 
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-02-09 13:16:56
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-02-11 13:38:59
+focus --class ~.domain.Comment
+field string --fieldName businessId --comment "a generated id, for business purpose."

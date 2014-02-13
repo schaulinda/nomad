@@ -9,6 +9,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * @author bwa
+ * <p>Used to display topics in the mainPage.</p>
+ */
 @RooJavaBean
 @RooToString
 @RooEquals
@@ -16,11 +20,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class BeanTopicManager {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      */
     @ManyToOne
     private Topic topic;

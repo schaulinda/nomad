@@ -5,4 +5,13 @@
      <definition extends="forumLayout" name="public/forum/mainpage">
         <put-attribute name="body" value="/WEB-INF/views/public/forum/mainpage.jspx"/>
     </definition>
+     <definition extends="forumLayout" name="public/forum/topicView">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/topicView.jspx"/>
+    </definition>
+     <definition extends="forumLayout" name="public/forum/subTopicView">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/subTopicView.jspx"/>
+    </definition>
+     <definition extends="forumLayout" name="public/forum/discussionView">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/discussionView.jspx"/>
+    </definition>
 </tiles-definitions>

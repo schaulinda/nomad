@@ -11,6 +11,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import com.nomade.domain.Comment;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
+import com.nomade.domain.SubTopic;
 import com.nomade.domain.UserNomade;
 
 public class DiscussionBuilder {
@@ -28,8 +29,9 @@ public class DiscussionBuilder {
 		public static DiscussionBuilder get(){
 			return new DiscussionBuilder();
 		}
-		public DiscussionBuilder addDiscussion(Confidentiality confidentiality, String content, UserNomade nomade, String title){
+		public DiscussionBuilder addDiscussion(SubTopic subTopic, Confidentiality confidentiality, String content, UserNomade nomade, String title){
 			Discussion discussion = new Discussion();
+			discussion.setSubTopic(subTopic);
 			discussion.setComments(generateComments(3, nomade));
 			discussion.setConfidentiality(confidentiality);
 			discussion.setContent(content);
@@ -43,6 +45,7 @@ public class DiscussionBuilder {
 			Set<Comment> comments = new HashSet<Comment>(number);
 			for (int i = 0; i < number; i++) {
 				Comment comment = new Comment();
+				comment.setBusinessId(RandomStringUtils.randomAlphanumeric(7));
 				comment.setCommentaire(RandomStringUtils.randomAlphabetic(30));
 				comment.setCreated(new Date());
 				comment.setNomade(nomade);

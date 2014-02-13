@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+ 	xmlns:rooForm="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="row">
+	
+		<div>
+			<span>${topicBean.topic.title }</span> |
+			<span style=" margin-left: 20px;">${topicBean.topic.content }</span> |
+			<span style=" margin-left: 20px;">Created The : ${topicBean.topic.created }</span> |
+			<span style=" margin-left: 20px;">${topicBean.nbOfDiscussion } Discussions</span> |
+			<span style=" margin-left: 20px;">${topicBean.nbOfMessages } Messages</span> |
+			<span style=" margin-left: 20px;">Last Message :${topicBean.lastMessageDate }</span> |
+		</div>
+		<br />
+		<h4>
+			Sub Topics
+		</h4>
+		<table>
+			<thead>
+				<th>Title</th>
+				<th>Content</th>
+				<th>Date</th>
+				<th>Number Of Discussions</th>
+				<th>Number Of Messages</th>
+				<th>Date</th>
+				<th />
+			</thead>
+			<tbody>
+				<c:forEach items="${subTopicToBeans }" var="subTopicToBean">
+					<tr>
+						<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id }" var="subtopic_url" />
+						<td> <a href="${subtopic_url }">${subTopicToBean.subTopic.title }</a> </td>
+						<td>${subTopicToBean.subTopic.content }</td>
+						<td>${subTopicToBean.subTopic.created }</td>
+						<td>${subTopicToBean.numberOfDiscussion}</td>
+						<td>${subTopicToBean.numberOfMessage }</td>
+						<td>${subTopicToBean.lastMessageDate }</td>
+						<td>
+							<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
+							<a href="${subTopicUrl}">see</a> |
+							<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>

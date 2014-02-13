@@ -1,25 +1,26 @@
 package com.nomade.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
-import com.nomade.domain.Comment;
-import com.nomade.domain.Discussion;
+import com.nomade.domain.BeanSubTopicView;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
+import com.nomade.tools.CollectionUtil;
+import com.sun.mail.util.BEncoderStream;
 
 public class SubTopicServiceImpl implements SubTopicService {
 	
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
+	@Autowired
+	DiscussionService discussionService;
 	@Override
 	public List<SubTopic> findByParentTopic(Topic topic){
 		return subTopicRepository.findByParentTopic(topic);
@@ -27,61 +28,47 @@ public class SubTopicServiceImpl implements SubTopicService {
 
 	@Override
 	public int countDiscussion(List<SubTopic> subTopics) {
-		List<Discussion> discussions = new ArrayList<Discussion>();
+		int discussions = 0 ;
 		for (SubTopic subTopic : subTopics) {
-			Collection<Discussion> subTopicDiscussion = subTopic.getDiscussions();
-			discussions.addAll(subTopicDiscussion);
+			int countDiscussion = discussionService.countDiscussion(subTopic);
+			discussions += countDiscussion;
 		}
-		return discussions.size();
+		return discussions;
 	}
 	@Override
 	public int countMessages(List<SubTopic> subTopics) {
-		List<Discussion> discussions = new ArrayList<Discussion>();
+		int messages = 0;
 		for (SubTopic subTopic : subTopics) {
-			Collection<Discussion> subTopicDiscussion = subTopic.getDiscussions();
-			discussions.addAll(subTopicDiscussion);
+			int countMessages = discussionService.countMessages(subTopic);
+			messages += countMessages;
 		}
-		List<Comment> comments = new ArrayList<Comment>();
-		for (Discussion discussion : discussions) {
-			Collection<Comment> discussionComments = discussion.getComments();
-			comments.addAll(discussionComments);
-		}
-		return comments.size();
+		return messages;
 	}
 	public int countMessages(SubTopic subTopic){
-		return 0;
+		return discussionService.countMessages(subTopic);
 	}
 	@Override
 	public Date getLastMessageDate(List<SubTopic> subTopics) {
-		List<Discussion> discussions = new ArrayList<Discussion>();
+		List<Date> lastMessageDates = new ArrayList<Date>();
 		for (SubTopic subTopic : subTopics) {
-			Collection<Discussion> subTopicDiscussion = subTopic.getDiscussions();
-			discussions.addAll(subTopicDiscussion);
+			Date lastMessageDate = discussionService.getLastMessageDate(subTopic);
+			lastMessageDates.add(lastMessageDate);
 		}
-		List<Comment> comments = new ArrayList<Comment>();
-		for (Discussion discussion : discussions) {
-			Collection<Comment> discussionComments = discussion.getComments();
-			comments.addAll(discussionComments);
+		Collections.sort(lastMessageDates);
+		return CollectionUtil.getLastElement(lastMessageDates);
+	}
+
+	@Override
+	public List<BeanSubTopicView> convertSubTopicToBeanSubTopic(List<SubTopic> subTopics){
+		List<BeanSubTopicView> subTopicBeans = new ArrayList<BeanSubTopicView>();
+		for (SubTopic subTopic : subTopics) {
+			BeanSubTopicView beanSubTopicView = new BeanSubTopicView();
+			beanSubTopicView.setSubTopic(subTopic);
+			beanSubTopicView.setNumberOfDiscussion(discussionService.countDiscussion(subTopic));
+			beanSubTopicView.setNumberOfMessage(discussionService.countMessages(subTopic));
+			beanSubTopicView.setLastMessageDate(discussionService.getLastMessageDate(subTopic));
+			subTopicBeans.add(beanSubTopicView);
 		}
-		Collections.sort(comments, new Comparator<Comment>() {
-			@Override
-			public int compare(Comment o1, Comment o2) {
-				int result = 0;
-				if(o1.getCreated().before(o2.getCreated())){
-					result = -1;
-				}else if(o1.getCreated().after(o2.getCreated())){
-					result = 1;
-				}
-				return result;
-			}
-		});
-		int lastIndex = 0 ;
-		if(comments.size() > 0){
-			lastIndex = comments.size()-1;
-		}
-		if(lastIndex == 0) {
-			return null ;
-		}
-		return comments.get(lastIndex).getCreated();//get the date of the last element.
+		return subTopicBeans;
 	}
 }

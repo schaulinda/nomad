@@ -1,12 +1,9 @@
 package com.nomade.domain;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Enumerated;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -40,13 +37,11 @@ public class SubTopic {
 
     /**
      */
-    @NotNull
     @DBRef
     private UserNomade nomade;
 
     /**
      */
-    @NotNull
     @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
@@ -55,19 +50,13 @@ public class SubTopic {
     /**
      * The parent topic of this subtopic
      */
-    @NotNull
     @DBRef
     private Topic parentTopic;
 
     /**
+     * The subtopic in which this subpic is included
      */
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Discussion> discussions = new HashSet<Discussion>();
-
-    /**
-     * a set of subtopics related to this subtopic
-     */
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne
     @DBRef
-    private Set<SubTopic> subTopics = new HashSet<SubTopic>();
+    private SubTopic parentSubTopic;
 }
