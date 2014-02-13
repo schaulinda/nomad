@@ -212,6 +212,8 @@ filter: grayscale(100%); */
 
 #map {
 	
+	height: 360px;
+	
 }
 
 /************** Bootstrap remake********/

@@ -398,7 +398,7 @@
 									
 									 polyline:{
 										    options:{
-										    	geodesic: true,
+										    	geodesic: false,
 										        strokeColor: '#FF0000',
 										        strokeOpacity: 0,
 										        strokeWeight: 3,
