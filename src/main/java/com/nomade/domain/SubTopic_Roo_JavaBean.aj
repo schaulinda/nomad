@@ -4,12 +4,10 @@
 package com.nomade.domain;
 
 import com.nomade.domain.Confidentiality;
-import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
-import java.util.Set;
 
 privileged aspect SubTopic_Roo_JavaBean {
     
@@ -61,20 +59,12 @@ privileged aspect SubTopic_Roo_JavaBean {
         this.parentTopic = parentTopic;
     }
     
-    public Set<Discussion> SubTopic.getDiscussions() {
-        return this.discussions;
+    public SubTopic SubTopic.getParentSubTopic() {
+        return this.parentSubTopic;
     }
     
-    public void SubTopic.setDiscussions(Set<Discussion> discussions) {
-        this.discussions = discussions;
-    }
-    
-    public Set<SubTopic> SubTopic.getSubTopics() {
-        return this.subTopics;
-    }
-    
-    public void SubTopic.setSubTopics(Set<SubTopic> subTopics) {
-        this.subTopics = subTopics;
+    public void SubTopic.setParentSubTopic(SubTopic parentSubTopic) {
+        this.parentSubTopic = parentSubTopic;
     }
     
 }

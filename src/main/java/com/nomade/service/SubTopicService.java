@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.roo.addon.layers.service.RooService;
 
+import com.nomade.domain.BeanSubTopicView;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 
@@ -13,4 +14,5 @@ public interface SubTopicService {
 	public int countDiscussion(List<SubTopic> subTopics);
 	public int countMessages(List<SubTopic> subTopics);
 	public Date getLastMessageDate(List<SubTopic> subTopics);
+	public List<BeanSubTopicView>convertSubTopicToBeanSubTopic(List<SubTopic> subTopics);
 }

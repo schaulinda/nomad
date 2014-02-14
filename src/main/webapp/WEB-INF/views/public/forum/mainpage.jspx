@@ -37,9 +37,9 @@
 							</b>
 						</span> <br /> 
 						<c:forEach items="${topicBean.topic.subTopics }" var="subTopic">
-								<spring:url value="/forum/topics/${subTopic.id }"	var="topic_url" />
+								<spring:url value="/forum/subtopics/${subTopic.id }"	var="subtopic_url" />
 								<u>
-									<a style="margin-right: 8px;" href="${topic_url }"	title="${subTopic.content }">${subTopic.title }</a>
+									<a style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subTopic.title }</a>
 								</u>
 							</c:forEach></td>
 						<td>${topicBean.nbOfDiscussion }</td>

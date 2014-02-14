@@ -116,7 +116,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Comment, String> ApplicationConversionServiceFactoryBean.getCommentToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Comment, java.lang.String>() {
             public String convert(Comment comment) {
-                return new StringBuilder().append(comment.getCommentaire()).append(' ').append(comment.getCreated()).toString();
+                return new StringBuilder().append(comment.getCommentaire()).append(' ').append(comment.getCreated()).append(' ').append(comment.getBusinessId()).toString();
             }
         };
     }

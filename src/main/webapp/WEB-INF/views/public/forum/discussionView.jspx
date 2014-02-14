@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:rooForm="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<div class="row">
+		<div>
+			<span>Title : ${discussion.title } | </span> 
+			<span>${numberOfMessages } Messages </span> 
+			<span> | Last message :${lastMessageDate }</span> 
+			<span> | <button id="post_comment" class="btn">Post a comment</button ></span>
+		</div>
+		<spring:url value="/forum/discussions/${discussion.id }/comments" var="create_comment_url"/>
+		<div id="createCommendDiv" class="hide">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true" id="commentDialogCaret">×</button>
+				<h3 id="myModalLabel">Create your comment</h3>
+			</div>
+			<div class="modal-body">
+				<form:form commandName="commentModel" action="${create_comment_url }" method="POST">
+					<div class="form-group">
+							<form:textarea placeholder="your comment please ..." path="commentaire" cssStyle="form-control margin: 0px; width: 517px; height: 155px;" />
+					</div>
+					<button class="btn btn-primary" type="submit">Save changes</button>
+					<button class="btn" data-dismiss="modal" type="reset" aria-hidden="true" id="btnCloseDialog">Close</button>
+				</form:form>
+			</div>
+			<div class="modal-footer">
+				<!--  -->
+			</div>
+		</div>
+		<table>
+			<thead>
+				<th></th>
+				<th>Comment</th>
+				<th>Dates</th>
+				<th></th>
+				<th></th>
+			</thead>
+			<tbody>
+				<c:forEach items="${discussion.comments }" var="comment">
+					<tr>
+						<td>
+							<div>
+								<c:choose>
+									<c:when test="${empty comment.nomade.profil.file}">
+										<img alt="user" src="${res}/img/avatar.png"
+											style="width: 50px; height: 50px" class="img-rounded"
+											title="username" />
+									</c:when>
+									<c:otherwise>
+										<img alt="user"
+											src="${imageRender_url}/${comment.nomade.profil.file}"
+											style="width: 50px; height: 50px" class="img-rounded"
+											title="username" />
+									</c:otherwise>
+								</c:choose>
+							</div>
+						</td>
+						<td class="comment-text">
+							<div>${comment.created }</div>
+							<div>${comment.commentaire}</div>
+						</td>
+						<td>
+						<spring:url
+								value="/forum/discussions/${discussion.id }/comments/${comment.businessId }"
+								var="comment_url" />
+							<span>
+								 <a href="#" id = '${comment.businessId }'>edit</a>
+							</span>|
+							<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
+		<script type="text/javascript">
+			jQuery.noConflict($);
+			(function($){
+				/* switch to boostrap modals*/
+				function hideOrDisplayForm(dialog){
+					if(dialog.attr('class') == ''){
+						dialog.attr('class','hide');
+					}else{
+						dialog.attr('class','');
+					}
+				}
+				function registerPostCommentsEvent(dialog){
+					$("#post_comment").bind('click',function(){
+						hideOrDisplayForm(dialog);
+					});
+					$('#commentDialogCaret').bind('click',function(){
+						hideOrDisplayForm(dialog);
+					});
+					$('#btnCloseDialog').bind('click',function(){
+						hideOrDisplayForm(dialog);
+					});
+					
+				}
+				function showCommentUpdateForm(link ){
+					var id = $(link).attr('id');
+					var formId = 'form_'+id;
+					var dialog = $('#'+formId);
+					console.log(dialog);
+					hideOrDisplayForm(dialog);
+				}
+				$(document).ready(function(){
+					var dialog = $('#createCommendDiv');
+					registerPostCommentsEvent(dialog);
+				});
+			})(jQuery);
+		</script>
+</div>

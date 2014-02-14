@@ -33,4 +33,12 @@ privileged aspect Comment_Roo_JavaBean {
         this.nomade = nomade;
     }
     
+    public String Comment.getBusinessId() {
+        return this.businessId;
+    }
+    
+    public void Comment.setBusinessId(String businessId) {
+        this.businessId = businessId;
+    }
+    
 }
