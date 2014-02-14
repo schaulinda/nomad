@@ -286,3 +286,9 @@ class --class ~.domain.BeanDiscussionView --rooAnnotations
 focus --class ~.domain.Comment
 field string --fieldName businessId --comment "a generated id, for business purpose."
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-02-14 15:39:13
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-03 23:14:09
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-10 13:28:51
+repository mongo --interface ~.repository.EtapeRepository --entity ~.domain.Etape
+service --interface ~.service.EtapeService --entity ~.domain.Etape
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-11 14:25:06
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-02-11 14:31:46

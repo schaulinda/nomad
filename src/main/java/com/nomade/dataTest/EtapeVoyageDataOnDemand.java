@@ -84,7 +84,6 @@ public class EtapeVoyageDataOnDemand {
 
 	public void setParcours(EtapeVoyage obj, int index) {
 		Parcours parcours = dataOnDemand.getSpecificParcours(index);
-        obj.setParcours(parcours);
     }
 
 	public void setUserPhoto(EtapeVoyage obj, int index) {
