@@ -60,6 +60,8 @@ public class DangerPratique {
 
 	@DBRef
 	private UserNomade nomade;
+	
+	private String icon;
 
 	public void incrementVotePositif() {
 
@@ -69,6 +71,14 @@ public class DangerPratique {
 	public void incrementVoteNegatif() {
 
 		this.voteNegatif = this.voteNegatif + 1;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

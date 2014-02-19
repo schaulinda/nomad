@@ -51,6 +51,8 @@ public class InfoPratique {
 	
 	private int voteNegatif;
 	
+	private String icon;
+	
 	 @OrderBy(value = "created", order=Order.DESCENDING)
 	    private List<Comment> comments = new ArrayList<Comment>();
 	
@@ -70,6 +72,14 @@ public class InfoPratique {
 	public void incrementVoteNegatif(){
 		
 		this.voteNegatif=this.voteNegatif+1;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

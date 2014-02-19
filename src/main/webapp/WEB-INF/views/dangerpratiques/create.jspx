@@ -19,6 +19,7 @@
         <field:input field="voteNegatif" id="c_com_nomade_domain_DangerPratique_voteNegatif" z="rU4Hg6c3ZtQdK9ECKmi6+kdOpMg="/>
         <field:input field="nomade" id="c_com_nomade_domain_DangerPratique_nomade" z="Ha9/c4HIhREqBHcCB0g0acJPoyI="/>
         <field:input field="comments" id="c_com_nomade_domain_DangerPratique_comments" z="ihVoauYrSIqXw3nx/nR/JFiNvJE="/>
+        <field:input field="icon" id="c_com_nomade_domain_DangerPratique_icon" z="TW9Xq+yjxuo2Ryxu1SvCRgFzKos="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_DangerPratique" render="${not empty dependencies}" z="6+uNmufpVENNuLQB0sgGUBbYdQQ="/>
 </div>

@@ -67,11 +67,85 @@ public class InfoPratiqueController {
     	double[] location = new double[]{infoPratique.getLocationLng(), infoPratique.getLocationLat()};
     	infoPratique.setGeoLocation(location);
 		infoPratique.setNomade(userNomade);
+		infoPratique.setIcon(infoDecoration(infoPratique.getSelecteur1()));
     	infoPratiqueService.saveInfoPratique(infoPratique);
     	beanHistoriqueDecoration(uiModel,userNomade);
     	uiModel.addAttribute("infoPratique", new InfoPratique());
     	uiModel.addAttribute("saveInfoDanger", "saveInfoDanger");
     	return "public/info";
+    }
+    
+    public String infoDecoration(String typeInfo){
+    	
+    	String linkIcon = "info";
+    	
+    	if(typeInfo.equals("toilettes")){
+			linkIcon = linkIcon+"/toillete.png";
+		}
+		if(typeInfo.equals("pointEau")){
+			linkIcon = linkIcon+"/pointEau.png";
+		}
+		if(typeInfo.equals("faune")){
+			linkIcon = linkIcon+"/curiositeFone.png";
+		}
+		if(typeInfo.equals("douches")){
+			linkIcon = linkIcon+"/douche.png";
+		}
+		if(typeInfo.equals("stationnementGratuite")){
+			linkIcon = linkIcon+"/airStationementGratuit.png";
+		}
+		if(typeInfo.equals("stationnementPayant")){
+			linkIcon = linkIcon+"/aireStationementPayant.png";
+		}
+		if(typeInfo.equals("jardin")){
+			linkIcon = linkIcon+"/plage.png";//to be change with the real jardin icon 
+		}
+		if(typeInfo.equals("camping")){
+			linkIcon = linkIcon+"/reseauNomad.png";
+		}
+		if(typeInfo.equals("pointRencontre")){
+			linkIcon = linkIcon+"/pointRencontre.png";
+		}
+		if(typeInfo.equals("station")){
+			linkIcon = linkIcon+"/stationEssence.png";
+		}
+		if(typeInfo.equals("vidange")){
+			linkIcon = linkIcon+"/vidangeCampingCar.png";
+		}
+		if(typeInfo.equals("shipping")){
+			linkIcon = linkIcon+"/shipping.png";
+		}
+		if(typeInfo.equals("rassemblement")){
+			linkIcon = linkIcon+"/rassemblement.png";
+		}
+		if(typeInfo.equals("garage")){
+			linkIcon = linkIcon+"/garage.png";
+		}
+		if(typeInfo.equals("flore")){
+			linkIcon = linkIcon+"/curiositeFlore.png";
+		}
+		if(typeInfo.equals("geologique")){
+			linkIcon = linkIcon+"/curiositeGeologiaue.png";
+		}
+		if(typeInfo.equals("historique")){
+			linkIcon = linkIcon+"/historique.png";
+		}
+		if(typeInfo.equals("monuments")){
+			linkIcon = linkIcon+"/curiositeMonument.png";
+		}
+		if(typeInfo.equals("marins")){
+			linkIcon = linkIcon+"/curiositeFond.png";
+		}
+		if(typeInfo.equals("lac")){
+			linkIcon = linkIcon+"/curiositeLac.png";
+		}
+		if(typeInfo.equals("plage")){
+			linkIcon = linkIcon+"/plage.png";
+		}
+		if(typeInfo.equals("randonnee")){
+			linkIcon = linkIcon+"/departRandonne.png";
+		}
+    	return linkIcon;
     }
     
     @RequestMapping(value = "votePlus/{idInfo}")

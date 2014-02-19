@@ -75,10 +75,12 @@
 				${hPracticalOnTrip}
 			</h3>
 		</div>
-		<c:forEach var="info" items="${beanManagerItineraire.infoPratiques}">
+		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
+		<spring:url value="/resources/img/mapicon" var="iconmap_url"></spring:url>
+		<c:forEach var="info" items="${beanManagerItineraire.infoPratiques}"  >
 			<div class="row panel">
 				<div class="col-lg-2">
-					<p>Icône</p>
+					<img src="${iconmap_url}/${info.icon}"  alt="icon"/>
 				</div>
 				<div class="col-lg-7" style="border-left: solid 1px;">
 					<p>${info.title}</p>
@@ -107,7 +109,7 @@
 								<c:if test="${empty info.comments}">
 									0
 								</c:if>
-						</span> |<a id="${info.id}" class="detailsInfo" >details</a>
+						</span> |<a id="${info.id}dt" class="detailsInfo detail" href="${infoDetail_url}/${info.id}" >details</a>
 				</div>
 			</div>
 		</c:forEach>
@@ -121,12 +123,12 @@
 				${hDangerOnTrip}
 			</h3>
 		</div>
-
+		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
 		<c:forEach var="danger"
 			items="${beanManagerItineraire.dangerPratiques}">
 			<div class="row panel">
 				<div class="col-lg-2">
-					<p>Icône</p>
+					<img src="${iconmap_url}/${danger.icon}"  alt="icon"/>
 				</div>
 				<div class="col-lg-7" style="border-left: solid 1px;">
 					<p>${danger.title}</p>
@@ -153,8 +155,8 @@
 								<c:if test="${empty info.comments}">
 									0
 					</c:if>
-				</span> | <a id="${danger.id}"
-				 class="detailsDanger" >details</a>
+				</span> | <a id="${danger.id}dt"
+				 class="detailsDanger detail" href="${dangerDetail_url}/${danger.id}" >details</a>
 			</div>
 		</c:forEach>
 		
@@ -169,25 +171,6 @@
 		<spring:url value="/infopratiques/detail/" var="detailsInfo_url"></spring:url>
 		<spring:url value="/dangerpratiques/detail/" var="detailsDanger_url"></spring:url>
 	
-	<div class="modal fade" id="myModal" aria-hidden="true" role="dialog" tabindex="-1" style="display: none;" >
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">x</button>
-					<h4 class="modal-title">Detail</h4>
-				</div>
-				<div class="modal-body"><!--co  --></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
@@ -269,6 +252,7 @@
 				 	
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
+				if(bol!='back'){
 				if(bol!=""){
 					$('#direction').html("");
 					$('#panelDirection').removeClass("hide");
@@ -416,7 +400,7 @@
 					});
 					}
 				}
-					
+			}// no change in the map	
 				/* --------------------enable modal on click detail for each info------------- */
 				$('.detailsInfo').each(function() {
 
@@ -516,6 +500,26 @@
 				});
 			});
 		})(jQuery);
+	</script>
+	
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			
+
+			dojo.query(".detail").forEach(function(node, index, arr){
+				var id = dojo.attr(node,"id");
+				console.log(id);
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "smallTile"
+					}
+				}));
+
+			});
+
+		});
 	</script>
 
 </div>

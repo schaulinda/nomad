@@ -166,10 +166,27 @@ public class PublicController {
 		beanManagerItineraire.setDangerPratiquesAll(dangerPratiqueService
 				.findAllDangerPratiques());
 		beanManagerItineraire.buildMakers(request);
+		
+		request.getSession(true).setAttribute("beanManagerItineraire", beanManagerItineraire);
+		
 		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
 		uiModel.addAttribute("onglet", "itineraire");
 		return "public/itineraire";
 	}
+	
+	@RequestMapping("/backToItenary")
+	public String backToItenary(HttpServletRequest request, Model uiModel) {
+		UserNomade nomade = securite.getUserNomade();
+		uiModel.addAttribute("nomade", nomade);
+
+		BeanManagerItineraire beanManagerItineraire = (BeanManagerItineraire)request.getSession().getAttribute("beanManagerItineraire");
+		beanManagerItineraire.setBol("back");
+		
+		uiModel.addAttribute("beanManagerItineraire", beanManagerItineraire);
+		uiModel.addAttribute("onglet", "itineraire");
+		return "public/itineraire";
+	}
+	
 
 	@RequestMapping("/carnet")
 	public String carnet(HttpServletRequest request, Model uiModel) {

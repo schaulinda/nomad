@@ -47,11 +47,20 @@
         <put-attribute name="body" value="/WEB-INF/views/public/forum.jspx"/>
         <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
     </definition>
-    <definition extends="viergeLayout" name="public/infoDetail">
-        <put-attribute name="body" value="/WEB-INF/views/public/infoDetail.jspx"/>
+    
+    <definition extends="privateLayout" name="public/infoDetail">
+        <put-attribute name="body" value="/WEB-INF/views/public/itineraire.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/public/infoDetail.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
     </definition>
-     <definition extends="viergeLayout" name="public/dangerDetail">
-        <put-attribute name="body" value="/WEB-INF/views/public/dangerDetail.jspx"/>
+    <definition extends="privateLayout" name="public/dangerDetail">
+        <put-attribute name="body" value="/WEB-INF/views/public/itineraire.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/public/dangerDetail.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
     </definition>
     
 </tiles-definitions>

@@ -19,5 +19,6 @@
         <field:input field="voteNegatif" id="c_com_nomade_domain_InfoPratique_voteNegatif" z="8MaWTN8CkWYRXTHQYpHhJlEm7aY="/>
         <field:input field="nomade" id="c_com_nomade_domain_InfoPratique_nomade" z="LqGjsNqIq5R4B6fcRfhgA19S/DE="/>
         <field:input field="comments" id="c_com_nomade_domain_InfoPratique_comments" z="qz0nC8tRJwtWC8wRAByp8kevT2o="/>
+        <field:input field="icon" id="c_com_nomade_domain_InfoPratique_icon" z="fb01Lqi1l4czvfSl3lDFzCxfcZQ="/>
     </form:update>
 </div>
