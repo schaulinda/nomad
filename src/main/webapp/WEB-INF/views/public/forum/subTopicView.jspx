@@ -17,7 +17,7 @@
 	
 		<div>
 			<span>${subTopic.title }</span> |
-			<span style=" margin-left: 20px;">$subTopic.content }</span> |
+			<span style=" margin-left: 20px;">${subTopic.content }</span> |
 			<span style=" margin-left: 20px;">Created The : ${subTopic.created }</span> |
 			<span style=" margin-left: 20px;">${numberOfDiscussions } Discussions</span> |
 			<span style=" margin-left: 20px;">${numberOfMessages } Messages</span> |
@@ -127,6 +127,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+			<util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
 	</div>
 	<script type="text/javascript">
 			jQuery.noConflict($);

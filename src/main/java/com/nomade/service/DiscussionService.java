@@ -16,4 +16,5 @@ public interface DiscussionService extends ForumQuery<Discussion>{
 	public Date getLastMessageDate(SubTopic subTopics);
 	public List<Comment> findSubTopicComments(SubTopic subTopic);
     public List<Discussion> findBySubTopic(SubTopic subTopic);
+    public List<Discussion> findBySubTopic(SubTopic subTopic,int firstResult,int maxResults);
 }

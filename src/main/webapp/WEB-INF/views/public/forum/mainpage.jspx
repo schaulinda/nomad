@@ -29,8 +29,9 @@
 			<tbody>
 				<c:forEach items="${topicBeans }" var="topicBean">
 					<tr>
-						<td><span> <b> <spring:url
-										value="/forum/topics/${topicBean.topic.id }" var="topic_url" />
+						<td><span> <b> <spring:url value="/forum/topics/${topicBean.topic.id }" var="topic_url" >
+											<spring:param name="size" value="3" />
+										</spring:url>
 									<u> <a href="${topic_url }"
 										title="${topicBean.topic.content }">${topicBean.topic.title }</a>
 								</u>

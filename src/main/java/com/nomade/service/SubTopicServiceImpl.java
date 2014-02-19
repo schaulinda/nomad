@@ -12,7 +12,6 @@ import com.nomade.domain.BeanSubTopicView;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.tools.CollectionUtil;
-import com.sun.mail.util.BEncoderStream;
 
 public class SubTopicServiceImpl implements SubTopicService {
 	
@@ -24,6 +23,10 @@ public class SubTopicServiceImpl implements SubTopicService {
 	@Override
 	public List<SubTopic> findByParentTopic(Topic topic){
 		return subTopicRepository.findByParentTopic(topic);
+	}
+	@Override
+	public List<SubTopic> findByParentTopic(Topic topic,int firstResult,int maxResults){
+		return subTopicRepository.findByParentTopic(topic,new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults));
 	}
 
 	@Override

@@ -56,5 +56,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
 	</div>
 </div>

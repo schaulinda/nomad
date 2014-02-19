@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.data.domain.PageRequest;
+
 import com.nomade.domain.Comment;
 import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
@@ -72,5 +74,9 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
     public List<Discussion> findBySubTopic(SubTopic subTopic){
 		return discussionRepository.findBySubTopic(subTopic);
+    }
+	@Override
+    public List<Discussion> findBySubTopic(SubTopic subTopic,int firstResult,int maxResults){
+		return discussionRepository.findBySubTopic(subTopic, new PageRequest(firstResult, maxResults));
     }
 }

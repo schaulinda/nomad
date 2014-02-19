@@ -1,6 +1,7 @@
 package com.nomade.repository;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoRepository;
 
 import com.nomade.domain.Discussion;
@@ -13,4 +14,5 @@ public interface SubTopicRepository  extends ForumQuery<Discussion> {
 
     List<SubTopic> findAll();
     public List<SubTopic> findByParentTopic(Topic topic);
+    public List<SubTopic> findByParentTopic(Topic topic,Pageable pageable);
 }

@@ -11,6 +11,7 @@ import com.nomade.domain.Topic;
 @RooService(domainTypes = { com.nomade.domain.SubTopic.class })
 public interface SubTopicService {
 	public List<SubTopic> findByParentTopic(Topic topic);
+	public List<SubTopic> findByParentTopic(Topic topic,int firstResult, int maxResults);
 	public int countDiscussion(List<SubTopic> subTopics);
 	public int countMessages(List<SubTopic> subTopics);
 	public Date getLastMessageDate(List<SubTopic> subTopics);
