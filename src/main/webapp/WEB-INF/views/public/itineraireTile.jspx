@@ -401,42 +401,7 @@
 					}
 				}
 			}// no change in the map	
-				/* --------------------enable modal on click detail for each info------------- */
-				$('.detailsInfo').each(function() {
-
-					$(this).click(function() {
-						var idInfo = this.id;
-						
-						$('#myModal').modal({
-							remote : '${detailsInfo_url}' +idInfo,
-							show : true,
-							backdrop : false
-						});
-					});
-				});
-				$('#myModal').on('hidden.bs.modal', function () {
-						
-						$(this).removeData('bs.modal');
-					});
 				
-				/* --------------------enable modal on click detail for each danger------------- */
-				$('.detailsDanger').each(function() {
-
-					$(this).click(function() {
-						var idInfo = this.id;
-						
-						$('#myModal').modal({
-							remote : '${detailsDanger_url}' +idInfo,
-							show : true,
-							backdrop : false
-						});
-					});
-				});
-				$('#myModal').on('hidden.bs.modal', function () {
-						
-						$(this).removeData('bs.modal');
-					});
-
 				/* ----------------------vote positif info--------------------------- */
 				$('.voteplus').each(function() {
 
