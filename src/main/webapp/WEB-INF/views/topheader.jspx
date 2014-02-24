@@ -65,29 +65,105 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-10  col-xs-10">
 		   <div class="row">
+		   <spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 		      <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-						<select class="pull-right form-control" >
-							<option>
-								<spring:message code="option.withoutvehicle" />
-							</option>							<option>
-								<spring:message code="option.lookingForBuy" />
+						<select id="vehiculeState" class="pull-right form-control" >
+							<spring:message code="option.withoutvehicle" var="withoutvehicle" />
+							<spring:message code="option.lookingForBuy" var="lookingForBuy" />
+							<spring:message code="option.lookingForSale" var="lookingForSale" />
+							<spring:message code="option.onTheRoad" var="onTheRoad" />
+							<spring:message code="option.stopOver" var="stopOver" />
+							<spring:message code="option.inRepair" var="inRepair" />
+							<spring:message code="option.backToHome" var="backToHome" />
+							
+							
+							<c:if test="${nomade.vehicule.vehiculeState == 'withoutvehicle'}">
+							<option value="withoutvehicle" data-description="${withoutvehicle}" selected="selected" data-imagesrc="${iconstatut_url}/withoutvehicle.png">
+								${withoutvehicle}
 							</option>
-							<option>
-								<spring:message code="option.lookingForSale" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'lookingForBuy'}">
+														
+							<option value="lookingForBuy" data-description="${lookingForBuy}" selected="selected" data-imagesrc="${iconstatut_url}/lookingForBuy.png" >
+								${lookingForBuy}
 							</option>
-							<option>
-								<spring:message code="option.onTheRoad" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'lookingForSale'}">
+							
+							<option value="lookingForSale" data-description="${lookingForSale}" selected="selected" data-imagesrc="${iconstatut_url}/lookingForSale.png" >
+								${lookingForSale}
 							</option>
-							<option>
-								<spring:message code="option.stopOver" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'onTheRoad'}">
+							
+							<option  value="onTheRoad" data-description="${onTheRoad}" selected="selected" data-imagesrc="${iconstatut_url}/onTheRoad.png">
+								${onTheRoad}
 							</option>
-							<option>
-								<spring:message code="option.inRepair" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'stopOver'}">
+							
+							<option value="stopOver" data-description="${stopOver}" selected="selected" data-imagesrc="${iconstatut_url}/stopOver.png" >
+								${stopOver}
 							</option>
-							<option>
-								<spring:message code="option.backToHome" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'inRepair'}">
+							
+							<option value="inRepair" data-description="${inRepair}" selected="selected" data-imagesrc="${iconstatut_url}/inRepair.png" >
+								${inRepair }
 							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'backToHome'}">
+							
+							<option value="backToHome" data-description="${backToHome}" selected="selected" data-imagesrc="${iconstatut_url}/backToHome.png" >
+								${backToHome}
+							</option>
+							</c:if>
+							
+							
+							<c:if test="${nomade.vehicule.vehiculeState != 'withoutvehicle'}">
+							<option value="withoutvehicle" data-description="${withoutvehicle}" data-imagesrc="${iconstatut_url}/withoutvehicle.png">
+								${withoutvehicle}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'lookingForBuy'}">
+														
+							<option value="lookingForBuy" data-description="${lookingForBuy}" data-imagesrc="${iconstatut_url}/lookingForBuy.png" >
+								${lookingForBuy}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'lookingForSale'}">
+							
+							<option value="lookingForSale" data-description="${lookingForSale}" data-imagesrc="${iconstatut_url}/lookingForSale.png" >
+								${lookingForSale}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'onTheRoad'}">
+							
+							<option  value="onTheRoad" data-description="${onTheRoad}" data-imagesrc="${iconstatut_url}/onTheRoad.png">
+								${onTheRoad}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'stopOver'}">
+							
+							<option value="stopOver" data-description="${stopOver}" data-imagesrc="${iconstatut_url}/stopOver.png" >
+								${stopOver}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'inRepair'}">
+							
+							<option value="inRepair" data-description="${inRepair}" data-imagesrc="${iconstatut_url}/inRepair.png" >
+								${inRepair }
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'backToHome'}">
+							
+							<option value="backToHome" data-description="${backToHome}" data-imagesrc="${iconstatut_url}/backToHome.png" >
+								${backToHome}
+							</option>
+							</c:if>
+							
 						</select>
+						<a id="link_statutVeh" href="${updateVehState}" style="display: none;" ><!--co  --></a>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 pull-right">
 					<sec:authorize access="isAuthenticated()" >
@@ -97,7 +173,7 @@
 									class="img-rounded defaultvehicleimg" />
 							</c:when>
 							<c:otherwise>
-								<img alt="user"
+								<img alt="user" id="iconveh"
 									src="${imageRender_url}/${nomade.vehicule.photo}"
 									class="img-rounded userVehicleImg" />
 							</c:otherwise>
@@ -132,7 +208,61 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 		(function($) {
+			
 			$(document).ready(function() {
+				
+				
+
+				/* ddslick for vehiculeState */
+				$('#vehiculeState').ddslick({
+				    width:230,
+				    selectText: "Statut vehicule",
+				    imagePosition:"right",
+				    onSelected: function(selectedData){
+				    	
+				    	$('#vehiculeState .dd-selected-value').each(function(){
+				    		
+				    		var val = $(this).val();
+				    		
+				    		$.get("${updateVehState}/"+val,
+				    				{
+
+							}, function(data, status) {
+
+								console.log(data);
+								
+
+							});
+				    	});
+				    	
+				       
+				    }   
+				});
+				
+				
+							/* $('#vehiculeState').on('change', function() {
+
+									console.log(this.value);
+
+										var val = this.value;
+
+										$.get("${updateVehState}", {
+
+											vehState : val
+
+					
+
+										}, function(data, status) {
+
+											console.log(data);
+
+										});
+
+									}); */
+
+					
+
+
 
 				var onglet = '${onglet}';
 				if (onglet != 'itineraire') {

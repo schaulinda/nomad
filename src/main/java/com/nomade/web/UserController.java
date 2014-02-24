@@ -219,7 +219,7 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "updateVehState")
+	/*@RequestMapping(method = RequestMethod.GET, value = "updateVehState")
 	public @ResponseBody
 	String updateVehState(Model uiModel, HttpServletRequest httpServletRequest,
 			HttpServletResponse response, @RequestParam("vehState") String vehState){
@@ -228,6 +228,16 @@ public class UserController {
 		userNomade.getVehicule().setVehiculeState(VehiculeState.valueOf(vehState));
 		userService.updateUserNomade(userNomade);
 		return "good";
+	}*/
+	
+	@RequestMapping("/updateVehState/{vehState}")
+	public @ResponseBody String updateVehState(@PathVariable("vehState") String vehState, Model uiModel, HttpServletRequest httpServletRequest,
+			HttpServletResponse response){
+		
+		UserNomade userNomade = securite.getUserNomade();
+		userNomade.getVehicule().setVehiculeState(VehiculeState.valueOf(vehState));
+		userService.updateUserNomade(userNomade);
+		return userNomade.getVehicule().getIcon();
 	}
 
 	// this function has to be refactoring in another class

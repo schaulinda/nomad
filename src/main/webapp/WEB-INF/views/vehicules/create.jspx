@@ -12,6 +12,7 @@
         <field:select field="forSellCountry" id="c_com_nomade_domain_Vehicule_forSellCountry" items="${countrys}" path="countrys" z="Xwx1wJDDUfGO0lYiLIP3F9vviFY="/>
         <field:datetime dateTimePattern="${vehicule_annemiseenservice_date_format}" field="anneMiseEnService" id="c_com_nomade_domain_Vehicule_anneMiseEnService" z="93IiVzkDnA/SX6JN7iWCQ7zU8H0="/>
         <field:input field="description" id="c_com_nomade_domain_Vehicule_description" z="K0UmLW7sPXmuuYCC1TO7sA2WIIk="/>
+        <field:input field="icon" id="c_com_nomade_domain_Vehicule_icon" z="Ufyf+IGrdXwjWn/+s7wLaU9wYAw="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Vehicule" render="${not empty dependencies}" z="eLY1UbqdVj98QB8iZHlVIWDHUMA="/>
 </div>

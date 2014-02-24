@@ -318,7 +318,7 @@
 								$('.add_field').click(function(){
 									
 									decoration();
-									$('.datepicker').datepicker();
+									$('.datepicker').datepicker({ maxDate: new Date() });
 									
 									/*put date on datepicker  */
 									
@@ -457,7 +457,7 @@
 									}, 1000);
 								}
 							
-								$('.datepicker').datepicker();
+								$('.datepicker').datepicker({ maxDate: new Date()});
 
 								/* --------------------------on load recup session voy---------------------------- */
 								if ($.session.get('location') != null

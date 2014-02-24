@@ -162,6 +162,13 @@
 		
 	</div>
 	
+	<div class="hide" id="grpLink">
+		<!--link for D/I  -->
+	</div>
+		
+		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
+		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
+		
 		<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
 		<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
 
@@ -253,12 +260,12 @@
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
 				if(bol!='back'){
-				if(bol!=""){
+				if(bol=="true"){
 					$('#direction').html("");
 					$('#panelDirection').removeClass("hide");
 				/* the map data ----------------------------- */	
 				console.log('${beanManagerItineraire.makers}');
-				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//to something if mapdata is null 
+				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//do something if mapdata is null 
 				/* --------------agrandir la map------------- */
 								$('#smallTile').hide();
 								$('#id_map').removeClass("col-lg-6");
@@ -302,17 +309,24 @@
 						 name:["directionsrenderer"]
 					 }	
 					
-					});
+					}); 
 							
 				/*------------------ render direction ----------------------------*/	
 				
 					$("#map").gmap3({
 						
-						    marker:{
+						 marker:{
 						        values:mapdata,
-						        bounds:true
+						        bounds:true,
+						        events:{
+						            
+						            click: function(marker, event, context){
+						  
+						            	document.getElementById(context.id+"url").click();
+						            },
+						          }
 						    },
-						      
+					
 						 getroute:{
 							    options:{
 							        origin:'${beanManagerItineraire.start}',
@@ -334,6 +348,55 @@
 							  },
 				
 					});
+				
+
+					var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
+					console.log(mapdata);
+					if(mapdata!=null){
+					/*dracula code form links for D/I*/
+					$.each(mapdata,function(index, value) {
+										var baseLink="";
+										if(value.tag=="info"){
+											baseLink= '${infoDetail_url}';
+										}
+										if(value.tag=="danger"){
+											baseLink= '${dangerDetail_url}';
+										}
+										var hreflink = baseLink + "/" + value.id+"?cameFrom=back";
+										console.log(hreflink);
+										var newId = value.id+"url";
+										var html = '<a href="'+hreflink+'" id="'+newId+'" class="'+value.id+'" >'
+										+ value.id + '</a>';
+										$('#grpLink').append(html);
+										$('#' + value.id+"url")
+												.click(function(event) {
+															event.stopPropagation();
+															if ($('#id_map').hasClass("col-lg-12")) {
+																/* reduice map */
+																$('#id_map').removeClass("col-lg-12");
+																$('#id_map').addClass("col-lg-6");
+
+																$('#smallTile').show();
+																$('.open').addClass("hide");
+																$('.closemap').removeClass("hide");
+
+																map = $("#map").gmap3('get');
+																google.maps.event.trigger(map,'resize');
+																
+																map.setZoom(map.getZoom());
+																var markIndic = $("#map")
+																		.gmap3({
+																					get : {
+																						id : "indicator"
+																					}
+																				});
+																map.setCenter(markIndic.getPosition());
+																map.panToBounds(map.getBounds());
+															}
+														});
+									});
+
+					}
 				
 					
 				
@@ -374,26 +437,59 @@
 					var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
 					console.log(mapdata);
 					if(mapdata!=null){
+					/*dracula code form links for D/I*/
+					$.each(mapdata,function(index, value) {
+										var baseLink="";
+										if(value.tag=="info"){
+											baseLink= '${infoDetail_url}';
+										}
+										if(value.tag=="danger"){
+											baseLink= '${dangerDetail_url}';
+										}
+										var hreflink = baseLink + "/" + value.id+"?cameFrom=back";
+										var newId = value.id+"url";
+										var html = '<a href="'+hreflink+'" id="'+newId+'" class="'+value.id+'" >'
+												+ value.id + '</a>';
+										$('#grpLink').append(html);
+										$('#' + value.id+"url")
+												.click(function(event) {
+															event.stopPropagation();
+															if ($('#id_map').hasClass("col-lg-12")) {
+																/* reduice map */
+																$('#id_map').removeClass("col-lg-12");
+																$('#id_map').addClass("col-lg-6");
+
+																$('#smallTile').show();
+																$('.open').addClass("hide");
+																$('.closemap').removeClass("hide");
+
+																map = $("#map").gmap3('get');
+																google.maps.event.trigger(map,'resize');
+																
+																map.setZoom(map.getZoom());
+																var markIndic = $("#map")
+																		.gmap3({
+																					get : {
+																						id : "indicator"
+																					}
+																				});
+																map.setCenter(markIndic.getPosition());
+																map.panToBounds(map.getBounds());
+															}
+														});
+									});
+					
+					
+					
 					$("#map").gmap3({
 						
 					    marker:{
 					        values:mapdata,
 					        events:{
-					            mouseover: function(marker, event, context){
-					              var map = $(this).gmap3("get"),
-					                infowindow = $(this).gmap3({get:{name:"infowindow"}});
-					              if (infowindow){
-					                infowindow.open(map, marker);
 					            
-					                infowindow.setContent(context.data);
-					              } else {
-					                $(this).gmap3({
-					                  infowindow:{
-					                    anchor:marker, 
-					                    options:{content: context.data}
-					                  }
-					                });
-					              }
+					            click: function(marker, event, context){
+					  
+					            	document.getElementById(context.id+"url").click();
 					            },
 					          }
 					    }
@@ -474,6 +570,26 @@
 			dojo.query(".detail").forEach(function(node, index, arr){
 				var id = dojo.attr(node,"id");
 				console.log(id);
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "smallTile"
+					}
+				}));
+
+			});
+
+		});
+	</script>
+	
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			var mapdata = JSON.parse('${beanManagerItineraire.makers}');
+
+			dojo.forEach(mapdata, function(item, i) {
+				var id = item.id+"url";
+
 				Spring.addDecoration(new Spring.AjaxEventDecoration({
 					elementId : id,
 					event : "onclick",

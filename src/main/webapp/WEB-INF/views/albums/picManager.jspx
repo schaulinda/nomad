@@ -79,8 +79,8 @@
 										</a> <c:if test="${beanPictureManager.isBackLink() eq true}">
 												<spring:url value="/users/selectImg" var="selectImg"></spring:url>
 												<a class="btn btnSelect" id="select_${photo}"
-													href="${selectImg}/${photo}"><i class="icon-ok">
-														select</i></a>
+													href="${selectImg}/${photo}"><i class="icon-ok"><!-- co -->
+														</i>select</a>
 											</c:if></li>
 									</c:forEach>
 								</ul>

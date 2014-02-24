@@ -4,11 +4,13 @@
 package com.nomade.web;
 
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.TypeTime;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.UserService;
 import com.nomade.web.InfoPratiqueController;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +105,7 @@ privileged aspect InfoPratiqueController_Roo_Controller {
     void InfoPratiqueController.populateEditForm(Model uiModel, InfoPratique infoPratique) {
         uiModel.addAttribute("infoPratique", infoPratique);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("typetimes", Arrays.asList(TypeTime.values()));
         uiModel.addAttribute("usernomades", userService.findAllUserNomades());
     }
     

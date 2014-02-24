@@ -4,11 +4,13 @@
 package com.nomade.web;
 
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.TypeTime;
 import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.UserService;
 import com.nomade.web.DangerPratiqueController;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,6 +105,7 @@ privileged aspect DangerPratiqueController_Roo_Controller {
     void DangerPratiqueController.populateEditForm(Model uiModel, DangerPratique dangerPratique) {
         uiModel.addAttribute("dangerPratique", dangerPratique);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("typetimes", Arrays.asList(TypeTime.values()));
         uiModel.addAttribute("usernomades", userService.findAllUserNomades());
     }
     

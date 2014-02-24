@@ -39,11 +39,11 @@ public class DangerPratique {
 
 	private String photo;
 
-	private int dure;
+	private TypeTime dure;
 
 	private boolean infoVerif;
 
-	private int estimationValidite;
+	private TypeTime estimationValidite;
 
 	private String comment;
 

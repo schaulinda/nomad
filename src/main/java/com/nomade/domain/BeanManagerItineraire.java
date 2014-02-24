@@ -46,12 +46,13 @@ public class BeanManagerItineraire {
 	public void buildMakers(HttpServletRequest httpServletRequest){
 		List<Marker> listMarkers = new ArrayList<Marker>();
 		Marker mark = null;
+		String linkBase = linkBase(httpServletRequest);
 		for(InfoPratique info:this.infoPratiquesAll){
 			 mark = new Marker(info.getLocation(), info.getTitle());
 			 mark.setTag("info");
 				mark.setId(info.getId().toString());
 				
-				String linkBase = linkBase(httpServletRequest);
+				
 				String linkIcon=linkBase+info.getIcon();
 				
 				mark.getOptions().setIcon(linkIcon);
@@ -62,7 +63,6 @@ public class BeanManagerItineraire {
 			 mark.setTag("danger");
 			 mark.setId(danger.getId().toString());
 				
-				String linkBase = linkBase(httpServletRequest);
 				String linkIcon=linkBase+danger.getIcon();
 				
 				mark.getOptions().setIcon(linkIcon);

@@ -19,10 +19,10 @@ public class Vehicule {
     private String photo;
 
     @Enumerated
-    private VehiculeType vehiculeType;
+    private VehiculeType vehiculeType = VehiculeType.Autre;
 
     @Enumerated
-    private VehiculeState vehiculeState;
+    private VehiculeState vehiculeState = VehiculeState.withoutvehicle;
 
     private String model;
 
@@ -36,4 +36,23 @@ public class Vehicule {
     private Date anneMiseEnService;
 
     private String description;
+    
+    private String icon;
+    
+    /*withoutvehicle, lookingForBuy, lookingForSale, onTheRoad, stopOver, inRepair, backToHome;*/
+    /*DeuxRouesRoutier, DeuxRouesToutTerrain, QuatrexQuatre, CampingCar, Camion, Camionette, Velo, Voiture, Autre;*/
+    private void makeIcon(){
+    	
+    	this.icon = ""+this.vehiculeType+""+this.vehiculeState;
+    }
+    
+    public void setVehiculeType(VehiculeType vehiculeType) {
+        this.vehiculeType = vehiculeType;
+        makeIcon();
+    }
+    
+    public void setVehiculeState(VehiculeState vehiculeState) {
+        this.vehiculeState = vehiculeState;
+        makeIcon();
+    }
 }

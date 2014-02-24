@@ -16,17 +16,19 @@
 
 	<div class="panel">
 		<div class="panel-heading">
-			<spring:url value="/public/backToItenary" var="back"></spring:url>
+			<spring:url value="/public/backToItenary" var="back_url"></spring:url>
 			<div class="row">
 				<div class="col-lg-6">
 					<h3 class="panel-title">Detail Info</h3>
 				</div>
+				<c:if test="${back eq true }">
 				<div class="col-lg-6">
 					<a class="btn btn-default btn-block pull-left" id="back"
-						href="${back}"><i class="icon-arrow-left">
+						href="${back_url}"><i class="icon-arrow-left">
 							<!--co  -->
 					</i>Back</a>
 				</div>
+				</c:if>
 			</div>
 		</div>
 		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
@@ -85,6 +87,8 @@
 						</c:if>
 					</div>
 					<div class="col-lg-9 form-group">
+					<div><span style="color: #999999;">Dure:</span> ${infoPratique.dure}</div>
+					<div><span style="color: #999999;">Estimation Validite:</span> ${infoPratique.estimationValidite}</div>
 						<div><span style="color: #999999;">Description:</span> ${infoPratique.comment}</div>
 					</div>
 				</div>

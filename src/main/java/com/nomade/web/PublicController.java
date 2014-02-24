@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.TypeTime;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
@@ -66,7 +68,7 @@ public class PublicController {
 		beanNomadeManager.setNomads(findAllUserNomades);
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
-		String makers = etapeService.buildMakers(findAllUserNomades);
+		String makers = etapeService.buildMakers(findAllUserNomades, request);
 		beanNomadeManager.setMakers(makers);
 
 		
@@ -119,7 +121,7 @@ public class PublicController {
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
-		String makers = etapeService.buildMakers(findAllUserNomades);
+		String makers = etapeService.buildMakers(findAllUserNomades,request);
 		beanNomadeManager.setMakers(makers);
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
@@ -205,6 +207,7 @@ public class PublicController {
 	public String danger(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
 
+		uiModel.addAttribute("typeTime", Arrays.asList(TypeTime.class.getEnumConstants()));
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("dangerPratique", new DangerPratique());
 		return "public/danger";
@@ -214,6 +217,8 @@ public class PublicController {
 	public String info(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
 
+		
+		uiModel.addAttribute("typeTime", Arrays.asList(TypeTime.class.getEnumConstants()));
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("infoPratique", new InfoPratique());
 

@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/dangerpratiques")
@@ -165,8 +166,14 @@ public class DangerPratiqueController {
        }
     
     @RequestMapping(value = "detail/{idInfo}")
-   	public String detail(@PathVariable("idInfo") String idInfo, Model uiModel) {
+   	public String detail(@PathVariable("idInfo") String idInfo, @RequestParam(value="cameFrom", required=false)String cameFrom, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
+       	
+    	if(cameFrom =="back"){
+       		uiModel.addAttribute("back", false);
+       	}else{
+       		uiModel.addAttribute("back", true);
+       	}
     
        	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
        	uiModel.addAttribute("dangerPratique", dangerPratique);

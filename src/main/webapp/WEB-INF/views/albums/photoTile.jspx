@@ -61,10 +61,9 @@
 					 <label>Localisation</label>
 					 <div class="input-group">
 						<input type="text" name="addresspicker" class="form-control"
-							id="addresspicker_map" placeholder="enter the location"
+							id="" placeholder="enter the location"
 							rel="popover" value="${addresspicker}" /> <span class="input-group-addon"> <a
-							href="#"> <i class="icon-screenshot"> 
-							</i>
+							href="#"> <i class="icon-screenshot"><!-- co --></i>
 						</a>
 						</span>
 					</div>

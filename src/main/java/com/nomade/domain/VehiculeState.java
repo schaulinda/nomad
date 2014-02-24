@@ -3,5 +3,6 @@ package com.nomade.domain;
 
 public enum VehiculeState {
 
-	SansVehicule, EnRechercheAchat, AVendre, SurLaRoute, EnEtape, EnReparation, RentreAlaMaison;
+	withoutvehicle, lookingForBuy, lookingForSale, onTheRoad, stopOver, inRepair, backToHome;
+	
 }
