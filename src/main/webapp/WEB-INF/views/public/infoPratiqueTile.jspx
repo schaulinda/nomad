@@ -561,6 +561,37 @@
 												});
 						
 								
+								/* -----clear marker and directions but not clear the picker------------ */
+								$("#map").gmap3({
+								    get: {
+								     		 name: "marker",
+								     		all:true,
+								     		full:true,
+								     		callback: function(objs){
+								     				var arrayId=[];
+								     			 $.each(objs, function(i, obj){
+								     				if(obj.id!="indicator"){
+								     				
+								     					var markObj = obj;
+								     					arrayId.push(markObj.id);		
+									     			}
+								     	          });
+								     			console.log(arrayId);
+								     			
+								     			$(this).gmap3({
+						     				        clear:{
+						     				          id:arrayId
+						     				        }
+						     				      });
+								     			
+								     		}
+								    },
+								 clear:{
+									 name:["directionsrenderer"]
+								 }	
+								
+								});
+							
 							});
 		})(jQuery);
 	</script>

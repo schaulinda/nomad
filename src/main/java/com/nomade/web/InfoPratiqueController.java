@@ -175,10 +175,10 @@ public class InfoPratiqueController {
    	public String detail(@PathVariable("idInfo") String idInfo, @RequestParam(value="cameFrom", required=false)String cameFrom, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
        	
-       	if(cameFrom =="back"){
-       		uiModel.addAttribute("back", false);
+    	if("map".equals(cameFrom)){
+       		uiModel.addAttribute("back", "itineraire");
        	}else{
-       		uiModel.addAttribute("back", true);
+       		uiModel.addAttribute("back", "formfinditineraire");
        	}
        	
        	

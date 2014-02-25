@@ -161,13 +161,6 @@
 		</c:forEach>
 		
 	</div>
-	
-	<div class="hide" id="grpLink">
-		<!--link for D/I  -->
-	</div>
-		
-		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
-		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
 		
 		<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
 		<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
@@ -279,53 +272,10 @@
 								map.setCenter(map.getCenter());
 								map.panToBounds(map.getBounds());
 				
-				/* -----clear marker and directions but not clear the picker------------ */
-				
-					$("#map").gmap3({
-					    get: {
-					     		 name: "marker",
-					     		all:true,
-					     		full:true,
-					     		callback: function(objs){
-					     				var arrayId=[];
-					     			 $.each(objs, function(i, obj){
-					     				if(obj.id!="indicator"){
-					     				
-					     					var markObj = obj;
-					     					arrayId.push(markObj.id);		
-						     			}
-					     	          });
-					     			console.log(arrayId);
-					     			
-					     			$(this).gmap3({
-			     				        clear:{
-			     				          id:arrayId
-			     				        }
-			     				      });
-					     			
-					     		}
-					    },
-					 clear:{
-						 name:["directionsrenderer"]
-					 }	
 					
-					}); 
-							
 				/*------------------ render direction ----------------------------*/	
 				
 					$("#map").gmap3({
-						
-						 marker:{
-						        values:mapdata,
-						        bounds:true,
-						        events:{
-						            
-						            click: function(marker, event, context){
-						  
-						            	document.getElementById(context.id+"url").click();
-						            },
-						          }
-						    },
 					
 						 getroute:{
 							    options:{
@@ -350,151 +300,10 @@
 					});
 				
 
-					var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
-					console.log(mapdata);
-					if(mapdata!=null){
-					/*dracula code form links for D/I*/
-					$.each(mapdata,function(index, value) {
-										var baseLink="";
-										if(value.tag=="info"){
-											baseLink= '${infoDetail_url}';
-										}
-										if(value.tag=="danger"){
-											baseLink= '${dangerDetail_url}';
-										}
-										var hreflink = baseLink + "/" + value.id+"?cameFrom=back";
-										console.log(hreflink);
-										var newId = value.id+"url";
-										var html = '<a href="'+hreflink+'" id="'+newId+'" class="'+value.id+'" >'
-										+ value.id + '</a>';
-										$('#grpLink').append(html);
-										$('#' + value.id+"url")
-												.click(function(event) {
-															event.stopPropagation();
-															if ($('#id_map').hasClass("col-lg-12")) {
-																/* reduice map */
-																$('#id_map').removeClass("col-lg-12");
-																$('#id_map').addClass("col-lg-6");
-
-																$('#smallTile').show();
-																$('.open').addClass("hide");
-																$('.closemap').removeClass("hide");
-
-																map = $("#map").gmap3('get');
-																google.maps.event.trigger(map,'resize');
-																
-																map.setZoom(map.getZoom());
-																var markIndic = $("#map")
-																		.gmap3({
-																					get : {
-																						id : "indicator"
-																					}
-																				});
-																map.setCenter(markIndic.getPosition());
-																map.panToBounds(map.getBounds());
-															}
-														});
-									});
-
-					}
-				
-					
 				
 				}else{
 					
-					/* -----clear marker and directions but not clear the picker------------ */
-					
-					$("#map").gmap3({
-					    get: {
-					     		 name: "marker",
-					     		all:true,
-					     		full:true,
-					     		callback: function(objs){
-					     				var arrayId=[];
-					     			 $.each(objs, function(i, obj){
-					     				if(obj.id!="indicator"){
-					     				
-					     					var markObj = obj;
-					     					arrayId.push(markObj.id);		
-						     			}
-					     	          });
-					     			console.log(arrayId);
-					     			
-					     			$(this).gmap3({
-			     				        clear:{
-			     				          id:arrayId
-			     				        }
-			     				      });
-					     			
-					     		}
-					    },
-					 clear:{
-						 name:["directionsrenderer"]
-					 }	
-					
-					});
-					
-					var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
-					console.log(mapdata);
-					if(mapdata!=null){
-					/*dracula code form links for D/I*/
-					$.each(mapdata,function(index, value) {
-										var baseLink="";
-										if(value.tag=="info"){
-											baseLink= '${infoDetail_url}';
-										}
-										if(value.tag=="danger"){
-											baseLink= '${dangerDetail_url}';
-										}
-										var hreflink = baseLink + "/" + value.id+"?cameFrom=back";
-										var newId = value.id+"url";
-										var html = '<a href="'+hreflink+'" id="'+newId+'" class="'+value.id+'" >'
-												+ value.id + '</a>';
-										$('#grpLink').append(html);
-										$('#' + value.id+"url")
-												.click(function(event) {
-															event.stopPropagation();
-															if ($('#id_map').hasClass("col-lg-12")) {
-																/* reduice map */
-																$('#id_map').removeClass("col-lg-12");
-																$('#id_map').addClass("col-lg-6");
-
-																$('#smallTile').show();
-																$('.open').addClass("hide");
-																$('.closemap').removeClass("hide");
-
-																map = $("#map").gmap3('get');
-																google.maps.event.trigger(map,'resize');
-																
-																map.setZoom(map.getZoom());
-																var markIndic = $("#map")
-																		.gmap3({
-																					get : {
-																						id : "indicator"
-																					}
-																				});
-																map.setCenter(markIndic.getPosition());
-																map.panToBounds(map.getBounds());
-															}
-														});
-									});
-					
-					
-					
-					$("#map").gmap3({
-						
-					    marker:{
-					        values:mapdata,
-					        events:{
-					            
-					            click: function(marker, event, context){
-					  
-					            	document.getElementById(context.id+"url").click();
-					            },
-					          }
-					    }
-					});
-					}
+				
 				}
 			}// no change in the map	
 				
@@ -570,26 +379,6 @@
 			dojo.query(".detail").forEach(function(node, index, arr){
 				var id = dojo.attr(node,"id");
 				console.log(id);
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : id,
-					event : "onclick",
-					params : {
-						fragments : "smallTile"
-					}
-				}));
-
-			});
-
-		});
-	</script>
-	
-	<script type="text/javascript">
-		dojo.addOnLoad(function() {
-			var mapdata = JSON.parse('${beanManagerItineraire.makers}');
-
-			dojo.forEach(mapdata, function(item, i) {
-				var id = item.id+"url";
-
 				Spring.addDecoration(new Spring.AjaxEventDecoration({
 					elementId : id,
 					event : "onclick",
