@@ -60,6 +60,9 @@ public class ForumController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForumMainPage(Model uiModel) {
+		if(!securityUtil.isUserLogged()){
+			
+		}
     		List<Topic> topics = topicService.findAllTopics();
     		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
     		for (Topic topic : topics) {

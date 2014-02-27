@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.roo.addon.layers.service.RooService;
 
 import com.nomade.domain.BeanSubTopicView;
+import com.nomade.domain.Confidentiality;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 
@@ -16,4 +17,7 @@ public interface SubTopicService {
 	public int countMessages(List<SubTopic> subTopics);
 	public Date getLastMessageDate(List<SubTopic> subTopics);
 	public List<BeanSubTopicView>convertSubTopicToBeanSubTopic(List<SubTopic> subTopics);
+    public List<SubTopic> findByConfidentiality(Confidentiality confidentiality);
+    public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality);
+    public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality,int firstResult,int maxResult);
 }

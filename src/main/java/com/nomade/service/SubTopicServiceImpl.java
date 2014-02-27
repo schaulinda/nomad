@@ -6,9 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.nomade.domain.BeanSubTopicView;
+import com.nomade.domain.Confidentiality;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.tools.CollectionUtil;
@@ -79,5 +81,18 @@ public class SubTopicServiceImpl implements SubTopicService {
 			subTopicBeans.add(beanSubTopicView);
 		}
 		return subTopicBeans;
+	}
+
+	@Override
+    public List<SubTopic> findByConfidentiality(Confidentiality confidentiality){
+    	return subTopicRepository.findByConfidentiality(confidentiality);
+    }
+	@Override
+    public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality){
+		return subTopicRepository.findByParentTopicAndConfidentiality(topic, confidentiality);
+	}
+	@Override
+    public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality,int firstResult,int maxResult){
+		return subTopicRepository.findByParentTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult, maxResult));
 	}
 }

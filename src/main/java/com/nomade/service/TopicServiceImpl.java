@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.nomade.domain.Confidentiality;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 
@@ -27,5 +28,10 @@ public class TopicServiceImpl implements TopicService {
 	public Date getLastMessageDate(Topic topic) {
 		List<SubTopic> subTopics = subTopicService.findByParentTopic(topic);
 		return subTopicService.getLastMessageDate(subTopics);
+	}
+
+	@Override
+	public List<Topic> findByConfidentiality(Confidentiality confidentiality) {
+		return topicRepository.findByConfidentiality(confidentiality);
 	}
 }
