@@ -60,10 +60,12 @@ public class ForumController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForumMainPage(Model uiModel) {
+		List<Topic> topics = new ArrayList<Topic>();
 		if(!securityUtil.isUserLogged()){
-			
+			topics = topicService.findByConfidentiality(Confidentiality.Publique);
+		}else {
+			topics = topicService.findAllTopics();
 		}
-    		List<Topic> topics = topicService.findAllTopics();
     		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
     		for (Topic topic : topics) {
     			List<SubTopic> subTopics = subTopicService.findByParentTopic(topic);
@@ -90,6 +92,23 @@ public class ForumController {
 		return "redirect:/forum/";
 	}
 
+	/**
+	 * <p>
+	 * 	<ul>
+	 * 		<li> if pagination is set and user is logged in, no confidentiality on subtopics are applied</li>
+	 * 		<li>if pagination is not setted and user is logged in</li>
+	 * 		<li>if pagination is set and user is not logged in, we find only publics ones</li>
+	 * 		<li>if pagination is not setted and user is not logged in, we find only publics subtopics</li>
+	 *  </ul>
+	 * </p>
+	 * @param topicId
+	 * @param page
+	 * @param size
+	 * @param sortFieldName
+	 * @param sortOrder
+	 * @param uiModel
+	 * @return
+	 */
 	@RequestMapping(value = "/topics/{id}", method = RequestMethod.GET)
 	public String showTopicView(@PathVariable("id") BigInteger topicId,
 			@RequestParam(value = "page", required = false) Integer page,
@@ -98,19 +117,32 @@ public class ForumController {
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
 			Model uiModel) {
 		Topic topic = topicService.findTopic(topicId);
-
 		if (topic == null) {
 			return "redirect:" + FORUM_TOPICS;
 		}
 		List<SubTopic> subTopics =  null;
-		if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-    		subTopics = subTopicService.findByParentTopic(topic,firstResult,sizeNo);
-    		float nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+		boolean paginationIsSet = page != null || size != null;
+		//declare local params
+		int sizeNo = 0;
+		int firstResult = 0;
+		float nrOfPages = 0;
+		//init local params if pagination is set
+		if(paginationIsSet){
+			sizeNo = size == null ? 10 : size.intValue();
+            firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+     		nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+		}
+		
+		if (paginationIsSet && securityUtil.isUserLogged()) {
+			subTopics = subTopicService.findByParentTopic(topic,firstResult,sizeNo);
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else {
+		}else if(paginationIsSet && !securityUtil.isUserLogged()){
+    		subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique, firstResult, sizeNo);
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+		}else if(!paginationIsSet && securityUtil.isUserLogged()){
     		subTopics = subTopicService.findByParentTopic(topic);
+		}else if(!paginationIsSet && !securityUtil.isUserLogged()){
+    		subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique);
 		}
 		List<BeanSubTopicView> subTopicToBeanSubTopic = subTopicService
 				.convertSubTopicToBeanSubTopic(subTopics);
@@ -169,6 +201,14 @@ public class ForumController {
 		return "redirect:/topics";
 	}
 
+
+	@RequestMapping(value = "/topics/{topicId}/", method = RequestMethod.GET)
+	public String showUpdateTopicForm(@PathVariable("topicId") BigInteger topicId, Model uiModel,HttpServletRequest httpServletRequest){
+		Topic topic = topicService.findTopic(topicId);
+		uiModel.addAttribute("topic", topic);
+		populateModel(uiModel);
+		return "public/topics/update";
+	}
 	/* subtopics */
 	@RequestMapping(value = "/subtopics")
 	public String showSubTopics(
@@ -192,15 +232,29 @@ public class ForumController {
 		if (subTopic == null) {
 			return "redirect:" + FORUM_SUBTOPICS;
 		}
-		if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-    		List<Discussion> discussions = discussionService.findBySubTopic(subTopic,firstResult,sizeNo);    	
-    		float nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+		//declare local params
+		int sizeNo = 0;
+		int firstResult = 0;
+		float nrOfPages = 0;
+		boolean paginationIsSet = page != null || size != null;
+		if(paginationIsSet){
+			sizeNo = size == null ? 10 : size.intValue();
+            firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+    		nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+		}
+		if (paginationIsSet && securityUtil.isUserLogged()) {
+    		List<Discussion> discussions = discussionService.findBySubTopic(subTopic,firstResult,sizeNo);
     		uiModel.addAttribute("discussions", discussions);
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else {
-			List<Discussion> discussions = discussionService.findBySubTopic(subTopic);    	
+		}else if(paginationIsSet && !securityUtil.isUserLogged()){
+    		List<Discussion> discussions = discussionService.findBySubTopicAndConfidentiality(subTopic, Confidentiality.Publique, firstResult, sizeNo);
+    		uiModel.addAttribute("discussions", discussions);
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+		}else if(!paginationIsSet && securityUtil.isUserLogged()){
+			List<Discussion> discussions = discussionService.findBySubTopic(subTopic);
+    		uiModel.addAttribute("discussions", discussions);
+		}else if(!paginationIsSet && !securityUtil.isUserLogged()){
+			List<Discussion> discussions = discussionService.findBySubTopicAndConfidentiality(subTopic, Confidentiality.Publique);    	
     		uiModel.addAttribute("discussions", discussions);
 		}
 		int numberOfDiscussions = discussionService.countDiscussion(subTopic);
@@ -272,6 +326,13 @@ public class ForumController {
 		return "redirect:" + FORUM_SUBTOPICS;
 	}
 
+	@RequestMapping(value = "/subtopics/{subTopicId}/", method = RequestMethod.GET)
+	public String showUpdateSubTopicForm(@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,HttpServletRequest httpServletRequest){
+		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
+		uiModel.addAttribute("subTopic", subTopic);
+		populateModel(uiModel);
+		return "public/subtopics/update";
+	}
 	/* Discussions */
 	@RequestMapping(value = "/discussions", method = RequestMethod.GET)
 	public String showDiscussions(
@@ -337,7 +398,13 @@ public class ForumController {
 				+ encodeUrlPathSegment(discussion.getId().toString(),
 						httpServletRequest);
 	}
-
+	@RequestMapping(value = "/discussions/{discussionId}/", method = RequestMethod.GET)
+	public String showUpdateDiscussionForm(@PathVariable("discussionId") BigInteger discussionId, Model uiModel,HttpServletRequest httpServletRequest){
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		uiModel.addAttribute("discussion", discussion);
+		populateModel(uiModel);
+		return "public/discussion/update";
+	}
 	@RequestMapping(value = "/subtopics/{subTopicId}/discussions", method = RequestMethod.PUT)
 	public String updateDiscussion(@Valid Discussion discussion,
 			@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,
@@ -459,6 +526,6 @@ public class ForumController {
 
 	public void populateModel(Model uiModel) {
 		uiModel.addAttribute("confidentialities",
-				Arrays.asList(Confidentiality.values()));
+				Arrays.asList(Confidentiality.Publique,Confidentiality.NomadesOnly));
 	}
 }
