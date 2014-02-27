@@ -318,7 +318,7 @@
 								$('.add_field').click(function(){
 									
 									decoration();
-									$('.datepicker').datepicker();
+									$('.datepicker').datepicker({ maxDate: new Date() });
 									
 									/*put date on datepicker  */
 									
@@ -357,11 +357,6 @@
 								
 								
 								/* -----clear marker and directions but not clear the picker------------ */
-								var lineSymbol = {
-										path: 'M 0,-1 0,1',
-										strokeOpacity: 1,
-									    scale: 4
-							    };
 								
 								$("#map").gmap3({
 								    get: {
@@ -393,6 +388,12 @@
 								});
 								
 								/*---------------- draw parcours -------------------*/
+								var lineSymbol = {
+										path: 'M 0,-1 0,1',
+										strokeOpacity: 1,
+									    scale: 4
+							    };
+								
 								if(arrayParcours!=""){
 								$("#map").gmap3({
 									
@@ -414,7 +415,7 @@
 										  } 
 									
 								});
-							}
+							
 						/*----------------- make a bound for map fit this bound ----------------------------------*/
 								
 								var bounds = new google.maps.LatLngBounds();
@@ -425,7 +426,7 @@
 								var map = $("#map").gmap3('get');
 								map.fitBounds(bounds);
 								map.setZoom(3);
-
+							}
 								/* ----------------------------noty for save etape------------------------------------- */
 
 								var save = '${beanNoteBookManager.notify}';
@@ -457,7 +458,7 @@
 									}, 1000);
 								}
 							
-								$('.datepicker').datepicker();
+								$('.datepicker').datepicker({ maxDate: new Date()});
 
 								/* --------------------------on load recup session voy---------------------------- */
 								if ($.session.get('location') != null

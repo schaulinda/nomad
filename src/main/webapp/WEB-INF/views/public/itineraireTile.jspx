@@ -75,10 +75,12 @@
 				${hPracticalOnTrip}
 			</h3>
 		</div>
-		<c:forEach var="info" items="${beanManagerItineraire.infoPratiques}">
+		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
+		<spring:url value="/resources/img/mapicon" var="iconmap_url"></spring:url>
+		<c:forEach var="info" items="${beanManagerItineraire.infoPratiques}"  >
 			<div class="row panel">
 				<div class="col-lg-2">
-					<p>Icône</p>
+					<img src="${iconmap_url}/${info.icon}"  alt="icon"/>
 				</div>
 				<div class="col-lg-7" style="border-left: solid 1px;">
 					<p>${info.title}</p>
@@ -107,7 +109,7 @@
 								<c:if test="${empty info.comments}">
 									0
 								</c:if>
-						</span> |<a id="${info.id}" class="detailsInfo" >details</a>
+						</span> |<a id="${info.id}dt" class="detailsInfo detail" href="${infoDetail_url}/${info.id}" >details</a>
 				</div>
 			</div>
 		</c:forEach>
@@ -121,12 +123,12 @@
 				${hDangerOnTrip}
 			</h3>
 		</div>
-
+		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
 		<c:forEach var="danger"
 			items="${beanManagerItineraire.dangerPratiques}">
 			<div class="row panel">
 				<div class="col-lg-2">
-					<p>Icône</p>
+					<img src="${iconmap_url}/${danger.icon}"  alt="icon"/>
 				</div>
 				<div class="col-lg-7" style="border-left: solid 1px;">
 					<p>${danger.title}</p>
@@ -153,13 +155,13 @@
 								<c:if test="${empty info.comments}">
 									0
 					</c:if>
-				</span> | <a id="${danger.id}"
-				 class="detailsDanger" >details</a>
+				</span> | <a id="${danger.id}dt"
+				 class="detailsDanger detail" href="${dangerDetail_url}/${danger.id}" >details</a>
 			</div>
 		</c:forEach>
 		
 	</div>
-	
+		
 		<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
 		<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
 
@@ -169,25 +171,6 @@
 		<spring:url value="/infopratiques/detail/" var="detailsInfo_url"></spring:url>
 		<spring:url value="/dangerpratiques/detail/" var="detailsDanger_url"></spring:url>
 	
-	<div class="modal fade" id="myModal" aria-hidden="true" role="dialog" tabindex="-1" style="display: none;" >
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">x</button>
-					<h4 class="modal-title">Detail</h4>
-				</div>
-				<div class="modal-body"><!--co  --></div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
-
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
@@ -269,12 +252,13 @@
 				 	
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
-				if(bol!=""){
+				if(bol!='back'){
+				if(bol=="true"){
 					$('#direction').html("");
 					$('#panelDirection').removeClass("hide");
 				/* the map data ----------------------------- */	
 				console.log('${beanManagerItineraire.makers}');
-				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//to something if mapdata is null 
+				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//do something if mapdata is null 
 				/* --------------agrandir la map------------- */
 								$('#smallTile').hide();
 								$('#id_map').removeClass("col-lg-6");
@@ -288,47 +272,11 @@
 								map.setCenter(map.getCenter());
 								map.panToBounds(map.getBounds());
 				
-				/* -----clear marker and directions but not clear the picker------------ */
-				
-					$("#map").gmap3({
-					    get: {
-					     		 name: "marker",
-					     		all:true,
-					     		full:true,
-					     		callback: function(objs){
-					     				var arrayId=[];
-					     			 $.each(objs, function(i, obj){
-					     				if(obj.id!="indicator"){
-					     				
-					     					var markObj = obj;
-					     					arrayId.push(markObj.id);		
-						     			}
-					     	          });
-					     			console.log(arrayId);
-					     			
-					     			$(this).gmap3({
-			     				        clear:{
-			     				          id:arrayId
-			     				        }
-			     				      });
-					     			
-					     		}
-					    },
-					 clear:{
-						 name:["directionsrenderer"]
-					 }	
 					
-					});
-							
 				/*------------------ render direction ----------------------------*/	
 				
 					$("#map").gmap3({
-						
-						    marker:{
-						        values:mapdata,
-						        bounds:true
-						    },
-						      
+					
 						 getroute:{
 							    options:{
 							        origin:'${beanManagerItineraire.start}',
@@ -351,108 +299,14 @@
 				
 					});
 				
-					
+
 				
 				}else{
 					
-					/* -----clear marker and directions but not clear the picker------------ */
-					
-					$("#map").gmap3({
-					    get: {
-					     		 name: "marker",
-					     		all:true,
-					     		full:true,
-					     		callback: function(objs){
-					     				var arrayId=[];
-					     			 $.each(objs, function(i, obj){
-					     				if(obj.id!="indicator"){
-					     				
-					     					var markObj = obj;
-					     					arrayId.push(markObj.id);		
-						     			}
-					     	          });
-					     			console.log(arrayId);
-					     			
-					     			$(this).gmap3({
-			     				        clear:{
-			     				          id:arrayId
-			     				        }
-			     				      });
-					     			
-					     		}
-					    },
-					 clear:{
-						 name:["directionsrenderer"]
-					 }	
-					
-					});
-					
-					var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
-					console.log(mapdata);
-					if(mapdata!=null){
-					$("#map").gmap3({
-						
-					    marker:{
-					        values:mapdata,
-					        events:{
-					            mouseover: function(marker, event, context){
-					              var map = $(this).gmap3("get"),
-					                infowindow = $(this).gmap3({get:{name:"infowindow"}});
-					              if (infowindow){
-					                infowindow.open(map, marker);
-					            
-					                infowindow.setContent(context.data);
-					              } else {
-					                $(this).gmap3({
-					                  infowindow:{
-					                    anchor:marker, 
-					                    options:{content: context.data}
-					                  }
-					                });
-					              }
-					            },
-					          }
-					    }
-					});
-					}
-				}
-					
-				/* --------------------enable modal on click detail for each info------------- */
-				$('.detailsInfo').each(function() {
-
-					$(this).click(function() {
-						var idInfo = this.id;
-						
-						$('#myModal').modal({
-							remote : '${detailsInfo_url}' +idInfo,
-							show : true,
-							backdrop : false
-						});
-					});
-				});
-				$('#myModal').on('hidden.bs.modal', function () {
-						
-						$(this).removeData('bs.modal');
-					});
 				
-				/* --------------------enable modal on click detail for each danger------------- */
-				$('.detailsDanger').each(function() {
-
-					$(this).click(function() {
-						var idInfo = this.id;
-						
-						$('#myModal').modal({
-							remote : '${detailsDanger_url}' +idInfo,
-							show : true,
-							backdrop : false
-						});
-					});
-				});
-				$('#myModal').on('hidden.bs.modal', function () {
-						
-						$(this).removeData('bs.modal');
-					});
-
+				}
+			}// no change in the map	
+				
 				/* ----------------------vote positif info--------------------------- */
 				$('.voteplus').each(function() {
 
@@ -516,6 +370,26 @@
 				});
 			});
 		})(jQuery);
+	</script>
+	
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			
+
+			dojo.query(".detail").forEach(function(node, index, arr){
+				var id = dojo.attr(node,"id");
+				console.log(id);
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "smallTile"
+					}
+				}));
+
+			});
+
+		});
 	</script>
 
 </div>

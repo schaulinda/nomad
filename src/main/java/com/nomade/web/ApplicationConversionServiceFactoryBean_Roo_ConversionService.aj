@@ -132,7 +132,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<DangerPratique, String> ApplicationConversionServiceFactoryBean.getDangerPratiqueToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.DangerPratique, java.lang.String>() {
             public String convert(DangerPratique dangerPratique) {
-                return new StringBuilder().append(dangerPratique.getTitle()).append(' ').append(dangerPratique.getSelecteur()).append(' ').append(dangerPratique.getSelecteur1()).append(' ').append(dangerPratique.getLocation()).toString();
+                return new StringBuilder().append(dangerPratique.getIcon()).append(' ').append(dangerPratique.getTitle()).append(' ').append(dangerPratique.getSelecteur()).append(' ').append(dangerPratique.getSelecteur1()).toString();
             }
         };
     }
@@ -204,7 +204,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<InfoPratique, String> ApplicationConversionServiceFactoryBean.getInfoPratiqueToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.InfoPratique, java.lang.String>() {
             public String convert(InfoPratique infoPratique) {
-                return new StringBuilder().append(infoPratique.getTitle()).append(' ').append(infoPratique.getSelecteur()).append(' ').append(infoPratique.getSelecteur1()).append(' ').append(infoPratique.getLocation()).toString();
+                return new StringBuilder().append(infoPratique.getIcon()).append(' ').append(infoPratique.getTitle()).append(' ').append(infoPratique.getSelecteur()).append(' ').append(infoPratique.getSelecteur1()).toString();
             }
         };
     }

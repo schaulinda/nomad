@@ -11,13 +11,14 @@
         <field:input field="locationLng" id="c_com_nomade_domain_InfoPratique_locationLng" z="zL8ZgHM8VPi6gGiDBrVxgdgG/YI="/>
         <field:input field="geoLocation" id="c_com_nomade_domain_InfoPratique_geoLocation" z="qNzIMXucfCZCpF7TOb4f7iECQjA="/>
         <field:input field="photo" id="c_com_nomade_domain_InfoPratique_photo" z="sA8m1neKqeH3QwwVz8qrDHlDSrw="/>
-        <field:input field="dure" id="c_com_nomade_domain_InfoPratique_dure" z="xMeK3ddF5ksKhZ1f5s7YWa7I6SI="/>
+        <field:select field="dure" id="c_com_nomade_domain_InfoPratique_dure" items="${typetimes}" path="typetimes" z="136Ky07sod9mMG7klm8BOuUD7WQ="/>
         <field:checkbox field="infoVerif" id="c_com_nomade_domain_InfoPratique_infoVerif" z="QEWzqe7GYvNIzk33a8fU9G4nrNk="/>
-        <field:input field="estimationValidite" id="c_com_nomade_domain_InfoPratique_estimationValidite" z="PJ3DbFqInCc5tTiw4GSKrjQLbaE="/>
+        <field:select field="estimationValidite" id="c_com_nomade_domain_InfoPratique_estimationValidite" items="${typetimes}" path="typetimes" z="XwqIrf9ZxyfSYtKmNQOVkxp41bE="/>
         <field:input field="comment" id="c_com_nomade_domain_InfoPratique_comment" z="cEn6faVDXS2O/ggr7SwqB1ZcV7Q="/>
         <field:input field="votePositif" id="c_com_nomade_domain_InfoPratique_votePositif" z="I7r12kQ6kGMu0hGpz5/Mv5RURfU="/>
         <field:input field="voteNegatif" id="c_com_nomade_domain_InfoPratique_voteNegatif" z="8MaWTN8CkWYRXTHQYpHhJlEm7aY="/>
         <field:input field="nomade" id="c_com_nomade_domain_InfoPratique_nomade" z="LqGjsNqIq5R4B6fcRfhgA19S/DE="/>
         <field:input field="comments" id="c_com_nomade_domain_InfoPratique_comments" z="qz0nC8tRJwtWC8wRAByp8kevT2o="/>
+        <field:input field="icon" id="c_com_nomade_domain_InfoPratique_icon" z="fb01Lqi1l4czvfSl3lDFzCxfcZQ="/>
     </form:update>
 </div>

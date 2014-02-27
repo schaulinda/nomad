@@ -39,17 +39,19 @@ public class InfoPratique {
 	
 	private String photo;
 	
-	private int dure;
+	private TypeTime dure;
 	
 	private boolean infoVerif;
 	
-	private int estimationValidite;
+	private TypeTime estimationValidite;
 	
 	private String comment;
 	
 	private int votePositif;
 	
 	private int voteNegatif;
+	
+	private String icon;
 	
 	 @OrderBy(value = "created", order=Order.DESCENDING)
 	    private List<Comment> comments = new ArrayList<Comment>();
@@ -70,6 +72,14 @@ public class InfoPratique {
 	public void incrementVoteNegatif(){
 		
 		this.voteNegatif=this.voteNegatif+1;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 }

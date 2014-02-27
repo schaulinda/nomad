@@ -24,6 +24,18 @@ import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 
+import com.nomade.service.ParcoursService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 @RequestMapping("/dangerpratiques")
 @Controller
 @RooWebScaffold(path = "dangerpratiques", formBackingObject = DangerPratique.class)
@@ -65,11 +77,80 @@ public class DangerPratiqueController {
     	double[] location = new double[]{dangerPratique.getLocationLng(), dangerPratique.getLocationLat()};
     	dangerPratique.setGeoLocation(location);
     	dangerPratique.setNomade(userNomade);
+    	dangerPratique.setIcon(dangerDecoration(dangerPratique.getSelecteur1()));
     	dangerPratiqueService.saveDangerPratique(dangerPratique);
     	beanHistoriqueDecoration(uiModel,userNomade);
     	uiModel.addAttribute("dangerPratique", new DangerPratique());
     	uiModel.addAttribute("saveInfoDanger", "saveInfoDanger");
     	return "public/danger";
+    }
+    
+    public String dangerDecoration(String typeInfo){
+    	
+    	String linkIcon = "danger";
+    	
+    	if(typeInfo.equals("impraticable")){
+			linkIcon = linkIcon+"/impraticable.png";
+		}
+		if(typeInfo.equals("chausse")){
+			linkIcon = linkIcon+"/chausse.png";
+		}
+		if(typeInfo.equals("piste")){
+			linkIcon = linkIcon+"/piste.png";
+		}
+		if(typeInfo.equals("bande")){
+			linkIcon = linkIcon+"/bande.png";
+		}
+		if(typeInfo.equals("boue")){
+			linkIcon = linkIcon+"/boue.png";
+		}
+		if(typeInfo.equals("route")){
+			linkIcon = linkIcon+"/route.png";
+		}
+		if(typeInfo.equals("denivelation")){
+			linkIcon = linkIcon+"/denivelation.png";
+		}
+		if(typeInfo.equals("effondrement")){
+			linkIcon = linkIcon+"/effondrement.png";
+		}
+		if(typeInfo.equals("inondations")){
+			linkIcon = linkIcon+"/inondations.png";
+		}
+		if(typeInfo.equals("poids")){
+			linkIcon = linkIcon+"/poids.png";
+		}
+		if(typeInfo.equals("hauteur")){
+			linkIcon = linkIcon+"/hauteur.png";
+		}
+		if(typeInfo.equals("travaux")){
+			linkIcon = linkIcon+"/travaux.png";
+		}
+		if(typeInfo.equals("douane")){
+			linkIcon = linkIcon+"/douane.png";
+		}
+		if(typeInfo.equals("information")){
+			linkIcon = linkIcon+"/information.png";
+		}
+		if(typeInfo.equals("immigration")){
+			linkIcon = linkIcon+"/immigration.png";
+		}
+		if(typeInfo.equals("barrage")){
+			linkIcon = linkIcon+"/barrage.png";
+		}
+		if(typeInfo.equals("greve")){
+			linkIcon = linkIcon+"/greve.png";
+		}
+		if(typeInfo.equals("agressions")){
+			linkIcon = linkIcon+"/agressions.png";
+		}
+		if(typeInfo.equals("agressionMain")){
+			linkIcon = linkIcon+"/agressionMain.png";
+		}
+		if(typeInfo.equals("escroquerie")){
+			linkIcon = linkIcon+"/escroquerie.png";
+		}
+    	
+    	return linkIcon;
     }
     
     @RequestMapping(value = "votePlus/{idInfo}")
@@ -94,8 +175,14 @@ public class DangerPratiqueController {
        }
     
     @RequestMapping(value = "detail/{idInfo}")
-   	public String detail(@PathVariable("idInfo") String idInfo, Model uiModel) {
+   	public String detail(@PathVariable("idInfo") String idInfo, @RequestParam(value="cameFrom", required=false)String cameFrom, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
+       	
+       	if("map".equals(cameFrom)){
+       		uiModel.addAttribute("back", "itineraire");
+       	}else{
+       		uiModel.addAttribute("back", "formfinditineraire");
+       	}
     
        	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
        	uiModel.addAttribute("dangerPratique", dangerPratique);

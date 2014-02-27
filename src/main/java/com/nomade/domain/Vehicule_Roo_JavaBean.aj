@@ -31,16 +31,8 @@ privileged aspect Vehicule_Roo_JavaBean {
         return this.vehiculeType;
     }
     
-    public void Vehicule.setVehiculeType(VehiculeType vehiculeType) {
-        this.vehiculeType = vehiculeType;
-    }
-    
     public VehiculeState Vehicule.getVehiculeState() {
         return this.vehiculeState;
-    }
-    
-    public void Vehicule.setVehiculeState(VehiculeState vehiculeState) {
-        this.vehiculeState = vehiculeState;
     }
     
     public String Vehicule.getModel() {
@@ -81,6 +73,14 @@ privileged aspect Vehicule_Roo_JavaBean {
     
     public void Vehicule.setDescription(String description) {
         this.description = description;
+    }
+    
+    public String Vehicule.getIcon() {
+        return this.icon;
+    }
+    
+    public void Vehicule.setIcon(String icon) {
+        this.icon = icon;
     }
     
 }

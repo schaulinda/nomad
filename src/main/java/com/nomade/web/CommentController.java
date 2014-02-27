@@ -113,6 +113,48 @@ public class CommentController {
 		return "public/nomad";
 	}
 	
+	//add comment on detail info
+	@RequestMapping("/addCommentInfo")
+	public String addCommentInfo(@RequestParam("InfoId")String etapeId,  
+			@RequestParam("commentaireInfo")String commentaire, HttpServletRequest request, Model uiModel) {
+		
+		InfoPratique info = infoPratiqueService.findInfoPratique(new BigInteger(etapeId));
+		UserNomade nomade = info.getNomade();
+		
+		Comment comment = new Comment();
+		comment.setCommentaire(commentaire);
+		comment.setNomade(security.getUserNomade());
+		
+		info.getComments().add(comment);
+		infoPratiqueService.updateInfoPratique(info);
+		
+		InfoPratique infoPratique = infoPratiqueService.findInfoPratique(info.getId());
+       	uiModel.addAttribute("infoPratique", infoPratique);
+       	uiModel.addAttribute("nomade", nomade);
+		return "public/infoDetail";
+	}
+	
+	//add comment on detail danger
+	@RequestMapping("/addCommentDanger")
+	public String addCommentDanger(@RequestParam("InfoId")String etapeId,  
+			@RequestParam("commentaireInfo")String commentaire, HttpServletRequest request, Model uiModel) {
+		
+		DangerPratique danger = dangerPratiqueService.findDangerPratique(new BigInteger(etapeId));
+		UserNomade nomade = danger.getNomade();
+		
+		Comment comment = new Comment();
+		comment.setCommentaire(commentaire);
+		comment.setNomade(security.getUserNomade());
+		
+		danger.getComments().add(comment);
+		dangerPratiqueService.updateDangerPratique(danger);
+		
+		DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(danger.getId());
+       	uiModel.addAttribute("dangerPratique", dangerPratique);
+       	uiModel.addAttribute("nomade", nomade);
+		return "public/dangerDetail";
+	}
+	
 	@RequestMapping("/addDanger")
 	public String addInfo(@RequestParam("dangerId")String etapeId, 
 			@RequestParam("pageDanger")int page, 

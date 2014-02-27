@@ -244,10 +244,7 @@
 								var mapdata = jQuery
 										.parseJSON('${beanNomadeManager.makers}');
 								/*dracula code form links for nomad*/
-								$
-										.each(
-												mapdata,
-												function(index, value) {
+								$.each(mapdata,function(index, value) {
 													var hreflink = '${nomad_url}'
 															+ "/" + value.id;
 													var html = '<a href="'+hreflink+'" id="'+value.id+'" class="'+value.id+'" >'

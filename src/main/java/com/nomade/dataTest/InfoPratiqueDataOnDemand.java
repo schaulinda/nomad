@@ -38,8 +38,8 @@ public class InfoPratiqueDataOnDemand {
         InfoPratique obj = new InfoPratique();
         setComment(obj, index);
         setCreated(obj, index);
-        setDure(obj, index);
-        setEstimationValidite(obj, index);
+        /*setDure(obj, index);
+        setEstimationValidite(obj, index);*/
         setGeoLocation(obj, index);
         setInfoVerif(obj, index);
         setLocation(obj, index);
@@ -65,15 +65,15 @@ public class InfoPratiqueDataOnDemand {
         obj.setCreated(created);
     }
 
-	public void setDure(InfoPratique obj, int index) {
-        int dure = index;
+	/*public void setDure(InfoPratique obj, int index) {
+		TypeTime dure = index;
         obj.setDure(dure);
     }
 
 	public void setEstimationValidite(InfoPratique obj, int index) {
         int estimationValidite = index;
         obj.setEstimationValidite(estimationValidite);
-    }
+    }*/
 
 	public void setGeoLocation(InfoPratique obj, int index) {
         double[] geoLocation = { new Integer(index+10).doubleValue()+48.890681, new Integer(index+2).doubleValue()+2.335911 };

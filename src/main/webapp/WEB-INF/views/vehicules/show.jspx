@@ -12,5 +12,6 @@
         <field:display field="forSellCountry" id="s_com_nomade_domain_Vehicule_forSellCountry" object="${vehicule}" z="1CErRqNclWMKuuW8EhAnwDNrrtw="/>
         <field:display date="true" dateTimePattern="${vehicule_annemiseenservice_date_format}" field="anneMiseEnService" id="s_com_nomade_domain_Vehicule_anneMiseEnService" object="${vehicule}" z="BfBcn2GqeMWAFSRs9a5DM79B2XE="/>
         <field:display field="description" id="s_com_nomade_domain_Vehicule_description" object="${vehicule}" z="ETwbPcGYJgB5FAMwClXxyMYEzZs="/>
+        <field:display field="icon" id="s_com_nomade_domain_Vehicule_icon" object="${vehicule}" z="gbAZPuzsVVntTgEImfKtQvkspYk="/>
     </page:show>
 </div>

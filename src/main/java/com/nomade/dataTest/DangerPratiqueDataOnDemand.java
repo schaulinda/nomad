@@ -67,12 +67,12 @@ public class DangerPratiqueDataOnDemand {
 
 	public void setDure(DangerPratique obj, int index) {
         int dure = index;
-        obj.setDure(dure);
+        //obj.setDure(dure);
     }
 
 	public void setEstimationValidite(DangerPratique obj, int index) {
         int estimationValidite = index;
-        obj.setEstimationValidite(estimationValidite);
+       // obj.setEstimationValidite(estimationValidite);
     }
 
 	public void setGeoLocation(DangerPratique obj, int index) {

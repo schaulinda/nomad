@@ -19,5 +19,6 @@
         <field:display field="voteNegatif" id="s_com_nomade_domain_InfoPratique_voteNegatif" object="${infopratique}" z="qv7/WnMztgTXVmBCsgxFbj/Pl34="/>
         <field:display field="nomade" id="s_com_nomade_domain_InfoPratique_nomade" object="${infopratique}" z="XXC7/DDKUch8SOtybhxLsWrjNzE="/>
         <field:display field="comments" id="s_com_nomade_domain_InfoPratique_comments" object="${infopratique}" z="r8KFikUL40n5omlDZmlWh+lVpRc="/>
+        <field:display field="icon" id="s_com_nomade_domain_InfoPratique_icon" object="${infopratique}" z="ghCRP2qi9geezLEb7pKFP8HbMXk="/>
     </page:show>
 </div>

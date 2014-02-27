@@ -14,6 +14,9 @@
 		<spring:url value="/users/updateVehState" var="updateVehState"></spring:url>
 		<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 		
+		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
+		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
+		
    <div class="row">
       <div class="container">
 		<div class="col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-12 col-xs-12 user" >
@@ -65,29 +68,105 @@
 		</div>
 		<div class="col-lg-3 col-md-3 col-sm-10  col-xs-10">
 		   <div class="row">
+		   <spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 		      <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-						<select class="pull-right form-control" >
-							<option>
-								<spring:message code="option.withoutvehicle" />
-							</option>							<option>
-								<spring:message code="option.lookingForBuy" />
+						<select id="vehiculeState" class="pull-right form-control" >
+							<spring:message code="option.withoutvehicle" var="withoutvehicle" />
+							<spring:message code="option.lookingForBuy" var="lookingForBuy" />
+							<spring:message code="option.lookingForSale" var="lookingForSale" />
+							<spring:message code="option.onTheRoad" var="onTheRoad" />
+							<spring:message code="option.stopOver" var="stopOver" />
+							<spring:message code="option.inRepair" var="inRepair" />
+							<spring:message code="option.backToHome" var="backToHome" />
+							
+							
+							<c:if test="${nomade.vehicule.vehiculeState == 'withoutvehicle'}">
+							<option value="withoutvehicle" data-description="${withoutvehicle}" selected="selected" data-imagesrc="${iconstatut_url}/withoutvehicle.png">
+								${withoutvehicle}
 							</option>
-							<option>
-								<spring:message code="option.lookingForSale" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'lookingForBuy'}">
+														
+							<option value="lookingForBuy" data-description="${lookingForBuy}" selected="selected" data-imagesrc="${iconstatut_url}/lookingForBuy.png" >
+								${lookingForBuy}
 							</option>
-							<option>
-								<spring:message code="option.onTheRoad" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'lookingForSale'}">
+							
+							<option value="lookingForSale" data-description="${lookingForSale}" selected="selected" data-imagesrc="${iconstatut_url}/lookingForSale.png" >
+								${lookingForSale}
 							</option>
-							<option>
-								<spring:message code="option.stopOver" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'onTheRoad'}">
+							
+							<option  value="onTheRoad" data-description="${onTheRoad}" selected="selected" data-imagesrc="${iconstatut_url}/onTheRoad.png">
+								${onTheRoad}
 							</option>
-							<option>
-								<spring:message code="option.inRepair" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'stopOver'}">
+							
+							<option value="stopOver" data-description="${stopOver}" selected="selected" data-imagesrc="${iconstatut_url}/stopOver.png" >
+								${stopOver}
 							</option>
-							<option>
-								<spring:message code="option.backToHome" />
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'inRepair'}">
+							
+							<option value="inRepair" data-description="${inRepair}" selected="selected" data-imagesrc="${iconstatut_url}/inRepair.png" >
+								${inRepair }
 							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState == 'backToHome'}">
+							
+							<option value="backToHome" data-description="${backToHome}" selected="selected" data-imagesrc="${iconstatut_url}/backToHome.png" >
+								${backToHome}
+							</option>
+							</c:if>
+							
+							
+							<c:if test="${nomade.vehicule.vehiculeState != 'withoutvehicle'}">
+							<option value="withoutvehicle" data-description="${withoutvehicle}" data-imagesrc="${iconstatut_url}/withoutvehicle.png">
+								${withoutvehicle}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'lookingForBuy'}">
+														
+							<option value="lookingForBuy" data-description="${lookingForBuy}" data-imagesrc="${iconstatut_url}/lookingForBuy.png" >
+								${lookingForBuy}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'lookingForSale'}">
+							
+							<option value="lookingForSale" data-description="${lookingForSale}" data-imagesrc="${iconstatut_url}/lookingForSale.png" >
+								${lookingForSale}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'onTheRoad'}">
+							
+							<option  value="onTheRoad" data-description="${onTheRoad}" data-imagesrc="${iconstatut_url}/onTheRoad.png">
+								${onTheRoad}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'stopOver'}">
+							
+							<option value="stopOver" data-description="${stopOver}" data-imagesrc="${iconstatut_url}/stopOver.png" >
+								${stopOver}
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'inRepair'}">
+							
+							<option value="inRepair" data-description="${inRepair}" data-imagesrc="${iconstatut_url}/inRepair.png" >
+								${inRepair }
+							</option>
+							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'backToHome'}">
+							
+							<option value="backToHome" data-description="${backToHome}" data-imagesrc="${iconstatut_url}/backToHome.png" >
+								${backToHome}
+							</option>
+							</c:if>
+							
 						</select>
+						<a id="link_statutVeh" href="${updateVehState}" style="display: none;" ><!--co  --></a>
 					</div>
 					<div class="col-lg-1 col-md-1 col-sm-6 col-xs-6 pull-right">
 					<sec:authorize access="isAuthenticated()" >
@@ -97,7 +176,7 @@
 									class="img-rounded defaultvehicleimg" />
 							</c:when>
 							<c:otherwise>
-								<img alt="user"
+								<img alt="user" id="iconveh"
 									src="${imageRender_url}/${nomade.vehicule.photo}"
 									class="img-rounded userVehicleImg" />
 							</c:otherwise>
@@ -108,6 +187,10 @@
 		   </div>
 		</div>
 		</div>
+		</div>
+		<!-- no touch -->
+		<div class="hide" id="grpLink">
+		<!--link for D/I  -->
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -132,8 +215,136 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 		(function($) {
+			
 			$(document).ready(function() {
+				
+				
 
+				/* ddslick for vehiculeState */
+				$('#vehiculeState').ddslick({
+				    width:230,
+				    selectText: "Statut vehicule",
+				    imagePosition:"right",
+				    onSelected: function(selectedData){
+				    	
+				    	$('#vehiculeState .dd-selected-value').each(function(){
+				    		
+				    		var val = $(this).val();
+				    		
+				    		$.get("${updateVehState}/"+val,
+				    				{
+
+							}, function(data, status) {
+
+								console.log(data);
+								
+
+							});
+				    	});
+				    	
+				       
+				    }   
+				});
+				
+				/* ---------render marker D/I when click on itineraire */
+			if('${itineraireOnglet}'=="active")	{
+				
+				/* -----clear marker and directions but not clear the picker------------ */
+				$("#map").gmap3({
+				    get: {
+				     		 name: "marker",
+				     		all:true,
+				     		full:true,
+				     		callback: function(objs){
+				     				var arrayId=[];
+				     			 $.each(objs, function(i, obj){
+				     				if(obj.id!="indicator"){
+				     				
+				     					var markObj = obj;
+				     					arrayId.push(markObj.id);		
+					     			}
+				     	          });
+				     			console.log(arrayId);
+				     			
+				     			$(this).gmap3({
+		     				        clear:{
+		     				          id:arrayId
+		     				        }
+		     				      });
+				     			
+				     		}
+				    },
+				 clear:{
+					 name:["directionsrenderer"]
+				 }	
+				
+				});
+				
+				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
+				console.log(mapdata);
+				if(mapdata!=null){
+				/*dracula code form links for D/I*/
+				$.each(mapdata,function(index, value) {
+									var baseLink="";
+									if(value.tag=="info"){
+										baseLink= '${infoDetail_url}';
+									}
+									if(value.tag=="danger"){
+										baseLink= '${dangerDetail_url}';
+									}
+									var hreflink = baseLink + "/" + value.id+"?cameFrom=map";
+									var newId = value.id+"url";
+									var html = '<a href="'+hreflink+'" id="'+newId+'" class="'+value.id+'" >'
+											+ value.id + '</a>';
+									$('#grpLink').append(html);
+									$('#' + value.id+"url")
+											.click(function(event) {
+														event.stopPropagation();
+														if ($('#id_map').hasClass("col-lg-12")) {
+															/* reduice map */
+															$('#id_map').removeClass("col-lg-12");
+															$('#id_map').addClass("col-lg-6");
+
+															$('#smallTile').show();
+															$('.open').addClass("hide");
+															$('.closemap').removeClass("hide");
+
+															map = $("#map").gmap3('get');
+															google.maps.event.trigger(map,'resize');
+															
+															map.setZoom(map.getZoom());
+															var markIndic = $("#map")
+																	.gmap3({
+																				get : {
+																					id : "indicator"
+																				}
+																			});
+															map.setCenter(markIndic.getPosition());
+															map.panToBounds(map.getBounds());
+														}
+													});
+								});
+				
+				
+				
+				$("#map").gmap3({
+					
+				    marker:{
+				        values:mapdata,
+				        events:{
+				            
+				            click: function(marker, event, context){
+				  
+				            	document.getElementById(context.id+"url").click();
+				            },
+				          }
+				    }
+				});
+				}
+			}	
+				
+						
+/* --------------------for panel direction and open or close map ------------------- */
 				var onglet = '${onglet}';
 				if (onglet != 'itineraire') {
 
@@ -169,6 +380,30 @@
 
 			});
 		})(jQuery);
+	</script>
+	
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			if('${itineraireOnglet}'=="active")	{
+			
+				var mapdata = JSON.parse('${beanManagerItineraire.makers}');
+	
+				dojo.forEach(mapdata, function(item, i) {
+					var id = item.id+"url";
+	
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "smallTile"
+						}
+					}));
+	
+				});
+			
+			}
+
+		});
 	</script>
 
 </div>

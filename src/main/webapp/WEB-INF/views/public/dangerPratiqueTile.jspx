@@ -64,7 +64,12 @@
 					<label for="duree" class="col-lg-6 control-label">Duree de
 						validite</label>
 					<div class="col-lg-5">
-						<form:input class="form-control" id="dure" pattern="[0-9]*" path="dure" />
+						<select id="dure" name="dure" class="form-control">
+							  <c:forEach var="status" items="${typeTime}">
+							        <spring:message code="${status}" text="${status}" var="labelEnum" ></spring:message>
+							        <option value="${status}">${labelEnum}</option>
+							  </c:forEach>
+							</select>
 					</div>
 				</div>
 				<br />
@@ -77,9 +82,12 @@
 						</div>
 					</div>
 					<div class="col-lg-5 form-group">
-						<form:input cssClass="form-control" disabled="true"
-							id="dureVerification" path="estimationValidite"
-							placeholder="Estimation de validite" />
+						<select id="dureVerification" disabled="disabled" name="estimationValidite" class="form-control">
+							  <c:forEach var="status" items="${typeTime}">
+							        <spring:message code="${status}" text="${status}" var="labelEnum" ></spring:message>
+							        <option value="${status}">${labelEnum}</option>
+							  </c:forEach>
+							</select> 
 					</div>
 				</div>
 				<div class="row">
@@ -550,7 +558,36 @@
 									}
 								});
 		
+				/* -----clear marker and directions but not clear the picker------------ */
+				$("#map").gmap3({
+				    get: {
+				     		 name: "marker",
+				     		all:true,
+				     		full:true,
+				     		callback: function(objs){
+				     				var arrayId=[];
+				     			 $.each(objs, function(i, obj){
+				     				if(obj.id!="indicator"){
+				     				
+				     					var markObj = obj;
+				     					arrayId.push(markObj.id);		
+					     			}
+				     	          });
+				     			console.log(arrayId);
+				     			
+				     			$(this).gmap3({
+		     				        clear:{
+		     				          id:arrayId
+		     				        }
+		     				      });
+				     			
+				     		}
+				    },
+				 clear:{
+					 name:["directionsrenderer"]
+				 }	
 				
+				});
 				
 			});
 		})(jQuery);

@@ -5,6 +5,7 @@ package com.nomade.domain;
 
 import com.nomade.domain.Comment;
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.TypeTime;
 import com.nomade.domain.UserNomade;
 import java.util.Date;
 import java.util.List;
@@ -75,11 +76,11 @@ privileged aspect DangerPratique_Roo_JavaBean {
         this.photo = photo;
     }
     
-    public int DangerPratique.getDure() {
+    public TypeTime DangerPratique.getDure() {
         return this.dure;
     }
     
-    public void DangerPratique.setDure(int dure) {
+    public void DangerPratique.setDure(TypeTime dure) {
         this.dure = dure;
     }
     
@@ -91,11 +92,11 @@ privileged aspect DangerPratique_Roo_JavaBean {
         this.infoVerif = infoVerif;
     }
     
-    public int DangerPratique.getEstimationValidite() {
+    public TypeTime DangerPratique.getEstimationValidite() {
         return this.estimationValidite;
     }
     
-    public void DangerPratique.setEstimationValidite(int estimationValidite) {
+    public void DangerPratique.setEstimationValidite(TypeTime estimationValidite) {
         this.estimationValidite = estimationValidite;
     }
     
