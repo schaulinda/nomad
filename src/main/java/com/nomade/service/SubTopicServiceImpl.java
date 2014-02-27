@@ -26,6 +26,12 @@ public class SubTopicServiceImpl implements SubTopicService {
 	}
 	@Override
 	public List<SubTopic> findByParentTopic(Topic topic,int firstResult,int maxResults){
+		if(firstResult < 0){
+			firstResult = 0;
+		}
+		if(firstResult < 0){
+			firstResult = 10;
+		}
 		return subTopicRepository.findByParentTopic(topic,new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults));
 	}
 

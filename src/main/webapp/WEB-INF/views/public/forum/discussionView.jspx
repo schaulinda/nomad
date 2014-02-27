@@ -15,6 +15,10 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="row">
+		<div class="component-navigation">
+			<spring:url value="/forum/subtopics"  var="list_subTopics_url"/>
+			<a href="${list_subTopics_url }" id="subtopics-list-url-id" title="back to subtopics list" >See Sub Topics</a>
+		</div>
 		<div>
 			<span>Title : ${discussion.title } | </span> 
 			<span>${numberOfMessages } Messages </span> 
@@ -87,6 +91,16 @@
 		</table>
 	</div>
 	
+	<script type="text/javascript">
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : "subtopics-list-url-id",
+					event : "onclick",
+					params : {
+						fragments : "body"
+					}
+				}));
+		</script>
+		
 		<script type="text/javascript">
 			jQuery.noConflict($);
 			(function($){

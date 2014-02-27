@@ -32,7 +32,7 @@
 						<td><span> <b> <spring:url value="/forum/topics/${topicBean.topic.id }" var="topic_url" >
 											<spring:param name="size" value="3" />
 										</spring:url>
-									<u> <a href="${topic_url }"
+									<u> <a class="forum-topic" id="${topicBean.topic.id }" href="${topic_url }"
 										title="${topicBean.topic.content }">${topicBean.topic.title }</a>
 								</u>
 							</b>
@@ -40,7 +40,7 @@
 						<c:forEach items="${topicBean.topic.subTopics }" var="subTopic">
 								<spring:url value="/forum/subtopics/${subTopic.id }"	var="subtopic_url" />
 								<u>
-									<a style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subTopic.title }</a>
+									<a class="forum-topic-subtopic" id="${ subTopic.id}" style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subTopic.title }</a>
 								</u>
 							</c:forEach></td>
 						<td>${topicBean.nbOfDiscussion }</td>
@@ -51,4 +51,33 @@
 			</tbody>
 		</table>
 	</div>
+	<script type="text/javascript">
+		dojo.query(".forum-topic").forEach(function(node, index, arr){
+			var id = dojo.attr(node,"id");
+			console.log(id);
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : id,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
+	
+		});
+	</script>
+	
+	<script type="text/javascript">
+		dojo.query(".forum-topic-subtopic").forEach(function(node, index, arr){
+			var id = dojo.attr(node,"id");
+			console.log(id);
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : id,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
+	
+		});
+	</script>
 </div>

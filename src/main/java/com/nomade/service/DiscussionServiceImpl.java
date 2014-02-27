@@ -77,6 +77,12 @@ public class DiscussionServiceImpl implements DiscussionService {
     }
 	@Override
     public List<Discussion> findBySubTopic(SubTopic subTopic,int firstResult,int maxResults){
+		if(firstResult < 0){
+			firstResult = 0;
+		}
+		if(firstResult < 0){
+			firstResult = 10;
+		}
 		return discussionRepository.findBySubTopic(subTopic, new PageRequest(firstResult, maxResults));
     }
 }

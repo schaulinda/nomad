@@ -364,7 +364,7 @@ body {
 					code="a.helpFAQ" /></a> | <a href="#" class="traitgauche"><spring:message
 					code="a.professionals" /></a> | <a href="#" class="traitgauche"><spring:message
 					code="a.advertiser" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.developmentTranslation" /></a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
+					code="a.developmentTranslation" /></a> | <a href="${forum_url}" class="traitgauche" id="forum_id_footer">
 					<spring:message code="a.forum" /></a>
 		</footer>
 	</div>
@@ -394,6 +394,24 @@ body {
 	}));
 </script>
 
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "forum_id",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "forum_id_footer",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
 
 <script type="text/javascript">
 	jQuery.noConflict();
