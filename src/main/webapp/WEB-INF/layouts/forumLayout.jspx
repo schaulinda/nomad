@@ -81,6 +81,11 @@
 	
 </script>
 
+<script src="${res}/js/jquery.ddslick.min.js">
+<!-- eh -->
+	
+</script>
+
 <script type="text/javascript" src="${res}/js/jquery-addable.js" ><!-- eh --></script>
 
 <util:load-scripts />
