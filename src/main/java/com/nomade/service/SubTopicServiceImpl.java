@@ -63,7 +63,9 @@ public class SubTopicServiceImpl implements SubTopicService {
 		List<Date> lastMessageDates = new ArrayList<Date>();
 		for (SubTopic subTopic : subTopics) {
 			Date lastMessageDate = discussionService.getLastMessageDate(subTopic);
-			lastMessageDates.add(lastMessageDate);
+			if(lastMessageDate != null){
+				lastMessageDates.add(lastMessageDate);
+			}
 		}
 		Collections.sort(lastMessageDates);
 		return CollectionUtil.getLastElement(lastMessageDates);

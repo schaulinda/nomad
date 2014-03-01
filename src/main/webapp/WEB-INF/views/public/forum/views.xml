@@ -14,4 +14,17 @@
      <definition extends="forumLayout" name="public/forum/discussionView">
         <put-attribute name="body" value="/WEB-INF/views/public/forum/discussionView.jspx"/>
     </definition>
+    
+    <!-- updates -->
+    
+     <definition extends="forumLayout" name="public/discussions/update">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/discussionUpdate.jspx"/>
+    </definition>
+    
+     <definition extends="forumLayout" name="public/subtopics/update">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/subTopicUpdate.jspx"/>
+    </definition>
+     <definition extends="forumLayout" name="public/topics/update">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/topicUpdate.jspx"/>
+    </definition>
 </tiles-definitions>

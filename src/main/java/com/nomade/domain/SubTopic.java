@@ -54,7 +54,7 @@ public class SubTopic {
     private Topic parentTopic;
 
     /**
-     * The subtopic in which this subpic is included
+     * The subtopic in which this subtopic is included
      */
     @ManyToOne
     @DBRef

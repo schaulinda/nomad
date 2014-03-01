@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,25 +63,31 @@ public class ForumController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForumMainPage(Model uiModel) {
 		List<Topic> topics = new ArrayList<Topic>();
-		if(!securityUtil.isUserLogged()){
-			topics = topicService.findByConfidentiality(Confidentiality.Publique);
-		}else {
+		if (!securityUtil.isUserLogged()) {
+			topics = topicService
+					.findByConfidentiality(Confidentiality.Publique);
+		} else {
 			topics = topicService.findAllTopics();
 		}
-    		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
-    		for (Topic topic : topics) {
-    			List<SubTopic> subTopics = subTopicService.findByParentTopic(topic);
-    			topic.setSubTopics(new HashSet<SubTopic>(subTopics));
-    			BeanTopicManager beanTopicManager = new BeanTopicManager();
-    			beanTopicManager.setTopic(topic);
-    			beanTopicManager.setNbOfDiscussion(topicService
-    					.countDiscussion(topic));
-    			beanTopicManager.setNbOfMessages(topicService.countMessages(topic));
-    			beanTopicManager.setLastMessageDate(topicService
-    					.getLastMessageDate(topic));
-    			topicBeans.add(beanTopicManager);
-    		}
-    		uiModel.addAttribute("topicBeans", topicBeans);
+		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
+		for (Topic topic : topics) {
+			List<SubTopic> subTopics = new ArrayList<SubTopic>();
+			if(securityUtil.isUserLogged()){
+				subTopics =  subTopicService.findByParentTopic(topic);
+			}else{
+				subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique);
+			}
+			topic.setSubTopics(new HashSet<SubTopic>(subTopics));
+			BeanTopicManager beanTopicManager = new BeanTopicManager();
+			beanTopicManager.setTopic(topic);
+			beanTopicManager.setNbOfDiscussion(topicService
+					.countDiscussion(topic));
+			beanTopicManager.setNbOfMessages(topicService.countMessages(topic));
+			beanTopicManager.setLastMessageDate(topicService
+					.getLastMessageDate(topic));
+			topicBeans.add(beanTopicManager);
+		}
+		uiModel.addAttribute("topicBeans", topicBeans);
 		return "public/forum/mainpage";
 	}
 
@@ -88,19 +96,24 @@ public class ForumController {
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
-			@RequestParam(value = "sortOrder", required = false) String sortOrder,Model uiModel) {
+			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			Model uiModel) {
 		return "redirect:/forum/";
 	}
 
 	/**
 	 * <p>
-	 * 	<ul>
-	 * 		<li> if pagination is set and user is logged in, no confidentiality on subtopics are applied</li>
-	 * 		<li>if pagination is not setted and user is logged in</li>
-	 * 		<li>if pagination is set and user is not logged in, we find only publics ones</li>
-	 * 		<li>if pagination is not setted and user is not logged in, we find only publics subtopics</li>
-	 *  </ul>
+	 * <ul>
+	 * <li>if pagination is set and user is logged in, no confidentiality on
+	 * subtopics are applied</li>
+	 * <li>if pagination is not setted and user is logged in</li>
+	 * <li>if pagination is set and user is not logged in, we find only publics
+	 * ones</li>
+	 * <li>if pagination is not setted and user is not logged in, we find only
+	 * publics subtopics</li>
+	 * </ul>
 	 * </p>
+	 * 
 	 * @param topicId
 	 * @param page
 	 * @param size
@@ -110,7 +123,8 @@ public class ForumController {
 	 * @return
 	 */
 	@RequestMapping(value = "/topics/{id}", method = RequestMethod.GET)
-	public String showTopicView(@PathVariable("id") BigInteger topicId,
+	public String showTopicView(
+			@PathVariable("id") BigInteger topicId,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
@@ -120,29 +134,38 @@ public class ForumController {
 		if (topic == null) {
 			return "redirect:" + FORUM_TOPICS;
 		}
-		List<SubTopic> subTopics =  null;
+		List<SubTopic> subTopics = null;
 		boolean paginationIsSet = page != null || size != null;
-		//declare local params
+		// declare local params
 		int sizeNo = 0;
 		int firstResult = 0;
 		float nrOfPages = 0;
-		//init local params if pagination is set
-		if(paginationIsSet){
+		// init local params if pagination is set
+		if (paginationIsSet) {
 			sizeNo = size == null ? 10 : size.intValue();
-            firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-     		nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+			firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+			nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
 		}
-		
+
 		if (paginationIsSet && securityUtil.isUserLogged()) {
-			subTopics = subTopicService.findByParentTopic(topic,firstResult,sizeNo);
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else if(paginationIsSet && !securityUtil.isUserLogged()){
-    		subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique, firstResult, sizeNo);
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else if(!paginationIsSet && securityUtil.isUserLogged()){
-    		subTopics = subTopicService.findByParentTopic(topic);
-		}else if(!paginationIsSet && !securityUtil.isUserLogged()){
-    		subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique);
+			subTopics = subTopicService.findByParentTopic(topic, firstResult,
+					sizeNo);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		} else if (paginationIsSet && !securityUtil.isUserLogged()) {
+			subTopics = subTopicService.findByParentTopicAndConfidentiality(
+					topic, Confidentiality.Publique, firstResult, sizeNo);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		} else if (!paginationIsSet && securityUtil.isUserLogged()) {
+			subTopics = subTopicService.findByParentTopic(topic);
+		} else if (!paginationIsSet && !securityUtil.isUserLogged()) {
+			subTopics = subTopicService.findByParentTopicAndConfidentiality(
+					topic, Confidentiality.Publique);
 		}
 		List<BeanSubTopicView> subTopicToBeanSubTopic = subTopicService
 				.convertSubTopicToBeanSubTopic(subTopics);
@@ -167,20 +190,35 @@ public class ForumController {
 		topic.setCreated(new Date());
 		topic.setNomade(securityUtil.getUserNomade());
 		topic = topicService.updateTopic(topic);
-		return "redirect:/topics/"
+		return "redirect:/forum/topics/"
 				+ encodeUrlPathSegment(topic.getId().toString(),
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/topics", method = RequestMethod.PUT)
+	@RequestMapping(value = "/topics/{topicId}/form", method = RequestMethod.GET)
+	public String showUpdateTopicForm(
+			@PathVariable("topicId") BigInteger topicId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Topic topic = topicService.findTopic(topicId);
+		uiModel.addAttribute("topic", topic);
+		populateModel(uiModel);
+		return "public/topics/update";
+	}
+
+	@RequestMapping(value = "/topics/update", method = RequestMethod.POST)
 	public String updateTopic(@Valid Topic topic, BindingResult bindingResult,
 			Model uiModel, HttpServletRequest httpServletRequest) {
-		if (topicService.findTopic(topic.getId()) == null) {
+		Topic findTopic = topicService.findTopic(topic.getId());
+		if (findTopic == null) {
 			throw new RuntimeException(
 					"You are trying to update an invalid/unexisting topic");
 		}
-		topic = topicService.updateTopic(topic);
-		return "redirect:/topics/"
+		findTopic.setConfidentiality(topic.getConfidentiality());
+		findTopic.setContent(topic.getContent());
+		findTopic.setTitle(topic.getTitle());
+		topic = topicService.updateTopic(findTopic);
+		findTopic = null;
+		return "redirect:/forum/topics/"
 				+ encodeUrlPathSegment(topic.getId().toString(),
 						httpServletRequest);
 	}
@@ -196,32 +234,36 @@ public class ForumController {
 		/*
 		 * if(topic.getNomade().equals(securityUtil.getUserNomade()) ||
 		 * isAllowed(securityUtil.getUserNomade())){
-		 * topicService.deleteTopic(topic); }
+		 * }
 		 */
-		return "redirect:/topics";
+		topicService.deleteTopic(topic);
+		return "redirect:/forum/topics";
 	}
 
-
 	@RequestMapping(value = "/topics/{topicId}/", method = RequestMethod.GET)
-	public String showUpdateTopicForm(@PathVariable("topicId") BigInteger topicId, Model uiModel,HttpServletRequest httpServletRequest){
+	public String showTopic(@PathVariable("topicId") BigInteger topicId, Model uiModel,
+			HttpServletRequest httpServletRequest) {
 		Topic topic = topicService.findTopic(topicId);
 		uiModel.addAttribute("topic", topic);
 		populateModel(uiModel);
 		return "public/topics/update";
 	}
+
 	/* subtopics */
 	@RequestMapping(value = "/subtopics")
 	public String showSubTopics(
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
-			@RequestParam(value = "sortOrder", required = false) String sortOrder,HttpServletRequest httpServletRequest,
+			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Model uiModel) {
 		return "redirect:" + FORUM_TOPICS;
 	}
 
 	@RequestMapping(value = "/subtopics/{id}")
-	public String showSubTopicView(@PathVariable("id") BigInteger subTopicId,
+	public String showSubTopicView(
+			@PathVariable("id") BigInteger subTopicId,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
@@ -232,30 +274,42 @@ public class ForumController {
 		if (subTopic == null) {
 			return "redirect:" + FORUM_SUBTOPICS;
 		}
-		//declare local params
+		// declare local params
 		int sizeNo = 0;
 		int firstResult = 0;
 		float nrOfPages = 0;
 		boolean paginationIsSet = page != null || size != null;
-		if(paginationIsSet){
+		if (paginationIsSet) {
 			sizeNo = size == null ? 10 : size.intValue();
-            firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-    		nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
+			firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+			nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
 		}
 		if (paginationIsSet && securityUtil.isUserLogged()) {
-    		List<Discussion> discussions = discussionService.findBySubTopic(subTopic,firstResult,sizeNo);
-    		uiModel.addAttribute("discussions", discussions);
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else if(paginationIsSet && !securityUtil.isUserLogged()){
-    		List<Discussion> discussions = discussionService.findBySubTopicAndConfidentiality(subTopic, Confidentiality.Publique, firstResult, sizeNo);
-    		uiModel.addAttribute("discussions", discussions);
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-		}else if(!paginationIsSet && securityUtil.isUserLogged()){
-			List<Discussion> discussions = discussionService.findBySubTopic(subTopic);
-    		uiModel.addAttribute("discussions", discussions);
-		}else if(!paginationIsSet && !securityUtil.isUserLogged()){
-			List<Discussion> discussions = discussionService.findBySubTopicAndConfidentiality(subTopic, Confidentiality.Publique);    	
-    		uiModel.addAttribute("discussions", discussions);
+			List<Discussion> discussions = discussionService.findBySubTopic(
+					subTopic, firstResult, sizeNo);
+			uiModel.addAttribute("discussions", discussions);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		} else if (paginationIsSet && !securityUtil.isUserLogged()) {
+			List<Discussion> discussions = discussionService
+					.findBySubTopicAndConfidentiality(subTopic,
+							Confidentiality.Publique, firstResult, sizeNo);
+			uiModel.addAttribute("discussions", discussions);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		} else if (!paginationIsSet && securityUtil.isUserLogged()) {
+			List<Discussion> discussions = discussionService
+					.findBySubTopic(subTopic);
+			uiModel.addAttribute("discussions", discussions);
+		} else if (!paginationIsSet && !securityUtil.isUserLogged()) {
+			List<Discussion> discussions = discussionService
+					.findBySubTopicAndConfidentiality(subTopic,
+							Confidentiality.Publique);
+			uiModel.addAttribute("discussions", discussions);
 		}
 		int numberOfDiscussions = discussionService.countDiscussion(subTopic);
 		int numberOfMessages = discussionService.countMessages(subTopic);
@@ -293,24 +347,17 @@ public class ForumController {
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/subtopics", method = RequestMethod.PUT)
-	public String updateSubTopic(@Valid SubTopic subTopic,
-			@RequestParam("parentSubTopicId") BigInteger parentSubTopicId,
-			@RequestParam("parentTopicId") BigInteger parentTopic,
-			BindingResult bindingResult, Model uiModel,
-			HttpServletRequest httpServletRequest) {
-		if (parentSubTopicId != null) {
-			SubTopic findSubTopic = subTopicService
-					.findSubTopic(parentSubTopicId);
-			subTopic.setParentSubTopic(findSubTopic);
-		}
-		if (parentTopic != null) {
-			Topic topic = topicService.findTopic(parentTopic);
-			subTopic.setParentTopic(topic);
-		}
-		subTopic = subTopicService.updateSubTopic(subTopic);
-		return "redirect:/subtopics/"
-				+ encodeUrlPathSegment(subTopic.getId().toString(),
+	@RequestMapping(value = "/subtopics/update", method = RequestMethod.POST)
+	public String updateSubTopic(@Valid SubTopic subTopic,BindingResult bindingResult, Model uiModel,HttpServletRequest httpServletRequest) {
+		SubTopic subTopic2 = subTopicService.findSubTopic(subTopic.getId());
+		subTopic2.setTitle(subTopic.getTitle());
+		subTopic2.setContent(subTopic.getContent());
+		subTopic2.setParentTopic(subTopic.getParentTopic());
+		subTopic2.setConfidentiality(subTopic.getConfidentiality());
+		subTopicService.updateSubTopic(subTopic2);
+		subTopic = null;
+		return "redirect:/forum/subtopics/"
+				+ encodeUrlPathSegment(subTopic2.getId().toString(),
 						httpServletRequest);
 	}
 
@@ -326,25 +373,45 @@ public class ForumController {
 		return "redirect:" + FORUM_SUBTOPICS;
 	}
 
-	@RequestMapping(value = "/subtopics/{subTopicId}/", method = RequestMethod.GET)
-	public String showUpdateSubTopicForm(@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,HttpServletRequest httpServletRequest){
+	@RequestMapping(value = "/subtopics/{subTopicId}/form", method = RequestMethod.GET)
+	public String showUpdateSubTopicForm(
+			@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,
+			HttpServletRequest httpServletRequest) {
 		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
 		uiModel.addAttribute("subTopic", subTopic);
+		List<Topic> allTopics = new ArrayList<Topic>();
+		if(securityUtil.isUserLogged()){
+			allTopics= topicService.findAllTopics();
+		}else {
+			allTopics  = topicService.findByConfidentiality(Confidentiality.Publique);
+		}
+		Iterator<Topic> iterator = allTopics.iterator();
+		while (iterator.hasNext()) {
+			Topic topic = (Topic) iterator.next();
+			if(topic.getId().equals(subTopic.getParentTopic().getId())){
+				iterator.remove();
+			}
+		}
+		allTopics.add(0, subTopic.getParentTopic());
+		uiModel.addAttribute("topics", allTopics);
 		populateModel(uiModel);
 		return "public/subtopics/update";
 	}
+
 	/* Discussions */
 	@RequestMapping(value = "/discussions", method = RequestMethod.GET)
 	public String showDiscussions(
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
-			@RequestParam(value = "sortOrder", required = false) String sortOrder,Model uiModel) {
+			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			Model uiModel) {
 		return "redirect:" + FORUM_SUBTOPICS;
 	}
 
 	/**
 	 * show discussion, with pagination on discussions comments.
+	 * 
 	 * @param discussionId
 	 * @param page
 	 * @param size
@@ -356,7 +423,8 @@ public class ForumController {
 	 * @return
 	 */
 	@RequestMapping(value = "/discussions/{id}", method = RequestMethod.GET)
-	public String showDiscussion(@PathVariable("id") BigInteger discussionId,
+	public String showDiscussion(
+			@PathVariable("id") BigInteger discussionId,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
@@ -398,30 +466,35 @@ public class ForumController {
 				+ encodeUrlPathSegment(discussion.getId().toString(),
 						httpServletRequest);
 	}
-	@RequestMapping(value = "/discussions/{discussionId}/", method = RequestMethod.GET)
-	public String showUpdateDiscussionForm(@PathVariable("discussionId") BigInteger discussionId, Model uiModel,HttpServletRequest httpServletRequest){
+
+	@RequestMapping(value = "/discussions/{discussionId}/form", method = RequestMethod.GET)
+	public String showUpdateDiscussionForm(
+			@PathVariable("discussionId") BigInteger discussionId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
 		Discussion discussion = discussionService.findDiscussion(discussionId);
 		uiModel.addAttribute("discussion", discussion);
 		populateModel(uiModel);
-		return "public/discussion/update";
+		return "public/discussions/update";
 	}
-	@RequestMapping(value = "/subtopics/{subTopicId}/discussions", method = RequestMethod.PUT)
-	public String updateDiscussion(@Valid Discussion discussion,
-			@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,
+
+	@RequestMapping(value = "/discussions/update", method = RequestMethod.POST)
+	public String updateDiscussion(@Valid Discussion discussion, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
 		Discussion discussion2 = discussionService.findDiscussion(discussion
 				.getId());
 		if (discussion2 == null) {
 			throw new RuntimeException(
 					"You are trying to update an invalid/unexisting discussion");
 		}
-		discussion.setSubTopic(subTopic);
 		// actually, the #updateDiscussion method, save the object and return
 		// the saved object.
-		discussion = discussionService.updateDiscussion(discussion);
+		discussion2.setTitle(discussion.getTitle());
+		discussion2.setContent(discussion.getContent());
+		discussion2.setSubTopic(discussion.getSubTopic());
+		discussion = discussionService.updateDiscussion(discussion2);
+		discussion = null;
 		return "redirect:/forum/discussions/"
-				+ encodeUrlPathSegment(discussion.getId().toString(),
+				+ encodeUrlPathSegment(discussion2.getId().toString(),
 						httpServletRequest);
 	}
 
@@ -525,7 +598,14 @@ public class ForumController {
 	}
 
 	public void populateModel(Model uiModel) {
-		uiModel.addAttribute("confidentialities",
-				Arrays.asList(Confidentiality.Publique,Confidentiality.NomadesOnly));
+		addDateTimeFormatPatterns(uiModel,"");
+		uiModel.addAttribute("confidentialities", Arrays.asList(
+				Confidentiality.Publique, Confidentiality.NomadesOnly));
 	}
+	void addDateTimeFormatPatterns(Model uiModel,String dateTimePattern) {
+		if(StringUtils.isBlank((dateTimePattern))){
+			dateTimePattern = "dd-MM-yyyy HH:mm";
+		}
+        uiModel.addAttribute("dateTimePattern", dateTimePattern);
+    }
 }

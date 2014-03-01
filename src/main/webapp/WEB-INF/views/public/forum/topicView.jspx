@@ -22,6 +22,9 @@
 			<span style=" margin-left: 20px;">${topicBean.nbOfDiscussion } Discussions</span> |
 			<span style=" margin-left: 20px;">${topicBean.nbOfMessages } Messages</span> |
 			<span style=" margin-left: 20px;">Last Message :${topicBean.lastMessageDate }</span> |
+			
+			<spring:url value="/forum/topics/${topicBean.topic.id}" var="topic_url" /> 
+			<span><a href="${topic_url}/form" 	id="update_topic_link">update</a></span>
 		</div>
 		<br />
 		<h4>
@@ -41,7 +44,7 @@
 				<c:forEach items="${subTopicToBeans }" var="subTopicToBean">
 					<tr>
 						<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id }" var="subtopic_url" />
-						<td> <a href="${subtopic_url }">${subTopicToBean.subTopic.title }</a> </td>
+						<td> <a href="${subtopic_url }" >${subTopicToBean.subTopic.title }</a> </td>
 						<td>${subTopicToBean.subTopic.content }</td>
 						<td>${subTopicToBean.subTopic.created }</td>
 						<td>${subTopicToBean.numberOfDiscussion}</td>
@@ -49,7 +52,7 @@
 						<td>${subTopicToBean.lastMessageDate }</td>
 						<td>
 							<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
-							<a href="${subTopicUrl}">see</a> |
+							<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
 							<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
 						</td>
 					</tr>
@@ -58,4 +61,29 @@
 		</table>
 		<util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
 	</div>
+	
+	<script type="text/javascript">
+		dojo.query(".update_subtopic_link").forEach(
+				function(node, index, arr) {
+					var id = dojo.attr(node, "id");
+					console.log(id);
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "body"
+						}
+					}));
+
+				});
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "update_topic_link",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
 </div>

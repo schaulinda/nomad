@@ -14,25 +14,29 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="row">
-	
+
 		<div>
-			<span>${subTopic.title }</span> |
-			<span style=" margin-left: 20px;">${subTopic.content }</span> |
-			<span style=" margin-left: 20px;">Created The : ${subTopic.created }</span> |
-			<span style=" margin-left: 20px;">${numberOfDiscussions } Discussions</span> |
-			<span style=" margin-left: 20px;">${numberOfMessages } Messages</span> |
-			<span style=" margin-left: 20px;">Last Message :${lastMessageDate }</span> |
-			<span style=" margin-left: 20px;">  <button class="btn" id="btnAddSubtopic">Add a sub topic</button> </span> |
-			<span style=" margin-left: 20px;">  <button class="btn" id="btnAddDiscussion">Add a Discussion</button> </span>
-			
+			<span>${subTopic.title }</span> | <span style="margin-left: 20px;">${subTopic.content }</span>
+			| <span style="margin-left: 20px;">Created The :
+				${subTopic.created }</span> | <span style="margin-left: 20px;">${numberOfDiscussions }
+				Discussions</span> | <span style="margin-left: 20px;">${numberOfMessages }
+				Messages</span> | <span style="margin-left: 20px;">Last Message
+				:${lastMessageDate }</span> | <span style="margin-left: 20px;">
+				<button class="btn" id="btnAddSubtopic">Add a sub topic</button>
+			</span> | <span style="margin-left: 20px;">
+				<button class="btn" id="btnAddDiscussion">Add a Discussion</button>
+			</span>
+
 		</div>
-		
+
 		<div class="component-navigation">
 			<spring:url value="/forum/topics" var="list_topics_url" />
-			<a href="${list_topics_url }" id="topics-list-url-elt" title="back to topics list" >See Topics</a>
+			<a href="${list_topics_url }" id="topics-list-url-elt"
+				title="back to topics list">See Topics</a>
 		</div>
 		<!-- create discussion form -->
-		<spring:url value="/forum/subtopics/${subTopic.id }/discussions" var="create_discussion_url" />
+		<spring:url value="/forum/subtopics/${subTopic.id }/discussions"
+			var="create_discussion_url" />
 		<div id="createDiscussionDiv" class="hide">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
@@ -44,23 +48,24 @@
 					action="${create_discussion_url }" method="POST">
 					<div class="form-group">
 						<span>Title</span>
-						<form:input path="title" cssClass="form-control" placeholder="title..." />
+						<form:input path="title" cssClass="form-control"
+							placeholder="title..." />
 					</div>
 					<div class="form-group">
-					<span>Content</span>
-						<form:textarea path="content"
-							cssClass="form-control" placeholder="type the content..." />
+						<span>Content</span>
+						<form:textarea path="content" cssClass="form-control"
+							placeholder="type the content..." />
 					</div>
-					
-<!-- 					<sec:authorize access="isAuthenticated()" > -->
-						<div class="form-group">
-							<label>Confidentiality</label>
-							<form:select path="confidentiality" cssClass="form-control"
-								items="${confidentialities}" placeholder="Confidentiality" />
-						</div>
-<!-- 					</sec:authorize> -->
+
+					<!-- 					<sec:authorize access="isAuthenticated()" > -->
+					<div class="form-group">
+						<label>Confidentiality</label>
+						<form:select path="confidentiality" cssClass="form-control"
+							items="${confidentialities}" placeholder="Confidentiality" />
+					</div>
+					<!-- 					</sec:authorize> -->
 					<button class="btn" data-dismiss="modal" aria-hidden="true"
-						id="btnCloseDiscussionDialog"  type="reset">Close</button>
+						id="btnCloseDiscussionDialog" type="reset">Close</button>
 					<button class="btn btn-primary" type="submit">Save changes</button>
 				</form:form>
 			</div>
@@ -69,7 +74,9 @@
 			</div>
 		</div>
 		<!-- create subtopic form -->
-		<spring:url value="/forum/topics/${subTopic.parentTopic.id }/subtopics/${subTopic.id }/add" var="create_subtopic_url" />
+		<spring:url
+			value="/forum/topics/${subTopic.parentTopic.id }/subtopics/${subTopic.id }/add"
+			var="create_subtopic_url" />
 		<div id="createSubTopicView" class="hide">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
@@ -80,19 +87,22 @@
 				<form:form commandName="subTopicModel"
 					action="${create_subtopic_url }" method="POST">
 					<div class="form-group">
-						<span>Title</span> <form:input path="title" cssClass="form-control" placeholder="title" />
+						<span>Title</span>
+						<form:input path="title" cssClass="form-control"
+							placeholder="title" />
 					</div>
-					
-<!-- 					<sec:authorize access="isAuthenticated()" > -->
-						<div class="form-group">
-							<label>Confidentiality</label>
-							<form:select path="confidentiality" cssClass="form-control"
-								items="${confidentialities}" placeholder="Confidentiality" />
-						</div>
-<!-- 					</sec:authorize> -->
+
+					<!-- 					<sec:authorize access="isAuthenticated()" > -->
+					<div class="form-group">
+						<label>Confidentiality</label>
+						<form:select path="confidentiality" cssClass="form-control"
+							items="${confidentialities}" placeholder="Confidentiality" />
+					</div>
+					<!-- 					</sec:authorize> -->
 					<div>
-						<span>Content</span> <form:textarea path="content"
-							cssClass="form-control" placeholder="content" />
+						<span>Content</span>
+						<form:textarea path="content" cssClass="form-control"
+							placeholder="content" />
 					</div>
 					<button class="btn" data-dismiss="modal" aria-hidden="true"
 						id="btnCloseSubTopicDialog" type="reset">Close</button>
@@ -104,9 +114,7 @@
 			</div>
 		</div>
 		<br />
-		<h4>
-			Discussions
-		</h4>
+		<h4>Discussions</h4>
 		<table>
 			<thead>
 				<th>Title</th>
@@ -117,89 +125,109 @@
 			<tbody>
 				<c:forEach items="${discussions }" var="discussion">
 					<tr>
-						<spring:url value="/forum/discussions/${discussion.id }" var="subtopic_url" />
-						<td> <a class="forum-subtopics-discussion" id="${discussion.id}" href="${subtopic_url }">${discussion.title }</a> </td>
+						<spring:url value="/forum/discussions/${discussion.id }"
+							var="subtopic_url" />
+						<td><a class="forum-subtopics-discussion"
+							id="s_${discussion.id}" href="${subtopic_url }">${discussion.title }</a>
+						</td>
 						<td>${discussion.content }</td>
 						<td>${discussion.created }</td>
-						<td>
-							<spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />
-							<a href="${discussion_url}/show">see</a> |
-							<a href="${discussion_url}/update">update</a> |
-							<rooForm:delete entityId="${discussion.id }" path="${discussion_url }" id="form_${discussion.id }"/>
+						<td><spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />| 
+						<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a> | 
+						<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-			<util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
+		<util:pagination maxPages="${maxPages}" page="${param.page}"
+			size="${param.size}" />
 	</div>
-		<script type="text/javascript">
-			dojo.query(".forum-subtopics-discussion").forEach(function(node, index, arr){
-				var id = dojo.attr(node,"id");
-				console.log(id);
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : id,
-					event : "onclick",
-					params : {
-						fragments : "body"
-					}
-				}));
-		
-			});
-		</script>
-		
+	
 	<script type="text/javascript">
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : "topics-list-url-elt",
-					event : "onclick",
-					params : {
-						fragments : "body"
-					}
-				}));
-		</script>
-		
-	<script type="text/javascript">
-			jQuery.noConflict($);
-			(function($){
-				/* switch to boostrap modals*/
-				function hideOrDisplayForm(dialog){
-					if(dialog.attr('class') == ''){
-						dialog.attr('class','hide');
-					}else{
-						dialog.attr('class','');
-					}
-				}
-				function closeDialog(dialog){
-					if(dialog.attr('class') == ''){
-						dialog.attr('class','hide');
-					}
-				}
-				function initCreateSubTopicDialogEvents(){
-					var subTopicDialog = $('#createSubTopicView');
-					$('#btnAddSubtopic').bind('click',function(){
-						var discussionDialog = $('#createDiscussionDiv');
-						closeDialog(discussionDialog);
-						hideOrDisplayForm(subTopicDialog);
-					});
-					$('#btnCloseSubTopicDialog').bind('click',function(){
-						hideOrDisplayForm(subTopicDialog);
-					});
-				}
-				function initCreateDiscussionDialogEvents(){
-					var discussionDialog = $('#createDiscussionDiv');
-					$("#btnAddDiscussion").bind('click',function(){
-						var subTopicDialog = $('#createSubTopicView');
-						closeDialog(subTopicDialog);
-						hideOrDisplayForm(discussionDialog);
-					});
-					$('#btnCloseDiscussionDialog').bind('click',function(){
-						hideOrDisplayForm(discussionDialog);
-					});
-				}
-				$(document).ready(function(){
-					initCreateSubTopicDialogEvents();
-					initCreateDiscussionDialogEvents();
+		dojo.query(".forum-subtopics-discussion").forEach(
+				function(node, index, arr) {
+					var id = dojo.attr(node, "id");
+					console.log(id);
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "body"
+						}
+					}));
+
 				});
-			})(jQuery);
-		</script>
+	</script >
+
+	<script type="text/javascript">
+		dojo.query(".update_discussion_link").forEach(
+				function(node, index, arr) {
+					var id = dojo.attr(node, "id");
+					console.log(id);
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "body"
+						}
+					}));
+
+				});
+	</script>
+
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "topics-list-url-elt",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+
+	<script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			/* switch to boostrap modals*/
+			function hideOrDisplayForm(dialog) {
+				if (dialog.attr('class') == '') {
+					dialog.attr('class', 'hide');
+				} else {
+					dialog.attr('class', '');
+				}
+			}
+			function closeDialog(dialog) {
+				if (dialog.attr('class') == '') {
+					dialog.attr('class', 'hide');
+				}
+			}
+			function initCreateSubTopicDialogEvents() {
+				var subTopicDialog = $('#createSubTopicView');
+				$('#btnAddSubtopic').bind('click', function() {
+					var discussionDialog = $('#createDiscussionDiv');
+					closeDialog(discussionDialog);
+					hideOrDisplayForm(subTopicDialog);
+				});
+				$('#btnCloseSubTopicDialog').bind('click', function() {
+					hideOrDisplayForm(subTopicDialog);
+				});
+			}
+			function initCreateDiscussionDialogEvents() {
+				var discussionDialog = $('#createDiscussionDiv');
+				$("#btnAddDiscussion").bind('click', function() {
+					var subTopicDialog = $('#createSubTopicView');
+					closeDialog(subTopicDialog);
+					hideOrDisplayForm(discussionDialog);
+				});
+				$('#btnCloseDiscussionDialog').bind('click', function() {
+					hideOrDisplayForm(discussionDialog);
+				});
+			}
+			$(document).ready(function() {
+				initCreateSubTopicDialogEvents();
+				initCreateDiscussionDialogEvents();
+			});
+		})(jQuery);
+	</script>
 </div>

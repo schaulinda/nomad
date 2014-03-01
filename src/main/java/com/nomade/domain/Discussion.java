@@ -58,5 +58,6 @@ public class Discussion {
      * The subtopic of this discussion
      */
     @ManyToOne
+    @DBRef
     private SubTopic subTopic;
 }
