@@ -32,7 +32,7 @@ public class ParcoursServiceImpl implements ParcoursService {
 			Parcours lastParcours = lastParcours(nomad);
 			if(lastParcours!=null){
 				
-				mark = new Marker(lastParcours.getEndAdress(), nomad.toString());
+				//mark = new Marker(lastParcours.getEndAdress(), nomad.toString());
 				mark.setTag("nomad");
 				mark.setId(nomad.getId().toString());
 				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_whiteN.png");

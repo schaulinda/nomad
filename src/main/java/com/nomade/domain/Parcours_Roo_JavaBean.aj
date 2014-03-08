@@ -3,42 +3,28 @@
 
 package com.nomade.domain;
 
+import com.nomade.domain.Etape;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.Voyage;
 import java.util.Date;
 
 privileged aspect Parcours_Roo_JavaBean {
     
-    public String Parcours.getStartAdress() {
-        return this.startAdress;
+    public Etape Parcours.getDepart() {
+        return this.depart;
     }
     
-    public void Parcours.setStartAdress(String startAdress) {
-        this.startAdress = startAdress;
+    public void Parcours.setDepart(Etape depart) {
+        this.depart = depart;
     }
     
-    public String Parcours.getEndAdress() {
-        return this.endAdress;
+    public Etape Parcours.getArrived() {
+        return this.arrived;
     }
     
-    public void Parcours.setEndAdress(String endAdress) {
-        this.endAdress = endAdress;
-    }
-    
-    public double[] Parcours.getStart() {
-        return this.start;
-    }
-    
-    public void Parcours.setStart(double[] start) {
-        this.start = start;
-    }
-    
-    public double[] Parcours.getEnd() {
-        return this.end;
-    }
-    
-    public void Parcours.setEnd(double[] end) {
-        this.end = end;
+    public void Parcours.setArrived(Etape arrived) {
+        this.arrived = arrived;
     }
     
     public Date Parcours.getCreated() {
@@ -55,6 +41,14 @@ privileged aspect Parcours_Roo_JavaBean {
     
     public void Parcours.setNomad(UserNomade nomad) {
         this.nomad = nomad;
+    }
+    
+    public Voyage Parcours.getVoyage() {
+        return this.voyage;
+    }
+    
+    public void Parcours.setVoyage(Voyage voyage) {
+        this.voyage = voyage;
     }
     
 }

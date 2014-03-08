@@ -12,5 +12,4 @@ public interface EtapeRepository {
 
     List<com.nomade.domain.Etape> findAll();
     
-    public List<Etape> findByNomadOrderByDayDesc(UserNomade nomad);
 }

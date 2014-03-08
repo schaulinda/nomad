@@ -10,20 +10,24 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.PointPacours;
 import com.nomade.domain.Profil;
 import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Vehicule;
+import com.nomade.domain.Voyage;
 import com.nomade.service.AccountService;
 import com.nomade.service.AlbumService;
 import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.PointParcoursService;
 import com.nomade.service.ProfilService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 import com.nomade.service.VehiculeService;
+import com.nomade.service.VoyageService;
 import com.nomade.web.ApplicationConversionServiceFactoryBean;
 import java.math.BigInteger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +58,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     InfoPratiqueService ApplicationConversionServiceFactoryBean.infoPratiqueService;
     
     @Autowired
+    PointParcoursService ApplicationConversionServiceFactoryBean.pointParcoursService;
+    
+    @Autowired
     ProfilService ApplicationConversionServiceFactoryBean.profilService;
     
     @Autowired
@@ -64,6 +71,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     VehiculeService ApplicationConversionServiceFactoryBean.vehiculeService;
+    
+    @Autowired
+    VoyageService ApplicationConversionServiceFactoryBean.voyageService;
     
     public Converter<Account, String> ApplicationConversionServiceFactoryBean.getAccountToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Account, java.lang.String>() {
@@ -225,6 +235,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<PointPacours, String> ApplicationConversionServiceFactoryBean.getPointPacoursToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.PointPacours, java.lang.String>() {
+            public String convert(PointPacours pointPacours) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<BigInteger, PointPacours> ApplicationConversionServiceFactoryBean.getIdToPointPacoursConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.PointPacours>() {
+            public com.nomade.domain.PointPacours convert(java.math.BigInteger id) {
+                return pointParcoursService.findPointPacours(id);
+            }
+        };
+    }
+    
+    public Converter<String, PointPacours> ApplicationConversionServiceFactoryBean.getStringToPointPacoursConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.PointPacours>() {
+            public com.nomade.domain.PointPacours convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), PointPacours.class);
+            }
+        };
+    }
+    
     public Converter<Profil, String> ApplicationConversionServiceFactoryBean.getProfilToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Profil, java.lang.String>() {
             public String convert(Profil profil) {
@@ -321,6 +355,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Voyage, String> ApplicationConversionServiceFactoryBean.getVoyageToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Voyage, java.lang.String>() {
+            public String convert(Voyage voyage) {
+                return new StringBuilder().append(voyage.getTitle()).toString();
+            }
+        };
+    }
+    
+    public Converter<BigInteger, Voyage> ApplicationConversionServiceFactoryBean.getIdToVoyageConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.Voyage>() {
+            public com.nomade.domain.Voyage convert(java.math.BigInteger id) {
+                return voyageService.findVoyage(id);
+            }
+        };
+    }
+    
+    public Converter<String, Voyage> ApplicationConversionServiceFactoryBean.getStringToVoyageConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.Voyage>() {
+            public com.nomade.domain.Voyage convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), Voyage.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getAccountToStringConverter());
         registry.addConverter(getIdToAccountConverter());
@@ -342,6 +400,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getInfoPratiqueToStringConverter());
         registry.addConverter(getIdToInfoPratiqueConverter());
         registry.addConverter(getStringToInfoPratiqueConverter());
+        registry.addConverter(getPointPacoursToStringConverter());
+        registry.addConverter(getIdToPointPacoursConverter());
+        registry.addConverter(getStringToPointPacoursConverter());
         registry.addConverter(getProfilToStringConverter());
         registry.addConverter(getIdToProfilConverter());
         registry.addConverter(getStringToProfilConverter());
@@ -354,6 +415,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getVehiculeToStringConverter());
         registry.addConverter(getIdToVehiculeConverter());
         registry.addConverter(getStringToVehiculeConverter());
+        registry.addConverter(getVoyageToStringConverter());
+        registry.addConverter(getIdToVoyageConverter());
+        registry.addConverter(getStringToVoyageConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

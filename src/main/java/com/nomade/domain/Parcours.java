@@ -18,13 +18,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJson
 public class Parcours {
 	
-	private String startAdress;
-	
-	private String endAdress;
-	
-	private double[] start;
-
-	private double[] end;
+	private Etape depart;
+	private Etape arrived;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
@@ -32,17 +27,8 @@ public class Parcours {
 	
 	@DBRef
 	private UserNomade nomad;
-
-	public Parcours(double[] start, double[] end) {
-		super();
-		this.start = start;
-		this.end = end;
-	}
-
-	public Parcours() {
-		super();
-	}
 	
-
+	 @DBRef
+	 private Voyage voyage;
 
 }

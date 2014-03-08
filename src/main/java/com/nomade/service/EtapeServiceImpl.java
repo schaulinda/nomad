@@ -14,7 +14,7 @@ public class EtapeServiceImpl implements EtapeService {
 	
 	
 	public Etape lastEtape(UserNomade nomad) {
-		List<Etape> findByNomadOrderByDay = etapeRepository.findByNomadOrderByDayDesc(nomad);
+		List<Etape> findByNomadOrderByDay = null;
 		
 		Etape etape=null;
 		if(findByNomadOrderByDay!=null && findByNomadOrderByDay.size()>0){
@@ -62,6 +62,6 @@ private String linkBase(HttpServletRequest httpServletRequest){
 	
 	public List<Etape> drawParcours(UserNomade nomad) {
 		
-		return etapeRepository.findByNomadOrderByDayDesc(nomad);
+		return null;
 	}
 }

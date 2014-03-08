@@ -6,6 +6,7 @@ import com.nomade.domain.FriendState;
 import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class FriendController {
 	UserService userservice;
 	@Autowired
 	Security security;
+	@Autowired
+	RelationService relationService;
 	
 	@RequestMapping(value = "add/{idUser}")
    	@ResponseBody
