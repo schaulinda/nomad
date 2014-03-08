@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="smallTile" class="tab-pane fade in active col-lg-6"
+	style="margin-left: -16px;"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+	<spring:url value="voyages/select" var="voyage_url"></spring:url>
+	
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-road"> <!-- co -->
+				</i> Ou en etes vous?
+			</h3>
+		</div>
+	<br/>
+	<div>
+		<a href="${voyage_url}?type=preparation" id="preparation" class="btn btn-default btn-block" >En Preparation</a>
+		 <p class="help-block">
+		 		Si vous etes en recherche d'information ou planifier votre voyage
+		 .</p>
+	</div>
+	<br/>
+	<div>
+		<a href="${voyage_url}?type=nouveau" id="nouveau" class="btn btn-default btn-block" >Nouveau voyage</a>
+		 <p class="help-block">si vous etes deja en aventure ou debutez votre voyage.</p>
+	</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+		dojo.ready(function() {
+			new stuff().addAjaxPublicPage();
+		});
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "preparation",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "nouveau",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
+</div>

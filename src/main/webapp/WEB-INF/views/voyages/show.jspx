@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_Voyage" object="${voyage}" path="/voyages" z="ku1pV88A6hI3Zt7ttI/O8xYuJI0=">
+        <field:display field="title" id="s_com_nomade_domain_Voyage_title" object="${voyage}" z="XnD0Kci/EMXwsUwe85pyga89Rf0="/>
+        <field:display field="depart" id="s_com_nomade_domain_Voyage_depart" object="${voyage}" z="HqjHyY1B+oCytX0Qra5wg0BpkCs="/>
+        <field:display field="arrived" id="s_com_nomade_domain_Voyage_arrived" object="${voyage}" z="Cvwd62pSyqIIB3dHzg6vC2RWrbA="/>
+        <field:display field="status" id="s_com_nomade_domain_Voyage_status" object="${voyage}" z="DrPPhrjE2twLzmgeZVt2JxOQDtk="/>
+        <field:display field="nomade" id="s_com_nomade_domain_Voyage_nomade" object="${voyage}" z="OcbhZkfY7db33uvWeZAGGUbtjvs="/>
+        <field:display field="terminated" id="s_com_nomade_domain_Voyage_terminated" object="${voyage}" z="cFY7rwl4NIke7qMNf7fUC62kFnw="/>
+    </page:show>
+</div>

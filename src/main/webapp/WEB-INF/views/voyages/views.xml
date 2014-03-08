@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="voyages/list">
+        <put-attribute name="body" value="/WEB-INF/views/voyages/list.jspx"/>
+    </definition>
+<definition extends="default" name="voyages/show">
+        <put-attribute name="body" value="/WEB-INF/views/voyages/show.jspx"/>
+    </definition>
+<definition extends="default" name="voyages/create">
+        <put-attribute name="body" value="/WEB-INF/views/voyages/create.jspx"/>
+    </definition>
+<definition extends="default" name="voyages/update">
+        <put-attribute name="body" value="/WEB-INF/views/voyages/update.jspx"/>
+    </definition>
+  
+    <definition extends="privateLayout" name="voyages/selectView">
+        <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/voyages/select.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
+    
+    <definition extends="privateLayout" name="voyages/new">
+        <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/voyages/new.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
+    
+    <definition extends="privateLayout" name="voyages/carnet">
+        <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/voyages/carnetTile.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
+    
+</tiles-definitions>

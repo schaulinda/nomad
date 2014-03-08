@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_PointPacours" items="${pointpacourses}" z="i1qka1Wj9+h8dmKvDPjBNi1my/4=">
+        <table:table data="${pointpacourses}" id="l_com_nomade_domain_PointPacours" path="/pointpacourses" z="ChSZA3M+sVFkeINbEz+IclMl8hs=">
+            <table:column id="c_com_nomade_domain_PointPacours_point" property="point" z="e68myvOXu3iEBdhCXto50DRRzsM="/>
+            <table:column id="c_com_nomade_domain_PointPacours_parcours" property="parcours" z="8CcTXGuvTjlPR7B7HAQkza9XJpY="/>
+        </table:table>
+    </page:list>
+</div>
