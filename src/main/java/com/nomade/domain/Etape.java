@@ -25,8 +25,8 @@ public class Etape {
 	private double lng;
 	private double[] coord;
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-	private Date day = new Date();
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date day;
 	
 
 	

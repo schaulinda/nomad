@@ -80,6 +80,7 @@
 							<spring:message code="option.stopOver" var="stopOver" />
 							<spring:message code="option.inRepair" var="inRepair" />
 							<spring:message code="option.backToHome" var="backToHome" />
+							<spring:message code="option.inPreparation" var="inPreparation" text="in Preparation" />
 							
 							
 							<c:if test="${nomade.vehicule.vehiculeState == 'withoutvehicle'}">
@@ -166,6 +167,12 @@
 								${backToHome}
 							</option>
 							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'inPreparation'}">
+							
+							<option value="inPreparation" data-description="${inPreparation}" data-imagesrc="${iconstatut_url}/inPreparation.png" >
+								${inPreparation}
+							</option>
+							</c:if>
 							
 						</select>
 						<a id="link_statutVeh" href="${updateVehState}" style="display: none;" ><!--co  --></a>
@@ -194,6 +201,8 @@
 		<div class="hide" id="grpLink">
 		<!--link for D/I  -->
 		</div>
+		<spring:url value="/voyages/formTermineVoy" var="formTermineVoy_url" ></spring:url>
+		<a id="formTermineVoy" href="${formTermineVoy_url}" class="hide" ><!-- co --></a>
 	</div>
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
@@ -213,6 +222,15 @@
 			}
 		}));
 	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "formTermineVoy",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
 
 	<script type="text/javascript">
 		jQuery.noConflict();
@@ -220,7 +238,10 @@
 			
 			$(document).ready(function() {
 				
-				
+				/* event on formTermineVoy */
+				$("#formTermineVoy").click(function(event){
+					event.stopPropagation();
+				});
 
 				/* ddslick for vehiculeState_header */
 				$('#vehiculeState_header').ddslick({
@@ -231,17 +252,24 @@
 				    	
 				    	$('#vehiculeState_header .dd-selected-value').each(function(){
 				    		
+				    		var state = '${nomade.vehicule.vehiculeState}';
 				    		var val = $(this).val();
 				    		
+				    		if(val!=state){
 				    		$.get("${updateVehState}/"+val,
 				    				{
 
 							}, function(data, status) {
 
 								console.log(data);
+								if(val=="backToHome"){
+									document.getElementById("formTermineVoy").click();
+									
+								}
 								
 
 							});
+				    	 }
 				    	});
 				    	
 				       

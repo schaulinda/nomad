@@ -1,5 +1,6 @@
 package com.nomade.repository;
 
+import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Voyage;
 import java.util.List;
@@ -10,4 +11,5 @@ public interface VoyageRepository {
 
     List<com.nomade.domain.Voyage> findAll();
     List<Voyage> findByNomade(UserNomade nomad);
+    List<Voyage> findByNomadeAndStatus(UserNomade nomad, StatusVoyage status);
 }

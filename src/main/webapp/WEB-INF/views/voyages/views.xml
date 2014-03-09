@@ -29,6 +29,21 @@
         <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
         <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
     </definition>
+     <definition extends="privateLayout" name="voyages/formTermineVoy">
+        <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/voyages/formTermineVoy.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="voyages/listV">
+        <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
+        <put-attribute name="id_subfooter" value="historique" />
+        <put-attribute name="smallTile" value="/WEB-INF/views/voyages/listV.jspx" cascade="true"/>
+        <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
+        <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
+    </definition>
     
     <definition extends="privateLayout" name="voyages/carnet">
         <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>

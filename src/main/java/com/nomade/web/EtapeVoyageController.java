@@ -104,7 +104,7 @@ public class EtapeVoyageController {
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
-		return "public/carnet";
+		return "voyages/carnet";
 	}
 	
 	

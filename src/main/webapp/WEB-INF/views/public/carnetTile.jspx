@@ -21,7 +21,8 @@
 					</i> Parcours
 			</h3>
 		</div>
-		<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>
+	
+	<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>
 		<form action="${etape_url}" method="GET" id="form_etape">
 				<div class="row">
 					<div class="col-lg-11">
@@ -101,9 +102,7 @@
 					</div>
 				</div>
 			</form>
-	</div>
-
-
+	
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -620,6 +619,26 @@
 			formId : "form_etape",
 			params : {
 				fragments : "smallTile, subuser"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "newVoyage",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "listVoyage",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
 			}
 		}));
 	</script>

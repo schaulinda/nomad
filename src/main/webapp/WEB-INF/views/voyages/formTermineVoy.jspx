@@ -18,18 +18,20 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<i class="icon-road"> <!-- co -->
-				</i> Nouveau Voyage
+				</i> Termine ce Voyage
 			</h3>
 		</div>
 		<c:if test="${not empty beanNoteBookManager.error}" >
 			<div class="alert alert-danger">${beanNoteBookManager.error}</div>
 		</c:if>
-		<spring:url value="/voyages/save" var="save_url"></spring:url>
-		<form:form action="${save_url}" method="GET" id="form_voyage" commandName="voyage"  >
-			<form:input path="title" cssClass="form-control" placeholder="Title" required="required" />
+		<spring:url value="/voyages/updateAndCloseVoy" var="updateAndCloseVoy_url"></spring:url>
+		<form:form action="${updateAndCloseVoy_url}" method="GET" id="form_voyage" commandName="voyage"  >
+			<label>Title</label>
+			<form:input path="title" cssClass="form-control" disabled="true" required="required" />
 			<br/>
+			<label>depart location</label>
 			<div class="input-group">
-				<form:input  id="depart" required="required" placeholder="depart location" cssClass="form-control adress"
+				<form:input  id="depart" required="required" disabled="true" cssClass="form-control adress"
 					 path="depart.location" autocomplete="off" />
 					 <form:hidden id="departLat" path="depart.lat" />
 					 <form:hidden	id="departLng" path="depart.lng" /> 
@@ -40,21 +42,22 @@
 				</a>
 			</div>
 			<br/>
+			<label>depart date</label>
 			<div class="input-group">
-				<form:input id="departDate" required="required" placeholder="depart date" cssClass="datepicker form-control" path="depart.day"
+				<form:input id="departDate" required="required" disabled="true" cssClass="datepicker form-control" path="depart.day"
 					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
 					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
 			</div>
 			<br/>
 			<div class="input-group">
-				<form:checkbox path="terminated" id="termined" />
+				<form:checkbox path="terminated"  id="termined" />
 				voyage deja termine?
 			</div>
 			<br/>
 			<div class="disabled" id="grouparrived" >
 				<label>arrived location</label>
 				<div class="input-group">
-				<form:input  id="arrived" cssClass="form-control adress" disabled="true"
+				<form:input  id="arrived" cssClass="form-control adress" 
 					required="required" path="arrived.location" autocomplete="off" />
 					 <form:hidden id="arrivedLat" path="arrived.lat" />
 					 <form:hidden	id="arrivedLng" path="arrived.lng" /> 
@@ -67,13 +70,13 @@
 			<br/>
 			<label>arrived date</label>
 			<div class="input-group">
-				<form:input id="arrivedDate" disabled="true" cssClass="datepicker form-control" path="arrived.day"
+				<form:input id="arrivedDate"  cssClass="datepicker form-control" path="arrived.day"
 					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
 					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
 			</div>
 			</div>
 			<br/>
-			<input type="submit" id="btn_save" value="save" class="btn btn-default btn-block" />
+			<input type="submit" value="save" id="btn_save" class="btn btn-default btn-block" />
 		</form:form>
 
 
@@ -97,36 +100,12 @@
 		}));
 	</script>
 	
-	
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
 			$(document)
 					.ready(
 							function() {
-								
-								/* reduice map if open */
-								if ($('#id_map').hasClass("col-lg-12")) {
-
-						$('#id_map').removeClass("col-lg-12");
-						$('#id_map').addClass("col-lg-6");
-
-						$('#smallTile').show();
-
-						$('.open').addClass("hide");
-						$('.closemap').removeClass("hide");
-
-						map = $("#map").gmap3('get');
-						google.maps.event.trigger(map, 'resize');
-						map.setZoom(map.getZoom());
-						var markIndic = $("#map").gmap3({
-							get : {
-								id : "indicator"
-							}
-						});
-						map.setCenter(markIndic.getPosition());
-						map.panToBounds(map.getBounds());
-					}
 								
 								/* ------------------disable and enable arrivedDate and arrived ------------------------------- */
 								$('#termined').click(
@@ -142,6 +121,22 @@
 												$('#arrivedDate').attr("disabled", true);
 											}
 										});
+								/* reduice map if open */
+							if ($('#id_map').hasClass("col-lg-12")) {
+
+						$('#id_map').removeClass("col-lg-12");
+						$('#id_map').addClass("col-lg-6");
+
+						$('#smallTile').show();
+
+						$('.open').addClass("hide");
+						$('.closemap').removeClass("hide");
+
+						map = $("#map").gmap3('get');
+						google.maps.event.trigger(map, 'resize');
+						map.setZoom(map.getZoom());
+						
+					}
 
 								/*put date on datepicker  */
 								$('.datepicker').datepicker();
