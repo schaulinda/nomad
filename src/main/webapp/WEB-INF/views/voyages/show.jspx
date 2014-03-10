@@ -9,5 +9,6 @@
         <field:display field="status" id="s_com_nomade_domain_Voyage_status" object="${voyage}" z="DrPPhrjE2twLzmgeZVt2JxOQDtk="/>
         <field:display field="nomade" id="s_com_nomade_domain_Voyage_nomade" object="${voyage}" z="OcbhZkfY7db33uvWeZAGGUbtjvs="/>
         <field:display field="terminated" id="s_com_nomade_domain_Voyage_terminated" object="${voyage}" z="cFY7rwl4NIke7qMNf7fUC62kFnw="/>
+        <field:display field="nbreParcours" id="s_com_nomade_domain_Voyage_nbreParcours" object="${voyage}" z="mH1hJsfH0YsayB9JEXy0iNxNsRo="/>
     </page:show>
 </div>

@@ -22,7 +22,7 @@
 			</h3>
 		</div>
 	<br/>
-	<div style="max-height: 500px;overflow-y: scroll;overflow-x:hidden " >
+	<div style="max-height: 500px;" >
 		<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
 			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >creer un nouveau voyage</a>
 			<br/>
@@ -33,7 +33,7 @@
 						<b>Titre: </b>${voyage.title} 
 					</div>
 					<div class="col-lg-6" >
-						<b>nbre de parcours: </b> 
+						<b>nbre de parcours: </b>${voyage.nbreParcours}
 					</div >
 				</div>
 				<div  class="row" >
@@ -56,9 +56,9 @@
 					</div >
 					<div class="col-lg-4" >
 						<spring:url value="/voyages/delete" var="supp_url" ></spring:url>
-						<spring:url value="/voyages/parcours" var="parcours_url" ></spring:url>
+						<spring:url value="/voyages/listParcours" var="parcours_url" ></spring:url>
 						<a href="${supp_url}?idV=${voyage.id}" id="supp_${voyage.id}" class="supp btn btn-default" style="margin-bottom: 3px;" >supprimer</a>
-						<a href="${parcours_url}?idV=${voyage.id}" id="parcours" class="btn btn-default" >parcours </a>
+						<a href="${parcours_url}?idV=${voyage.id}" id="parcours_${voyage.id}" class="parcours btn btn-default" >parcours </a>
 					</div>
 				</div>
 			</div>
@@ -86,6 +86,20 @@
 	</script>
 	<script type="text/javascript">
 	dojo.query(".supp").forEach(function(node, index, arr){
+		var id = dojo.attr(node,"id");
+		console.log(id);
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : id,
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+
+	});
+	</script>
+	<script type="text/javascript">
+	dojo.query(".parcours").forEach(function(node, index, arr){
 		var id = dojo.attr(node,"id");
 		console.log(id);
 		Spring.addDecoration(new Spring.AjaxEventDecoration({

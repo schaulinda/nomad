@@ -33,7 +33,9 @@ public boolean collision(Date depart, Date arrive, UserNomade nomad){
 	for(Voyage v : list){
 		
 		if(v.getDepart().getDay().before(depart) && v.getArrived().getDay().after(depart) 
-				|| v.getDepart().getDay().before(arrive) && v.getArrived().getDay().after(arrive)){
+				|| v.getDepart().getDay().before(arrive) && v.getArrived().getDay().after(arrive)
+				|| v.getDepart().getDay().after(depart) && v.getArrived().getDay().before(arrive)
+				||v.getDepart().getDay().equals(depart) && v.getArrived().equals(arrive)){
 			
 			bool = true;
 			break;

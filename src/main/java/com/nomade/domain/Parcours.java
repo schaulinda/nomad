@@ -25,6 +25,8 @@ public class Parcours {
 	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
 	private Date created = new Date();
 	
+	private int nbreEtape;
+	
 	@DBRef
 	private UserNomade nomad;
 	

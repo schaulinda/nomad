@@ -8,8 +8,8 @@
             <table:column id="c_com_nomade_domain_Voyage_depart" property="depart" z="Zvz2HoHGYTe7aBeOXteJDX5Y6M4="/>
             <table:column id="c_com_nomade_domain_Voyage_arrived" property="arrived" z="UMauZGMctOOduP9/oVF8GwVgspM="/>
             <table:column id="c_com_nomade_domain_Voyage_status" property="status" z="gaULfdJhZnX5cC+xLIJbZCP/Wog="/>
-            <table:column id="c_com_nomade_domain_Voyage_nomade" property="nomade" z="ENJFbAbc1Fnmnfo5sebdkeryWWo="/>
             <table:column id="c_com_nomade_domain_Voyage_terminated" property="terminated" z="y77xDZTM78iBw0fjTiW2ayf5ee0="/>
+            <table:column id="c_com_nomade_domain_Voyage_nbreParcours" property="nbreParcours" z="Nq8/j2B0s2eIbHGbXODkcVI8nv8="/>
         </table:table>
     </page:list>
 </div>

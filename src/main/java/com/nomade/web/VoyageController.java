@@ -6,16 +6,19 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nomade.domain.BeanNoteBookManager;
+import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
+import com.nomade.service.ParcoursService;
 import com.nomade.service.VoyageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +32,8 @@ public class VoyageController {
 	Security securite;
 	@Autowired
 	VoyageService voyService;
+	@Autowired
+	ParcoursService parcoursService;
 
 	@RequestMapping("/selectView")
 	public String selectView(HttpServletRequest request, Model uiModel) {
@@ -139,8 +144,17 @@ public class VoyageController {
 			uiModel.addAttribute("voyage", voyage);
 			return "voyages/formTermineVoy";
 		}else{
-			
 			Voyage voyage2 = voyageService.findByNomadeAndStatus(nomade,StatusVoyage.EN_COURS).get(0);
+			Parcours parcours = parcoursService.findByVoyageAndSortByDayDepart(voyage2).get(0);//get last parcours
+			if(voyage.getArrived().getDay().after(parcours.getArrived().getDay())){
+				
+				bookManager.setError("La date d'arrive du voyage doit etre plus future que tous ses parcours");
+				uiModel.addAttribute("beanNoteBookManager", bookManager);
+				uiModel.addAttribute("voyage", voyage);
+				return "voyages/formTermineVoy";
+				
+			}
+			
 			voyage2.getArrived().setDay(voyage.getArrived().getDay());
 			voyage2.getArrived().setLat(voyage.getArrived().getLat());
 			voyage2.getArrived().setLng(voyage.getArrived().getLng());
@@ -165,6 +179,87 @@ public class VoyageController {
 		uiModel.addAttribute("listVoy", listVoy);
 
 		return "voyages/listV";
+	}
+	
+	@RequestMapping("/listParcours")
+	public String listParcours(HttpServletRequest request, Model uiModel, @RequestParam("idV") String idV) {
+
+		UserNomade nomade = securite.getUserNomade();
+		Voyage voyage = voyageService.findVoyage(new BigInteger(idV));
+		List<Parcours> listP = parcoursService.findByVoyageAndSortByDayDepart(voyage);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("idV", idV);
+		uiModel.addAttribute("listP", listP);
+		uiModel.addAttribute("parcours", new Parcours());
+		return "voyages/listP";
+	}
+	
+	@RequestMapping("/deleteParcours")
+	public String deleteParcours(HttpServletRequest request, Model uiModel,
+			@RequestParam("idP") String idP, @PathVariable("idV") String idV) {
+
+		Parcours parcours = parcoursService.findParcours(new BigInteger(idP));
+		parcoursService.deleteParcours(parcours);
+
+		UserNomade nomade = securite.getUserNomade();
+		Voyage voyage = voyageService.findVoyage(new BigInteger(idV));
+		List<Parcours> listP = parcoursService.findByVoyageAndSortByDayDepart(voyage);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("idV", idV);
+		uiModel.addAttribute("listP", listP);
+		uiModel.addAttribute("parcours", new Parcours());
+		return "voyages/listP";
+	}
+	
+	@RequestMapping("/createParcours")
+	public String createParcours(HttpServletRequest request, Model uiModel,Parcours parcours, @RequestParam("idV") String idV) {
+		
+		UserNomade nomade = securite.getUserNomade();
+		Voyage voyage = voyageService.findVoyage(new BigInteger(idV));
+	
+		List<Parcours> listP = parcoursService.findByVoyageAndSortByDayDepart(voyage);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("listP", listP);
+		uiModel.addAttribute("idV", idV);
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		
+		if(parcours.getDepart().getDay()==null || parcours.getArrived().getDay()==null
+				|| parcours.getDepart().getLocation().isEmpty()|| parcours.getArrived().getLocation().isEmpty()){
+			
+			beanNoteBookManager.setError("Completer tous les champs!");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("parcours", parcours);
+			uiModel.addAttribute("listP", listP);
+			return "voyages/listP";
+		}
+			
+		
+		if(parcoursService.datesHorsScopeVoyage(parcours.getDepart().getDay(), parcours.getArrived().getDay(), voyage)){
+			beanNoteBookManager.setError("Les dates du parcours ne sont pas compris dans le voyage");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("parcours", parcours);
+			uiModel.addAttribute("listP", listP);
+			return "voyages/listP";
+		}
+		
+		if(parcoursService.datesInCollisionWithParcours(parcours.getDepart().getDay(), parcours.getArrived().getDay(), listP)){
+			beanNoteBookManager.setError("Les dates du parcours correspondent ou s'intefere a un autre parcours");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("parcours", parcours);
+			uiModel.addAttribute("listP", listP);
+			return "voyages/listP";
+		}
+		
+		voyage.setNbreParcours(voyage.getNbreParcours() + 1);
+		voyageService.updateVoyage(voyage);	
+		parcours.setVoyage(voyage);
+		parcoursService.saveParcours(parcours);
+		beanNoteBookManager.setNotify("yep");
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		uiModel.addAttribute("parcours", new Parcours());
+		List<Parcours> listP1 = parcoursService.findByVoyageAndSortByDayDepart(voyage);
+		uiModel.addAttribute("listP", listP1);
+		return "voyages/listP";
 	}
 
 	@RequestMapping("/save")

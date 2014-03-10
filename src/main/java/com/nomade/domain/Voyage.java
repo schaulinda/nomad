@@ -16,6 +16,7 @@ public class Voyage {
 	private Etape arrived;
 	private StatusVoyage status;
 	private boolean terminated;
+	private int nbreParcours = 0;
 	@DBRef
 	private UserNomade nomade;
 

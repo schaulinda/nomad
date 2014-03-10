@@ -50,6 +50,14 @@ privileged aspect Voyage_Roo_JavaBean {
         this.terminated = terminated;
     }
     
+    public int Voyage.getNbreParcours() {
+        return this.nbreParcours;
+    }
+    
+    public void Voyage.setNbreParcours(int nbreParcours) {
+        this.nbreParcours = nbreParcours;
+    }
+    
     public UserNomade Voyage.getNomade() {
         return this.nomade;
     }

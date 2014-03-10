@@ -358,7 +358,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Voyage, String> ApplicationConversionServiceFactoryBean.getVoyageToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.nomade.domain.Voyage, java.lang.String>() {
             public String convert(Voyage voyage) {
-                return new StringBuilder().append(voyage.getTitle()).toString();
+                return new StringBuilder().append(voyage.getTitle()).append(' ').append(voyage.getNbreParcours()).toString();
             }
         };
     }

@@ -120,7 +120,7 @@ public class PublicController {
 		}
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
-		//beanNomadeManager.setNomade(findUserNomade);
+		beanNomadeManager.setNomade(findUserNomade);
 		String makers = etapeService.buildMakers(findAllUserNomades,request);
 		beanNomadeManager.setMakers(makers);
 

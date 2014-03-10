@@ -9,6 +9,7 @@
         <field:select field="status" id="c_com_nomade_domain_Voyage_status" items="${statusvoyages}" path="statusvoyages" z="XNa9RuzS8gYbjr09QyoJJea2Znk="/>
         <field:input field="nomade" id="c_com_nomade_domain_Voyage_nomade" z="VEZvkriIw9H3tSOUkCBDZKnEvI4="/>
         <field:checkbox field="terminated" id="c_com_nomade_domain_Voyage_terminated" z="VqStzaloLhFVAAgZy7Tq7SyWNIo="/>
+        <field:input field="nbreParcours" id="c_com_nomade_domain_Voyage_nbreParcours" z="VuDcxbbEleGA0D2dXRi3v+aHmyk="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_Voyage" render="${not empty dependencies}" z="4t4MTYEKQF/0I8SobS6tzaY08W4="/>
 </div>

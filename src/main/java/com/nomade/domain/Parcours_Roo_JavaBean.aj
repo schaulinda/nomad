@@ -35,6 +35,14 @@ privileged aspect Parcours_Roo_JavaBean {
         this.created = created;
     }
     
+    public int Parcours.getNbreEtape() {
+        return this.nbreEtape;
+    }
+    
+    public void Parcours.setNbreEtape(int nbreEtape) {
+        this.nbreEtape = nbreEtape;
+    }
+    
     public UserNomade Parcours.getNomad() {
         return this.nomad;
     }

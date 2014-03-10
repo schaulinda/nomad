@@ -268,3 +268,5 @@ web mvc scaffold --backingType ~.domain.PointPacours --class ~.web.PointParcours
 web mvc scaffold --backingType ~.domain.Voyage --class ~.web.VoyageController
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-04 13:32:00
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-08 15:41:32
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-09 14:12:20
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-09 22:07:07
