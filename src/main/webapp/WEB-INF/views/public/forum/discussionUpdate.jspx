@@ -11,7 +11,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
-		<h1>Update topic</h1>
+		<h1>Update Discussion</h1>
 		
 		<spring:url value="/forum/discussions/update" var="update_discussion_url" />
 		<c:if test="${empty dateTimePattern}">

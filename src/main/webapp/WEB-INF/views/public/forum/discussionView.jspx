@@ -78,13 +78,29 @@
 							<div>${comment.commentaire}</div>
 						</td>
 						<td>
+						
 						<spring:url
 								value="/forum/discussions/${discussion.id }/comments/${comment.businessId }"
 								var="comment_url" />
-							<span>
-								 <a href="#" id = '${comment.businessId }'>edit</a>
-							</span>|
-							<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" /></td>
+								<c:if test="${pageContext['request'].userPrincipal != null}">
+									<c:choose>
+										<c:when test="${ comment.nomade.userName eq pageContext['request'].userPrincipal.name}">
+											<span>
+												<a href="#" id = '${comment.businessId }'>edit</a>
+											</span>|
+											<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+										</c:when>
+										<c:otherwise>
+											<sec:authorize ifAnyGranted="ROLE_ADMIN">
+												<span>
+												 	<a href="#" id = '${comment.businessId }'>edit</a>
+												</span>|
+												<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+											</sec:authorize>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</td>
 					</tr>
 				</c:forEach>
 			</tbody>

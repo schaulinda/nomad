@@ -35,6 +35,7 @@ import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
+import com.nomade.domain.UserNomade;
 import com.nomade.security.SecurityUtil;
 import com.nomade.service.DiscussionService;
 import com.nomade.service.SubTopicService;
@@ -339,6 +340,9 @@ public class ForumController {
 			Topic topic = topicService.findTopic(parentTopic);
 			subTopic.setParentTopic(topic);
 		}
+		if(subTopic.getConfidentiality() == null){//mean it was an unauthenticated user, that don't have access to the confidentiality combobox
+			subTopic.setConfidentiality(Confidentiality.Publique);
+		}
 		subTopic.setNomade(securityUtil.getUserNomade());
 		subTopic.setCreated(new Date());
 		subTopic = subTopicService.updateSubTopic(subTopic);
@@ -458,6 +462,9 @@ public class ForumController {
 		discussion.setSubTopic(subTopic);
 		discussion.setNomade(securityUtil.getUserNomade());
 		discussion.setCreated(new Date());
+		if(discussion.getConfidentiality() == null ){//mean it was an unauthenticated user, that don't have access to the confidentiality combobox
+			discussion.setConfidentiality(Confidentiality.Publique);
+		}
 		discussion.setComments(new HashSet<Comment>());
 		// actually, the #updateDiscussion method, save the object and return
 		// the saved object.
@@ -597,6 +604,13 @@ public class ForumController {
 		return CollectionUtil.getLastElement(comments);
 	}
 
+	/**
+	 * This method take a {@link Model uiModel} and populate it with <br />
+	 * <ul>
+	 * 	<li>{@link Confidentiality confidentiality}</li>
+	 * </ul>
+	 * @param uiModel
+	 */
 	public void populateModel(Model uiModel) {
 		addDateTimeFormatPatterns(uiModel,"");
 		uiModel.addAttribute("confidentialities", Arrays.asList(

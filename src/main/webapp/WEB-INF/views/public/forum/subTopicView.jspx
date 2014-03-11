@@ -8,6 +8,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:sec="http://www.springframework.org/security/tags"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -57,13 +58,13 @@
 							placeholder="type the content..." />
 					</div>
 
-					<!-- 					<sec:authorize access="isAuthenticated()" > -->
-					<div class="form-group">
-						<label>Confidentiality</label>
-						<form:select path="confidentiality" cssClass="form-control"
-							items="${confidentialities}" placeholder="Confidentiality" />
-					</div>
-					<!-- 					</sec:authorize> -->
+					<sec:authorize access="isAuthenticated()" >
+						<div class="form-group">
+							<label>Confidentiality</label>
+							<form:select path="confidentiality" cssClass="form-control"
+								items="${confidentialities}" placeholder="Confidentiality" />
+						</div>
+					</sec:authorize>
 					<button class="btn" data-dismiss="modal" aria-hidden="true"
 						id="btnCloseDiscussionDialog" type="reset">Close</button>
 					<button class="btn btn-primary" type="submit">Save changes</button>
@@ -92,13 +93,13 @@
 							placeholder="title" />
 					</div>
 
-					<!-- 					<sec:authorize access="isAuthenticated()" > -->
-					<div class="form-group">
-						<label>Confidentiality</label>
-						<form:select path="confidentiality" cssClass="form-control"
-							items="${confidentialities}" placeholder="Confidentiality" />
-					</div>
-					<!-- 					</sec:authorize> -->
+					<sec:authorize access="isAuthenticated()" >
+						<div class="form-group">
+							<label>Confidentiality</label>
+							<form:select path="confidentiality" cssClass="form-control"
+								items="${confidentialities}" placeholder="Confidentiality" />
+						</div>
+					</sec:authorize>
 					<div>
 						<span>Content</span>
 						<form:textarea path="content" cssClass="form-control"
@@ -132,9 +133,24 @@
 						</td>
 						<td>${discussion.content }</td>
 						<td>${discussion.created }</td>
-						<td><spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />| 
-						<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a> | 
-						<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
+						<td>
+							<c:if test="${pageContext['request'].userPrincipal != null}">
+								<spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />
+										<c:choose>
+											<c:when test="${ discussion.nomade.userName eq pageContext['request'].userPrincipal.name}">
+												| 
+												<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a> | 
+												<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />	
+											</c:when>
+											<c:otherwise>
+												<sec:authorize ifAnyGranted="ROLE_ADMIN">
+													| 
+													<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a> | 
+													<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
+												</sec:authorize>
+											</c:otherwise>
+										</c:choose>
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

@@ -6,6 +6,7 @@
 	xmlns:form="http://www.springframework.org/tags/form"
 	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
@@ -44,16 +45,28 @@
 				<c:forEach items="${subTopicToBeans }" var="subTopicToBean">
 					<tr>
 						<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id }" var="subtopic_url" />
-						<td> <a href="${subtopic_url }" >${subTopicToBean.subTopic.title }</a> </td>
+						<td> <a href="${subtopic_url }" id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link" >${subTopicToBean.subTopic.title }</a> </td>
 						<td>${subTopicToBean.subTopic.content }</td>
 						<td>${subTopicToBean.subTopic.created }</td>
 						<td>${subTopicToBean.numberOfDiscussion}</td>
 						<td>${subTopicToBean.numberOfMessage }</td>
 						<td>${subTopicToBean.lastMessageDate }</td>
 						<td>
-							<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
-							<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
-							<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+							<c:if test="${pageContext['request'].userPrincipal != null}">
+									<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
+									<c:choose>
+										<c:when test="${ subTopicToBean.subTopic.nomade.userName eq pageContext['request'].userPrincipal.name}">
+											<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
+											<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+										</c:when>
+										<c:otherwise>
+											<sec:authorize ifAnyGranted="ROLE_ADMIN">
+												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
+												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+											</sec:authorize>
+										</c:otherwise>
+									</c:choose>
+						</c:if>
 						</td>
 					</tr>
 				</c:forEach>
@@ -64,6 +77,22 @@
 	
 	<script type="text/javascript">
 		dojo.query(".update_subtopic_link").forEach(
+				function(node, index, arr) {
+					var id = dojo.attr(node, "id");
+					console.log(id);
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "body"
+						}
+					}));
+
+				});
+	</script>
+		
+	<script type="text/javascript">
+		dojo.query(".see_subtopic_link").forEach(
 				function(node, index, arr) {
 					var id = dojo.attr(node, "id");
 					console.log(id);
