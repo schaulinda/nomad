@@ -50,4 +50,25 @@ public boolean collision(Date depart, Date arrive, UserNomade nomad){
 	return bool;
 }
 
+public boolean collision(Date depart, UserNomade nomad){
+	
+	List<Voyage> list = voyageRepository.findByNomadeAndStatus(nomad, StatusVoyage.TERMINE);
+	boolean bool=false;
+	for(Voyage v : list){
+		
+		if(v.getDepart().getDay().before(depart) && v.getArrived().getDay().after(depart)){
+			
+			bool = true;
+			break;
+			
+		}else{
+			
+			bool = false;
+		}
+	
+	}
+	
+	return bool;
+}
+
 }

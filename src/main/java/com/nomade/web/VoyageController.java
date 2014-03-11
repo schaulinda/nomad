@@ -10,9 +10,11 @@ import com.nomade.domain.Etape;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.VehiculeState;
 import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
 import com.nomade.service.ParcoursService;
+import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
 import com.nomade.tools.IdGenerator;
 
@@ -36,6 +38,7 @@ public class VoyageController {
 	VoyageService voyService;
 	@Autowired
 	ParcoursService parcoursService;
+	UserService service;
 
 	@RequestMapping("/selectView")
 	public String selectView(HttpServletRequest request, Model uiModel) {
@@ -147,14 +150,20 @@ public class VoyageController {
 			return "voyages/formTermineVoy";
 		}else{
 			Voyage voyage2 = voyageService.findByNomadeAndStatus(nomade,StatusVoyage.EN_COURS).get(0);
-			Parcours parcours = parcoursService.findByVoyageAndSortByDayDepart(voyage2).get(0);//get last parcours
-			if(voyage.getArrived().getDay().after(parcours.getArrived().getDay())){
+			List<Parcours> listParcours = parcoursService.findByVoyageAndSortByDayDepart(voyage2);
+			
+			if(listParcours !=null && listParcours.size() > 0){//si existe un parcours
 				
-				bookManager.setError("La date d'arrive du voyage doit etre plus future que tous ses parcours");
-				uiModel.addAttribute("beanNoteBookManager", bookManager);
-				uiModel.addAttribute("voyage", voyage);
-				return "voyages/formTermineVoy";
-				
+			
+				Parcours parcours = listParcours.get(0);//get last parcours
+				if(voyage.getArrived().getDay().before(parcours.getArrived().getDay())){
+					
+					bookManager.setError("La date d'arrive du voyage doit etre plus future que tous ses parcours");
+					uiModel.addAttribute("beanNoteBookManager", bookManager);
+					uiModel.addAttribute("voyage", voyage);
+					return "voyages/formTermineVoy";
+					
+				}
 			}
 			
 			voyage2.getArrived().setDay(voyage.getArrived().getDay());
@@ -400,22 +409,16 @@ public class VoyageController {
 			}
 		} else {// aucun voyage en cours existant, faut juste verifier les dates
 				// avec dautre voy termine pr pas de collison
-
+			if (voyage.isTerminated()
+					&& voyage.getArrived().getLocation() != null
+					&& voyage.getArrived().getDay() != null) {
+			
 			if (voyageService.collision(voyage.getDepart().getDay(), voyage
 					.getArrived().getDay(), nomade) == false) {
 				
-				if (voyage.isTerminated()
-						&& voyage.getArrived().getLocation() != null
-						&& voyage.getArrived().getDay() != null) {
-					
-					voyage.setStatus(StatusVoyage.TERMINE);
-					
-				}else{
-					voyage.setStatus(StatusVoyage.EN_COURS);
-				}
-
-				// pas de collision avec les existants voyage
 				
+				// pas de collision avec les existants voyage
+				voyage.setStatus(StatusVoyage.TERMINE);
 				voyage.setNomade(nomade);
 				voyageService.saveVoyage(voyage);
 				BeanNoteBookManager bookManager = new BeanNoteBookManager();
@@ -432,6 +435,32 @@ public class VoyageController {
 				uiModel.addAttribute("voyage", voyage);
 				return "voyages/new";
 			}
+		}else{//aucun voyage existant et le voyage actuel ne pas termine
+			
+			if (voyageService.collision(voyage.getDepart().getDay(), nomade) == false) {
+				
+				
+				// pas de collision avec les existants voyage
+				voyage.setStatus(StatusVoyage.EN_COURS);
+				nomade.getVehicule().setVehiculeState(VehiculeState.onTheRoad);
+				userService.updateUserNomade(nomade);
+				voyage.setNomade(nomade);
+				voyageService.saveVoyage(voyage);
+				BeanNoteBookManager bookManager = new BeanNoteBookManager();
+				uiModel.addAttribute("beanNoteBookManager", bookManager);
+				bookManager.setNotify("yep");
+				return "voyages/carnet";
+
+			} else {// collison avec ancien voy
+
+				BeanNoteBookManager bookManager = new BeanNoteBookManager();
+				bookManager
+						.setError("la date de depart appartient a dans l'intervalle de temps d'un autre voyage");
+				uiModel.addAttribute("beanNoteBookManager", bookManager);
+				uiModel.addAttribute("voyage", voyage);
+				return "voyages/new";
+			}
+		}
 
 		}
 	}

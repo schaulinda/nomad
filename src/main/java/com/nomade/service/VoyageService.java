@@ -16,5 +16,6 @@ public interface VoyageService {
 	public List<Voyage> findByNomadeAndStatus(UserNomade nomad, StatusVoyage status);
 	public List<Voyage> findVoyageEnCours(UserNomade nomad);
 	public boolean collision(Date depart, Date arrive, UserNomade nomad);
+	public boolean collision(Date depart, UserNomade nomad);
 	
 }
