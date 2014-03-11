@@ -15,6 +15,8 @@ public class BeanNoteBookManager {
 	
 	private String notify;
 	
+	private String error;
+	
 	private List<Etape> listParcours;
 
 	public EtapeVoyage getEtapeVoyage() {
@@ -55,6 +57,14 @@ public class BeanNoteBookManager {
 
 	public void setEtapes(List<Etape> etapes) {
 		this.etapes = etapes;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public void setError(String error) {
+		this.error = error;
 	}
 
 }

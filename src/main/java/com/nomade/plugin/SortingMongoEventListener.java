@@ -64,12 +64,15 @@ public class SortingMongoEventListener extends AbstractMongoEventListener {
     	  if(fieldValue!=null){
 	          if (ClassUtils.isAssignable(List.class, fieldValue.getClass())) {
 	              final List list = (List) fieldValue;
-	              
+	              if(list.size() > 0){
 	              if (orderBy.order() == Order.ASCENDING) {
-	                  Collections.sort(list, new BeanComparator(orderBy.value()));
+	                  //Collections.sort(list, new BeanComparator(orderBy.value()));
+	            	  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
+	            	  Collections.reverse(list);
 	              } else {
 	                  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
 	                 
+	              }
 	              }
 	          }
     	  }

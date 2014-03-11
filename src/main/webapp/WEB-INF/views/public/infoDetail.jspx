@@ -126,7 +126,9 @@
 									class="username" >${comment.nomade.userName}</a>
 								</div>
 								<div class="comment-text">${comment.commentaire}</div>
-								<div class="mic-info">${comment.created}</div>
+								<fmt:formatDate value="${comment.created}" var="cc"
+									pattern="dd-MM-yyyy hh:mm" />
+								<div class="mic-info">${cc}</div>
 							</div>
 						</div>
 					</li>
@@ -138,6 +140,7 @@
 						<spring:message code="input.addNewComment"
 							var="inputAddNewComment" />
 						<input type="hidden" value="${infoPratique.id}" name="InfoId" />
+						<input type="hidden" value="${back}" name="cameFrom" />
 						<textarea id="commentaireInfo" name="commentaireInfo"
 							class="form-control" placeholder="${inputAddNewComment}">
 										<!--co  -->

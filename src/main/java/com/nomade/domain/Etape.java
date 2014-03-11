@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
@@ -19,14 +20,15 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJson
 public class Etape {
 	
+	private String code;
 	private String location;
 	private double lat;
 	private double lng;
 	private double[] coord;
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-	private Date day = new Date();
-	private UserNomade nomad;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date day;
+	
 
 	
 	 public void setLat(double lat) {

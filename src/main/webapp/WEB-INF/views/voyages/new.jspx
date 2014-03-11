@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="smallTile" class="tab-pane fade in active col-lg-6"
+	style="margin-left: -16px;"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+	<spring:url value="/voyage/select" var="voyage_url"></spring:url>
+
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-road"> <!-- co -->
+				</i> Nouveau Voyage
+			</h3>
+		</div>
+		<c:if test="${not empty beanNoteBookManager.error}" >
+			<div class="alert alert-danger">${beanNoteBookManager.error}</div>
+		</c:if>
+		<spring:url value="/voyages/save" var="save_url"></spring:url>
+		<form:form action="${save_url}" method="GET" id="form_voyage" commandName="voyage"  >
+			<form:input path="title" cssClass="form-control" placeholder="Title" required="required" />
+			<br/>
+			<div class="input-group">
+				<form:input  id="depart" required="required" placeholder="depart location" cssClass="form-control adress"
+					 path="depart.location" autocomplete="off" />
+					 <form:hidden id="departLat" path="depart.lat" />
+					 <form:hidden	id="departLng" path="depart.lng" /> 
+					 <a href="#" class="mapPicker input-group-addon" id="depart-picker"> 
+					 <span class=""> 
+					 	<i class="icon-screenshot"> <!-- co --></i>
+					</span>
+				</a>
+			</div>
+			<br/>
+			<div class="input-group">
+				<form:input id="departDate" required="required" placeholder="depart date" cssClass="datepicker form-control" path="depart.day"
+					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
+					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+			</div>
+			<br/>
+			<div class="input-group">
+				<form:checkbox path="terminated" id="termined" />
+				voyage deja termine?
+			</div>
+			<br/>
+			<div class="disabled" id="grouparrived" >
+				<label>arrived location</label>
+				<div class="input-group">
+				<form:input  id="arrived" cssClass="form-control adress" disabled="true"
+					required="required" path="arrived.location" autocomplete="off" />
+					 <form:hidden id="arrivedLat" path="arrived.lat" />
+					 <form:hidden	id="arrivedLng" path="arrived.lng" /> 
+					 <a href="#" class="mapPicker input-group-addon" id="arrived-picker"> 
+					 <span class=""> 
+					 	<i class="icon-screenshot"> <!-- co --></i>
+					</span>
+				</a>
+			</div>
+			<br/>
+			<label>arrived date</label>
+			<div class="input-group">
+				<form:input id="arrivedDate" disabled="true" cssClass="datepicker form-control" path="arrived.day"
+					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
+					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+			</div>
+			</div>
+			<br/>
+			<input type="submit" id="btn_save" value="save" class="btn btn-default btn-block" />
+		</form:form>
+
+
+	</div>
+	
+	
+	<script type="text/javascript">
+		dojo.ready(function() {
+			new stuff().addAjaxPublicPage();
+		});
+	</script>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_save",
+			event : "onclick",
+			formId : "form_voyage",
+			params : {
+				fragments : "smallTile, topheader, subuser"
+			}
+		}));
+	</script>
+	
+	
+	<script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			$(document)
+					.ready(
+							function() {
+								
+								/* reduice map if open */
+								if ($('#id_map').hasClass("col-lg-12")) {
+
+						$('#id_map').removeClass("col-lg-12");
+						$('#id_map').addClass("col-lg-6");
+
+						$('#smallTile').show();
+
+						$('.open').addClass("hide");
+						$('.closemap').removeClass("hide");
+
+						map = $("#map").gmap3('get');
+						google.maps.event.trigger(map, 'resize');
+						map.setZoom(map.getZoom());
+						var markIndic = $("#map").gmap3({
+							get : {
+								id : "indicator"
+							}
+						});
+						map.setCenter(markIndic.getPosition());
+						map.panToBounds(map.getBounds());
+					}
+								
+								/* ------------------disable and enable arrivedDate and arrived ------------------------------- */
+								$('#termined').click(
+										function() {
+
+											var bol = $('#termined').attr("checked");
+											console.log(bol);
+											if (bol == "checked") {
+												$('#arrived').attr("disabled", false);
+												$('#arrivedDate').attr("disabled", false);
+											} else {
+												$('#arrived').attr("disabled", true);
+												$('#arrivedDate').attr("disabled", true);
+											}
+										});
+
+								/*put date on datepicker  */
+								$('.datepicker').datepicker();
+							
+							decoration =function(){
+								/* -------------tooltip for adresspicker--------------- */
+								
+								
+								$('.mapPicker').tooltip({
+									trigger: 'hover',
+									title: 'click and drag and drop violet marker, to get location'
+								});
+								
+								/* ------------------click on mapPicker----------------- */
+								$('.mapPicker').click(function(){
+									var id = $(this).attr("id");
+									var tab = id.split("-");
+									$.session.set('mapPicker', tab[0]);
+									
+									
+									/*ogment map -------------- */
+									$('#smallTile').hide();
+									
+									$('#id_map').removeClass("col-lg-6");
+									$('#id_map').addClass("col-lg-12");
+									
+									$('.closemap').addClass("hide");
+									$('.open').removeClass("hide");
+									
+									map = $("#map").gmap3('get');	
+									google.maps.event.trigger(map, 'resize');					
+									map.setZoom(map.getZoom());
+									
+								});
+								
+								/*autocompletion adress picker */
+								var geocoder = new google.maps.Geocoder();
+								$('.adress').autocomplete(
+												{
+													source : function(request,response) {
+														geocoder.geocode({
+																			'address' : request.term
+																		},
+																		function(
+																				results,
+																				status) {
+																			response($.map(results,function(item) {
+																								return {
+																									value : item.formatted_address,
+																									location : item.geometry.location
+																								};
+																							}));
+																		});
+													},
+													select : function(event, ui) {
+														var map = $("#map").gmap3('get');
+														map.setCenter(ui.item.location);
+														map.setZoom(5);
+														
+														var idInput = $(".adress:focus").attr("id");
+														$('#'+idInput+'Lat').val(ui.item.location.lat());
+														$('#'+idInput+'Lng').val(ui.item.location.lng());
+													}
+												});
+							}
+							decoration();
+								
+							});
+		})(jQuery);
+	</script>
+
+</div>

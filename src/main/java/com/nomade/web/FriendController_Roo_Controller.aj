@@ -5,7 +5,6 @@ package com.nomade.web;
 
 import com.nomade.domain.FriendState;
 import com.nomade.domain.Relation;
-import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 import com.nomade.web.FriendController;
 import java.io.UnsupportedEncodingException;
@@ -24,9 +23,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect FriendController_Roo_Controller {
-    
-    @Autowired
-    RelationService FriendController.relationService;
     
     @Autowired
     UserService FriendController.userService;

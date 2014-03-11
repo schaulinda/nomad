@@ -4,10 +4,17 @@
 package com.nomade.domain;
 
 import com.nomade.domain.Etape;
-import com.nomade.domain.UserNomade;
 import java.util.Date;
 
 privileged aspect Etape_Roo_JavaBean {
+    
+    public String Etape.getCode() {
+        return this.code;
+    }
+    
+    public void Etape.setCode(String code) {
+        this.code = code;
+    }
     
     public String Etape.getLocation() {
         return this.location;
@@ -39,14 +46,6 @@ privileged aspect Etape_Roo_JavaBean {
     
     public void Etape.setDay(Date day) {
         this.day = day;
-    }
-    
-    public UserNomade Etape.getNomad() {
-        return this.nomad;
-    }
-    
-    public void Etape.setNomad(UserNomade nomad) {
-        this.nomad = nomad;
     }
     
 }

@@ -37,9 +37,9 @@ public class ParcoursDataOnDemand {
 	public Parcours getNewTransientParcours(int index) {
         Parcours obj = new Parcours();
         setCreated(obj, index);
-        setEnd(obj, index);
+        
         setNomad(obj, index);
-        setStart(obj, index);
+       
         return obj;
     }
 
@@ -48,44 +48,7 @@ public class ParcoursDataOnDemand {
         obj.setCreated(created);
     }
 
-	public void setEnd(Parcours obj, int index) {
-       if(index==1){
-		double[] end = { 48.890681,2.335911 };
-        obj.setEnd(end);
-        String endAdress = "France ,paris 18e arrondissement";
-        obj.setEndAdress(endAdress);
-       }
-       if(index==2){
-   		double[] end = { 48.890681,2.335911 };
-           obj.setEnd(end);
-           String endAdress = "yaounde";
-           obj.setEndAdress(endAdress);
-          }
-       if(index==3){
-   		double[] end = { 48.890681,2.335911 };
-           obj.setEnd(end);
-           String endAdress = "Franckfort";
-           obj.setEndAdress(endAdress);
-          }
-       if(index==4){
-   		double[] end = { 48.890681,2.335911 };
-           obj.setEnd(end);
-           String endAdress = "douala";
-           obj.setEndAdress(endAdress);
-          }
-       if(index==5){
-   		double[] end = { 48.890681,2.335911 };
-           obj.setEnd(end);
-           String endAdress = "nantes";
-           obj.setEndAdress(endAdress);
-          }else{
-        	  double[] end = { new Integer(index).doubleValue(), new Integer(index).doubleValue() };
-              obj.setEnd(end);
-              String endAdress = "endAdress"+index;
-              obj.setEndAdress(endAdress);
-          }
-     
-    }
+	
 
 
 	public void setNomad(Parcours obj, int index) {
@@ -93,52 +56,7 @@ public class ParcoursDataOnDemand {
         obj.setNomad(nomad);
     }
 
-	public void setStart(Parcours obj, int index) {
-		
-		if(index==1){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "Accra";
-	        obj.setEndAdress(startAdress);
-	       }
-		if(index==1){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "berlin";
-	        obj.setEndAdress(startAdress);
-	       }
-		if(index==2){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "bulgare";
-	        obj.setEndAdress(startAdress);
-	       }
-		if(index==3){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "abidjan";
-	        obj.setEndAdress(startAdress);
-	       }
-		if(index==4){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "doha";
-	        obj.setEndAdress(startAdress);
-	       }
-		if(index==5){
-			double[] start = { 48.890681,2.335911 };
-			obj.setStart(start);
-	        String startAdress = "dubai";
-	        obj.setEndAdress(startAdress);
-	       }else{
-	    	   double[] start = { new Integer(index).doubleValue(), new Integer(index).doubleValue() };
-	           obj.setStart(start);
-	           String startAdress = "startAdress_" + index;
-	           obj.setStartAdress(startAdress);
-	       }
-        
-    }
-
+	
 
 	public Parcours getSpecificParcours(int index) {
         init();

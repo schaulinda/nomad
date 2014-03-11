@@ -61,7 +61,9 @@
 					href="${public_url}/itineraire" id="id_itineraireLink"> <spring:message
 							code="a.itinerary" />
 				</a></li>
-				<li class="${carnetOnglet}"><a href="${public_url}/carnet"
+				<li class="${carnetOnglet}">
+				<spring:url value="/voyages/selectView" var="voyage_url"></spring:url>
+				<a href="${voyage_url}"
 					id="id_carnetLink"> <spring:message code="a.logBook" />
 				</a></li>
 			</ul>
@@ -70,7 +72,7 @@
 		   <div class="row">
 		   <spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 		      <div class="col-lg-10 col-md-10 col-sm-6 col-xs-6">
-						<select id="vehiculeState" class="pull-right form-control" >
+						<select id="vehiculeState_header" class="pull-right form-control" >
 							<spring:message code="option.withoutvehicle" var="withoutvehicle" />
 							<spring:message code="option.lookingForBuy" var="lookingForBuy" />
 							<spring:message code="option.lookingForSale" var="lookingForSale" />
@@ -78,6 +80,7 @@
 							<spring:message code="option.stopOver" var="stopOver" />
 							<spring:message code="option.inRepair" var="inRepair" />
 							<spring:message code="option.backToHome" var="backToHome" />
+							<spring:message code="option.inPreparation" var="inPreparation" text="in Preparation" />
 							
 							
 							<c:if test="${nomade.vehicule.vehiculeState == 'withoutvehicle'}">
@@ -164,6 +167,12 @@
 								${backToHome}
 							</option>
 							</c:if>
+							<c:if test="${nomade.vehicule.vehiculeState != 'inPreparation'}">
+							
+							<option value="inPreparation" data-description="${inPreparation}" data-imagesrc="${iconstatut_url}/inPreparation.png" >
+								${inPreparation}
+							</option>
+							</c:if>
 							
 						</select>
 						<a id="link_statutVeh" href="${updateVehState}" style="display: none;" ><!--co  --></a>
@@ -192,6 +201,8 @@
 		<div class="hide" id="grpLink">
 		<!--link for D/I  -->
 		</div>
+		<spring:url value="/voyages/formTermineVoy" var="formTermineVoy_url" ></spring:url>
+		<a id="formTermineVoy" href="${formTermineVoy_url}" class="hide" ><!-- co --></a>
 	</div>
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
@@ -211,6 +222,15 @@
 			}
 		}));
 	</script>
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "formTermineVoy",
+			event : "onclick",
+			params : {
+				fragments : "smallTile"
+			}
+		}));
+	</script>
 
 	<script type="text/javascript">
 		jQuery.noConflict();
@@ -218,28 +238,38 @@
 			
 			$(document).ready(function() {
 				
-				
+				/* event on formTermineVoy */
+				$("#formTermineVoy").click(function(event){
+					event.stopPropagation();
+				});
 
-				/* ddslick for vehiculeState */
-				$('#vehiculeState').ddslick({
+				/* ddslick for vehiculeState_header */
+				$('#vehiculeState_header').ddslick({
 				    width:230,
 				    selectText: "Statut vehicule",
 				    imagePosition:"right",
 				    onSelected: function(selectedData){
 				    	
-				    	$('#vehiculeState .dd-selected-value').each(function(){
+				    	$('#vehiculeState_header .dd-selected-value').each(function(){
 				    		
+				    		var state = '${nomade.vehicule.vehiculeState}';
 				    		var val = $(this).val();
 				    		
+				    		if(val!=state){
 				    		$.get("${updateVehState}/"+val,
 				    				{
 
 							}, function(data, status) {
 
 								console.log(data);
+								if(val=="backToHome"){
+									document.getElementById("formTermineVoy").click();
+									
+								}
 								
 
 							});
+				    	 }
 				    	});
 				    	
 				       

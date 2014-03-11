@@ -60,5 +60,13 @@
         <menu:category id="c_comment" z="KpI9zqkdeE9bZ8zxvHTXU6Lm24s=">
             <menu:item id="i_comment_new" messageCode="global_menu_new" url="/comments?form" z="q921JBcftknHR9qtTYaac8JDm7g="/>
         </menu:category>
+        <menu:category id="c_pointpacours" z="5/Hu3+gksQadFRKqRbplxMvfDRU=">
+            <menu:item id="i_pointpacours_new" messageCode="global_menu_new" url="/pointpacourses?form" z="YFjcABWc92e+HHTKMIovFYcj+P0="/>
+            <menu:item id="i_pointpacours_list" messageCode="global_menu_list" url="/pointpacourses?page=1&amp;size=${empty param.size ? 10 : param.size}" z="tkmqanylouiOygM6rEDpQ4zA1Wc="/>
+        </menu:category>
+        <menu:category id="c_voyage" z="Kv9bcBVR/ZGC1qsFf2JWtWu+WV0=">
+            <menu:item id="i_voyage_new" messageCode="global_menu_new" url="/voyages?form" z="JDbnAS9jkxo6EF/UNdvG+MaiB1U="/>
+            <menu:item id="i_voyage_list" messageCode="global_menu_list" url="/voyages?page=1&amp;size=${empty param.size ? 10 : param.size}" z="2pgZcNQl1X1zI05q8wK0CcU/UVc="/>
+        </menu:category>
     </menu:menu>
 </div>

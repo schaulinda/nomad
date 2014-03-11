@@ -116,7 +116,7 @@ public class CommentController {
 	//add comment on detail info
 	@RequestMapping("/addCommentInfo")
 	public String addCommentInfo(@RequestParam("InfoId")String etapeId,  
-			@RequestParam("commentaireInfo")String commentaire, HttpServletRequest request, Model uiModel) {
+			@RequestParam("commentaireInfo")String commentaire, @RequestParam("cameFrom")String cameFrom, HttpServletRequest request, Model uiModel) {
 		
 		InfoPratique info = infoPratiqueService.findInfoPratique(new BigInteger(etapeId));
 		UserNomade nomade = info.getNomade();
@@ -128,6 +128,12 @@ public class CommentController {
 		info.getComments().add(comment);
 		infoPratiqueService.updateInfoPratique(info);
 		
+		if("map".equals(cameFrom)){
+       		uiModel.addAttribute("back", "itineraire");
+       	}else{
+       		uiModel.addAttribute("back", "formfinditineraire");
+       	}
+		
 		InfoPratique infoPratique = infoPratiqueService.findInfoPratique(info.getId());
        	uiModel.addAttribute("infoPratique", infoPratique);
        	uiModel.addAttribute("nomade", nomade);
@@ -137,7 +143,7 @@ public class CommentController {
 	//add comment on detail danger
 	@RequestMapping("/addCommentDanger")
 	public String addCommentDanger(@RequestParam("InfoId")String etapeId,  
-			@RequestParam("commentaireInfo")String commentaire, HttpServletRequest request, Model uiModel) {
+			@RequestParam("commentaireInfo")String commentaire, @RequestParam("cameFrom")String cameFrom, HttpServletRequest request, Model uiModel) {
 		
 		DangerPratique danger = dangerPratiqueService.findDangerPratique(new BigInteger(etapeId));
 		UserNomade nomade = danger.getNomade();
@@ -148,6 +154,12 @@ public class CommentController {
 		
 		danger.getComments().add(comment);
 		dangerPratiqueService.updateDangerPratique(danger);
+		
+		if("map".equals(cameFrom)){
+       		uiModel.addAttribute("back", "itineraire");
+       	}else{
+       		uiModel.addAttribute("back", "formfinditineraire");
+       	}
 		
 		DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(danger.getId());
        	uiModel.addAttribute("dangerPratique", dangerPratique);

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_Voyage" items="${voyages}" z="5Qgy9IVH5VdItP4/7XcDsCDoquk=">
+        <table:table data="${voyages}" id="l_com_nomade_domain_Voyage" path="/voyages" z="ahWp2k7VMwZi7WKCZWgv+gQZ9Ek=">
+            <table:column id="c_com_nomade_domain_Voyage_title" property="title" z="fwhngftd4a0kHnabhDIsX+P6b/I="/>
+            <table:column id="c_com_nomade_domain_Voyage_depart" property="depart" z="Zvz2HoHGYTe7aBeOXteJDX5Y6M4="/>
+            <table:column id="c_com_nomade_domain_Voyage_arrived" property="arrived" z="UMauZGMctOOduP9/oVF8GwVgspM="/>
+            <table:column id="c_com_nomade_domain_Voyage_status" property="status" z="gaULfdJhZnX5cC+xLIJbZCP/Wog="/>
+            <table:column id="c_com_nomade_domain_Voyage_terminated" property="terminated" z="y77xDZTM78iBw0fjTiW2ayf5ee0="/>
+            <table:column id="c_com_nomade_domain_Voyage_nbreParcours" property="nbreParcours" z="Nq8/j2B0s2eIbHGbXODkcVI8nv8="/>
+        </table:table>
+    </page:list>
+</div>

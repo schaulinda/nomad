@@ -103,7 +103,7 @@ public class EtapeVoyageController {
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
-		return "public/carnet";
+		return "voyages/carnet";
 	}
 	
 	
@@ -123,7 +123,7 @@ public class EtapeVoyageController {
 		        if(!vals[0].equals("")){
 		        	
 		        	Etape etape = new Etape();
-		        	etape.setNomad(nomade);
+		        	//etape.setNomad(nomade);
 		        	etape.setLocation(vals[0]);
 		        	try {
 						double double1 = Double.parseDouble(vals[1]);
