@@ -8,6 +8,14 @@ import java.util.Date;
 
 privileged aspect Etape_Roo_JavaBean {
     
+    public String Etape.getCode() {
+        return this.code;
+    }
+    
+    public void Etape.setCode(String code) {
+        this.code = code;
+    }
+    
     public String Etape.getLocation() {
         return this.location;
     }

@@ -67,7 +67,7 @@ public class ParcoursServiceImpl implements ParcoursService {
 	
 	public List<Parcours> findByVoyageAndSortByDayDepart(Voyage voyage){
 		
-		Sort sort = new Sort(Direction.DESC, "depart.day");
+		Sort sort = new Sort(Direction.ASC, "depart.day");
 		
 		return parcoursRepository.findByVoyage(voyage, sort);
 	}

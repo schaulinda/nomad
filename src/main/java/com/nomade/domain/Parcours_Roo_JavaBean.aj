@@ -8,6 +8,7 @@ import com.nomade.domain.Parcours;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Voyage;
 import java.util.Date;
+import java.util.List;
 
 privileged aspect Parcours_Roo_JavaBean {
     
@@ -57,6 +58,14 @@ privileged aspect Parcours_Roo_JavaBean {
     
     public void Parcours.setVoyage(Voyage voyage) {
         this.voyage = voyage;
+    }
+    
+    public List<Etape> Parcours.getEtapes() {
+        return this.etapes;
+    }
+    
+    public void Parcours.setEtapes(List<Etape> etapes) {
+        this.etapes = etapes;
     }
     
 }

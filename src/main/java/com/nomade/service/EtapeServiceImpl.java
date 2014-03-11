@@ -12,6 +12,10 @@ import com.nomade.domain.UserNomade;
 
 public class EtapeServiceImpl implements EtapeService {
 	
+	public List<Etape> findByCode(String code){
+		
+		return findByCode(code);
+	}
 	
 	public Etape lastEtape(UserNomade nomad) {
 		List<Etape> findByNomadOrderByDay = null;

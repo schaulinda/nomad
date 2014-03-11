@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nomade.domain.BeanNoteBookManager;
+import com.nomade.domain.Etape;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
@@ -13,6 +14,7 @@ import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.VoyageService;
+import com.nomade.tools.IdGenerator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -181,6 +183,89 @@ public class VoyageController {
 		return "voyages/listV";
 	}
 	
+	@RequestMapping("/listEtape")
+	public String listEtape(HttpServletRequest request, Model uiModel, @RequestParam("idP") String idP) {
+
+		UserNomade nomade = securite.getUserNomade();
+		Parcours parcours = parcoursService.findParcours(new BigInteger(idP));
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("idP", idP);
+		uiModel.addAttribute("listE", parcours.getEtapes());
+		uiModel.addAttribute("idV", parcours.getVoyage().getId());
+		uiModel.addAttribute("etape", new Etape());
+		return "voyages/listE";
+	}
+	
+	@RequestMapping("/deleteEtape/{idP}")
+	public String deleteEtape(HttpServletRequest request, Model uiModel,
+			@RequestParam("idE") String idE, @PathVariable("idP") String idP) {
+
+		Parcours parcours = parcoursService.findParcours(new BigInteger(idP));
+		parcours.setNbreEtape(parcours.getNbreEtape()-1);
+		
+		for(Etape e:parcours.getEtapes()){
+			
+			if(e.getCode().equals(idE)){
+				 
+				parcours.getEtapes().remove(e);
+				break;
+			}
+		}
+			
+		parcoursService.updateParcours(parcours);
+		
+		UserNomade nomade = securite.getUserNomade();
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("idP", idP);
+		uiModel.addAttribute("listE", parcours.getEtapes());
+		uiModel.addAttribute("idV", parcours.getVoyage().getId());
+		uiModel.addAttribute("etape", new Etape());
+		return "voyages/listE";
+	}
+	
+	@RequestMapping("/createEtape")
+	public String createEtape(HttpServletRequest request, Model uiModel,Etape etape, @RequestParam("idP") String idP) {
+		
+		Parcours parcours = parcoursService.findParcours(new BigInteger(idP));
+		uiModel.addAttribute("listE", parcours.getEtapes());
+		uiModel.addAttribute("idV", parcours.getVoyage().getId());
+		UserNomade nomade = securite.getUserNomade();
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("idP", idP);
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		
+		if("".equals(etape.getLocation())){
+			
+			beanNoteBookManager.setError("entrer une location");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("etape", etape);
+			return "voyages/listE";
+		}
+		
+		if(etape.getDay()==null){
+			etape.setDay(parcours.getDepart().getDay());
+		}
+		
+		if(etape.getDay().before(parcours.getDepart().getDay()) || etape.getDay().after(parcours.getArrived().getDay()) ){
+			
+			beanNoteBookManager.setError("la date doit etre dans l'intervalle du parcours");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+			uiModel.addAttribute("etape", etape);
+			return "voyages/listE";
+		}
+		
+		etape.setCode(IdGenerator.generateId());
+		parcours.getEtapes().add(etape);
+		parcours.setNbreEtape(parcours.getNbreEtape()+1);
+		parcoursService.updateParcours(parcours);
+		Parcours parcours2 = parcoursService.findParcours(new BigInteger(idP));
+		uiModel.addAttribute("listE", parcours2.getEtapes());
+		beanNoteBookManager.setNotify("yep");
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		uiModel.addAttribute("etape", new Etape());
+		return "voyages/listE";
+	}
+	
 	@RequestMapping("/listParcours")
 	public String listParcours(HttpServletRequest request, Model uiModel, @RequestParam("idV") String idV) {
 
@@ -194,7 +279,8 @@ public class VoyageController {
 		return "voyages/listP";
 	}
 	
-	@RequestMapping("/deleteParcours")
+	
+	@RequestMapping("/deleteParcours/{idV}")
 	public String deleteParcours(HttpServletRequest request, Model uiModel,
 			@RequestParam("idP") String idP, @PathVariable("idV") String idV) {
 
@@ -203,6 +289,8 @@ public class VoyageController {
 
 		UserNomade nomade = securite.getUserNomade();
 		Voyage voyage = voyageService.findVoyage(new BigInteger(idV));
+		voyage.setNbreParcours(voyage.getNbreParcours() - 1);
+		voyService.saveVoyage(voyage);
 		List<Parcours> listP = parcoursService.findByVoyageAndSortByDayDepart(voyage);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("idV", idV);
@@ -210,6 +298,7 @@ public class VoyageController {
 		uiModel.addAttribute("parcours", new Parcours());
 		return "voyages/listP";
 	}
+	
 	
 	@RequestMapping("/createParcours")
 	public String createParcours(HttpServletRequest request, Model uiModel,Parcours parcours, @RequestParam("idV") String idV) {
@@ -224,7 +313,7 @@ public class VoyageController {
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		
 		if(parcours.getDepart().getDay()==null || parcours.getArrived().getDay()==null
-				|| parcours.getDepart().getLocation().isEmpty()|| parcours.getArrived().getLocation().isEmpty()){
+				|| "".equals(parcours.getDepart().getLocation())|| "".equals(parcours.getArrived().getLocation())){
 			
 			beanNoteBookManager.setError("Completer tous les champs!");
 			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -254,10 +343,12 @@ public class VoyageController {
 		voyageService.updateVoyage(voyage);	
 		parcours.setVoyage(voyage);
 		parcoursService.saveParcours(parcours);
+		Voyage voyage2 = voyageService.findVoyage(new BigInteger(idV));
 		beanNoteBookManager.setNotify("yep");
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 		uiModel.addAttribute("parcours", new Parcours());
-		List<Parcours> listP1 = parcoursService.findByVoyageAndSortByDayDepart(voyage);
+		System.out.print("voyage2: "+voyage2);
+		List<Parcours> listP1 = parcoursService.findByVoyageAndSortByDayDepart(voyage2);
 		uiModel.addAttribute("listP", listP1);
 		return "voyages/listP";
 	}

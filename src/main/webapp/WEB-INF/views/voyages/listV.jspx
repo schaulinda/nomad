@@ -57,8 +57,8 @@
 					<div class="col-lg-4" >
 						<spring:url value="/voyages/delete" var="supp_url" ></spring:url>
 						<spring:url value="/voyages/listParcours" var="parcours_url" ></spring:url>
-						<a href="${supp_url}?idV=${voyage.id}" id="supp_${voyage.id}" class="supp btn btn-default" style="margin-bottom: 3px;" >supprimer</a>
-						<a href="${parcours_url}?idV=${voyage.id}" id="parcours_${voyage.id}" class="parcours btn btn-default" >parcours </a>
+						<a href="${supp_url}?idV=${voyage.id}" id="supp_${voyage.id}" class="supp btn btn-default" style="margin-bottom: 3px;" >Delete</a>
+						<a href="${parcours_url}?idV=${voyage.id}" id="parcours_${voyage.id}" class="parcours btn btn-default" >List parcours </a>
 					</div>
 				</div>
 			</div>

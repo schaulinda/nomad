@@ -20,6 +20,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJson
 public class Etape {
 	
+	private String code;
 	private String location;
 	private double lat;
 	private double lng;
