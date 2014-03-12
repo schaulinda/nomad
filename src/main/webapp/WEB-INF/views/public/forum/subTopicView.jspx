@@ -156,8 +156,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<util:pagination maxPages="${maxPages}" page="${param.page}"
-			size="${param.size}" />
+		<spring:url value="/forum/subtopics/${subTopic.id }" var="subtopic_url" />
+		<util:springjs-pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" url="${subtopic_url}" fragmentId="body" />
 	</div>
 	
 	<script type="text/javascript">
