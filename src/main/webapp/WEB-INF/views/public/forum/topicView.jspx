@@ -72,7 +72,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<util:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" />
+		<util:springjs-pagination maxPages="${maxPages }" url="${topic_url }" fragmentId="body" page="${param.page}" size="${param.size}" />
 	</div>
 	
 	<script type="text/javascript">

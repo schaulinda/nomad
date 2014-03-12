@@ -78,7 +78,7 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
     public List<Discussion> findBySubTopic(SubTopic subTopic,int firstResult,int maxResults){
 		checkAndFixPageParams(firstResult, maxResults);
-		return discussionRepository.findBySubTopic(subTopic, new PageRequest(firstResult, maxResults));
+		return discussionRepository.findBySubTopic(subTopic, new PageRequest(firstResult/maxResults, maxResults));
     }
 	protected void checkAndFixPageParams(int firstResult, int maxResults){
 		if (firstResult < 0) {
@@ -94,6 +94,6 @@ public class DiscussionServiceImpl implements DiscussionService {
 	@Override
     public List<Discussion> findBySubTopicAndConfidentiality(SubTopic topic,Confidentiality confidentiality,int firstResult,int maxResults){
 		checkAndFixPageParams(firstResult, maxResults);
-    	return discussionRepository.findBySubTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult, maxResults));
+    	return discussionRepository.findBySubTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult/maxResults, maxResults));
     }
 }

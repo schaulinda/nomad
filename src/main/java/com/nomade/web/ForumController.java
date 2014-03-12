@@ -35,7 +35,6 @@ import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
-import com.nomade.domain.UserNomade;
 import com.nomade.security.SecurityUtil;
 import com.nomade.service.DiscussionService;
 import com.nomade.service.SubTopicService;
@@ -136,12 +135,12 @@ public class ForumController {
 			return "redirect:" + FORUM_TOPICS;
 		}
 		List<SubTopic> subTopics = null;
-		boolean paginationIsSet = page != null || size != null;
+		boolean paginationIsSet = checkIfPaginationIsSet(page, size);
 		// declare local params
 		int sizeNo = 0;
 		int firstResult = 0;
 		float nrOfPages = 0;
-		// init local params if pagination is set
+		// init local 3params if pagination is set
 		if (paginationIsSet) {
 			sizeNo = size == null ? 10 : size.intValue();
 			firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -241,6 +240,7 @@ public class ForumController {
 		return "redirect:/forum/topics";
 	}
 
+	/*
 	@RequestMapping(value = "/topics/{topicId}/", method = RequestMethod.GET)
 	public String showTopic(@PathVariable("topicId") BigInteger topicId, Model uiModel,
 			HttpServletRequest httpServletRequest) {
@@ -248,7 +248,7 @@ public class ForumController {
 		uiModel.addAttribute("topic", topic);
 		populateModel(uiModel);
 		return "public/topics/update";
-	}
+	} */
 
 	/* subtopics */
 	@RequestMapping(value = "/subtopics")
@@ -279,7 +279,7 @@ public class ForumController {
 		int sizeNo = 0;
 		int firstResult = 0;
 		float nrOfPages = 0;
-		boolean paginationIsSet = page != null || size != null;
+		boolean paginationIsSet = checkIfPaginationIsSet(page, size);
 		if (paginationIsSet) {
 			sizeNo = size == null ? 10 : size.intValue();
 			firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
@@ -323,6 +323,13 @@ public class ForumController {
 		uiModel.addAttribute("subTopicModel", new SubTopic());
 		populateModel(uiModel);
 		return "public/forum/subTopicView";
+	}
+
+	private boolean checkIfPaginationIsSet(Integer page, Integer size) {
+		if(page != null || size != null){
+			return true;
+		}
+		return false;
 	}
 
 	@RequestMapping(value = "/topics/{parentTopicId}/subtopics/{parentSubTopicId}/add", method = RequestMethod.POST)

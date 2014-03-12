@@ -95,6 +95,6 @@ public class SubTopicServiceImpl implements SubTopicService {
 	}
 	@Override
     public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality,int firstResult,int maxResult){
-		return subTopicRepository.findByParentTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult, maxResult));
+		return subTopicRepository.findByParentTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult/maxResult, maxResult));
 	}
 }
