@@ -82,23 +82,25 @@
 						<spring:url
 								value="/forum/discussions/${discussion.id }/comments/${comment.businessId }"
 								var="comment_url" />
+								<c:set var="showActions" value="no" />
 								<c:if test="${pageContext['request'].userPrincipal != null}">
 									<c:choose>
 										<c:when test="${ comment.nomade.userName eq pageContext['request'].userPrincipal.name}">
-											<span>
-												<a href="#" id = '${comment.businessId }'>edit</a>
-											</span>|
-											<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+											<c:set var="showActions" value="yes"/>
+											
 										</c:when>
 										<c:otherwise>
 											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-												<span>
-												 	<a href="#" id = '${comment.businessId }'>edit</a>
-												</span>|
-												<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+												<c:set var="showActions" value="yes"/>
 											</sec:authorize>
 										</c:otherwise>
 									</c:choose>
+								</c:if>
+								<c:if test="${showActinos eq yes }">
+									<span>
+										<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
+									</span>|
+									<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
 								</c:if>
 							</td>
 					</tr>
@@ -153,4 +155,20 @@
 				});
 			})(jQuery);
 		</script>
+			
+	<script type="text/javascript">
+		dojo.query(".edit_comment_link").forEach(
+				function(node, index, arr) {
+					var id = dojo.attr(node, "id");
+					console.log(id);
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "body"
+						}
+					}));
+
+				});
+	</script >
 </div>

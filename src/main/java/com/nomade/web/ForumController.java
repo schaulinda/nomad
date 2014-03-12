@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -532,6 +533,8 @@ public class ForumController {
 			HttpServletRequest httpServletRequest) {
 		comment.setBusinessId(discussionId
 				+ RandomStringUtils.randomAlphanumeric(4));
+		comment.setCreated(new Date());
+		comment.setNomade(securityUtil.getUserNomade());
 		Discussion discussion = discussionService.findDiscussion(discussionId);
 		discussion.getComments().add(comment);
 		discussionService.updateDiscussion(discussion);
@@ -540,15 +543,33 @@ public class ForumController {
 						httpServletRequest);
 	}
 
-	@RequestMapping(value = "/discussions/{discussionId}/comments", method = RequestMethod.PUT)
+
+	@RequestMapping(value = "/discussions/{discussionId}/comments/{businessId}/form", method = RequestMethod.GET)
+	public String showUpdateCommentForm(
+			@PathVariable("discussionId") BigInteger discussionId,
+			@PathVariable("businessId") String commentBusinessId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		Comment comment = null;
+		for (Comment c : discussion.getComments()) {
+			if (c.getBusinessId().equals(commentBusinessId)) {
+				comment = c;
+			}
+		}
+		uiModel.addAttribute("discussion", discussion);
+		uiModel.addAttribute("comment", comment);
+		populateModel(uiModel);
+		return "public/comments/update";
+	}
+	
+	@RequestMapping(value = "/discussions/{discussionId}/comments/update", method = RequestMethod.POST)
 	public String updateComment(
 			@PathVariable("discussionId") BigInteger discussionId,
 			@Valid Comment comment, Model uiModel,
 			HttpServletRequest httpServletRequest) {
-		comment.setBusinessId(discussionId
-				+ RandomStringUtils.randomAlphanumeric(4));
 		Discussion discussion = discussionService.findDiscussion(discussionId);
-		for (Comment c : discussion.getComments()) {
+		Set<Comment> comments = discussion.getComments();
+		for (Comment c : comments) {
 			if (c.getBusinessId().equals(comment.getBusinessId())) {
 				c.setCommentaire(comment.getCommentaire());
 				break;

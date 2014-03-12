@@ -52,21 +52,24 @@
 						<td>${subTopicToBean.numberOfMessage }</td>
 						<td>${subTopicToBean.lastMessageDate }</td>
 						<td>
+							<c:set var="showActions" value="no" />
 							<c:if test="${pageContext['request'].userPrincipal != null}">
 									<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
 									<c:choose>
 										<c:when test="${ subTopicToBean.subTopic.nomade.userName eq pageContext['request'].userPrincipal.name}">
-											<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
-											<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+											<c:set var="showActions" value="yes" />
 										</c:when>
 										<c:otherwise>
 											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
-												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+												<c:set var="showActions" value="yes" />
 											</sec:authorize>
 										</c:otherwise>
 									</c:choose>
-						</c:if>
+							</c:if>
+							<c:if test="${showActions eq yes }">
+								<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
+								<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>

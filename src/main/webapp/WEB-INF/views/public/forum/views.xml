@@ -27,4 +27,7 @@
      <definition extends="forumLayout" name="public/topics/update">
         <put-attribute name="body" value="/WEB-INF/views/public/forum/topicUpdate.jspx"/>
     </definition>
+     <definition extends="forumLayout" name="public/comments/update">
+        <put-attribute name="body" value="/WEB-INF/views/public/forum/commentUpdate.jspx"/>
+    </definition>
 </tiles-definitions>

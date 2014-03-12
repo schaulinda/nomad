@@ -12,6 +12,7 @@ import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionS
 import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
+import com.nomade.domain.UserNomade;
 import com.nomade.service.DiscussionService;
 import com.nomade.service.SubTopicService;
 import com.nomade.service.TopicService;
@@ -27,6 +28,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	private SubTopicService subTopicService;
 	@Autowired
 	private DiscussionService discussionService;
+	
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
@@ -44,6 +46,17 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 				return null;
 			}
 			return topicService.findTopic(new BigInteger(topicId));
+		}
+		
+	}
+	class StringToUserNomadConverter implements Converter<String, UserNomade>{
+
+		@Override
+		public UserNomade convert(String nomadeId) {
+			if(StringUtils.isBlank(nomadeId)){
+				throw new IllegalArgumentException("Canno't parse/convert a blank id, to a nomad user.");
+			}
+			return userService.findUserNomade(new BigInteger(nomadeId));
 		}
 		
 	}

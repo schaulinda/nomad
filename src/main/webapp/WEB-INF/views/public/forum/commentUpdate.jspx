@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+	<div class="row">
+		<h1>Update topic</h1>
+		
+		<spring:url value="/forum/discussions/${discussion.id}/comments/update" var="update_comment_url" />
+		<c:if test="${empty dateTimePattern}">
+			<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
+		</c:if>
+		<form:form commandName="comment" action="${update_comment_url }" method="POST">
+			<div class="form-group">
+				<form:hidden path="businessId" value="${comment.businessId }" />
+				<form:textarea placeholder="your comment please ..." path="commentaire" value="${comment.commentaire }" cssStyle="form-control margin: 0px; width: 517px; height: 155px;" />
+			</div>
+			<button class="btn btn-primary" type="submit" id="btn_updatecomment">Save changes</button>
+			<button class="btn" data-dismiss="modal" type="reset" aria-hidden="true" id="btnCloseDialog">Close</button>
+		</form:form>
+	</div>
+	
+	<script type="text/javascript">
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_updatecomment",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+</div>
+
