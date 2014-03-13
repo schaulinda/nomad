@@ -34,6 +34,7 @@ import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 
 @RequestMapping("/etapevoyages")
 @Controller
@@ -56,6 +57,8 @@ public class EtapeVoyageController {
 	ParcoursService parcoursService;
 	@Autowired
 	EtapeService etapeService;
+	@Autowired
+	VoyageService voyageService2;
 	
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
@@ -102,6 +105,7 @@ public class EtapeVoyageController {
 		beanHistoriqueDecoration(uiModel, nomade);
 		
 		bookManager.setNotify("yep");
+		bookManager.setVoyageEnCours(voyageService2.existingVoyage(nomade));
 		//bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);

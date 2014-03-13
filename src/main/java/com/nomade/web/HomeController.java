@@ -84,8 +84,8 @@ public class HomeController {
 				beanNomadeManager.setMe(true);
 				//beanNomadeManager.setHome(true);
 				beanNomadeManager.setNomade(nomade);
-				String makers = parcoursService.buildMakers(findAllUserNomades);
-				beanNomadeManager.setMakers(makers);
+				//String makers = parcoursService.buildMakers(findAllUserNomades);
+				//beanNomadeManager.setMakers(makers);
 				
 				uiModel.addAttribute("beanHistorique", beanHistorique);
 				uiModel.addAttribute("beanNomadeManager", beanNomadeManager);

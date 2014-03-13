@@ -631,6 +631,7 @@
 	</script>
 	
 	<script type="text/javascript">
+	if(dojo.byId("btn_etape")!=null){
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_etape",
 			event : "onclick",
@@ -639,6 +640,7 @@
 				fragments : "smallTile, subuser"
 			}
 		}));
+	}
 	</script>
 	
 	
