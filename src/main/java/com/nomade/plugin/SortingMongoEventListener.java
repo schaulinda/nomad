@@ -68,8 +68,8 @@ public class SortingMongoEventListener extends AbstractMongoEventListener {
 	              if(list.size() > 0){
 	              if (orderBy.order() == Order.ASCENDING) {
 	                  //Collections.sort(list, new BeanComparator(orderBy.value()));
-	            	  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
-	            	  Collections.reverse(list);
+	            	  Collections.sort(list, new BeanComparator(orderBy.value()));
+	            	  //Collections.reverse(list);
 	              } else {
 	                  Collections.sort(list, new BeanComparator(orderBy.value(), Collections.reverseOrder()));
 	                 

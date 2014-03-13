@@ -67,6 +67,7 @@ import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 import com.nomade.tools.ImageUtil;
 import com.nomade.tools.ValideEmailUtil;
 
@@ -94,6 +95,8 @@ public class UserController {
 	DangerPratiqueService dangerPratiqueService;
 	@Autowired
 	ParcoursService parcoursService;
+	@Autowired
+	VoyageService voyageService;
 	
 	@RequestMapping("/register")
 	public String register(@Valid BeanRegister beanRegister,
@@ -504,19 +507,12 @@ public class UserController {
 		
 		if(stringPage.equals("carnet")){
 			BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+			beanNoteBookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 			beanNoteBookManager.getEtapeVoyage().setUserPhoto(id);
 			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("nomade", securite.getUserNomade());
 			uiModel.addAttribute("onglet", "carnet");
-			return "public/carnet";
-		}
-		if(stringPage.equals("carnetVeh")){
-			BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
-			beanNoteBookManager.getEtapeVehicule().setUserPhoto(id);
-			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
-			uiModel.addAttribute("nomade", securite.getUserNomade());
-			uiModel.addAttribute("onglet", "carnet");
-			return "public/carnet";
+			return "voyages/carnet";
 		}
 		
 		if(stringPage.equals("infoPratique")){

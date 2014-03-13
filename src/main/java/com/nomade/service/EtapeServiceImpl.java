@@ -64,8 +64,4 @@ private String linkBase(HttpServletRequest httpServletRequest){
 	}
 	
 	
-	public List<Etape> drawParcours(UserNomade nomad) {
-		
-		return null;
-	}
 }
