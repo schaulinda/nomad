@@ -14,6 +14,5 @@ public interface EtapeService {
 	
 	public Etape lastEtape(UserNomade nomad);
 	public String buildMakers(List<UserNomade> nomads, HttpServletRequest httpServletRequest);
-	public List<Etape> drawParcours(UserNomade nomad);
 	public List<Etape> findByCode(String code);
 }

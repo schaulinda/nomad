@@ -24,7 +24,104 @@
 				${hNotebookOfTraveler}
 			</h3>
 		</div>
-
+	<!-- parcours -->
+	<c:if test="${beanNoteBookManager.voyageEnCours == true}">
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				<i class="icon-road"> <!-- co -->
+					</i> Parcours
+			</h3>
+		</div>
+	
+		<spring:url value="/voyages/saveEtape" var="etape_url"></spring:url>
+		<form action="${etape_url}" method="GET" id="form_etape">
+			<c:if test="${not empty beanNoteBookManager.error}">
+					<div class="alert alert-danger">${beanNoteBookManager.error}</div>
+				</c:if>
+				<div class="row">
+					<div class="col-lg-11">
+						<div class="row">
+									<div class="input-group col-lg-7">
+										<input type="text" id="etape0"
+											class="form-control adress" required="required" name="etape0" autocomplete="off" />
+										<input type="hidden" id="etape0Lat" name="etape0" />
+										<input type="hidden" id="etape0Lng" name="etape0" />
+										<a href="#" class="mapPicker input-group-addon" id="etape0-picker">
+											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
+										</span>
+										</a>
+									</div>
+									<div class="col-lg-4 input-group" >
+										<input id="etape0Date" class="datepicker form-control" required="required"
+											name="etape0" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
+											<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+									</div>
+									
+								</div>
+						<br />
+						<div class="row">
+									<div class="input-group col-lg-7">
+										<input type="text" id="etape1"
+											class="form-control adress" required="required" name="etape1" autocomplete="off" />
+										<input type="hidden" id="etape1Lat" name="etape1" />
+										<input type="hidden" id="etape1Lng" name="etape1" />
+										<a href="#" class="mapPicker input-group-addon" id="etape1-picker">
+											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
+										</span>
+										</a>
+									</div>
+									<div class="col-lg-4 input-group" >
+										<input id="etape1Date" class="datepicker form-control" required="required"
+											name="etape1" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
+										<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+									</div>
+								</div>
+						
+						<div class="parent_container" >
+							
+							<div class="template_element" >
+								<br />
+								<div class="row">
+									<div class="input-group col-lg-7">
+										<input type="text" id="etapecounter"
+											class="form-control adress" required="required" name="etapecounter" autocomplete="off" />
+										<input type="hidden" id="etapecounterLat" name="etapecounter" />
+										<input type="hidden" id="etapecounterLng" name="etapecounter" />
+										<a href="#" class="mapPicker input-group-addon" id="etapecounter-picker">
+											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
+										</span>
+										</a>
+									</div>
+									<div class="col-lg-4 input-group" >
+										<input id="etapecounterDate" class="datepicker form-control"
+											name="etapecounter" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
+											<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+									</div>
+									<div class="col-lg-1">
+										<a href="#" class="remove">x</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="#" class="add_field">Add Field</a>
+						
+					</div>
+				</div>
+				<div class="row">
+				<br/>
+					<div class="col-lg-10">
+						<button class="btn btn-block" type="submit" id="btn_etape">
+										<spring:message code="button.valid" />
+						</button>
+					</div>
+				</div>
+			</form>
+	
+	</div>
+	</c:if>
+	
+<!--recit carnet  -->
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -152,15 +249,15 @@
 			</c:forEach>
 		</c:if>
 	</div>
-	<c:if test="${nomade.vehicule.vehiculeState != 'backToHome' or nomade.vehicule.vehiculeState != 'inPreparation'}">
+	<c:if test="${beanNoteBookManager.voyageEnCours == false}">
 			
 			<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
 			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >Commencer a voyager</a>
 			
 	</c:if>
 	<spring:url value="/voyages/list"  var="list_url" ></spring:url>
-	<a href="${list_url}" id="listVoyage" class="btn btn-default btn-block" >Aller a la liste des Voyages</a>
-	</div>
+		<a href="${list_url}" id="listVoyage" class="btn btn-default btn-block" >mes voyages</a>
+</div>
 	
 	<script type="text/javascript">
 		jQuery.noConflict($);
@@ -169,12 +266,7 @@
 					.ready(
 							function() {
 								
-								/*put date on datepicker  */
-								$(".datepicker").each(function() {	
-									
-									$(this).val($.datepicker.formatDate('mm/dd/yy', new Date()));
-								});
-							
+															
 							decoration =function(){
 								/* -------------tooltip for adresspicker--------------- */
 								
@@ -539,13 +631,28 @@
 	</script>
 	
 	<script type="text/javascript">
+	if(dojo.byId("btn_etape")!=null){
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "btn_etape",
+			event : "onclick",
+			formId : "form_etape",
+			params : {
+				fragments : "smallTile, subuser"
+			}
+		}));
+	}
+	</script>
+	
+	
+	<script type="text/javascript">
+	if(dojo.byId("newVoyage")!=null){
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "newVoyage",
 			event : "onclick",
 			params : {
 				fragments : "smallTile"
 			}
-		}));
+		}));}
 	</script>
 	
 	<script type="text/javascript">

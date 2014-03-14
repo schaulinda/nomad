@@ -196,7 +196,7 @@ public class PublicController {
 		
 		beanHistoriqueDecoration(uiModel, nomade);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		bookManager.setListParcours(etapeService.drawParcours(nomade));
+		//bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");

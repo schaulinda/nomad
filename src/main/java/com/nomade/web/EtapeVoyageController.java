@@ -1,7 +1,9 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,7 @@ import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 
 @RequestMapping("/etapevoyages")
 @Controller
@@ -53,6 +56,8 @@ public class EtapeVoyageController {
 	ParcoursService parcoursService;
 	@Autowired
 	EtapeService etapeService;
+	@Autowired
+	VoyageService voyageService2;
 	
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
@@ -99,7 +104,8 @@ public class EtapeVoyageController {
 		beanHistoriqueDecoration(uiModel, nomade);
 		
 		bookManager.setNotify("yep");
-		bookManager.setListParcours(etapeService.drawParcours(nomade));
+		bookManager.setVoyageEnCours(voyageService2.existingVoyage(nomade));
+		//bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
@@ -113,6 +119,8 @@ public class EtapeVoyageController {
 		
 		 Map<String, String[]> parameters = request.getParameterMap();
 		 UserNomade nomade = securite.getUserNomade();
+		 
+		 List<Etape> listEtape = new ArrayList<Etape>();
 		 
 		    for(String key : parameters.keySet()) {
 		        
@@ -153,7 +161,7 @@ public class EtapeVoyageController {
 		    beanHistoriqueDecoration(uiModel, nomade);
 			
 			bookManager.setNotify("yep");
-			bookManager.setListParcours(etapeService.drawParcours(nomade));
+			//bookManager.setListParcours(etapeService.drawParcours(nomade));
 			uiModel.addAttribute("beanNoteBookManager", bookManager);
 			uiModel.addAttribute("nomade", nomade);
 			uiModel.addAttribute("onglet", "carnet");

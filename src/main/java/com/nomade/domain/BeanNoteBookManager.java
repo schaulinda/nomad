@@ -12,6 +12,8 @@ public class BeanNoteBookManager {
 	
 	private EtapeVehicule etapeVehicule= new EtapeVehicule();
 	
+	private boolean voyageEnCours;
+	
 	
 	private String notify;
 	
@@ -65,6 +67,14 @@ public class BeanNoteBookManager {
 
 	public void setError(String error) {
 		this.error = error;
+	}
+
+	public boolean isVoyageEnCours() {
+		return voyageEnCours;
+	}
+
+	public void setVoyageEnCours(boolean voyageEnCours) {
+		this.voyageEnCours = voyageEnCours;
 	}
 
 }

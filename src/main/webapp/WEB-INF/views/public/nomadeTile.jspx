@@ -239,10 +239,12 @@
 									}
 
 								});
-
+								var marks = '${beanNomadeManager.makers}';
+								console.log(marks);
+								if(marks || !$.trim(marks) === ""){
+									console.log("hellp");
 								var url = '${imageRender_url}';
-								var mapdata = jQuery
-										.parseJSON('${beanNomadeManager.makers}');
+								var mapdata = jQuery.parseJSON(marks);
 								/*dracula code form links for nomad*/
 								$.each(mapdata,function(index, value) {
 													var hreflink = '${nomad_url}'
@@ -389,6 +391,7 @@
 														}
 													}
 												});
+								}
 
 							});
 		})(jQuery);
@@ -396,21 +399,23 @@
 
 	<script type="text/javascript">
 		dojo.addOnLoad(function() {
-			var mapdata = JSON.parse('${beanNomadeManager.makers}');
-
-			dojo.forEach(mapdata, function(item, i) {
-				var id = item.id;
-
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : id,
-					event : "onclick",
-					params : {
-						fragments : "smallTile, id_subfooter"
-					}
-				}));
-
-			});
-
+			var marks = '${beanNomadeManager.makers}';
+			if(marks || !marks === ""){
+				var mapdata = JSON.parse('${beanNomadeManager.makers}');
+	
+				dojo.forEach(mapdata, function(item, i) {
+					var id = item.id;
+	
+					Spring.addDecoration(new Spring.AjaxEventDecoration({
+						elementId : id,
+						event : "onclick",
+						params : {
+							fragments : "smallTile, id_subfooter"
+						}
+					}));
+	
+				});
+			}
 		});
 	</script>
 
