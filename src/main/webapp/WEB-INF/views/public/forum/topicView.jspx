@@ -31,7 +31,7 @@
 		<h4>
 			Sub Topics
 		</h4>
-		<table>
+		<table class="table table-bordered table-hover">
 			<thead>
 				<th>Title</th>
 				<th>Content</th>
@@ -39,7 +39,6 @@
 				<th>Number Of Discussions</th>
 				<th>Number Of Messages</th>
 				<th>Date</th>
-				<th />
 			</thead>
 			<tbody>
 				<c:forEach items="${subTopicToBeans }" var="subTopicToBean">
@@ -51,26 +50,29 @@
 						<td>${subTopicToBean.numberOfDiscussion}</td>
 						<td>${subTopicToBean.numberOfMessage }</td>
 						<td>${subTopicToBean.lastMessageDate }</td>
-						<td>
-							<c:set var="showActions" value="no" />
 							<c:if test="${pageContext['request'].userPrincipal != null}">
 									<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
 									<c:choose>
 										<c:when test="${ subTopicToBean.subTopic.nomade.userName eq pageContext['request'].userPrincipal.name}">
-											<c:set var="showActions" value="yes" />
+											<td>
+												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a>
+											</td>
+											<td>
+												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+											</td>
 										</c:when>
 										<c:otherwise>
 											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-												<c:set var="showActions" value="yes" />
+											<td>
+												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a>
+											</td>
+											<td>
+												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
+											</td>
 											</sec:authorize>
 										</c:otherwise>
 									</c:choose>
 							</c:if>
-							<c:if test="${showActions eq yes }">
-								<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a> |
-								<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
-							</c:if>
-						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

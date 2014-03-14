@@ -19,7 +19,7 @@
 				monde. C'est facile, rapide et gratuit!</p>
 		</div>
 
-		<table>
+		<table class="table table-bordered table-hover">
 			<thead>
 				<th>Topic Principal</th>
 				<th>Discussion</th>

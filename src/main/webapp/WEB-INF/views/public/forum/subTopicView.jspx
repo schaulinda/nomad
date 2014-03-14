@@ -116,12 +116,11 @@
 		</div>
 		<br />
 		<h4>Discussions</h4>
-		<table>
+		<table class="table table-bordered table-hover">
 			<thead>
 				<th>Title</th>
 				<th>Content</th>
 				<th>Date</th>
-				<th />
 			</thead>
 			<tbody>
 				<c:forEach items="${discussions }" var="discussion">
@@ -133,24 +132,29 @@
 						</td>
 						<td>${discussion.content }</td>
 						<td>${discussion.created }</td>
-						<td>
 							<c:set var="showActions" value="no" />
 							<c:if test="${pageContext['request'].userPrincipal != null}">
 								<spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />
 										<c:choose>
 											<c:when test="${ discussion.nomade.userName eq pageContext['request'].userPrincipal.name}">
-												<c:set var="showActions" value="yes" />
+												<td>
+													<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a>
+												</td>
+												<td>
+													<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
+												</td> 
 											</c:when>
 											<c:otherwise>
 												<sec:authorize ifAnyGranted="ROLE_ADMIN">
-													<c:set var="showActions" value="yes" />
+													<td>
+														<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a>
+													</td>
+													<td>
+														<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
+													</td>
 												</sec:authorize>
 											</c:otherwise>
 										</c:choose>
-							</c:if>
-							<c:if test="${showActions eq yes }">| 
-								<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a> | 
-								<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
 							</c:if>
 						</td>
 					</tr>

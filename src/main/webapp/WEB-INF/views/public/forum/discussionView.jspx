@@ -45,13 +45,11 @@
 				<!--  -->
 			</div>
 		</div>
-		<table>
+		<table class="table table-bordered table-hover">
 			<thead>
 				<th></th>
 				<th>Comment</th>
 				<th>Dates</th>
-				<th></th>
-				<th></th>
 			</thead>
 			<tbody>
 				<c:forEach items="${discussion.comments }" var="comment">
@@ -74,11 +72,11 @@
 							</div>
 						</td>
 						<td class="comment-text">
-							<div>${comment.created }</div>
 							<div>${comment.commentaire}</div>
 						</td>
 						<td>
-						
+							<div>${comment.created }</div>
+						</td>
 						<spring:url
 								value="/forum/discussions/${discussion.id }/comments/${comment.businessId }"
 								var="comment_url" />
@@ -86,23 +84,29 @@
 								<c:if test="${pageContext['request'].userPrincipal != null}">
 									<c:choose>
 										<c:when test="${ comment.nomade.userName eq pageContext['request'].userPrincipal.name}">
-											<c:set var="showActions" value="yes"/>
-											
+											<td>
+												<span>
+													<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
+												</span>
+											</td>
+											<td>
+												<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+											</td>
 										</c:when>
 										<c:otherwise>
 											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-												<c:set var="showActions" value="yes"/>
+												<td>
+													<span>
+														<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
+													</span>
+												</td>
+												<td>
+													<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+												</td>
 											</sec:authorize>
 										</c:otherwise>
 									</c:choose>
 								</c:if>
-								<c:if test="${showActinos eq yes }">
-									<span>
-										<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
-									</span>|
-									<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
-								</c:if>
-							</td>
 					</tr>
 				</c:forEach>
 			</tbody>
