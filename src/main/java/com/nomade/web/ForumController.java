@@ -64,12 +64,7 @@ public class ForumController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForumMainPage(Model uiModel) {
 		List<Topic> topics = new ArrayList<Topic>();
-		if (!securityUtil.isUserLogged()) {
-			topics = topicService
-					.findByConfidentiality(Confidentiality.Publique);
-		} else {
-			topics = topicService.findAllTopics();
-		}
+		topics = findTopicsDependingIfUserIsLoggedOrNot();
 		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
 		for (Topic topic : topics) {
 			List<SubTopic> subTopics = new ArrayList<SubTopic>();
@@ -90,6 +85,17 @@ public class ForumController {
 		}
 		uiModel.addAttribute("topicBeans", topicBeans);
 		return "public/forum/mainpage";
+	}
+
+	private List<Topic> findTopicsDependingIfUserIsLoggedOrNot() {
+		List<Topic> topics;
+		if (!securityUtil.isUserLogged()) {
+			topics = topicService
+					.findByConfidentiality(Confidentiality.Publique);
+		} else {
+			topics = topicService.findAllTopics();
+		}
+		return topics;
 	}
 
 	@RequestMapping(value = "/topics", method = RequestMethod.GET)
@@ -171,6 +177,8 @@ public class ForumController {
 		List<BeanSubTopicView> subTopicToBeanSubTopic = subTopicService
 				.convertSubTopicToBeanSubTopic(subTopics);
 
+		List<Topic> topics = new ArrayList<Topic>();
+		topics = findTopicsDependingIfUserIsLoggedOrNot();
 		BeanTopicManager beanTopicManager = new BeanTopicManager();
 		beanTopicManager.setTopic(topic);
 		beanTopicManager.setNbOfDiscussion(topicService.countDiscussion(topic));
@@ -181,6 +189,7 @@ public class ForumController {
 		uiModel.addAttribute("topicBean", beanTopicManager);
 		uiModel.addAttribute("subTopicToBeans", subTopicToBeanSubTopic);
 		uiModel.addAttribute("subtopicModel", new SubTopic());
+		uiModel.addAttribute("entities", topics);
 		populateModel(uiModel);
 		return "public/forum/topicView";
 	}
@@ -286,6 +295,7 @@ public class ForumController {
 			firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
 			nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
 		}
+		List<SubTopic> subTopics = new ArrayList<SubTopic>();
 		if (paginationIsSet && securityUtil.isUserLogged()) {
 			List<Discussion> discussions = discussionService.findBySubTopic(
 					subTopic, firstResult, sizeNo);
@@ -313,6 +323,12 @@ public class ForumController {
 							Confidentiality.Publique);
 			uiModel.addAttribute("discussions", discussions);
 		}
+		if(securityUtil.isUserLogged()){
+			subTopics = subTopicService.findByParentTopic(subTopic.getParentTopic());
+		}else {
+
+			subTopics = subTopicService.findByParentTopicAndConfidentiality(subTopic.getParentTopic(), Confidentiality.Publique);
+		}
 		int numberOfDiscussions = discussionService.countDiscussion(subTopic);
 		int numberOfMessages = discussionService.countMessages(subTopic);
 		Date lastMessageDate = discussionService.getLastMessageDate(subTopic);
@@ -322,6 +338,7 @@ public class ForumController {
 		uiModel.addAttribute("lastMessageDate", lastMessageDate);
 		uiModel.addAttribute("discussionModel", new Discussion());
 		uiModel.addAttribute("subTopicModel", new SubTopic());
+		uiModel.addAttribute("entities", subTopics);
 		populateModel(uiModel);
 		return "public/forum/subTopicView";
 	}
@@ -447,6 +464,12 @@ public class ForumController {
 		if (discussion == null) {
 			return "redirect:/forum/discussions";
 		}
+		List<Discussion> discussions = new ArrayList<Discussion>();
+		if(securityUtil.isUserLogged()){
+			discussions = discussionService.findBySubTopic(discussion.getSubTopic());
+		}else {
+			discussions = discussionService.findBySubTopicAndConfidentiality(discussion.getSubTopic(), Confidentiality.Publique);
+		}
 		uiModel.addAttribute("discussion", discussion);
 		uiModel.addAttribute("numberOfMessages", discussion.getComments()
 				.size());
@@ -458,6 +481,8 @@ public class ForumController {
 		}
 		uiModel.addAttribute("lastMessageDate", lastMessageDate);
 		uiModel.addAttribute("commentModel", new Comment());
+		uiModel.addAttribute("discussions", discussions);
+		uiModel.addAttribute("entities", discussions);
 		populateModel(uiModel);
 		return "public/forum/discussionView";
 	}

@@ -28,6 +28,12 @@
 			<span><a href="${topic_url}/form" 	id="update_topic_link">update</a></span>
 		</div>
 		<br />
+		<div class="row">
+			<spring:url value="/forum/topics" var="spring_url" />
+			<div class="col-lg-4">Sub topic</div>
+				<div class="col-lg-6" > <util:forum-entity-selection currentObject="${topicBean.topic }" formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection> </div>
+		</div>
+		<br />
 		<h4>
 			Sub Topics
 		</h4>
