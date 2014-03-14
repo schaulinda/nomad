@@ -156,7 +156,6 @@
 											</c:otherwise>
 										</c:choose>
 							</c:if>
-						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
