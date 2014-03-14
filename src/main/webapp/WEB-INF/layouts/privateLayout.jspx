@@ -277,7 +277,7 @@ body {
 					</a>
 						<ul class="dropdown-menu">
 							<spring:url value="/forum" var="forum_url"></spring:url>
-							<li><a href="${forum_url}" target="_blank" id="forum_id"><i
+							<li><a href="${forum_url}" id="forum_id"><i
 									class="icon-comment"> <!-- co -->
 								</i> <spring:message code="a.forum" /> </a></li>
 							<li class="divider">
