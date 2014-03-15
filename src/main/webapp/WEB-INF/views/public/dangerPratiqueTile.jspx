@@ -165,10 +165,10 @@
 			              },
 			              {
 			                  text: "piste terre",
-			                  value: "piste",
+			                  value: "pisteterre",
 			                  selected: false,
 			                  description: "piste terre -non goudronné",
-			                  imageSrc: "${icon_url}/piste.png"
+			                  imageSrc: "${icon_url}/pisteterre.png"
 			              },
 			              {
 			                  text: "bande sableuse",

@@ -22,7 +22,7 @@
 			</h3>
 		</div>
 	<br/>
-	<div style="max-height: 500px;" >
+	<div style="max-height: 500px;overflow: auto;" >
 		<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
 			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >creer un nouveau voyage</a>
 			<br/>
