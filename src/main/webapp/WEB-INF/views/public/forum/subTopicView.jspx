@@ -29,12 +29,6 @@
 			</span>
 
 		</div>
-
-		<div class="component-navigation">
-			<spring:url value="/forum/topics" var="list_topics_url" />
-			<a href="${list_topics_url }" id="topics-list-url-elt"
-				title="back to topics list">See Topics</a>
-		</div>
 		<!-- create discussion form -->
 		<spring:url value="/forum/subtopics/${subTopic.id }/discussions"
 			var="create_discussion_url" />
@@ -118,11 +112,17 @@
 		
 		<div class="row">
 			<spring:url value="/forum/subtopics" var="spring_url" />
-			<div class="col-lg-4">Sub Topics</div>
-				<div class="col-lg-6" > <util:forum-entity-selection currentObject="${subTopic }" formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection> </div>
+			<spring:url value="/forum/topics/${subTopic.parentTopic.id }" var="topic_url" />
+			<spring:url value="/forum/topics" var="topics_url" />
+			<div class="col-lg-6">
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt;
+				<a href="${ topic_url }" id="see_topic_link">${subTopic.parentTopic.title }</a> &gt;
+				<span>${subTopic.title }</span>
+			</div>
+				<div> <util:forum-entity-selection currentObject="${subTopic }" formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection> </div>
 		</div>
 		<br />
-		<h4>Discussions</h4>
+		<h2>Discussions</h2>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<th>Title</th>
@@ -204,15 +204,25 @@
 	</script>
 
 	<script type="text/javascript">
-		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "topics-list-url-elt",
-			event : "onclick",
-			params : {
-				fragments : "body"
-			}
-		}));
-	</script>
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : "see_topic_link",
+					event : "onclick",
+					params : {
+						fragments : "body"
+					}
+				}));
+		</script>
 
+	<script type="text/javascript">
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : "see_all_topics_link",
+					event : "onclick",
+					params : {
+						fragments : "body"
+					}
+				}));
+		</script>
+		
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {

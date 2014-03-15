@@ -29,14 +29,15 @@
 		</div>
 		<br />
 		<div class="row">
-			<spring:url value="/forum/topics" var="spring_url" />
-			<div class="col-lg-4">Sub topic</div>
-				<div class="col-lg-6" > <util:forum-entity-selection currentObject="${topicBean.topic }" formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection> </div>
+			<spring:url value="/forum/topics" var="topics_url" />
+			<div class="col-lg-4">
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt;
+				<span>${topicBean.topic.title }</span>
+			</div>
+				<div> <util:forum-entity-selection currentObject="${topicBean.topic }" formUrl="${topics_url }" entities="${entities }"></util:forum-entity-selection> </div>
 		</div>
 		<br />
-		<h4>
-			Sub Topics
-		</h4>
+		<h2>Sub Topics</h2>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<th>Title</th>
@@ -117,6 +118,7 @@
 
 				});
 	</script>
+	
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "update_topic_link",
@@ -126,4 +128,14 @@
 			}
 		}));
 	</script>
+	
+	<script type="text/javascript">
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : "see_all_topics_link",
+					event : "onclick",
+					params : {
+						fragments : "body"
+					}
+				}));
+		</script>
 </div>
