@@ -21,7 +21,6 @@
 			<div class="form-group">
 				<form:hidden path="businessId" value="${comment.businessId }" />
 				<form:textarea placeholder="your comment please ..." path="commentaire" value="${comment.commentaire }" cssStyle="form-control margin: 0px; width: 517px; height: 155px;" />
-				
 			<div class="checkbox">
 				<label>
 					<form:checkbox path="frozen" value="${comment.frozen }" /> Is Frozen ?

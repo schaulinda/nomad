@@ -12,30 +12,51 @@
 	<spring:url var="res" value="/resources" />
 	<div class="row">
 		<h1>Update Discussion</h1>
-		
-		<spring:url value="/forum/discussions/update" var="update_discussion_url" />
+
+		<spring:url value="/forum/discussions/update"
+			var="update_discussion_url" />
 		<c:if test="${empty dateTimePattern}">
 			<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
 		</c:if>
-		<form:form modelAttribute="discussion" action="${update_discussion_url }" method="POST" >
+		<form:form modelAttribute="discussion"
+			action="${update_discussion_url }" method="POST">
 			<form:hidden path="id" value="${discussion.id }" />
 			<c:if test="${not empty discussion.created }">
 				<spring:escapeBody>
 					<fmt:formatDate value="${discussion.created}"
-								pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
+						pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
 				</spring:escapeBody>
 			</c:if>
 			<form:hidden path="created" value="${formatedDateValue }" />
-			<form:hidden path="subTopic" value="${discussion.subTopic.id }" />
+			<!--form:hidden path="subTopic" value="${discussion.subTopic.id }" / -->
+			
+			<div class="form-group">
+				<span class="form-label">Choose a topic</span>
+					
+				<select name="subTopic" class="form-control" size="1" title="Please choose a different subtopic, if you want to move this discussion right there">
+					<c:forEach items="${subTopics }" var="subTopic">
+						<c:choose>
+							<c:when test="${discussion.subTopic.id eq subTopic.id }">
+								<option value="${supTopic.id }" selected="selected">
+									${subTopic.title}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${subTopic.id }">
+									${subTopic.title}</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</select>
+			</div>
 			<div class="form-group">
 				<span>Title</span>
 				<form:input path="title" cssClass="form-control"
 					placeholder="title..." />
 			</div>
-			
+
 			<div class="checkbox">
-				<label>
-					<form:checkbox path="frozen" value="${discussion.frozen }" /> Is Frozen ?
+				<label> <form:checkbox path="frozen"
+						value="${discussion.frozen }" /> Is Frozen ?
 				</label>
 			</div>
 			<div class="form-group">
@@ -50,10 +71,11 @@
 					items="${confidentialities}" placeholder="Confidentiality" />
 			</div>
 			<input class="btn" type="reset" />
-			<button class="btn btn-primary" id="btn_updatediscussion" type="submit">Save changes</button>
+			<button class="btn btn-primary" id="btn_updatediscussion"
+				type="submit">Save changes</button>
 		</form:form>
 	</div>
-	
+
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_updatediscussion",

@@ -551,6 +551,8 @@ public class ForumController {
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		Discussion discussion = discussionService.findDiscussion(discussionId);
 		uiModel.addAttribute("discussion", discussion);
+		List<SubTopic> subTopics = subTopicService.findByParentTopic(discussion.getSubTopic().getParentTopic());
+		uiModel.addAttribute("subTopics", subTopics);
 		populateModel(uiModel);
 		return "public/discussions/update";
 	}
