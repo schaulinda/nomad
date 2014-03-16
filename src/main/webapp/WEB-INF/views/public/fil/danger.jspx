@@ -13,45 +13,40 @@
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 
 
+<spring:message code="h.historiqueDangerInformation" var="hHistoriqueDangerInformation" />
+<spring:message code="input.addNewComment" var="inputAddNewComment" />
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_user">
 		<div class="panel panel-default widget">
 			<div class="panel-heading">
 				<span class="icon icon-warning-sign"><!-- co --></span>
-					<h3 class="panel-title">
-						<spring:message code="h.historiqueDangerInformation"
-							var="hHistoriqueDangerInformation" />
-						${hHistoriqueDangerInformation}
-					</h3>
-				<span class="label label-info"> <c:if
-						test="${beanHistorique.listDanger.hasContent()}">
-							${beanHistorique.listDanger.number+1} / ${beanHistorique.listDanger.totalPages}
-						</c:if> <c:if test="${!beanHistorique.listDanger.hasContent()}">
-							${beanHistorique.listDanger.number} / ${beanHistorique.listDanger.totalPages}
-						</c:if>
+				<h3 class="panel-title">${hHistoriqueDangerInformation}</h3>
+				<span class="label label-info">
+					<c:if test="${beanHistorique.listDanger.hasContent()}">
+						${beanHistorique.listDanger.number+1} / ${beanHistorique.listDanger.totalPages}
+					</c:if> <c:if test="${!beanHistorique.listDanger.hasContent()}">
+						${beanHistorique.listDanger.number} / ${beanHistorique.listDanger.totalPages}
+					</c:if>
 				</span>
 			</div>
-			<c:if test="${!beanHistorique.listDanger.hasContent()}">
-					Pubs google Adsense
-					
-				</c:if>
 			<c:if test="${beanHistorique.listDanger.hasContent()}">
-
 				<div class="panel-body scroll">
-					<c:forEach var="danger"
-						items="${beanHistorique.listDanger.content}">
+					<c:forEach var="danger" items="${beanHistorique.listDanger.content}">
 						<div class="row">
 							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-danger">
 								<c:choose>
 									<c:when test="${empty danger.nomade.profil.file}">
-										<img alt="user" src="${res}/img/avatar.png"
-											style="width: 50px; height: 50px" class="img-rounded"
-											title="username" />
+										<img alt="user" 
+											 src="${res}/img/avatar.png"
+											 style="width: 50px; height: 50px" 
+											 class="img-rounded"
+											 title="username" />
 									</c:when>
 									<c:otherwise>
 										<img alt="user"
-											src="${imageRender_url}/${danger.nomade.profil.file}"
-											style="width: 50px; height: 50px" class="img-rounded"
-											title="username" />
+											 src="${imageRender_url}/${danger.nomade.profil.file}"
+											 style="width: 50px; height: 50px" 
+											 class="img-rounded"
+											 title="username" />
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -67,22 +62,22 @@
 							<div class="row">
 								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 									<c:if test="${not empty danger.photo}">
-									<img alt="danger" src="${imageRender_url}/${danger.photo}"
-										class="img-rounded img-responsive"
-										style="width: 400px; height: 200px;" />
-								</c:if>
+										<img alt="danger" 
+										 	 src="${imageRender_url}/${danger.photo}"
+										 	 class="img-rounded img-responsive"
+										 	 style="width: 400px; height: 200px;" />
+									</c:if>
 								</div>
 								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 comment-text">
 									${danger.comment}
 								</div>
 							</div>
-							<div
-								class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-danger mic-info">
-								<a href="#"></a> * ${danger.created} * <a href="#"
-									class="parcour"> ${danger.location}</a>
+							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-danger mic-info">
+<!-- à quoi sa sert? -->		<a href="#"></a> * ${danger.created} * 
+								<a href="#" class="parcour"> ${danger.location}</a>
 								<c:if test="${not empty danger.comments}">
 									<span class="label label-info">${danger.comments.size()}
-										Comments</span>
+										Comments</span> <!-- ajouter trad? -->
 								</c:if>
 								<c:if test="${empty danger.comments}">
 									<span class="label label-info">0 Comments</span>
@@ -97,15 +92,18 @@
 										<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-danger">
 											<c:choose>
 												<c:when test="${empty comment.nomade.profil.file}">
-													<img alt="user" src="${res}/img/avatar.png"
-														style="width: 50px; height: 50px" class="img-rounded"
-														title="username" />
+													<img alt="user" 
+														 src="${res}/img/avatar.png"
+														 style="width: 50px; height: 50px" 
+														 class="img-rounded"
+														 title="username" />
 												</c:when>
 												<c:otherwise>
 													<img alt="user"
-														src="${imageRender_url}/${comment.nomade.profil.file}"
-														style="width: 50px; height: 50px" class="img-rounded"
-														title="username" />
+														 src="${imageRender_url}/${comment.nomade.profil.file}"
+														 style="width: 50px; height: 50px" 
+														 class="img-rounded"
+														 title="username" />
 												</c:otherwise>
 											</c:choose>
 										</div>
@@ -126,59 +124,60 @@
 
 				<div class="panel-footer">
 					<div class="row">
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"
-							style="margin-top: 5px;">
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8" style="margin-top: 5px;">
 							<spring:url value="/comments/addDanger" var="comment_url"></spring:url>
 							<form id="comment_formdanger" action="${comment_url}" method="GET">
-								<spring:message code="input.addNewComment"
-									var="inputAddNewComment" />
-								<input type="hidden" value="${danger_id}" name="dangerId" /> <input
-									type="hidden" value="${beanHistorique.listDanger.number}"
-									name="pageDanger" />
-								<textarea id="commentaireDanger" name="commentaireDanger"
-									class="form-control" placeholder="${inputAddNewComment}">
-									<!--co  -->
+								<input type="hidden" value="${danger_id}" name="dangerId" />
+								<input type="hidden" value="${beanHistorique.listDanger.number}" 
+									   name="pageDanger" />
+								<textarea id="commentaireDanger" 
+										  name="commentaireDanger"
+										  class="form-control" 
+										  placeholder="${inputAddNewComment}"><!--co  -->
 								</textarea>
 								<input type="submit" id="btn_commentDanger" value="send"
-									class="btn btn-default" style="display: none;" />
+									   class="btn btn-default" style="display: none;" />
 							</form>
 						</div>
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
-							style="margin-top: -14px;">
+							 style="margin-top: -14px;">
 							<spring:url
 								value="/dangerpratiques/dangerSuiv/${beanHistorique.nomade.id}"
-								var="dangerSuiv_url"></spring:url>
+								var="dangerSuiv_url">
+							</spring:url>
 							<ul class="pagination">
-
-								<c:if
-									test="${beanHistorique.listDanger.hasPreviousPage() eq true}">
-									<li><a id="precDanger"
-										href="${dangerSuiv_url}/${beanHistorique.listDanger.number-1}"><i
-											class="icon-chevron-left"> <!--  -->
-										</i></a></li>
+								<c:if test="${beanHistorique.listDanger.hasPreviousPage() eq true}">
+									<li>
+										<a id="precDanger"
+										   href="${dangerSuiv_url}/${beanHistorique.listDanger.number-1}">
+											<i class="icon-chevron-left"> <!--  -->
+											</i>
+										</a>
+									</li>
 								</c:if>
-								<c:if
-									test="${beanHistorique.listDanger.hasPreviousPage() eq false}">
-									<li class="disabled"><a id="precDanger" href="#"><i
-											class="icon-chevron-left"> <!--  -->
-										</i></a></li>
+								<c:if test="${beanHistorique.listDanger.hasPreviousPage() eq false}">
+									<li class="disabled">
+										<a id="precDanger" href="#">
+											<i class="icon-chevron-left"> <!--  --></i>
+										</a>
+									</li>
 								</c:if>
-								<c:if
-									test="${beanHistorique.listDanger.hasNextPage() eq true}">
-									<li><a id="suivDanger"
-										href="${dangerSuiv_url}/${beanHistorique.listDanger.number+1}"><i
-											class="icon-chevron-right"> <!--  -->
-										</i></a></li>
+								<c:if test="${beanHistorique.listDanger.hasNextPage() eq true}">
+									<li>
+										<a id="suivDanger"
+										   href="${dangerSuiv_url}/${beanHistorique.listDanger.number+1}">
+											<i class="icon-chevron-right"> <!--  --></i>
+										</a>
+									</li>
 								</c:if>
-								<c:if
-									test="${beanHistorique.listDanger.hasNextPage() eq false}">
-									<li class="disabled"><a id="suivDanger" href="#"><i
-											class="icon-chevron-right"> <!--  -->
-										</i></a></li>
+								<c:if test="${beanHistorique.listDanger.hasNextPage() eq false}">
+									<li class="disabled">
+										<a id="suivDanger" href="#">
+											<i class="icon-chevron-right"> <!--  --></i>
+										</a>
+									</li>
 								</c:if>
-
 							</ul>
-
 						</div>
 					</div>
 				</div>
