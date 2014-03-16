@@ -80,7 +80,7 @@
 			</form:form>
 		</div>
 		</div>
-		<div style="max-height: 500px;">
+		<div style="max-height: 500px;overflow: auto;">
 			<spring:url value="/voyages/list" var="list_url"></spring:url>
 			<a href="${list_url}" id="listVoyage"
 				class="btn btn-default btn-block">Retour a la liste de voyage</a> <br />

@@ -282,10 +282,10 @@
 			var ddData2 = [
 				              {
 				                  text: "agressions fréquentes",
-				                  value: "agressions",
+				                  value: "agression",
 				                  selected: true,
 				                  description: "agressions fréquentes",
-				                  imageSrc: "${icon_url}/agressions.png"
+				                  imageSrc: "${icon_url}/agression.png"
 				              },
 				              {
 				                  text: "agression main",
