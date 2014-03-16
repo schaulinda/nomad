@@ -25,9 +25,8 @@
 				Messages</span> | <span style="margin-left: 20px;">Last Message
 				:${topicBean.lastMessageDate }</span> |
 
-			<!-- spring:url value="/forum/topics/${topicBean.topic.id}"
+			<spring:url value="/forum/topics/${topicBean.topic.id}"
 				var="topic_url" />
-			<span><a href="${topic_url}/form" id="update_topic_link">update</a></span -->
 		</div>
 		<br />
 		<div class="row">
