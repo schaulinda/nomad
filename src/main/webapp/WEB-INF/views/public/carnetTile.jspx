@@ -13,138 +13,180 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+<spring:message code="h.travel" var="hTravel" />
+<spring:message code="a.addField" var="aAddField"/>
+<spring:message code="button.valid" var="buttonValid"/>
+<spring:message code="h.notebookOfTraveler" var="hNotebookOfTraveler" />
+<spring:message code="legend.shareExp" var="legendShareExp"/>
+<spring:message code="textarea.tellUs" var="textareaTellUs" />
+<spring:message code="p.tripDate" var="pTripDate"/>
+<spring:message code="p.clickOnMap" var="pClickOnMap" />
+<spring:message code="a.pictureSelect" var="aPictureSelect" />
+<spring:message code="p.saveTravelAndExp" var="pSaveTravelAndExp" />
 
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-					</i> Parcours
+				<i class="icon-road"><!-- co --></i>
+				${hTravel}
 			</h3>
-		</div>
-	
-	<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>
+		</div>	
+		<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>
 		<form action="${etape_url}" method="GET" id="form_etape">
-				<div class="row">
-					<div class="col-lg-11">
-						<div class="row">
-									<div class="input-group col-lg-7">
-										<input type="text" id="etape0"
-											class="form-control adress" required="required" name="etape0" autocomplete="off" />
-										<input type="hidden" id="etape0Lat" name="etape0" />
-										<input type="hidden" id="etape0Lng" name="etape0" />
-										<a href="#" class="mapPicker input-group-addon" id="etape0-picker">
-											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
+			<div class="row">
+				<div class="col-lg-11">
+					<div class="row">
+						<div class="input-group col-lg-7">
+							<input type="text" 
+								   id="etape0"
+								   class="form-control adress" 
+								   required="required" 
+								   name="etape0" 
+								   autocomplete="off" />
+							<input type="hidden" id="etape0Lat" name="etape0" />
+							<input type="hidden" id="etape0Lng" name="etape0" />
+							<a href="#" class="mapPicker input-group-addon" id="etape0-picker">
+								<span class="">
+									<i class="icon-screenshot"><!-- co --></i>
+								</span>
+							</a>
+						</div>
+						<div class="col-lg-4 input-group" >
+							<input id="etape0Date" 
+								   class="datepicker form-control"
+								   name="etape0" 
+								   type="date" 
+								   data-date-format="dd-mm-yyyy" 
+								   format="dd-mm-yyyy" />
+							<span class="input-group-addon">
+								<i class="icon-calendar"><!-- co --></i>
+							</span>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="input-group col-lg-7">
+							<input type="text" 
+								   id="etape1"
+								   class="form-control adress" 
+								   required="required" 
+								   name="etape1" 
+								   autocomplete="off" />
+							<input type="hidden" id="etape1Lat" name="etape1" />
+							<input type="hidden" id="etape1Lng" name="etape1" />
+							<a href="#" class="mapPicker input-group-addon" id="etape1-picker">
+								<span class="">
+									<i class="icon-screenshot"><!-- co --></i>
+								</span>
+							</a>
+						</div>
+						<div class="col-lg-4 input-group" >
+							<input id="etape1Date" 
+								   class="datepicker form-control"
+								   name="etape1" 
+								   type="date" 
+								   data-date-format="dd-mm-yyyy" 
+								   format="dd-mm-yyyy" />
+							<span class="input-group-addon">
+								<i class="icon-calendar"><!-- co --></i>
+							</span>
+						</div>
+					</div>						
+					<div class="parent_container" >
+						<div class="template_element" >
+							<br />
+							<div class="row">
+								<div class="input-group col-lg-7">
+									<input type="text" 
+										   id="etapecounter"
+										   class="form-control adress" 
+										   required="required" 
+										   name="etapecounter" 
+										   autocomplete="off" />
+									<input type="hidden" id="etapecounterLat" name="etapecounter" />
+									<input type="hidden" id="etapecounterLng" name="etapecounter" />
+									<a href="#" 
+									   class="mapPicker input-group-addon" 
+									   id="etapecounter-picker">
+										<span class="">
+											<i class="icon-screenshot"><!-- co --></i>
 										</span>
-										</a>
-									</div>
-									<div class="col-lg-4 input-group" >
-										<input id="etape0Date" class="datepicker form-control"
-											name="etape0" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
-											<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
-									</div>
-									
+									</a>
 								</div>
-						<br />
-						<div class="row">
-									<div class="input-group col-lg-7">
-										<input type="text" id="etape1"
-											class="form-control adress" required="required" name="etape1" autocomplete="off" />
-										<input type="hidden" id="etape1Lat" name="etape1" />
-										<input type="hidden" id="etape1Lng" name="etape1" />
-										<a href="#" class="mapPicker input-group-addon" id="etape1-picker">
-											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
-										</span>
-										</a>
-									</div>
-									<div class="col-lg-4 input-group" >
-										<input id="etape1Date" class="datepicker form-control"
-											name="etape1" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
-										<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
-									</div>
+								<div class="col-lg-4 input-group" >
+									<input id="etapecounterDate" 
+										   class="datepicker form-control"
+										   name="etapecounter" 
+										   type="date" 
+										   data-date-format="dd-mm-yyyy" 
+										   format="dd-mm-yyyy" />
+									<span class="input-group-addon">
+										<i class="icon-calendar"><!-- co --></i>
+									</span>
 								</div>
-						
-						<div class="parent_container" >
-							
-							<div class="template_element" >
-								<br />
-								<div class="row">
-									<div class="input-group col-lg-7">
-										<input type="text" id="etapecounter"
-											class="form-control adress" required="required" name="etapecounter" autocomplete="off" />
-										<input type="hidden" id="etapecounterLat" name="etapecounter" />
-										<input type="hidden" id="etapecounterLng" name="etapecounter" />
-										<a href="#" class="mapPicker input-group-addon" id="etapecounter-picker">
-											<span class=""> <i class="icon-screenshot"> <!-- co --></i>
-										</span>
-										</a>
-									</div>
-									<div class="col-lg-4 input-group" >
-										<input id="etapecounterDate" class="datepicker form-control"
-											name="etapecounter" type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" />
-											<span class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
-									</div>
-									<div class="col-lg-1">
-										<a href="#" class="remove">x</a>
-									</div>
+								<div class="col-lg-1">
+									<a href="#" class="remove">x</a>
 								</div>
 							</div>
 						</div>
-						<a href="#" class="add_field">Add Field</a>
-						
 					</div>
+					<a href="#" class="add_field">
+						${aAddField}
+					</a>						
 				</div>
-				<div class="row">
+			</div>
+			<div class="row">
 				<br/>
-					<div class="col-lg-10">
-						<button class="btn btn-block" type="submit" id="btn_etape">
-										<spring:message code="button.valid" />
-						</button>
-					</div>
+				<div class="col-lg-10">
+					<button class="btn btn-block" type="submit" id="btn_etape">
+						${buttonValid}
+					</button>
 				</div>
-			</form>
-	
-	<div class="panel">
-		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-user"> <!-- co -->
-				</i>
-				<spring:message code="h.notebookOfTraveler"
-					var="hNotebookOfTraveler" />
-				${hNotebookOfTraveler}
-			</h3>
-		</div>
-
-		<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
-		<form:form commandName="beanNoteBookManager" action="${etapVoy_url}"
-			method="GET" id="form_etapeVoy">
-
-			<!-- fieldset parcours -->
-			
+			</div>
+		</form>	
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-user"><!-- co --></i>				
+					${hNotebookOfTraveler}
+				</h3>
+			</div>
+			<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
+			<form:form commandName="beanNoteBookManager" 
+					   action="${etapVoy_url}"
+					   method="GET" 
+					   id="form_etapeVoy">
+			<!-- fieldset parcours -->			
 			<fieldset>
 				<legend>
-					<i class="icon-plane"> <!-- co -->
-					</i> Share your Trip experience
+					<i class="icon-plane"><!-- co --></i>
+					${legendShareExp}
 				</legend>
-				<spring:message code="textarea.tellUs" var="textareaTellUs" />
-				<form:textarea cssClass="form-control" row="8" id="description"
-					path="etapeVoyage.description" required="required"
-					placeholder="${textareaTellUs}" />
-
+				<form:textarea cssClass="form-control" 
+							   row="8" id="description"
+							   path="etapeVoyage.description" 
+							   required="required"
+							   placeholder="${textareaTellUs}" />
 				<div class="bs-callout" id="btnCalBox">
 					<div class="row">
 						<div class="col-lg-10 col-lg-offset-1">
 							<div class="form-group">
-								<form:input id="dateEtape" cssClass="datepicker form-control"
-									path="etapeVoyage.dateEtape" type="date"
-									placeholder="12-03-1991" data-date-format="dd-mm-yyyy"
-									format="dd-mm-yyyy" />
-								<p class="help-block">Date of Your trip.</p>
+								<form:input id="dateEtape" 
+											cssClass="datepicker form-control"
+											path="etapeVoyage.dateEtape" 
+											type="date"
+											placeholder="12-03-1991" 
+											data-date-format="dd-mm-yyyy"
+											format="dd-mm-yyyy" />
+								<p class="help-block">	
+									${pTripDate}
+								</p>
 							</div>
 						</div>
 						<div class="col-lg-1">
-							<a title="close" class="closeLink"><i
-								class="icon-remove-circle"> <!-- co -->
-							</i> </a>
+							<a title="close" class="closeLink">
+								<i class="icon-remove-circle"><!-- co --></i> 
+							</a>
 						</div>
 					</div>
 				</div>
@@ -154,21 +196,24 @@
 						<form:hidden id="locationLng" path="etapeVoyage.userlng" />
 						<div class="col-lg-10 col-lg-offset-1">
 							<div class="input-group">
-								<form:input id="location" path="etapeVoyage.location" cssClass="form-control adress"
-									placeholder="" />
-								<a href="#" class="input-group-addon mapPicker"
-									id="location-picker"> <span class=""> <i
-										class="icon-screenshot"> <!-- co --></i>
-								</span>
+								<form:input id="location" 
+											path="etapeVoyage.location" 
+											cssClass="form-control adress"
+											placeholder="" />
+								<a href="#" class="input-group-addon mapPicker" id="location-picker">
+									<span class="">
+										<i class="icon-screenshot"> <!-- co --></i>
+									</span>
 								</a>
 							</div>
-							<p class="help-block">Click and select the location on the
-								map.</p>
+							<p class="help-block">
+								${pClickOnMap}
+							</p>
 						</div>
 						<div class="col-lg-1">
-							<a title="close" class="closeLink"><i
-								class="icon-remove-circle"> <!-- co -->
-							</i> </a>
+							<a title="close" class="closeLink">
+								<i class="icon-remove-circle"><!-- co --></i> 
+							</a>
 						</div>
 					</div>
 				</div>
@@ -177,49 +222,50 @@
 					<div class="row">
 						<div class="col-lg-4 col-lg-offset-1">
 							<c:if test="${empty beanNoteBookManager.etapeVoyage.userPhoto}">
-								<IMG alt="" src="${res}/img/profil.png" width="100px"
-									height="100px;" />
+								<img alt="" src="${res}/img/profil.png" width="100px" height="100px;" />
 							</c:if>
 							<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-							<c:if
-								test="${not empty beanNoteBookManager.etapeVoyage.userPhoto}">
-								<IMG alt=""
-									src="${imageRender_url}/${beanNoteBookManager.etapeVoyage.userPhoto}"
-									width="100px" height="100px;" />
+							<c:if test="${not empty beanNoteBookManager.etapeVoyage.userPhoto}">
+								<img alt=""
+									 src="${imageRender_url}/${beanNoteBookManager.etapeVoyage.userPhoto}"
+									 width="100px" height="100px;" />
 							</c:if>
 						</div>
 						<div class="col-lg-4">
 							<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-							<a class="btn btn-default" id="selectImg"
-								href="${selectPhoto_url}?backLink=carnet"><i
-								class="icon-edit"> <!-- com  -->
-							</i> Select a picture</a>
+							<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=carnet">
+								<i class="icon-edit"> <!-- --></i>
+								${aPictureSelect}
+							</a>
 						</div>
 						<div class="col-lg-1 col-lg-offset-2">
-							<a title="close" class="closeLink"><i
-								class="icon-remove-circle"> <!-- co -->
-							</i> </a>
+							<a title="close" class="closeLink">
+								<i class="icon-remove-circle"><!-- --></i>
+							</a>
 						</div>
 					</div>
 				</div>
 				<div class="row grpBtn">
 					<div class="col-lg-8 col-lg-offset-4 col-12">
 						<ul class="nav nav-tabs nav-justified">
-							<li><a class="" id="btnPhoto"> <i class="icon-camera">
-										<!-- co -->
-								</i>
-							</a></li>
-							<li><a class="" id="btnCal"> <i class="icon-calendar">
-										<!-- co -->
-								</i>
-							</a></li>
-							<li><a class="" id="btnLocation"> <i
-									class="icon-screenshot"> <!-- co -->
-								</i>
-							</a></li>
+							<li>
+								<a class="" id="btnPhoto">
+									<i class="icon-camera"><!-- --></i>
+								</a>
+							</li>
+							<li>
+								<a class="" id="btnCal">
+									<i class="icon-calendar"><!-- --></i>
+								</a>
+							</li>
+							<li>
+								<a class="" id="btnLocation">
+									<i class="icon-screenshot"><!-- --></i>
+								</a>
+							</li>
 							<li>
 								<button class="btn" type="submit" id="btn_etapeVoy">
-									<spring:message code="button.valid" />
+									${buttonValid}
 								</button>
 							</li>
 						</ul>
@@ -227,11 +273,11 @@
 				</div>
 			</fieldset>
 		</form:form>
-		<p class="help-block">Vous pouvez enregistrer juste votre parcours
-			et/ou partagez vos experiences.</p>
+		<p class="help-block">
+			${pSaveTravelAndExp}
+		</p>
 		<c:if test="${not empty beanNoteBookManager.listParcours}">
 			<c:forEach items="${beanNoteBookManager.listParcours}" var="parcours">
-
 			</c:forEach>
 		</c:if>
 	</div>
