@@ -29,7 +29,7 @@ public class DiscussionBuilder {
 		public static DiscussionBuilder get(){
 			return new DiscussionBuilder();
 		}
-		public DiscussionBuilder addDiscussion(SubTopic subTopic, Confidentiality confidentiality, String content, UserNomade nomade, String title){
+		public DiscussionBuilder addDiscussion(SubTopic subTopic, Confidentiality confidentiality, String content, UserNomade nomade, String title,Boolean frozen){
 			Discussion discussion = new Discussion();
 			discussion.setSubTopic(subTopic);
 			discussion.setComments(generateComments(3, nomade));
@@ -38,6 +38,7 @@ public class DiscussionBuilder {
 			discussion.setCreated(new Date());
 			discussion.setNomade(nomade);
 			discussion.setTitle(title);
+			discussion.setFrozen(frozen);
 			discussions.add(discussion);
 			return this;
 		}
@@ -50,6 +51,7 @@ public class DiscussionBuilder {
 				comment.setCreated(new Date());
 				comment.setNomade(nomade);
 				comments.add(comment);
+				comment.setFrozen(false);
 			}
 			return comments;
 		}

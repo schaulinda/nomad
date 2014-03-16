@@ -41,4 +41,12 @@ privileged aspect Comment_Roo_JavaBean {
         this.businessId = businessId;
     }
     
+    public Boolean Comment.getFrozen() {
+        return this.frozen;
+    }
+    
+    public void Comment.setFrozen(Boolean frozen) {
+        this.frozen = frozen;
+    }
+    
 }

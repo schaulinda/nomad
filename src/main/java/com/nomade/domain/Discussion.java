@@ -60,4 +60,9 @@ public class Discussion {
     @ManyToOne
     @DBRef
     private SubTopic subTopic;
+
+    /**
+     */
+    @NotNull
+    private Boolean frozen;
 }

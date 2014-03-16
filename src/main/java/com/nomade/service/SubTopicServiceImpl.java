@@ -97,4 +97,38 @@ public class SubTopicServiceImpl implements SubTopicService {
     public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality,int firstResult,int maxResult){
 		return subTopicRepository.findByParentTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult/maxResult, maxResult));
 	}
+
+	@Override
+    public List<SubTopic> findByParentTopicAndConfidentialityAndFrozen(Topic topic,Confidentiality confidentiality,Boolean frozen){
+    	return subTopicRepository.findByParentTopicAndConfidentialityAndFrozen(topic,confidentiality,frozen);
+    }
+
+    @Override
+    public List<SubTopic> findByParentTopicAndConfidentialityAndFrozen(Topic topic,Confidentiality confidentiality,Boolean frozen,int firstResult, int max){
+    	return subTopicRepository.findByParentTopicAndConfidentialityAndFrozen(topic,confidentiality,frozen, new PageRequest(firstResult/max, max));
+    }
+    
+    @Override
+    public List<SubTopic> findByParentTopicAndFrozen(Topic topic,Boolean frozen){
+    	return subTopicRepository.findByParentTopicAndFrozen(topic,frozen);
+    }
+    
+    @Override
+    public List<SubTopic> findByParentTopicAndFrozen(Topic topic,Boolean frozen,int firstResult, int max){
+    	return subTopicRepository.findByParentTopicAndFrozen(topic,frozen, new PageRequest(firstResult/max, max));
+    }
+    
+    @Override
+    public SubTopic freezeSubTopic(SubTopic subTopic){
+    	subTopic.setFrozen(Boolean.TRUE);
+    	subTopic = updateSubTopic(subTopic);
+    	return subTopic;
+    }
+
+    @Override
+    public SubTopic unFreezeSubTopic(SubTopic subTopic){
+    	subTopic.setFrozen(Boolean.FALSE);
+    	subTopic = updateSubTopic(subTopic);
+    	return subTopic;
+    }
 }

@@ -26,4 +26,8 @@ public class Comment {
      * a generated id, to identify a {@link #Comment()} in the forum.
      */
     private String businessId;
+
+    /**
+     */
+    private Boolean frozen;
 }

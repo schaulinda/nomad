@@ -49,6 +49,12 @@
 				<form:select path="confidentiality" cssClass="form-control"
 					items="${confidentialities}" placeholder="Confidentiality" />
 			</div>
+			
+			<div class="checkbox">
+				<label>
+					<form:checkbox path="frozen" value="${subTopic.frozen}" /> Is Frozen ?
+				</label>
+			</div>
 			<input class="btn" type="reset" />
 			<button class="btn btn-primary" id="btn_updatesubtopic" type="submit">Save changes</button>
 		</form:form>

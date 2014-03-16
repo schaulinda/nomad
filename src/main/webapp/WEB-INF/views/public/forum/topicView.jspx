@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
- 	xmlns:rooForm="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:rooForm="urn:jsptagdir:/WEB-INF/tags/form"
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:form="http://www.springframework.org/tags/form"
@@ -15,26 +15,30 @@
 	<spring:url var="res" value="/resources" />
 
 	<div class="row">
-	
+
 		<div>
-			<span>${topicBean.topic.title }</span> |
-			<span style=" margin-left: 20px;">${topicBean.topic.content }</span> |
-			<span style=" margin-left: 20px;">Created The : ${topicBean.topic.created }</span> |
-			<span style=" margin-left: 20px;">${topicBean.nbOfDiscussion } Discussions</span> |
-			<span style=" margin-left: 20px;">${topicBean.nbOfMessages } Messages</span> |
-			<span style=" margin-left: 20px;">Last Message :${topicBean.lastMessageDate }</span> |
-			
-			<spring:url value="/forum/topics/${topicBean.topic.id}" var="topic_url" /> 
-			<span><a href="${topic_url}/form" 	id="update_topic_link">update</a></span>
+			<span>${topicBean.topic.title }</span> | <span
+				style="margin-left: 20px;">${topicBean.topic.content }</span> | <span
+				style="margin-left: 20px;">Created The :
+				${topicBean.topic.created }</span> | <span style="margin-left: 20px;">${topicBean.nbOfDiscussion }
+				Discussions</span> | <span style="margin-left: 20px;">${topicBean.nbOfMessages }
+				Messages</span> | <span style="margin-left: 20px;">Last Message
+				:${topicBean.lastMessageDate }</span> |
+
+			<!-- spring:url value="/forum/topics/${topicBean.topic.id}"
+				var="topic_url" />
+			<span><a href="${topic_url}/form" id="update_topic_link">update</a></span -->
 		</div>
 		<br />
 		<div class="row">
 			<spring:url value="/forum/topics" var="topics_url" />
 			<div class="col-lg-4">
-				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt;
-				<span>${topicBean.topic.title }</span>
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; <span>${topicBean.topic.title }</span>
 			</div>
-				<div> <util:forum-entity-selection currentObject="${topicBean.topic }" formUrl="${topics_url }" entities="${entities }"></util:forum-entity-selection> </div>
+			<div>
+				<util:forum-entity-selection currentObject="${topicBean.topic }"
+					formUrl="${topics_url }" entities="${entities }"></util:forum-entity-selection>
+			</div>
 		</div>
 		<br />
 		<h2>Sub Topics</h2>
@@ -50,92 +54,107 @@
 			<tbody>
 				<c:forEach items="${subTopicToBeans }" var="subTopicToBean">
 					<tr>
-						<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id }" var="subtopic_url" />
-						<td> <a href="${subtopic_url }" id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link" >${subTopicToBean.subTopic.title }</a> </td>
+						<spring:url
+							value="/forum/subtopics/${subTopicToBean.subTopic.id }"
+							var="subtopic_url" />
+						<td><a href="${subtopic_url }"
+							id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link">${subTopicToBean.subTopic.title }</a>
+						</td>
 						<td>${subTopicToBean.subTopic.content }</td>
 						<td>${subTopicToBean.subTopic.created }</td>
 						<td>${subTopicToBean.numberOfDiscussion}</td>
 						<td>${subTopicToBean.numberOfMessage }</td>
 						<td>${subTopicToBean.lastMessageDate }</td>
-							<c:if test="${pageContext['request'].userPrincipal != null}">
-									<spring:url value="/forum/subtopics/${subTopicToBean.subTopic.id}" var="subTopicUrl" />
-									<c:choose>
-										<c:when test="${ subTopicToBean.subTopic.nomade.userName eq pageContext['request'].userPrincipal.name}">
-											<td>
-												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a>
-											</td>
-											<td>
-												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
-											</td>
-										</c:when>
-										<c:otherwise>
-											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-											<td>
-												<a href="${subTopicUrl}/form" class="update_subtopic_link" id="_u${ subTopic.id}" >update</a>
-											</td>
-											<td>
-												<rooForm:delete entityId="${subTopicToBean.subTopic.id}" path="${subTopicUrl }" id="_form_${subTopicToBean.subTopic.id}" />
-											</td>
-											</sec:authorize>
-										</c:otherwise>
-									</c:choose>
+						<c:if test="${pageContext['request'].userPrincipal != null}">
+							<spring:url
+								value="/forum/subtopics/${subTopicToBean.subTopic.id}"
+								var="subTopicUrl" />
+
+							<c:set var="updateDeleteAndFrozenActionsAreShowned" value="false" />
+							<sec:authorize ifAnyGranted="ROLE_ADMIN">
+								<td><a href="${subTopicUrl}/form"
+									class="update_subtopic_link" id="_u${ subTopicToBean.subTopic.id}">update</a>
+								</td>
+								<c:choose>
+									<c:when test="${subTopicToBean.subTopic.frozen }">
+										<td><a href="${subTopicUrl}/unfreeze"
+											class="update_subtopic_link" id="_uf${ subTopicToBean.subTopic.id}">unfreeze</a>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td><a href="${subTopicUrl}/freeze"
+											class="update_subtopic_link" id="_f${ subTopicToBean.subTopic.id}">freeze</a>
+										</td>
+									</c:otherwise>
+								</c:choose>
+								<td><rooForm:delete
+										entityId="${subTopicToBean.subTopic.id}"
+										path="${subTopicUrl }"
+										id="_form_${subTopicToBean.subTopic.id}" /></td>
+
+								<c:set var="updateDeleteAndFrozenActionsAreShowned" value="true" />
+							</sec:authorize>
+
+							<c:if
+								test="${ subTopicToBean.subTopic.nomade.userName eq pageContext['request'].userPrincipal.name}">
+								<c:if test="${!updateDeleteAndFrozenActionsAreShowned }">
+
+									<td><a href="${subTopicUrl}/form"
+										class="update_subtopic_link" id="_u${ subTopic.id}">update</a>
+									</td>
+									<td><rooForm:delete
+											entityId="${subTopicToBean.subTopic.id}"
+											path="${subTopicUrl }"
+											id="_form_${subTopicToBean.subTopic.id}" /></td>
+								</c:if>
 							</c:if>
+
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<util:springjs-pagination maxPages="${maxPages }" url="${topic_url }" fragmentId="body" page="${param.page}" size="${param.size}" />
+		<util:springjs-pagination maxPages="${maxPages }" url="${topic_url }"
+			fragmentId="body" page="${param.page}" size="${param.size}" />
 	</div>
-	
-	<script type="text/javascript">
-		dojo.query(".update_subtopic_link").forEach(
-				function(node, index, arr) {
-					var id = dojo.attr(node, "id");
-					console.log(id);
-					Spring.addDecoration(new Spring.AjaxEventDecoration({
-						elementId : id,
-						event : "onclick",
-						params : {
-							fragments : "body"
-						}
-					}));
 
-				});
-	</script>
-		
 	<script type="text/javascript">
-		dojo.query(".see_subtopic_link").forEach(
-				function(node, index, arr) {
-					var id = dojo.attr(node, "id");
-					console.log(id);
-					Spring.addDecoration(new Spring.AjaxEventDecoration({
-						elementId : id,
-						event : "onclick",
-						params : {
-							fragments : "body"
-						}
-					}));
+		dojo.query(".update_subtopic_link").forEach(function(node, index, arr) {
+			var id = dojo.attr(node, "id");
+			console.log(id);
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : id,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
 
-				});
+		});
 	</script>
-	
+
+	<script type="text/javascript">
+		dojo.query(".see_subtopic_link").forEach(function(node, index, arr) {
+			var id = dojo.attr(node, "id");
+			console.log(id);
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : id,
+				event : "onclick",
+				params : {
+					fragments : "body"
+				}
+			}));
+
+		});
+	</script>
+
 	<script type="text/javascript">
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
-			elementId : "update_topic_link",
+			elementId : "see_all_topics_link",
 			event : "onclick",
 			params : {
 				fragments : "body"
 			}
 		}));
 	</script>
-	
-	<script type="text/javascript">
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : "see_all_topics_link",
-					event : "onclick",
-					params : {
-						fragments : "body"
-					}
-				}));
-		</script>
 </div>

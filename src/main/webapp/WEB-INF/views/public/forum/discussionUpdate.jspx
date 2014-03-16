@@ -32,6 +32,12 @@
 				<form:input path="title" cssClass="form-control"
 					placeholder="title..." />
 			</div>
+			
+			<div class="checkbox">
+				<label>
+					<form:checkbox path="frozen" value="${discussion.frozen }" /> Is Frozen ?
+				</label>
+			</div>
 			<div class="form-group">
 				<span>Content</span>
 				<form:textarea path="content" cssClass="form-control"

@@ -60,6 +60,9 @@ public class HomeController {
 			if (roleNames.contains(RoleName.ROLE_ADMIN)) {
 				return "redirect:/admin";
 			}
+			if(roleNames.contains(RoleName.ROLE_MODERATOR)){
+				return "redirect:/admin";
+			}
 			if (roleNames.contains(RoleName.ROLE_SIMPLE_USER)) {
 				
 				uiModel.addAttribute("fieldPercent", request.getSession(false).getAttribute("fieldPercent"));
@@ -102,7 +105,43 @@ public class HomeController {
 		return "/login";
 	}
 	
-	
+	@RequestMapping("/admin")
+	public String adminController(HttpServletRequest request, Model uiModel){
+		UserNomade nomade = securite.getUserNomade();
+		uiModel.addAttribute("fieldPercent", request.getSession(false).getAttribute("fieldPercent"));
+		request.getSession(false).removeAttribute("fieldPercent");
+		
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
+		
+		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(nomade, 0);
+		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(nomade, 0);
+		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
+		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListEtapeVoy(listEtapeVoy);//listEtapeVoy.getContent().get(0).getComments().s
+		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListDanger(listDanger);
+		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setNomade(nomade);
+		
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		beanNomadeManager.setNomads(findAllUserNomades);	
+		beanNomadeManager.setMe(true);
+		//beanNomadeManager.setHome(true);
+		beanNomadeManager.setNomade(nomade);
+		//String makers = parcoursService.buildMakers(findAllUserNomades);
+		//beanNomadeManager.setMakers(makers);
+		
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("onglet", "nomad");
+		
+		uiModel.addAttribute("demands", relationService.findReceivedDemand(nomade));
+		
+		return "public/nomad";
+	}
 	@RequestMapping("/@{username}")
 	public String nomad(@PathVariable("username") String username, HttpServletRequest request, Model uiModel) {
 		

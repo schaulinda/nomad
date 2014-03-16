@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.nomade.domain.RoleName;
 import com.nomade.domain.UserNomade;
 import com.nomade.service.UserService;
 
@@ -58,5 +59,9 @@ public class SecurityUtil implements Security {
 	}
 	public boolean isUserLogged(){
 		return getUserDetails() != null ;
+	}
+
+	public boolean hasAccessToFrozenData() {
+		return getUserNomade().getRoleNames().contains(RoleName.ROLE_ADMIN)  || getUserNomade().getRoleNames().contains(RoleName.ROLE_MODERATOR);
 	}
 }

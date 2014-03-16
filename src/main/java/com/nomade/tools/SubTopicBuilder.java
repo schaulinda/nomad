@@ -33,7 +33,7 @@ public class SubTopicBuilder {
 	 * @param discussions
 	 * @return {@link SubTopicBuilder SubTopicBuilder}
 	 */
-	public SubTopicBuilder addSubTopic(String title,String content, Confidentiality confidentiality,UserNomade nomade, Topic parentTopic){
+	public SubTopicBuilder addSubTopic(String title,String content, Confidentiality confidentiality,UserNomade nomade, Topic parentTopic,Boolean frozen){
 		SubTopic subTopic = new SubTopic();
 		subTopic.setConfidentiality(confidentiality);
 		subTopic.setContent(content);
@@ -41,6 +41,7 @@ public class SubTopicBuilder {
 		subTopic.setNomade(nomade);
 		subTopic.setParentTopic(parentTopic);
 		subTopic.setTitle(title);
+		subTopic.setFrozen(frozen);
 		getSubTopics().add(subTopic);
 		return this;
 	}

@@ -21,4 +21,11 @@ public interface DiscussionService extends ForumQuery<Discussion>{
     public List<Discussion> findByConfidentiality(Confidentiality confidentiality);
     public List<Discussion> findBySubTopicAndConfidentiality(SubTopic topic,Confidentiality confidentiality);
     public List<Discussion> findBySubTopicAndConfidentiality(SubTopic topic,Confidentiality confidentiality,int firstResult,int maxResults);
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen);
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen,int firstResult,int maxResults);
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen);
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen,int firstResult,int maxResults);
+    
+    public Discussion freezeDiscussion(Discussion discussion);
+    public Discussion unFreezeDiscussion(Discussion discussion);
 }

@@ -17,4 +17,8 @@ public interface DiscussionRepository extends ForumQuery<Discussion>{
     public List<Discussion> findBySubTopic(SubTopic subTopic,Pageable pageable);
     public List<Discussion> findBySubTopicAndConfidentiality(SubTopic topic,Confidentiality confidentiality);
     public List<Discussion> findBySubTopicAndConfidentiality(SubTopic topic,Confidentiality confidentiality,Pageable pageable);
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen);
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen,Pageable pageable);
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen);
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen,Pageable pageable);
 }

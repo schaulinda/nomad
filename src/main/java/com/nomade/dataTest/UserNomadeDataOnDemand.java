@@ -66,6 +66,13 @@ public class UserNomadeDataOnDemand {
 	    public void setRoleNames(UserNomade obj, int index){
 	    	Set<RoleName> roleNames = new HashSet<RoleName>();
 			roleNames.add(RoleName.ROLE_SIMPLE_USER);
+			if(index == 0){
+				roleNames.add(RoleName.ROLE_ADMIN);
+				roleNames.add(RoleName.ROLE_MODERATOR);
+			}
+			if(index == 1){
+				roleNames.add(RoleName.ROLE_MODERATOR);
+			}
 	    	obj.setRoleNames(roleNames);
 	    }
 	    

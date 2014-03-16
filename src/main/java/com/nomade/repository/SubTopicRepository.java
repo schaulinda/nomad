@@ -17,4 +17,9 @@ public interface SubTopicRepository  extends ForumQuery<SubTopic> {
     public List<SubTopic> findByParentTopic(Topic topic,Pageable pageable);
     public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality);
     public List<SubTopic> findByParentTopicAndConfidentiality(Topic topic,Confidentiality confidentiality,Pageable pageable);
+
+    public List<SubTopic> findByParentTopicAndConfidentialityAndFrozen(Topic topic,Confidentiality confidentiality,Boolean frozen);
+    public List<SubTopic> findByParentTopicAndConfidentialityAndFrozen(Topic topic,Confidentiality confidentiality,Boolean frozen,Pageable pageable);
+    public List<SubTopic> findByParentTopicAndFrozen(Topic topic,Boolean frozen);
+    public List<SubTopic> findByParentTopicAndFrozen(Topic topic,Boolean frozen,Pageable pageable);
 }

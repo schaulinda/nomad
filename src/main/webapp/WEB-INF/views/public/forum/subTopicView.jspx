@@ -22,104 +22,130 @@
 				${subTopic.created }</span> | <span style="margin-left: 20px;">${numberOfDiscussions }
 				Discussions</span> | <span style="margin-left: 20px;">${numberOfMessages }
 				Messages</span> | <span style="margin-left: 20px;">Last Message
-				:${lastMessageDate }</span> | <span style="margin-left: 20px;">
-				<button class="btn" id="btnAddSubtopic">Add a sub topic</button>
-			</span> | <span style="margin-left: 20px;">
-				<button class="btn" id="btnAddDiscussion">Add a Discussion</button>
-			</span>
+				:${lastMessageDate }</span>
+
+			<sec:authorize ifAnyGranted="ROLE_ADMIN">
+			| <span style="margin-left: 20px;"> <button>Add a sub topic
+					</button>
+				</span>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated() ">
+					| <span style="margin-left: 20px;">
+					<button class="btn" id="btnAddDiscussion">Add a Discussion</button>
+				</span>
+			</sec:authorize>
 
 		</div>
-		<!-- create discussion form -->
-		<spring:url value="/forum/subtopics/${subTopic.id }/discussions"
-			var="create_discussion_url" />
-		<div id="createDiscussionDiv" class="hide">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true" id="commentDialogCaret">×</button>
-				<h3 id="myModalLabel">New Discussion</h3>
-			</div>
-			<div class="modal-body">
-				<form:form commandName="discussionModel"
-					action="${create_discussion_url }" method="POST">
-					<div class="form-group">
-						<span>Title</span>
-						<form:input path="title" cssClass="form-control"
-							placeholder="title..." />
-					</div>
-					<div class="form-group">
-						<span>Content</span>
-						<form:textarea path="content" cssClass="form-control"
-							placeholder="type the content..." />
-					</div>
+		<sec:authorize access="isAuthenticated() ">
+			<!-- CREATE DISCUSSION FORM -->
+			<spring:url value="/forum/subtopics/${subTopic.id }/discussions"
+				var="create_discussion_url" />
+			<div id="createDiscussionDiv" class="hide">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" id="commentDialogCaret">×</button>
+					<h3 id="myModalLabel">New Discussion</h3>
+				</div>
+				<div class="modal-body">
+					<form:form commandName="discussionModel"
+						action="${create_discussion_url }" method="POST">
+						<div class="form-group">
+							<span>Title</span>
+							<form:input path="title" cssClass="form-control"
+								placeholder="title..." />
+						</div>
+						<div class="form-group">
+							<span>Content</span>
+							<form:textarea path="content" cssClass="form-control"
+								placeholder="type the content..." />
+						</div>
 
-					<sec:authorize access="isAuthenticated()" >
 						<div class="form-group">
 							<label>Confidentiality</label>
 							<form:select path="confidentiality" cssClass="form-control"
 								items="${confidentialities}" placeholder="Confidentiality" />
 						</div>
-					</sec:authorize>
-					<button class="btn" data-dismiss="modal" aria-hidden="true"
-						id="btnCloseDiscussionDialog" type="reset">Close</button>
-					<button class="btn btn-primary" type="submit">Save changes</button>
-				</form:form>
+							
+						<div class="checkbox">
+							<label>
+								<form:checkbox path="frozen" value="false" /> Is Frozen ?
+							</label>
+						</div>
+						<button class="btn" data-dismiss="modal" aria-hidden="true"
+							id="btnCloseDiscussionDialog" type="reset">Close</button>
+						<button class="btn btn-primary" type="submit">Save
+							changes</button>
+					</form:form>
+				</div>
+				<div class="modal-footer">
+					<!--  -->
+				</div>
 			</div>
-			<div class="modal-footer">
-				<!--  -->
-			</div>
-		</div>
-		<!-- create subtopic form -->
-		<spring:url
-			value="/forum/topics/${subTopic.parentTopic.id }/subtopics/${subTopic.id }/add"
-			var="create_subtopic_url" />
-		<div id="createSubTopicView" class="hide">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true" id="commentDialogCaret">×</button>
-				<h3 id="myModalLabel">New Sub Topic</h3>
-			</div>
-			<div class="modal-body">
-				<form:form commandName="subTopicModel"
-					action="${create_subtopic_url }" method="POST">
-					<div class="form-group">
-						<span>Title</span>
-						<form:input path="title" cssClass="form-control"
-							placeholder="title" />
-					</div>
-
-					<sec:authorize access="isAuthenticated()" >
+			<!-- END CREATE DISCUSSION FORM -->
+		</sec:authorize>
+		<sec:authorize ifAnyGranted="ROLE_ADMIN">
+			<!-- CREATE SUBTOPIC FORM -->
+			<spring:url
+				value="/forum/topics/${subTopic.parentTopic.id }/subtopics/${subTopic.id }/add"
+				var="create_subtopic_url" />
+			<div id="createSubTopicView" class="hide">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" id="commentDialogCaret">×</button>
+					<h3 id="myModalLabel">New Sub Topic</h3>
+				</div>
+				<div class="modal-body">
+					<form:form commandName="subTopicModel"
+						action="${create_subtopic_url }" method="POST">
+						<div class="form-group">
+							<span>Title</span>
+							<form:input path="title" cssClass="form-control"
+								placeholder="title" />
+						</div>
 						<div class="form-group">
 							<label>Confidentiality</label>
 							<form:select path="confidentiality" cssClass="form-control"
 								items="${confidentialities}" placeholder="Confidentiality" />
 						</div>
-					</sec:authorize>
-					<div>
-						<span>Content</span>
-						<form:textarea path="content" cssClass="form-control"
-							placeholder="content" />
-					</div>
-					<button class="btn" data-dismiss="modal" aria-hidden="true"
-						id="btnCloseSubTopicDialog" type="reset">Close</button>
-					<button class="btn btn-primary" type="submit">Save changes</button>
-				</form:form>
+						<div>
+							<span>Content</span>
+							<form:textarea path="content" cssClass="form-control"
+								placeholder="content" />
+						</div>
+						
+						<div class="checkbox">
+							<label>
+								<form:checkbox path="frozen" value="false" /> Is Frozen ?
+							</label>
+						</div>
+						<button class="btn" data-dismiss="modal" aria-hidden="true"
+							id="btnCloseSubTopicDialog" type="reset">Close</button>
+						<button class="btn btn-primary" type="submit">Save
+							changes</button>
+					</form:form>
+				</div>
+				<div class="modal-footer">
+					<!--  -->
+				</div>
 			</div>
-			<div class="modal-footer">
-				<!--  -->
-			</div>
-		</div>
+			<!-- END CREATE SUBTOPIC FORM -->
+		</sec:authorize>
 		<br />
-		
+
 		<div class="row">
 			<spring:url value="/forum/subtopics" var="spring_url" />
-			<spring:url value="/forum/topics/${subTopic.parentTopic.id }" var="topic_url" />
+			<spring:url value="/forum/topics/${subTopic.parentTopic.id }"
+				var="topic_url" />
 			<spring:url value="/forum/topics" var="topics_url" />
 			<div class="col-lg-6">
-				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt;
-				<a href="${ topic_url }" id="see_topic_link">${subTopic.parentTopic.title }</a> &gt;
-				<span>${subTopic.title }</span>
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; <a
+					href="${ topic_url }" id="see_topic_link">${subTopic.parentTopic.title }</a>
+				&gt; <span>${subTopic.title }</span>
 			</div>
-				<div> <util:forum-entity-selection currentObject="${subTopic }" formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection> </div>
+			<div>
+				<util:forum-entity-selection currentObject="${subTopic }"
+					formUrl="${spring_url }" entities="${entities }"></util:forum-entity-selection>
+			</div>
 		</div>
 		<br />
 		<h2>Discussions</h2>
@@ -133,44 +159,67 @@
 				<c:forEach items="${discussions }" var="discussion">
 					<tr>
 						<spring:url value="/forum/discussions/${discussion.id }"
-							var="subtopic_url" />
+							var="discussion_url" />
 						<td><a class="forum-subtopics-discussion"
-							id="s_${discussion.id}" href="${subtopic_url }">${discussion.title }</a>
+							id="s_${discussion.id}" href="${discussion_url }">${discussion.title }</a>
 						</td>
 						<td>${discussion.content }</td>
 						<td>${discussion.created }</td>
-							<c:set var="showActions" value="no" />
-							<c:if test="${pageContext['request'].userPrincipal != null}">
-								<spring:url value="/forum/discussions/${discussion.id}" var="discussion_url" />
+						<c:set var="showActions" value="no" />
+						<c:if test="${pageContext['request'].userPrincipal != null}">
+							<spring:url value="/forum/discussions/${discussion.id}"
+								var="discussion_url" />
+								<c:set var="updateAndFrozenActionsAreShowned" value="false" />
+								<c:set var="deleteActionIsShowned" value="false" />
+									<sec:authorize ifAnyGranted="ROLE_MODERATOR,ROLE_ADMIN">
+										<td><a href="${discussion_url}/form"
+											class="update_discussion_link btn" id="u_${discussion.id}">update</a>
+										</td>
 										<c:choose>
-											<c:when test="${ discussion.nomade.userName eq pageContext['request'].userPrincipal.name}">
-												<td>
-													<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a>
+											<c:when test="${discussion.frozen }">
+												<td><a href="${discussion_url}/unfreeze"
+													class="update_discussion_link btn" id="uf_${discussion.id}">unfreeze</a>
 												</td>
-												<td>
-													<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
-												</td> 
 											</c:when>
 											<c:otherwise>
-												<sec:authorize ifAnyGranted="ROLE_ADMIN">
-													<td>
-														<a href="${discussion_url}/form" class="update_discussion_link" id="u_${discussion.id}">update</a>
-													</td>
-													<td>
-														<rooForm:delete path="${discussion_url }" entityId="${discussion.id }" id="form_${discussion.id }" />
-													</td>
-												</sec:authorize>
+												<td><a href="${discussion_url}/freeze"
+													class="update_discussion_link btn" id="f_${discussion.id}">freeze</a>
+												</td>
 											</c:otherwise>
 										</c:choose>
-							</c:if>
+										<c:set value="true" var="updateAndFrozenActionsAreShowned"/>
+									</sec:authorize>
+									<sec:authorize ifAllGranted="ROLE_ADMIN" >
+										<td><rooForm:delete path="${discussion_url }"
+												entityId="${discussion.id }" id="form_${discussion.id }" />
+										</td>
+										<c:set value="true" var="deleteActionIsShowned"/>
+									</sec:authorize>
+									
+								<c:if test="${ discussion.nomade.userName eq pageContext['request'].userPrincipal.name}">
+									<c:if test="${!updateAndFrozenActionsAreShowned }">
+										<td><a href="${discussion_url}/form"
+											class="update_discussion_link" id="u_${discussion.id}">update</a>
+										</td>
+									</c:if>
+									<c:if test="${!deleteActionIsShowned }">
+										<td><rooForm:delete path="${discussion_url }"
+												entityId="${discussion.id }" id="form_${discussion.id }" />
+										</td>
+									</c:if>
+								</c:if>
+									
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<spring:url value="/forum/subtopics/${subTopic.id }" var="subtopic_url" />
-		<util:springjs-pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" url="${subtopic_url}" fragmentId="body" />
+		<spring:url value="/forum/subtopics/${subTopic.id }"
+			var="subtopic_url" />
+		<util:springjs-pagination maxPages="${maxPages}" page="${param.page}"
+			size="${param.size}" url="${subtopic_url}" fragmentId="body" />
 	</div>
-	
+
 	<script type="text/javascript">
 		dojo.query(".forum-subtopics-discussion").forEach(
 				function(node, index, arr) {
@@ -185,7 +234,7 @@
 					}));
 
 				});
-	</script >
+	</script>
 
 	<script type="text/javascript">
 		dojo.query(".update_discussion_link").forEach(
@@ -204,25 +253,25 @@
 	</script>
 
 	<script type="text/javascript">
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : "see_topic_link",
-					event : "onclick",
-					params : {
-						fragments : "body"
-					}
-				}));
-		</script>
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "see_topic_link",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
 
 	<script type="text/javascript">
-				Spring.addDecoration(new Spring.AjaxEventDecoration({
-					elementId : "see_all_topics_link",
-					event : "onclick",
-					params : {
-						fragments : "body"
-					}
-				}));
-		</script>
-		
+		Spring.addDecoration(new Spring.AjaxEventDecoration({
+			elementId : "see_all_topics_link",
+			event : "onclick",
+			params : {
+				fragments : "body"
+			}
+		}));
+	</script>
+
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {

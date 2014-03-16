@@ -2,7 +2,6 @@ package com.nomade.domain;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Enumerated;
@@ -10,7 +9,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -58,4 +56,8 @@ public class Topic {
     @ManyToMany(cascade = CascadeType.ALL)
     @DBRef
     private Set<SubTopic> subTopics = new HashSet<SubTopic>();
+
+    /**
+     */
+    private Boolean frozen;
 }

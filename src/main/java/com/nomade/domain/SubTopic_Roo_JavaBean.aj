@@ -67,4 +67,12 @@ privileged aspect SubTopic_Roo_JavaBean {
         this.parentSubTopic = parentSubTopic;
     }
     
+    public Boolean SubTopic.getFrozen() {
+        return this.frozen;
+    }
+    
+    public void SubTopic.setFrozen(Boolean frozen) {
+        this.frozen = frozen;
+    }
+    
 }

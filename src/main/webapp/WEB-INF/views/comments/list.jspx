@@ -8,6 +8,7 @@
             <table:column date="true" dateTimePattern="${comment_created_date_format}" id="c_com_nomade_domain_Comment_created" property="created" z="3YBSpwYdSuIxxrvunm3lc/m9lXs="/>
             <table:column id="c_com_nomade_domain_Comment_nomade" property="nomade" z="B+hG5KNBtBmB76SGmcHTlHlNbnY="/>
             <table:column id="c_com_nomade_domain_Comment_businessId" property="businessId" z="c2FMSoTdLY3gdJSxe/XxsdiRxKE="/>
+            <table:column id="c_com_nomade_domain_Comment_frozen" property="frozen" z="jYutQIXh3lNVkaayMRcag/RwMuk="/>
         </table:table>
     </page:list>
 </div>

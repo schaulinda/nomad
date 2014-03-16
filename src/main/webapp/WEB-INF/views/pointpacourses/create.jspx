@@ -5,6 +5,7 @@
     <form:create id="fc_com_nomade_domain_PointPacours" modelAttribute="pointPacours" path="/pointpacourses" render="${empty dependencies}" z="dQwGXMES+zsiL4Re2+UmCxPqc38=">
         <field:input field="point" id="c_com_nomade_domain_PointPacours_point" z="HJzdBf2qNsduZmwQfKYywiER+sQ="/>
         <field:input field="parcours" id="c_com_nomade_domain_PointPacours_parcours" z="UlYbygDrZszzLaZkSWmIA2aApnk="/>
+        <field:input field="id" id="c_com_nomade_domain_PointPacours_id" required="true" validationMessageCode="field_invalid_integer" z="8e78qolvD0VJDPyur8lyRYdezXg="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_PointPacours" render="${not empty dependencies}" z="JsM2fF4elDu7BqN4ndNsX7D2vXQ="/>
 </div>

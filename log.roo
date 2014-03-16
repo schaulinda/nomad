@@ -313,3 +313,12 @@ web mvc scaffold --backingType ~.domain.Voyage --class ~.web.VoyageController
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-10 22:01:39
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-11 01:54:29
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-13 00:12:06
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-03-16 00:13:31
+focus --class ~.domain.Comment
+field boolean --fieldName frozen
+focus --class ~.domain.Discussion
+field boolean --fieldName frozen
+focus --class ~.domain.SubTopic
+field boolean --fieldName frozen
+focus --class ~.domain.Topic
+field boolean --fieldName frozen

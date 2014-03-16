@@ -19,29 +19,41 @@
 			<span>Title : ${discussion.title } | </span> 
 			<span>${numberOfMessages } Messages </span> 
 			<span> | Last message :${lastMessageDate }</span> 
-			<span> | <button id="post_comment" class="btn">Post a comment</button ></span>
+			<sec:authorize access="isAuthenticated()"> <span> | <button id="post_comment" class="btn">Post a comment</button ></span> </sec:authorize>
 		</div>
-		<spring:url value="/forum/discussions/${discussion.id }/comments" var="create_comment_url"/>
-		<div id="createCommendDiv" class="hide">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-hidden="true" id="commentDialogCaret">×</button>
-				<h3 id="myModalLabel">Create your comment</h3>
+		<sec:authorize access="isAuthenticated()">
+			<spring:url value="/forum/discussions/${discussion.id }/comments"
+				var="create_comment_url" />
+			<div id="createCommendDiv" class="hide">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true" id="commentDialogCaret">×</button>
+					<h3 id="myModalLabel">Create your comment</h3>
+				</div>
+				<div class="modal-body">
+					<form:form commandName="commentModel"
+						action="${create_comment_url }" method="POST">
+						<div class="form-group">
+							<form:textarea placeholder="your comment please ..."
+								path="commentaire"
+								cssStyle="form-control margin: 0px; width: 517px; height: 155px;" />
+						</div>
+						<div class="checkbox">
+						    <label>
+						      <form:checkbox path="frozen" value="false" /> Is Frozen ?
+						    </label>
+						</div>
+						<button class="btn btn-primary" type="submit">Save
+							changes</button>
+						<button class="btn" data-dismiss="modal" type="reset"
+							aria-hidden="true" id="btnCloseDialog">Close</button>
+					</form:form>
+				</div>
+				<div class="modal-footer">
+					<!--  -->
+				</div>
 			</div>
-			<div class="modal-body">
-				<form:form commandName="commentModel" action="${create_comment_url }" method="POST">
-					<div class="form-group">
-							<form:textarea placeholder="your comment please ..." path="commentaire" cssStyle="form-control margin: 0px; width: 517px; height: 155px;" />
-					</div>
-					<button class="btn btn-primary" type="submit">Save changes</button>
-					<button class="btn" data-dismiss="modal" type="reset" aria-hidden="true" id="btnCloseDialog">Close</button>
-				</form:form>
-			</div>
-			<div class="modal-footer">
-				<!--  -->
-			</div>
-		</div>
-		
+		</sec:authorize>
 		<div class="row">
 			<spring:url value="/forum/topics" var="topics_url" />
 			<spring:url value="/forum/discussions" var="spring_url" />
@@ -64,7 +76,8 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${discussion.comments }" var="comment">
-					<tr>
+					<c:if test="${!comment.frozen }">
+						<tr>
 						<td>
 							<div>
 								<c:choose>
@@ -93,32 +106,57 @@
 								var="comment_url" />
 								<c:set var="showActions" value="no" />
 								<c:if test="${pageContext['request'].userPrincipal != null}">
-									<c:choose>
-										<c:when test="${ comment.nomade.userName eq pageContext['request'].userPrincipal.name}">
+									
+								<c:set var="updateAndFrozenActionsAreShown" value="false" />
+								<c:set var="deleteActionIsShown" value="false" />
+								
+									<sec:authorize ifAnyGranted="ROLE_MODERATOR,ROLE_ADMIN">
+										<td>
+											<span>
+												<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>update </a>
+											</span>
+										</td>
+										<c:choose>
+											<c:when test="${comment.frozen }">
+												<td>
+													<span>
+														<a href="${comment_url }/unfreeze" class="edit_comment_link" id = 'uf_${comment.businessId }'>unfreeze</a>
+													</span>
+												</td>
+											</c:when>
+											<c:otherwise>
+												<td>
+													<span>
+														<a href="${comment_url }/freeze" class="edit_comment_link" id = 'f_${comment.businessId }'>freeze</a>
+													</span>
+												</td>
+											</c:otherwise>
+										</c:choose>
+										<c:set value="true" var="updateAndFrozenActionsAreShown"/>
+									</sec:authorize>
+									<sec:authorize ifAnyGranted="ROLE_ADMIN">
+										<td>
+											<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
+										</td>
+										<c:set value="true" var="deleteActionIsShown"/>
+									</sec:authorize>
+									<c:if test="${ comment.nomade.userName eq pageContext['request'].userPrincipal.name}">
+										<c:if test="${!updateAndFrozenActionsAreShown}">
 											<td>
 												<span>
 													<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
 												</span>
 											</td>
+										</c:if>
+										<c:if test="${deleteActionIsShown}">
 											<td>
 												<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
 											</td>
-										</c:when>
-										<c:otherwise>
-											<sec:authorize ifAnyGranted="ROLE_ADMIN">
-												<td>
-													<span>
-														<a href="${comment_url }/form" class="edit_comment_link" id = 'e_${comment.businessId }'>edit</a>
-													</span>
-												</td>
-												<td>
-													<rooForm:delete entityId="${comment.id }" path="${comment_url }"	id="_form_${comment.id }" />
-												</td>
-											</sec:authorize>
-										</c:otherwise>
-									</c:choose>
+										</c:if>
+									</c:if>
 								</c:if>
 					</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>

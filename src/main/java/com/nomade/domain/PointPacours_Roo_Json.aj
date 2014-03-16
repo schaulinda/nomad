@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect PointPacours_Roo_Json {
     
     public String PointPacours.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String PointPacours.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static PointPacours PointPacours.fromJsonToPointPacours(String json) {
-        return new JSONDeserializer<PointPacours>().use(null, PointPacours.class).deserialize(json);
+        return new JSONDeserializer<PointPacours>()
+        .use(null, PointPacours.class).deserialize(json);
     }
     
     public static String PointPacours.toJsonArray(Collection<PointPacours> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String PointPacours.toJsonArray(Collection<PointPacours> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<PointPacours> PointPacours.fromJsonArrayToPointPacourses(String json) {
-        return new JSONDeserializer<List<PointPacours>>().use(null, ArrayList.class).use("values", PointPacours.class).deserialize(json);
+        return new JSONDeserializer<List<PointPacours>>()
+        .use("values", PointPacours.class).deserialize(json);
     }
     
 }

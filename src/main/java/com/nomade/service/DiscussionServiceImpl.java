@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import com.nomade.domain.Comment;
@@ -16,10 +17,14 @@ import com.nomade.domain.Confidentiality;
 import com.nomade.domain.Discussion;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.UserNomade;
+import com.nomade.security.SecurityUtil;
 import com.nomade.tools.CollectionUtil;
 
 public class DiscussionServiceImpl implements DiscussionService {
 
+	@Autowired
+	SecurityUtil securityUtil;
+	
 	@Override
 	public int countDiscussion(SubTopic subTopic){
 		return discussionRepository.findBySubTopic(subTopic).size();
@@ -96,4 +101,37 @@ public class DiscussionServiceImpl implements DiscussionService {
 		checkAndFixPageParams(firstResult, maxResults);
     	return discussionRepository.findBySubTopicAndConfidentiality(topic, confidentiality, new PageRequest(firstResult/maxResults, maxResults));
     }
+
+	@Override
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen){
+    	return discussionRepository.findBySubTopicAndConfidentialityAndFrozen(subTopic,confidentiality,frozen);
+    }
+	@Override
+    public List<Discussion> findBySubTopicAndConfidentialityAndFrozen(SubTopic subTopic,Confidentiality confidentiality,Boolean frozen,int firstResult,int maxResults){
+		checkAndFixPageParams(firstResult, maxResults);
+		return discussionRepository.findBySubTopicAndConfidentialityAndFrozen(subTopic,confidentiality,frozen,new PageRequest(firstResult/maxResults, maxResults));
+	}
+	@Override
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen){
+		return discussionRepository.findBySubTopicAndFrozen(subTopic,frozen);
+	}
+	@Override
+    public List<Discussion> findBySubTopicAndFrozen(SubTopic subTopic,Boolean frozen,int firstResult,int maxResults){
+		checkAndFixPageParams(firstResult, maxResults);
+		return discussionRepository.findBySubTopicAndFrozen(subTopic,frozen,new PageRequest(firstResult/maxResults, maxResults));
+	}
+	
+	@Override
+    public Discussion freezeDiscussion(Discussion discussion){
+		discussion.setFrozen(Boolean.TRUE);
+		discussion = updateDiscussion(discussion);
+		return discussion;
+	}
+
+	@Override
+    public Discussion unFreezeDiscussion(Discussion discussion){
+		discussion.setFrozen(Boolean.FALSE);
+		discussion = updateDiscussion(discussion);
+		return discussion;
+	}
 }

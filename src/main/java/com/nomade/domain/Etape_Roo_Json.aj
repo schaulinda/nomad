@@ -13,19 +13,33 @@ import java.util.List;
 privileged aspect Etape_Roo_Json {
     
     public String Etape.toJson() {
-        return new JSONSerializer().exclude("*.class").serialize(this);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(this);
+    }
+    
+    public String Etape.toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(this);
     }
     
     public static Etape Etape.fromJsonToEtape(String json) {
-        return new JSONDeserializer<Etape>().use(null, Etape.class).deserialize(json);
+        return new JSONDeserializer<Etape>()
+        .use(null, Etape.class).deserialize(json);
     }
     
     public static String Etape.toJsonArray(Collection<Etape> collection) {
-        return new JSONSerializer().exclude("*.class").serialize(collection);
+        return new JSONSerializer()
+        .exclude("*.class").serialize(collection);
+    }
+    
+    public static String Etape.toJsonArray(Collection<Etape> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").serialize(collection);
     }
     
     public static Collection<Etape> Etape.fromJsonArrayToEtapes(String json) {
-        return new JSONDeserializer<List<Etape>>().use(null, ArrayList.class).use("values", Etape.class).deserialize(json);
+        return new JSONDeserializer<List<Etape>>()
+        .use("values", Etape.class).deserialize(json);
     }
     
 }

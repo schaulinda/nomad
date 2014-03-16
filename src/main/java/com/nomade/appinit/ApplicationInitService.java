@@ -86,11 +86,11 @@ public class ApplicationInitService {
 		}
 	}
 	protected void initSubTopics(Topic topic,UserNomade nomade){
-		SubTopicBuilder subTopicBuilder = SubTopicBuilder.get().addSubTopic("Afrique du Nord", "Forum relatif a l'Afrique du nord", Confidentiality.Publique, nomade, topic)
-			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4) , Confidentiality.Publique, nomade, topic)
-			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic)
-			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic)
-			.addSubTopic("Afrique de L'Ouest", "Forum relatif a l'Afrique l'ouest", Confidentiality.Publique, nomade, topic);
+		SubTopicBuilder subTopicBuilder = SubTopicBuilder.get().addSubTopic("Afrique du Nord", "Forum relatif a l'Afrique du nord", Confidentiality.Publique, nomade, topic,false)
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4) , Confidentiality.Publique, nomade, topic,false)
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic,false)
+			.addSubTopic("Afrique du "+RandomStringUtils.randomAlphanumeric(4), "Forum relatif a l'Afrique du "+RandomStringUtils.randomAlphanumeric(4), Confidentiality.Publique, nomade, topic,false)
+			.addSubTopic("Afrique de L'Ouest", "Forum relatif a l'Afrique l'ouest", Confidentiality.Publique, nomade, topic,true);
 		List<SubTopic> subTopics = subTopicBuilder.getSubTopics();
 		for (SubTopic subTopic : subTopics) {
 			subTopicService.saveSubTopic(subTopic);
@@ -106,11 +106,11 @@ public class ApplicationInitService {
 		}
 	}
 	protected HashSet<Discussion> initDiscussion(SubTopic subTopic,UserNomade userNomade) {
-		List<Discussion> discussions = DiscussionBuilder.get().addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
-			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
-			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
-			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7))
-			.addDiscussion(subTopic,Confidentiality.NomadesOnly, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7)).getDiscussions();
+		List<Discussion> discussions = DiscussionBuilder.get().addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7),false)
+			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7),false)
+			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7),false)
+			.addDiscussion(subTopic,Confidentiality.Publique, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7),true)
+			.addDiscussion(subTopic,Confidentiality.NomadesOnly, RandomStringUtils.randomAlphanumeric(120), userNomade, RandomStringUtils.randomAlphabetic(7),false).getDiscussions();
 		return new HashSet<Discussion>(discussions);
 	}
 	/*public void initApplication() {

@@ -45,6 +45,8 @@ import com.nomade.tools.CollectionUtil;
 @Controller
 @RequestMapping("/forum")
 public class ForumController {
+	private static final String PAGE_SIZE = "5";
+
 	private static final String FORUM_SUBTOPICS = "/forum/subtopics";
 
 	private static final String FORUM_TOPICS = "/forum/topics";
@@ -68,10 +70,12 @@ public class ForumController {
 		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
 		for (Topic topic : topics) {
 			List<SubTopic> subTopics = new ArrayList<SubTopic>();
-			if(securityUtil.isUserLogged()){
+			if(securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()){
 				subTopics =  subTopicService.findByParentTopic(topic);
+			}else if(securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()){
+				subTopics =  subTopicService.findByParentTopicAndFrozen(topic, Boolean.FALSE);
 			}else{
-				subTopics = subTopicService.findByParentTopicAndConfidentiality(topic, Confidentiality.Publique);
+				subTopics = subTopicService.findByParentTopicAndConfidentialityAndFrozen(topic, Confidentiality.Publique, Boolean.FALSE);
 			}
 			topic.setSubTopics(new HashSet<SubTopic>(subTopics));
 			BeanTopicManager beanTopicManager = new BeanTopicManager();
@@ -154,25 +158,30 @@ public class ForumController {
 			nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
 		}
 
-		if (paginationIsSet && securityUtil.isUserLogged()) {
-			subTopics = subTopicService.findByParentTopic(topic, firstResult,
-					sizeNo);
+		if (paginationIsSet && securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()) {
+			subTopics = subTopicService.findByParentTopic(topic, firstResult,sizeNo);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		}if (paginationIsSet && securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()) {
+			subTopics = subTopicService.findByParentTopicAndFrozen(topic, Boolean.FALSE, firstResult, sizeNo);
 			uiModel.addAttribute(
 					"maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
 		} else if (paginationIsSet && !securityUtil.isUserLogged()) {
-			subTopics = subTopicService.findByParentTopicAndConfidentiality(
-					topic, Confidentiality.Publique, firstResult, sizeNo);
+			subTopics = subTopicService.findByParentTopicAndConfidentialityAndFrozen(topic, Confidentiality.Publique, Boolean.FALSE, firstResult, sizeNo);
 			uiModel.addAttribute(
 					"maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
-		} else if (!paginationIsSet && securityUtil.isUserLogged()) {
+		} else if (!paginationIsSet && securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()) {
 			subTopics = subTopicService.findByParentTopic(topic);
+		}else if (!paginationIsSet && securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()) {
+			subTopics = subTopicService.findByParentTopicAndFrozen(topic, Boolean.FALSE);
 		} else if (!paginationIsSet && !securityUtil.isUserLogged()) {
-			subTopics = subTopicService.findByParentTopicAndConfidentiality(
-					topic, Confidentiality.Publique);
+			subTopics = subTopicService.findByParentTopicAndConfidentialityAndFrozen(topic, Confidentiality.Publique, Boolean.FALSE);
 		}
 		List<BeanSubTopicView> subTopicToBeanSubTopic = subTopicService
 				.convertSubTopicToBeanSubTopic(subTopics);
@@ -226,6 +235,7 @@ public class ForumController {
 		findTopic.setConfidentiality(topic.getConfidentiality());
 		findTopic.setContent(topic.getContent());
 		findTopic.setTitle(topic.getTitle());
+		findTopic.setFrozen(topic.getFrozen());
 		topic = topicService.updateTopic(findTopic);
 		findTopic = null;
 		return "redirect:/forum/topics/"
@@ -296,31 +306,35 @@ public class ForumController {
 			nrOfPages = (float) subTopicService.countAllSubTopics() / sizeNo;
 		}
 		List<SubTopic> subTopics = new ArrayList<SubTopic>();
-		if (paginationIsSet && securityUtil.isUserLogged()) {
-			List<Discussion> discussions = discussionService.findBySubTopic(
-					subTopic, firstResult, sizeNo);
+		if (paginationIsSet && securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()) {
+			List<Discussion> discussions = discussionService.findBySubTopic(subTopic, firstResult, sizeNo);
+			uiModel.addAttribute("discussions", discussions);
+			uiModel.addAttribute(
+					"maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
+							: nrOfPages));
+		}else if (paginationIsSet && securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()) {
+			List<Discussion> discussions = discussionService.findBySubTopicAndFrozen(subTopic, Boolean.FALSE, firstResult, sizeNo);
 			uiModel.addAttribute("discussions", discussions);
 			uiModel.addAttribute(
 					"maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
 		} else if (paginationIsSet && !securityUtil.isUserLogged()) {
-			List<Discussion> discussions = discussionService
-					.findBySubTopicAndConfidentiality(subTopic,
-							Confidentiality.Publique, firstResult, sizeNo);
+			List<Discussion> discussions = discussionService.findBySubTopicAndConfidentialityAndFrozen(subTopic, Confidentiality.Publique, Boolean.FALSE, firstResult, sizeNo);
 			uiModel.addAttribute("discussions", discussions);
 			uiModel.addAttribute(
 					"maxPages",
 					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
 							: nrOfPages));
-		} else if (!paginationIsSet && securityUtil.isUserLogged()) {
-			List<Discussion> discussions = discussionService
-					.findBySubTopic(subTopic);
+		} else if (!paginationIsSet && securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()) {
+			List<Discussion> discussions = discussionService.findBySubTopic(subTopic);
+			uiModel.addAttribute("discussions", discussions);
+		} else if (!paginationIsSet && securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()) {
+			List<Discussion> discussions = discussionService.findBySubTopicAndFrozen(subTopic, Boolean.FALSE);
 			uiModel.addAttribute("discussions", discussions);
 		} else if (!paginationIsSet && !securityUtil.isUserLogged()) {
-			List<Discussion> discussions = discussionService
-					.findBySubTopicAndConfidentiality(subTopic,
-							Confidentiality.Publique);
+			List<Discussion> discussions = discussionService.findBySubTopicAndConfidentialityAndFrozen(subTopic, Confidentiality.Publique, Boolean.FALSE);
 			uiModel.addAttribute("discussions", discussions);
 		}
 		if(securityUtil.isUserLogged()){
@@ -383,6 +397,7 @@ public class ForumController {
 		subTopic2.setContent(subTopic.getContent());
 		subTopic2.setParentTopic(subTopic.getParentTopic());
 		subTopic2.setConfidentiality(subTopic.getConfidentiality());
+		subTopic2.setFrozen(subTopic.getFrozen());
 		subTopicService.updateSubTopic(subTopic2);
 		subTopic = null;
 		return "redirect:/forum/subtopics/"
@@ -425,6 +440,30 @@ public class ForumController {
 		uiModel.addAttribute("topics", allTopics);
 		populateModel(uiModel);
 		return "public/subtopics/update";
+	}
+
+	@RequestMapping(value = "/subtopics/{subTopicId}/freeze", method = RequestMethod.GET)
+	public String freezeSubTopic(
+			@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
+		if(subTopic == null){
+			return "redirect:/forum";
+		}
+		subTopic = subTopicService.freezeSubTopic(subTopic);
+		return "redirect:/forum/subtopics/"+subTopic.getId()+"?size=" + PAGE_SIZE;
+	}
+
+	@RequestMapping(value = "/subtopics/{subTopicId}/unfreeze", method = RequestMethod.GET)
+	public String unFreezeSubTopic(
+			@PathVariable("subTopicId") BigInteger subTopicId, Model uiModel,
+			HttpServletRequest httpServletRequest) {
+		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
+		if(subTopic == null){
+			return "redirect:/forum";
+		}
+		subTopic = subTopicService.unFreezeSubTopic(subTopic);
+		return "redirect:/forum/subtopics/"+subTopic.getId()+"?size=" + PAGE_SIZE;
 	}
 
 	/* Discussions */
@@ -481,7 +520,6 @@ public class ForumController {
 		}
 		uiModel.addAttribute("lastMessageDate", lastMessageDate);
 		uiModel.addAttribute("commentModel", new Comment());
-		uiModel.addAttribute("discussions", discussions);
 		uiModel.addAttribute("entities", discussions);
 		populateModel(uiModel);
 		return "public/forum/discussionView";
@@ -516,6 +554,23 @@ public class ForumController {
 		populateModel(uiModel);
 		return "public/discussions/update";
 	}
+	@RequestMapping(value = "/discussions/{discussionId}/freeze", method = RequestMethod.GET)
+	public String freezeDiscussion(
+			@PathVariable("discussionId") BigInteger discussionId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		discussion = discussionService.freezeDiscussion(discussion);
+		return "redirect:/forum/discussions/"+discussion.getId()+"?size=" + PAGE_SIZE;
+	}
+
+	@RequestMapping(value = "/discussions/{discussionId}/unfreeze", method = RequestMethod.GET)
+	public String unFreezeDiscussion(
+			@PathVariable("discussionId") BigInteger discussionId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		discussion = discussionService.freezeDiscussion(discussion);
+		return "redirect:/forum/discussions/"+discussion.getId()+"?size=" + PAGE_SIZE;
+	}
 
 	@RequestMapping(value = "/discussions/update", method = RequestMethod.POST)
 	public String updateDiscussion(@Valid Discussion discussion, Model uiModel,
@@ -531,8 +586,8 @@ public class ForumController {
 		discussion2.setTitle(discussion.getTitle());
 		discussion2.setContent(discussion.getContent());
 		discussion2.setSubTopic(discussion.getSubTopic());
-		discussion = discussionService.updateDiscussion(discussion2);
-		discussion = null;
+		discussion2.setFrozen(discussion.getFrozen());
+		discussionService.updateDiscussion(discussion2);
 		return "redirect:/forum/discussions/"
 				+ encodeUrlPathSegment(discussion2.getId().toString(),
 						httpServletRequest);
@@ -586,6 +641,37 @@ public class ForumController {
 		populateModel(uiModel);
 		return "public/comments/update";
 	}
+	@RequestMapping(value = "/discussions/{discussionId}/comments/{businessId}/freeze", method = RequestMethod.GET)
+	public String freezeComment(
+			@PathVariable("discussionId") BigInteger discussionId,
+			@PathVariable("businessId") String commentBusinessId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		Set<Comment> comments = discussion.getComments();
+		for (Comment c : comments) {
+			if (c.getBusinessId().equals(commentBusinessId)) {
+				c.setFrozen(Boolean.TRUE);
+				discussionService.updateDiscussion(discussion);
+			}
+		}
+		return "redirect:/forum/discussions/"+discussion.getId()+"?size=" + PAGE_SIZE;
+	}
+
+	@RequestMapping(value = "/discussions/{discussionId}/comments/{businessId}/unfreeze", method = RequestMethod.GET)
+	public String unFreezeComment(
+			@PathVariable("discussionId") BigInteger discussionId,
+			@PathVariable("businessId") String commentBusinessId,
+			Model uiModel, HttpServletRequest httpServletRequest) {
+		Discussion discussion = discussionService.findDiscussion(discussionId);
+		Set<Comment> comments = discussion.getComments();
+		for (Comment c : comments) {
+			if (c.getBusinessId().equals(commentBusinessId)) {
+				c.setFrozen(Boolean.FALSE);
+				discussionService.updateDiscussion(discussion);
+			}
+		}
+		return "redirect:/forum/discussions/"+discussion.getId()+"?size=" + PAGE_SIZE;
+	}
 	
 	@RequestMapping(value = "/discussions/{discussionId}/comments/update", method = RequestMethod.POST)
 	public String updateComment(
@@ -597,6 +683,7 @@ public class ForumController {
 		for (Comment c : comments) {
 			if (c.getBusinessId().equals(comment.getBusinessId())) {
 				c.setCommentaire(comment.getCommentaire());
+				c.setFrozen(comment.getFrozen());
 				break;
 			}
 		}
