@@ -22,10 +22,10 @@
 			</h3>
 		</div>
 	<br/>
-	<div style="max-height: 500px;overflow: auto;" >
-		<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
+	<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
 			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >creer un nouveau voyage</a>
 			<br/>
+	<div style="overflow-y: auto;overflow-x: hidden;height: 400px;" >
 			<c:forEach  var="voyage" items="${listVoy}" >
 			<div style="border-bottom-style: solid;">
 				<div  class="row" >
@@ -45,6 +45,8 @@
 					</div >
 					<div class="col-lg-4" >
 						<b>Status: </b>${voyage.status}
+						<spring:url value="/voyages/visualiser" var="visu_url" ></spring:url>
+						<a href="${visu_url}?idV=${voyage.id}" >Visualiser sur map</a>
 					</div >
 				</div>
 				<div  class="row" >
@@ -69,6 +71,111 @@
 	</div>
 	
   </div>
+  
+  
+ <script type="text/javascript">
+		jQuery.noConflict($);
+		(function($) {
+			$(document)
+					.ready(
+							function() {
+								 
+
+								/* construct polyline for  */
+								
+									var arrayParcours=null;
+									 arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="etape" varStatus="loop" >
+															
+																['${etape.lat}','${etape.lng}']
+																
+																<c:if test="${!loop.last}">,</c:if>
+																
+														 </c:forEach>
+													];
+									console.log(arrayParcours);
+								
+								
+								
+								/* -----clear marker and directions but not clear the picker------------ */
+								
+								$("#map").gmap3({
+								    get: {
+								     		 name: "marker",
+								     		all:true,
+								     		full:true,
+								     		callback: function(objs){
+								     				var arrayId=[];
+								     			 $.each(objs, function(i, obj){
+								     				if(obj.id!="indicator"){
+								     				
+								     					var markObj = obj;
+								     					arrayId.push(markObj.id);		
+									     			}
+								     	          });
+								     			console.log(arrayId);
+								     			
+								     			$(this).gmap3({
+						     				        clear:{
+						     				          id:arrayId
+						     				        }
+						     				      });
+								     			
+								     		}
+								    },
+								 clear:{
+									 name:["directionsrenderer", "polyline"],
+									 tag:["line"]
+								 }	
+								});
+								
+								/*---------------- draw parcours -------------------*/
+								var lineSymbol = {
+										path: 'M 0,-1 0,1',
+										strokeOpacity: 1,
+									    scale: 4
+							    };
+								
+								if(arrayParcours!=""){
+
+									
+									$("#map").gmap3({
+									
+									 polyline:{
+										    options:{
+										    	geodesic: false,
+										        strokeColor: '#FF0000',
+										        strokeOpacity: 0,
+										        strokeWeight: 3,
+										       path:arrayParcours,
+										       icons: [{
+										    	   		icon: lineSymbol,
+										    	      offset: 0,
+										    	      repeat: '20px'
+
+										     }]
+										    },
+										    tag:["line"]
+										  } 
+									
+								});
+							
+						/*----------------- make a bound for map fit this bound ----------------------------------*/
+								
+								var bounds = new google.maps.LatLngBounds();
+								for (var i = 0; arrayParcours.length > i; i++) {
+								    bounds.extend(new google.maps.LatLng(arrayParcours[i][0],arrayParcours[i][1]));
+								    
+								}
+								var map = $("#map").gmap3('get');
+								map.fitBounds(bounds);
+								map.setZoom(3);
+							}
+							
+  
+  
+							});
+		})(jQuery);
+	</script>
 	
 	<script type="text/javascript">
 		dojo.ready(function() {

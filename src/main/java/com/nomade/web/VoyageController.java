@@ -23,6 +23,7 @@ import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
 import com.nomade.tools.IdGenerator;
 
+import org.cloudfoundry.org.codehaus.jackson.annotate.JsonAnySetter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -54,12 +55,14 @@ public class VoyageController {
 
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 
 		if (findByNomade != null && findByNomade.size() > 0) {
 
-			BeanNoteBookManager bookManager = new BeanNoteBookManager();
-			bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-			uiModel.addAttribute("beanNoteBookManager", bookManager);
+			beanNoteBookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			return "voyages/carnet";
 		} else {
 			// la page selectView napparait que si le nomad na effectue aucun
@@ -77,12 +80,14 @@ public class VoyageController {
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 
 		if ("preparation".equals(type)) {
 
-			BeanNoteBookManager bookManager = new BeanNoteBookManager();
-			bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-			uiModel.addAttribute("beanNoteBookManager", bookManager);
+			beanNoteBookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			return "voyages/carnet";
 		}
 
@@ -105,6 +110,9 @@ public class VoyageController {
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("voyage", voyage);
 		uiModel.addAttribute("onglet", "carnet");
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 		return "voyages/new";
 
 	}
@@ -115,6 +123,10 @@ public class VoyageController {
 
 		Voyage voyage = voyageService.findVoyage(new BigInteger(idV));
 		voyageService.deleteVoyage(voyage);
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 
 		UserNomade nomade = securite.getUserNomade();
 		List<Voyage> listVoy = voyageService.findByNomade(nomade);
@@ -126,6 +138,8 @@ public class VoyageController {
 	@RequestMapping("/formTermineVoy")
 	public String termineVoyage(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		List<Voyage> list = voyageService.findByNomadeAndStatus(nomade,
 				StatusVoyage.EN_COURS);
 		uiModel.addAttribute("nomade", nomade);
@@ -133,12 +147,13 @@ public class VoyageController {
 		if (list != null && list.size() > 0) {
 			Voyage voyage = list.get(0);
 			voyage.setTerminated(true);
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("voyage", voyage);
 			return "voyages/formTermineVoy";
 		} else {
-			BeanNoteBookManager bookManager = new BeanNoteBookManager();
-			bookManager.setError("Vous n'avez aucun voyage en cour! creer un nouveau voyage");
-			uiModel.addAttribute("beanNoteBookManager", bookManager);
+			
+			beanNoteBookManager.setError("Vous n'avez aucun voyage en cour! creer un nouveau voyage");
+			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			uiModel.addAttribute("voyage",  new Voyage());
 			return "voyages/new";
 		}
@@ -149,6 +164,7 @@ public class VoyageController {
 	public String updateAndCloseVoy(HttpServletRequest request, Model uiModel,Voyage voyage) {
 		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("nomade", nomade);
 		
@@ -185,7 +201,6 @@ public class VoyageController {
 			voyageService.updateVoyage(voyage2);
 			
 			bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-			bookManager.setListParcours(voyageService.drawParcours(nomade));
 			uiModel.addAttribute("beanNoteBookManager", bookManager);
 			return "voyages/carnet";
 		}
@@ -200,6 +215,10 @@ public class VoyageController {
 		List<Voyage> listVoy = voyageService.findByNomade(nomade);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("listVoy", listVoy);
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 
 		return "voyages/listV";
 	}
@@ -214,6 +233,11 @@ public class VoyageController {
 		uiModel.addAttribute("listE", parcours.getEtapes());
 		uiModel.addAttribute("idV", parcours.getVoyage().getId());
 		uiModel.addAttribute("etape", new Etape());
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		
 		return "voyages/listE";
 	}
 	
@@ -241,6 +265,11 @@ public class VoyageController {
 		uiModel.addAttribute("listE", parcours.getEtapes());
 		uiModel.addAttribute("idV", parcours.getVoyage().getId());
 		uiModel.addAttribute("etape", new Etape());
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		
 		return "voyages/listE";
 	}
 	
@@ -254,6 +283,7 @@ public class VoyageController {
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("idP", idP);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		
 		if("".equals(etape.getLocation())){
 			
@@ -297,6 +327,11 @@ public class VoyageController {
 		uiModel.addAttribute("idV", idV);
 		uiModel.addAttribute("listP", listP);
 		uiModel.addAttribute("parcours", new Parcours());
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		
 		return "voyages/listP";
 	}
 	
@@ -317,6 +352,11 @@ public class VoyageController {
 		uiModel.addAttribute("idV", idV);
 		uiModel.addAttribute("listP", listP);
 		uiModel.addAttribute("parcours", new Parcours());
+		
+		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
+		
 		return "voyages/listP";
 	}
 	
@@ -332,6 +372,7 @@ public class VoyageController {
 		uiModel.addAttribute("listP", listP);
 		uiModel.addAttribute("idV", idV);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		
 		if(parcours.getDepart().getDay()==null || parcours.getArrived().getDay()==null
 				|| "".equals(parcours.getDepart().getLocation())|| "".equals(parcours.getArrived().getLocation())){
@@ -366,9 +407,9 @@ public class VoyageController {
 		parcoursService.saveParcours(parcours);
 		Voyage voyage2 = voyageService.findVoyage(new BigInteger(idV));
 		beanNoteBookManager.setNotify("yep");
+		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 		uiModel.addAttribute("parcours", new Parcours());
-		System.out.print("voyage2: "+voyage2);
 		List<Parcours> listP1 = parcoursService.findByVoyageAndSortByDayDepart(voyage2);
 		uiModel.addAttribute("listP", listP1);
 		return "voyages/listP";
@@ -379,7 +420,9 @@ public class VoyageController {
 			Voyage voyage) {
 		UserNomade nomade = securite.getUserNomade();
 		List<Voyage> voyageEnCours = voyageService.findVoyageEnCours(nomade);
-
+		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListParcours(voyageService.drawVoyageEnCours());
+		
 		if (voyageEnCours != null && voyageEnCours.size() > 0) {
 			if (voyage.isTerminated()
 					&& voyage.getArrived().getLocation() != null
@@ -394,16 +437,14 @@ public class VoyageController {
 					voyage.setStatus(StatusVoyage.TERMINE);
 					voyage.setNomade(nomade);
 					voyageService.saveVoyage(voyage);
-					BeanNoteBookManager bookManager = new BeanNoteBookManager();
 					bookManager.setNotify("yep");
 					bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-					bookManager.setListParcours(voyageService.drawParcours(nomade));
 					uiModel.addAttribute("beanNoteBookManager", bookManager);
 					return "voyages/carnet";
 
 				} else {// collison avec ancien voy
 
-					BeanNoteBookManager bookManager = new BeanNoteBookManager();
+					
 					bookManager
 							.setError("les dates entrees correspondent aux dates d'ancien voyage");
 					uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -413,8 +454,6 @@ public class VoyageController {
 
 			} else { // voyage en cours existant et pas de cloture sur le nvo
 						// voyage, renvoi sur la page de voy
-
-				BeanNoteBookManager bookManager = new BeanNoteBookManager();
 				bookManager
 						.setError("Vous devriez terminez votre voyage en cours, en mettant votre statut a Rentre a la maison");
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -435,18 +474,14 @@ public class VoyageController {
 				voyage.setStatus(StatusVoyage.TERMINE);
 				voyage.setNomade(nomade);
 				voyageService.saveVoyage(voyage);
-				BeanNoteBookManager bookManager = new BeanNoteBookManager();
 				bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-				bookManager.setListParcours(voyageService.drawParcours(nomade));
 				bookManager.setNotify("yep");
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
 				return "voyages/carnet";
 
 			} else {// collison avec ancien voy
 
-				BeanNoteBookManager bookManager = new BeanNoteBookManager();
-				bookManager
-						.setError("les dates entrees correspondent aux dates d'ancien voyage");
+				bookManager.setError("les dates entrees correspondent aux dates d'ancien voyage");
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
 				uiModel.addAttribute("voyage", voyage);
 				return "voyages/new";
@@ -462,7 +497,6 @@ public class VoyageController {
 				userService.updateUserNomade(nomade);
 				voyage.setNomade(nomade);
 				voyageService.saveVoyage(voyage);
-				BeanNoteBookManager bookManager = new BeanNoteBookManager();
 				bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 				bookManager.setNotify("yep");
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -470,7 +504,6 @@ public class VoyageController {
 
 			} else {// collison avec ancien voy
 
-				BeanNoteBookManager bookManager = new BeanNoteBookManager();
 				bookManager.setError("la date de depart appartient a dans l'intervalle de temps d'un autre voyage");
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
 				uiModel.addAttribute("voyage", voyage);
@@ -484,6 +517,9 @@ public class VoyageController {
 	@RequestMapping("/saveEtape")
 	public String saveEtape(BeanNoteBookManager beanNoteBookManager,
 			HttpServletRequest request, Model uiModel) {
+		
+		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		
 		 Map<String, String[]> parameters = request.getParameterMap();
 		 UserNomade nomade = securite.getUserNomade();
@@ -508,7 +544,6 @@ public class VoyageController {
 						etape.setLng(double2);
 					} catch (NumberFormatException e) {
 						
-						BeanNoteBookManager bookManager = new BeanNoteBookManager();
 						bookManager.setError("Selectionnez une localisation sur la map a l'aide du mappicker");
 						bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 						uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -518,7 +553,6 @@ public class VoyageController {
 						
 					}
 		        	if(vals[3]==null && "".equals(vals[3])){
-		        		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 						bookManager.setError("Entrer des dates pr vos etapes");
 						bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 						uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -532,7 +566,6 @@ public class VoyageController {
 						d = sdf.parse(vals[3]);
 						etape.setDay(d);
 					} catch (ParseException e) {
-						BeanNoteBookManager bookManager = new BeanNoteBookManager();
 						bookManager.setError("vous n'avez pas entrer la date dans le bon format");
 						bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 						uiModel.addAttribute("beanNoteBookManager", bookManager);
@@ -575,26 +608,33 @@ public class VoyageController {
 			    parcours.setNomad(nomade);
 			    parcoursService.saveParcours(parcours);
 			    
-			    BeanNoteBookManager bookManager = new BeanNoteBookManager();
 			    bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
 				bookManager.setNotify("yep");
-				bookManager.setListParcours(voyageService.drawParcours(nomade));
+				bookManager.setListParcours(voyageService.drawVoyageEnCours());
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "carnet");
 				return "voyages/carnet";
 		    }else{
 		    	
-		    	BeanNoteBookManager bookManager = new BeanNoteBookManager();
 				bookManager.setError("la date des etapes doivent etre egal ou plus future que la date de depart du voyage");
 				bookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
-				bookManager.setListParcours(voyageService.drawParcours(nomade));
+				bookManager.setListParcours(voyageService.drawVoyageEnCours());
 				uiModel.addAttribute("beanNoteBookManager", bookManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "carnet");
 				return "voyages/carnet";
 		    	
 		    }
+	}
+	
+	@RequestMapping("/visualiser/{idV}")
+	public @ResponseBody String  visu(HttpServletRequest request, @PathVariable("idV") String idV ) {
+		
+		List<Etape> oneParcours = voyageService.drawOneParcours(idV);
+		
+		return Etape.toJsonArray(oneParcours);
+		
 	}
 
 }

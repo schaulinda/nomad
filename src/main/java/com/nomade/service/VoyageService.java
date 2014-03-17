@@ -20,6 +20,9 @@ public interface VoyageService {
 	public boolean collision(Date depart, UserNomade nomad);
 	public List<Etape> sortListEtape(List<Etape> listToSort);
 	public boolean existingVoyage(UserNomade nomade);
-	public List<Etape> drawParcours(UserNomade nomad);
+	public List<Etape> drawAllParcours(UserNomade nomad);
+	public List<Etape> drawOneParcours(String idV);
+	public Etape getLastLocation(UserNomade nomad);
+	public List<Etape> drawVoyageEnCours();
 	
 }

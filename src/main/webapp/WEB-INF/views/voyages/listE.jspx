@@ -59,10 +59,10 @@
 			</form:form>
 		</div>
 		</div>
-		<div style="max-height: 500px;overflow: auto;">
-			<spring:url value="/voyages/listParcours" var="list_url" ></spring:url>
+		<spring:url value="/voyages/listParcours" var="list_url" ></spring:url>
 			<a href="${list_url}?idV=${idV}" id="listParcours"
 				class="btn btn-default btn-block">Retour a la liste de parcours</a> <br />
+		<div style="overflow-y: auto;overflow-x: hidden;height: 200px;">
 			<c:forEach var="etape" items="${listE}">
 				<div style="border-bottom-style: solid;">
 					<div class="row">
@@ -157,6 +157,97 @@
 												});
 							}
 							decoration();
+							
+							
+							/* construct polyline for  */
+							
+								var arrayParcours=null;
+								 arrayParcours =[ <c:forEach  items="${beanNoteBookManager.listParcours}" var="etape" varStatus="loop" >
+														
+															['${etape.lat}','${etape.lng}']
+															
+															<c:if test="${!loop.last}">,</c:if>
+															
+													 </c:forEach>
+												];
+								console.log(arrayParcours);
+							
+							
+							
+							/* -----clear marker and directions but not clear the picker------------ */
+							
+							$("#map").gmap3({
+							    get: {
+							     		 name: "marker",
+							     		all:true,
+							     		full:true,
+							     		callback: function(objs){
+							     				var arrayId=[];
+							     			 $.each(objs, function(i, obj){
+							     				if(obj.id!="indicator"){
+							     				
+							     					var markObj = obj;
+							     					arrayId.push(markObj.id);		
+								     			}
+							     	          });
+							     			console.log(arrayId);
+							     			
+							     			$(this).gmap3({
+					     				        clear:{
+					     				          id:arrayId
+					     				        }
+					     				      });
+							     			
+							     		}
+							    },
+							 clear:{
+								 name:["directionsrenderer", "polyline"],
+								 tag:["line"]
+							 }	
+							});
+							
+							/*---------------- draw parcours -------------------*/
+							var lineSymbol = {
+									path: 'M 0,-1 0,1',
+									strokeOpacity: 1,
+								    scale: 4
+						    };
+							
+							if(arrayParcours!=""){
+
+								
+								$("#map").gmap3({
+								
+								 polyline:{
+									    options:{
+									    	geodesic: false,
+									        strokeColor: '#FF0000',
+									        strokeOpacity: 0,
+									        strokeWeight: 3,
+									       path:arrayParcours,
+									       icons: [{
+									    	   		icon: lineSymbol,
+									    	      offset: 0,
+									    	      repeat: '20px'
+
+									     }]
+									    },
+									    tag:["line"]
+									  } 
+								
+							});
+						
+					/*----------------- make a bound for map fit this bound ----------------------------------*/
+							
+							var bounds = new google.maps.LatLngBounds();
+							for (var i = 0; arrayParcours.length > i; i++) {
+							    bounds.extend(new google.maps.LatLng(arrayParcours[i][0],arrayParcours[i][1]));
+							    
+							}
+							var map = $("#map").gmap3('get');
+							map.fitBounds(bounds);
+							map.setZoom(3);
+						}
 							
 							
 							/* ----------------------------noty for save etape------------------------------------- */
