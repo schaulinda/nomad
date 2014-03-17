@@ -322,6 +322,8 @@
 														map.setZoom(5);
 														
 														var idInput = $(".adress:focus").attr("id");
+														
+														$('#'+idInput).val(ui.item.value);
 														$('#'+idInput+'Lat').val(ui.item.location.lat());
 														$('#'+idInput+'Lng').val(ui.item.location.lng());
 													}
