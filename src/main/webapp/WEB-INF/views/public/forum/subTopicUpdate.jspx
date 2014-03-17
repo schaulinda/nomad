@@ -69,5 +69,6 @@
 			}
 		}));
 	</script>
+	<jsp:include page ="summernote-js.jspx" />
 </div>
 

@@ -36,7 +36,8 @@
 						<div class="form-group">
 							<form:textarea placeholder="your comment please ..."
 								path="commentaire"
-								cssStyle="form-control summernote margin: 0px; width: 517px; height: 155px;" />
+								cssClass="summernote"
+								cssStyle="form-control  margin: 0px; width: 517px; height: 155px;" />
 						</div>
 						<div class="checkbox">
 						    <label>
@@ -244,5 +245,5 @@
 					}
 				}));
 		</script>
-	<jsp:include page="summernote-js.jspx" />
+	<jsp:include page ="summernote-js.jspx" />
 </div>
