@@ -46,7 +46,7 @@
 					<div class="col-lg-4" >
 						<b>Status: </b>${voyage.status}
 						<spring:url value="/voyages/visualiser" var="visu_url" ></spring:url>
-						<a href="${visu_url}?idV=${voyage.id}" >Visualiser sur map</a>
+						<a href="#" id="visu_${voyage.id}" class="visu" >Visualiser sur map</a>
 					</div >
 				</div>
 				<div  class="row" >
@@ -94,84 +94,119 @@
 													];
 									console.log(arrayParcours);
 								
-								
-								
-								/* -----clear marker and directions but not clear the picker------------ */
-								
-								$("#map").gmap3({
-								    get: {
-								     		 name: "marker",
-								     		all:true,
-								     		full:true,
-								     		callback: function(objs){
-								     				var arrayId=[];
-								     			 $.each(objs, function(i, obj){
-								     				if(obj.id!="indicator"){
-								     				
-								     					var markObj = obj;
-								     					arrayId.push(markObj.id);		
-									     			}
-								     	          });
-								     			console.log(arrayId);
-								     			
-								     			$(this).gmap3({
-						     				        clear:{
-						     				          id:arrayId
-						     				        }
-						     				      });
-								     			
-								     		}
-								    },
-								 clear:{
-									 name:["directionsrenderer", "polyline"],
-									 tag:["line"]
-								 }	
-								});
-								
-								/*---------------- draw parcours -------------------*/
-								var lineSymbol = {
-										path: 'M 0,-1 0,1',
-										strokeOpacity: 1,
-									    scale: 4
-							    };
-								
-								if(arrayParcours!=""){
-
+						
 									
-									$("#map").gmap3({
-									
-									 polyline:{
-										    options:{
-										    	geodesic: false,
-										        strokeColor: '#FF0000',
-										        strokeOpacity: 0,
-										        strokeWeight: 3,
-										       path:arrayParcours,
-										       icons: [{
-										    	   		icon: lineSymbol,
-										    	      offset: 0,
-										    	      repeat: '20px'
-
-										     }]
+									/*draw parcours  */
+									function draw(arrayParcours){				
+										
+										/* -----clear marker and directions but not clear the picker------------ */
+										
+										$("#map").gmap3({
+										    get: {
+										     		 name: "marker",
+										     		all:true,
+										     		full:true,
+										     		callback: function(objs){
+										     				var arrayId=[];
+										     			 $.each(objs, function(i, obj){
+										     				if(obj.id!="indicator"){
+										     				
+										     					var markObj = obj;
+										     					arrayId.push(markObj.id);		
+											     			}
+										     	          });
+										     			console.log(arrayId);
+										     			
+										     			$(this).gmap3({
+								     				        clear:{
+								     				          id:arrayId
+								     				        }
+								     				      });
+										     			
+										     		}
 										    },
-										    tag:["line"]
-										  } 
+										 clear:{
+											 name:["directionsrenderer", "polyline"],
+											 tag:["line"]
+										 }	
+										});
+										
+										/*---------------- draw parcours -------------------*/
+										var lineSymbol = {
+												path: 'M 0,-1 0,1',
+												strokeOpacity: 1,
+											    scale: 4
+									    };
+										
+										if(arrayParcours!=""){
+
+											
+											$("#map").gmap3({
+											
+											 polyline:{
+												    options:{
+												    	geodesic: false,
+												        strokeColor: '#FF0000',
+												        strokeOpacity: 0,
+												        strokeWeight: 3,
+												       path:arrayParcours,
+												       icons: [{
+												    	   		icon: lineSymbol,
+												    	      offset: 0,
+												    	      repeat: '20px'
+
+												     }]
+												    },
+												    tag:["line"]
+												  } 
+											
+										});
+									
+								/*----------------- make a bound for map fit this bound ----------------------------------*/
+										
+										var bounds = new google.maps.LatLngBounds();
+										for (var i = 0; arrayParcours.length > i; i++) {
+										    bounds.extend(new google.maps.LatLng(arrayParcours[i][0],arrayParcours[i][1]));
+										    
+										}
+										var map = $("#map").gmap3('get');
+										map.fitBounds(bounds);
+										map.setZoom(3);
+									}
+												
+								}
+								
+								draw(arrayParcours);
+								
+								$(".visu").each(function( index ) {
+									
+									var idLink = $(this).attr("id");
+									
+									var idV = idLink.split("_");
+									
+									var url = '${visu_url}/'+idV[1];
+									
+									var id = "#"+idLink;
+
+									
+									$(id).click(function(){
+										
+										var array = [];
+										$.get(url, function(data) {
+											
+											var etapes = jQuery.parseJSON(data);
+											jQuery.each(etapes, function(index, value) {
+												
+												var e = [value.lat, value.lng];
+												array.push(e);
+												
+											});
+											draw(array);
+											
+										});
+									});
 									
 								});
-							
-						/*----------------- make a bound for map fit this bound ----------------------------------*/
-								
-								var bounds = new google.maps.LatLngBounds();
-								for (var i = 0; arrayParcours.length > i; i++) {
-								    bounds.extend(new google.maps.LatLng(arrayParcours[i][0],arrayParcours[i][1]));
-								    
-								}
-								var map = $("#map").gmap3('get');
-								map.fitBounds(bounds);
-								map.setZoom(3);
-							}
-							
-  
   
 							});
 		})(jQuery);
