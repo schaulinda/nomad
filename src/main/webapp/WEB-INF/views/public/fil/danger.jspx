@@ -73,7 +73,7 @@
 								</div>
 							</div>
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-danger mic-info">
-<!-- à quoi sa sert? -->		<a href="#"></a> * ${danger.created} * 
+<!-- à quoi sa sert? -->		<a href="#">* ${danger.created} *</a>  
 								<a href="#" class="parcour"> ${danger.location}</a>
 								<c:if test="${not empty danger.comments}">
 									<span class="label label-info">${danger.comments.size()}

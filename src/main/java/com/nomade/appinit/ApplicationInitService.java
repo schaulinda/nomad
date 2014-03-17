@@ -61,8 +61,8 @@ public class ApplicationInitService {
 	
     public  void initData() throws IOException{
 		System.out.print("init");
-		mongoTemplate.getDb().dropDatabase();
 		
+		mongoTemplate.getDb().dropDatabase();		
 		nomadeDod.init();
 		initTopics();
 		initSubTopics(topicService.findAllTopics().iterator().next(),userService.findAllUserNomades().iterator().next());

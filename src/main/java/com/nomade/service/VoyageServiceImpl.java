@@ -1,5 +1,6 @@
 package com.nomade.service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -13,11 +14,14 @@ import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Voyage;
+import com.nomade.security.Security;
 
 public class VoyageServiceImpl implements VoyageService {
-	
+
 	@Autowired
 	ParcoursService parcoursService;
+	@Autowired
+	Security security;
 
 	public List<Voyage> findByNomade(UserNomade nomad) {
 
@@ -91,7 +95,7 @@ public class VoyageServiceImpl implements VoyageService {
 	public List<Etape> sortListEtape(List<Etape> listToSort) {
 
 		try {
-		
+
 			Collections.sort(listToSort, new BeanComparator("day"));
 
 			return listToSort;
@@ -113,31 +117,81 @@ public class VoyageServiceImpl implements VoyageService {
 
 		return false;
 	}
-	
-	public List<Etape> drawParcours(UserNomade nomad) {
-		
+
+	public List<Etape> drawAllParcours(UserNomade nomad) {
+
 		ArrayList<Etape> listEtape = new ArrayList<Etape>();
 		List<Voyage> listVoyage = voyageRepository.findByNomade(nomad);
-		
-		for(Voyage v:listVoyage){
-			if(v.getDepart().getLocation()!=null && !"".equals(v.getDepart().getLocation())){
+
+		for (Voyage v : listVoyage) {
+			if (v.getDepart().getLocation() != null
+					&& !"".equals(v.getDepart().getLocation())) {
 				listEtape.add(v.getDepart());
 			}
-			if(v.getArrived().getLocation()!=null && !"".equals(v.getArrived().getLocation())){
+			if (v.getArrived().getLocation() != null
+					&& !"".equals(v.getArrived().getLocation())) {
 				listEtape.add(v.getArrived());
 			}
-			System.out.print("v: "+v);
+			System.out.print("v: " + v);
 			List<Parcours> byVoyage = parcoursService.findByVoyage(v);
-			System.out.print("byVoyage: "+byVoyage);
-			for(Parcours p:byVoyage){
+			System.out.print("byVoyage: " + byVoyage);
+			for (Parcours p : byVoyage) {
 				listEtape.add(p.getDepart());
 				listEtape.add(p.getArrived());
 				listEtape.addAll(p.getEtapes());
 			}
-			
+
 		}
-				
+
 		return sortListEtape(listEtape);
+	}
+
+	public List<Etape> drawOneParcours(String idV) {
+
+		ArrayList<Etape> listEtape = new ArrayList<Etape>();
+		Voyage v = voyageRepository.findOne(new BigInteger(idV));
+
+		if (v.getDepart().getLocation() != null
+				&& !"".equals(v.getDepart().getLocation())) {
+			listEtape.add(v.getDepart());
+		}
+		if (v.getArrived().getLocation() != null
+				&& !"".equals(v.getArrived().getLocation())) {
+			listEtape.add(v.getArrived());
+		}
+
+		List<Parcours> listP = parcoursService.findByVoyage(v);
+
+		for (Parcours p : listP) {
+			listEtape.add(p.getDepart());
+			listEtape.add(p.getArrived());
+			listEtape.addAll(p.getEtapes());
+		}
+
+		return sortListEtape(listEtape);
+	}
+	
+	
+	public List<Etape> drawVoyageEnCours(){
+		UserNomade nomade = security.getUserNomade();
+		List<Voyage> findByNomadeAndStatus = voyageRepository.findByNomadeAndStatus(nomade, StatusVoyage.EN_COURS);
+		if(findByNomadeAndStatus!=null && findByNomadeAndStatus.size()>0){
+			Voyage voyage = findByNomadeAndStatus.get(0);
+			List<Etape> drawOneParcours = drawOneParcours(""+voyage.getId());
+			System.out.print("drawVoyageEnCours: "+drawOneParcours.toString());
+			
+			return drawOneParcours;
+		}else
+			return null;
+		
+	}
+	
+
+	public Etape getLastLocation(UserNomade nomad) {
+
+		List<Etape> allEtape = drawAllParcours(nomad);
+
+		return allEtape.get(0);
 	}
 
 }

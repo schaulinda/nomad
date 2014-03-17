@@ -28,10 +28,10 @@
 	<c:if test="${beanNoteBookManager.voyageEnCours == true}">
 	<div class="panel">
 		<div class="panel-heading">
-			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
+			<!-- <h3 class="panel-title">
+				<i class="icon-road"> co
 					</i> Parcours
-			</h3>
+			</h3> -->
 		</div>
 	
 		<spring:url value="/voyages/saveEtape" var="etape_url"></spring:url>
@@ -112,7 +112,7 @@
 				<br/>
 					<div class="col-lg-10">
 						<button class="btn btn-block" type="submit" id="btn_etape">
-										<spring:message code="button.valid" />
+									enregistrez un parcours
 						</button>
 					</div>
 				</div>
@@ -242,7 +242,6 @@
 				</div>
 			</fieldset>
 		</form:form>
-		<p class="help-block">Partagez l'experience de votre roadtrip</p>
 		<c:if test="${not empty beanNoteBookManager.listParcours}">
 			<c:forEach items="${beanNoteBookManager.listParcours}" var="parcours">
 
@@ -323,6 +322,8 @@
 														map.setZoom(5);
 														
 														var idInput = $(".adress:focus").attr("id");
+														
+														$('#'+idInput).val(ui.item.value);
 														$('#'+idInput+'Lat').val(ui.item.location.lat());
 														$('#'+idInput+'Lng').val(ui.item.location.lng());
 													}
@@ -400,7 +401,8 @@
 								     		}
 								    },
 								 clear:{
-									 name:["directionsrenderer"]
+									 name:["directionsrenderer", "polyline"],
+									 tag:["line"]
 								 }	
 								});
 								
@@ -412,7 +414,8 @@
 							    };
 								
 								if(arrayParcours!=""){
-								$("#map").gmap3({
+									
+									$("#map").gmap3({
 									
 									 polyline:{
 										    options:{
