@@ -14,29 +14,32 @@
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/home" var="base_url"></spring:url>
 	<spring:url var="public_url" value="/public" />
+	
+<spring:message code ="lang_danger_detail" var="langDangerDetail" />
+<spring:message code ="lang_back" var="langBack" />
 
 	<div class="panel">
 		<div class="panel-heading">
 			<spring:url value="/public/backToItenary" var="back_url"></spring:url>
 			<div class="row">
 				<div class="col-lg-6">
-					<h3 class="panel-title">Detail Danger</h3>
+					<h3 class="panel-title">${langDangerDetail}</h3>
 				</div>
 				<c:if test="${back == 'formfinditineraire' }">
-				<div class="col-lg-6">
-					<a class="btn btn-default btn-block pull-left" id="back"
-						href="${back_url}"><i class="icon-arrow-left">
-							<!--co  -->
-					</i>Back</a>
-				</div>
+					<div class="col-lg-6">
+						<a class="btn btn-default btn-block pull-left" id="back" href="${back_url}">
+							<i class="icon-arrow-left"><!-- --></i>
+							${langBack}
+						</a>
+					</div>
 				</c:if>
 				<c:if test="${back == 'itineraire' }">
-				<div class="col-lg-6">
-					<a class="btn btn-default btn-block pull-left" id="back"
-						href="${public_url}/itineraire"><i class="icon-arrow-left">
-							<!--co  -->
-					</i>Back</a>
-				</div>
+					<div class="col-lg-6">
+						<a class="btn btn-default btn-block pull-left" id="back" href="${public_url}/itineraire">
+							<i class="icon-arrow-left"><!-- --></i>
+							${langBack}
+						</a>
+					</div>
 				</c:if>
 			</div>
 		</div>
@@ -52,9 +55,12 @@
 			<div class="col-lg-3" style="border-left: solid 1px;">
 				<ul class="nav nav-tabs nav-justified">
 						<li id="${dangerPratique.id}vn">${dangerPratique.voteNegatif}</li>
-						<li><a id="${dangerPratique.id}" class="voteDMinus"><i
-								class="icon-thumbs-down"> <!-- co --></i></a></li>
-								<li> | </li>
+						<li>
+							<a id="${dangerPratique.id}" class="voteDMinus">
+								<i class="icon-thumbs-down"><!-- --></i>
+							</a>
+						</li>
+							<li> | </li>
 						<li id="${dangerPratique.id}vp" style="padding-left: 15px;" >${dangerPratique.votePositif}</li>
 						<li><a id="${dangerPratique.id}" class="voteDplus"><i
 								class="icon-thumbs-up"> <!-- co --></i></a></li>

@@ -13,15 +13,13 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+<spring:message code="lang_notebookOfTraveler" var="langNotebookOfTraveler" />
 
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-user"> <!-- co -->
-				</i>
-				<spring:message code="h.notebookOfTraveler"
-					var="hNotebookOfTraveler" />
-				${hNotebookOfTraveler}
+				<i class="icon-user"><!-- --></i>				
+				${langNotebookOfTraveler}
 			</h3>
 		</div>
 	<!-- parcours -->
