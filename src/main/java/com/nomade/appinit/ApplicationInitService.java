@@ -40,9 +40,10 @@ public class ApplicationInitService {
 		
     public  void initData() throws IOException{
 		System.out.print("init");
-		mongoTemplate.getDb().dropDatabase();
 		
+		mongoTemplate.getDb().dropDatabase();		
 		nomadeDod.init();
+		
 		/*parcoursDataOnDemand.init();
 		voyageDataOnDemand.init();
 		vehiculeDataOnDemand.init();

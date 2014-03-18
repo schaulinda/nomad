@@ -32,6 +32,7 @@ import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 
 @RequestMapping({ "/public" })
 @Controller
@@ -55,6 +56,8 @@ public class PublicController {
 	RelationService relationService;
 	@Autowired
 	EtapeService etapeService;
+	@Autowired
+	VoyageService voyageService;
 
 	@RequestMapping("/nomad")
 	public String nomad(HttpServletRequest request, Model uiModel) {
@@ -196,7 +199,7 @@ public class PublicController {
 		
 		beanHistoriqueDecoration(uiModel, nomade);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
-		//bookManager.setListParcours(etapeService.drawParcours(nomade));
+		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("onglet", "carnet");

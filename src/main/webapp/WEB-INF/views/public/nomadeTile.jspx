@@ -235,7 +235,8 @@
 										}
 									},
 									clear : {
-										name : [ "directionsrenderer" ]
+										name : [ "directionsrenderer", "polyline" ],
+										 tag:["line"]
 									}
 
 								});

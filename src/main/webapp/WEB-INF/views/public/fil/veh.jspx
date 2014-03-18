@@ -184,8 +184,11 @@
 		dojo.connect(dojo.byId('commentaireVeh'), 'onkeydown', function(event) {
 			if (event.keyCode == dojo.keys.ENTER) {
 				if (dojo.byId('commentaireVeh') != '') {
-					document.getElementById("btn_commentVeh").click();
-					dojo.stopEvent(event);
+					if(dojo.byId('btn_commentVeh') != null){
+						document.getElementById("btn_commentVeh").click();
+						dojo.stopEvent(event);
+					}
+					
 				}
 			}
 		});
