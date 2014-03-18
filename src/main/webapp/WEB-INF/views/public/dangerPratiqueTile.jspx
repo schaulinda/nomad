@@ -13,12 +13,65 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
+<spring:message code="label.title" var="labelTitle" />
+<spring:message code ="input.EnterTitle" var="inputEnterTitle" />
+<spring:message code ="option.roadSide" var="optionroadSide" />
+<spring:message code ="option.administativeSide" var="optionAdministativeSide" />
+<spring:message code ="option.riskSide" var="optionRiskSide" />
+<spring:message code ="input.location" var="inputLocation" />
+<spring:message code ="label.validityDuration" var="labelValidityDuration" />
+<spring:message code ="form.info2BVerified" var="formInfo2BVerified" />
+<spring:message code ="lang_duration" var="langDuration" />
+<spring:message code ="lang_estimationOfValidity" var="langEstimationOfValidity" />
+<spring:message code ="lang_enterAComment" var="langEnterAComment" />
+<spring:message code ="button.valid" var="buttonValid" />
+<spring:message code ="lang_marker_on_map" var="langMarkerOnMap" />
+<spring:message code ="lang_impraticable" var="langImpraticable" />
+<spring:message code ="lang_impraticable_description" var="langImpraticableDescription" />
+<spring:message code ="lang_badRoad" var="langBadRoad" />
+<spring:message code ="lang_badRoad_description" var="langBadRoadDescription" />
+<spring:message code ="lang_dirt_road" var="langDirtRoad" />
+<spring:message code ="lang_dirt_road_Description" var="langDirtRoadDescription" />
+<spring:message code ="lang_sandblank" var="langSandblank" />
+<spring:message code ="lang_sandblank_description" var="langSandblankDescription" />
+<spring:message code ="lang_mud_rut" var="langMudRut" />
+<spring:message code ="lang_mud_rut_description" var="langMudRutDescription" />
+<spring:message code ="lang_snowy_road" var="langSnowyRoad" />
+<spring:message code ="lang_snowy_road_description" var="langSnowyRoadDescription" />
+<spring:message code ="lang_difference_height" var="langDifferenceHeight" />
+<spring:message code ="lang_difference_height_description" var="langDifferenceHeightDescription" />
+<spring:message code ="lang_collapsing" var="langCollapse" />
+<spring:message code ="lang_collapsing_description" var="langCollapseDescription" />
+<spring:message code ="lang_flooding_risk" var="langFloodingrisk" />
+<spring:message code ="lang_flooding_risk_description" var="langFloodingriskDescription" />
+<spring:message code ="lang_max_weight" var="langMaxWeight" />
+<spring:message code ="lang_max_weight_description" var="langMaxWeightDescription" />
+<spring:message code ="lang_max_size" var="langMaxSize" />
+<spring:message code ="lang_max_size_descritpion" var="langMaxSizeDescription" />
+<spring:message code ="lang_work_on_road" var="langWorkOnRoad" />
+<spring:message code ="lang_work_on_road_description" var="langWorkOnRoaddescription" />
+<spring:message code ="lang_difficult_customs" var="langDifficultCustoms" />
+<spring:message code ="lang_difficult_customs_dexcription" var="langDifficultCustomsDescription" />
+<spring:message code ="lang_informations" var="langInformations" />
+<spring:message code ="lang_informations_description" var="langInformationsDescription" />
+<spring:message code ="lang_immigration" var="langImmigration" />
+<spring:message code ="lang_immigration_description" var="langImmigrationDescription" />
+<spring:message code ="lang_roadblock" var="langRoadblock" />
+<spring:message code ="lang_roadblock_description" var="langRoadblockDescription" />
+<spring:message code ="lang_strike_blocking" var="langStrikeBlocking" />
+<spring:message code ="lang_strike_blocking_descritpion" var="langStriBlockingkeDescription" />
+<spring:message code ="lang_frequent_attacks" var="langFequentAttacks" />
+<spring:message code ="lang_frequent_attacks_description" var="langFequentAttacksDescription" />
+<spring:message code ="lang_armed_attacks" var="langArmedAttacks" />
+<spring:message code ="lang_armed_attacks_description" var="langArmedAttacksDescription" />
+<spring:message code ="lang_fraud_theft" var="langFraudTheft" />
+<spring:message code ="lang_fraud_theft_description" var="langFraudTheftDescription" />
+
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-warning-sign"> <!-- co -->
-				</i>
-				<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
+				<i class="icon-warning-sign"><!-- --></i>
 				${hDangerOnTrip}
 			</h3>
 		</div>
@@ -26,47 +79,55 @@
 			<spring:url value="/dangerpratiques/save" var="save_info_url" ></spring:url>
 			<form:form commandName="dangerPratique" method="GET" action="${save_info_url}" id="form_danger" >
 				<div class="form-group">
-					<label>Title</label>
-					<form:input cssClass="form-control" id="title"
-						placeholder="Enter title " path="title" required="required" />
+					<label>${labelTitle}</label>
+					<form:input cssClass="form-control" 
+								id="title" 
+								placeholder="${inputEnterTitle}" 
+								path="title" 
+								required="required" />
 				</div>
 				<div class="row">
 					<div class="col-lg-5 form-group">
-						<select class="form-control" required="required"
-							placeholder="select type of info" id="select0" name="selecteur" >
-							<option value="route" data-description="cote route" >cote route</option>
-							<option value="administratif" data-description="cote Administratif" >cote Administratif</option>
-							<option value="risque" data-description="cote risque" >cote risque</option>
+						<select class="form-control" 
+								required="required"
+								placeholder="select type of info" 
+								id="select0" 
+								name="selecteur" ><!-- ??? -->
+							<option value="route" data-description="${optionroadSide}" >${optionroadSide}</option>
+							<option value="administratif" data-description="${optionAdministativeSide}" >${optionAdministativeSide}</option>
+							<option value="risque" data-description="${optionRiskSide }" >${optionRiskSide}</option>
 						</select>
 					</div>
 					<div class="col-lg-7 form-group">
 						<div class="col-lg-7 form-group">
 						<input type="hidden" name="selecteur1" id="selecteur1" />
-						<div id="myDropdown"><!-- co --></div>
+						<div id="myDropdown"><!-- --></div>
 					</div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label>location</label>
+					<label>${inputLocation}</label>
 					<div class="input-group">
-								<form:input id="location" required="required" path="location" cssClass="form-control adress"
-									placeholder="" />
-								<a href="#" class="input-group-addon mapPicker"
-									id="location-picker"> <span class=""> <i
-										class="icon-screenshot"> <!-- co --></i>
-								</span>
-								</a>
+						<form:input id="location" 
+									required="required"
+									path="location" 
+									cssClass="form-control adress"
+									placeholder="${inputLocation}" />
+						<a href="#" class="input-group-addon mapPicker" id="location-picker">
+							<span class="">
+								<i class="icon-screenshot"><!-- --></i>
+							</span>
+						</a>
 					</div>
 					<form:hidden id="locationLat" path="locationLat" /> 
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
 				<div class="form-group">
-					<label for="duree" class="col-lg-6 control-label">Duree de
-						validite</label>
+					<label for="duree" class="col-lg-6 control-label">${labelValidityDuration}</label>
 					<div class="col-lg-5">
 						<select id="dure" name="dure" class="form-control">
 							  <c:forEach var="status" items="${typeTime}">
-							        <spring:message code="${status}" text="${status}" var="labelEnum" ></spring:message>
+							  		<spring:message code="${status}" text="${status}" var="labelEnum" />
 							        <option value="${status}">${labelEnum}</option>
 							  </c:forEach>
 							</select>
@@ -77,14 +138,18 @@
 				<div class="row">
 					<div class="col-lg-6 form-group">
 						<div class="checkbox">
-							<label> <form:checkbox id="verif" path="infoVerif" /> Info a verifier
+							<label>
+								<form:checkbox id="verif" path="infoVerif" />
+								${formInfo2BVerified}
 							</label>
 						</div>
 					</div>
 					<div class="col-lg-5 form-group">
-						<select id="dureVerification" disabled="disabled" name="estimationValidite" class="form-control">
+						<select id="dureVerification" 
+								disabled="disabled" 
+								name="${langEstimationOfValidity}" 
+								class="form-control">
 							  <c:forEach var="status" items="${typeTime}">
-							        <spring:message code="${status}" text="${status}" var="labelEnum" ></spring:message>
 							        <option value="${status}">${labelEnum}</option>
 							  </c:forEach>
 							</select> 
@@ -92,34 +157,31 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 form-group">
-					<form:textarea class="form-control" placeholder="Enter a comment" 
-						path="comment" id="comment" rows="4" />
-						
+						<form:textarea class="form-control" 
+									   placeholder="${langEnterAComment}" 
+									   path="comment" 
+									   id="comment" 
+								   	   rows="4" />
 					</div>
 					<div class="col-lg-3 form-group">
 					<form:hidden id="photo" path="photo"/>
 						<c:if test="${empty dangerPratique.photo}">
-							<IMG alt="" src="${res}/img/profil.png" width="100px"
-								height="100px;" />
+							<img alt="" src="${res}/img/profil.png" width="100px" height="100px;" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if
-							test="${not empty dangerPratique.photo}">
-							<IMG alt=""
-								src="${imageRender_url}/${dangerPratique.photo}"
-								width="100px" height="100px;" />
+						<c:if test="${not empty dangerPratique.photo}">
+							<img alt="" src="${imageRender_url}/${dangerPratique.photo}"
+								 width="100px" height="100px;" />
 						</c:if>
 					</div>
 					<div class="col-lg-1">
 						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-						<a class="btn btn-default" id="selectImg"
-							href="${selectPhoto_url}?backLink=dangerPratique"><i
-							class="icon-edit"> <!-- com  -->
-						</i></a>
+						<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=dangerPratique">
+							<i class="icon-edit"> <!-- --></i>
+						</a>
 					</div>
 				</div>
-
-				<button type="submit" id="btn_savedanger" class="btn btn-default">Submit</button>
+				<button type="submit" id="btn_savedanger" class="btn btn-default">${buttonValid}</button>
 			</form:form>
 
 		</div>
@@ -128,6 +190,7 @@
 <spring:url value="/resources/img/mapicon/danger" var="icon_url"></spring:url>
 	<script type="text/javascript">
 		dojo.ready(function() {
+			
 			new stuff().addAjaxPublicPage();
 		});
 	</script>
@@ -139,7 +202,7 @@
 				
 				$('.adress').tooltip({
 					trigger: 'focus',
-					title: 'drag and drop violet marker, to get location'
+					title: '${langMarkerOnMap}'
 				});
 				
 				/* change select1 based on select0  */
@@ -150,87 +213,87 @@
 		                        "effondrement","inondations","poids","hauteur","travaux"];
 			var ddData = [
 			              {
-			                  text: "impraticable",
+			                  text: "${langImpraticable}",
 			                  value: "impraticable",
 			                  selected: true,
-			                  description: "impraticable",
+			                  description: "${langImpraticableDescription}",
 			                  imageSrc: "${icon_url}/impraticable.png"
 			              },
 			              {
-			                  text: "chaussée mauvaise",
+			                  text: "${langBadRoad}",
 			                  value: "chausse",
 			                  selected: false,
-			                  description: "chaussée en très mauvais état",
+			                  description: "${langBadRoadDescription}",
 			                  imageSrc: "${icon_url}/chausse.png"
 			              },
 			              {
-			                  text: "piste terre",
+			                  text: "${langDirtRoad}",
 			                  value: "pisteterre",
 			                  selected: false,
-			                  description: "piste terre -non goudronné",
+			                  description: "${langDirtRoadDescription}",
 			                  imageSrc: "${icon_url}/pisteterre.png"
 			              },
 			              {
-			                  text: "bande sableuse",
+			                  text: "${langSandblank}",
 			                  value: "bande",
 			                  selected: false,
-			                  description: "bande sableuse",
+			                  description: "${langSandblankDescription}",
 			                  imageSrc: "${icon_url}/bande.png"
 			              },
 			              {
-			                  text: "boue ,ornière",
+			                  text: "${langMudRut}",
 			                  value: "boue",
 			                  selected: false,
-			                  description: "boue ,ornière",
+			                  description: "${langMudRutDescription}",
 			                  imageSrc: "${icon_url}/boue.png"
 			              },
 			              {
-			                  text: "route enneigée",
+			                  text: "${langSnowyRoad}",
 			                  value: "route",
 			                  selected: false,
-			                  description: "route enneigée, verglacée",
+			                  description: "${langSnowyRoadDescription}",
 			                  imageSrc: "${icon_url}/route.png"
 			              },
 			              {
-			                  text: "fort dénivelé",
+			                  text: "${langDifferenceHeight}",
 			                  value: "denivelation",
 			                  selected: false,
-			                  description: "fort dénivelé, col 4000m",
+			                  description: "${langDifferenceHeightDescription}",
 			                  imageSrc: "${icon_url}/denivelation.png"
 			              },
 			              {
-			                  text: "effondrement",
+			                  text: "${langCollapse}",
 			                  value: "effondrement",
 			                  selected: false,
-			                  description: "effondrement, chute de pierre",
+			                  description: "${langCollapseDescription}",
 			                  imageSrc: "${icon_url}/effondrement.png"
 			              },
 			              {
-			                  text: "risque d'inondations",
+			                  text: "${langFloodingrisk}",
 			                  value: "inondations",
 			                  selected: false,
-			                  description: "risque d'inondations",
+			                  description: "${langFloodingriskDescription}",
 			                  imageSrc: "${icon_url}/inondations.png"
 			              },
 			              {
-			                  text: "poids max",
+			                  text: "${langMaxWeight}",
 			                  value: "poids",
 			                  selected: false,
-			                  description: "poids max",
+			                  description: "${langMaxWeightDescription}",
 			                  imageSrc: "${icon_url}/poids.png"
 			              },
 			              {
-			                  text: "hauteur max",
+			                  text: "${langMaxSize}",
 			                  value: "hauteur",
 			                  selected: false,
-			                  description: "hauteur max",
+			                  description: "${langMaxSizeDescription}",
 			                  imageSrc: "${icon_url}/hauteur.png"
 			              },
 			              {
-			                  text: "en travaux",
+			                  text: "${langWorkOnRoad}",
 			                  value: "travaux",
 			                  selected: false,
-			                  description: "en travaux",
+			                  description: "${langWorkOnRoaddescription}",
 			                  imageSrc: "${icon_url}/travaux.png"
 			              }
 			          ];
@@ -241,38 +304,38 @@
 			
 			var ddData1 = [
 			              {
-			                  text: "douane difficile",
+			                  text: "${langDifficultCustoms}",
 			                  value: "douane",
 			                  selected: true,
-			                  description: "douane difficile",
+			                  description: "${langDifficultCustomsDescription}",
 			                  imageSrc: "${icon_url}/douane.png"
 			              },
 			              {
-			                  text: "information",
+			                  text: "${langInformations}",
 			                  value: "information",
 			                  selected: false,
-			                  description: "information: permis pour véhicule/carnet de douane",
+			                  description: "${langInformationsDescription}",
 			                  imageSrc: "${icon_url}/information.png"
 			              },
 			              {
-			                  text: "immigration",
+			                  text: "${langImmigration}",
 			                  value: "immigration",
 			                  selected: false,
-			                  description: "immigration",
+			                  description: "${langImmigrationDescription}",
 			                  imageSrc: "${icon_url}/immigration.png"
 			              },
 			              {
-			                  text: "barrage policier",
+			                  text: "${langRoadblock}",
 			                  value: "barrage",
 			                  selected: false,
-			                  description: "nombreux barrage policier",
+			                  description: "${langRoadblockDescription}",
 			                  imageSrc: "${icon_url}/barrage.png"
 			              },
 			              {
-			                  text: "grève, blocage",
+			                  text: "${langStrikeBlocking}",
 			                  value: "greve",
 			                  selected: false,
-			                  description: "grève, blocage",
+			                  description: "${langStriBlockingkeDescription}",
 			                  imageSrc: "${icon_url}/greve.png"
 			              }
 			          ];
@@ -281,24 +344,24 @@
 			var risqueValue = ["agressions","agressionMain","escroquerie"];
 			var ddData2 = [
 				              {
-				                  text: "agressions fréquentes",
+				                  text: "${langFequentAttacks}",
 				                  value: "agressions",
 				                  selected: true,
-				                  description: "agressions fréquentes",
+				                  description: "${langFequentAttacks}",
 				                  imageSrc: "${icon_url}/agressions.png"
 				              },
 				              {
-				                  text: "agression main",
+				                  text: "${langArmedAttacks}",
 				                  value: "agressionMain",
 				                  selected: false,
-				                  description: "agression à main armée",
+				                  description: "${langArmedAttacksDescription}",
 				                  imageSrc: "${icon_url}/agressionMain.png"
 				              },
 				              {
-				                  text: "escroquerie,vol",
+				                  text: "${langFraudTheft}",
 				                  value: "escroquerie",
 				                  selected: false,
-				                  description: "escroquerie,vol",
+				                  description: "${langFraudTheftDescription}",
 				                  imageSrc: "${icon_url}/escroquerie.png"
 				              }
 				          ];

@@ -15,15 +15,17 @@
 
 <spring:message code="h.historiqueDangerInformation" var="hHistoriqueDangerInformation" />
 <spring:message code="input.addNewComment" var="inputAddNewComment" />
+
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_user">
 		<div class="panel panel-default widget">
-			<div class="panel-heading">
+			<div class="panel-heading"> 
 				<span class="icon icon-warning-sign"><!-- co --></span>
 				<h3 class="panel-title">${hHistoriqueDangerInformation}</h3>
 				<span class="label label-info">
 					<c:if test="${beanHistorique.listDanger.hasContent()}">
 						${beanHistorique.listDanger.number+1} / ${beanHistorique.listDanger.totalPages}
-					</c:if> <c:if test="${!beanHistorique.listDanger.hasContent()}">
+					</c:if>
+					<c:if test="${!beanHistorique.listDanger.hasContent()}">
 						${beanHistorique.listDanger.number} / ${beanHistorique.listDanger.totalPages}
 					</c:if>
 				</span>
@@ -73,7 +75,7 @@
 								</div>
 							</div>
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-danger mic-info">
-<!-- à quoi sa sert? -->		<a href="#"></a> * ${danger.created} * 
+								<a href="#">* ${danger.created} *</a> 
 								<a href="#" class="parcour"> ${danger.location}</a>
 								<c:if test="${not empty danger.comments}">
 									<span class="label label-info">${danger.comments.size()}
