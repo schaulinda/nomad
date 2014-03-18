@@ -60,26 +60,32 @@
 								<i class="icon-thumbs-down"><!-- --></i>
 							</a>
 						</li>
-							<li> | </li>
-						<li id="${dangerPratique.id}vp" style="padding-left: 15px;" >${dangerPratique.votePositif}</li>
-						<li><a id="${dangerPratique.id}" class="voteDplus"><i
-								class="icon-thumbs-up"> <!-- co --></i></a></li>
+						<li id="${dangerPratique.id}vp" style="padding-left: 15px;" >
+							${dangerPratique.votePositif}
+						</li>
+						<li>
+							<a id="${dangerPratique.id}" class="voteDplus">
+								<i class="icon-thumbs-up"><!-- --></i>
+							</a>
+						</li>
 					</ul>
 			</div>
 			<div>
-				<a href="${base_url}/@${dangerPratique.nomade.userName}" id="${dangerPratique.nomade.userName}user" 
-				class="username" > ${dangerPratique.nomade.userName} </a>  | <i
-					class="icon-calendar"> <!-- co --></i>
-				<fmt:formatDate value="${dangerPratique.created}" var="dateC"
-					pattern="dd-MM-yyyy hh:mm" />
+				<a href="${base_url}/@${dangerPratique.nomade.userName}" 
+				   id="${dangerPratique.nomade.userName}user" 
+				   class="username" > 
+					${dangerPratique.nomade.userName} 
+				</a>  | <i class="icon-calendar"><!-- --></i>
+				<fmt:formatDate value="${dangerPratique.created}" var="dateC" pattern="dd-MM-yyyy" />
 				<span style="color: #999999;"> ${dateC} </span>| <span><i
 					class="icon-comment">
 						<!-- co -->
 				</i> <c:if test="${not empty dangerPratique.comments}">
 									${dangerPratique.comments.size()}
-					</c:if> <c:if test="${empty dangerPratique.comments}">
-									0
-								</c:if> </span>
+					</c:if>
+					<c:if test="${empty dangerPratique.comments}">
+						0
+					</c:if> </span>
 				<div>
 					<span style="color: #999999;">Location:</span>
 					${dangerPratique.location}
@@ -96,7 +102,7 @@
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty dangerPratique.photo}">
-							<IMG alt="" src="${imageRender_url}/${dangerPratique.photo}"
+							<img alt="" src="${imageRender_url}/${dangerPratique.photo}"
 								width="100px" height="100px;" />
 						</c:if>
 					</div>
