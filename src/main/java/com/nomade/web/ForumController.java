@@ -536,7 +536,15 @@ public class ForumController {
 		if(discussion.getConfidentiality() == null ){//mean it was an unauthenticated user, that don't have access to the confidentiality combobox
 			discussion.setConfidentiality(Confidentiality.Publique);
 		}
-		discussion.setComments(new HashSet<Comment>());
+		HashSet<Comment> comments = new HashSet<Comment>();
+		Comment comment = new Comment();
+		comment.setBusinessId(RandomStringUtils.randomAlphanumeric(7));
+		comment.setCommentaire(discussion.getContent());
+		comment.setCreated(new Date());
+		comment.setFrozen(discussion.getFrozen());
+		comment.setNomade(discussion.getNomade());
+		comments.add(comment);
+		discussion.setComments(comments);
 		// actually, the #updateDiscussion method, save the object and return
 		// the saved object.
 		discussion = discussionService.updateDiscussion(discussion);
