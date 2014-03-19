@@ -13,76 +13,77 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
-<spring:message code="label.title" var="labelTitle" />
-<spring:message code ="input.EnterTitle" var="inputEnterTitle" />
-<spring:message code ="option.roadSide" var="optionroadSide" />
-<spring:message code ="option.administativeSide" var="optionAdministativeSide" />
-<spring:message code ="option.riskSide" var="optionRiskSide" />
-<spring:message code ="input.location" var="inputLocation" />
-<spring:message code ="label.validityDuration" var="labelValidityDuration" />
-<spring:message code ="form.info2BVerified" var="formInfo2BVerified" />
-<spring:message code ="lang_duration" var="langDuration" />
-<spring:message code ="lang_estimationOfValidity" var="langEstimationOfValidity" />
-<spring:message code ="lang_enterAComment" var="langEnterAComment" />
-<spring:message code ="button.valid" var="buttonValid" />
-<spring:message code ="lang_marker_on_map" var="langMarkerOnMap" />
-<spring:message code ="lang_impraticable" var="langImpraticable" />
-<spring:message code ="lang_impraticable_description" var="langImpraticableDescription" />
-<spring:message code ="lang_badRoad" var="langBadRoad" />
-<spring:message code ="lang_badRoad_description" var="langBadRoadDescription" />
-<spring:message code ="lang_dirt_road" var="langDirtRoad" />
-<spring:message code ="lang_dirt_road_Description" var="langDirtRoadDescription" />
-<spring:message code ="lang_sandblank" var="langSandblank" />
-<spring:message code ="lang_sandblank_description" var="langSandblankDescription" />
-<spring:message code ="lang_mud_rut" var="langMudRut" />
-<spring:message code ="lang_mud_rut_description" var="langMudRutDescription" />
-<spring:message code ="lang_snowy_road" var="langSnowyRoad" />
-<spring:message code ="lang_snowy_road_description" var="langSnowyRoadDescription" />
-<spring:message code ="lang_difference_height" var="langDifferenceHeight" />
-<spring:message code ="lang_difference_height_description" var="langDifferenceHeightDescription" />
-<spring:message code ="lang_collapsing" var="langCollapse" />
-<spring:message code ="lang_collapsing_description" var="langCollapseDescription" />
-<spring:message code ="lang_flooding_risk" var="langFloodingrisk" />
-<spring:message code ="lang_flooding_risk_description" var="langFloodingriskDescription" />
-<spring:message code ="lang_max_weight" var="langMaxWeight" />
-<spring:message code ="lang_max_weight_description" var="langMaxWeightDescription" />
-<spring:message code ="lang_max_size" var="langMaxSize" />
-<spring:message code ="lang_max_size_descritpion" var="langMaxSizeDescription" />
-<spring:message code ="lang_work_on_road" var="langWorkOnRoad" />
-<spring:message code ="lang_work_on_road_description" var="langWorkOnRoaddescription" />
-<spring:message code ="lang_difficult_customs" var="langDifficultCustoms" />
-<spring:message code ="lang_difficult_customs_dexcription" var="langDifficultCustomsDescription" />
-<spring:message code ="lang_informations" var="langInformations" />
-<spring:message code ="lang_informations_description" var="langInformationsDescription" />
-<spring:message code ="lang_immigration" var="langImmigration" />
-<spring:message code ="lang_immigration_description" var="langImmigrationDescription" />
-<spring:message code ="lang_roadblock" var="langRoadblock" />
-<spring:message code ="lang_roadblock_description" var="langRoadblockDescription" />
-<spring:message code ="lang_strike_blocking" var="langStrikeBlocking" />
-<spring:message code ="lang_strike_blocking_descritpion" var="langStriBlockingkeDescription" />
-<spring:message code ="lang_frequent_attacks" var="langFequentAttacks" />
-<spring:message code ="lang_frequent_attacks_description" var="langFequentAttacksDescription" />
-<spring:message code ="lang_armed_attacks" var="langArmedAttacks" />
-<spring:message code ="lang_armed_attacks_description" var="langArmedAttacksDescription" />
-<spring:message code ="lang_fraud_theft" var="langFraudTheft" />
-<spring:message code ="lang_fraud_theft_description" var="langFraudTheftDescription" />
+<spring:message code="lang_add_security_information" var="LangAddSecurityInformation" />
+<spring:message code="lang_title" var="langTitle" />
+<spring:message code="lang_enter_title" var="langEnterTitle" />
+<spring:message code="lang_select_info_type" var="langSelectInfoType" />
+<spring:message code="option.roadSide" var="optionroadSide" />
+<spring:message code="option.administativeSide" var="optionAdministativeSide" />
+<spring:message code="option.riskSide" var="optionRiskSide" />
+<spring:message code="lang_location" var="langLocation" />
+<spring:message code="lang_validity_duration" var="langValidityDuration" />
+<spring:message code="lang_info_2_be_verified" var="langInfo2BVerified" />
+<spring:message code="lang_duration" var="langDuration" />
+<spring:message code="lang_estimationOfValidity" var="langEstimationOfValidity" />
+<spring:message code="lang_enterAComment" var="langEnterAComment" />
+<spring:message code="lang_valid" var="langValid" />
+<spring:message code="lang_marker_on_map" var="langMarkerOnMap" />
+<spring:message code="lang_impraticable" var="langImpraticable" />
+<spring:message code="lang_impraticable_description" var="langImpraticableDescription" />
+<spring:message code="lang_badRoad" var="langBadRoad" />
+<spring:message code="lang_badRoad_description" var="langBadRoadDescription" />
+<spring:message code="lang_dirt_road" var="langDirtRoad" />
+<spring:message code="lang_dirt_road_Description" var="langDirtRoadDescription" />
+<spring:message code="lang_sandblank" var="langSandblank" />
+<spring:message code="lang_sandblank_description" var="langSandblankDescription" />
+<spring:message code="lang_mud_rut" var="langMudRut" />
+<spring:message code="lang_mud_rut_description" var="langMudRutDescription" />
+<spring:message code="lang_snowy_road" var="langSnowyRoad" />
+<spring:message code="lang_snowy_road_description" var="langSnowyRoadDescription" />
+<spring:message code="lang_difference_height" var="langDifferenceHeight" />
+<spring:message code="lang_difference_height_description" var="langDifferenceHeightDescription" />
+<spring:message code="lang_collapsing" var="langCollapse" />
+<spring:message code="lang_collapsing_description" var="langCollapseDescription" />
+<spring:message code="lang_flooding_risk" var="langFloodingrisk" />
+<spring:message code="lang_flooding_risk_description" var="langFloodingriskDescription" />
+<spring:message code="lang_max_weight" var="langMaxWeight" />
+<spring:message code="lang_max_weight_description" var="langMaxWeightDescription" />
+<spring:message code="lang_max_size" var="langMaxSize" />
+<spring:message code="lang_max_size_descritpion" var="langMaxSizeDescription" />
+<spring:message code="lang_work_on_road" var="langWorkOnRoad" />
+<spring:message code="lang_work_on_road_description" var="langWorkOnRoaddescription" />
+<spring:message code="lang_difficult_customs" var="langDifficultCustoms" />
+<spring:message code="lang_difficult_customs_dexcription" var="langDifficultCustomsDescription" />
+<spring:message code="lang_informations" var="langInformations" />
+<spring:message code="lang_informations_description" var="langInformationsDescription" />
+<spring:message code="lang_immigration" var="langImmigration" />
+<spring:message code="lang_immigration_description" var="langImmigrationDescription" />
+<spring:message code="lang_roadblock" var="langRoadblock" />
+<spring:message code="lang_roadblock_description" var="langRoadblockDescription" />
+<spring:message code="lang_strike_blocking" var="langStrikeBlocking" />
+<spring:message code="lang_strike_blocking_descritpion" var="langStriBlockingkeDescription" />
+<spring:message code="lang_frequent_attacks" var="langFequentAttacks" />
+<spring:message code="lang_frequent_attacks_description" var="langFequentAttacksDescription" />
+<spring:message code="lang_armed_attacks" var="langArmedAttacks" />
+<spring:message code="lang_armed_attacks_description" var="langArmedAttacksDescription" />
+<spring:message code="lang_fraud_theft" var="langFraudTheft" />
+<spring:message code="lang_fraud_theft_description" var="langFraudTheftDescription" />
 
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<i class="icon-warning-sign"><!-- --></i>
-				${hDangerOnTrip}
+				${LangAddSecurityInformation}
 			</h3>
 		</div>
 		<div class="">
 			<spring:url value="/dangerpratiques/save" var="save_info_url" ></spring:url>
 			<form:form commandName="dangerPratique" method="GET" action="${save_info_url}" id="form_danger" >
 				<div class="form-group">
-					<label>${labelTitle}</label>
+					<label>${langTitle}</label>
 					<form:input cssClass="form-control" 
 								id="title" 
-								placeholder="${inputEnterTitle}" 
+								placeholder="${langEnterTitle}" 
 								path="title" 
 								required="required" />
 				</div>
@@ -90,7 +91,7 @@
 					<div class="col-lg-5 form-group">
 						<select class="form-control" 
 								required="required"
-								placeholder="select type of info" 
+								placeholder="${langSelectInfoType}" 
 								id="select0" 
 								name="selecteur" ><!-- ??? -->
 							<option value="route" data-description="${optionroadSide}" >${optionroadSide}</option>
@@ -106,13 +107,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label>${inputLocation}</label>
+					<label>${langLocation}</label>
 					<div class="input-group">
 						<form:input id="location" 
 									required="required"
 									path="location" 
 									cssClass="form-control adress"
-									placeholder="${inputLocation}" />
+									placeholder="${langLocation}" />
 						<a href="#" class="input-group-addon mapPicker" id="location-picker">
 							<span class="">
 								<i class="icon-screenshot"><!-- --></i>
@@ -123,7 +124,7 @@
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
 				<div class="form-group">
-					<label for="duree" class="col-lg-6 control-label">${labelValidityDuration}</label>
+					<label for="duree" class="col-lg-6 control-label">${langValidityDuration}</label>
 					<div class="col-lg-5">
 						<select id="dure" name="dure" class="form-control">
 							  <c:forEach var="status" items="${typeTime}">
@@ -140,7 +141,7 @@
 						<div class="checkbox">
 							<label>
 								<form:checkbox id="verif" path="infoVerif" />
-								${formInfo2BVerified}
+								${langInfo2BVerified}
 							</label>
 						</div>
 					</div>
@@ -177,11 +178,11 @@
 					<div class="col-lg-1">
 						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
 						<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=dangerPratique">
-							<i class="icon-edit"> <!-- --></i>
+							<i class="icon-edit"><!-- --></i>
 						</a>
 					</div>
 				</div>
-				<button type="submit" id="btn_savedanger" class="btn btn-default">${buttonValid}</button>
+				<button type="submit" id="btn_savedanger" class="btn btn-default">${langValid}</button>
 			</form:form>
 
 		</div>

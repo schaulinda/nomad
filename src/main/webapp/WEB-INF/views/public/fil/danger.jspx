@@ -14,7 +14,7 @@
 
 
 <spring:message code="h.historiqueDangerInformation" var="hHistoriqueDangerInformation" />
-<spring:message code="input.addNewComment" var="inputAddNewComment" />
+<spring:message code="lang_add_new_comment" var="langAddNewComment" />
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="historique_user">
 		<div class="panel panel-default widget">
@@ -136,7 +136,7 @@
 								<textarea id="commentaireDanger" 
 										  name="commentaireDanger"
 										  class="form-control" 
-										  placeholder="${inputAddNewComment}"><!--co  -->
+										  placeholder="${langAddNewComment}"><!--co  -->
 								</textarea>
 								<input type="submit" id="btn_commentDanger" value="send"
 									   class="btn btn-default" style="display: none;" />
@@ -153,7 +153,7 @@
 									<li>
 										<a id="precDanger"
 										   href="${dangerSuiv_url}/${beanHistorique.listDanger.number-1}">
-											<i class="icon-chevron-left"> <!--  -->
+											<i class="icon-chevron-left"><!-- -->
 											</i>
 										</a>
 									</li>
@@ -161,7 +161,7 @@
 								<c:if test="${beanHistorique.listDanger.hasPreviousPage() eq false}">
 									<li class="disabled">
 										<a id="precDanger" href="#">
-											<i class="icon-chevron-left"> <!--  --></i>
+											<i class="icon-chevron-left"><!-- --></i>
 										</a>
 									</li>
 								</c:if>
@@ -169,14 +169,14 @@
 									<li>
 										<a id="suivDanger"
 										   href="${dangerSuiv_url}/${beanHistorique.listDanger.number+1}">
-											<i class="icon-chevron-right"> <!--  --></i>
+											<i class="icon-chevron-right"><!-- --></i>
 										</a>
 									</li>
 								</c:if>
 								<c:if test="${beanHistorique.listDanger.hasNextPage() eq false}">
 									<li class="disabled">
 										<a id="suivDanger" href="#">
-											<i class="icon-chevron-right"> <!--  --></i>
+											<i class="icon-chevron-right"><!-- --></i>
 										</a>
 									</li>
 								</c:if>

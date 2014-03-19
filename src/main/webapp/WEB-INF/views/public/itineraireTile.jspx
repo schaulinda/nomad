@@ -59,7 +59,7 @@
 				<div class="col-lg-3">
 					<a href="#" class="pull-down">
 						<button class="btn" type="submit" id="btn_itineraire">
-							<spring:message code="button.valid" />
+							<spring:message code="lang_valid" />
 						</button>
 					</a>
 				</div>
@@ -71,8 +71,8 @@
 			<h3 class="panel-title">
 				<i class="icon-info-sign"> <!-- co -->
 				</i>
-				<spring:message code="h.practicalOnTrip" var="hPracticalOnTrip" />
-				${hPracticalOnTrip}
+				<spring:message code="lang_practical_on_trip" var="LangPracticalOnTrip" />
+				${LangPracticalOnTrip}
 			</h3>
 		</div>
 		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>

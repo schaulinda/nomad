@@ -137,12 +137,12 @@
 				<div>
 					<spring:url value="/comments/addCommentInfo" var="comment_url"></spring:url>
 					<form id="comment_formInfo" action="${comment_url}" method="GET">
-						<spring:message code="input.addNewComment"
-							var="inputAddNewComment" />
+						<spring:message code="lang_add_new_comment"
+							var="langAddNewComment" />
 						<input type="hidden" value="${infoPratique.id}" name="InfoId" />
 						<input type="hidden" value="${back}" name="cameFrom" />
 						<textarea id="commentaireInfo" name="commentaireInfo"
-							class="form-control" placeholder="${inputAddNewComment}">
+							class="form-control" placeholder="${langAddNewComment}">
 										<!--co  -->
 									</textarea>
 						<input type="submit" id="btn_commentInfo" value="send"

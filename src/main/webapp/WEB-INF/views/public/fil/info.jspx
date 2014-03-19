@@ -14,7 +14,7 @@
 
 
 <spring:message code="h.historiquePraticalInformation" var="hHistoriquePraticalInformation" />
-<spring:message code="input.addNewComment" var="inputAddNewComment" />
+<spring:message code="lang_add_new_comment" var="langAddNewComment" />
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 		<div class="panel panel-default widget">
@@ -138,7 +138,7 @@
 								<textarea id="commentaireInfo" 
 										  name="commentaireInfo"
 										  class="form-control" 
-										  placeholder="${inputAddNewComment}">
+										  placeholder="${langAddNewComment}">
 									<!--co  -->
 								</textarea>
 								<input type="submit" 
