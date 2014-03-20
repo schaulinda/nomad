@@ -6,21 +6,23 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+
+<spring:message code="lang_add_practical_information" var="LangAddPracticalInformation" />
+<spring:message code="lang_add_security_information" var="LangAddSecurityInformation" />
+	
 	<div class="row">
 		<div class="col-lg-4">
 			<spring:url value="/public/info" var="info_url"></spring:url>
-			<a class="btn btn-success" href="${info_url}" id="btn_info"> <i
-				class=" icon-info-sign"> <!-- com-->
-			</i> <spring:message code="button.practicalInformation"
-					var="buttonPracticalInformation" /> ${buttonPracticalInformation}
+			<a class="btn btn-success" href="${info_url}" id="btn_info">
+				<i class=" icon-info-sign"><!-- --></i>
+				 ${LangAddPracticalInformation}
 			</a>
 		</div>
 		<div class="col-lg-4 col-lg-offset-3">
 			<spring:url value="/public/danger" var="danger_url"></spring:url>
 			<a class="btn btn-danger" href="${danger_url}" id="btn_danger">
-				<i class="icon-warning-sign"> <!-- com -->
-			</i> <spring:message code="button.dangerInformation"
-					var="buttonDangerInformation" /> ${buttonDangerInformation}
+				<i class="icon-warning-sign"><!-- --></i>
+				${LangAddSecurityInformation}
 			</a>
 		</div>
 	</div>

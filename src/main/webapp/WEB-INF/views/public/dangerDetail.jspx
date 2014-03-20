@@ -21,6 +21,7 @@
 <spring:message code ="lang_duration" var="langDuration" />
 <spring:message code ="lang_estimationOfValidity" var="langEstimationOfValidity" />
 <spring:message code ="lang_description" var="langDescription" />
+<spring:message code="lang_add_new_comment" var="langAddNewComment" />
 <spring:message code ="lang_valid" var="langValid" />
 
 	<div class="panel">

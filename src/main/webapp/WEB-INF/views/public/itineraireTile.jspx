@@ -12,54 +12,61 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_new_itinerary" var="langNewItinerary" />
+<spring:message code="lang_start" var="langStart" />
+<spring:message code="lang_finish" var="langFinish" />
+<spring:message code="lang_valid" var="langValid"/>
+<spring:message code="lang_practical_on_trip" var="langPracticalOnTrip" />
+<spring:message code="lang_security_information_on_trip" var="langSecurityInformationOnTrip" />
+<spring:message code="lang_details" var="langDetails" />
+<spring:message code="lang_marker_on_map" var="langMarkerOnMap" />
 
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-plus"> <!-- co -->
-				</i>
-				<spring:message code="h.newItinerary" var="hNewItinerary" />
-				${hNewItinerary}
+				<i class="icon-plus"><!-- --></i>
+				${langNewItinerary}
 			</h3>
 		</div>
 		<spring:url value="/public/findInfosDangers" var="itineraire_url"></spring:url>
-		<form:form commandName="beanManagerItineraire" method="GET"
-			action="${itineraire_url}" id="form_itineraire">
+		<form:form commandName="beanManagerItineraire" 
+				   method="GET"
+				   action="${itineraire_url}" 
+				   id="form_itineraire">
 			<div class="row">
 				<div class="col-lg-9">
 					<div class="input-group">
-						<spring:message code="input.start" var="inputStart" />
-						<form:input type="text" id="start" cssClass="form-control adress"
-							placeholder="${inputStart}" path="start" autocomplete="off" />
+						<form:input type="text" 
+									id="start" 
+									cssClass="form-control adress"
+									placeholder="${langStart}" 
+									path="start" 
+									autocomplete="off" />
 						<form:hidden id="startLat" path="startLng" />
 						<form:hidden id="startLng" path="startLat" />
-						<a href="#" class="input-group-addon mapPicker" id="start-picker" > <span > <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						</span>
+						<a href="#" class="input-group-addon mapPicker" id="start-picker" >
+							<span ><i class="icon-screenshot"><!-- --></i></span>
 						</a>
 					</div>
 					<br />
 					<div class="input-group">
-						<spring:message code="input.finish" var="inputFinish" />
-						<form:input type="text" id="end" cssClass="form-control adress"
-							placeholder="${inputFinish}" path="end" autocomplete="off" />
+						<form:input type="text" id="end" 
+									cssClass="form-control adress"
+									placeholder="${langFinish}" 
+									path="end" 
+									autocomplete="off" />
 						<form:hidden id="endLat" path="endLng" />
 						<form:hidden id="endLng" path="endLat" />
-						<!--please change end not finish -->
 						<a href="#" class="input-group-addon mapPicker" id="end-picker" >
-						<span >  <i
-								class="icon-screenshot"> <!-- co -->
-							</i>
-						
-						</span>
+							<span ><i class="icon-screenshot"><!-- --></i></span>
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<a href="#" class="pull-down">
 						<button class="btn" type="submit" id="btn_itineraire">
-							<spring:message code="lang_valid" />
+							${langValid}
 						</button>
 					</a>
 				</div>
@@ -69,10 +76,8 @@
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-info-sign"> <!-- co -->
-				</i>
-				<spring:message code="lang_practical_on_trip" var="LangPracticalOnTrip" />
-				${LangPracticalOnTrip}
+				<i class="icon-info-sign"><!-- --></i>
+				${langPracticalOnTrip}
 			</h3>
 		</div>
 		<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
@@ -88,28 +93,36 @@
 				<div class="col-lg-3" style="border-left: solid 1px;">
 					<ul class="nav nav-tabs nav-justified">
 						<li id="${info.id}vn">${info.voteNegatif}</li>
-						<li><a id="${info.id}" class="voteMinus"><i
-								class="icon-thumbs-down"> <!-- co --></i></a></li>
-								<li> | </li>
+						<li>
+							<a id="${info.id}" class="voteMinus">
+								<i class="icon-thumbs-down"><!-- --></i>
+							</a>
+						</li>
 						<li id="${info.id}vp" style="padding-left: 15px;">${info.votePositif}</li>
-						<li><a id="${info.id}" class="voteplus"><i
-								class="icon-thumbs-up"> <!-- co --></i></a></li>
+						<li>
+							<a id="${info.id}" class="voteplus">
+								<i class="icon-thumbs-up"><!-- --></i>
+							</a>
+						</li>
 					</ul>
 				</div>
 				<div>
 					 <a href="#"> 
 					 	${info.nomade.userName}
-					 </a> | <i class="icon-calendar"> <!-- co --></i>
-					<fmt:formatDate value="${info.created}" var="dateC" pattern="dd-MM-yyyy hh:mm" />
+					 </a> | <i class="icon-calendar"><!-- --></i>
+					<fmt:formatDate value="${info.created}" var="dateC" pattern="dd-MM-yyyy" />
 					<span style="color: #999999;"> ${dateC} </span>|
-					<span ><i class="icon-comment"><!-- co --></i> 
-					<c:if test="${not empty info.comments}">
-									${info.comments.size()}
-					</c:if>
-								<c:if test="${empty info.comments}">
-									0
-								</c:if>
-						</span> |<a id="${info.id}dt" class="detailsInfo detail" href="${infoDetail_url}/${info.id}" >details</a>
+					<span ><i class="icon-comment"><!-- --></i> 
+						<c:if test="${not empty info.comments}">
+							${info.comments.size()}
+						</c:if>
+						<c:if test="${empty info.comments}">0</c:if>
+					</span> |
+					<a id="${info.id}dt" 
+					   class="detailsInfo detail" 
+					   href="${infoDetail_url}/${info.id}" >
+					   	${langDetails}
+					</a>
 				</div>
 			</div>
 		</c:forEach>
@@ -117,15 +130,12 @@
 	<div class="panel panel-danger">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-warning-sign"> <!-- co -->
-				</i>
-				<spring:message code="h.dangerOnTrip" var="hDangerOnTrip" />
-				${hDangerOnTrip}
+				<i class="icon-warning-sign"><!-- --></i>
+				${langSecurityInformationOnTrip}
 			</h3>
 		</div>
 		<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
-		<c:forEach var="danger"
-			items="${beanManagerItineraire.dangerPratiques}">
+		<c:forEach var="danger" items="${beanManagerItineraire.dangerPratiques}">
 			<div class="row panel">
 				<div class="col-lg-2">
 					<img src="${iconmap_url}/${danger.icon}"  alt="icon"/>
@@ -136,32 +146,41 @@
 				<div class="col-lg-3" style="border-left: solid 1px;">
 					<ul class="nav nav-tabs nav-justified">
 						<li id="${danger.id}vn">${danger.voteNegatif}</li>
-						<li><a id="${danger.id}" class="voteDMinus"><i
-								class="icon-thumbs-down"> <!-- co --></i></a></li>
-								<li> | </li>
+						<li>
+							<a id="${danger.id}" class="voteDMinus">
+								<i class="icon-thumbs-down"><!-- --></i>
+							</a>
+						</li>
 						<li id="${danger.id}vp" style="padding-left: 15px;" >${danger.votePositif}</li>
-						<li><a id="${danger.id}" class="voteDplus"><i
-								class="icon-thumbs-up"> <!-- co --></i></a></li>
+						<li>
+							<a id="${danger.id}" class="voteDplus">
+								<i class="icon-thumbs-up"><!-- --></i>
+							</a>
+						</li>
 					</ul>
 				</div>
-				<br /> <a href="#"> ${danger.nomade.userName}</a> | <i class="icon-calendar"> <!-- co -->
-				</i><fmt:formatDate value="${danger.created}" var="dateCreation" pattern="dd-MM-yyyy hh:mm" />
+				<br />
+				<a href="#"> ${danger.nomade.userName}</a> | <i class="icon-calendar"><!-- --></i>
+				<fmt:formatDate value="${danger.created}" var="dateCreation" pattern="dd-MM-yyyy" />
 				<span style="color: #999999;">${dateCreation} </span>|
 				<span >
 					<i class="icon-comment"><!-- co --></i>
 					<c:if test="${not empty info.comments}">
 									${info.comments.size()}
 					</c:if>
-								<c:if test="${empty info.comments}">
-									0
+					<c:if test="${empty info.comments}">
+						0
 					</c:if>
-				</span> | <a id="${danger.id}dt"
-				 class="detailsDanger detail" href="${dangerDetail_url}/${danger.id}" >details</a>
+				</span> |
+				<a id="${danger.id}dt"
+				   class="detailsDanger detail" 
+				   href="${dangerDetail_url}/${danger.id}" >
+				    ${langDetails}
+				</a>
 			</div>
 		</c:forEach>
 		
-	</div>
-		
+	</div>		
 		<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
 		<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
 
@@ -194,7 +213,7 @@
 				
 				$('.mapPicker').tooltip({
 					trigger: 'hover',
-					title: 'click and drag and drop violet marker, to get location'
+					title: '${langMarkerOnMap}'
 				});
 				
 				/* ------------------click on mapPicker----------------- */
