@@ -236,18 +236,32 @@
 									},
 									clear : {
 										name : [ "directionsrenderer", "polyline" ],
-										 tag:["line"]
+										 tag:["line", "info", "danger"]
 									}
 
 								});
-								var marks = '${beanNomadeManager.makers}';
+								var marks=null;
+								marks =[ <c:forEach  items="${beanNomadeManager.marker}" var="marker" varStatus="loop" >
+														
+														{	
+															latLng:['${marker.latLng[0]}','${marker.latLng[1]}'], tag:'${marker.tag}',
+															id:'${marker.id}', data:'${marker.data}',
+															options:{icon:'${marker.options.icon}'}
+															
+														}
+															
+															<c:if test="${!loop.last}">,</c:if>
+															
+													 </c:forEach>
+												];
+								
 								console.log(marks);
 								if(marks || !$.trim(marks) === ""){
 									console.log("hellp");
 								var url = '${imageRender_url}';
-								var mapdata = jQuery.parseJSON(marks);
+						
 								/*dracula code form links for nomad*/
-								$.each(mapdata,function(index, value) {
+								$.each(marks,function(index, value) {
 													var hreflink = '${nomad_url}'
 															+ "/" + value.id;
 													var html = '<a href="'+hreflink+'" id="'+value.id+'" class="'+value.id+'" >'
@@ -318,7 +332,7 @@
 												{
 
 													marker : {
-														values : mapdata,
+														values : marks,
 														options : {
 															draggable : false
 														},
@@ -400,11 +414,24 @@
 
 	<script type="text/javascript">
 		dojo.addOnLoad(function() {
-			var marks = '${beanNomadeManager.makers}';
+			var marks=null;
+			marks =[ <c:forEach  items="${beanNomadeManager.marker}" var="marker" varStatus="loop" >
+									
+									{	
+										latLng:['${marker.latLng[0]}','${marker.latLng[1]}'], tag:'${marker.tag}',
+										id:'${marker.id}', data:'${marker.data}',
+										options:{icon:'${marker.options.icon}'}
+										
+									}
+										
+										<c:if test="${!loop.last}">,</c:if>
+										
+								 </c:forEach>
+							];
+			
 			if(marks || !marks === ""){
-				var mapdata = JSON.parse('${beanNomadeManager.makers}');
-	
-				dojo.forEach(mapdata, function(item, i) {
+				
+				dojo.forEach(marks, function(item, i) {
 					var id = item.id;
 	
 					Spring.addDecoration(new Spring.AjaxEventDecoration({

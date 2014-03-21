@@ -6,10 +6,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.beanutils.BeanComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.nomade.domain.Etape;
+import com.nomade.domain.Marker;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
@@ -22,6 +25,21 @@ public class VoyageServiceImpl implements VoyageService {
 	ParcoursService parcoursService;
 	@Autowired
 	Security security;
+	@Autowired
+	UserService userService;
+	
+private String linkBase(HttpServletRequest httpServletRequest){
+		
+		StringBuilder stringBuilder = new StringBuilder()
+		.append("http://")
+		.append(httpServletRequest.getServerName())
+		.append(":").append(httpServletRequest.getServerPort())
+		.append("/resources/img")
+		.append("/mapicon/veh");
+		
+		return stringBuilder.toString();
+		
+	}
 
 	public List<Voyage> findByNomade(UserNomade nomad) {
 
@@ -195,6 +213,30 @@ public class VoyageServiceImpl implements VoyageService {
 			return allEtape.get(0);
 		else
 			return null;
+	}
+	
+	public List<Marker>  buildNomadMakers(HttpServletRequest httpServletRequest) {
+		
+		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
+		String linkBase = linkBase(httpServletRequest);
+		List<Marker> listMarkers = new ArrayList<Marker>();
+		Marker mark = null;
+		for(UserNomade nomad:findAllUserNomades){
+			Etape lastEtape = getLastLocation(nomad);
+			if(lastEtape!=null){
+				double[] latLng = {lastEtape.getLat(), lastEtape.getLng()};
+				 mark = new Marker(latLng, nomad.toString());
+		
+				mark.setTag("nomad");
+				mark.setId(nomad.getId().toString());
+				String icon = linkBase+"/"+nomad.getVehicule().getIcon()+".png";
+				//mark.getOptions().setIcon(icon);
+				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_whiteN.png");
+				listMarkers.add(mark);
+			}
+			
+		}
+		return listMarkers;
 	}
 
 }

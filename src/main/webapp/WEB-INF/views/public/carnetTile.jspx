@@ -15,7 +15,7 @@
 
 <spring:message code="h.travel" var="hTravel" />
 <spring:message code="a.addField" var="aAddField"/>
-<spring:message code="button.valid" var="buttonValid"/>
+<spring:message code="lang_valid" var="langValid"/>
 <spring:message code="h.notebookOfTraveler" var="hNotebookOfTraveler" />
 <spring:message code="legend.shareExp" var="legendShareExp"/>
 <spring:message code="textarea.tellUs" var="textareaTellUs" />
@@ -139,7 +139,7 @@
 				<br/>
 				<div class="col-lg-10">
 					<button class="btn btn-block" type="submit" id="btn_etape">
-						${buttonValid}
+						${langValid}
 					</button>
 				</div>
 			</div>
@@ -265,7 +265,7 @@
 							</li>
 							<li>
 								<button class="btn" type="submit" id="btn_etapeVoy">
-									${buttonValid}
+									${langValid}
 								</button>
 							</li>
 						</ul>

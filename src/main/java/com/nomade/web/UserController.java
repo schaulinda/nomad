@@ -451,11 +451,11 @@ public class UserController {
 	
 	@RequestMapping("/selectImg/{id}")
 	public String selectImg(@PathVariable("id") String id, Model uiModel,
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest request) {
 		
 		
 		UserNomade nomade = securite.getUserNomade();
-		String stringPage = httpServletRequest.getSession(true).getAttribute("backLink").toString();
+		String stringPage = request.getSession(true).getAttribute("backLink").toString();
 		
 		//render previous page with marker an historik
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
@@ -474,12 +474,9 @@ public class UserController {
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
 
-		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-		beanNomadeManager.setNomads(findAllUserNomades);
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
-		beanNomadeManager.setMakers(makers);
 
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);

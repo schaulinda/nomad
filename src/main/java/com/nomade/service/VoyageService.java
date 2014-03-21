@@ -3,8 +3,11 @@ package com.nomade.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.roo.addon.layers.service.RooService;
 
+import com.nomade.domain.Marker;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.Voyage;
@@ -24,5 +27,6 @@ public interface VoyageService {
 	public List<Etape> drawOneParcours(String idV);
 	public Etape getLastLocation(UserNomade nomad);
 	public List<Etape> drawVoyageEnCours();
+	public List<Marker>  buildNomadMakers(HttpServletRequest httpServletRequest);
 	
 }

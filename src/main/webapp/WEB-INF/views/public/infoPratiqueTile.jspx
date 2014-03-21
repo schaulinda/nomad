@@ -12,34 +12,108 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_add_practical_information" var="LangAddPracticalInformation" />
+<spring:message code="lang_title" var="langTitle" />
+<spring:message code="lang_select_info_type" var="langSelectInfoType" />
+<spring:message code="lang_for_daily" var="langForDaily" />
+<spring:message code="lang_for_camp" var="langForCamp" />
+<spring:message code="lang_for_tourism" var="langForTourism" />
+<spring:message code="lang_for_the_vehicle" var="langForTheVehicle" />
+<spring:message code="lang_location" var="langLocation" />
+<spring:message code="lang_validity_duration" var="langValidityDuration" />
+<spring:message code="lang_info_2_be_verified" var="langInfo2BVerified" />
+<spring:message code="lang_duration" var="langDuration" />
+<spring:message code="lang_estimationOfValidity" var="langEstimationOfValidity" />
+<spring:message code="lang_enterAComment" var="langEnterAComment" />
+<spring:message code="lang_valid" var="langValid" />
+<spring:message code="lang_marker_on_map" var="langMarkerOnMap" />
+<spring:message code="lang_water_point" var="langWaterPoint" />
+<spring:message code="lang_water_point_description" var="langWaterPointDescription" />
+<spring:message code="lang_w_c" var="langWC" />
+<spring:message code="lang_w_c_description" var="langWCDescription" />
+<spring:message code="lang_showers" var="langShowers" />
+<spring:message code="lang_showers_description" var="langShowersDescription" />
+<spring:message code="lang_parking" var="langParking" />
+<spring:message code="lang_parking_Description" var="langParkingDescription" />
+<spring:message code="lang_paid_parking" var="langPaidParking" />
+<spring:message code="lang_paid_parking_description" var="langPaidParkingDescription" />
+<spring:message code="lang_garden_of_traveller" var="langGardenOfTraveller" />
+<spring:message code="lang_garden_of_traveller_description" var="langGardenOfTravellerDescription" />
+<spring:message code="lang_petitnomad_camping" var="langPetitnomadCamping" />
+<spring:message code="lang_petitnomad_camping_description" var="langPetitnomadCampingdescription" />
+<spring:message code="lang_meeting_point" var="langMeetingPoint" />
+<spring:message code="lang_meeting_point_description" var="langMeetingPointDescription" />
+<spring:message code="lang_gas_station" var="langGasStation" />
+<spring:message code="lang_gas_station_description" var="langGasStationDescription" />
+<spring:message code="lang_emptying_camping_car" var="langEmptyingCampingCar" />
+<spring:message code="lang_emptying_camping_car_description" var="langEmptyingCampingCarDecription" />
+<spring:message code="lang_shipping" var="langShipping" />
+<spring:message code="lang_shipping_description" var="langShippingDescription" />
+<spring:message code="lang_meeting_convoy" var="langMeetingConvoy" />
+<spring:message code="lang_meeting_convoy_description" var="langMeetingConvoyDescription" />
+<spring:message code="lang_garage" var="langGarage" />
+<spring:message code="lang_garage_description" var="langGarageDescription" />
+<spring:message code="lang_fauna_curiosity" var="langFaunaCuriosity" />
+<spring:message code="lang_fauna_curiosity_description" var="langFaunaCuriosityDescription" />
+<spring:message code="lang_flora_curiosity" var="langFloraCuriosity" />
+<spring:message code="lang_flora_curiosity_description" var="langFloraCuriosityDescription" />
+<spring:message code="lang_geological_curiosity" var="langGeologicalCuriosity" />
+<spring:message code="lang_geological_curiosity_description" var="langGeologicalCuriosityDescription" />
+<spring:message code="lang_beach" var="langBeach" />
+<spring:message code="lang_beach_description" var="langBeachDescription" />
+<spring:message code="lang_monument" var="langMonument" />
+<spring:message code="lang_monument_description" var="langMonumentDescription" />
+<spring:message code="lang_sea_beds" var="langSeaBeds" />
+<spring:message code="lang_sea_beds_description" var="langSeaBedsDescription" />
+<spring:message code="lang_lake_lagoon" var="langLakeLagoon" />
+<spring:message code="lang_lake_lagoon_description" var="langLakeLagoonDescription" />
+<spring:message code="lang_hike_start" var="langHikeStart" />
+<spring:message code="lang_hike_start_description" var="langHikeStartDescription" />
+<spring:message code="lang_save" var="langSave" />
 
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-info-sign"> <!-- co -->
-				</i>
-				<spring:message code="h.practicalOnTrip" var="hPracticalOnTrip" />
-				${hPracticalOnTrip}
+				<i class="icon-info-sign"><!-- --></i>
+				${LangAddPracticalInformation}
 			</h3>
 		</div>
 		<div class="">
 			<spring:url value="/infopratiques/save" var="save_info_url"></spring:url>
-			<form:form commandName="infoPratique" method="GET"
-				action="${save_info_url}" id="form_info">
+			<form:form commandName="infoPratique" method="GET" action="${save_info_url}" id="form_info">
 				<div class="form-group">
-					<label>Title</label>
-					<form:input cssClass="form-control" id="title"
-						placeholder="Enter title " path="title" required="required" />
+					<label>${langTitle}</label>
+					<form:input cssClass="form-control" 
+								id="title"
+								placeholder="${langEnterTitle}" 
+								path="title" 
+								required="required" />
 				</div>
 				<div class="row">
 					<div class="col-lg-5 form-group">
 						 <select class="form-control"
-							required="required" placeholder="select type of info" id="select0"
-							name="selecteur">
-							<option value="quotidien" data-description="pour le quotidien" selected="selected" >pour le quotidien</option>
-							<option value="bivouac" data-description="pour le bivouac" >pour le bivouac</option>
-							<option value="tourisme" data-description="pour le tourisme" >pour le tourisme</option>
-							<option value="vehicule" data-description="pour le véhicule" >pour le véhicule</option>
+								 required="required" 
+								 placeholder="${langSelectInfoType}" 
+								 id="select0"
+								 name="selecteur">
+							<option value="quotidien" 
+									data-description="${langForDaily}" 
+									selected="selected" >
+								${langForDaily}
+							</option>
+							<option value="bivouac" 
+									data-description="${langForCamp}" >
+								${langForCamp}
+							</option>
+							<option value="tourisme" 
+									data-description="${langForTourism}" >
+								${langForTourism}
+							</option>
+							<option value="vehicule" 
+									data-description="${langForTheVehicle}" >
+								${langForTheVehicle}
+							</option>
 						</select>
 					</div>
 					<div class="col-lg-7 form-group">
@@ -48,22 +122,21 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label>location</label>
+					<label>${langLocation}</label>
 					<div class="input-group">
-								<form:input id="location" required="required" path="location" cssClass="form-control adress"
-									placeholder="" />
-								<a href="#" class="input-group-addon mapPicker"
-									id="location-picker"> <span class=""> <i
-										class="icon-screenshot"> <!-- co --></i>
-								</span>
-								</a>
+						<form:input id="location" required="required" path="location" cssClass="form-control adress"
+									placeholder="${langLocation}" />
+						<a href="#" class="input-group-addon mapPicker" id="location-picker">
+							<span class="">
+								<i class="icon-screenshot"><!-- --></i>
+							</span>
+						</a>
 					</div>
 					<form:hidden id="locationLat" path="locationLat" />
 					<form:hidden id="locationLng" path="locationLng" />
 				</div>
 				<div class="form-group">
-					<label for="duree" class="col-lg-6 control-label">Duree de
-						validite</label>
+					<label for="duree" class="col-lg-6 control-label">${langValidityDuration}</label>
 					<div class="col-lg-5">
 							<select id="dure" name="dure" class="form-control">
 							  <c:forEach var="status" items="${typeTime}">
@@ -79,14 +152,17 @@
 					<div class="col-lg-6 form-group">
 						<div class="checkbox">
 							<label> <form:checkbox id="verif" path="infoVerif" />
-								Info a verifier
+								${langInfo2BVerified}
 							</label>
 						</div>
 					</div>
 					<div class="col-lg-5 form-group">
-							<select id="dureVerification" disabled="disabled" name="estimationValidite" class="form-control">
+							<select id="dureVerification" 
+									disabled="disabled" 
+									name="${langEstimationOfValidity}" 
+									class="form-control">
 							  <c:forEach var="status" items="${typeTime}">
-							        <spring:message code="${status}" text="${status}" var="labelEnum" ></spring:message>
+							        <spring:message code="${status}" text="${status}" var="labelEnum" />
 							        <option value="${status}">${labelEnum}</option>
 							  </c:forEach>
 							</select> 
@@ -94,37 +170,34 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 form-group">
-						<form:textarea class="form-control" placeholder="Enter a comment"
-							path="comment" id="comment" rows="4" />
+						<form:textarea class="form-control" 
+									   placeholder="${langEnterAComment}"
+									   path="comment" 
+									   id="comment" 
+									   rows="4" />
 
 					</div>
 					<div class="col-lg-3 form-group">
 						<form:hidden id="photo" path="photo" />
 						<c:if test="${empty infoPratique.photo}">
-							<IMG alt="" src="${res}/img/profil.png" width="100px"
-								height="100px;" />
+							<img alt="" src="${res}/img/profil.png" width="100px" height="100px;" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty infoPratique.photo}">
-							<IMG alt="" src="${imageRender_url}/${infoPratique.photo}"
-								width="100px" height="100px;" />
+							<img alt="" src="${imageRender_url}/${infoPratique.photo}" width="100px" height="100px;" />
 						</c:if>
 					</div>
 					<div class="col-lg-1">
 						<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-						<a class="btn btn-default" id="selectImg"
-							href="${selectPhoto_url}?backLink=infoPratique"><i
-							class="icon-edit"> <!-- com  -->
-						</i></a>
+						<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=infoPratique">
+							<i class="icon-edit"><!-- --></i>
+						</a>
 					</div>
 				</div>
-
-				<button type="submit" id="btn_saveinfo" class="btn btn-default">Submit</button>
+				<button type="submit" id="btn_saveinfo" class="btn btn-default">${langValid}</button>
 			</form:form>
-
 		</div>
 	</div>
-
 	<script type="text/javascript">
 		dojo.ready(function() {
 			new stuff().addAjaxPublicPage();
@@ -140,165 +213,165 @@
 								
 								$('.adress').tooltip({
 									trigger: 'focus',
-									title: 'drag and drop violet marker, to get location'
+									title: '${langMarkerOnMap}'
 								});
 								
 								/* change select1 in ftion of select0 */
 								
 								var ddData = [
 								              {
-								                  text: "point d'eau",
+								                  text: "${langWaterPoint}",
 								                  value: "pointEau",
 								                  selected: true,
-								                  description: "Tout point d'eau",
+								                  description: "${langWaterPoint}",
 								                  imageSrc: "${icon_url}/pointEau.png"
 								              },
 								              {
-								                  text: "toilettes",
+								                  text: "${langWC}",
 								                  value: "toilettes",
 								                  selected: false,
-								                  description: "toilettes",
+								                  description: "${langWCDescription}",
 								                  imageSrc: "${icon_url}/toillete.png"
 								              },
 								              {
-								                  text: "douches",
+								                  text: "${langShowers}",
 								                  value: "douches",
 								                  selected: false,
-								                  description: "douches",
+								                  description: "${langShowersDescription}",
 								                  imageSrc: "${icon_url}/douche.png"
 								              }
 								          ];
 								
 								var ddData1 = [
 								              {
-								                  text: "aire de stationnement",
+								                  text: "${langParking}",
 								                  value: "stationnementGratuite",
 								                  selected: true,
-								                  description: "aire de stationnement gratuite",
+								                  description: "${langParkingDescription}",
 								                  imageSrc: "${icon_url}/airStationementGratuit.png"
 								              },
 								              {
-								                  text: "aire de stationnement",
+								                  text: "${langPaidParking}",
 								                  value: "stationnementPayant",
 								                  selected: false,
-								                  description: "aire de stationnement payant",
+								                  description: "${langPaidParkingDescription}",
 								                  imageSrc: "${icon_url}/aireStationementPayant.png"
 								              },
 								              {
-								                  text: "voyageur jardin",
+								                  text: "${langGardenOfTraveller}",
 								                  value: "jardin",
 								                  selected: false,
-								                  description: "voyageur proposant une place dans son jardin",
+								                  description: "${langGardenOfTravellerDescription}",
 								                  imageSrc: "${icon_url}/plage.png"
 								              },
 								              {
-								                  text: "camping petitnomad",
+								                  text: "${langPetitnomadCamping}",
 								                  value: "camping",
 								                  selected: false,
-								                  description: "camping appartenant au réseau petitnomad",
+								                  description: "${langPetitnomadCampingdescription}",
 								                  imageSrc: "${icon_url}/reseauNomad.png"
 								              },
 								              {
-								                  text: "point de rencontre",
+								                  text: "${langMeetingPoint}",
 								                  value: "pointRencontre",
 								                  selected: false,
-								                  description: "point de rencontre voyageurs",
+								                  description: "${langMeetingPointDescription}",
 								                  imageSrc: "${icon_url}/pointRencontre.png"
 								              }
 								          ];
 								var ddData2 = [
 									              {
-									                  text: "station essence",
+									                  text: "${langGasStation}",
 									                  value: "station",
 									                  selected: true,
-									                  description: "station essence",
+									                  description: "${langGasStationDescription}",
 									                  imageSrc: "${icon_url}/stationEssence.png"
 									              },
 									              {
-									                  text: "vidange camping-car",
+									                  text: "${langEmptyingCampingCar}",
 									                  value: "vidange",
 									                  selected: false,
-									                  description: "vidange camping-car",
+									                  description: "${langEmptyingCampingCarDecription}",
 									                  imageSrc: "${icon_url}/vidangeCampingCar.png"
 									              },
 									              {
-									                  text: "shipping",
+									                  text: "${langShipping}",
 									                  value: "shipping",
 									                  selected: false,
-									                  description: "shipping",
+									                  description: "${langShippingDescription}",
 									                  imageSrc: "${icon_url}/shipping.png"
 									              },
 									              {
-									                  text: "rassemblement convoi",
+									                  text: "${langMeetingConvoy}",
 									                  value: "rassemblement",
 									                  selected: false,
-									                  description: "rassemblement convoi",
+									                  description: "${langMeetingConvoyDescription}",
 									                  imageSrc: "${icon_url}/rassemblement.png"
 									              },
 									              {
-									                  text: "garage",
+									                  text: "${langGarage}",
 									                  value: "garage",
 									                  selected: false,
-									                  description: "garage",
+									                  description: "${langGarageDescription}",
 									                  imageSrc: "${icon_url}/garage.png"
 									              }
 									          ];
 								
 								var ddData3 = [
 									              {
-									                  text: "curiosité faune",
+									                  text: "${langFaunaCuriosity}",
 									                  value: "faune",
 									                  selected: true,
-									                  description: "curiosité faune",
+									                  description: "${langFaunaCuriosityDescription}",
 									                  imageSrc: "${icon_url}/curiositeFone.png"
 									              },
 									              {
-									                  text: "curiosité flore",
+									                  text: "${langFloraCuriosity}",
 									                  value: "flore",
 									                  selected: false,
-									                  description: "curiosité flore",
+									                  description: "${langFloraCuriosityDescription}",
 									                  imageSrc: "${icon_url}/curiositeFlore.png"
 									              },
 									              {
-									                  text: "curiosité géologique",
+									                  text: "${langGeologicalCuriosity}",
 									                  value: "geologique",
 									                  selected: false,
-									                  description: "curiosité géologique",
+									                  description: "${langGeologicalCuriosityDescription}",
 									                  imageSrc: "${icon_url}/curiositeGeologiaue.png"
 									              },
 									              {
-									                  text: "plage",
+									                  text: "${langBeach}",
 									                  value: "plage",
 									                  selected: false,
-									                  description: "plage",
+									                  description: "${langBeachDescription}",
 									                  imageSrc: "${icon_url}/plage.png"
 									              },
 									              {
-									                  text: "monuments",
+									                  text: "${langMonument}",
 									                  value: "monuments",
 									                  selected: false,
-									                  description: "monuments",
+									                  description: "${langMonumentDescription}",
 									                  imageSrc: "${icon_url}/curiositeMonument.png"
 									              },
 									              {
-									                  text: "fonds marins",
+									                  text: "${langSeaBeds}",
 									                  value: "marins",
 									                  selected: false,
-									                  description: "fonds marins",
+									                  description: "${langSeaBedsDescription}",
 									                  imageSrc: "${icon_url}/curiositeFond.png"
 									              },
 									              {
-									                  text: "lac, lagunes",
+									                  text: "${langLakeLagoon}",
 									                  value: "lac",
 									                  selected: false,
-									                  description: "lac, lagunes",
+									                  description: "${langLakeLagoonDescription}",
 									                  imageSrc: "${icon_url}/curiositeLac.png"
 									              },
 									              {
-									                  text: "départ randonnée",
+									                  text: "${langHikeStart}",
 									                  value: "randonnee",
 									                  selected: false,
-									                  description: "départ randonnée",
+									                  description: "${langHikeStartDescription}",
 									                  imageSrc: "${icon_url}/departRandonne.png"
 									              }
 									          ];
@@ -420,7 +493,7 @@
 									setTimeout(function generate() {
 
 										noty({
-											text : "save...",
+											text : "${langSave}...",
 											type : "alert",
 											timeout : 2000,
 											modal : false,
@@ -505,7 +578,7 @@
 								
 								$('.mapPicker').tooltip({
 									trigger: 'hover',
-									title: 'click and drag and drop violet marker, to get location'
+									title: '${langMarkerOnMap}'
 								});
 								
 								/* ------------------click on mapPicker----------------- */

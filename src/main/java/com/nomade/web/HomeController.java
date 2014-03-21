@@ -29,6 +29,7 @@ import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 
 @RequestMapping({ "/", "/index", "home" })
 @Controller
@@ -50,6 +51,8 @@ public class HomeController {
 	ParcoursService parcoursService;
 	@Autowired
 	RelationService relationService;
+	@Autowired
+	VoyageService voyageService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String selectPage(HttpServletRequest request, Model uiModel) {
@@ -79,8 +82,7 @@ public class HomeController {
 				beanHistorique.setListInfo(listInfo);
 				beanHistorique.setNomade(nomade);
 				
-				List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-				beanNomadeManager.setNomads(findAllUserNomades);	
+				beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));	
 				beanNomadeManager.setMe(true);
 				//beanNomadeManager.setHome(true);
 				beanNomadeManager.setNomade(nomade);
@@ -121,8 +123,7 @@ public class HomeController {
 			
 			beanHistoriqueDecoration(uiModel, findUserNomade);
 
-			List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-			beanNomadeManager.setNomads(findAllUserNomades);
+			beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 			beanNomadeManager.setMe(false);
 			beanNomadeManager.setHome(false);
 
@@ -139,8 +140,7 @@ public class HomeController {
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
-		beanNomadeManager.setMakers(makers);
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
