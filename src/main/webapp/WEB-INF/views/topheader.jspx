@@ -305,16 +305,28 @@
 				     		}
 				    },
 				 clear:{
-					 name:["directionsrenderer"]
+					 name:["directionsrenderer", "polyline"]
 				 }	
 				
 				});
 				
-				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');
-				console.log(mapdata);
-				if(mapdata!=null){
+				var arrayMarker=null;
+				arrayMarker =[ <c:forEach  items="${beanManagerItineraire.makers}" var="marker" varStatus="loop" >
+										
+										{	
+											latLng:['${marker.latLng[0]}','${marker.latLng[1]}'], tag:'${marker.tag}',
+											id:'${marker.id}', data:'${marker.data}',
+											options:{icon:'${marker.options.icon}'}
+											
+										}
+											
+											<c:if test="${!loop.last}">,</c:if>
+											
+									 </c:forEach>
+								];
+				if(arrayMarker!=null){
 				/*dracula code form links for D/I*/
-				$.each(mapdata,function(index, value) {
+				$.each(arrayMarker,function(index, value) {
 									var baseLink="";
 									if(value.tag=="info"){
 										baseLink= '${infoDetail_url}';
@@ -360,7 +372,7 @@
 				$("#map").gmap3({
 					
 				    marker:{
-				        values:mapdata,
+				        values:arrayMarker,
 				        events:{
 				            
 				            click: function(marker, event, context){
@@ -416,9 +428,22 @@
 		dojo.addOnLoad(function() {
 			if('${itineraireOnglet}'=="active")	{
 			
-				var mapdata = JSON.parse('${beanManagerItineraire.makers}');
+				var arrayMarker=null;
+				arrayMarker =[ <c:forEach  items="${beanManagerItineraire.makers}" var="marker" varStatus="loop" >
+										
+										{	
+											latLng:['${marker.latLng[0]}','${marker.latLng[1]}'], tag:'${marker.tag}',
+											id:'${marker.id}', data:'${marker.data}',
+											options:{icon:'${marker.options.icon}'}
+											
+										}
+											
+											<c:if test="${!loop.last}">,</c:if>
+											
+									 </c:forEach>
+								];
 	
-				dojo.forEach(mapdata, function(item, i) {
+				dojo.forEach(arrayMarker, function(item, i) {
 					var id = item.id+"url";
 	
 					Spring.addDecoration(new Spring.AjaxEventDecoration({

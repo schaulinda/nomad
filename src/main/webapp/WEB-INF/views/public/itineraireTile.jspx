@@ -266,19 +266,12 @@
 				     					arrayId.push(markObj.id);		
 					     			}
 				     	          });
-				     			console.log(arrayId);
-				     			
-				     			$(this).gmap3({
-		     				        clear:{
-		     				          id:arrayId
-		     				        }
-		     				      });
 				     			
 				     		}
 				    },
 				 clear:{
-					 name:["directionsrenderer", "polyline"],
-					 tag:["line"]
+					 name:["polyline"],
+					 tag:["nomad"]
 				 }	
 				});
 				 	
@@ -289,8 +282,7 @@
 					$('#direction').html("");
 					$('#panelDirection').removeClass("hide");
 				/* the map data ----------------------------- */	
-				console.log('${beanManagerItineraire.makers}');
-				var mapdata = jQuery.parseJSON('${beanManagerItineraire.makers}');//do something if mapdata is null 
+				 
 				/* --------------agrandir la map------------- */
 								$('#smallTile').hide();
 								$('#id_map').removeClass("col-lg-6");
@@ -306,7 +298,7 @@
 				
 					
 				/*------------------ render direction ----------------------------*/	
-				
+				console.log('${beanManagerItineraire.end}');
 					$("#map").gmap3({
 					
 						 getroute:{
@@ -316,6 +308,7 @@
 							        travelMode: google.maps.DirectionsTravelMode.DRIVING
 							    },
 							    callback: function(results){
+							    	console.log(results);
 							      if (!results) return;
 							      console.log(results);
 							      $(this).gmap3({
@@ -335,7 +328,7 @@
 				
 				}else{
 					
-				
+					console.log("nogood");
 				}
 			}// no change in the map	
 				

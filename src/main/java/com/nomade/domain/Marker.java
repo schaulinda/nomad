@@ -1,6 +1,5 @@
 package com.nomade.domain;
 
-import org.springframework.roo.addon.dod.RooDataOnDemand;
 import org.springframework.roo.addon.json.RooJson;
 
 @RooJson
@@ -10,24 +9,20 @@ public class Marker {
 	
 	private String tag;
 	
-	private String address;
+	private double[] latLng;
 	
 	private String data;
 	
 	private Options options = new Options();
+	
+	
+	
 
-	public Marker(String address, String data) {
+
+	public Marker(double[] latLng, String data) {
 		super();
-		this.address = address;
+		this.latLng = latLng;
 		this.data = data;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getData() {
@@ -60,6 +55,14 @@ public class Marker {
 
 	public void setOptions(Options options) {
 		this.options = options;
+	}
+
+	public double[] getLatLng() {
+		return latLng;
+	}
+
+	public void setLatLng(double[] latLng) {
+		this.latLng = latLng;
 	}
 	
 

@@ -602,7 +602,7 @@
 		}));
 	</script>
 	<script type="text/javascript">
-	if (dojo.byId('subdanger') != null) {
+	 
 		Spring.addDecoration(new Spring.AjaxEventDecoration({
 			elementId : "btn_savedanger",
 			event : "onclick",
@@ -611,7 +611,7 @@
 				fragments : "smallTile, subdanger"
 			}
 		}));
-	}
+	
 	</script>
 	
 	

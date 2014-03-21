@@ -132,9 +132,9 @@ public class VoyageServiceImpl implements VoyageService {
 					&& !"".equals(v.getArrived().getLocation())) {
 				listEtape.add(v.getArrived());
 			}
-			System.out.print("v: " + v);
+		
 			List<Parcours> byVoyage = parcoursService.findByVoyage(v);
-			System.out.print("byVoyage: " + byVoyage);
+			
 			for (Parcours p : byVoyage) {
 				listEtape.add(p.getDepart());
 				listEtape.add(p.getArrived());
@@ -191,7 +191,10 @@ public class VoyageServiceImpl implements VoyageService {
 
 		List<Etape> allEtape = drawAllParcours(nomad);
 
-		return allEtape.get(0);
+		if(allEtape!=null && allEtape.size() > 0)
+			return allEtape.get(0);
+		else
+			return null;
 	}
 
 }

@@ -53,7 +53,7 @@
 												}
 											},
 											marker : {
-												address : "France,paris",
+												data:"Paris !",latLng:[48.8620722, 2.352047],
 												id:"indicator",
 												options : {
 													draggable : true,

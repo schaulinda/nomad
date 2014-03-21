@@ -49,8 +49,9 @@ private String linkBase(HttpServletRequest httpServletRequest){
 		for(UserNomade nomad:nomads){
 			Etape lastEtape = lastEtape(nomad);
 			if(lastEtape!=null){
-				
-				mark = new Marker(lastEtape.getLocation(), nomad.toString());
+				double[] latLng = {lastEtape.getLat(), lastEtape.getLng()};
+				 mark = new Marker(latLng, nomad.toString());
+		
 				mark.setTag("nomad");
 				mark.setId(nomad.getId().toString());
 				String icon = linkBase+"/"+nomad.getVehicule().getIcon();
