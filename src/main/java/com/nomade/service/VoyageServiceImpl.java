@@ -229,9 +229,9 @@ private String linkBase(HttpServletRequest httpServletRequest){
 		
 				mark.setTag("nomad");
 				mark.setId(nomad.getId().toString());
-				String icon = linkBase+"/"+nomad.getVehicule().getIcon()+".png";
-				//mark.getOptions().setIcon(icon);
-				mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_whiteN.png");
+				String icon = linkBase+"/"+nomad.getVehicule().getIcon();
+				mark.getOptions().setIcon(icon);
+				//mark.getOptions().setIcon("http://maps.google.com/mapfiles/marker_whiteN.png");
 				listMarkers.add(mark);
 			}
 			

@@ -289,10 +289,12 @@
 				     		}
 				    },
 				 clear:{
-					 name:["polyline"],
-					 tag:["nomad"]
+					 name:["polyline", "getroute", "directionsrenderer"],
+					 tag:["nomad", "route"]
 				 }	
 				});
+				var directionsDisplay = new google.maps.DirectionsRenderer(); 
+				directionsDisplay.setMap();
 				 	
 				/* render with new itineraire */
 				var bol ='${beanManagerItineraire.bol}';
@@ -317,15 +319,19 @@
 				
 					
 				/*------------------ render direction ----------------------------*/	
-				console.log('${beanManagerItineraire.end}');
+				
+				var start = '${beanManagerItineraire.start}';
+				var end =  '${beanManagerItineraire.end}';
+				console.log(start);
 					$("#map").gmap3({
 					
 						 getroute:{
 							    options:{
-							        origin:'${beanManagerItineraire.start}',
-							        destination:'${beanManagerItineraire.end}',
+							    	origin:start,
+							        destination:end,
 							        travelMode: google.maps.DirectionsTravelMode.DRIVING
 							    },
+							    tag: "route",
 							    callback: function(results){
 							    	console.log(results);
 							      if (!results) return;
@@ -347,7 +353,7 @@
 				
 				}else{
 					
-					console.log("nogood");
+					console.log("NO directionrender");
 				}
 			}// no change in the map	
 				

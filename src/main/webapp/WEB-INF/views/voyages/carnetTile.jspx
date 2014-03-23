@@ -398,11 +398,13 @@
 								     			
 								     		}
 								    },
-								 clear:{
-									 name:["directionsrenderer", "polyline"],
-									 tag:["line"]
+								    clear:{
+										 name:["polyline", "getroute", "directionsrenderer"],
+										 tag:["nomad", "route"]
 								 }	
 								});
+								
+								
 								
 								/*---------------- draw parcours -------------------*/
 								var lineSymbol = {

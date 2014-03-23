@@ -168,7 +168,6 @@
 						</div>
 					</li>
 				</c:forEach>
-				<br/>
 				<div>
 					<spring:url value="/comments/addCommentDanger" var="comment_url"></spring:url>
 					<form id="comment_formInfo" action="${comment_url}" method="GET">

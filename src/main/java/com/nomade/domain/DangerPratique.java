@@ -50,6 +50,8 @@ public class DangerPratique {
 	private int votePositif;
 
 	private int voteNegatif;
+	
+	private List<UserNomade> listVotants = new ArrayList<UserNomade>();
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -79,6 +81,14 @@ public class DangerPratique {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public List<UserNomade> getListVotants() {
+		return listVotants;
+	}
+
+	public void setListVotants(List<UserNomade> listVotants) {
+		this.listVotants = listVotants;
 	}
 
 }

@@ -51,6 +51,8 @@ public class InfoPratique {
 	
 	private int voteNegatif;
 	
+	private List<UserNomade> listVotants = new ArrayList<UserNomade>();
+	
 	private String icon;
 	
 	 @OrderBy(value = "created", order=Order.DESCENDING)
@@ -80,6 +82,14 @@ public class InfoPratique {
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+
+	public List<UserNomade> getListVotants() {
+		return listVotants;
+	}
+
+	public void setListVotants(List<UserNomade> listVotants) {
+		this.listVotants = listVotants;
 	}
 
 }

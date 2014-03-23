@@ -121,7 +121,7 @@ public class PublicController {
 		}
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
-		//beanNomadeManager.setNomade(findUserNomade);
+		beanNomadeManager.setNomade(findUserNomade);
 		Etape etape = voyageService.getLastLocation(nomade);
 		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 

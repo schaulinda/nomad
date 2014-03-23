@@ -148,9 +148,13 @@ public class DangerPratiqueController {
 	@ResponseBody
 	public String votePositif(@PathVariable("idInfo") String idInfo, Model uiModel) {
     	BigInteger bigInteger = new BigInteger(idInfo);
- 
     	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
+    	UserNomade nomade = securite.getUserNomade();
+    	if(dangerPratiqueService.hasVoted(nomade, dangerPratique)){
+    		return ""+dangerPratique.getVotePositif();
+    	}
     	dangerPratique.incrementVotePositif();
+    	dangerPratique.getListVotants().add(nomade);
     	dangerPratiqueService.updateDangerPratique(dangerPratique);
     	return ""+dangerPratique.getVotePositif();
     }
@@ -160,7 +164,12 @@ public class DangerPratiqueController {
    	public String voteMinus(@PathVariable("idInfo") String idInfo, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
        	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
-    	dangerPratique.incrementVoteNegatif();;
+       	UserNomade nomade = securite.getUserNomade();
+    	if(dangerPratiqueService.hasVoted(nomade, dangerPratique)){
+    		return ""+dangerPratique.getVoteNegatif();
+    	}
+    	dangerPratique.incrementVoteNegatif();
+    	dangerPratique.getListVotants().add(nomade);
     	dangerPratiqueService.updateDangerPratique(dangerPratique);
     	return ""+dangerPratique.getVoteNegatif();
        }

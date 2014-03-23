@@ -1,11 +1,6 @@
 package com.nomade.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.data.domain.Page;
 
 
 public class BeanNomadeManager {
