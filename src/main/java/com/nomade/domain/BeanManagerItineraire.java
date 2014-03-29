@@ -70,7 +70,6 @@ public class BeanManagerItineraire {
 				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
 		}
-		System.out.print("listMarkers: "+listMarkers.get(0).getLatLng()[0]+""+listMarkers.get(0).getLatLng()[0]);
 		this.makers = listMarkers;
 		
 	}
