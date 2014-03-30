@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="id_subfooter"
 	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
-	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
 	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	<spring:url value="/resources/img/mapicon" var="iconmap_url"></spring:url>
+
+	<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
+	<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
+
+	<spring:url value="/dangerpratiques/votePlus/" var="voteDPlus_url"></spring:url>
+	<spring:url value="/dangerpratiques/voteMinus/" var="voteDMinus_url"></spring:url>
+
+	<spring:url value="/infopratiques/detail/" var="detailsInfo_url"></spring:url>
+	<spring:url value="/dangerpratiques/detail/" var="detailsDanger_url"></spring:url>
+
+	<spring:message code="lang_practical_on_trip" var="langPracticalOnTrip" />
+	<spring:message code="lang_security_information_on_trip"
+		var="langSecurityInformationOnTrip" />
+	<spring:message code="lang_details" var="langDetails" />
 
 	<div class="row">
-		<div class="col-lg-6">
-			<div class="panel panel-warning">
+		<div class="col-lg-1">
+			<!-- co -->
+		</div>
+		<div class="col-lg-5">
+			<div class="panel ">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-user"> <!-- com -->
@@ -22,7 +43,7 @@
 					<!-- co -->
 				</div>
 			</div>
-			<div class="panel panel-warning">
+			<div class="panel ">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-user"> <!-- com -->
@@ -34,44 +55,217 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-6">
-			<div class="panel panel-warning">
+		<div class="col-lg-5">
+			<div class="panel ">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon-user"> <!-- com -->
-						</i> Photo Amies
-					</h3>
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#amis" data-toggle="tab">Mes contacts</a></li>
+						<li><a href="#photo" data-toggle="tab">Mes photos</a></li>
+					</ul>
 				</div>
-				<div>
-					<!-- co -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="amis">
+					<!--co  -->
+					</div>
+					<div class="tab-pane active" id="photo">
+					<!--co  -->
+					</div>
 				</div>
 			</div>
 
-			<div class="panel panel-warning">
+			<div class="panel">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon-user"> <!-- com -->
-						</i> info
-					</h3>
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#danger" data-toggle="tab">Danger</a></li>
+						<li><a href="#info" data-toggle="tab">Info</a></li>
+					</ul>
 				</div>
-				<div>
-					<!-- co -->
-				</div>
-			</div>
+				<div class="tab-content">
+					<div class="tab-pane active" id="danger">
+						<spring:url value="/dangerpratiques/detail" var="dangerDetail_url"></spring:url>
+						<c:forEach var="danger" items="${beanHistorique.listDanger}">
+							<div class="row panel">
+								<div class="col-lg-2">
+									<img src="${iconmap_url}/${danger.icon}" alt="icon" />
+								</div>
+								<div class="col-lg-7" style="border-left: solid 1px;">
+									<p>${danger.title}</p>
+								</div>
+								<div class="col-lg-3" style="border-left: solid 1px;">
+									<ul class="nav nav-tabs nav-justified">
+										<li id="${danger.id}vn">${danger.voteNegatif}</li>
+										<li><a id="${danger.id}" class="voteDMinus"> <i
+												class="icon-thumbs-down"> <!-- -->
+											</i>
+										</a></li>
+										<li id="${danger.id}vp" style="padding-left: 15px;">${danger.votePositif}</li>
+										<li><a id="${danger.id}" class="voteDplus"> <i
+												class="icon-thumbs-up"> <!-- -->
+											</i>
+										</a></li>
+									</ul>
+								</div>
+								<br /> <a href="#"> ${danger.nomade.userName}</a> | <i
+									class="icon-calendar"> <!-- -->
+								</i>
+								<fmt:formatDate value="${danger.created}" var="dateCreation"
+									pattern="dd-MM-yyyy" />
+								<span style="color: #999999;">${dateCreation} </span>| <span>
+									<i class="icon-comment"> <!-- co -->
+								</i> <c:if test="${not empty info.comments}">
+									${info.comments.size()}
+					</c:if> <c:if test="${empty info.comments}">
+						0
+					</c:if>
+								</span> | <a id="${danger.id}dt" class="detailsDanger detail"
+									href="${dangerDetail_url}/${danger.id}?cameFrom=nomad"> ${langDetails} </a>
+							</div>
+						</c:forEach>
 
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon-user"> <!-- com -->
-						</i> danger
-					</h3>
-				</div>
-				<div>
-					<!-- co -->
+					</div>
+					<div class="tab-pane" id="info">
+						<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
+						<c:forEach var="info"
+							items="${beanHistorique.listInfo}">
+							<div class="row panel">
+								<div class="col-lg-2">
+									<img src="${iconmap_url}/${info.icon}" alt="icon" />
+								</div>
+								<div class="col-lg-7" style="border-left: solid 1px;">
+									<p>${info.title}</p>
+								</div>
+								<div class="col-lg-3" style="border-left: solid 1px;">
+									<ul class="nav nav-tabs nav-justified">
+										<li id="${info.id}vn">${info.voteNegatif}</li>
+										<li><a id="${info.id}" class="voteMinus"> <i
+												class="icon-thumbs-down">
+													<!-- -->
+											</i>
+										</a></li>
+										<li id="${info.id}vp" style="padding-left: 15px;">${info.votePositif}</li>
+										<li><a id="${info.id}" class="voteplus"> <i
+												class="icon-thumbs-up">
+													<!-- -->
+											</i>
+										</a></li>
+									</ul>
+								</div>
+								<div>
+									<a href="#"> ${info.nomade.userName} </a> | <i
+										class="icon-calendar">
+										<!-- -->
+									</i>
+									<fmt:formatDate value="${info.created}" var="dateC"
+										pattern="dd-MM-yyyy" />
+									<span style="color: #999999;"> ${dateC} </span>| <span><i
+										class="icon-comment">
+											<!-- -->
+									</i> <c:if test="${not empty info.comments}">
+							${info.comments.size()}
+						</c:if> <c:if test="${empty info.comments}">0</c:if> </span> | <a
+										id="${info.id}dt" class="detailsInfo detail"
+										href="${infoDetail_url}/${info.id}?cameFrom=nomad"> ${langDetails} </a>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-1">
+			<!-- co -->
+		</div>
 	</div>
+
+	<script type="text/javascript">
+		jQuery.noConflict();
+		(function($) {
+			$(document).ready(function() {
+
+				/* ----------------------vote positif info--------------------------- */
+				$('.voteplus').each(function() {
+
+					$(this).click(function() {
+
+						var elt = this.id;
+						var url = '${votePlus_url}' + this.id;
+						$.get(url, function(data) {
+							var idvp = "#" + elt + "vp";
+							$(idvp).html("");
+							$(idvp).html(data);
+						});
+
+					});
+				});
+				/* --------------------vote negatif info------------------------- */
+				$('.voteMinus').each(function() {
+
+					$(this).click(function() {
+
+						var elt = this.id;
+						var url = '${voteMinus_url}' + this.id;
+						$.get(url, function(data) {
+							var idvp = "#" + elt + "vn";
+							$(idvp).html("");
+							$(idvp).html(data);
+						});
+
+					});
+				});
+
+				/* ----------------------vote positif danger--------------------------- */
+				$('.voteDplus').each(function() {
+
+					$(this).click(function() {
+						console.log(this.id);
+						var elt = this.id;
+						var url = '${voteDPlus_url}' + this.id;
+						$.get(url, function(data) {
+							var idvp = "#" + elt + "vp";
+							$(idvp).html("");
+							$(idvp).html(data);
+						});
+
+					});
+				});
+				/* --------------------vote negatif danger------------------------- */
+				$('.voteDMinus').each(function() {
+
+					$(this).click(function() {
+						console.log(this.id);
+						var elt = this.id;
+						var url = '${voteDMinus_url}' + this.id;
+						$.get(url, function(data) {
+							var idvp = "#" + elt + "vn";
+							$(idvp).html("");
+							$(idvp).html(data);
+						});
+
+					});
+				});
+			});
+		})(jQuery);
+	</script>
+
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+
+			dojo.query(".detail").forEach(function(node, index, arr) {
+				var id = dojo.attr(node, "id");
+				console.log(id);
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "smallTile, topheader"
+					}
+				}));
+
+			});
+
+		});
+	</script>
+
 
 </div>
 

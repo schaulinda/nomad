@@ -38,6 +38,15 @@
 					</a>
 				</div>
 				</c:if>
+				<c:if test="${back == 'nomad' }">
+				<div class="col-lg-6">
+					<spring:url value="/public/nomad" var="backnomade_url"></spring:url>
+					<a class="btn btn-default btn-block pull-left" id="back" href="${backnomade_url}/${idNomad}">
+						<i class="icon-arrow-left"><!-- --></i>
+						${langBack}
+					</a>
+				</div>
+				</c:if>
 				<c:if test="${back == 'formfinditineraire' }">
 				<div class="col-lg-6">
 					<a class="btn btn-default btn-block pull-left" id="back" 
@@ -223,7 +232,7 @@
 			elementId : "back",
 			event : "onclick",
 			params : {
-				fragments : "smallTile"
+				fragments : "smallTile, id_subfooter, topheader"
 			}
 		}));
 	</script>

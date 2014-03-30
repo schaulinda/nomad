@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -49,16 +50,10 @@ public class EtapeVehiculeController {
 	ParcoursService parcoursService;
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
-		
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
+
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
@@ -100,10 +95,9 @@ public class EtapeVehiculeController {
 	@RequestMapping("/etapeVehSuiv/{id}/{page}")
 	public String nomad(@PathVariable("id")String id, @PathVariable("page")int page ,HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = userService.findUserNomade(new BigInteger(id)); 
-		Page<EtapeVehicule> listEtapeVoy = vehiculeService.findByNomade(
-				nomade, page);
+		//Page<EtapeVehicule> listEtapeVoy = vehiculeService.findByNomade(nomade, page);
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVeh(listEtapeVoy);
+		//beanHistorique.setListEtapeVeh(listEtapeVoy);
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		return "public/nomad";

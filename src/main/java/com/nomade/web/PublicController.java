@@ -76,25 +76,19 @@ public class PublicController {
 		
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		
-		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("nomade", nomade); 
 		uiModel.addAttribute("onglet", "nomad");
 		return "public/nomad";
 	}
 
 
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
 		beanHistorique.setListDanger(listDanger);
-		beanHistorique.setListInfo(listInfo);
+			
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}

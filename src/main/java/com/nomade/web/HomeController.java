@@ -70,17 +70,7 @@ public class HomeController {
 				
 				BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 				
-				Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(nomade, 0);
-				Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(nomade, 0);
-				Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-				Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
-				
-				BeanHistorique beanHistorique = new BeanHistorique();
-				beanHistorique.setListEtapeVoy(listEtapeVoy);//listEtapeVoy.getContent().get(0).getComments().s
-				beanHistorique.setListEtapeVeh(listEtapeVeh);
-				beanHistorique.setListDanger(listDanger);
-				beanHistorique.setListInfo(listInfo);
-				beanHistorique.setNomade(nomade);
+				beanHistoriqueDecoration(uiModel, nomade);
 				
 				beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));	
 				beanNomadeManager.setMe(true);
@@ -88,8 +78,6 @@ public class HomeController {
 				beanNomadeManager.setNomade(nomade);
 				//String makers = parcoursService.buildMakers(findAllUserNomades);
 				//beanNomadeManager.setMakers(makers);
-				
-				uiModel.addAttribute("beanHistorique", beanHistorique);
 				uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "nomad");
@@ -152,16 +140,11 @@ public class HomeController {
 	}
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);

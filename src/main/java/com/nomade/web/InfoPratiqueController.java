@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,17 +45,10 @@ public class InfoPratiqueController {
 	ParcoursService parcoursService;
 
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(nomade,
-				0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(
-				nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade,
-				0);
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
 
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
@@ -198,15 +192,22 @@ public class InfoPratiqueController {
 			@RequestParam(value = "cameFrom", required = false) String cameFrom,
 			Model uiModel) {
 		BigInteger bigInteger = new BigInteger(idInfo);
+		InfoPratique infoPratique = infoPratiqueService
+				.findInfoPratique(bigInteger);
+		
+		BigInteger id = infoPratique.getNomade().getId();
 
 		if ("map".equals(cameFrom)) {
 			uiModel.addAttribute("back", "itineraire");
 		} else {
-			uiModel.addAttribute("back", "formfinditineraire");
+			if ("nomad".equals(cameFrom)) {
+				uiModel.addAttribute("back", "nomad");
+				uiModel.addAttribute("idNomad", ""+id);
+			}else{
+					uiModel.addAttribute("back", "formfinditineraire");		
+			}
 		}
 
-		InfoPratique infoPratique = infoPratiqueService
-				.findInfoPratique(bigInteger);
 		uiModel.addAttribute("infoPratique", infoPratique);
 		return "public/infoDetail";
 	}
@@ -216,8 +217,7 @@ public class InfoPratiqueController {
 			@PathVariable("page") int page, HttpServletRequest request,
 			Model uiModel) {
 		UserNomade nomade = userService.findUserNomade(new BigInteger(id));
-		Page<InfoPratique> listDanger = infoPratiqueService.findByNomade(
-				nomade, page);
+		List<InfoPratique> listDanger = infoPratiqueService.findByNomadeOrderByCreated(nomade);
 		BeanHistorique beanHistorique = new BeanHistorique();
 		beanHistorique.setListInfo(listDanger);
 		beanHistorique.setNomade(nomade);

@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.UserNomade;
+import com.nomade.repository.DangerPratiqueRepository;
 
 public class DangerPratiqueServiceImpl implements DangerPratiqueService {
 
@@ -40,6 +41,11 @@ public class DangerPratiqueServiceImpl implements DangerPratiqueService {
 						new Order(Direction.DESC, "created")));
 
 		return dangerPratiqueRepository.findByNomade(nomade, pageRequest);
+	}
+	
+	public List<DangerPratique> findByNomadeOrderByCreated(UserNomade nomade){
+		
+		return dangerPratiqueRepository.findByNomadeOrderByCreatedDesc(nomade);
 	}
 
 	public boolean hasVoted(UserNomade nomade, DangerPratique dangerPratique) {

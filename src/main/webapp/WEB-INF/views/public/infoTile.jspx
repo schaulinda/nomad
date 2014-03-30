@@ -46,7 +46,7 @@
 			elementId : "btn_danger",
 			event : "onclick",
 			params : {
-				fragments : "smallTile,topheader"
+				fragments : "smallTile,topheader, id_subfooter"
 			}
 		}));
 	</script>
@@ -56,7 +56,7 @@
 			elementId : "btn_info",
 			event : "onclick",
 			params : {
-				fragments : "smallTile,topheader"
+				fragments : "smallTile,topheader, id_subfooter"
 			}
 		}));
 	</script>

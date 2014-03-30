@@ -57,4 +57,9 @@ public class InfoPratiqueServiceImpl implements InfoPratiqueService {
 		return found;
 
 	}
+	
+	public List<InfoPratique> findByNomadeOrderByCreated(UserNomade nomade){
+		
+		return infoPratiqueRepository.findByNomadeOrderByCreatedDesc(nomade);
+	}
 }

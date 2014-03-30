@@ -15,4 +15,5 @@ public interface DangerPratiqueRepository {
 
     List<com.nomade.domain.DangerPratique> findAll();
     Page<DangerPratique> findByNomade(UserNomade nomade, Pageable pageable);
+    List<DangerPratique> findByNomadeOrderByCreatedDesc(UserNomade nomade);
 }

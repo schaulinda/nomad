@@ -62,16 +62,10 @@ public class EtapeVoyageController {
 	
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
-		
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
+
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
@@ -172,10 +166,9 @@ public class EtapeVoyageController {
 	@RequestMapping("/etapeVoySuiv/{id}/{page}")
 	public String nomad(@PathVariable("id")String id, @PathVariable("page")int page ,HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = userService.findUserNomade(new BigInteger(id)); 
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, page);
+		//List<EtapeVoyage> listEtapeVoy = etapeVoyageService.
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		//beanHistorique.setListEtapeVoy(listEtapeVoy);
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		return "public/nomad";
