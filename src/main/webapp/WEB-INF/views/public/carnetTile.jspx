@@ -653,7 +653,7 @@
 			event : "onclick",
 			formId : "form_etapeVoy",
 			params : {
-				fragments : "smallTile, subuser"
+				fragments : "smallTile"
 			}
 		}));
 	</script>
@@ -664,7 +664,7 @@
 			event : "onclick",
 			formId : "form_etape",
 			params : {
-				fragments : "smallTile, subuser"
+				fragments : "smallTile"
 			}
 		}));
 	</script>
