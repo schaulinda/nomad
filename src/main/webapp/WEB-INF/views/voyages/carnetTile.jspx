@@ -138,10 +138,10 @@
 					<i class="icon-plane"> <!-- co -->
 					</i> Share your Trip experience
 				</legend>
-				<spring:message code="textarea.tellUs" var="textareaTellUs" />
+				<spring:message code="lang_tell_us_your_trip" var="langTellUsYourTrip" />
 				<form:textarea cssClass="form-control" row="8" id="description"
 					path="etapeVoyage.description" required="required"
-					placeholder="${textareaTellUs}" />
+					placeholder="${langTellUsYourTrip}" />
 
 				<div class="bs-callout" id="btnCalBox">
 					<div class="row">
