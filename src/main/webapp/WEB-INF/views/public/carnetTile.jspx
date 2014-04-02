@@ -14,14 +14,14 @@
 	<spring:url var="res" value="/resources" />
 
 <spring:message code="lang_travel" var="langTravel" />
-<spring:message code="lang_add_field" var="langAddField"/>
+<spring:message code="lang_add_a_destination" var="langAddADestination"/>
 <spring:message code="lang_valid" var="langValid"/>
 <spring:message code="lang_notebookOfTraveler" var="langNotebookOfTraveler" />
 <spring:message code="lang_share_your_exp" var="langShareYourExp"/>
 <spring:message code="lang_tell_us_your_trip" var="langTellUsYourTrip" />
 <spring:message code="lang_date_of_your_trip" var="langDateOfYourTrip"/>
 <spring:message code="lang_clip_and_select_on_map" var="langClicAndSelectOnMap" />
-<spring:message code="lang_select_a_picture" var="langSelectAPicture" />
+<spring:message code="lang_select_a_photo" var="langSelectAPhoto" />
 <spring:message code="lang_save_your_trip_and_exp" var="langSaveYourTripAndExp" />
 <spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap" />
 <spring:message code="lang_you_must_create_a_trip_first" var="langYouMustCreateATripFirst" />
@@ -133,7 +133,7 @@
 						</div>
 					</div>
 					<a href="#" class="add_field">
-						${langAddField}
+						${langAddADestination}
 					</a>						
 				</div>
 			</div>
@@ -237,7 +237,7 @@
 							<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
 							<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=carnet">
 								<i class="icon-edit"> <!-- --></i>
-								${langSelectAPicture}
+								${langSelectAPhoto}
 							</a>
 						</div>
 						<div class="col-lg-1 col-lg-offset-2">
