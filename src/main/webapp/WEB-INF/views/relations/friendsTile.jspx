@@ -42,7 +42,7 @@
 					<div class="col-lg-3">${demand.nomade.userName}</div>
 					<div class="col-lg-3">
 						<a class="btn btn-default add"  href="${friend_url}/accept/${demand.nomade.id}" ><i class="icon-plus-sign"> <!--coment  -->
-						</i> <spring:message code="a.add" /></a>
+						</i> <spring:message code="lang_add" /></a>
 					</div>
 					<div class="col-lg-3">
 						<a class="btn btn-default remove"  href="${friend_url}/remove/${demand.nomade.id}" ><i class="icon-minus-sign"> <!--coment  --></i> Remove</a>
