@@ -134,43 +134,40 @@ body {
 <title>Petit Nomad</title>
 </head>
 <body>
-<spring:message code="div.requestSend" var="divRequestSend"/>
-<spring:message code="a.add" var="aAdd"/>
-<spring:message code="a.allFriends" var="aAllFriends"/>
+<spring:message code="lang_sent_you_a_request" var="langSentYouARequest"/>
+<spring:message code="lang_add" var="langAdd"/>
+<spring:message code="lang_all_your_friends" var="langAllYourFriends"/>
 <spring:message code="title.username" var="titleUsername" />
-<spring:message code="a.message" var="aMessage"/>
-<spring:message code="div.from" var="divFrom"/>
-<spring:message code="a.allMessages" var="aAllMessages"/>
-<spring:message code="a.photoVideoManager" var="aPhotoVideoManager"/>
-<spring:message code="a.photoOfTheMonth" var="aPhotoOfTheMonth"/>
-<spring:message code="a.forum" var="aForum"/>
-<spring:message code="a.profilManagement" var="aProfilManagement"/>
-<spring:message var="logout_msg" code="security_logout" htmlEscape="false" />
-<spring:message code="a.whoAreWe" var="aWhoAreWe"/>
-<spring:message code="a.contact" var="aContact"/>
-<spring:message code="a.confidentiality" var="aConfidentiality"/>
-<spring:message code="a.userAgreement" var="aUserAgreement"/>
-<spring:message code="a.helpFAQ" var="aHelpFAQ"/>
-<spring:message code="a.professionals" var="aProfessionals"/>
-<spring:message code="a.advertiser" var="aAdvertiser"/>
-<spring:message code="a.developmentTranslation" var="aDevelopmentTranslation"/>
+<spring:message code="lang_message" var="langMessage"/>
+<spring:message code="lang_from" var="langFrom"/>
+<spring:message code="lang_all_messages" var="langAllMessages"/>
+<spring:message code="lang_photo_video_manager" var="langPhotoVideoManager"/>
+<spring:message code="lang_photo_of_the_month" var="langPhotoOfTheMonth"/>
+<spring:message code="lang_forum" var="langForum"/>
+<spring:message code="lang_profil_management" var="langProfilManagement"/>
+<spring:message code="lang_logout" var="langLogout" htmlEscape="false" />
+<spring:message code="lang_who_are_we" var="langWhoAreWe"/>
+<spring:message code="lang_contact" var="langContact"/>
+<spring:message code="lang_confidentiality" var="langConfidentiality"/>
+<spring:message code="lang_user_agreement" var="langUserAgreement"/>
+<spring:message code="lang_help_FAQ" var="langHelpFAQ"/>
+<spring:message code="lang_professionals" var="langProfessionals"/>
+<spring:message code="lang_advertiser" var="langAdvertiser"/>
+<spring:message code="lang_development_translation" var="langDevelopmentTranslation"/>
 	<!-- navBar -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<!-- 		 <div class="navbar-header"> -->
 			<button class="navbar-toggle" type="button" data-toggle="collapse"
 				data-target=".nav-collapse">
-				<span class="icon-bar"> <!--coment  --></span> <span
-					class="icon-bar"> <!--coment  --></span> <span class="icon-bar">
-					<!--coment  -->
-				</span>
+				<span class="icon-bar"><!--co --></span>
+				<span class="icon-bar"><!--co --></span>
+				<span class="icon-bar"><!--co --></span>
 			</button>
 			<spring:url var="home" value="/" />
-			<a href="${home}" class="navbar-brand"> <img
-				src="${res}/img/navbarlogo.png" title="Petit Nomad" />
+			<a href="${home}" class="navbar-brand">
+				<img src="${res}/img/navbarlogo.png" title="Petit Nomad" />
 			</a>
-			<!-- 		 </div> -->
-
 			<div class="nav-collapse collapse bs-navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
@@ -198,13 +195,13 @@ body {
 										</div>
 										<div class="col-lg-5 col-sm-5 col-4 friendInvitDropdown">
 											<a>${demand.nomade.userName} </a>
-											${divRequestSend}
+											${langSentYouARequest}
 										</div>
 										<div class="col-lg-5 col-sm-5 col-5">
 											<a class="btn btn-default add"
 											   href="${friend_url}/accept/${demand.nomade.id}">
 												<i class="icon-plus-sign"> <!--coment  --> </i>
-										       ${aAdd}
+										       ${langAdd}
 										    </a>
 											<a class="btn btn-default remove"
 												href="${friend_url}/remove/${demand.nomade.id}">
@@ -225,14 +222,14 @@ body {
 							<spring:url value="/relations/friends" var="friends"></spring:url>
 							<li>
 								<a href="${friends}" id="allFriend">
-									${aAllFriends}
+									${langAllYourFriends}
 								</a>
 							</li>
 						</ul>
 					</li>
 					<li>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class=" icon-envelope-alt"> <!--coment  --></i>
+							<i class=" icon-envelope-alt"><!--co --></i>
 						</a>
 						<ul class="dropdown-menu xmoyen">
 							<li>
@@ -244,34 +241,32 @@ body {
 											 title="${titleUsername}" />
 									</div>
 									<div class="col-lg-8 col-sm-8 col-8">
-										<a>${aMessage}</a><br />
-										${divFrom }
+										<a>${langMessage}</a><br />
+										${langFrom}
 										Username
 									</div>
 								</div>
 							</li>
-							<li class="divider">
-								<!--coment  -->
-							</li>
+							<li class="divider"><!--co --></li>
 							<li>
 								<div class="row">
 									<div class="col-lg-2 col-sm-2 col-2 avatarDropdown">
-										<img data-src="holder.js/40x40" class="img-rounded"
-											src="data:img/png;" title="username" />
+										<img data-src="holder.js/40x40" 
+											 class="img-rounded"
+											 src="data:img/png;" 
+											 title="username" />
 									</div>
 									<div class="col-lg-8 col-sm-8 col-8">
-										<a>${aMessage}</a><br />
-										${divFrom }
+										<a>${langMessage}</a><br />
+										${langFrom }
 										Username
 									</div>
 								</div>
 							</li>
-							<li class="divider">
-								<!--coment  -->
-							</li>
+							<li class="divider"><!--co --></li>
 							<li>
 								<a href="message.html">
-									${aAllMessages}
+									${langAllMessages}
 								</a>
 							</li>
 						</ul>
@@ -284,12 +279,12 @@ body {
 							<spring:url value="albums/myPic" var="picManager_url"></spring:url>
 							<li>
 								<a href="${picManager_url}" id="picManager_id">
-									${aPhotoVideoManager}
+									${langPhotoVideoManager}
 								</a>
 							</li>
 							<li>
 								<a href="#">
-									${aPhotoOfTheMonth}
+									${langPhotoOfTheMonth}
 								</a>
 							</li>
 						</ul>
@@ -305,21 +300,21 @@ body {
 							<input type="text" class="form-control" />
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button">
-									<i class="icon-search"> <!-- co --> </i>
+									<i class="icon-search"><!-- co --></i>
 								</button>
 							</span>
 						</div>
 					</li>
 					<li>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="icon-plus"> <!-- co --></i>
+							<i class="icon-plus"><!-- co --></i>
 						</a>
 						<ul class="dropdown-menu">
 							<spring:url value="/forum" var="forum_url"></spring:url>
 							<li>
 								<a href="${forum_url}" target="_blank" id="forum_id">
 									<i class="icon-comment"> <!-- co --></i>
-									${aForum} 
+									${langForum} 
 								</a>
 							</li>
 							<li class="divider"><!-- co --></li>
@@ -328,7 +323,7 @@ body {
 							<li>
 								<a href="${users_url}/private/profil" id="profil_id">
 									<i class="icon-user"><!-- co --></i>
-									${aProfilManagement}
+									${langProfilManagement}
 								</a>
 							</li>
 							<li class="divider"><!-- co --></li>
@@ -337,7 +332,7 @@ body {
 							<li>
 								<a href="${logout}">
 									<i class="icon-lock"> <!-- co --></i>
-									${logout_msg}
+									${langLogout}
 								</a>
 							</li>
 							</sec:authorize>
@@ -438,21 +433,21 @@ body {
 		<br />
 		<footer class="text-center" style="z-index: 99; position: relative;">
 			<a href="#">© Petit Nomad 2238 <br /> 
-				${aWhoAreWe}
+				${langWhoAreWe}
 			</a> | <a href="#" class="traitgauche">
-				${aContact}
+				${langContact}
 			</a> | <a href="#" class="traitgauche">
-				${aConfidentiality}
+				${langConfidentiality}
 			</a> | <a href="#" class="traitgauche">
-				${aUserAgreement}
+				${langUserAgreement}
 			</a> | <a href="#" class="traitgauche">
-				${aHelpFAQ}
+				${langHelpFAQ}
 			</a> | <a href="#" class="traitgauche">
-				${aProfessionals}
+				${langProfessionals}
 			</a> | <a href="#" class="traitgauche">
-				${aAdvertiser}
+				${langAdvertiser}
 			</a> | <a href="#" class="traitgauche">
-				${aDevelopementTranslation }
+				${langDevelopmentTranslation}
 			</a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
 				${aForum}
 			</a>

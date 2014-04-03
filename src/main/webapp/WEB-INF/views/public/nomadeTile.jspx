@@ -52,12 +52,12 @@
 						<div class="col-lg-4 col-sm-4 col-12">
 							<a class="btn_cancel btn btn-default " id="btn_msg"> <i
 								class="icon-envelope"> <!-- com -->
-							</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}</a>
+							</i> <spring:message code="lang_message" var="langMessage" /> ${langMessage}</a>
 							<c:if test="${beanNomadeManager.amie eq false}"> 
 								 <a class="btn btn-default" id="btn_add"
 									style="margin-top: 3px; width: 105px;"> <i
 									class="icon-plus-sign"> <!-- com -->
-								</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
+								</i> <spring:message code="lang_add" var="langAdd" /> ${langAdd}
 								</a>
 							</c:if>
 							<c:if test="${beanNomadeManager.amie eq true}"> 
