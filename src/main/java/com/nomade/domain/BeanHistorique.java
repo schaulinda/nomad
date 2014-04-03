@@ -12,6 +12,12 @@ public class BeanHistorique {
 	
 	private List<InfoPratique> listInfo;
 	
+	private List<String> listImg;
+	
+	private List<Relation> friends;
+	
+	private Page<Voyage> voyages;
+	
 	private UserNomade nomade;
 	
 	private Comment comment = new Comment();
@@ -54,6 +60,30 @@ public class BeanHistorique {
 
 	public void setComment(Comment comment) {
 		this.comment = comment;
+	}
+
+	public List<String> getListImg() {
+		return listImg;
+	}
+
+	public void setListImg(List<String> listImg) {
+		this.listImg = listImg;
+	}
+
+	public List<Relation> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<Relation> friends) {
+		this.friends = friends;
+	}
+
+	public Page<Voyage> getVoyages() {
+		return voyages;
+	}
+
+	public void setVoyages(Page<Voyage> voyages) {
+		this.voyages = voyages;
 	}
 
 }

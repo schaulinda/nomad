@@ -20,6 +20,7 @@
         <field:input field="nomade" id="c_com_nomade_domain_InfoPratique_nomade" z="LqGjsNqIq5R4B6fcRfhgA19S/DE="/>
         <field:input field="comments" id="c_com_nomade_domain_InfoPratique_comments" z="qz0nC8tRJwtWC8wRAByp8kevT2o="/>
         <field:input field="icon" id="c_com_nomade_domain_InfoPratique_icon" z="fb01Lqi1l4czvfSl3lDFzCxfcZQ="/>
+        <field:input field="listVotants" id="c_com_nomade_domain_InfoPratique_listVotants" z="5y2YPc+nSQfsw4XxxlQZsFRq7bE="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_InfoPratique" render="${not empty dependencies}" z="7W3SOC6s5QtdbeIWpJNBRLTzk+w="/>
 </div>

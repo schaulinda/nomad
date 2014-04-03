@@ -12,5 +12,6 @@
         <field:input field="geolocation" id="c_com_nomade_domain_EtapeVoyage_geolocation" z="czLnwHfhsIpwufY+G1wvXixMId8="/>
         <field:input field="nomade" id="c_com_nomade_domain_EtapeVoyage_nomade" z="66Ow2ochyX0lu4ym48uK+ETOuNs="/>
         <field:input field="comments" id="c_com_nomade_domain_EtapeVoyage_comments" z="wSMXYsWq0GImLbfL/pSPjxEdi2Y="/>
+        <field:input field="voyage" id="c_com_nomade_domain_EtapeVoyage_voyage" z="c1S81yu85p8tSDQtwlmfyQcQtug="/>
     </form:update>
 </div>

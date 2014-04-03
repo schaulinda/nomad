@@ -10,14 +10,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.Etape;
+import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.VehiculeState;
 import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
+import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
@@ -25,6 +28,7 @@ import com.nomade.tools.IdGenerator;
 
 import org.cloudfoundry.org.codehaus.jackson.annotate.JsonAnySetter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +48,10 @@ public class VoyageController {
 	VoyageService voyService;
 	@Autowired
 	ParcoursService parcoursService;
+	@Autowired
 	UserService service;
+	@Autowired
+	EtapeVoyageService etapeVoyageService;
 	
 	
 
@@ -635,6 +642,26 @@ public class VoyageController {
 		
 		return Etape.toJsonArray(oneParcours);
 		
+	}
+	
+	@RequestMapping("/voyageSuiv/{id}/{page}")
+	public String nomad(@PathVariable("id") String id,
+			@PathVariable("page") int page, HttpServletRequest request,
+			Model uiModel) {
+		UserNomade nomade = userService.findUserNomade(new BigInteger(id));
+		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setVoyages(voyages);
+		try {
+			Voyage voyage = voyages.getContent().get(0);
+			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+		return "public/nomad";
 	}
 
 }

@@ -10,8 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.beanutils.BeanComparator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 
 import com.nomade.domain.Etape;
+import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.Marker;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.StatusVoyage;
@@ -27,6 +33,8 @@ public class VoyageServiceImpl implements VoyageService {
 	Security security;
 	@Autowired
 	UserService userService;
+	
+	protected static final int NUMBER_PER_PAGE = 1;
 	
 private String linkBase(HttpServletRequest httpServletRequest){
 		
@@ -237,6 +245,20 @@ private String linkBase(HttpServletRequest httpServletRequest){
 			
 		}
 		return listMarkers;
+	}
+	
+	
+	public Page<Voyage> findByNomade(UserNomade nomade, int page){
+		
+		/*PageRequest pageRequest = new PageRequest(page, NUMBER_PER_PAGE, new Sort(
+			    new Order(Direction.DESC, "comments.created"), 
+			    new Order(Direction.DESC, "created")
+			  ));*/
+		
+		PageRequest pageRequest = new PageRequest(page, NUMBER_PER_PAGE, new Sort(Direction.DESC, "depart.day"));
+
+		
+		return voyageRepository.findByNomade(nomade, pageRequest);
 	}
 
 }

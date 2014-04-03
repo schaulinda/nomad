@@ -2,6 +2,7 @@ package com.nomade.repository;
 
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.Voyage;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface EtapeVoyageRepository {
     List<com.nomade.domain.EtapeVoyage> findAll();
     
     Page<EtapeVoyage> findByNomade(UserNomade nomade, Pageable pageable);
+    List<EtapeVoyage> findByVoyage(Voyage voyage);
 }

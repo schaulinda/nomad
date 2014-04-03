@@ -22,6 +22,8 @@ public interface ImageUtilInterface {
 	public GridFSDBFile get(String id);
 	
 	public List<GridFSDBFile> listFiles();
+	
+	public List<String> allImg();
 
 	List<String> getPhotoIdByAlbum(String albumId);
 

@@ -178,6 +178,20 @@ public class ImageUtil implements ImageUtilInterface {
 
 		return gridFsTemplate.find(null);
 	}
+	
+	@Override
+	public List<String> allImg() {
+		
+		List<String> idPhoto = new ArrayList<String>();
+		
+		List<GridFSDBFile> list = gridFsTemplate.find(null);
+
+		for (GridFSDBFile file : list) {
+			idPhoto.add(file.getId().toString());
+		}
+		
+		return idPhoto;
+	}
 
 	@Override
 	public void delete(String id) {

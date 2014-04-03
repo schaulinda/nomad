@@ -6,17 +6,25 @@
     <put-attribute name="body" value="/WEB-INF/views/index.jspx"/>
   </definition>
 
-  <definition extends="public" name="dataAccessFailure">
+  <definition extends="privateLayout" name="dataAccessFailure">
     <put-attribute name="body" value="/WEB-INF/views/dataAccessFailure.jspx"/>
+    <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
   </definition>
 
-  <definition extends="public" name="resourceNotFound">
+  <definition extends="privateLayout" name="resourceNotFound">
     <put-attribute name="body" value="/WEB-INF/views/resourceNotFound.jspx"/>
+    <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
   </definition>
 
-  <definition extends="public" name="uncaughtException">
+ <!--  <definition extends="public" name="uncaughtException">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
-  </definition>
+  </definition> -->
+  
+   <definition extends="privateLayout" name="uncaughtException">
+        <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
 
 <definition extends="loginLayout" name="login">
         <put-attribute name="body" value="/WEB-INF/views/login.jspx"/>

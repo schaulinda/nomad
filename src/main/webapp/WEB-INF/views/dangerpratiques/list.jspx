@@ -8,8 +8,8 @@
             <table:column id="c_com_nomade_domain_DangerPratique_selecteur" property="selecteur" z="Mh0t3NPGBhh/pANzgm3/OJMVmAk="/>
             <table:column id="c_com_nomade_domain_DangerPratique_selecteur1" property="selecteur1" z="aeInb4l7VPcOZN1KgdunVoysw7Y="/>
             <table:column id="c_com_nomade_domain_DangerPratique_location" property="location" z="DXI2+Tqssbvjh3tCEkG2Ll3nn64="/>
-            <table:column id="c_com_nomade_domain_DangerPratique_locationLat" property="locationLat" z="77rvZIMrs7/MCdsFRHcq2MT/Hvo="/>
             <table:column id="c_com_nomade_domain_DangerPratique_icon" property="icon" z="feW7ITR00RVPnwwAT35mMctxabs="/>
+            <table:column id="c_com_nomade_domain_DangerPratique_listVotants" property="listVotants" z="cWsj1GwtYkcjbxA0E2yvo/BXhUM="/>
         </table:table>
     </page:list>
 </div>

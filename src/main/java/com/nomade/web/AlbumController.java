@@ -295,6 +295,7 @@ public class AlbumController {
 		return "albums/picManager";
 	}
 
+
 	@RequestMapping(value = "imageRender/{id}")
 	@ResponseBody
 	public byte[] getImageGrdFormat(@PathVariable("id") String id, Model uiModel) {
