@@ -323,3 +323,4 @@ field boolean --fieldName frozen
 focus --class ~.domain.Topic
 field boolean --fieldName frozen
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log closed at 2014-03-16 08:14:03
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-03-19 15:57:49

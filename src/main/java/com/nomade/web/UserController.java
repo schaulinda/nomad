@@ -98,6 +98,19 @@ public class UserController {
 	@Autowired
 	VoyageService voyageService;
 	
+	
+	
+private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		beanHistorique.setListDanger(listDanger);
+			
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+	}
+	
 	@RequestMapping("/register")
 	public String register(@Valid BeanRegister beanRegister,
 			BindingResult bindingResult, Model uiModel,
@@ -451,37 +464,21 @@ public class UserController {
 	
 	@RequestMapping("/selectImg/{id}")
 	public String selectImg(@PathVariable("id") String id, Model uiModel,
-			HttpServletRequest httpServletRequest) {
+			HttpServletRequest request) {
 		
 		
 		UserNomade nomade = securite.getUserNomade();
-		String stringPage = httpServletRequest.getSession(true).getAttribute("backLink").toString();
+		String stringPage = request.getSession(true).getAttribute("backLink").toString();
 		
 		//render previous page with marker an historik
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
-		
-		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
-		beanHistorique.setListDanger(listDanger);
-		beanHistorique.setListInfo(listInfo);
-		beanHistorique.setNomade(nomade);
+		beanHistoriqueDecoration(uiModel, nomade);
 
-		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-		beanNomadeManager.setNomads(findAllUserNomades);
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
-		beanNomadeManager.setMakers(makers);
 
-		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		//---------------end----------
 		

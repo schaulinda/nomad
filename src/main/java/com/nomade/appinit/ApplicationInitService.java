@@ -66,6 +66,8 @@ public class ApplicationInitService {
 		nomadeDod.init();
 		initTopics();
 		initSubTopics(topicService.findAllTopics().iterator().next(),userService.findAllUserNomades().iterator().next());
+		//mongoTemplate.getDb().dropDatabase();		
+		//nomadeDod.init();
 		/*parcoursDataOnDemand.init();
 		voyageDataOnDemand.init();
 		vehiculeDataOnDemand.init();

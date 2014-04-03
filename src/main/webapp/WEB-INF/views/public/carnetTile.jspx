@@ -13,22 +13,24 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-<spring:message code="h.travel" var="hTravel" />
-<spring:message code="a.addField" var="aAddField"/>
-<spring:message code="button.valid" var="buttonValid"/>
-<spring:message code="h.notebookOfTraveler" var="hNotebookOfTraveler" />
-<spring:message code="legend.shareExp" var="legendShareExp"/>
-<spring:message code="textarea.tellUs" var="textareaTellUs" />
-<spring:message code="p.tripDate" var="pTripDate"/>
-<spring:message code="p.clickOnMap" var="pClickOnMap" />
-<spring:message code="a.pictureSelect" var="aPictureSelect" />
-<spring:message code="p.saveTravelAndExp" var="pSaveTravelAndExp" />
+<spring:message code="lang_travel" var="langTravel" />
+<spring:message code="lang_add_a_destination" var="langAddADestination"/>
+<spring:message code="lang_valid" var="langValid"/>
+<spring:message code="lang_notebookOfTraveler" var="langNotebookOfTraveler" />
+<spring:message code="lang_share_your_exp" var="langShareYourExp"/>
+<spring:message code="lang_tell_us_your_trip" var="langTellUsYourTrip" />
+<spring:message code="lang_date_of_your_trip" var="langDateOfYourTrip"/>
+<spring:message code="lang_clip_and_select_on_map" var="langClicAndSelectOnMap" />
+<spring:message code="lang_select_a_photo" var="langSelectAPhoto" />
+<spring:message code="lang_save_your_trip_and_exp" var="langSaveYourTripAndExp" />
+<spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap" />
+<spring:message code="lang_you_must_create_a_trip_first" var="langYouMustCreateATripFirst" />
 
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<i class="icon-road"><!-- co --></i>
-				${hTravel}
+				${langTravel}
 			</h3>
 		</div>	
 		<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>
@@ -131,7 +133,7 @@
 						</div>
 					</div>
 					<a href="#" class="add_field">
-						${aAddField}
+						${langAddADestination}
 					</a>						
 				</div>
 			</div>
@@ -139,7 +141,7 @@
 				<br/>
 				<div class="col-lg-10">
 					<button class="btn btn-block" type="submit" id="btn_etape">
-						${buttonValid}
+						${langValid}
 					</button>
 				</div>
 			</div>
@@ -148,7 +150,7 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">
 					<i class="icon-user"><!-- co --></i>				
-					${hNotebookOfTraveler}
+					${langNotebookOfTraveler}
 				</h3>
 			</div>
 			<spring:url value="/etapevoyages/save" var="etapVoy_url"></spring:url>
@@ -160,13 +162,13 @@
 			<fieldset>
 				<legend>
 					<i class="icon-plane"><!-- co --></i>
-					${legendShareExp}
+					${langShareYourExp}
 				</legend>
 				<form:textarea cssClass="form-control" 
 							   row="8" id="description"
 							   path="etapeVoyage.description" 
 							   required="required"
-							   placeholder="${textareaTellUs}" />
+							   placeholder="${langTellUsYourTrip}" />
 				<div class="bs-callout" id="btnCalBox">
 					<div class="row">
 						<div class="col-lg-10 col-lg-offset-1">
@@ -179,7 +181,7 @@
 											data-date-format="dd-mm-yyyy"
 											format="dd-mm-yyyy" />
 								<p class="help-block">	
-									${pTripDate}
+									${langDateOfYourTrip}
 								</p>
 							</div>
 						</div>
@@ -207,7 +209,7 @@
 								</a>
 							</div>
 							<p class="help-block">
-								${pClickOnMap}
+								${langClicAndSelectOnMap}
 							</p>
 						</div>
 						<div class="col-lg-1">
@@ -235,7 +237,7 @@
 							<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
 							<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=carnet">
 								<i class="icon-edit"> <!-- --></i>
-								${aPictureSelect}
+								${langSelectAPhoto}
 							</a>
 						</div>
 						<div class="col-lg-1 col-lg-offset-2">
@@ -265,7 +267,7 @@
 							</li>
 							<li>
 								<button class="btn" type="submit" id="btn_etapeVoy">
-									${buttonValid}
+									${langValid}
 								</button>
 							</li>
 						</ul>
@@ -274,7 +276,7 @@
 			</fieldset>
 		</form:form>
 		<p class="help-block">
-			${pSaveTravelAndExp}
+			${langSaveYourTripAndExp}
 		</p>
 		<c:if test="${not empty beanNoteBookManager.listParcours}">
 			<c:forEach items="${beanNoteBookManager.listParcours}" var="parcours">
@@ -301,7 +303,7 @@
 								
 								$('.mapPicker').tooltip({
 									trigger: 'hover',
-									title: 'click and drag and drop violet marker, to get location'
+									title: '${langDragMarkerOnMap}'
 								});
 								
 								/* ------------------click on mapPicker----------------- */
@@ -493,7 +495,7 @@
 									setTimeout(function generate() {
 
 										noty({
-											text : "you must create a parcours first...",
+											text : "${langYouMustCreateATripFirst}...",
 											type : "warning",
 											timeout : 4000,
 											modal : false,
@@ -653,7 +655,7 @@
 			event : "onclick",
 			formId : "form_etapeVoy",
 			params : {
-				fragments : "smallTile, subuser"
+				fragments : "smallTile"
 			}
 		}));
 	</script>
@@ -664,7 +666,7 @@
 			event : "onclick",
 			formId : "form_etape",
 			params : {
-				fragments : "smallTile, subuser"
+				fragments : "smallTile"
 			}
 		}));
 	</script>
@@ -690,4 +692,3 @@
 	</script>
 
 </div>
-

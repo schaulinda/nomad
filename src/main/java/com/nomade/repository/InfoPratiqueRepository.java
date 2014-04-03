@@ -14,4 +14,6 @@ public interface InfoPratiqueRepository {
 
     List<com.nomade.domain.InfoPratique> findAll();
     Page<InfoPratique> findByNomade(UserNomade nomade, Pageable pageable);
+    
+    List<InfoPratique> findByNomadeOrderByCreatedDesc(UserNomade nomade);
 }

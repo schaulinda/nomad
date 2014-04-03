@@ -15,28 +15,51 @@
 	<spring:url value="/home" var="base_url"></spring:url>
 	<spring:url var="public_url" value="/public" />
 
+	<spring:message code="lang_danger_detail" var="langDangerDetail" />
+	<spring:message code="lang_back" var="langBack" />
+	<spring:message code="lang_location" var="langLocation" />
+	<spring:message code="lang_duration" var="langDuration" />
+	<spring:message code="lang_estimationOfValidity"
+		var="langEstimationOfValidity" />
+	<spring:message code="lang_description" var="langDescription" />
+	<spring:message code="lang_add_new_comment" var="langAddNewComment" />
+	<spring:message code="lang_valid" var="langValid" />
+
 	<div class="panel">
 		<div class="panel-heading">
 			<spring:url value="/public/backToItenary" var="back_url"></spring:url>
 			<div class="row">
 				<div class="col-lg-6">
-					<h3 class="panel-title">Detail Danger</h3>
+					<h3 class="panel-title">${langDangerDetail}</h3>
 				</div>
 				<c:if test="${back == 'formfinditineraire' }">
-				<div class="col-lg-6">
-					<a class="btn btn-default btn-block pull-left" id="back"
-						href="${back_url}"><i class="icon-arrow-left">
-							<!--co  -->
-					</i>Back</a>
-				</div>
+					<div class="col-lg-6">
+						<a class="btn btn-default btn-block pull-left" id="back"
+							href="${back_url}"> <i class="icon-arrow-left">
+								<!-- -->
+						</i> ${langBack}
+						</a>
+					</div>
+				</c:if>
+				<c:if test="${back == 'nomad' }">
+					<div class="col-lg-6">
+						<spring:url value="/public/nomad" var="backnomade_url"></spring:url>
+						<a class="btn btn-default btn-block pull-left" id="back"
+							href="${backnomade_url}/${idNomad}"> <i
+							class="icon-arrow-left">
+								<!-- -->
+						</i> ${langBack}
+						</a>
+					</div>
 				</c:if>
 				<c:if test="${back == 'itineraire' }">
-				<div class="col-lg-6">
-					<a class="btn btn-default btn-block pull-left" id="back"
-						href="${public_url}/itineraire"><i class="icon-arrow-left">
-							<!--co  -->
-					</i>Back</a>
-				</div>
+					<div class="col-lg-6">
+						<a class="btn btn-default btn-block pull-left" id="back"
+							href="${public_url}/itineraire"> <i class="icon-arrow-left">
+								<!-- -->
+						</i> ${langBack}
+						</a>
+					</div>
 				</c:if>
 			</div>
 		</div>
@@ -51,57 +74,72 @@
 			</div>
 			<div class="col-lg-3" style="border-left: solid 1px;">
 				<ul class="nav nav-tabs nav-justified">
-						<li id="${dangerPratique.id}vn">${dangerPratique.voteNegatif}</li>
-						<li><a id="${dangerPratique.id}" class="voteDMinus"><i
-								class="icon-thumbs-down"> <!-- co --></i></a></li>
-								<li> | </li>
-						<li id="${dangerPratique.id}vp" style="padding-left: 15px;" >${dangerPratique.votePositif}</li>
-						<li><a id="${dangerPratique.id}" class="voteDplus"><i
-								class="icon-thumbs-up"> <!-- co --></i></a></li>
-					</ul>
+					<li id="${dangerPratique.id}vn">${dangerPratique.voteNegatif}</li>
+					<li><a id="${dangerPratique.id}" class="voteDMinus"> <i
+							class="icon-thumbs-down">
+								<!-- -->
+						</i>
+					</a></li>
+					<li id="${dangerPratique.id}vp" style="padding-left: 15px;">
+						${dangerPratique.votePositif}</li>
+					<li><a id="${dangerPratique.id}" class="voteDplus"> <i
+							class="icon-thumbs-up">
+								<!-- -->
+						</i>
+					</a></li>
+				</ul>
 			</div>
 			<div>
-				<a href="${base_url}/@${dangerPratique.nomade.userName}" id="${dangerPratique.nomade.userName}user" 
-				class="username" > ${dangerPratique.nomade.userName} </a>  | <i
-					class="icon-calendar"> <!-- co --></i>
+				<a href="${base_url}/@${dangerPratique.nomade.userName}"
+					id="${dangerPratique.nomade.userName}user" class="username">
+					${dangerPratique.nomade.userName} </a> | <i class="icon-calendar">
+					<!-- -->
+				</i>
 				<fmt:formatDate value="${dangerPratique.created}" var="dateC"
-					pattern="dd-MM-yyyy hh:mm" />
+					pattern="dd-MM-yyyy" />
 				<span style="color: #999999;"> ${dateC} </span>| <span><i
-					class="icon-comment">
-						<!-- co -->
+					class="icon-comment"> <!-- co -->
 				</i> <c:if test="${not empty dangerPratique.comments}">
 									${dangerPratique.comments.size()}
 					</c:if> <c:if test="${empty dangerPratique.comments}">
-									0
-								</c:if> </span>
+						0
+					</c:if> </span>
 				<div>
-					<span style="color: #999999;">Location:</span>
+					<span style="color: #999999;">${langLocation} :</span>
 					${dangerPratique.location}
 				</div>
-				
-				<br/>
+
+				<br />
 				<div class="row">
-					
 					<div class="col-lg-3">
-						
 						<c:if test="${empty dangerPratique.photo}">
-							<IMG alt="" src="${res}/img/profil.png" width="100px"
+							<img alt="" src="${res}/img/profil.png" width="100px"
 								height="100px;" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty dangerPratique.photo}">
-							<IMG alt="" src="${imageRender_url}/${dangerPratique.photo}"
+							<img alt="" src="${imageRender_url}/${dangerPratique.photo}"
 								width="100px" height="100px;" />
 						</c:if>
 					</div>
 					<div class="col-lg-9 form-group">
-						<div><span style="color: #999999;">Dure:</span> ${infoPratique.dure}</div>
-						<div><span style="color: #999999;">Estimation Validite:</span> ${infoPratique.estimationValidite}</div>
-						<div><span style="color: #999999;">Description:</span> ${dangerPratique.comment}</div>
+						<div>
+							<span style="color: #999999;"> ${langDuration} : </span>
+							${infoPratique.dure}
+						</div>
+						<div>
+							<span style="color: #999999;"> ${langEstimationOfValidity}
+								: </span> ${infoPratique.estimationValidite}
+						</div>
+						<div>
+							<span style="color: #999999;"> ${langDescription} : </span>
+							${dangerPratique.comment}
+						</div>
 					</div>
 				</div>
-				<br/>
-				<c:forEach var="comment" items="${dangerPratique.comments}" varStatus="count" >
+				<br />
+				<c:forEach var="comment" items="${dangerPratique.comments}"
+					varStatus="count">
 					<li class="list-group-item">
 						<div class="row">
 							<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 user-info">
@@ -121,30 +159,28 @@
 							</div>
 							<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 								<div class="mic-info">
-									<a href="${base_url}/@${comment.nomade.userName}" id="${comment.nomade.userName}${count.index}" 
-									class="username" >${comment.nomade.userName}</a>
+									<a href="${base_url}/@${comment.nomade.userName}"
+										id="${comment.nomade.userName}${count.index}" class="username">
+										${comment.nomade.userName} </a>
 								</div>
 								<div class="comment-text">${comment.commentaire}</div>
 								<fmt:formatDate value="${comment.created}" var="cc"
-									pattern="dd-MM-yyyy hh:mm" />
+									pattern="dd-MM-yyyy" />
 								<div class="mic-info">${cc}</div>
 							</div>
 						</div>
 					</li>
 				</c:forEach>
-				<br/>
 				<div>
 					<spring:url value="/comments/addCommentDanger" var="comment_url"></spring:url>
 					<form id="comment_formInfo" action="${comment_url}" method="GET">
-						<spring:message code="input.addNewComment"
-							var="inputAddNewComment" />
 						<input type="hidden" value="${dangerPratique.id}" name="InfoId" />
 						<input type="hidden" value="${back}" name="cameFrom" />
 						<textarea id="commentaireInfo" name="commentaireInfo"
-							class="form-control" placeholder="${inputAddNewComment}">
+							class="form-control" placeholder="${langAddNewComment}">
 										<!--co  -->
-									</textarea>
-						<input type="submit" id="btn_commentInfo" value="send"
+						</textarea>
+						<input type="submit" id="btn_commentInfo" value="${langValid}"
 							class="btn btn-default btn-block" />
 					</form>
 				</div>
@@ -152,7 +188,7 @@
 		</div>
 	</div>
 
-	
+
 	<spring:url value="/dangerpratiques/votePlus/" var="voteDPlus_url"></spring:url>
 	<spring:url value="/dangerpratiques/voteMinus/" var="voteDMinus_url"></spring:url>
 
@@ -160,7 +196,6 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-
 
 				/* ----------------------vote positif danger--------------------------- */
 				$('.voteDplus').each(function() {
@@ -201,7 +236,7 @@
 			elementId : "back",
 			event : "onclick",
 			params : {
-				fragments : "smallTile"
+				fragments : "smallTile, id_subfooter, topheader"
 			}
 		}));
 	</script>
@@ -227,13 +262,12 @@
 			}));
 		}
 	</script>
-	
+
 	<script type="text/javascript">
 		dojo.addOnLoad(function() {
-			
 
-			dojo.query(".username").forEach(function(node, index, arr){
-				var id = dojo.attr(node,"id");
+			dojo.query(".username").forEach(function(node, index, arr) {
+				var id = dojo.attr(node, "id");
 				console.log(id);
 				Spring.addDecoration(new Spring.AjaxEventDecoration({
 					elementId : id,
@@ -247,5 +281,5 @@
 
 		});
 	</script>
-	
+
 </div>

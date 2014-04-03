@@ -1,50 +1,42 @@
 package com.nomade.domain;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 public class BeanHistorique {
 	
-	private Page<EtapeVoyage> listEtapeVoy;
+	private List<EtapeVoyage> listEtapeVoy;
 	
-	private Page<EtapeVehicule> listEtapeVeh;
+	private List<DangerPratique> listDanger;
 	
-	private Page<DangerPratique> listDanger;
-	
-	private Page<InfoPratique> listInfo;
+	private List<InfoPratique> listInfo;
 	
 	private UserNomade nomade;
 	
 	private Comment comment = new Comment();
 
-	public Page<EtapeVoyage> getListEtapeVoy() {
+	public List<EtapeVoyage> getListEtapeVoy() {
 		return listEtapeVoy;
 	}
 
-	public void setListEtapeVoy(Page<EtapeVoyage> listEtapeVoy) {
+	public void setListEtapeVoy(List<EtapeVoyage> listEtapeVoy) {
 		this.listEtapeVoy = listEtapeVoy;
 	}
 
-	public Page<EtapeVehicule> getListEtapeVeh() {
-		return listEtapeVeh;
-	}
-
-	public void setListEtapeVeh(Page<EtapeVehicule> listEtapeVeh) {
-		this.listEtapeVeh = listEtapeVeh;
-	}
-
-	public Page<DangerPratique> getListDanger() {
+	public List<DangerPratique> getListDanger() {
 		return listDanger;
 	}
 
-	public void setListDanger(Page<DangerPratique> listDanger) {
+	public void setListDanger(List<DangerPratique> listDanger) {
 		this.listDanger = listDanger;
 	}
 
-	public Page<InfoPratique> getListInfo() {
+	public List<InfoPratique> getListInfo() {
 		return listInfo;
 	}
 
-	public void setListInfo(Page<InfoPratique> listInfo) {
+	public void setListInfo(List<InfoPratique> listInfo) {
 		this.listInfo = listInfo;
 	}
 

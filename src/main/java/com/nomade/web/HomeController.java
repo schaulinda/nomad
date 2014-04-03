@@ -29,6 +29,7 @@ import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
+import com.nomade.service.VoyageService;
 
 @RequestMapping({ "/", "/index", "home" })
 @Controller
@@ -50,6 +51,8 @@ public class HomeController {
 	ParcoursService parcoursService;
 	@Autowired
 	RelationService relationService;
+	@Autowired
+	VoyageService voyageService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String selectPage(HttpServletRequest request, Model uiModel) {
@@ -70,27 +73,14 @@ public class HomeController {
 				
 				BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 				
-				Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(nomade, 0);
-				Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(nomade, 0);
-				Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-				Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+				beanHistoriqueDecoration(uiModel, nomade);
 				
-				BeanHistorique beanHistorique = new BeanHistorique();
-				beanHistorique.setListEtapeVoy(listEtapeVoy);//listEtapeVoy.getContent().get(0).getComments().s
-				beanHistorique.setListEtapeVeh(listEtapeVeh);
-				beanHistorique.setListDanger(listDanger);
-				beanHistorique.setListInfo(listInfo);
-				beanHistorique.setNomade(nomade);
-				
-				List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-				beanNomadeManager.setNomads(findAllUserNomades);	
+				beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));	
 				beanNomadeManager.setMe(true);
 				//beanNomadeManager.setHome(true);
 				beanNomadeManager.setNomade(nomade);
 				//String makers = parcoursService.buildMakers(findAllUserNomades);
 				//beanNomadeManager.setMakers(makers);
-				
-				uiModel.addAttribute("beanHistorique", beanHistorique);
 				uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 				uiModel.addAttribute("nomade", nomade);
 				uiModel.addAttribute("onglet", "nomad");
@@ -160,8 +150,7 @@ public class HomeController {
 			
 			beanHistoriqueDecoration(uiModel, findUserNomade);
 
-			List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-			beanNomadeManager.setNomads(findAllUserNomades);
+			beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 			beanNomadeManager.setMe(false);
 			beanNomadeManager.setHome(false);
 
@@ -178,8 +167,7 @@ public class HomeController {
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
-		String makers = parcoursService.buildMakers(findAllUserNomades);
-		beanNomadeManager.setMakers(makers);
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
@@ -191,16 +179,11 @@ public class HomeController {
 	}
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
+		
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);

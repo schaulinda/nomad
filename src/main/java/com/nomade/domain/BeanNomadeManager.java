@@ -6,17 +6,16 @@ import java.util.List;
 public class BeanNomadeManager {
 	
 	private UserNomade nomade;
-	
-	List<UserNomade> nomads;
-	
+		
 	private boolean amie;
 	
 	private boolean me;
 	
 	private boolean home;
-	
-	private String makers;
 
+	
+	private List<Marker> marker;
+	
 	
 	public UserNomade getNomade() {
 		return nomade;
@@ -34,14 +33,6 @@ public class BeanNomadeManager {
 		this.amie = amie;
 	}
 
-	public String getMakers() {
-		return makers;
-	}
-
-	public void setMakers(String makers) {
-		this.makers = makers;
-	}
-
 	public boolean isMe() {
 		return me;
 	}
@@ -50,13 +41,6 @@ public class BeanNomadeManager {
 		this.me = me;
 	}
 
-	public List<UserNomade> getNomads() {
-		return nomads;
-	}
-
-	public void setNomads(List<UserNomade> nomads) {
-		this.nomads = nomads;
-	}
 
 	public boolean isHome() {
 		return home;
@@ -65,5 +49,14 @@ public class BeanNomadeManager {
 	public void setHome(boolean home) {
 		this.home = home;
 	}
+
+	public List<Marker> getMarker() {
+		return marker;
+	}
+
+	public void setMarker(List<Marker> marker) {
+		this.marker = marker;
+	}
+
 	
 }

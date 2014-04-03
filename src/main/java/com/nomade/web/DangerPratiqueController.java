@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -52,16 +53,10 @@ public class DangerPratiqueController {
 	
 	
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = voyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = vehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
-		
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
+
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
@@ -157,9 +152,13 @@ public class DangerPratiqueController {
 	@ResponseBody
 	public String votePositif(@PathVariable("idInfo") String idInfo, Model uiModel) {
     	BigInteger bigInteger = new BigInteger(idInfo);
- 
     	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
+    	UserNomade nomade = securite.getUserNomade();
+    	if(dangerPratiqueService.hasVoted(nomade, dangerPratique)){
+    		return ""+dangerPratique.getVotePositif();
+    	}
     	dangerPratique.incrementVotePositif();
+    	dangerPratique.getListVotants().add(nomade);
     	dangerPratiqueService.updateDangerPratique(dangerPratique);
     	return ""+dangerPratique.getVotePositif();
     }
@@ -169,7 +168,12 @@ public class DangerPratiqueController {
    	public String voteMinus(@PathVariable("idInfo") String idInfo, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
        	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
-    	dangerPratique.incrementVoteNegatif();;
+       	UserNomade nomade = securite.getUserNomade();
+    	if(dangerPratiqueService.hasVoted(nomade, dangerPratique)){
+    		return ""+dangerPratique.getVoteNegatif();
+    	}
+    	dangerPratique.incrementVoteNegatif();
+    	dangerPratique.getListVotants().add(nomade);
     	dangerPratiqueService.updateDangerPratique(dangerPratique);
     	return ""+dangerPratique.getVoteNegatif();
        }
@@ -178,13 +182,22 @@ public class DangerPratiqueController {
    	public String detail(@PathVariable("idInfo") String idInfo, @RequestParam(value="cameFrom", required=false)String cameFrom, Model uiModel) {
        	BigInteger bigInteger = new BigInteger(idInfo);
        	
-       	if("map".equals(cameFrom)){
-       		uiModel.addAttribute("back", "itineraire");
-       	}else{
-       		uiModel.addAttribute("back", "formfinditineraire");
-       	}
-    
-       	DangerPratique dangerPratique = dangerPratiqueService.findDangerPratique(bigInteger);
+       	DangerPratique dangerPratique = dangerPratiqueService
+				.findDangerPratique(bigInteger);
+		
+		BigInteger id = dangerPratique.getNomade().getId();
+
+		if ("map".equals(cameFrom)) {
+			uiModel.addAttribute("back", "itineraire");
+		} else {
+			if ("nomad".equals(cameFrom)) {
+				uiModel.addAttribute("back", "nomad");
+				uiModel.addAttribute("idNomad", ""+id);
+			}else{
+					uiModel.addAttribute("back", "formfinditineraire");		
+			}
+		}
+
        	uiModel.addAttribute("dangerPratique", dangerPratique);
        	return "public/dangerDetail";
        }
@@ -192,8 +205,7 @@ public class DangerPratiqueController {
     @RequestMapping("/dangerSuiv/{id}/{page}")
 	public String nomad(@PathVariable("id")String id, @PathVariable("page")int page ,HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = userService.findUserNomade(new BigInteger(id)); 
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(
-				nomade, page);
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
 		BeanHistorique beanHistorique = new BeanHistorique();
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setNomade(nomade);

@@ -43,7 +43,7 @@ public class Vehicule {
     /*DeuxRouesRoutier, DeuxRouesToutTerrain, QuatrexQuatre, CampingCar, Camion, Camionette, Velo, Voiture, Autre;*/
     private void makeIcon(){
     	
-    	this.icon = ""+this.vehiculeType+""+this.vehiculeState;
+    	this.icon = ""+this.vehiculeType+".png";
     }
     
     public void setVehiculeType(VehiculeType vehiculeType) {
@@ -53,6 +53,6 @@ public class Vehicule {
     
     public void setVehiculeState(VehiculeState vehiculeState) {
         this.vehiculeState = vehiculeState;
-        makeIcon();
+       // makeIcon();
     }
 }

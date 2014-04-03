@@ -13,5 +13,7 @@ public interface InfoPratiqueService {
 	
 	public List<InfoPratique> findByLocation(double[] loc1, double[] loc2);
 	public Page<InfoPratique> findByNomade(UserNomade nomade, int page);
+	public boolean hasVoted(UserNomade nomade,InfoPratique infoPratique);
+	public List<InfoPratique> findByNomadeOrderByCreated(UserNomade nomade);
 	
 }

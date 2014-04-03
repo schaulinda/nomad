@@ -92,14 +92,21 @@
 																
 														 </c:forEach>
 													];
-									console.log(arrayParcours);
-								
-						
+									 
+										console.log(arrayParcours);
 									
 									/*draw parcours  */
 									function draw(arrayParcours){				
 										
 										/* -----clear marker and directions but not clear the picker------------ */
+										var marks = [];
+										
+										$.each( arrayParcours, function( index, value ){
+												
+												var localVar = { latLng:[value[0], value[1] ], tag:"markerParcours" };
+												marks.push(localVar);
+											
+											});
 										
 										$("#map").gmap3({
 										    get: {
@@ -142,7 +149,13 @@
 
 											
 											$("#map").gmap3({
-											
+												
+												marker : {
+													values : marks,
+													options : {
+														draggable : false
+													}
+												},
 											 polyline:{
 												    options:{
 												    	geodesic: false,

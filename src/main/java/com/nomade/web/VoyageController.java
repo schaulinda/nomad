@@ -143,7 +143,7 @@ public class VoyageController {
 		List<Voyage> list = voyageService.findByNomadeAndStatus(nomade,
 				StatusVoyage.EN_COURS);
 		uiModel.addAttribute("nomade", nomade);
-
+		uiModel.addAttribute("onglet", "carnet");
 		if (list != null && list.size() > 0) {
 			Voyage voyage = list.get(0);
 			voyage.setTerminated(true);

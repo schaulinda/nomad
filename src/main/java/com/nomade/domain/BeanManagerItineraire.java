@@ -28,7 +28,7 @@ public class BeanManagerItineraire {
 	
 	private List<DangerPratique> dangerPratiquesAll;
 
-	private String makers;
+	private List<Marker> makers;
 	
 	private String linkBase(HttpServletRequest httpServletRequest){
 		
@@ -48,7 +48,8 @@ public class BeanManagerItineraire {
 		Marker mark = null;
 		String linkBase = linkBase(httpServletRequest);
 		for(InfoPratique info:this.infoPratiquesAll){
-			 mark = new Marker(info.getLocation(), info.getTitle());
+			double[] latLng = {info.getLocationLat(), info.getLocationLng()};
+			 mark = new Marker(latLng, info.getTitle());
 			 mark.setTag("info");
 				mark.setId(info.getId().toString());
 				
@@ -59,7 +60,8 @@ public class BeanManagerItineraire {
 			listMarkers.add(mark);
 		}
 		for(DangerPratique danger:this.dangerPratiquesAll){
-			 mark = new Marker(danger.getLocation(), danger.getTitle());
+			double[] latLng = {danger.getLocationLat(), danger.getLocationLng()};
+			 mark = new Marker(latLng, danger.getTitle());
 			 mark.setTag("danger");
 			 mark.setId(danger.getId().toString());
 				
@@ -68,8 +70,7 @@ public class BeanManagerItineraire {
 				mark.getOptions().setIcon(linkIcon);
 			listMarkers.add(mark);
 		}
-		this.makers = Marker.toJsonArray(listMarkers);
-		System.out.print(makers);
+		this.makers = listMarkers;
 		
 	}
 	
@@ -154,11 +155,11 @@ public class BeanManagerItineraire {
 		this.bol = bol;
 	}
 
-	public String getMakers() {
+	public List<Marker> getMakers() {
 		return makers;
 	}
 
-	public void setMakers(String makers) {
+	public void setMakers(List<Marker> makers) {
 		this.makers = makers;
 	}
 

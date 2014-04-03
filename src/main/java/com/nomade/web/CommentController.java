@@ -1,6 +1,7 @@
 package com.nomade.web;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,9 +57,9 @@ public class CommentController {
 		voyage.getComments().add(comment);
 		etapeVoyageService.updateEtapeVoyage(voyage);
 		
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
+		/*List<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
 				nomade, 0);
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
+		beanHistorique.setListEtapeVoy(listEtapeVoy);*/
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		
@@ -80,9 +81,7 @@ public class CommentController {
 		voyage.getComments().add(comment);
 		etapeVehiculeService.updateEtapeVehicule(voyage);
 		
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		
@@ -104,8 +103,7 @@ public class CommentController {
 		info.getComments().add(comment);
 		infoPratiqueService.updateInfoPratique(info);
 		
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(
-				nomade, 0);
+		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
 		beanHistorique.setListInfo(listInfo);
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
@@ -182,8 +180,7 @@ public class CommentController {
 		danger.getComments().add(comment);
 		dangerPratiqueService.updateDangerPratique(danger);
 		
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(
-				nomade, 0);
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
 		beanHistorique.setListDanger(listDanger);
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);

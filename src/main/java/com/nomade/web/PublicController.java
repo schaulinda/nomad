@@ -18,6 +18,7 @@ import com.nomade.domain.BeanManagerItineraire;
 import com.nomade.domain.BeanNomadeManager;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.DangerPratique;
+import com.nomade.domain.Etape;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
@@ -67,35 +68,27 @@ public class PublicController {
 
 		beanHistoriqueDecoration(uiModel, nomade);
 
-		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-		beanNomadeManager.setNomads(findAllUserNomades);
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
-		String makers = etapeService.buildMakers(findAllUserNomades, request);
-		beanNomadeManager.setMakers(makers);
+		
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 
 		
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		
-		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("nomade", nomade); 
 		uiModel.addAttribute("onglet", "nomad");
 		return "public/nomad";
 	}
 
 
 	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		Page<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		Page<EtapeVehicule> listEtapeVeh = etapeVehiculeService.findByNomade(
-				nomade, 0);
-		Page<DangerPratique> listDanger = dangerPratiqueService.findByNomade(nomade, 0);
-		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
 		beanHistorique.setListDanger(listDanger);
-		beanHistorique.setListInfo(listInfo);
+			
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}
@@ -110,8 +103,7 @@ public class PublicController {
 		
 		beanHistoriqueDecoration(uiModel, findUserNomade);
 
-		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
-		beanNomadeManager.setNomads(findAllUserNomades);
+		
 		beanNomadeManager.setMe(false);
 		beanNomadeManager.setHome(false);
 
@@ -123,9 +115,9 @@ public class PublicController {
 		}
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
-		//beanNomadeManager.setNomade(findUserNomade);
-		String makers = etapeService.buildMakers(findAllUserNomades,request);
-		beanNomadeManager.setMakers(makers);
+		beanNomadeManager.setNomade(findUserNomade);
+		Etape etape = voyageService.getLastLocation(nomade);
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);

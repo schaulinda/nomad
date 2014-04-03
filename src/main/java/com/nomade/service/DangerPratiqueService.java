@@ -13,4 +13,6 @@ public interface DangerPratiqueService {
 	
 	public List<DangerPratique> findByLocation(double[] loc1, double[] loc2);
 	public Page<DangerPratique> findByNomade(UserNomade nomade, int page);
+	public boolean hasVoted(UserNomade nomade, DangerPratique dangerPratique);
+	public List<DangerPratique> findByNomadeOrderByCreated(UserNomade nomade);
 }
