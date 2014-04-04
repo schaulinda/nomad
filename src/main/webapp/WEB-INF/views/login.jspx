@@ -31,7 +31,7 @@
 	<div class="block-avant">
 		<div class="row login_content">
 		    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 logo-page">
-		       <img src="${resources}/img/travel.png" class="img-responsive transparent"> </img>
+		       <img src="${resources}/img/travel.png" class="img-responsive"> </img>
 		    </div> 
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="well loginForm">
@@ -152,9 +152,9 @@
 	</div>
 	</div>
 	<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 <br /> 
+			<a href="#" class="traitgauche">Â© Petit Nomad 2238 
 				${langWhoAreWe}
-			</a> | <a href="#" class="traitgauche">
+			</a><br /> | <a href="#" class="traitgauche">
 				${langContact}
 			</a> | <a href="#" class="traitgauche">
 				${langConfidentiality}
