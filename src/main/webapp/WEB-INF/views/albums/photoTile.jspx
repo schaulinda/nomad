@@ -10,91 +10,115 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 
+<spring:message code="lang_upload_photo" var="langUploadPhoto" />
+<spring:message code="lang_only_images_files" var="langOnlyImagesFiles" />
+<spring:message code="lang_send" var="langSend" />
+<spring:message code="lang_location" var="langLocation" />
+<spring:message code="lang_enter_a_location" var="langEnterALocation" />
+<spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap" />
+<spring:message code="lang_date" var="langDate" />
+<spring:message code="lang_description" var="langDescription" />
+<spring:message code="lang_just_save_photo_manager" var="langJustSavePhotoManager" />
+<spring:message code="lang_save" var="langSave" />
+<spring:message code="lang_delete" var="langDelete" />
+<spring:message code="lang_cancel" var="langCancel" />
+<spring:message code="lang_close" var="langClose" />
 
 	<spring:url var="res" value="/resources" />
 	<c:if test="${beanPictureManager.formInfoImg eq true}">
 		<c:set value="hidden"  var="hidef1" ></c:set>
 	</c:if>
 		<spring:url value="/albums/upload" var="upload_url"></spring:url>
-		<form:form method="POST" action="${upload_url}" 
-			cssStyle="margin-bottom: -23px" id="formUpload"
-			enctype="multipart/form-data">
+		<form:form method="POST" 
+				   action="${upload_url}" 
+				   cssStyle="margin-bottom: -23px" 
+				   id="formUpload"
+				   enctype="multipart/form-data">
 			<div class="row ${hidef1} tog">
-
 				<div class="form-group col-lg-5">
-					<label>upload a photo in the chosen album </label> <input type="file" name="fileImage"
-						class="form-control" required="required" />
-					<p class="help-block">Only image file.</p>
+					<label>${langUploadPhoto}</label>
+					<input type="file" 
+						   name="fileImage"
+						   class="form-control" 
+						   required="required" />
+					<p class="help-block">${langOnlyImagesFiles}</p>
 					<c:if test="${empty error}">
-						<c:set value="hidden" var="cacheError" > </c:set>
+						<c:set value="hidden" var="cacheError" ></c:set>
 					</c:if>
 					<div id="error" class="" >
 						<div  class="alert alert-danger ${cacheError}" ><!-- co -->${error}</div>
 					</div>
 				</div>
-				<input id="idAlbum" name="idAlbum" type="hidden"
-					value="${beanPictureManager.idAlbum}" />
+				<input id="idAlbum" name="idAlbum" type="hidden" value="${beanPictureManager.idAlbum}" />
 				<div class="col-lg-3" style="margin-top: 26px;">
-					<button type="submit" id="btn_upload" 
-						class="btn btn-default btn-block">upload</button>
+					<button type="submit" id="btn_upload"  class="btn btn-default btn-block">
+						${langSend}
+					</button>
 				</div>
 			</div>
 		</form:form>
-	
-	<hr />
-	
-	
-	<spring:url value="/albums/imageRenderNet" var="imageRender_url"></spring:url>
+		<hr />
+		<spring:url value="/albums/imageRenderNet" var="imageRender_url"></spring:url>
 		<div class="row"  >
 			<div class="col-lg-6" id="imgPhoto" >
 				<img alt="" src="${imageRender_url}/${beanPictureManager.photoSave}"
-					style="max-height: 280px; max-width: 270px;" />
+					 style="max-height: 280px; max-width: 270px;" />
 				<input type="hidden" value="${beanPictureManager.photoSave}" id="imgUpload_id" />
 			</div>
-	<c:if test="${beanPictureManager.formInfoImg eq false}">
-		<c:set value="hidden"  var="hidef2" ></c:set>
-	</c:if>		
+			<c:if test="${beanPictureManager.formInfoImg eq false}">
+				<c:set value="hidden"  var="hidef2" ></c:set>
+			</c:if>		
 			<div class="col-lg-6 ${hidef2} tog">
 				<spring:url value="/albums/saveImageInfo" var="saveImageInfo_url"></spring:url>
-				<form:form id="formDescrption" action="${saveImageInfo_url}"
-					method="POST">
-					 <label>Localisation</label>
-					 <div class="input-group">
-						<input type="text" name="addresspicker" class="form-control"
-							id="" placeholder="enter the location"
-							rel="popover" value="${addresspicker}" /> <span class="input-group-addon"> <a
-							href="#"> <i class="icon-screenshot"><!-- co --></i>
-						</a>
+				<form:form id="formDescrption" action="${saveImageInfo_url}" method="POST">
+					<label>${langLocation}</label>
+					<div class="input-group">
+						<input type="text" 
+							   name="addresspicker" 
+							   class="form-control"
+							   id="" 
+							   placeholder="${langEnterALocation}"
+							   rel="popover" 
+							   value="${addresspicker}" />
+						<span class="input-group-addon">
+							<a href="#"><i class="icon-screenshot"><!-- co --></i></a>
 						</span>
 					</div>
-					<p class="help-block">Drag and drop marker on the map</p>
+					<p class="help-block">${langDragMarkerOnMap}</p>
 					<div class="form-group">
-					<fmt:formatDate value="${datePhoto}" var="dateP" pattern="dd-MM-yyyy"  />
-						<label for="datePhoto">Date</label> <input value="${dateP}"
-							class="datepicker form-control" name="datePhoto" type="date"
-							placeholder="12-03-1991" data-date-format="dd-mm-yyyy" />
+						<fmt:formatDate value="${datePhoto}" var="dateP" pattern="dd-MM-yyyy"  />
+						<label for="datePhoto">${langDate}</label>
+						<input value="${dateP}"
+							   class="datepicker form-control" 
+							   name="datePhoto" 
+							   type="date"
+							   placeholder="12-03-1991" 
+							   data-date-format="dd-mm-yyyy" />
 					</div>
 					<input id="lat" type="hidden" name="lat" value="${lat}" />
 					<input id="lng" name="lng" type="hidden" value="${lng}" />
-					<input id="idPhoto" type="hidden" name="idPhoto"
-						value="${beanPictureManager.photoSave}" />
-					<label>description </label>
+					<input id="idPhoto" type="hidden" name="idPhoto" value="${beanPictureManager.photoSave}" />
+						<label>${langDescription}</label>
 					<div class="form-group">
-						<textarea name="description" cssClass="form-control"  ><!-- co -->${description}</textarea>
+						<textarea name="description" cssClass="form-control"  ><!-- co -->
+							${description}
+						</textarea>
 					</div>
-					<p class="help-block">just save! if you don't have more info</p>
-					<button type="submit" id="btn_save"
-						class="btn btn-default btn-block">Save</button>
-					
-					<spring:url value="/albums/delete/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" var="delete_url"></spring:url>
-					<a id="btn_delete" href="${delete_url}"
-						class="btn btn-default btn-block">Delete</a>
-					<spring:url value="/albums/cancel/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" var="cancel_url"></spring:url>
-					<a id="btn_cancel" href="${cancel_url}"
-						class="btn btn-default btn-block">Cancel</a>
-					
+					<p class="help-block">${langJustSavePhotoManager}</p>
+					<button type="submit" id="btn_save" class="btn btn-default btn-block">
+						${langSave}
+					</button>
+					<spring:url value="/albums/delete/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" 
+								var="delete_url"></spring:url>
+					<a id="btn_delete" href="${delete_url}" class="btn btn-default btn-block">
+						${langDelete}
+					</a>
+					<spring:url value="/albums/cancel/${beanPictureManager.idAlbum}/${beanPictureManager.photoSave}" 
+								var="cancel_url"></spring:url>
+					<a id="btn_cancel" href="${cancel_url}" class="btn btn-default btn-block">
+						${langCancel}
+					</a>
 				</form:form>
-
 			</div>
 		</div>
 
@@ -231,7 +255,7 @@
 												{
 
 													placement : 'left',
-													title : '<a id="close" style="cursor:pointer" >close</a>',
+													title : '<a id="close" style="cursor:pointer" >${langClose}</a>',
 													html : true,
 													trigger : 'manual',
 													content : '<div id="map" style="height: 200px;width: 250px;" ><!-- co --></div>'
