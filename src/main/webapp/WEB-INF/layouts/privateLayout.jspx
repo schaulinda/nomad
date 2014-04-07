@@ -347,7 +347,7 @@ body {
 		<!-- block top -->
 		<tiles:insertAttribute name="topheader" />
 		<!-- <hr> -->
-		<div class="row" style="padding: 20px;">
+		<div class="row" style="padding: 2px;">
 			<div class="col-lg-1 col-md-1 hidden-xs hidden-sm pubs"
 				style="margin-right: 12px; margin-left: -20px;">
 				<h3>Pubs</h3>

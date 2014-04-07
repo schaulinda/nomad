@@ -11,12 +11,18 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.EtapeService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
+import com.nomade.service.RelationService;
+import com.nomade.service.VoyageService;
+import com.nomade.tools.ImageUtilInterface;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,10 +48,53 @@ public class CommentController {
 	DangerPratiqueService dangerPratiqueService;
 	@Autowired
 	Security security;
+	@Autowired
+	RelationService relationService;
+	@Autowired
+	EtapeService etapeService;
+	@Autowired
+	VoyageService voyageService;
+	@Autowired
+	ImageUtilInterface imgService;
+	
+private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page) {
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		beanHistorique.setListDanger(dangerPratiqueService.findByNomadeOrderByCreated(nomade));
+		
+		beanHistorique.setListImg(imgService.allImg(nomade));
+		List<Relation> findMyFriends = relationService.findMyFriends(nomade);
+		beanHistorique.setFriends(findMyFriends);
+		
+		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
+		beanHistorique.setVoyages(voyages);
+		
+		try {
+			Voyage voyage = voyages.getContent().get(0);
+			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyage(null);
+			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+
+	}
 	
 	@RequestMapping("/addEtapeVoy")
 	public String add(@RequestParam("etapeId")String etapeId, 
-			@RequestParam("page")int page, 
+			@RequestParam("page")int page,
 			@RequestParam("commentaire")String commentaire, BeanHistorique beanHistorique, HttpServletRequest request, Model uiModel) {
 		
 		EtapeVoyage voyage = etapeVoyageService.findEtapeVoyage(new BigInteger(etapeId));
@@ -58,12 +107,8 @@ public class CommentController {
 		voyage.getComments().add(comment);
 		etapeVoyageService.updateEtapeVoyage(voyage);
 		
-		/*List<EtapeVoyage> listEtapeVoy = etapeVoyageService.findByNomade(
-				nomade, 0);
-		beanHistorique.setListEtapeVoy(listEtapeVoy);*/
-		beanHistorique.setNomade(nomade);
-		uiModel.addAttribute("beanHistorique", beanHistorique);
-		
+		beanHistoriqueDecoration(uiModel,nomade,page);
+
 		return "public/nomad";
 	}
 	

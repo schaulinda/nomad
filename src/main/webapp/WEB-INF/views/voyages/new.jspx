@@ -92,7 +92,7 @@
 			event : "onclick",
 			formId : "form_voyage",
 			params : {
-				fragments : "smallTile"
+				fragments : "smallTile, nomadFooterTile"
 			}
 		}));
 	</script>

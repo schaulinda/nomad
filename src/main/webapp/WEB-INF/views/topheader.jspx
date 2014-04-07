@@ -185,7 +185,7 @@
 					</div>
 					<div class="col-lg-1 col-sm-4 pull-left img_veh1">
 					<sec:authorize access="isAuthenticated()" >
-					<a href="${users_url}/private/vehicule"> <c:choose>
+					<a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>
 							<c:when test="${empty nomade.vehicule.photo}">
 								<img data-src="holder.js/46x46" src="data:img/png;"
 									class="img-rounded defaultvehicleimg" />

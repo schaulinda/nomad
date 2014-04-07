@@ -658,7 +658,7 @@
 			event : "onclick",
 			formId : "form_etapeVoy",
 			params : {
-				fragments : "smallTile"
+				fragments : "smallTile, nomadFooterTile"
 			}
 		}));
 	</script>

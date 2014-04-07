@@ -23,7 +23,7 @@ public interface ImageUtilInterface {
 	
 	public List<GridFSDBFile> listFiles();
 	
-	public List<String> allImg();
+	public List<String> allImg(UserNomade nomade);
 
 	List<String> getPhotoIdByAlbum(String albumId);
 

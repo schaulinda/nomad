@@ -13,18 +13,24 @@ import javax.servlet.http.HttpServletRequest;
 import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.Etape;
+import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Parcours;
+import com.nomade.domain.Relation;
 import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.domain.VehiculeState;
 import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
+import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
 import com.nomade.tools.IdGenerator;
+import com.nomade.tools.ImageUtilInterface;
 
 import org.cloudfoundry.org.codehaus.jackson.annotate.JsonAnySetter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,8 +58,48 @@ public class VoyageController {
 	UserService service;
 	@Autowired
 	EtapeVoyageService etapeVoyageService;
+	@Autowired
+	InfoPratiqueService infoPratiqueService;
+	@Autowired
+	DangerPratiqueService dangerPratiqueService;
+	@Autowired
+	ImageUtilInterface imgService;
+	@Autowired
+	RelationService relationService;
 	
-	
+private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page) {
+		
+		BeanHistorique beanHistorique = new BeanHistorique();
+		
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		beanHistorique.setListDanger(dangerPratiqueService.findByNomadeOrderByCreated(nomade));
+		
+		beanHistorique.setListImg(imgService.allImg(nomade));
+		List<Relation> findMyFriends = relationService.findMyFriends(nomade);
+		beanHistorique.setFriends(findMyFriends);
+		
+		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
+		beanHistorique.setVoyages(voyages);
+		
+		try {
+			Voyage voyage = voyages.getContent().get(0);
+			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyage(null);
+			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		beanHistorique.setNomade(nomade);
+		uiModel.addAttribute("beanHistorique", beanHistorique);
+	}
 
 	@RequestMapping("/selectView")
 	public String selectView(HttpServletRequest request, Model uiModel) {
@@ -65,10 +111,12 @@ public class VoyageController {
 		
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 
 		if (findByNomade != null && findByNomade.size() > 0) {
 
 			beanNoteBookManager.setVoyageEnCours(voyageService.existingVoyage(nomade));
+			
 			uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 			return "voyages/carnet";
 		} else {
@@ -90,6 +138,7 @@ public class VoyageController {
 		
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 
 		if ("preparation".equals(type)) {
 
@@ -117,6 +166,7 @@ public class VoyageController {
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("voyage", voyage);
 		uiModel.addAttribute("onglet", "carnet");
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -136,6 +186,7 @@ public class VoyageController {
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
 
 		UserNomade nomade = securite.getUserNomade();
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		List<Voyage> listVoy = voyageService.findByNomade(nomade);
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("listVoy", listVoy);
@@ -170,6 +221,7 @@ public class VoyageController {
 	@RequestMapping("/updateAndCloseVoy")
 	public String updateAndCloseVoy(HttpServletRequest request, Model uiModel,Voyage voyage) {
 		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		UserNomade nomade = securite.getUserNomade();
@@ -241,6 +293,7 @@ public class VoyageController {
 		uiModel.addAttribute("idV", parcours.getVoyage().getId());
 		uiModel.addAttribute("etape", new Etape());
 		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -273,6 +326,7 @@ public class VoyageController {
 		uiModel.addAttribute("idV", parcours.getVoyage().getId());
 		uiModel.addAttribute("etape", new Etape());
 		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -289,6 +343,7 @@ public class VoyageController {
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("nomade", nomade);
 		uiModel.addAttribute("idP", idP);
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		
@@ -335,6 +390,7 @@ public class VoyageController {
 		uiModel.addAttribute("listP", listP);
 		uiModel.addAttribute("parcours", new Parcours());
 		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -360,6 +416,7 @@ public class VoyageController {
 		uiModel.addAttribute("listP", listP);
 		uiModel.addAttribute("parcours", new Parcours());
 		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", beanNoteBookManager);
@@ -380,6 +437,7 @@ public class VoyageController {
 		uiModel.addAttribute("idV", idV);
 		BeanNoteBookManager beanNoteBookManager = new BeanNoteBookManager();
 		beanNoteBookManager.setListParcours(voyageService.drawVoyageEnCours());
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		
 		if(parcours.getDepart().getDay()==null || parcours.getArrived().getDay()==null
 				|| "".equals(parcours.getDepart().getLocation())|| "".equals(parcours.getArrived().getLocation())){
@@ -426,6 +484,7 @@ public class VoyageController {
 	public String select(HttpServletRequest request, Model uiModel,
 			Voyage voyage) {
 		UserNomade nomade = securite.getUserNomade();
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		List<Voyage> voyageEnCours = voyageService.findVoyageEnCours(nomade);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setListParcours(voyageService.drawVoyageEnCours());
@@ -530,6 +589,7 @@ public class VoyageController {
 		
 		 Map<String, String[]> parameters = request.getParameterMap();
 		 UserNomade nomade = securite.getUserNomade();
+		 beanHistoriqueDecoration(uiModel, nomade, 0);
 		 
 		 List<Etape> listEtape = new ArrayList<Etape>();
 		 
@@ -649,18 +709,8 @@ public class VoyageController {
 			@PathVariable("page") int page, HttpServletRequest request,
 			Model uiModel) {
 		UserNomade nomade = userService.findUserNomade(new BigInteger(id));
-		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
-		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setVoyages(voyages);
-		try {
-			Voyage voyage = voyages.getContent().get(0);
-			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		beanHistorique.setNomade(nomade);
-		uiModel.addAttribute("beanHistorique", beanHistorique);
+		
+		beanHistoriqueDecoration(uiModel, nomade, page);
 		return "public/nomad";
 	}
 

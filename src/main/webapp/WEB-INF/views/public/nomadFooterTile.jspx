@@ -110,7 +110,7 @@
 						</i> Historik
 					</h3>
 				</div>
-				<div>
+				<div class="thumbnail">
 					<c:forEach var="etape" items="${beanHistorique.listEtapeVoy}">
 						<div class="row">
 							<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
@@ -135,7 +135,6 @@
 								<div class="comment-text">${etape.description}</div>
 							</div>
 						</div>
-						<br />
 						<div class="row">
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
 								<a href="#"></a> * ${etape.dateEtape} * <a href="#"
@@ -159,7 +158,7 @@
 						<!-- comments -->
 						<ul class="list-group">
 							<c:forEach var="comment" items="${etape.comments}">
-								<li class="list-group-item">
+								<li class="list-group-item" style="border-top: none;">
 									<div class="row">
 										<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 											<c:choose>
@@ -190,9 +189,10 @@
 						<c:set value="${etape.id}" var="etape_id"></c:set>
 						<spring:url value="/comments/addEtapeVoy" var="comment_url"></spring:url>
 						<form id="comment_form" action="${comment_url}" method="GET">
-							<input type="hidden" value="${etape_id}" name="etapeId" /> 
+							<input type="hidden" value="${etape_id}" name="etapeId" />
+							<input type="hidden"  value="${beanHistorique.voyages.number}" name="page" /> 
 							<textarea id="commentaire" name="commentaire"
-								class="form-control" placeholder="${langAddNewComment}">
+								class="form-control col-lg-3" style="height: 32px;" placeholder="${langAddNewComment}">
 									<!--co  -->
 								</textarea>
 							<input type="submit" id="btn_comment" value="send"
@@ -200,6 +200,7 @@
 						</form>
 					</c:forEach>
 				</div>
+				<br />
 			</div>
 		</div>
 		

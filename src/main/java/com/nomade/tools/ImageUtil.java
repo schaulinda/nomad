@@ -180,16 +180,34 @@ public class ImageUtil implements ImageUtilInterface {
 	}
 	
 	@Override
-	public List<String> allImg() {
+	public List<String> allImg(UserNomade nomade) {
 		
-		List<String> idPhoto = new ArrayList<String>();
+		/*List<String> idPhoto = new ArrayList<String>();
 		
 		List<GridFSDBFile> list = gridFsTemplate.find(null);
 
-		for (GridFSDBFile file : list) {
+			for (GridFSDBFile file : list) {
 			idPhoto.add(file.getId().toString());
 		}
-		
+		return idPhoto;*/
+		List<String> idPhoto = new ArrayList<String>();
+	
+		try {
+			List<Album> albums = nomade.getAlbums();
+			for(Album a:albums){
+			Query query = new Query(Criteria.where("metadata.albumId").is(""+a.get_id()));
+
+			List<GridFSDBFile> list = gridFsTemplate.find(query);
+				
+				for (GridFSDBFile file : list) {
+					idPhoto.add(file.getId().toString());
+			}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		return idPhoto;
 	}
 

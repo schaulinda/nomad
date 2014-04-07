@@ -15,6 +15,8 @@
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 	<spring:url var="nomad_url" value="/public/nomad" />
+	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
+	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
 	<spring:url var="friend_url" value="/relations/add" />
@@ -101,10 +103,13 @@
 						</c:if>
 					</div>
 					<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
-						<label>vehicule State: </label> ${nomad.vehicule.vehiculeState}<br />
+						<label>vehicule State: </label>
+						<img src="${iconstatut_url}/${nomad.vehicule.vehiculeState}.png" 
+							 alt="${nomad.vehicule.vehiculeState}" /><br />
 						<label>Nom: </label> ${nomad.vehicule.vehiculeName}<br /> <label>Modele:
 						</label> ${nomad.vehicule.model}<br /> <label>vehicule Type: </label>
-						${nomad.vehicule.vehiculeType}
+						<img src="${iconveh_url}/${nomad.vehicule.vehiculeType}.png" 
+							 alt="${nomad.vehicule.vehiculeType}" />
 
 					</div>
 				</div>

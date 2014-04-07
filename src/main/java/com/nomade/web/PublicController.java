@@ -95,7 +95,7 @@ public class PublicController {
 		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
 		beanHistorique.setListDanger(dangerPratiqueService.findByNomadeOrderByCreated(nomade));
 		
-		beanHistorique.setListImg(imgService.allImg());
+		beanHistorique.setListImg(imgService.allImg(nomade));
 		List<Relation> findMyFriends = relationService.findMyFriends(nomade);
 		beanHistorique.setFriends(findMyFriends);
 		
