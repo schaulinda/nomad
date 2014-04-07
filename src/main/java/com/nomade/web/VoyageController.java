@@ -221,10 +221,11 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page
 	@RequestMapping("/updateAndCloseVoy")
 	public String updateAndCloseVoy(HttpServletRequest request, Model uiModel,Voyage voyage) {
 		
-		beanHistoriqueDecoration(uiModel, nomade, 0);
+		
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		UserNomade nomade = securite.getUserNomade();
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		uiModel.addAttribute("nomade", nomade);
 		
 		if(voyage.getArrived().getDay()==null || voyage.getArrived().getLocation()==null){
