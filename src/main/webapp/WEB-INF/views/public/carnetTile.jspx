@@ -20,7 +20,7 @@
 <spring:message code="lang_share_your_exp" var="langShareYourExp"/>
 <spring:message code="lang_tell_us_your_trip" var="langTellUsYourTrip" />
 <spring:message code="lang_date_of_your_trip" var="langDateOfYourTrip"/>
-<spring:message code="lang_clip_and_select_on_map" var="langClicAndSelectOnMap" />
+<spring:message code="lang_click_and_select_on_map" var="langClickAndSelectOnMap" />
 <spring:message code="lang_select_a_photo" var="langSelectAPhoto" />
 <spring:message code="lang_save_your_trip_and_exp" var="langSaveYourTripAndExp" />
 <spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap" />
@@ -209,7 +209,7 @@
 								</a>
 							</div>
 							<p class="help-block">
-								${langClicAndSelectOnMap}
+								${langClickAndSelectOnMap}
 							</p>
 						</div>
 						<div class="col-lg-1">

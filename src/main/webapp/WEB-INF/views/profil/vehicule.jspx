@@ -179,7 +179,7 @@
 							<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
 							<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=vehicule" > <i
 							class="icon-edit"> <!-- co -->
-						</i> <spring:message code="a.edit" />
+						</i> <spring:message code="lang_modify" />
 						</a>
 					</div>
 				</div>
