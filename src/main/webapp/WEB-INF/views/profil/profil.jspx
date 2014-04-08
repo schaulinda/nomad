@@ -17,7 +17,7 @@
 <spring:message code="lang_username" var="langUsername" />
 <spring:message code="lang_website_blog_fb" var="langWebsiteBlogFb" />
 <spring:message code="lang_spoken_langage" var="langSpokenLangage" />
-<spring:message code="lang_click_to_select_langage" var="clicToSelectLangage" />
+<spring:message code="lang_click_to_select_language" var="clicToSelectLanguage" />
 <spring:message code="lang_visited_country" var="langVisitedCountry" />
 <spring:message code="lang_click_to_select_country" var="langClickToSelectCountry" />
 <spring:message code="lang_work_during_travel" var="langWorkDuringTravel" />
@@ -102,7 +102,7 @@
 									<td>
 										<a href="#" id="langues" data-type="select2"
 										   data-name="langues" data-pk="1" data-url="${updateFieldUrl}"
-										   class="editable editable-click" data-placeholder="${clicToSelectLangage}"
+										   class="editable editable-click" data-placeholder="${clicToSelectLanguage}"
 										   style="color: gray;">
 											<c:forEach var="item" items="${nomade.profil.langues}" 
 													   varStatus="loop">
