@@ -101,7 +101,7 @@ privileged aspect EtapeVoyageController_Roo_Controller {
         uiModel.addAttribute("etapeVoyage", etapeVoyage);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("usernomades", userService.findAllUserNomades());
-        uiModel.addAttribute("voyages", voyageService.findAllVoyages());
+        //uiModel.addAttribute("voyages", voyageService.findAllVoyages());
     }
     
     String EtapeVoyageController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
