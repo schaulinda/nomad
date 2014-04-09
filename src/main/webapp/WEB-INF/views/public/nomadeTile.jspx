@@ -10,6 +10,27 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	
+<spring:message code="lang_complete" var="langComplete" />
+<spring:message code="lang_profile_of" var="langProfileOf" />
+<spring:message code="lang_nationality" var="langNationality" />
+<spring:message code="lang_name" var="langName" />
+<spring:message code="lang_website" var="langWebsite" />
+<spring:message code="lang_message" var="langMessage" />
+<spring:message code="lang_add" var="langAdd" />
+<spring:message code="lang_spoken_language" var="langSpokenLanguage" />
+<spring:message code="lang_visited_country" var="langVisitedCountry" />
+<spring:message code="lang_purpose_of_the_trip" var="langPurposeOfTheTrip" />
+<spring:message code="lang_vehicle_of" var="langVehicleOf" />
+<spring:message code="lang_status" var="langStatus" />
+<spring:message code="lang_model" var="langoModel" />
+<spring:message code="lang_type_of_vehicle" var="langTypeOfVehicle" />
+<spring:message code="lang_error" var="langError" />
+<spring:message code="lang_nomad_not_found" var="langNomadNotFound" />
+<spring:message code="lang_send_message" var="langSendMessage" />
+<spring:message code="lang_cancel" var="langCancel" />
+<spring:message code="lang_send" var="langSend" />
+	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
@@ -17,97 +38,95 @@
 	<spring:url var="nomad_url" value="/public/nomad" />
 	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
+<style type="text/css">
+	   @media (min-width:992px) and (max-width:1199px){
+	      .first-info{
+	         margin-left:10%;
+	      }
+	   }
+	</style>
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
 	<spring:url var="friend_url" value="/relations/add" />
 	<c:if test="${not empty nomad}" >
 	<c:if test="${beanNomadeManager.home eq false}">
 		<div class="tab-content">
-			<div class="panel panel-warning">
+			<div class="panel panel-warning col-lg-12 col-md-12">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-user"> <!-- com -->
-						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
-						<a href="">${aProfileOf} ${nomad.userName}</a>
+						<i class="icon-user"><!-- co --></i>
+						<a href="">${langProfileOf} ${nomad.userName}</a>
 					</h3>
 				</div>
 				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
+					<div class="col-lg-2 col-sm-2 col-xs-12 col-md-12">
 						<c:if test="${empty nomad.profil.file}">
 							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty nomad.profil.file}">
-							<IMG alt="" src="${imageRender_url}/${nomad.profil.file}"
-								class="img-rounded" width="90px;" />
+							<img alt="" src="${imageRender_url}/${nomad.profil.file}"
+								 class="img-rounded" width="90px;" />
 						</c:if>
-
 					</div>
-					<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-8">
-						<label>Nationalite: </label> ${nomad.compte.nationality}<br /> <label>Nom:
-						</label> ${nomad.compte.fullName} <br /> <label>Site: </label>
-						${nomad.profil.website}
+					<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-xs-12 col-md-12 first-info">
+						<label>${langNationality} : </label> ${nomad.compte.nationality}<br /> 
+						<label>${langName} : </label>${nomad.compte.fullName} <br />
+						<label>${langWebsite} : </label>${nomad.profil.website}
 					</div>
 					<c:if test="${beanNomadeManager.me eq false}">
 						<sec:authorize access="isAuthenticated()" >
-						<div class="col-lg-4 col-sm-4 col-12">
-							<a class="btn_cancel btn btn-default " id="btn_msg"> <i
-								class="icon-envelope"> <!-- com -->
-							</i> <spring:message code="lang_message" var="langMessage" /> ${langMessage}</a>
-							<c:if test="${beanNomadeManager.amie eq false}"> 
-								 <a class="btn btn-default" id="btn_add"
-									style="margin-top: 3px; width: 105px;"> <i
-									class="icon-plus-sign"> <!-- com -->
-								</i> <spring:message code="lang_add" var="langAdd" /> ${langAdd}
-								</a>
-							</c:if>
-							<c:if test="${beanNomadeManager.amie eq true}"> 
-
-								<a class="btn btn-default" id="btn_add" disabled="true"
-											style="margin-top: 3px; width: 105px;"><i
-											class="icon-ok"> <!-- com --> -
-										</i> 
+							<div class="col-lg-4 col-sm-4 col-12">
+								<a class="btn_cancel btn btn-default " id="btn_msg">
+									<i class="icon-envelope"> <!-- co --></i>
+									${langMessage}</a>
+								<c:if test="${beanNomadeManager.amie eq false}"> 
+									 <a class="btn btn-default" id="btn_add"
+										style="margin-top: 3px; width: 105px;">
+										<i class="icon-plus-sign"><!-- co --></i>
+										 ${langAdd}
 									</a>
-		
-						</c:if>
-						 </div>
+								</c:if>
+								<c:if test="${beanNomadeManager.amie eq true}"> 
+									<a class="btn btn-default" id="btn_add" disabled="true"
+									   style="margin-top: 3px; width: 105px;">
+									   <i class="icon-ok"><!-- co --></i>
+									</a>
+								</c:if>
+						 	</div>
 						 </sec:authorize>
 					</c:if>
-							
-						
 				</div>
-				<br /> <label>Langues parlees: </label> ${nomad.profil.langues}<br />
-				<label>Pays visites: </label> ${nomad.profil.visitedCountry}<br />
-				<br /> <label>Infos supplémentaires / but du voyage:</label>
-				${nomad.profil.butVoyage}
+				<br />
+				<label>${langSpokenLanguage} : </label> ${nomad.profil.langues}<br />
+				<label>${langVisitedCountry} : </label> ${nomad.profil.visitedCountry}<br />
+				<label>${langPurposeOfTheTrip} :</label>${nomad.profil.butVoyage}
 			</div>
-			<div class="panel panel-warning">
+			<div class="panel panel-warning col-lg-12 col-md-12">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-truck"> <!-- com -->
-						</i>
-						<spring:message code="a.vehicleOf" var="aVehicleOf" />
-						<a href="#">${aVehicleOf} User</a>
+						<i class="icon-truck"><!-- co --></i>
+						<a href="#">${langVehicleOf} ${nomad.userName}</a>
 					</h3>
 				</div>
 				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
+					<div class="col-lg-2 col-sm-2 col-xs-12">
 						<c:if test="${empty nomad.vehicule.photo}">
 							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty nomad.vehicule.photo}">
-							<IMG alt="" src="${imageRender_url}/${nomad.vehicule.photo}"
-								class="img-rounded" width="100px;" />
+							<img alt="" src="${imageRender_url}/${nomad.vehicule.photo}"
+								 class="img-rounded" width="100px;" />
 						</c:if>
 					</div>
 					<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
-						<label>vehicule State: </label>
+						<label>${langStatus} : </label>
 						<img src="${iconstatut_url}/${nomad.vehicule.vehiculeState}.png" 
 							 alt="${nomad.vehicule.vehiculeState}" /><br />
-						<label>Nom: </label> ${nomad.vehicule.vehiculeName}<br /> <label>Modele:
-						</label> ${nomad.vehicule.model}<br /> <label>vehicule Type: </label>
+						<label>${langName} : </label> ${nomad.vehicule.vehiculeName}<br />
+						<label>${langoModel} : </label> ${nomad.vehicule.model}<br />
+						<label>${langTypeOfVehicle} : </label>
 						<img src="${iconveh_url}/${nomad.vehicule.vehiculeType}.png" 
 							 alt="${nomad.vehicule.vehiculeType}" />
 
@@ -123,7 +142,7 @@
 					<h3 class="panel-title">
 						<i class="icon-help"> <!-- com -->
 						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
+						<spring:message code="lang_profile_of" var="langProfileOf" />
 						Help
 					</h3>
 				</div>
@@ -153,14 +172,12 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-help"> <!-- com -->
-						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
-						Nomad
+						<i class="icon-help"><!-- co --></i>
+						${langError}
 					</h3>
 				</div>
 				<div class="row">
-					<p class="label-warning">Nomad not found, use our search tool or map!</p>
+					<p class="label-warning">${langNomadNotFound}</p>
 				</div>
 			</div>
 		</div>
@@ -188,10 +205,10 @@
 													html : 'true',
 													trigger : 'click',
 													placement : 'bottom',
-													title : 'Send message',
+													title : '${langSendMessage}',
 													content : '<form id="formMsg" ><p><textarea><!-- com --></textarea></p>'
-															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >Cancel</button>'
-															+ ' <button class="btn btn-primary" >Send</button></form>'
+															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >${langCancel}</button>'
+															+ ' <button class="btn btn-primary" >${langSend}</button></form>'
 												});
 
 								/* add friend */

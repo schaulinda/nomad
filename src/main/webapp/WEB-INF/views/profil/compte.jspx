@@ -13,11 +13,11 @@
 <spring:message code="lang_account" var="langAccount" />
 <spring:message code="lang_vehicle" var="langVehicle" />
 <spring:message code="lang_security" var="langSecurity" />
-<spring:message code="lang_email_adress" var="langEmailAdress" />
+<spring:message code="lang_email_address" var="langEmailAddress" />
 <spring:message code="lang_full_name" var="langFullName" />
 <spring:message code="lang_gender" var="langGender" />
 <spring:message code="lang_birth_date" var="langBirthDate" />
-<spring:message code="lang_adress" var="langAdress" />
+<spring:message code="lang_address" var="langAddress" />
 <spring:message code="lang_phone_number" var="langPhoneNumber" />
 <spring:message code="lang_nationality" var="langNationality" />
 	
@@ -56,7 +56,7 @@
 		<div class="tab-pane active">
 			<div class="panel">
 				<div class="row">
-					<div class="col-lg-6">${langEmailAdress}</div>
+					<div class="col-lg-6">${langEmailAddress}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="email"
@@ -118,7 +118,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">${langAdress}</div>
+					<div class="col-lg-6">${langAddress}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="adress" 
