@@ -128,7 +128,7 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
-							<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+							<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 								<div class="mic-info">
 									<a href="#">${etape.nomade.userName}</a>
 								</div>
@@ -137,7 +137,9 @@
 						</div>
 						<div class="row">
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
-								<a href="#"></a> * ${etape.dateEtape} * <a href="#"
+								<fmt:formatDate value="${etape.dateEtape}" var="dateEtape_formatted" 
+               								 type="date" pattern="MM-dd-yyyy hh:mm" />
+								<a href="#"></a> * ${dateEtape_formatted} * <a href="#"
 									class="parcour"> ${etape.location} </a>
 								<c:if test="${not empty etape.comments}">
 									<span class="label label-info"> ${etape.comments.size()}
@@ -157,10 +159,16 @@
 						</div>
 						<!-- comments -->
 						<ul class="list-group">
-							<c:forEach var="comment" items="${etape.comments}">
-								<li class="list-group-item" style="border-top: none;">
+							<c:forEach var="comment" items="${etape.comments}" varStatus="loop" >
+								<c:if test="${loop.index ge 3}" >
+									<c:set var="hide" value="hide" ></c:set>
+									<c:set var="longComent" value="true" ></c:set>
+								</c:if>
+								
+								<li class="list-group-item ${hide} item-comments ${longComent}" style="border: none;">
 									<div class="row">
-										<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+										<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-1
+										 col-sm-offset-1 col-md-offset-1 col-lg-offset-1  user-etape">
 											<c:choose>
 												<c:when test="${empty comment.nomade.profil.file}">
 													<img alt="user" src="${res}/img/avatar.png"
@@ -175,17 +183,25 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
-										<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10">
+										<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 											<div class="mic-info">
 												<a href="#">${comment.nomade.userName}</a>
 											</div>
 											<div class="comment-text">${comment.commentaire}</div>
-											<div class="mic-info">${comment.created}</div>
+											<fmt:formatDate value="${comment.created}" var="formattedDate" 
+               								 type="date" pattern="MM-dd-yyyy hh:mm" />
+											<div class="mic-info">${formattedDate}</div>
 										</div>
 									</div>
 								</li>
+								
 							</c:forEach>
+							<c:if test="${longComent eq true}" >	
+									<a id="load" class="btn">load more comments</a>
+									<a id="reduire" class="btn hide">reduire comments</a>
+							</c:if>
 						</ul>
+						<br/>
 						<c:set value="${etape.id}" var="etape_id"></c:set>
 						<spring:url value="/comments/addEtapeVoy" var="comment_url"></spring:url>
 						<form id="comment_form" action="${comment_url}" method="GET">
@@ -209,7 +225,22 @@
 		jQuery.noConflict();
 		(function($) {
 			$(document).ready(function() {
-/* fjf */
+					
+				$("#load").click(function(){
+					$(".item-comments").each(function(){
+						$(this).removeClass("hide");
+						$("#load").addClass("hide");
+						$("#reduire").removeClass("hide");
+					});
+				});
+				
+				$("#reduire").click(function(){
+					$(".true").each(function(){
+						$(this).addClass("hide");
+						$("#load").removeClass("hide");
+						$("#reduire").addClass("hide");
+					});
+				});
 			});
 		})(jQuery);
 	</script>
