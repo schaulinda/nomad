@@ -9,16 +9,38 @@
 
 <spring:message code="lang_add_practical_information" var="LangAddPracticalInformation" />
 <spring:message code="lang_add_security_information" var="LangAddSecurityInformation" />
-	
+	<style type="text/css">
+   
+@media (max-width:768px){
+
+.practical-info, .security-info{
+	padding-left:10%;
+}
+}
+
+@media (min-width:768px) and (max-width:991px){
+   .practical-info, .security-info{
+	padding-left:4%;
+}
+}
+
+@media (min-width:992px) and (max-width:1199px){
+   .practical-info, .security-info{
+	float:none;
+	padding-left:0;
+	margin-left:30px;
+}
+}
+</style>
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-5 practical-info">
 			<spring:url value="/public/info" var="info_url"></spring:url>
 			<a class="btn btn-success" href="${info_url}" id="btn_info">
 				<i class=" icon-info-sign"><!-- --></i>
 				 ${LangAddPracticalInformation}
 			</a>
 		</div>
-		<div class="col-lg-4 col-lg-offset-2">
+		<div class="col-lg-4 col-lg-offset-1 security-info">
 			<spring:url value="/public/danger" var="danger_url"></spring:url>
 			<a class="btn btn-danger" href="${danger_url}" id="btn_danger">
 				<i class="icon-warning-sign"><!-- --></i>

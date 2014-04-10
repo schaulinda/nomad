@@ -38,13 +38,20 @@
 	<spring:url var="nomad_url" value="/public/nomad" />
 	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
+<style type="text/css">
+	   @media (min-width:992px) and (max-width:1199px){
+	      .first-info{
+	         margin-left:10%;
+	      }
+	   }
+	</style>
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
 	<spring:url var="friend_url" value="/relations/add" />
 	<c:if test="${not empty nomad}" >
 	<c:if test="${beanNomadeManager.home eq false}">
 		<div class="tab-content">
-			<div class="panel panel-warning">
+			<div class="panel panel-warning col-lg-12 col-md-12">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-user"><!-- co --></i>
@@ -52,7 +59,7 @@
 					</h3>
 				</div>
 				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
+					<div class="col-lg-2 col-sm-2 col-xs-12 col-md-12">
 						<c:if test="${empty nomad.profil.file}">
 							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
 						</c:if>
@@ -62,7 +69,7 @@
 								 class="img-rounded" width="90px;" />
 						</c:if>
 					</div>
-					<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-8">
+					<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-xs-12 col-md-12 first-info">
 						<label>${langNationality} : </label> ${nomad.compte.nationality}<br /> 
 						<label>${langName} : </label>${nomad.compte.fullName} <br />
 						<label>${langWebsite} : </label>${nomad.profil.website}
@@ -95,7 +102,7 @@
 				<label>${langVisitedCountry} : </label> ${nomad.profil.visitedCountry}<br />
 				<label>${langPurposeOfTheTrip} :</label>${nomad.profil.butVoyage}
 			</div>
-			<div class="panel panel-warning">
+			<div class="panel panel-warning col-lg-12 col-md-12">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-truck"><!-- co --></i>
@@ -103,7 +110,7 @@
 					</h3>
 				</div>
 				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
+					<div class="col-lg-2 col-sm-2 col-xs-12">
 						<c:if test="${empty nomad.vehicule.photo}">
 							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
 						</c:if>

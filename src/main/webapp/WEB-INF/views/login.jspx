@@ -152,7 +152,7 @@
 	</div>
 	</div>
 	<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#" class="traitgauche">Â© Petit Nomad 2238 
+			<a href="#" class="traitgauche">© Petit Nomad 2238 
 				${langWhoAreWe}
 			</a><br /> | <a href="#" class="traitgauche">
 				${langContact}
