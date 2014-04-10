@@ -9,27 +9,28 @@
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	
+<spring:message code="lang_practical_on_trip" var="langPracticalOnTrip" />
+<spring:message code="lang_security_information_on_trip" var="langSecurityInformationOnTrip" />
+<spring:message code="lang_details" var="langDetails" />
+<spring:message code="lang_nomads_followed" var="langNomadsFollowed" />
+<spring:message code="lang_photos" var="langPhotos" />
+<spring:message code="lang_select" var="langSelect" />
+<spring:message code="lang_no_photo_or_album" var="langNoPhotoOrAlbum" />
+<spring:message code="lang_security_informations" var="langSecurityInformation" />
+<spring:message code="lang_practical_information" var="langPracticalInformation" />
+
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-	<jsp:output omit-xml-declaration="yes" />
-	
-	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-	
+	<jsp:output omit-xml-declaration="yes" />	
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>	
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/resources/img/mapicon" var="iconmap_url"></spring:url>
-
 	<spring:url value="/infopratiques/votePlus/" var="votePlus_url"></spring:url>
 	<spring:url value="/infopratiques/voteMinus/" var="voteMinus_url"></spring:url>
-
 	<spring:url value="/dangerpratiques/votePlus/" var="voteDPlus_url"></spring:url>
 	<spring:url value="/dangerpratiques/voteMinus/" var="voteDMinus_url"></spring:url>
-
 	<spring:url value="/infopratiques/detail/" var="detailsInfo_url"></spring:url>
 	<spring:url value="/dangerpratiques/detail/" var="detailsDanger_url"></spring:url>
-
-	<spring:message code="lang_practical_on_trip" var="langPracticalOnTrip" />
-	<spring:message code="lang_security_information_on_trip"
-		var="langSecurityInformationOnTrip" />
-	<spring:message code="lang_details" var="langDetails" />
 
 	<div class="row">
 		<div class="col-lg-1">
@@ -40,9 +41,12 @@
 			<div class="panel ">
 				<div class="panel-heading">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#amis" data-toggle="tab">Mes
-								contacts</a></li>
-						<li><a href="#photo" data-toggle="tab">Mes photos</a></li>
+						<li class="active">
+							<a href="#amis" data-toggle="tab">
+								${langNomadsFollowed}
+							</a>
+						</li>
+						<li><a href="#photo" data-toggle="tab">${langPhotos}</a></li>
 					</ul>
 				</div>
 				<div class="tab-content">
@@ -54,20 +58,19 @@
 							<c:if test="${friend.nomade2.userName eq nomade.userName}">
 								<c:set var="nmd" value="${friend.nomade}"></c:set>
 							</c:if>
-
-							<li id="image-1" class="thumbnail"><c:choose>
+							<li id="image-1" class="thumbnail">
+								<c:choose>
 									<c:when test="${empty nmd.profil.file}">
 										<img alt="user" src="${res}/img/avatar.png"
-											class="img-rounded" title="" />
+											 class="img-rounded" title="" />
 									</c:when>
 									<c:otherwise>
 										<img alt="user" src="${imageRender_url}/${nmd.profil.file}"
-											class="img-rounded" title="" />
+											 class="img-rounded" title="" />
 									</c:otherwise>
 								</c:choose>
-								<div>${nmd.userName}</div></li>
-
-
+								<div>${nmd.userName}</div>
+							</li>
 						</c:forEach>
 					</div>
 					<div class="tab-pane" id="photo">
@@ -75,34 +78,40 @@
 							<div class="picManager">
 								<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 								<ul class="thumbnails gallery" style="margin-left: -25px;">
-									<c:forEach items="${beanHistorique.listImg}" var="photo"
-										end="6">
-										<li id="image-1" class="thumbnail"><a href="#"
-											id="${photo}" class="imgClass"> <img width="91px"
-												height="91px" alt="" src="${imageRender_url}/${photo}"
-												class="grayscale" />
-										</a> <c:if test="${beanPictureManager.isBackLink() eq true}">
+									<c:forEach items="${beanHistorique.listImg}" var="photo" end="6">
+										<li id="image-1" class="thumbnail">
+											<a href="#" id="${photo}" class="imgClass">
+												<img src="${imageRender_url}/${photo}"
+													 class="grayscale" alt=""
+													 width="91px" height="91px"/>
+											</a>
+											<c:if test="${beanPictureManager.isBackLink() eq true}">
 												<spring:url value="/users/selectImg" var="selectImg"></spring:url>
 												<a class="btn btnSelect" id="select_${photo}"
-													href="${selectImg}/${photo}"><i class="icon-ok"> <!-- co -->
-												</i>select</a>
-											</c:if></li>
+													href="${selectImg}/${photo}">
+													<i class="icon-ok"><!-- co --></i>${langSelect}
+												</a>
+											</c:if>
+										</li>
 									</c:forEach>
 								</ul>
 							</div>
 						</c:if>
 						<c:if test="${empty beanHistorique.listImg }">
-								empty
+							${langNoPhotoOrAlbum}
 						</c:if>
 					</div>
 				</div>
 			</div>
-
 			<div class="panel">
 				<div class="panel-heading">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#danger" data-toggle="tab">Danger</a></li>
-						<li><a href="#info" data-toggle="tab">Info</a></li>
+						<li class="active">
+							<a href="#danger" data-toggle="tab">
+								${langSecurityInformation}
+							</a>
+						</li>
+						<li><a href="#info" data-toggle="tab">${langPracticalInformation}</a></li>
 					</ul>
 				</div>
 				<div class="tab-content">
@@ -119,35 +128,38 @@
 								<div class="col-lg-3" style="border-left: solid 1px;">
 									<ul class="nav nav-tabs nav-justified">
 										<li id="${danger.id}vn">${danger.voteNegatif}</li>
-										<li><a id="${danger.id}" class="voteDMinus"> <i
-												class="icon-thumbs-down"> <!-- -->
-											</i>
-										</a></li>
-										<li id="${danger.id}vp" style="padding-left: 15px;">${danger.votePositif}</li>
-										<li><a id="${danger.id}" class="voteDplus"> <i
-												class="icon-thumbs-up"> <!-- -->
-											</i>
-										</a></li>
+										<li>
+											<a id="${danger.id}" class="voteDMinus">
+												<i class="icon-thumbs-down"><!-- --></i>
+											</a>
+										</li>
+										<li id="${danger.id}vp" style="padding-left: 15px;">
+											${danger.votePositif}
+										</li>
+										<li>
+											<a id="${danger.id}" class="voteDplus">
+												<i class="icon-thumbs-up"><!-- --></i>
+											</a>
+										</li>
 									</ul>
 								</div>
-								<br /> <a href="#"> ${danger.nomade.userName}</a> | <i
-									class="icon-calendar"> <!-- -->
-								</i>
+								<br />
+								<a href="#"> ${danger.nomade.userName}</a> | <i class="icon-calendar"> <!-- --></i>
 								<fmt:formatDate value="${danger.created}" var="dateCreation"
-									pattern="dd-MM-yyyy" />
-								<span style="color: #999999;">${dateCreation} </span>| <span>
-									<i class="icon-comment"> <!-- co -->
-								</i> <c:if test="${not empty info.comments}">
-									${info.comments.size()}
-					</c:if> <c:if test="${empty info.comments}">
-						0
-					</c:if>
+												pattern="dd-MM-yyyy" />
+								<span style="color: #999999;">${dateCreation} </span>
+								| <span>
+									<i class="icon-comment"> <!-- co --></i>
+									<c:if test="${not empty info.comments}">
+										${info.comments.size()}
+									</c:if>
+									<c:if test="${empty info.comments}"> 0 </c:if>
 								</span> | <a id="${danger.id}dt" class="detailsDanger detail"
 									href="${dangerDetail_url}/${danger.id}?cameFrom=nomad">
-									${langDetails} </a>
+									${langDetails}
+								</a>
 							</div>
 						</c:forEach>
-
 					</div>
 					<div class="tab-pane" id="info">
 						<spring:url value="/infopratiques/detail" var="infoDetail_url"></spring:url>
@@ -162,31 +174,36 @@
 								<div class="col-lg-3" style="border-left: solid 1px;">
 									<ul class="nav nav-tabs nav-justified">
 										<li id="${info.id}vn">${info.voteNegatif}</li>
-										<li><a id="${info.id}" class="voteMinus"> <i
-												class="icon-thumbs-down"> <!-- -->
-											</i>
-										</a></li>
-										<li id="${info.id}vp" style="padding-left: 15px;">${info.votePositif}</li>
-										<li><a id="${info.id}" class="voteplus"> <i
-												class="icon-thumbs-up"> <!-- -->
-											</i>
-										</a></li>
+										<li>
+											<a id="${info.id}" class="voteMinus">
+												<i class="icon-thumbs-down"><!-- --></i>
+											</a>
+										</li>
+										<li id="${info.id}vp" style="padding-left: 15px;">
+											${info.votePositif}
+										</li>
+										<li>
+											<a id="${info.id}" class="voteplus">
+												<i class="icon-thumbs-up"><!-- --></i>
+											</a>
+										</li>
 									</ul>
 								</div>
 								<div>
-									<a href="#"> ${info.nomade.userName} </a> | <i
-										class="icon-calendar"> <!-- -->
-									</i>
+									<a href="#"> ${info.nomade.userName} </a> | <i class="icon-calendar"><!-- --></i>
 									<fmt:formatDate value="${info.created}" var="dateC"
-										pattern="dd-MM-yyyy" />
-									<span style="color: #999999;"> ${dateC} </span>| <span><i
-										class="icon-comment"> <!-- -->
-									</i> <c:if test="${not empty info.comments}">
-							${info.comments.size()}
-						</c:if> <c:if test="${empty info.comments}">0</c:if> </span> | <a
-										id="${info.id}dt" class="detailsInfo detail"
+													pattern="dd-MM-yyyy" />
+									<span style="color: #999999;"> 
+										${dateC} 
+									</span>| <span><i class="icon-comment"> <!-- --></i>
+										<c:if test="${not empty info.comments}">
+											${info.comments.size()}
+										</c:if>
+										<c:if test="${empty info.comments}">0</c:if>
+									</span> | <a id="${info.id}dt" class="detailsInfo detail"
 										href="${infoDetail_url}/${info.id}?cameFrom=nomad">
-										${langDetails} </a>
+										${langDetails}
+									</a>
 								</div>
 							</div>
 						</c:forEach>

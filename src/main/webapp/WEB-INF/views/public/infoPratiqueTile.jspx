@@ -70,7 +70,7 @@
 <spring:message code="lang_lake_lagoon_description" var="langLakeLagoonDescription" />
 <spring:message code="lang_hike_start" var="langHikeStart" />
 <spring:message code="lang_hike_start_description" var="langHikeStartDescription" />
-<spring:message code="lang_save" var="langSave" />
+<spring:message code="lang_saving" var="langSaving" />
 
 	<div class="panel panel-success">
 		<div class="panel-heading">
@@ -493,7 +493,7 @@
 									setTimeout(function generate() {
 
 										noty({
-											text : "${langSave}...",
+											text : "${langSaving}...",
 											type : "alert",
 											timeout : 2000,
 											modal : false,

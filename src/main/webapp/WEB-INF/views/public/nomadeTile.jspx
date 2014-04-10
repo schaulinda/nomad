@@ -122,7 +122,6 @@
 						<label>${langTypeOfVehicle} : </label>
 						<img src="${iconveh_url}/${nomad.vehicule.vehiculeType}.png" 
 							 alt="${nomad.vehicule.vehiculeType}" />
-
 					</div>
 				</div>
 			</div>
