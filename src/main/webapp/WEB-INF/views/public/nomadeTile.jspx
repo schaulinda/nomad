@@ -20,96 +20,7 @@
 	<spring:url var="friend_url" value="/relations/add" />
 	<c:if test="${not empty nomad}" >
 	<c:if test="${beanNomadeManager.home eq false}">
-		<div class="tab-content">
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon-user"> <!-- com -->
-						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
-						<a href="">${aProfileOf} ${nomad.userName}</a>
-					</h3>
-				</div>
-				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
-						<c:if test="${empty nomad.profil.file}">
-							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
-						</c:if>
-						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if test="${not empty nomad.profil.file}">
-							<IMG alt="" src="${imageRender_url}/${nomad.profil.file}"
-								class="img-rounded" width="90px;" />
-						</c:if>
-
-					</div>
-					<div class="col-lg-5 col-lg-offset-1 col-sm-6 col-8">
-						<label>Nationalite: </label> ${nomad.compte.nationality}<br /> <label>Nom:
-						</label> ${nomad.compte.fullName} <br /> <label>Site: </label>
-						${nomad.profil.website}
-					</div>
-					<c:if test="${beanNomadeManager.me eq false}">
-						<sec:authorize access="isAuthenticated()" >
-						<div class="col-lg-4 col-sm-4 col-12">
-							<a class="btn_cancel btn btn-default " id="btn_msg"> <i
-								class="icon-envelope"> <!-- com -->
-							</i> <spring:message code="a.message" var="aMessage" /> ${aMessage}</a>
-							<c:if test="${beanNomadeManager.amie eq false}"> 
-								 <a class="btn btn-default" id="btn_add"
-									style="margin-top: 3px; width: 105px;"> <i
-									class="icon-plus-sign"> <!-- com -->
-								</i> <spring:message code="a.add" var="aAdd" /> ${aAdd}
-								</a>
-							</c:if>
-							<c:if test="${beanNomadeManager.amie eq true}"> 
-
-								<a class="btn btn-default" id="btn_add" disabled="true"
-											style="margin-top: 3px; width: 105px;"><i
-											class="icon-ok"> <!-- com --> -
-										</i> 
-									</a>
-		
-						</c:if>
-						 </div>
-						 </sec:authorize>
-					</c:if>
-							
-						
-				</div>
-				<br /> <label>Langues parlees: </label> ${nomad.profil.langues}<br />
-				<label>Pays visites: </label> ${nomad.profil.visitedCountry}<br />
-				<br /> <label>Infos supplémentaires / but du voyage:</label>
-				${nomad.profil.butVoyage}
-			</div>
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">
-						<i class="icon-truck"> <!-- com -->
-						</i>
-						<spring:message code="a.vehicleOf" var="aVehicleOf" />
-						<a href="#">${aVehicleOf} User</a>
-					</h3>
-				</div>
-				<div class="row">
-					<div class="col-lg-2 col-sm-2 col-4">
-						<c:if test="${empty nomad.vehicule.photo}">
-							<img alt="user" src="${res}/img/avatar.png" class="img-rounded" />
-						</c:if>
-						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
-						<c:if test="${not empty nomad.vehicule.photo}">
-							<IMG alt="" src="${imageRender_url}/${nomad.vehicule.photo}"
-								class="img-rounded" width="100px;" />
-						</c:if>
-					</div>
-					<div class="col-lg-8 col-lg-offset-2 col-sm-10 col-8">
-						<label>vehicule State: </label> ${nomad.vehicule.vehiculeState}<br />
-						<label>Nom: </label> ${nomad.vehicule.vehiculeName}<br /> <label>Modele:
-						</label> ${nomad.vehicule.model}<br /> <label>vehicule Type: </label>
-						${nomad.vehicule.vehiculeType}
-
-					</div>
-				</div>
-			</div>
-		</div>
+		<jsp:include page="./forum/mainpage.jspx" />
 	</c:if>
 	<c:if test="${beanNomadeManager.home eq true}">
 		<div class="tab-content">
@@ -141,7 +52,7 @@
 				</div>
 			</div>
 		</div>
-	</c:if>
+	</c:if> 
 </c:if>
 <c:if test="${empty nomad}" >
 	<div class="tab-content">

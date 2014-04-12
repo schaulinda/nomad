@@ -2,8 +2,6 @@ package com.nomade.domain;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
 public class BeanHistorique {
 	
 	private List<EtapeVoyage> listEtapeVoy;
@@ -11,6 +9,8 @@ public class BeanHistorique {
 	private List<DangerPratique> listDanger;
 	
 	private List<InfoPratique> listInfo;
+	
+	private List<EtapeVehicule> listEtapeVeh;
 	
 	private UserNomade nomade;
 	
@@ -54,6 +54,14 @@ public class BeanHistorique {
 
 	public void setComment(Comment comment) {
 		this.comment = comment;
+	}
+
+	public List<EtapeVehicule> getListEtapeVeh() {
+		return listEtapeVeh;
+	}
+
+	public void setListEtapeVeh(List<EtapeVehicule> listEtapeVeh) {
+		this.listEtapeVeh = listEtapeVeh;
 	}
 
 }

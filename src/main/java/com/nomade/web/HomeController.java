@@ -1,5 +1,7 @@
 package com.nomade.web;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,19 +17,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNomadeManager;
+import com.nomade.domain.BeanTopicManager;
+import com.nomade.domain.Confidentiality;
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.RoleName;
+import com.nomade.domain.SubTopic;
+import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
+import com.nomade.security.SecurityUtil;
 import com.nomade.service.DangerPratiqueService;
+import com.nomade.service.DiscussionService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
+import com.nomade.service.SubTopicService;
+import com.nomade.service.TopicService;
 import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
 
@@ -53,6 +63,23 @@ public class HomeController {
 	RelationService relationService;
 	@Autowired
 	VoyageService voyageService;
+	private static final String PAGE_SIZE = "5";
+
+	private static final String FORUM_SUBTOPICS = "/forum/subtopics";
+
+	private static final String FORUM_TOPICS = "/forum/topics";
+
+	@Autowired
+	private TopicService topicService;
+
+	@Autowired
+	private SubTopicService subTopicService;
+
+	@Autowired
+	private DiscussionService discussionService;
+
+	@Autowired
+	SecurityUtil securityUtil;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String selectPage(HttpServletRequest request, Model uiModel) {
@@ -109,10 +136,10 @@ public class HomeController {
 		Page<InfoPratique> listInfo = infoPratiqueService.findByNomade(nomade, 0);
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListEtapeVoy(listEtapeVoy);//listEtapeVoy.getContent().get(0).getComments().s
-		beanHistorique.setListEtapeVeh(listEtapeVeh);
-		beanHistorique.setListDanger(listDanger);
-		beanHistorique.setListInfo(listInfo);
+		beanHistorique.setListEtapeVoy(listEtapeVoy.getContent());//listEtapeVoy.getContent().get(0).getComments().s
+		beanHistorique.setListEtapeVeh(listEtapeVeh.getContent());
+		beanHistorique.setListDanger(listDanger.getContent());
+		beanHistorique.setListInfo(listInfo.getContent());
 		beanHistorique.setNomade(nomade);
 		
 		List<UserNomade> findAllUserNomades = userService.findAllUserNomades();
@@ -123,6 +150,32 @@ public class HomeController {
 		//String makers = parcoursService.buildMakers(findAllUserNomades);
 		//beanNomadeManager.setMakers(makers);
 		
+		
+		List<Topic> topics = new ArrayList<Topic>();
+		topics = findTopicsDependingIfUserIsLoggedOrNot();
+		List<BeanTopicManager> topicBeans = new ArrayList<BeanTopicManager>();
+		for (Topic topic : topics) {
+			List<SubTopic> subTopics = new ArrayList<SubTopic>();
+			if(securityUtil.isUserLogged() && securityUtil.hasAccessToFrozenData()){
+				subTopics =  subTopicService.findByParentTopic(topic);
+			}else if(securityUtil.isUserLogged() && !securityUtil.hasAccessToFrozenData()){
+				subTopics =  subTopicService.findByParentTopicAndFrozen(topic, Boolean.FALSE);
+			}else{
+				subTopics = subTopicService.findByParentTopicAndConfidentialityAndFrozen(topic, Confidentiality.Publique, Boolean.FALSE);
+			}
+			topic.setSubTopics(new HashSet<SubTopic>(subTopics));
+			BeanTopicManager beanTopicManager = new BeanTopicManager();
+			beanTopicManager.setTopic(topic);
+			beanTopicManager.setNbOfDiscussion(topicService
+					.countDiscussion(topic));
+			beanTopicManager.setNbOfMessages(topicService.countMessages(topic));
+			beanTopicManager.setLastMessageDate(topicService
+					.getLastMessageDate(topic));
+			topicBeans.add(beanTopicManager);
+		}
+		uiModel.addAttribute("topicBeans", topicBeans);
+//		return "public/forum/mainpage";
+		
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
 		uiModel.addAttribute("nomade", nomade);
@@ -132,6 +185,18 @@ public class HomeController {
 		
 		return "public/nomad";
 	}
+
+	private List<Topic> findTopicsDependingIfUserIsLoggedOrNot() {
+		List<Topic> topics;
+		if (!securityUtil.isUserLogged()) {
+			topics = topicService
+					.findByConfidentiality(Confidentiality.Publique);
+		} else {
+			topics = topicService.findAllTopics();
+		}
+		return topics;
+	}
+
 	@RequestMapping("/@{username}")
 	public String nomad(@PathVariable("username") String username, HttpServletRequest request, Model uiModel) {
 		
@@ -189,5 +254,4 @@ public class HomeController {
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}
-
 }

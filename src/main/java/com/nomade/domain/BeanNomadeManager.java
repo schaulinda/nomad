@@ -13,6 +13,7 @@ public class BeanNomadeManager {
 	
 	private boolean home;
 
+	private List<UserNomade> nomads;
 	
 	private List<Marker> marker;
 	
@@ -56,6 +57,14 @@ public class BeanNomadeManager {
 
 	public void setMarker(List<Marker> marker) {
 		this.marker = marker;
+	}
+
+	public List<UserNomade> getNomads() {
+		return nomads;
+	}
+
+	public void setNomads(List<UserNomade> nomads) {
+		this.nomads = nomads;
 	}
 
 	
