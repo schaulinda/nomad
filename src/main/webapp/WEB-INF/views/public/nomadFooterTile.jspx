@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="nomadFooterTile"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+
+	<div class="col-lg-5">
+		<div class="panel ">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="icon-user"> <!-- com -->
+					</span> Voyage
+				</h3>
+			</div>
+			<div class="thumbnail">
+				<c:if test="${beanHistorique.voyages.hasContent()}">
+					<c:forEach var="voyage" items="${beanHistorique.voyages.content}">
+						<div class="row">
+							<div>
+								<div class="row">
+									<div class="col-lg-6">
+										<b>Titre: </b>${voyage.title}
+									</div>
+									<div class="col-lg-6">
+										<b>nbre de parcours: </b>${voyage.nbreParcours}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-4">
+										<fmt:formatDate value="${voyage.depart.day}"
+											var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
+										<b>date depart: </b>${formattedDateDepart}
+									</div>
+									<div class="col-lg-4">
+										<fmt:formatDate value="${voyage.arrived.day}"
+											var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
+										<b>date Arrive: </b>${formattedDateArrived}
+									</div>
+									<div class="col-lg-4">
+										<b>Status: </b>${voyage.status}
+									</div>
+									<span class="label label-info"> <c:if
+											test="${beanHistorique.voyages.hasContent()}">
+											${beanHistorique.voyages.number+1} / ${beanHistorique.voyages.totalPages}
+										</c:if> <c:if test="${!beanHistorique.voyages.hasContent()}">
+											0 / 0
+										</c:if>
+									</span>
+									<spring:url
+										value="/voyages/voyageSuiv/${beanHistorique.nomade.id}"
+										var="voyageSuiv_url">
+									</spring:url>
+									<ul class="pagination">
+										<c:if
+											test="${beanHistorique.voyages.hasPreviousPage() eq true}">
+											<li><a id="prec"
+												href="${voyageSuiv_url}/${beanHistorique.voyages.number-1}">
+													<i class="icon-chevron-left"> <!--  -->
+												</i>
+											</a></li>
+										</c:if>
+										<c:if
+											test="${beanHistorique.voyages.hasPreviousPage() eq false}">
+											<li class="disabled"><a id="prec" href="#"> <i
+													class="icon-chevron-left"> <!--  -->
+												</i>
+											</a></li>
+										</c:if>
+										<c:if test="${beanHistorique.voyages.hasNextPage() eq true}">
+											<li><a id="suiv"
+												href="${voyageSuiv_url}/${beanHistorique.voyages.number+1}">
+													<i class="icon-chevron-right"> <!--  -->
+												</i>
+											</a></li>
+										</c:if>
+										<c:if test="${beanHistorique.voyages.hasNextPage() eq false}">
+											<li class="disabled"><a id="suiv" href="#"> <i
+													class="icon-chevron-right"> <!--  -->
+												</i>
+											</a></li>
+										</c:if>
+									</ul>
+								</div>
+								<div class="row">
+									<div class="col-lg-4">
+										<b>Lieu Depart: </b>${voyage.depart.location}
+									</div>
+									<div class="col-lg-4">
+										<b>Lieu Arrive: </b>${voyage.arrived.location}
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+
+			</div>
+		</div>
+		<div class="panel ">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="icon-user"> <!-- com -->
+					</i> Historik
+				</h3>
+			</div>
+			<div class="thumbnail">
+				<c:forEach var="etape" items="${beanHistorique.listEtapeVoy}">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
+							<c:choose>
+								<c:when test="${empty etape.nomade.profil.file}">
+									<img alt="user" src="${res}/img/avatar.png"
+										style="width: 50px; height: 50px" class="img-rounded"
+										title="username" />
+								</c:when>
+								<c:otherwise>
+									<img alt="user"
+										src="${imageRender_url}/${etape.nomade.profil.file}"
+										style="width: 50px; height: 50px" class="img-rounded"
+										title="username" />
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div
+							class="col-xs-11 col-sm-11 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+							<div class="mic-info">
+								<a href="#">${etape.nomade.userName}</a>
+							</div>
+							<div class="comment-text">${etape.description}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div
+							class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
+							<fmt:formatDate value="${etape.dateEtape}"
+								var="dateEtape_formatted" type="date" pattern="MM-dd-yyyy hh:mm" />
+							<a href="#"></a> * ${dateEtape_formatted} * <a href="#"
+								class="parcour"> ${etape.location} </a>
+							<c:if test="${not empty etape.comments}">
+								<span class="label label-info"> ${etape.comments.size()}
+									Comments </span>
+							</c:if>
+							<c:if test="${empty etape.comments}">
+								<span class="label label-info">0 Comments</span>
+							</c:if>
+						</div>
+						<c:if test="${not empty etape.userPhoto}">
+							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape">
+								<img alt="Etape" src="${imageRender_url}/${etape.userPhoto}"
+									class="img-rounded img-responsive"
+									style="width: 400px; height: 200px;" />
+							</div>
+						</c:if>
+					</div>
+					<!-- comments -->
+					<ul class="list-group">
+						<c:forEach var="comment" items="${etape.comments}"
+							varStatus="loop">
+							<c:if test="${loop.index ge 3}">
+								<c:set var="hide" value="hide"></c:set>
+								<c:set var="longComent" value="true"></c:set>
+							</c:if>
+
+							<li class="list-group-item ${hide} item-comments ${longComent}"
+								style="border: none;">
+								<div class="row">
+									<div
+										class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-1
+										 col-sm-offset-1 col-md-offset-1 col-lg-offset-1  user-etape">
+										<c:choose>
+											<c:when test="${empty comment.nomade.profil.file}">
+												<img alt="user" src="${res}/img/avatar.png"
+													style="width: 50px; height: 50px" class="img-rounded"
+													title="username" />
+											</c:when>
+											<c:otherwise>
+												<img alt="user"
+													src="${imageRender_url}/${comment.nomade.profil.file}"
+													style="width: 50px; height: 50px" class="img-rounded"
+													title="username" />
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div
+										class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+										<div class="mic-info">
+											<a href="#">${comment.nomade.userName}</a>
+										</div>
+										<div class="comment-text">${comment.commentaire}</div>
+										<fmt:formatDate value="${comment.created}" var="formattedDate"
+											type="date" pattern="MM-dd-yyyy hh:mm" />
+										<div class="mic-info">${formattedDate}</div>
+									</div>
+								</div>
+							</li>
+
+						</c:forEach>
+						<c:if test="${longComent eq true}">
+							<a id="load" class="btn">load more comments</a>
+							<a id="reduire" class="btn hide">reduire comments</a>
+						</c:if>
+					</ul>
+					<br />
+					<c:set value="${etape.id}" var="etape_id"></c:set>
+					<spring:url value="/comments/addEtapeVoy" var="comment_url"></spring:url>
+					<form id="comment_form" action="${comment_url}" method="GET">
+						<input type="hidden" value="${etape_id}" name="etapeId" /> <input
+							type="hidden" value="${beanHistorique.voyages.number}"
+							name="page" />
+						<textarea id="commentaire" name="commentaire"
+							class="form-control col-lg-3" style="height: 32px;"
+							placeholder="${langAddNewComment}">
+									<!--co  -->
+								</textarea>
+						<input type="submit" id="btn_comment" value="send"
+							class="btn btn-default" style="display: none;" />
+					</form>
+				</c:forEach>
+			</div>
+			<br />
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		jQuery.noConflict();
+		(function($) {
+			$(document).ready(function() {
+
+				$("#load").click(function() {
+					$(".item-comments").each(function() {
+						$(this).removeClass("hide");
+						$("#load").addClass("hide");
+						$("#reduire").removeClass("hide");
+					});
+				});
+
+				$("#reduire").click(function() {
+					$(".true").each(function() {
+						$(this).addClass("hide");
+						$("#load").removeClass("hide");
+						$("#reduire").addClass("hide");
+					});
+				});
+			});
+		})(jQuery);
+	</script>
+
+	<script type="text/javascript">
+		dojo.connect(dojo.byId('commentaire'), 'onkeydown', function(event) {
+			if (event.keyCode == dojo.keys.ENTER) {
+				if (dojo.byId('commentaire') != '') {
+					console.log("hello");
+					document.getElementById("btn_comment").click();
+					dojo.stopEvent(event);
+				}
+			}
+		});
+
+		if (dojo.byId('prec') != null) {
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "prec",
+				event : "onclick",
+				params : {
+					fragments : "nomadFooterTile"
+				}
+			}));
+		}
+		if (dojo.byId('suiv') != null) {
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "suiv",
+				event : "onclick",
+				params : {
+					fragments : "nomadFooterTile"
+				}
+			}));
+		}
+		if (dojo.byId('btn_comment') != null) {
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "btn_comment",
+				event : "onclick",
+				formId : "comment_form",
+				params : {
+					fragments : "nomadFooterTile"
+				}
+			}));
+		}
+	</script>
+
+</div>
+

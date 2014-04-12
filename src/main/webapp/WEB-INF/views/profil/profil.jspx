@@ -8,23 +8,50 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_profile" var="langProfile" />
+<spring:message code="lang_account" var="langAccount" />
+<spring:message code="lang_vehicle" var="langVehicle" />
+<spring:message code="lang_security" var="langSecurity" />
+<spring:message code="lang_modify" var="langModify" />
+<spring:message code="lang_username" var="langUsername" />
+<spring:message code="lang_website_blog_fb" var="langWebsiteBlogFb" />
+<spring:message code="lang_spoken_language" var="langSpokenLanguage" />
+<spring:message code="lang_click_to_select_language" var="clicToSelectLanguage" />
+<spring:message code="lang_visited_country" var="langVisitedCountry" />
+<spring:message code="lang_click_to_select_country" var="langClickToSelectCountry" />
+<spring:message code="lang_work_during_travel" var="langWorkDuringTravel" />
+<spring:message code="lang_purpose_of_the_travel" var="langPurposeOfTheTravel" />
+	
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
 		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
-			<li class="active"><a href="${users_url}/private/profil"
-				id="id_profil"><i class="icon-user"> <!-- co -->
-				</i> <spring:message code="a.profile" /></a></li>
-			<li><a href="${users_url}/private/compte" id="id_compte"><i
-					class="	icon-briefcase"> <!-- co -->
-				</i> <spring:message code="a.account" /></a></li>
-			<li><a href="${users_url}/private/vehicule" id="id_vehicule"><i
-					class="icon-truck "> <!-- co -->
-				</i> <spring:message code="a.vehicle" /></a></li>
-			<li><a href="${users_url}/private/passwordReset"
-				id="id_password"><i class="icon-lock "> <!-- co -->
-				</i> <spring:message code="a.security" /></a></li>
+			<li class="active">
+				<a href="${users_url}/private/profil" id="id_profil">
+					<i class="icon-user"><!-- co --></i>
+					${langProfile}
+				</a>
+			</li>
+			<li>
+				<a href="${users_url}/private/compte" id="id_compte">
+					<i class="	icon-briefcase"><!-- co --></i>
+					${langAccount}
+				</a>
+			</li>
+			<li>
+				<a href="${users_url}/private/vehicule" id="id_vehicule">
+					<i class="icon-truck "><!-- co --></i>
+					${langVehicle}
+				</a>
+			</li>
+			<li>
+				<a href="${users_url}/private/passwordReset" id="id_password">
+					<i class="icon-lock "><!-- co --></i>
+					${langSecurity}
+				</a>
+			</li>
 		</ul>
 	</div>
 	<div class="tab-content">
@@ -33,77 +60,93 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<c:if test="${empty nomade.profil.file}" >
-							<IMG alt="" src="${res}/img/profil.png" width="210px"
-							height="240px;" /> 
+							<img alt="" src="${res}/img/profil.png" 
+								 width="210px" height="240px;" /> 
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty nomade.profil.file}" >
-							<IMG alt="" src="${imageRender_url}/${nomade.profil.file}" width="210px"
-							height="240px;" /> 
+							<img alt="" src="${imageRender_url}/${nomade.profil.file}" 
+								 width="210px" height="240px;" /> 
 						</c:if>
-							<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
-							<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=profil" > <i
-							class="icon-edit"> <!-- co -->
-						</i> <spring:message code="a.edit" />
+						<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
+						<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=profil" >
+						   <i class="icon-edit"><!-- co --></i>
+							${langModify}
 						</a>
 					</div>
 					<div class="col-lg-9 table-responsive">
 						<table id="user" class="table table-bordered table-striped">
 							<tbody>
 								<tr>
-									<td width="40%"><spring:message code="td.userName" /></td>
-									<td><a href="#" id="username" data-url="${updateFieldUrl}"
-										data-type="text" data-pk="1" data-name="username"
-										class="editable editable-click"
-										data-value="${nomade.userName}"> </a></td>
+									<td width="40%">${langUsername}</td>
+									<td>
+										<a href="#" id="username" data-url="${updateFieldUrl}"
+										   data-type="text" data-pk="1" data-name="username"
+										   class="editable editable-click"
+										   data-value="${nomade.userName}">
+										</a>
+									</td>
 								</tr>
 								<tr>
-									<td><spring:message code="td.webSite" /></td>
-									<td><a href="#" id="website" data-type="text" data-pk="1"
-										data-name="website" data-placeholder="facebook.com/john"
-										data-url="${updateFieldUrl}" class="editable editable-click"
-										data-value="${nomade.profil.website}"> </a></td>
+									<td>${langWebsiteBlogFb}</td>
+									<td>
+										<a href="#" id="website" data-type="text" data-pk="1"
+										   data-name="website" data-placeholder="facebook.com/john"
+										   data-url="${updateFieldUrl}" class="editable editable-click"
+										   data-value="${nomade.profil.website}">
+										</a>
+									</td>
 								</tr>
 								<tr>
-									<td><spring:message code="td.spokenLanguage" /></td>
-									<td><a href="#" id="langues" data-type="select2"
-										data-name="langues" data-pk="1" data-url="${updateFieldUrl}"
-										class="editable editable-click" style="color: gray;"
-										data-placeholder="click to selection languages"> <c:forEach
-												var="item" items="${nomade.profil.langues}" varStatus="loop">
+									<td>${langSpokenLanguage}</td>
+									<td>
+										<a href="#" id="langues" data-type="select2"
+										   data-name="langues" data-pk="1" data-url="${updateFieldUrl}"
+										   class="editable editable-click" data-placeholder="${clicToSelectLanguage}"
+										   style="color: gray;">
+											<c:forEach var="item" items="${nomade.profil.langues}" 
+													   varStatus="loop">
 			                   					${item}
-			                    				<c:if test="${!loop.last}">,</c:if>
+			                    				<c:if test="${!loop.last}">, </c:if>
 											</c:forEach>
-									</a></td>
+										</a>
+									</td>
 								</tr>
 								<tr>
-									<td><spring:message code="td.visitedCountry" /></td>
-									<td><a href="#" id="visitedCountry" data-type="select2"
-										data-name="visitedCountry" data-pk="1"
-										data-url="${updateFieldUrl}"
-										data-placeholder="click to selection countries"
-										class="editable editable-click "> <c:forEach var="item"
-												items="${nomade.profil.visitedCountry}" varStatus="loop">
+									<td>${langVisitedCountry}</td>
+									<td>
+										<a href="#" id="visitedCountry" data-type="select2"
+										   data-name="visitedCountry" data-pk="1"
+										   data-url="${updateFieldUrl}"
+										   data-placeholder="${langClickToSelectCountry} }"
+										   class="editable editable-click ">
+											<c:forEach var="item" items="${nomade.profil.visitedCountry}" 
+											           varStatus="loop">
 			                   					${item}
-			                    				<c:if test="${!loop.last}">,</c:if>
+			                    				<c:if test="${!loop.last}">, </c:if>
 											</c:forEach>
-									</a></td>
+										</a>
+									</td>
 								</tr>
 								<tr>
-									<td><spring:message code="td.workDuringTravel" /></td>
-									<td><a href="#" id="metier" data-type="text"
-										data-url="${updateFieldUrl}" data-pk="1" data-name="metier"
-										data-value="${nomade.profil.metier}"
-										class="editable editable-click"> </a></td>
-
+									<td>${langWorkDuringTravel}</td>
+									<td>
+										<a href="#" id="metier" data-type="text"
+										   data-url="${updateFieldUrl}" data-pk="1" data-name="metier"
+										   data-value="${nomade.profil.metier}"
+										   class="editable editable-click">
+										</a>
+									</td>
 								</tr>
 								<tr>
-									<td><spring:message code="td.purposeOfTheTrip" /></td>
-									<td><a href="#" id="butVoyage" data-type="textarea"
-										data-pk="1" data-name="butVoyage" data-url="${updateFieldUrl}"
-										data-value="${nomade.profil.butVoyage}"
-										class="editable editable-click"> <!-- co -->
-									</a></td>
+									<td>${langPurposeOfTheTravel}</td>
+									<td>
+										<a href="#" id="butVoyage" data-type="textarea"
+										   data-pk="1" data-name="butVoyage" data-url="${updateFieldUrl}"
+										   data-value="${nomade.profil.butVoyage}"
+										   class="editable editable-click">
+										</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>

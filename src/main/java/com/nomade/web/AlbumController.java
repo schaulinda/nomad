@@ -48,6 +48,7 @@ public class AlbumController {
 		String idAlbum;
 		List<String> listIdPhoto;
 		List<Album> albums = nomade.getAlbums();
+		
 		if (albums != null && albums.size() > 0) {
 
 			Album album = albums.iterator().next();
@@ -289,6 +290,7 @@ public class AlbumController {
 
 		return "albums/picManager";
 	}
+
 
 	@RequestMapping(value = "imageRender/{id}")
 	@ResponseBody

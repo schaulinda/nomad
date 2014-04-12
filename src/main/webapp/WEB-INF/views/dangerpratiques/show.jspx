@@ -20,5 +20,6 @@
         <field:display field="nomade" id="s_com_nomade_domain_DangerPratique_nomade" object="${dangerpratique}" z="gDayWzswddRLfj3OypuievPGl7k="/>
         <field:display field="comments" id="s_com_nomade_domain_DangerPratique_comments" object="${dangerpratique}" z="ReWw/6KUSfkTn7AsyTkqU2JxCwc="/>
         <field:display field="icon" id="s_com_nomade_domain_DangerPratique_icon" object="${dangerpratique}" z="vMY9WN2Fwx2TZS9sj5Fag8S2H5E="/>
+        <field:display field="listVotants" id="s_com_nomade_domain_DangerPratique_listVotants" object="${dangerpratique}" z="GNzmFd6YRTU70lJRKI1OFs+qKBs="/>
     </page:show>
 </div>

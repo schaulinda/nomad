@@ -49,4 +49,7 @@ public class EtapeVoyage {
     @OrderBy(value = "created", order=Order.DESCENDING)
     private List<Comment> comments = new ArrayList<Comment>();
     
+    @DBRef
+    private Voyage voyage;
+    
 }

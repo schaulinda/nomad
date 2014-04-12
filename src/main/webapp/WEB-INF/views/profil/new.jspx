@@ -8,6 +8,8 @@
 	<jsp:output omit-xml-declaration="yes" />
 
 	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_complete" var="langComplete" />
 
 	<div class="panel">
 		landing page, comming soon...<br /> securite(connection,
@@ -37,7 +39,7 @@
 													  +fieldpercent+'" aria-valuemin="0" aria-valuemax="100" style="width:'
 													  +fieldpercent+'%">'
 											   		 +'<span class="sr-only">'
-													  +fieldpercent+'% Complete</span></div></div>'
+													  +fieldpercent+'% ${langComplete}</span></div></div>'
 													  +'<div>'+a+'</div>';
 													  
 													var n = noty({

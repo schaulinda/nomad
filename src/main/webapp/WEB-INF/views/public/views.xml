@@ -8,9 +8,13 @@
         <put-attribute name="subdanger" value="/WEB-INF/views/public/fil/danger.jspx" cascade="true"/>
         <put-attribute name="subinfo" value="/WEB-INF/views/public/fil/info.jspx" cascade="true"/>
     </definition>
+    
+    <definition name="nomadFooter" template="/WEB-INF/views/public/nomadFooter.jspx" >
+        <put-attribute name="nomadFooterTile" value="/WEB-INF/views/public/nomadFooterTile.jspx" cascade="true"/>
+    </definition>
      <definition extends="privateLayout" name="public/nomad">
         <put-attribute name="body" value="/WEB-INF/views/public/nomade.jspx"/>
-        <put-attribute name="id_subfooter" value="/WEB-INF/views/public/nomadFooter.jspx" />
+        <put-attribute name="id_subfooter" value="nomadFooter" />
         <put-attribute name="smallTile" value="/WEB-INF/views/public/nomadeTile.jspx" cascade="true"/>
         <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
         <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>
@@ -24,7 +28,7 @@
     </definition>
     <definition extends="privateLayout" name="public/carnet">
         <put-attribute name="body" value="/WEB-INF/views/public/carnet.jspx"/>
-        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+        <put-attribute name="id_subfooter" value="nomadFooter" />
         <put-attribute name="smallTile" value="/WEB-INF/views/public/carnetTile.jspx" cascade="true"/>
         <put-attribute name="mapTile" value="/WEB-INF/views/public/mapTile.jspx" cascade="true"/>
         <put-attribute name="infoTile" value="/WEB-INF/views/public/infoTile.jspx" cascade="true"/>

@@ -3,7 +3,6 @@
 	height: 46px;
 	vertical-align: center;
 	width: 46px;
-	margin-right: 4px;
 	margin-left:0;
 }
 
@@ -12,7 +11,7 @@
 }
 
 #topheader .user{
-   margin-left:7.005%;	
+  margin-left:5%;
 }
 
 .user>a:HOVER {
@@ -264,14 +263,14 @@ filter: grayscale(100%); */
 }
 
 .logo-page{
-	margin-left:20%;
-	margin-right:10%;
+	margin-left:25%;
+	margin-right:5%;
 	padding-top:30px;
 }
 
 .loginForm, .registerForm{
 	background-color:rgba(245, 245, 245, 0.7);
-	padding:4% 5% 4% 5%;
+	padding:4% 5% 4% 4%;
 }
 
 .loginForm legend, .registerForm legend {
@@ -346,6 +345,10 @@ footer{
 	margin-bottom:-10px;
 }
 
+.navbar-topheader{
+	background-color:#FFFBE8;
+}
+
 
 #subuser div, #subveh div, #subinfo div, #subdanger div{
 	width:100%;
@@ -359,6 +362,11 @@ footer{
 .logo-page img{
 	width:50%;
 }
+
+.img_veh1{
+	width:50px;
+	margin-left:40px;
+}
 }
 
 @media (min-width:992px) and (max-width:1199px){
@@ -366,4 +374,46 @@ footer{
 	   width: 325px;
 	}
 	
+    .img_veh1{
+	margin-left:-50px;
+}
+    .selectVehicle{
+       padding-left:3px;
+       padding-right:0;
+    }
+    
+    .navbar-topheader .container{
+       padding-left:40px;
+    }
+    
+    .bs-navbar-topheader .navbar-nav{
+       width:40%;
+       margin-left:20px;
+    }
+}
+
+@media (width:768px){
+.bs-navbar-topheader{
+	width:78%;
+	margin-left:5%;
+}
+.img_veh1{
+	width:40px;
+	margin-left:50px;
+}
+
+}
+
+@media (min-width:389px) and (max-width:767px){
+
+#vehiculeState_header{
+	float:left;
+}
+}
+
+@media (width:1280px){
+
+    .navbar-topheader .container{
+       padding-left:50px;
+    }
 }

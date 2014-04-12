@@ -8,8 +8,8 @@
             <table:column id="c_com_nomade_domain_InfoPratique_selecteur" property="selecteur" z="Kuo7TYIA01gDE/82ij752c4eiro="/>
             <table:column id="c_com_nomade_domain_InfoPratique_selecteur1" property="selecteur1" z="xIwwiaa6+EA8cNvzCsfKSQNlxV8="/>
             <table:column id="c_com_nomade_domain_InfoPratique_location" property="location" z="ezeza5FvEE36uz7Kg2VegZXyL0I="/>
-            <table:column id="c_com_nomade_domain_InfoPratique_locationLat" property="locationLat" z="B/O2GRQdBj3IYLVvdQopzh4/LUg="/>
             <table:column id="c_com_nomade_domain_InfoPratique_icon" property="icon" z="NSX0c5ZWfc2eesXSuJsrxAF30eU="/>
+            <table:column id="c_com_nomade_domain_InfoPratique_listVotants" property="listVotants" z="ZP3wlAr+wtGZWaF4P/jZKNkqcPs="/>
         </table:table>
     </page:list>
 </div>

@@ -10,11 +10,41 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	
+<spring:message code="lang_complete" var="langComplete" />
+<spring:message code="lang_profile_of" var="langProfileOf" />
+<spring:message code="lang_nationality" var="langNationality" />
+<spring:message code="lang_name" var="langName" />
+<spring:message code="lang_website" var="langWebsite" />
+<spring:message code="lang_message" var="langMessage" />
+<spring:message code="lang_add" var="langAdd" />
+<spring:message code="lang_spoken_language" var="langSpokenLanguage" />
+<spring:message code="lang_visited_country" var="langVisitedCountry" />
+<spring:message code="lang_purpose_of_the_trip" var="langPurposeOfTheTrip" />
+<spring:message code="lang_vehicle_of" var="langVehicleOf" />
+<spring:message code="lang_status" var="langStatus" />
+<spring:message code="lang_model" var="langoModel" />
+<spring:message code="lang_type_of_vehicle" var="langTypeOfVehicle" />
+<spring:message code="lang_error" var="langError" />
+<spring:message code="lang_nomad_not_found" var="langNomadNotFound" />
+<spring:message code="lang_send_message" var="langSendMessage" />
+<spring:message code="lang_cancel" var="langCancel" />
+<spring:message code="lang_send" var="langSend" />
+	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 	<spring:url var="nomad_url" value="/public/nomad" />
+	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
+	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
+<style type="text/css">
+	   @media (min-width:992px) and (max-width:1199px){
+	      .first-info{
+	         margin-left:10%;
+	      }
+	   }
+	</style>
 
 	<c:set value="${beanNomadeManager.nomade}" var="nomad"></c:set>
 	<spring:url var="friend_url" value="/relations/add" />
@@ -29,7 +59,7 @@
 					<h3 class="panel-title">
 						<i class="icon-help"> <!-- com -->
 						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
+						<spring:message code="lang_profile_of" var="langProfileOf" />
 						Help
 					</h3>
 				</div>
@@ -59,14 +89,12 @@
 			<div class="panel panel-warning">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-help"> <!-- com -->
-						</i>
-						<spring:message code="a.profileOf" var="aProfileOf" />
-						Nomad
+						<i class="icon-help"><!-- co --></i>
+						${langError}
 					</h3>
 				</div>
 				<div class="row">
-					<p class="label-warning">Nomad not found, use our search tool or map!</p>
+					<p class="label-warning">${langNomadNotFound}</p>
 				</div>
 			</div>
 		</div>
@@ -94,10 +122,10 @@
 													html : 'true',
 													trigger : 'click',
 													placement : 'bottom',
-													title : 'Send message',
+													title : '${langSendMessage}',
 													content : '<form id="formMsg" ><p><textarea><!-- com --></textarea></p>'
-															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >Cancel</button>'
-															+ ' <button class="btn btn-primary" >Send</button></form>'
+															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >${langCancel}</button>'
+															+ ' <button class="btn btn-primary" >${langSend}</button></form>'
 												});
 
 								/* add friend */

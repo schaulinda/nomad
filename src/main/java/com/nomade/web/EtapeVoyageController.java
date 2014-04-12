@@ -24,6 +24,7 @@ import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Parcours;
+import com.nomade.domain.StatusVoyage;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
@@ -90,15 +91,21 @@ public class EtapeVoyageController {
 		double[] location = new double[]{etapeVoyage.getUserlat(), etapeVoyage.getUserlng()};
 		etapeVoyage.setGeolocation(location);
 		
-		BeanNoteBookManager bookManager = new BeanNoteBookManager();
+		boolean existingVoyage = voyageService2.existingVoyage(nomade);
+		if(existingVoyage){
+			etapeVoyage.setVoyage(voyageService2.findVoyageEnCours(nomade).get(0));
+		}else{
+			etapeVoyage.setVoyage(null);
+		}
+		
 		
 		//save and render page
 		voyageService.saveEtapeVoyage(etapeVoyage);
 		
 		beanHistoriqueDecoration(uiModel, nomade);
-		
+		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setNotify("yep");
-		bookManager.setVoyageEnCours(voyageService2.existingVoyage(nomade));
+		bookManager.setVoyageEnCours(existingVoyage);
 		//bookManager.setListParcours(etapeService.drawParcours(nomade));
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
 		uiModel.addAttribute("nomade", nomade);

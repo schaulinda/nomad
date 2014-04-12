@@ -10,7 +10,16 @@
 	<spring:url var="home" value="/" />
 	
 	<!-- header -->
-   
+	
+<spring:message code="lang_who_are_we" var="langWhoAreWe"/>
+<spring:message code="lang_contact" var="langContact"/>
+<spring:message code="lang_confidentiality" var="langConfidentiality"/>
+<spring:message code="lang_user_agreement" var="langUserAgreement"/>
+<spring:message code="lang_help_FAQ" var="langHelpFAQ"/>
+<spring:message code="lang_professionals" var="langProfessionals"/>
+<spring:message code="lang_advertiser" var="langAdvertiser"/>
+<spring:message code="lang_development_translation" var="langDevelopmentTranslation"/>
+	
 	<!-- body content -->
 	<div class="row">
 	   <div class="global_block">
@@ -22,7 +31,7 @@
 	<div class="block-avant">
 		<div class="row login_content">
 		    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 logo-page">
-		       <img src="${resources}/img/travel.png" class="img-responsive transparent"> </img>
+		       <img src="${resources}/img/travel.png" class="img-responsive"> </img>
 		    </div> 
 			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 				<div class="well loginForm">
@@ -142,16 +151,27 @@
 		</div>
 	</div>
 	</div>
-	<footer class="text-center login-footer" style="z-index: 99; position: relative;">
-			<a href="#" class="copyright">© Petit Nomad 2238 <spring:message code="a.whoAreWe" /></a> <br /> 
-			<a href="#" class="traitgauche"><spring:message code="a.contact" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.confidentiality" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.userAgreement" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.helpFAQ" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.professionals" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.advertiser" /></a> | 
-			<a href="#" class="traitgauche"><spring:message code="a.developmentTranslation" /></a>
-	</footer>
+	<footer class="text-center" style="z-index: 99; position: relative;">
+			<a href="#" class="traitgauche">© Petit Nomad 2238 
+				${langWhoAreWe}
+			</a><br /> | <a href="#" class="traitgauche">
+				${langContact}
+			</a> | <a href="#" class="traitgauche">
+				${langConfidentiality}
+			</a> | <a href="#" class="traitgauche">
+				${langUserAgreement}
+			</a> | <a href="#" class="traitgauche">
+				${langHelpFAQ}
+			</a> | <a href="#" class="traitgauche">
+				${langProfessionals}
+			</a> | <a href="#" class="traitgauche">
+				${langAdvertiser}
+			</a> | <a href="#" class="traitgauche">
+				${langDevelopmentTranslation}
+			</a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
+				${aForum}
+			</a>
+		</footer>
 	<script type="text/javascript">
 		dojo.addOnLoad(function() {
 			document.getElementById('j_username').focus();

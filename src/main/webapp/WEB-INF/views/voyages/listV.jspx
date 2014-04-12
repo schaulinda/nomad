@@ -22,8 +22,17 @@
 			</h3>
 		</div>
 	<br/>
-	<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
+	<div class="row">
+		<div class="col-lg-6">
+			<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
 			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >creer un nouveau voyage</a>
+		</div>
+		<div class="col-lg-6">
+			<spring:url value="/voyages/selectView" var="retour_url" ></spring:url>
+			<a href="${retour_url}" id="retour" class="btn btn-default btn-block" ><i class="icon-circle-arrow-left"><!-- co --></i> Retour au carnet de voyage</a>
+		</div>
+	
+	</div>
 			<br/>
 	<div style="overflow-y: auto;overflow-x: hidden;height: 400px;" >
 			<c:forEach  var="voyage" items="${listVoy}" >
@@ -38,10 +47,12 @@
 				</div>
 				<div  class="row" >
 					<div class="col-lg-4" >
-						<b>date depart: </b>${voyage.depart.day} 
+						<fmt:formatDate value="${voyage.depart.day}" var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
+						<b>date depart: </b>${formattedDateDepart} 
 					</div>
 					<div class="col-lg-4" >
-						<b>date Arrive: </b>${voyage.arrived.day}
+						<fmt:formatDate value="${voyage.arrived.day}" var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
+						<b>date Arrive: </b>${formattedDateArrived}
 					</div >
 					<div class="col-lg-4" >
 						<b>Status: </b>${voyage.status}
@@ -66,8 +77,6 @@
 			</div>
 			<br/>
 			</c:forEach>
-			<spring:url value="/voyages/selectView" var="retour_url" ></spring:url>
-			<a href="${retour_url}" id="retour" class="btn btn-default btn-block" >Retour au carnet de voyage</a>
 	</div>
 	
   </div>

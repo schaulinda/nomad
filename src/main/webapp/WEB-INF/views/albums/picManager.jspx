@@ -6,22 +6,38 @@
 	xmlns:tiles="http://tiles.apache.org/tags-tiles"
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	
+<spring:message code="lang_photos_manager" var="langPhotosManager" />
+<spring:message code="lang_enter_an_album_name" var="langEnterAnAlbumName" />
+<spring:message code="lang_add" var="langAdd" />
+<spring:message code="lang_photos_albums" var="langPhotosAlbums" />
+<spring:message code="lang_photos" var="langPhotos" />
+<spring:message code="lang_delete_this_album" var="langDeleteThisAlbum" />
+<spring:message code="lang_select" var="langSelect" />
+<spring:message code="lang_previous" var="langPrevious" />
+<spring:message code="lang_next" var="langNext" />
+<spring:message code="lang_empty_album" var="langEmptyAlbum" />
 
 	<spring:url var="res" value="/resources" />
 	<div class="panel">
-		<div class="panel-heading">Your pictures</div>
+		<div class="panel-heading">${langPhotosManager}</div>
 		<div class="row">
 			<div class="col-lg-3" style="" id="albumList">
 				<spring:url value="/albums" var="album_url"></spring:url>
 				<form:form action="${album_url}/create" id="formCreateAlbum">
 					${errorAlbum}
 					<div class="input-group">
-						<input type="text" class="form-control" required="required"
-							id="albumName" name="albumName" value="${albumName}"
-							placeholder="Enter album name" /> <span class="input-group-btn">
+						<input type="text" 
+							   class="form-control" 
+							   required="required"
+							   id="albumName" 
+							   name="albumName" 
+							   value="${albumName}"
+							   placeholder="${langEnterAnAlbumName}" />
+						<span class="input-group-btn">
 							<button class="btn btn-default" id="createAlbum_id" type="submit">
-								<i class="icon-folder-open"> <!-- co -->
-								</i> Add
+								<i class="icon-folder-open"><!-- co --></i>
+								${langAdd}
 							</button>
 						</span>
 					</div>
@@ -37,29 +53,33 @@
 							<c:set value="" var="active"></c:set>
 						</c:if>
 						<spring:url value="/albums/image" var="imageAlbum_url"></spring:url>
-						<a href="${imageAlbum_url}/${album._id}" id="${album._id}"
-							class="list-group-item ${active}"> <spring:url
-								value="/albums/delete" var="deleteAlbum_url"></spring:url> <span
-							class="badge">${album.numPhoto}</span> <i
-							class="icon-folder-open"> <!--co  -->
-						</i> <label id="${album.name}"> ${album.name} </label>
+						<a href="${imageAlbum_url}/${album._id}" 
+						   id="${album._id}" 
+						   class="list-group-item ${active}">
+							<spring:url value="/albums/delete" var="deleteAlbum_url"></spring:url>
+							<span class="badge">${album.numPhoto}</span>
+							<i class="icon-folder-open"><!--co  --></i>
+							<label id="${album.name}"> ${album.name} </label>
 						</a>
 					</c:forEach>
 				</div>
-				<!-- <a href="${deleteAlbum_url}/${album.id}"> -->
 			</div>
 			<div class="col-lg-9">
 				<ul class="nav nav-tabs nav-justified">
-					<li class="${beanPictureManager.tabManager}"><a
-						href="#manager" data-toggle="tab">Albums</a></li>
-					<li class="${beanPictureManager.tabPhoto}"><a
-						href="#photoUpload" data-toggle="tab">Photos</a></li>
+					<li class="${beanPictureManager.tabManager}">
+						<a href="#manager" data-toggle="tab">${langPhotosAlbums}</a>
+					</li>
+					<li class="${beanPictureManager.tabPhoto}">
+						<a href="#photoUpload" data-toggle="tab">${langPhotos}</a>
+					</li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane ${beanPictureManager.tabManager}" id="manager">
 						<c:if test="${not empty nomade.albums}">
-							<a href="${deleteAlbum_url}/${beanPictureManager.idAlbum}"
-								id="deleteAlbumId">delete this album</a>
+							<a href="${deleteAlbum_url}/${beanPictureManager.idAlbum}" 
+							   id="deleteAlbumId">
+								${langDeleteThisAlbum}
+							</a>
 						</c:if>
 						<c:if test="${empty nomade.albums}">
 							<input type="hidden" id="deleteAlbumId" />
@@ -69,38 +89,42 @@
 							<div class="picManager">
 								<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 								<ul class="thumbnails gallery" style="margin-left: -25px;">
-									<c:forEach items="${beanPictureManager.listIdPhoto}"
-										var="photo">
-										<li id="image-1" class="thumbnail"><spring:url
-												var="viewImg" value="/albums/viewImg"></spring:url> <a
-											href="${viewImg}/${photo}" id="${photo}" class="imgClass">
-												<img width="91px" height="91px" alt=""
-												src="${imageRender_url}/${photo}" class="grayscale" />
-										</a> <c:if test="${beanPictureManager.isBackLink() eq true}">
+									<c:forEach items="${beanPictureManager.listIdPhoto}" var="photo">
+										<li id="image-1" class="thumbnail">
+											<spring:url var="viewImg" value="/albums/viewImg"></spring:url>
+											<a href="${viewImg}/${photo}" 
+											   id="${photo}" 
+											   class="imgClass">
+												<img alt=""
+												     src="${imageRender_url}/${photo}" 
+												     class="grayscale"
+												     width="91px" height="91px" />
+											</a>
+											<c:if test="${beanPictureManager.isBackLink() eq true}">
 												<spring:url value="/users/selectImg" var="selectImg"></spring:url>
-												<a class="btn btnSelect" id="select_${photo}"
-													href="${selectImg}/${photo}"><i class="icon-ok"><!-- co -->
-														</i>select</a>
-											</c:if></li>
+												<a class="btn btnSelect" 
+												   id="select_${photo}"
+												   href="${selectImg}/${photo}">
+													<i class="icon-ok"><!-- co --></i>
+													${langSelect}
+												</a>
+											</c:if>
+										</li>
 									</c:forEach>
 								</ul>
 								<ul class="pagination">
-									<li><a href="#">previous</a></li>
+									<li><a href="#">${langPrevious}</a></li>
 									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">next</a></li>
+									<li><a href="#">${langNext}</a></li>
 								</ul>
 							</div>
 						</c:if>
 						<c:if test="${empty beanPictureManager.listIdPhoto }">
-								empty
+							${langEmptyAlbum}
 						</c:if>
 					</div>
-
 					<tiles:insertAttribute name="photoUpload" />
-
 				</div>
-
-
 			</div>
 		</div>
 	</div>

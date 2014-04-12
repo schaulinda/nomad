@@ -21,6 +21,7 @@
         <field:input field="comments" id="c_com_nomade_domain_DangerPratique_comments" z="ihVoauYrSIqXw3nx/nR/JFiNvJE="/>
         <field:input field="id" id="c_com_nomade_domain_DangerPratique_id" required="true" validationMessageCode="field_invalid_integer" z="F4nhIEhn9Yqn91x4xeb2vFm0gWU="/>
         <field:input field="icon" id="c_com_nomade_domain_DangerPratique_icon" z="TW9Xq+yjxuo2Ryxu1SvCRgFzKos="/>
+        <field:input field="listVotants" id="c_com_nomade_domain_DangerPratique_listVotants" z="TaEDWhHd/V/eu6dRehz7Adf/pLc="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_nomade_domain_DangerPratique" render="${not empty dependencies}" z="6+uNmufpVENNuLQB0sgGUBbYdQQ="/>
 </div>

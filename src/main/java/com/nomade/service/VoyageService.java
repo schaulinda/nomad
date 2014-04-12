@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.layers.service.RooService;
 
 import com.nomade.domain.Marker;
@@ -28,5 +29,6 @@ public interface VoyageService {
 	public Etape getLastLocation(UserNomade nomad);
 	public List<Etape> drawVoyageEnCours();
 	public List<Marker>  buildNomadMakers(HttpServletRequest httpServletRequest);
+	public Page<Voyage> findByNomade(UserNomade nomade, int page);
 	
 }

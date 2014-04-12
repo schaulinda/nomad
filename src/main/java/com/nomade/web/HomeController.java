@@ -23,10 +23,12 @@ import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.Relation;
 import com.nomade.domain.RoleName;
 import com.nomade.domain.SubTopic;
 import com.nomade.domain.Topic;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
 import com.nomade.security.SecurityUtil;
 import com.nomade.service.DangerPratiqueService;
@@ -40,6 +42,7 @@ import com.nomade.service.SubTopicService;
 import com.nomade.service.TopicService;
 import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
+import com.nomade.tools.ImageUtilInterface;
 
 @RequestMapping({ "/", "/index", "home" })
 @Controller
@@ -80,7 +83,8 @@ public class HomeController {
 
 	@Autowired
 	SecurityUtil securityUtil;
-	
+	@Autowired
+	ImageUtilInterface imgService;
 	@RequestMapping(method = RequestMethod.GET)
 	public String selectPage(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
@@ -100,7 +104,7 @@ public class HomeController {
 				
 				BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 				
-				beanHistoriqueDecoration(uiModel, nomade);
+				beanHistoriqueDecoration(uiModel, nomade, 0);
 				
 				beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));	
 				beanNomadeManager.setMe(true);
@@ -213,7 +217,7 @@ public class HomeController {
 			
 			UserNomade findUserNomade = findByUserName.get(0);
 			
-			beanHistoriqueDecoration(uiModel, findUserNomade);
+			beanHistoriqueDecoration(uiModel, nomade, 0);
 
 			beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 			beanNomadeManager.setMe(false);
@@ -243,14 +247,37 @@ public class HomeController {
 		
 	}
 	
-	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
-		
-		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
-		List<InfoPratique> listInfo = infoPratiqueService.findByNomadeOrderByCreated(nomade);
+private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page) {
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
-		beanHistorique.setListDanger(listDanger);
-		beanHistorique.setListInfo(listInfo);
+		
+		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
+		beanHistorique.setListDanger(dangerPratiqueService.findByNomadeOrderByCreated(nomade));
+		
+		beanHistorique.setListImg(imgService.allImg(nomade));
+		List<Relation> findMyFriends = relationService.findMyFriends(nomade);
+		beanHistorique.setFriends(findMyFriends);
+		
+
+		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
+		beanHistorique.setVoyages(voyages);
+		
+		try {
+			Voyage voyage = voyages.getContent().get(0);
+			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyage(null);
+			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}

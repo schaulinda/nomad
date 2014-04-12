@@ -8,34 +8,55 @@
 	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
+	
+<spring:message code="lang_profile" var="langProfile" />
+<spring:message code="lang_account" var="langAccount" />
+<spring:message code="lang_vehicle" var="langVehicle" />
+<spring:message code="lang_security" var="langSecurity" />
+<spring:message code="lang_email_address" var="langEmailAddress" />
+<spring:message code="lang_full_name" var="langFullName" />
+<spring:message code="lang_gender" var="langGender" />
+<spring:message code="lang_birth_date" var="langBirthDate" />
+<spring:message code="lang_address" var="langAddress" />
+<spring:message code="lang_phone_number" var="langPhoneNumber" />
+<spring:message code="lang_nationality" var="langNationality" />
+	
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users" var="users_url"></spring:url>
 		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
-			<li><a href="${users_url}/private/profil" id="id_profil"><i
-					class="icon-user"> <!-- co -->
-				</i>
-				<spring:message code="a.profile" /></a></li>
-			<li class="active"><a href="${users_url}/private/compte"
-				id="id_compte"><i class="	icon-briefcase"> <!-- co -->
-				</i>
-				<spring:message code="a.account" /></a></li>
-			<li><a href="${users_url}/private/vehicule" id="id_vehicule"><i
-					class="icon-truck "> <!-- co -->
-				</i>
-				<spring:message code="a.vehicle" /></a></li>
-			<li><a href="${users_url}/private/passwordReset"
-				id="id_password"><i class="icon-lock "> <!-- co -->
-				</i>
-				<spring:message code="a.security" /></a></li>
+			<li>
+				<a href="${users_url}/private/profil" id="id_profil">
+					<i class="icon-user"><!-- co --></i>
+					${langProfile}
+				</a>
+			</li>
+			<li class="active">
+				<a href="${users_url}/private/compte" id="id_compte">
+					<i class="	icon-briefcase"><!-- co --></i>
+					${langAccount}
+				</a>
+			</li>
+			<li>
+				<a href="${users_url}/private/vehicule" id="id_vehicule">
+					<i class="icon-truck "><!-- co --></i>
+					${langVehicle}
+				</a>
+			</li>
+			<li>
+				<a href="${users_url}/private/passwordReset" id="id_password">
+					<i class="icon-lock "><!-- co --></i>
+					${langSecurity}
+				</a>
+			</li>
 		</ul>
 	</div>
 	<div class="tab-content">
 		<div class="tab-pane active">
 			<div class="panel">
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.mail" /></div>
+					<div class="col-lg-6">${langEmailAddress}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="email"
@@ -45,12 +66,12 @@
 						   data-pk="1"
 						   data-name="email" 
 						   class="editable editable-click"
-						   data-value="${nomade.compte.email}"><!-- com--> -->
+						   data-value="${nomade.compte.email}"><!-- co-->
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.fullName" /></div>
+					<div class="col-lg-6">${langFullName}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="fullName" 
@@ -60,12 +81,12 @@
 						   data-placeholder="celis ave"
 						   data-url="${updateFieldUrl}" 
 						   class="editable editable-click"
-						   data-value="${nomade.compte.fullName}"><!-- com--> -->
+						   data-value="${nomade.compte.fullName}"><!-- co-->
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.gender" /></div>
+					<div class="col-lg-6">${langGender}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="gender" 
@@ -75,12 +96,12 @@
 						   data-url="${updateFieldUrl}"
 						   class="editable editable-click"
 						   data-placeholder="click to select your gender"
-						   data-value="${nomade.compte.gender}"><!-- com--> --> 
+						   data-value="${nomade.compte.gender}"><!-- co--> 
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.birthDate" /></div>
+					<div class="col-lg-6">${langBirthDate}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="birthDate" 
@@ -92,12 +113,12 @@
 					   	   data-url="${updateFieldUrl}"
 						   class="editable editable-click" 
 						   data-format="dd-mm-yyyy"> 
-							<fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy" /><!-- com--> -->
+							<fmt:formatDate value="${nomade.compte.birthDate}" pattern="dd-MM-yyyy" /><!-- com-->
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.adress" /></div>
+					<div class="col-lg-6">${langAddress}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="adress" 
@@ -107,12 +128,12 @@
 						   data-name="adress"
 						   data-value="${nomade.compte.adress}"
 						   placeholder="cameroun douala rue 38"
-						   class="editable editable-click"><!-- com-->
+						   class="editable editable-click"><!-- co-->
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.phoneNumber" /></div>
+					<div class="col-lg-6">${langPhoneNumber}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="phoneNumber" 
@@ -122,12 +143,12 @@
 						   data-url="${updateFieldUrl}"
 						   placeholder="+23796857425"
 						   data-value="${nomade.compte.phoneNumber}"
-					       class="editable editable-click"> <!-- co -->
+					       class="editable editable-click"><!-- co -->
 						</a>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6"><spring:message code="td.nationality" /></div>
+					<div class="col-lg-6">${langNationality}</div>
 					<div class="col-lg-6">
 						<a href="#" 
 						   id="nationality" 
@@ -137,7 +158,7 @@
 						   data-url="${updateFieldUrl}"
 						   class="editable editable-click"
 						   data-placeholder="click to select your gender"
-						   data-value="${nomade.compte.nationality}"><!-- com-->
+						   data-value="${nomade.compte.nationality}"><!-- co-->
 						</a>
 					</div>
 				</div>

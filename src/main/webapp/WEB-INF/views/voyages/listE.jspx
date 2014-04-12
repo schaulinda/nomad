@@ -257,7 +257,7 @@
 								setTimeout(function generate() {
 
 									noty({
-										text : "save...",
+										text : "${langSaving}...",
 										type : "alert",
 										timeout : 2000,
 										modal : false,

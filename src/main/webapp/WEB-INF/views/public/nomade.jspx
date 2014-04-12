@@ -18,6 +18,8 @@
 		</div>
 		<tiles:insertAttribute name="smallTile" />
 	</div>
+	
+<spring:message code="lang_complete" var="langComplete" />
 
 	<script type="text/javascript">
 		var a = '<spring:message code="div.completeProfil" />';
@@ -49,7 +51,7 @@
 															+ '%">'
 															+ '<span class="sr-only">'
 															+ fieldpercent
-															+ '% Complete</span></div></div>'
+															+ '% ${langComplete}</span></div></div>'
 															+ '<div>'
 															+ a
 															+ '</div>';

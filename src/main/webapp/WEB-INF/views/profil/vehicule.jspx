@@ -9,27 +9,56 @@
 	 xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	<spring:url var="res" value="/resources" />	
+	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_profile" var="langProfile" />
+<spring:message code="lang_account" var="langAccount" />
+<spring:message code="lang_vehicle" var="langVehicle" />
+<spring:message code="lang_security" var="langSecurity" />
+<spring:message code="lang_vehicle_name" var="langVehicleName" />
+<spring:message code="lang_type_of_vehicle" var="langTypeOfVehicle" />
+<spring:message code="lang_click_to_select_vehicle_type" var="langClickToSelectVehicleType" />
+<spring:message code="lang_status_of_vehicle" var="langStatusOfVehicle" />
+<spring:message code="lang_click_to_select_your_status" var="langClickToSelectYourStatus" />
+<spring:message code="lang_model_of_the_vehicle" var="langModelOfTheVehicle" />
+<spring:message code="lang_write_here_the_name_of_your_vehicle_model" var="langWriteHereTheNameOfYourVehicleModel" />
+<spring:message code="lang_vehicle_color" var="langVehicleColor" />
+<spring:message code="lang_write_here_the_color_of_your_vehicle" var="langWriteHereColorOfTheVehicle" />
+<spring:message code="lang_vehicle_country" var="langVehicleCountry" />
+<spring:message code="lang_state_where_the_vehicle_have_valid_papers" var="langStateWhereTheVehicleHaveValidPapers" />
+<spring:message code="lang_click_to_select_a_country_for_your_vehicle" var="langClickToSelectACountryForYourVehicle" />
+<spring:message code="lang_year_of_entry_into_service" var="langYearOfEntryIntoService" />
+<spring:message code="lang_description_of_the_vehicle" var="langDescriptionOfTheVehicle" />
+<spring:message code="lang_modify" var="langModify" />
+		
 	<div class="">
 		<!--affichage du menu pour les grands écrans-->
 		<spring:url value="/users/updateField" var="updateFieldUrl"></spring:url>
 		<spring:url value="/users" var="users_url"></spring:url>
 		<ul class="nav nav-tabs nav-justified">
 			<li>
-				<a href="${users_url}/private/profil" id="id_profil"><i class="icon-user"> <!-- co -->
-				</i><spring:message code="a.profile" /></a>
+				<a href="${users_url}/private/profil" id="id_profil">
+					<i class="icon-user"><!-- co --></i>
+					${langProfile}
+				</a>
 			</li>
 			<li>
-				<a href="${users_url}/private/compte" id="id_compte"><i class="	icon-briefcase"> <!-- co -->
-				</i><spring:message code="a.account" /></a>
+				<a href="${users_url}/private/compte" id="id_compte">
+					<i class="	icon-briefcase"><!-- co --></i>
+					${langAccount}
+				</a>
 			</li>
 			<li class="active">
-				<a href="${users_url}/private/vehicule" id="id_vehicule"><i class="icon-truck "> <!-- co -->
-				</i><spring:message code="a.vehicle" /></a>
+				<a href="${users_url}/private/vehicule" id="id_vehicule">
+					<i class="icon-truck "><!-- co --></i>
+					${langVehicle}
+				</a>
 			</li>
 			<li>
-				<a href="${users_url}/private/passwordReset" id="id_password"><i class="icon-lock "> <!-- co -->
-				</i><spring:message code="a.security" /></a>
+				<a href="${users_url}/private/passwordReset" id="id_password">
+					<i class="icon-lock "><!-- co --></i>
+					${langSecurity}
+				</a>
 			</li>
 		</ul>
 	</div>	
@@ -41,11 +70,11 @@
 					<table id="user" class="table table-bordered table-striped table-responsive">
 						<tbody>
 							<tr>
-								<td><spring:message code="td.vehicleName" /></td>
+								<td>${langVehicleName}</td>
 								<td>
 								<a href="#" 
 									   id="vehiculeName"
-									   data-placeholder="Titine"
+									   data-placeholder="${langVehicleName}"
 									   data-url="${updateFieldUrl}" 
 									   data-type="text" 
 									   data-pk="1"
@@ -56,7 +85,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.vehicleType" /></td>
+								<td>${langTypeOfVehicle}</td>
 								<td>
 									<a href="#" 
 								   	   id="vehiculeType" 
@@ -66,12 +95,12 @@
 									   data-url="${updateFieldUrl}" 
 									   class="editable editable-click"
 									   data-value="${nomade.vehicule.vehiculeType}"
-									   data-placeholder="click to select your vehiculeState">
+									   data-placeholder="${langClickToSelectVehicleType}">
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.vehicleStatus" /></td>
+								<td>${langStatusOfVehicle}</td>
 								<td>
 									<a href="#" 
 									   id="vehiculeState" 
@@ -81,12 +110,12 @@
 									   data-url="${updateFieldUrl}" 
 									   class="editable editable-click"
 									   data-value="${nomade.vehicule.vehiculeState}"
-									   data-placeholder="click to select your vehiculeState">
+									   data-placeholder="${langClickToSelectYourStatus}">
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.vehicleModel" /></td>
+								<td>${langModelOfTheVehicle}</td>
 								<td>
 									<a href="#" 
 									   id="model" 
@@ -95,13 +124,13 @@
 									   data-pk="1" 
 									   data-name="model"
 									   data-value="${nomade.vehicule.model}" 
-									   placeholder="peugeot"
+									   placeholder="${langWriteHereTheNameOfYourVehicleModel}"
 									   class="editable editable-click">
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.vehicleColor" /></td>
+								<td>${langVehicleColor}</td>
 								<td>
 									<a href="#" 
 									   id="couleur" 
@@ -110,14 +139,17 @@
 									   data-pk="1" 
 									   data-name="couleur"
 									   data-value="${nomade.vehicule.couleur}" 
-									   placeholder="jaune"
+									   placeholder="${langWriteHereColorOfTheVehicle}"
 									   class="editable editable-click">
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<spring:message code="alt.vehicleCountry" var="altVehicleCountry" />
-								<td><spring:message code="td.vehicleCountry" /><a href="" alt="${altVehicleCountry}">*</a></td>
+								
+								<td>
+									${langVehicleCountry}
+									<a href="" alt="${langStateWhereTheVehicleHaveValidPapers}">*</a>
+								</td>
 								<td>
 									<a href="#" 
 									   id="country" 
@@ -126,13 +158,13 @@
 									   data-pk="1" 
 									   data-url="${updateFieldUrl}"
 									   class="editable editable-click"
-									   data-placeholder="click to select your vehiculeState"
+									   data-placeholder="${langClickToSelectACountryForYourVehicle}"
 									   data-value="${nomade.vehicule.forSellCountry}"> 
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.vehicleYear" /></td>
+								<td>${langYearOfEntryIntoService}</td>
 								<td>
 									<a href="#" 
 									   id="anneMiseEnService" 
@@ -149,7 +181,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td><spring:message code="td.description" /></td>
+								<td>${langDescriptionOfTheVehicle}</td>
 								<td>
 									<a href="#" 
 									   id="description" 
@@ -158,7 +190,7 @@
 									   data-pk="1"
 									   data-name="description"
 									   data-value="${nomade.vehicule.description}" 
-									   placeholder="jaune"
+									   placeholder="..."
 									   class="editable editable-click">
 									</a>
 								</td>
@@ -168,18 +200,18 @@
 					</div>
 					<div class="col-lg-3">
 						<c:if test="${empty nomade.vehicule.photo}" >
-							<IMG alt="" src="${res}/img/profil.png" width="210px"
-							height="240px;" /> 
+							<IMG alt="" src="${res}/img/profil.png" 
+								 width="210px" height="240px;" /> 
 						</c:if>
 						<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 						<c:if test="${not empty nomade.vehicule.photo}" >
-							<IMG alt="" src="${imageRender_url}/${nomade.vehicule.photo}" width="210px"
-							height="240px;" /> 
+							<IMG alt="" src="${imageRender_url}/${nomade.vehicule.photo}" 
+								 width="210px" height="240px;" /> 
 						</c:if>
-							<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
-							<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=vehicule" > <i
-							class="icon-edit"> <!-- co -->
-						</i> <spring:message code="a.edit" />
+						<spring:url value="/albums/myPic" var="changePhoto_url"></spring:url>
+						<a class="btn btn-default" id="modifImg" href="${changePhoto_url}?backLink=vehicule" >
+							<i class="icon-edit"> <!-- co --></i>
+							${langModify}
 						</a>
 					</div>
 				</div>

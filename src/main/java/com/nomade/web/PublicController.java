@@ -22,8 +22,10 @@ import com.nomade.domain.Etape;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
 import com.nomade.domain.InfoPratique;
+import com.nomade.domain.Relation;
 import com.nomade.domain.TypeTime;
 import com.nomade.domain.UserNomade;
+import com.nomade.domain.Voyage;
 import com.nomade.security.Security;
 import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeService;
@@ -34,6 +36,8 @@ import com.nomade.service.ParcoursService;
 import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
+import com.nomade.tools.ImageUtil;
+import com.nomade.tools.ImageUtilInterface;
 
 @RequestMapping({ "/public" })
 @Controller
@@ -59,6 +63,8 @@ public class PublicController {
 	EtapeService etapeService;
 	@Autowired
 	VoyageService voyageService;
+	@Autowired
+	ImageUtilInterface imgService;
 
 	@RequestMapping("/nomad")
 	public String nomad(HttpServletRequest request, Model uiModel) {
@@ -66,7 +72,7 @@ public class PublicController {
 		
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
-		beanHistoriqueDecoration(uiModel, nomade);
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 
 		beanNomadeManager.setMe(true);
 		beanNomadeManager.setNomade(nomade);
@@ -82,13 +88,37 @@ public class PublicController {
 	}
 
 
-	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
+	private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page) {
 		
 		BeanHistorique beanHistorique = new BeanHistorique();
+		
 		beanHistorique.setListInfo(infoPratiqueService.findByNomadeOrderByCreated(nomade));
-		List<DangerPratique> listDanger = dangerPratiqueService.findByNomadeOrderByCreated(nomade);
-		beanHistorique.setListDanger(listDanger);
-			
+		beanHistorique.setListDanger(dangerPratiqueService.findByNomadeOrderByCreated(nomade));
+		
+		beanHistorique.setListImg(imgService.allImg(nomade));
+		List<Relation> findMyFriends = relationService.findMyFriends(nomade);
+		beanHistorique.setFriends(findMyFriends);
+		
+
+		Page<Voyage> voyages = voyageService.findByNomade(nomade, page);
+		beanHistorique.setVoyages(voyages);
+		
+		try {
+			Voyage voyage = voyages.getContent().get(0);
+			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyage(null);
+			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}
@@ -101,7 +131,7 @@ public class PublicController {
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 		UserNomade findUserNomade = userService.findUserNomade(new BigInteger(id)); 
 		
-		beanHistoriqueDecoration(uiModel, findUserNomade);
+		beanHistoriqueDecoration(uiModel, findUserNomade, 0);
 
 		
 		beanNomadeManager.setMe(false);
@@ -113,10 +143,12 @@ public class PublicController {
 			beanNomadeManager.setMe(true);
 
 		}
+		
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
 				findUserNomade));
 		beanNomadeManager.setNomade(findUserNomade);
 		Etape etape = voyageService.getLastLocation(nomade);
+		//renvoyer le derniere parcours sur la vue
 		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));
 
 		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
@@ -189,7 +221,7 @@ public class PublicController {
 	public String carnet(HttpServletRequest request, Model uiModel) {
 		UserNomade nomade = securite.getUserNomade();
 		
-		beanHistoriqueDecoration(uiModel, nomade);
+		beanHistoriqueDecoration(uiModel, nomade, 0);
 		BeanNoteBookManager bookManager = new BeanNoteBookManager();
 		bookManager.setListParcours(voyageService.drawVoyageEnCours());
 		uiModel.addAttribute("beanNoteBookManager", bookManager);
