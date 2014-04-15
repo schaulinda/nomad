@@ -17,5 +17,7 @@ public interface EtapeVoyageService {
 	
 	public List<EtapeVoyage> findByVoyage(Voyage voyage);
 	
+	public List<EtapeVoyage> findByVoyageAndNomade(Voyage voyage, UserNomade nomade);
+	
 	
 }

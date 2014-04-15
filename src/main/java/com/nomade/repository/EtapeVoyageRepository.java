@@ -17,4 +17,5 @@ public interface EtapeVoyageRepository {
     
     Page<EtapeVoyage> findByNomade(UserNomade nomade, Pageable pageable);
     List<EtapeVoyage> findByVoyage(Voyage voyage);
+    List<EtapeVoyage> findByVoyageAndNomade(Voyage voyage, UserNomade nomade);
 }

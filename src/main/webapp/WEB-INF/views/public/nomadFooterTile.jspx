@@ -22,11 +22,11 @@
 					</span> Voyage
 				</h3>
 			</div>
-			<div class="thumbnail">
+			<div class="">
 				<c:if test="${beanHistorique.voyages.hasContent()}">
 					<c:forEach var="voyage" items="${beanHistorique.voyages.content}">
-						<div class="row">
-							<div>
+						<div class="row thumbnail">
+							<div class="col-lg-offset-1">
 								<div class="row">
 									<div class="col-lg-6">
 										<b>Titre: </b>${voyage.title}
@@ -226,9 +226,10 @@
 						<input type="submit" id="btn_comment" value="send"
 							class="btn btn-default" style="display: none;" />
 					</form>
+					<br/><br /><br />
 				</c:forEach>
 			</div>
-			<br />
+			
 		</div>
 	</div>
 

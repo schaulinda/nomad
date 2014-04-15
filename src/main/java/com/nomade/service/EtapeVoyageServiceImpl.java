@@ -25,12 +25,17 @@ public class EtapeVoyageServiceImpl implements EtapeVoyageService {
 		
 		PageRequest pageRequest = new PageRequest(page, NUMBER_PER_PAGE, new Sort(Direction.DESC, "depart.day"));
 
-		
+
 		return etapeVoyageRepository.findByNomade(nomade, pageRequest);
 	}
 	
 	public List<EtapeVoyage> findByVoyage(Voyage voyage){
 		
 		return etapeVoyageRepository.findByVoyage(voyage);
+	}
+	
+	public List<EtapeVoyage> findByVoyageAndNomade(Voyage voyage, UserNomade nomade){
+		
+		return etapeVoyageRepository.findByVoyageAndNomade(voyage,nomade);
 	}
 }

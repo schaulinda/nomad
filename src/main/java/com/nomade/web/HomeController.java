@@ -163,17 +163,10 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page
 			Voyage voyage = voyages.getContent().get(0);
 			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyageAndNomade(null,nomade);
+			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
 		}
 		
-		try {
-			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyage(null);
-			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);

@@ -51,14 +51,15 @@
 				</div>
 				<div class="tab-content">
 					<div class="tab-pane active" id="amis">
+						<div class="row thumbnail">
 						<c:forEach items="${beanHistorique.friends}" var="friend">
-							<c:if test="${friend.nomade.userName eq nomade.userName}">
+							<c:if test="${friend.nomade.userName eq beanHistorique.nomade.userName}">
 								<c:set var="nmd" value="${friend.nomade2}"></c:set>
 							</c:if>
-							<c:if test="${friend.nomade2.userName eq nomade.userName}">
+							<c:if test="${friend.nomade2.userName eq beanHistorique.nomade.userName}">
 								<c:set var="nmd" value="${friend.nomade}"></c:set>
 							</c:if>
-							<li id="image-1" class="thumbnail">
+							<div  class="col-lg-3">
 								<c:choose>
 									<c:when test="${empty nmd.profil.file}">
 										<img alt="user" src="${res}/img/avatar.png"
@@ -69,9 +70,11 @@
 											 class="img-rounded" title="" />
 									</c:otherwise>
 								</c:choose>
-								<div>${nmd.userName}</div>
-							</li>
+								<spring:url value="/public" var="pub_url"></spring:url>
+								<div><a id="${nmd.id}contact" href="${pub_url}/nomad/${nmd.id}" class="contact_id">${nmd.userName}</a></div>
+							</div>
 						</c:forEach>
+						</div>
 					</div>
 					<div class="tab-pane" id="photo">
 						<c:if test="${not empty beanHistorique.listImg }">
@@ -282,6 +285,48 @@
 
 					});
 				});
+				
+				$('.contact_id').each(function() {
+
+					$(this).click(function() {
+						
+
+						if ($('#id_map').hasClass("col-lg-12")) {
+							/* reduice map */
+							$('#id_map').removeClass("col-lg-12");
+							$('#id_map').addClass("col-lg-6");
+
+							$('#smallTile').show();
+							$('.open').addClass("hide");
+							$(
+									'.closemap')
+									.removeClass(
+											"hide");
+
+							map = $(
+									"#map")
+									.gmap3(
+											'get');
+							google.maps.event
+									.trigger(
+											map,
+											'resize');
+							
+							map.setZoom(map.getZoom());
+							var markIndic = $(
+									"#map")
+									.gmap3(
+											{
+												get : {
+													id : "indicator"
+												}
+											});
+							map.setCenter(markIndic.getPosition());
+							map.panToBounds(map.getBounds());
+						}
+						
+					});
+				});
 			});
 		})(jQuery);
 	</script>
@@ -297,6 +342,19 @@
 					event : "onclick",
 					params : {
 						fragments : "smallTile, topheader"
+					}
+				}));
+
+			});
+			
+			dojo.query(".contact_id").forEach(function(node, index, arr) {
+				var id = dojo.attr(node, "id");
+				console.log(id);
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "smallTile, id_subfooter"
 					}
 				}));
 
