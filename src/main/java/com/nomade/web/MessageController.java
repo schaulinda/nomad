@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +40,7 @@ public class MessageController {
     @RequestMapping("/send")
     @ResponseBody
     public String sendMsg(@RequestParam("content") String content,
-    		@RequestParam("idReceiver") String idReceiver) {
+    		@RequestParam("idReceiver") String idReceiver, HttpServletRequest request) {
        
     	UserNomade nomade = security.getUserNomade();
     	
@@ -53,5 +54,25 @@ public class MessageController {
     	messageService.saveMessage(message);
     	
     	return "envoyer";
+    }
+    
+    @RequestMapping("/listMsg")
+    public String listMsg(HttpServletRequest request,Model uiModel) {
+       
+    	UserNomade nomade = security.getUserNomade();
+    	
+    	
+    	return "message/listMsg";
+    }
+    
+    @RequestMapping("/read")
+    public String read(@RequestParam("idSender") String idSender, HttpServletRequest request,
+    		Model uiModel) {
+       
+    	UserNomade nomade = security.getUserNomade();
+    	
+ 
+    	
+    	return "message/listMsg";
     }
 }
