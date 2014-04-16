@@ -108,8 +108,11 @@ public class PublicController {
 			beanHistorique.setListEtapeVoy(etapeVoyageService.findByVoyage(voyage));
 		} catch (Exception e) {
 			List<EtapeVoyage> findByVoyageNull = etapeVoyageService.findByVoyageAndNomade(null,nomade);
-			beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
+			if(beanHistorique.getListEtapeVoy()!=null && beanHistorique.getListEtapeVoy().size()>0)
+				beanHistorique.getListEtapeVoy().addAll(findByVoyageNull);
 		}
+		
+		
 		
 		beanHistorique.setNomade(nomade);
 		uiModel.addAttribute("beanHistorique", beanHistorique);
