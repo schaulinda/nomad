@@ -672,7 +672,7 @@
 			event : "onclick",
 			formId : "form_danger",
 			params : {
-				fragments : "smallTile, subdanger"
+				fragments : "smallTile"
 			}
 		}));
 	

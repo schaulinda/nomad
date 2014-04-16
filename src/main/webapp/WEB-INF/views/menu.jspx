@@ -41,6 +41,8 @@
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
             <menu:item id="i_controller__infopratiqueindex_id" messageCode="global_generic" url="/infopratique/index" z="k2PJ3vxQ2bdKN5yBLpZko+i2AYo="/>
+            <menu:item id="i_controller__messageindex_id" messageCode="global_generic" url="/message/index" z="hqLNpj2xKnCNmpYzRvMZs7ykY8c="/>
+            <menu:item id="i_controller__index_id" messageCode="global_generic" url="//index" z="BilDDrRa3S6p76AzJBTOOtSChVU="/>
         </menu:category>
         <menu:category id="c_infopratique" z="JtfmfbvOCIH6JCZdht2ZdpKZcb8=">
             <menu:item id="i_infopratique_new" messageCode="global_menu_new" url="/infopratiques?form" z="j4t0ODs96GM1naJltqYAyp1ub0I="/>

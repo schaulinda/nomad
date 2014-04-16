@@ -101,7 +101,9 @@
 				</span>
 				<div>
 					<span style="color: #999999;">${langLocation} :</span>
-					${infoPratique.location}
+					${infoPratique.location}<br/>
+					<span style="color: #999999;">Coord gps :</span>
+					${infoPratique.locationLat}, ${infoPratique.locationLng}
 				</div>
 				<br/>
 				<div class="row">

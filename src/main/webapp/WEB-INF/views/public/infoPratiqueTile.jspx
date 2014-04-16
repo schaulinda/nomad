@@ -684,7 +684,7 @@
 			event : "onclick",
 			formId : "form_info",
 			params : {
-				fragments : "subinfo,smallTile"
+				fragments : "smallTile"
 			}
 		}));
 	}
