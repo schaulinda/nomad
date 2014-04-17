@@ -13,7 +13,7 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
-<spring:message code="lang_travel" var="langTravel" />
+<spring:message code="lang_trip" var="langTrip" />
 <spring:message code="lang_add_a_destination" var="langAddADestination"/>
 <spring:message code="lang_valid" var="langValid"/>
 <spring:message code="lang_notebookOfTraveler" var="langNotebookOfTraveler" />
@@ -30,7 +30,7 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">
 				<i class="icon-road"><!-- co --></i>
-				${langTravel}
+				${langTrip}
 			</h3>
 		</div>	
 		<spring:url value="/etapevoyages/saveEtape" var="etape_url"></spring:url>

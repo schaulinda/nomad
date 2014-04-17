@@ -106,7 +106,9 @@
 					</c:if> </span>
 				<div>
 					<span style="color: #999999;">${langLocation} :</span>
-					${dangerPratique.location}
+					${dangerPratique.location}<br/>
+					<span style="color: #999999;">Coord gps :</span>
+					${dangerPratique.locationLat}, ${dangerPratique.locationLng}
 				</div>
 
 				<br />
