@@ -142,6 +142,27 @@ table {
 <title>Petit Nomad</title>
 </head>
 <body>
+
+<spring:message code="lang_sent_you_a_request" var="langSentYouARequest"/>
+<spring:message code="lang_add" var="langAdd"/>
+<spring:message code="lang_all_your_friends" var="langAllYourFriends"/>
+<spring:message code="title.username" var="titleUsername" />
+<spring:message code="lang_message" var="langMessage"/>
+<spring:message code="lang_from" var="langFrom"/>
+<spring:message code="lang_all_messages" var="langAllMessages"/>
+<spring:message code="lang_photo_video_manager" var="langPhotoVideoManager"/>
+<spring:message code="lang_photo_of_the_month" var="langPhotoOfTheMonth"/>
+<spring:message code="lang_forum" var="langForum"/>
+<spring:message code="lang_profil_management" var="langProfilManagement"/>
+<spring:message code="lang_logout" var="langLogout" htmlEscape="false" />
+<spring:message code="lang_who_are_we" var="langWhoAreWe"/>
+<spring:message code="lang_contact" var="langContact"/>
+<spring:message code="lang_confidentiality" var="langConfidentiality"/>
+<spring:message code="lang_user_agreement" var="langUserAgreement"/>
+<spring:message code="lang_help_FAQ" var="langHelpFAQ"/>
+<spring:message code="lang_professionals" var="langProfessionals"/>
+<spring:message code="lang_advertiser" var="langAdvertiser"/>
+<spring:message code="lang_development_translation" var="langDevelopmentTranslation"/>
 	<!-- navBar -->
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -209,8 +230,7 @@ table {
 								</li>
 							</c:if>
 							<spring:url value="/relations/friends" var="friends"></spring:url>
-							<li><a href="${friends}" id="allFriend"><spring:message
-										code="a.allFriends" /></a></li>
+							<li><a href="${friends}" id="allFriend">${langAllYourFriends}</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class=" icon-envelope-alt"> <!--coment  --></i>
@@ -223,8 +243,8 @@ table {
 											src="data:img/png;" title="username" />
 									</div>
 									<div class="col-lg-8 col-sm-8 col-8">
-										<a>Message</a><br />
-										<spring:message code="div.from" />
+										<a>${langMessage}</a><br />
+										${langFrom}
 										Username
 									</div>
 								</div>
@@ -239,8 +259,8 @@ table {
 											src="data:img/png;" title="username" />
 									</div>
 									<div class="col-lg-8 col-sm-8 col-8">
-										<a>Message</a><br />
-										<spring:message code="div.from" />
+										<a>${langMessage}</a><br />
+										${langFrom}
 										Username
 									</div>
 								</div>
@@ -249,19 +269,16 @@ table {
 								<!--coment  -->
 							</li>
 
-							<li><a href="message.html"><spring:message
-										code="a.allMessages" /></a></li>
+							<li><a href="message.html">${langAllMessages}</a></li>
 						</ul></li>
 					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon-camera"> <!--coment  --></i>
 					</a>
 						<ul class="dropdown-menu">
 							<spring:url value="albums/myPic" var="picManager_url"></spring:url>
-							<li><a href="${picManager_url}" id="picManager_id"> <spring:message
-										code="a.photoVideoManager" />
+							<li><a href="${picManager_url}" id="picManager_id">${langPhotoVideoManager}
 							</a></li>
-							<li><a href="#"> <spring:message
-										code="a.photoOfTheMonth" />
+							<li><a href="#"> ${langPhotoOfTheMonth}
 							</a></li>
 						</ul></li>
 				</ul>
@@ -287,7 +304,7 @@ table {
 							<spring:url value="/forum" var="forum_url"></spring:url>
 							<li><a href="${forum_url}" id="forum_id"><i
 									class="icon-comment"> <!-- co -->
-								</i> <spring:message code="a.forum" /> </a></li>
+								</i> ${langForum}  </a></li>
 							<li class="divider">
 								<!-- co -->
 							</li>
@@ -295,16 +312,15 @@ table {
 							<sec:authorize access="isAuthenticated()" >
 							<li><a href="${users_url}/private/profil" id="profil_id"><i
 									class="icon-user"> <!-- co -->
-								</i> <spring:message code="a.profilManagement" /> </a></li>
+								</i> ${langProfilManagement}</a></li>
 							<li class="divider">
 								<!-- co -->
 							</li>
 							<spring:url value="/resources/j_spring_security_logout"
 								var="logout" />
-							<spring:message var="logout_msg" code="security_logout"
-								htmlEscape="false" />
+							
 							<li><a href="${logout}"><i class="icon-lock"> <!-- co -->
-								</i> ${logout_msg}</a></li>
+								</i> ${langLogout}</a></li>
 							</sec:authorize>
 						</ul></li>
 				</ul>
@@ -366,17 +382,34 @@ table {
 			<div class="col-lg-1"> <!--  -->
 			</div>
 		</div>
-		<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 <br /> <spring:message
-					code="a.whoAreWe" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.contact" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.confidentiality" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.userAgreement" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.helpFAQ" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.professionals" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.advertiser" /></a> | <a href="#" class="traitgauche"><spring:message
-					code="a.developmentTranslation" /></a> | <a href="${forum_url}" class="traitgauche" id="forum_id_footer">
-					<spring:message code="a.forum" /></a>
+		<spring:message code="lang_who_are_we" var="langWhoAreWe"/>
+<spring:message code="lang_contact" var="langContact"/>
+<spring:message code="lang_confidentiality" var="langConfidentiality"/>
+<spring:message code="lang_user_agreement" var="langUserAgreement"/>
+<spring:message code="lang_help_FAQ" var="langHelpFAQ"/>
+<spring:message code="lang_professionals" var="langProfessionals"/>
+<spring:message code="lang_advertiser" var="langAdvertiser"/>
+<spring:message code="lang_development_translation" var="langDevelopmentTranslation"/>
+<footer class="text-center" style="z-index: 99; position: relative;">
+			<a href="#">© Petit Nomad 2238 <br /> 
+				${langWhoAreWe}
+			</a> | <a href="#" class="traitgauche">
+				${langContact}
+			</a> | <a href="#" class="traitgauche">
+				${langConfidentiality}
+			</a> | <a href="#" class="traitgauche">
+				${langUserAgreement}
+			</a> | <a href="#" class="traitgauche">
+				${langHelpFAQ}
+			</a> | <a href="#" class="traitgauche">
+				${langProfessionals}
+			</a> | <a href="#" class="traitgauche">
+				${langAdvertiser}
+			</a> | <a href="#" class="traitgauche">
+				${langDevelopmentTranslation}
+			</a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
+				${aForum}
+			</a>
 		</footer>
 	</div>
 </body>
