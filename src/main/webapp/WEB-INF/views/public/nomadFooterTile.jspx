@@ -11,6 +11,19 @@
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
+	
+<spring:message code="lang_travels" var="langTravels"/>
+<spring:message code="lang_title" var="langTitle"/>
+<spring:message code="lang_number_of_itinerary" var="langNumberOfItinerary"/>
+<spring:message code="lang_departure_date" var="langDepartureDate"/>
+<spring:message code="lang_arrival_date" var="langArrivalDate"/>
+<spring:message code="lang_status" var="langStatus"/>
+<spring:message code="lang_departure_location" var="langDepartureLocation"/>
+<spring:message code="lang_arrival_location" var="langArrivalLocation"/>
+<spring:message code="lang_history" var="langHistory"/>
+<spring:message code="lang_comments" var="langComments"/>
+<spring:message code="lang_display_more_comments" var="langDisplayMoreComments"/>
+<spring:message code="lang_reduce_comments" var="langReduceComments"/>
 
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 
@@ -18,8 +31,8 @@
 		<div class="panel ">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<span class="icon-user"> <!-- com -->
-					</span> Voyage
+					<span class="icon-user"> <!-- co --></span>
+					${langTravels}
 				</h3>
 			</div>
 			<div class="">
@@ -29,30 +42,31 @@
 							<div class="col-lg-offset-1">
 								<div class="row">
 									<div class="col-lg-6">
-										<b>Titre: </b>${voyage.title}
+										<b>${langTitle} : </b>${voyage.title}
 									</div>
 									<div class="col-lg-6">
-										<b>nbre de parcours: </b>${voyage.nbreParcours}
+										<b>${langNumberOfItinerary} : </b>${voyage.nbreParcours}
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-4">
 										<fmt:formatDate value="${voyage.depart.day}"
 											var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
-										<b>date depart: </b>${formattedDateDepart}
+										<b>${langDepartureDate} : </b>${formattedDateDepart}
 									</div>
 									<div class="col-lg-4">
 										<fmt:formatDate value="${voyage.arrived.day}"
 											var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
-										<b>date Arrive: </b>${formattedDateArrived}
+										<b>${langArrivalDate} : </b>${formattedDateArrived}
 									</div>
 									<div class="col-lg-4">
-										<b>Status: </b>${voyage.status}
+										<b>${langStatus} : </b>${voyage.status}
 									</div>
-									<span class="label label-info"> <c:if
-											test="${beanHistorique.voyages.hasContent()}">
+									<span class="label label-info">
+										<c:if test="${beanHistorique.voyages.hasContent()}">
 											${beanHistorique.voyages.number+1} / ${beanHistorique.voyages.totalPages}
-										</c:if> <c:if test="${!beanHistorique.voyages.hasContent()}">
+										</c:if>
+										<c:if test="${!beanHistorique.voyages.hasContent()}">
 											0 / 0
 										</c:if>
 									</span>
@@ -63,40 +77,44 @@
 									<ul class="pagination">
 										<c:if
 											test="${beanHistorique.voyages.hasPreviousPage() eq true}">
-											<li><a id="prec"
-												href="${voyageSuiv_url}/${beanHistorique.voyages.number-1}">
-													<i class="icon-chevron-left"> <!--  -->
-												</i>
-											</a></li>
+											<li>
+												<a id="prec"
+												   href="${voyageSuiv_url}/${beanHistorique.voyages.number-1}">
+													<i class="icon-chevron-left"><!--  --></i>
+												</a>
+											</li>
 										</c:if>
 										<c:if
 											test="${beanHistorique.voyages.hasPreviousPage() eq false}">
-											<li class="disabled"><a id="prec" href="#"> <i
-													class="icon-chevron-left"> <!--  -->
-												</i>
-											</a></li>
+											<li class="disabled">
+												<a id="prec" href="#">
+													<i class="icon-chevron-left"><!--  --></i>
+												</a>
+											</li>
 										</c:if>
 										<c:if test="${beanHistorique.voyages.hasNextPage() eq true}">
-											<li><a id="suiv"
-												href="${voyageSuiv_url}/${beanHistorique.voyages.number+1}">
-													<i class="icon-chevron-right"> <!--  -->
-												</i>
-											</a></li>
+											<li>
+												<a id="suiv"
+												   href="${voyageSuiv_url}/${beanHistorique.voyages.number+1}">
+													<i class="icon-chevron-right"><!--  --></i>
+												</a>
+											</li>
 										</c:if>
 										<c:if test="${beanHistorique.voyages.hasNextPage() eq false}">
-											<li class="disabled"><a id="suiv" href="#"> <i
-													class="icon-chevron-right"> <!--  -->
-												</i>
-											</a></li>
+											<li class="disabled">
+												<a id="suiv" href="#">
+													<i class="icon-chevron-right"><!--  --></i>
+												</a>
+											</li>
 										</c:if>
 									</ul>
 								</div>
 								<div class="row">
 									<div class="col-lg-4">
-										<b>Lieu Depart: </b>${voyage.depart.location}
+										<b>${langDepartureLocation} : </b>${voyage.depart.location}
 									</div>
 									<div class="col-lg-4">
-										<b>Lieu Arrive: </b>${voyage.arrived.location}
+										<b>${langArrivalLocation} : </b>${voyage.arrived.location}
 									</div>
 
 								</div>
@@ -110,8 +128,7 @@
 		<div class="panel ">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="icon-user"> <!-- com -->
-					</i> Historik
+					<i class="icon-user"><!-- co --></i>${langHistory}
 				</h3>
 			</div>
 			<div class="thumbnail">
@@ -120,20 +137,18 @@
 						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 user-etape">
 							<c:choose>
 								<c:when test="${empty etape.nomade.profil.file}">
-									<img alt="user" src="${res}/img/avatar.png"
-										style="width: 50px; height: 50px" class="img-rounded"
-										title="username" />
+									<img alt="user" src="${res}/img/avatar.png" 
+									     title="username" class="img-rounded" 
+										 style="width: 50px; height: 50px" />
 								</c:when>
 								<c:otherwise>
-									<img alt="user"
-										src="${imageRender_url}/${etape.nomade.profil.file}"
-										style="width: 50px; height: 50px" class="img-rounded"
-										title="username" />
+									<img alt="user" src="${imageRender_url}/${etape.nomade.profil.file}"
+										 class="img-rounded" title="username"
+										 style="width: 50px; height: 50px"  />
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<div
-							class="col-xs-11 col-sm-11 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+						<div class="col-xs-11 col-sm-11 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 							<div class="mic-info">
 								<a href="#">${etape.nomade.userName}</a>
 							</div>
@@ -141,25 +156,28 @@
 						</div>
 					</div>
 					<div class="row">
-						<div
-							class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
+						<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape mic-info">
 							<fmt:formatDate value="${etape.dateEtape}"
-								var="dateEtape_formatted" type="date" pattern="MM-dd-yyyy hh:mm" />
-							<a href="#"></a> * ${dateEtape_formatted} * <a href="#"
-								class="parcour"> ${etape.location} </a>
+											var="dateEtape_formatted" 
+											type="date" 
+											pattern="MM-dd-yyyy" />
+							<a href="#"></a> * ${dateEtape_formatted} * <a href="#" class="parcour"> 
+								${etape.location}
+							</a>
 							<c:if test="${not empty etape.comments}">
 								<span class="label label-info"> ${etape.comments.size()}
-									Comments </span>
+									${langComments}
+								</span>
 							</c:if>
 							<c:if test="${empty etape.comments}">
-								<span class="label label-info">0 Comments</span>
+								<span class="label label-info">0 ${langComments}</span>
 							</c:if>
 						</div>
 						<c:if test="${not empty etape.userPhoto}">
 							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11 user-etape">
 								<img alt="Etape" src="${imageRender_url}/${etape.userPhoto}"
-									class="img-rounded img-responsive"
-									style="width: 400px; height: 200px;" />
+									 class="img-rounded img-responsive"
+									 style="width: 400px; height: 200px;" />
 							</div>
 						</c:if>
 					</div>
@@ -171,68 +189,63 @@
 								<c:set var="hide" value="hide"></c:set>
 								<c:set var="longComent" value="true"></c:set>
 							</c:if>
-
 							<li class="list-group-item ${hide} item-comments ${longComent}"
 								style="border: none;">
 								<div class="row">
-									<div
-										class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-1
+									<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 col-xs-offset-1
 										 col-sm-offset-1 col-md-offset-1 col-lg-offset-1  user-etape">
 										<c:choose>
 											<c:when test="${empty comment.nomade.profil.file}">
 												<img alt="user" src="${res}/img/avatar.png"
-													style="width: 50px; height: 50px" class="img-rounded"
-													title="username" />
+													 class="img-rounded" title="username" 
+													 style="width: 50px; height: 50px" />
 											</c:when>
 											<c:otherwise>
 												<img alt="user"
-													src="${imageRender_url}/${comment.nomade.profil.file}"
-													style="width: 50px; height: 50px" class="img-rounded"
-													title="username" />
+													 src="${imageRender_url}/${comment.nomade.profil.file}"
+													 class="img-rounded" title="username" 
+													 style="width: 50px; height: 50px" />
 											</c:otherwise>
 										</c:choose>
 									</div>
-									<div
-										class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+									<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-1 
+												col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 										<div class="mic-info">
 											<a href="#">${comment.nomade.userName}</a>
 										</div>
 										<div class="comment-text">${comment.commentaire}</div>
-										<fmt:formatDate value="${comment.created}" var="formattedDate"
-											type="date" pattern="MM-dd-yyyy hh:mm" />
+										<fmt:formatDate value="${comment.created}" 
+														var="formattedDate"
+														type="date" 
+														pattern="MM-dd-yyyy" />
 										<div class="mic-info">${formattedDate}</div>
 									</div>
 								</div>
 							</li>
-
 						</c:forEach>
 						<c:if test="${longComent eq true}">
-							<a id="load" class="btn">load more comments</a>
-							<a id="reduire" class="btn hide">reduire comments</a>
+							<a id="load" class="btn">${langDisplayMoreComments}</a>
+							<a id="reduire" class="btn hide">${langReduceComments}</a>
 						</c:if>
 					</ul>
 					<br />
 					<c:set value="${etape.id}" var="etape_id"></c:set>
 					<spring:url value="/comments/addEtapeVoy" var="comment_url"></spring:url>
 					<form id="comment_form" action="${comment_url}" method="GET">
-						<input type="hidden" value="${etape_id}" name="etapeId" /> <input
-							type="hidden" value="${beanHistorique.voyages.number}"
-							name="page" />
-						<textarea id="commentaire" name="commentaire"
-							class="form-control col-lg-3" style="height: 32px;"
-							placeholder="${langAddNewComment}">
-									<!--co  -->
-								</textarea>
-						<input type="submit" id="btn_comment" value="send"
-							class="btn btn-default" style="display: none;" />
+						<input type="hidden" value="${etape_id}" name="etapeId" />
+						<input type="hidden" value="${beanHistorique.voyages.number}" name="page" />
+						<textarea id="commentaire" name="commentaire" class="form-control col-lg-3"
+								  placeholder="${langAddNewComment}" 
+								  style="height: 32px;"><!--co  -->
+						</textarea>
+						<input type="submit" id="btn_comment" value="send" class="btn btn-default" 
+							   style="display: none;" />
 					</form>
 					<br/><br /><br />
 				</c:forEach>
 			</div>
-			
 		</div>
 	</div>
-
 
 	<script type="text/javascript">
 		jQuery.noConflict();

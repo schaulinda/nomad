@@ -15,34 +15,38 @@
 	<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
 	<spring:url var="friend_url" value="/relations" />
 	
+<spring:message code="lang_received_demand" var="langReceivedDemand"/>
+<spring:message code="lang_add" var="langAdd"/>
+<spring:message code="lang_friends" var="langFriends"/>
+<spring:message code="lang_unfriend" var="langUnfriend"/>
 	
 		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="icon-group"> <!-- com -->
-					</i> Received demand
+					<i class="icon-group"><!-- co --></i> ${langReceivedDemand}
 				</h3>
 			</div>
-
 			<c:forEach items="${demands}" var="demand">
-				
 				<div class="row">
 					<div class="col-lg-3" >
 						<c:choose>
 							<c:when test="${empty demand.nomade.profil.file}">
 								<img alt="user" src="${res}/img/avatar.png" class="img-rounded"
-									title="" />
+									 title="" />
 							</c:when>
 							<c:otherwise>
 								<img alt="user" src="${imageRender_url}/${demand.nomade.profil.file}"
-									class="img-rounded" title="" />
+									 class="img-rounded" title="" />
 							</c:otherwise>
 						</c:choose>
 					</div>
 					<div class="col-lg-3">${demand.nomade.userName}</div>
 					<div class="col-lg-3">
-						<a class="btn btn-default add"  href="${friend_url}/accept/${demand.nomade.id}" ><i class="icon-plus-sign"> <!--coment  -->
-						</i> <spring:message code="lang_add" /></a>
+						<a class="btn btn-default add"  
+						   href="${friend_url}/accept/${demand.nomade.id}" >
+							<i class="icon-plus-sign"><!-- co --></i> 
+							<spring:message code="lang_add" />
+						</a>
 					</div>
 					<div class="col-lg-3">
 						<a class="btn btn-default remove"  href="${friend_url}/remove/${demand.nomade.id}" ><i class="icon-minus-sign"> <!--coment  --></i> Remove</a>
@@ -50,14 +54,11 @@
 				</div>
 				<div class="divider"><!-- co --></div>
 			</c:forEach>
-
 		</div>
-	
 		<div class="panel panel-warning">
 			<div class="panel-heading">
 				<h3 class="panel-title">
-					<i class="icon-group"> <!-- com -->
-					</i> Friends
+					<i class="icon-group"><!-- co --></i>${langFriends}
 				</h3>
 			</div>
 
@@ -72,24 +73,24 @@
 					<div class="col-lg-3 ">
 						<c:choose>
 							<c:when test="${empty nmd.profil.file}">
-								<img alt="user" src="${res}/img/avatar.png" class="img-rounded"
-									title="" />
+								<img alt="user" src="${res}/img/avatar.png" class="img-rounded" title="" />
 							</c:when>
 							<c:otherwise>
 								<img alt="user" src="${imageRender_url}/${nmd.profil.file}"
-									class="img-rounded" title="" />
+									 class="img-rounded" title="" />
 							</c:otherwise>
 						</c:choose>
 					</div>
 					<div class="col-lg-3">${nmd.userName}</div>
 					
 					<div class="col-lg-3 col-offset-3">
-						<a class="btn btn-default remove"  href="${friend_url}/remove/${nmd.id}" ><i class="icon-minus-sign"> <!--coment  --></i> Remove</a>
+						<a class="btn btn-default remove"  href="${friend_url}/remove/${nmd.id}" >
+							<i class="icon-minus-sign"><!-- co --></i>${langUnfriend}
+						</a>
 					</div>
 				</div>
-				<div class="divider"><!-- co --></div>
+				<br />
 			</c:forEach>
-
 		</div>
 
 <script type="text/javascript">
