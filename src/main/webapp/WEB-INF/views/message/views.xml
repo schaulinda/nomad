@@ -4,4 +4,10 @@
     <definition extends="default" name="message/index">
         <put-attribute name="body" value="/WEB-INF/views/message/index.jspx"/>
     </definition>
+    
+    <definition extends="privateLayout" name="message/listMsg">
+        <put-attribute name="body" value="/WEB-INF/views/message/index.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
 </tiles-definitions>

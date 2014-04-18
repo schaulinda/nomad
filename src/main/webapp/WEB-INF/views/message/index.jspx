@@ -1,12 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-  <jsp:output omit-xml-declaration="yes"/>
-  <spring:message code="label_message_index" htmlEscape="false" var="title"/>
-  <util:panel id="title" title="${title}">
-    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
-    <h3>
-      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
-    </h3>
-  </util:panel>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+
+	<div class="col-lg-3">
+		<div class="list-group" style="overflow-y: scroll;">
+			<a href="#" class="list-group-item active"> <img
+				data-src="holder.js/40x40" class="img-rounded" src="data:img/png;" />
+				Jean Jacque
+			</a> <a href="#" class="list-group-item"> <img
+				data-src="holder.js/40x40" class="img-rounded" src="data:img/png;" />
+				Arnold Vieux
+			</a> <a href="#" class="list-group-item"> <span class="badge">2</span>
+				<img data-src="holder.js/40x40" class="img-rounded"
+				src="data:img/png;" /> Brice Conpiere
+			</a> <a href="#" class="list-group-item"> <img
+				data-src="holder.js/40x40" class="img-rounded" src="data:img/png;" />
+				Le Liguori
+			</a> <a href="#" class="list-group-item"> <img
+				data-src="holder.js/40x40" class="img-rounded" src="data:img/png;" />
+				Pipo Archibal
+			</a>
+		</div>
+
+	</div>
+	<div class="col-lg-7" style="margin-left: -16px;">
+		<!-- Chat
+					================================================== -->
+		<h3 class="">
+			<i class="icon-comments"><!--  oc--></i> Message
+		</h3>
+		<hr/>
+		<div class="widget-chat">
+			<div class="message">
+				<img src="img/avatar.png" alt="" />
+				<div>
+					<a href="#" title="">First User</a> says: <span class="pull-right">2
+						minutes ago</span>
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit, sed do eiusmod tempor incididunt ut labore.</div>
+				</div>
+			</div>
+
+			<div class="message right">
+				<img src="img/avatar.png" alt="" />
+				<div>
+					<a href="#" title="">Second User</a> says: <span class="pull-right">2
+						minutes ago</span>
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit, sed do eiusmod tempor incididunt ut labore.</div>
+				</div>
+			</div>
+
+			<div class="message">
+				<img src="img/avatar.png" alt="" />
+				<div>
+					<a href="#" title="">First User</a> says: <span class="pull-right">2
+						minutes ago</span>
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit, sed do eiusmod tempor incididunt ut labore.</div>
+				</div>
+			</div>
+
+			<div class="message right">
+				<img src="img/avatar.png" alt="" />
+				<div>
+					<a href="#" title="">Second User</a> says: <span class="pull-right">2
+						minutes ago</span>
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit, sed do eiusmod tempor incididunt ut labore.</div>
+				</div>
+			</div>
+
+			<div class="message">
+				<img src="img/avatar.png" alt="" />
+				<div>
+					<a href="#" title="">First User</a> says: <span class="pull-right">2
+						minutes ago</span>
+					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
+						elit, sed do eiusmod tempor incididunt ut labore.</div>
+				</div>
+			</div>
+
+			<div class="widget-actions row">
+				<div class="col-lg-9">
+					<textarea rows="1" id="textarea-chat-example"><!-- co --></textarea>
+				</div>
+				<div class="col-lg-3">
+					<button class="btn btn-default" style="margin-top: 12px;">
+						Send</button>
+				</div>
+
+			</div>
+		</div>
+		<!-- / Chat -->
+	</div>
 </div>

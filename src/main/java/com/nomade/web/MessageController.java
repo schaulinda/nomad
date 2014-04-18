@@ -2,6 +2,7 @@ package com.nomade.web;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nomade.domain.Message;
+import com.nomade.domain.Relation;
 import com.nomade.domain.UserNomade;
 import com.nomade.security.Security;
 import com.nomade.service.MessageService;
+import com.nomade.service.RelationService;
 import com.nomade.service.UserService;
 
 @RequestMapping("/message")
@@ -32,6 +35,8 @@ public class MessageController {
 	UserService userService;
 	@Autowired
 	MessageService messageService;
+	@Autowired
+	RelationService relationService;
 
     @RequestMapping(method = RequestMethod.POST, value = "{id}")
     public void post(@PathVariable Long id, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response) {
@@ -46,11 +51,11 @@ public class MessageController {
     	
     	System.out.print("content: "+content);
     	Message message = new Message();
-    	message.setSender(nomade);
+    	
     	message.setContent(content);
     	message.setRead(false);
     	message.setDateSend(new Date());
-    	message.setReceiver(userService.findUserNomade(new BigInteger(idReceiver)));
+    	//message.setReceiver(userService.findUserNomade(new BigInteger(idReceiver)));
     	messageService.saveMessage(message);
     	
     	return "envoyer";
@@ -60,6 +65,8 @@ public class MessageController {
     public String listMsg(HttpServletRequest request,Model uiModel) {
        
     	UserNomade nomade = security.getUserNomade();
+    	
+    	
     	
     	
     	return "message/listMsg";

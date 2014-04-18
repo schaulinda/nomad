@@ -39,7 +39,7 @@
 	<spring:url var="nomad_url" value="/public/nomad" />
 	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
-	<spring:url value="/message/send" var="message_url"></spring:url>
+	<spring:url value="/filemsgs/sendFromProfile" var="message_url"></spring:url>
 	<style type="text/css">
 @media ( min-width :992px) and (max-width:1199px) {
 	.first-info {

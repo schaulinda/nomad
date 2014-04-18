@@ -12,8 +12,6 @@ import org.springframework.roo.addon.tostring.RooToString;
 public class Message {
 
 		private String content;
-		private UserNomade sender;
-		private UserNomade receiver;
 		private Date dateSend;
 		private boolean read;
 }

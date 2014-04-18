@@ -290,3 +290,8 @@ web mvc controller --class ~.domain.Message --preferredMapping ~.web.MessageCont
 web mvc controller --class ~.web.MessageController
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-16 00:50:26
 service --interface ~.service.MessageService --entity ~.domain.Message
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-16 22:15:50
+repository mongo --interface ~.repository.FileMsgRepository --entity ~.domain.FileMsg
+service --entity ~.domain.FileMsg --interface ~.service.FileMsgService
+web mvc scaffold --class ~.domain.FileMsg --backingType ~.web.FileMsgController
+web mvc scaffold --class ~.web.FileMsgController --backingType ~.domain.FileMsg

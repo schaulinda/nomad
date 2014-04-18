@@ -4,7 +4,6 @@
 package com.nomade.domain;
 
 import com.nomade.domain.Message;
-import com.nomade.domain.UserNomade;
 import java.util.Date;
 
 privileged aspect Message_Roo_JavaBean {
@@ -15,22 +14,6 @@ privileged aspect Message_Roo_JavaBean {
     
     public void Message.setContent(String content) {
         this.content = content;
-    }
-    
-    public UserNomade Message.getSender() {
-        return this.sender;
-    }
-    
-    public void Message.setSender(UserNomade sender) {
-        this.sender = sender;
-    }
-    
-    public UserNomade Message.getReceiver() {
-        return this.receiver;
-    }
-    
-    public void Message.setReceiver(UserNomade receiver) {
-        this.receiver = receiver;
     }
     
     public Date Message.getDateSend() {

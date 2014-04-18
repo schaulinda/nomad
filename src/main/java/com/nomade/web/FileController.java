@@ -9,4 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RooWebScaffold(path = "files", formBackingObject = ImageInfo.class)
 public class FileController {
+	
+	
 }

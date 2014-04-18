@@ -180,5 +180,16 @@ public class EtapeVoyageController {
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 		return "public/nomad";
 	}
+	
+	void addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("etapeVoyage_dateetape_date_format", "dd-MM-yyyy");
+        uiModel.addAttribute("etapeVoyage_created_date_format", "dd-MM-yyyy HH:mm");
+    }
+	
+	void populateEditForm(Model uiModel, EtapeVoyage etapeVoyage) {
+        uiModel.addAttribute("etapeVoyage", etapeVoyage);
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("usernomades", userService.findAllUserNomades());
+    }
 
 }
