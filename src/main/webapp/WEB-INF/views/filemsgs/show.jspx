@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_nomade_domain_FileMsg" object="${filemsg}" path="/filemsgs" z="k8W9lmDu750ueySP/E9G7PDLoT8=">
+        <field:display field="nomad1" id="s_com_nomade_domain_FileMsg_nomad1" object="${filemsg}" z="av8yHnAwW4/B5nSIY0auWZMWyOA="/>
+        <field:display field="nomad2" id="s_com_nomade_domain_FileMsg_nomad2" object="${filemsg}" z="HA93eeNahazzDuhEjhD+lZCX+Ao="/>
+        <field:display field="messages" id="s_com_nomade_domain_FileMsg_messages" object="${filemsg}" z="lV5ekGtRydQFV+xBEASHClUKTMs="/>
+        <field:display field="numberUnreadMsg" id="s_com_nomade_domain_FileMsg_numberUnreadMsg" object="${filemsg}" z="zaxN+ccLc/MR9npNdO0uiEGvHNA="/>
+    </page:show>
+</div>
