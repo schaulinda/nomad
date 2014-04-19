@@ -340,4 +340,8 @@ web mvc controller --class ~.domain.Message
 web mvc controller --class ~.domain.Message --preferredMapping ~.web.MessageController
 web mvc controller --class ~.web.MessageController
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-16 00:50:26
-service --interface ~.service.MessageService --entity ~.domain.Message
+service --interface ~.service.MessageService --entity ~.domain.Message// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-04-18 05:52:39
+focus --class ~.domain.Discussion
+field string --fieldName photoId 
+focus --class ~.domain.Comment
+field string --fieldName photoId 

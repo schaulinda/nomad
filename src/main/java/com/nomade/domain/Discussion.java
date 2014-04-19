@@ -65,4 +65,8 @@ public class Discussion {
      */
     @NotNull
     private Boolean frozen;
+
+    /**
+     */
+    private String photoId;
 }

@@ -140,6 +140,7 @@ public class ForumController {
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			@RequestParam(value = "imageId", required  = false) String imageId,
 			Model uiModel) {
 		Topic topic = topicService.findTopic(topicId);
 		if (topic == null) {
@@ -199,6 +200,7 @@ public class ForumController {
 		uiModel.addAttribute("subTopicToBeans", subTopicToBeanSubTopic);
 		uiModel.addAttribute("subtopicModel", new SubTopic());
 		uiModel.addAttribute("entities", topics);
+		uiModel.addAttribute("imageId", imageId);
 		populateModel(uiModel);
 		return "public/forum/topicView";
 	}
@@ -289,6 +291,7 @@ public class ForumController {
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			@RequestParam(value = "imageId", required  = false) String imageId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Model uiModel) {
 		SubTopic subTopic = subTopicService.findSubTopic(subTopicId);
@@ -350,9 +353,12 @@ public class ForumController {
 		uiModel.addAttribute("numberOfDiscussion", numberOfDiscussions);
 		uiModel.addAttribute("numberOfMessages", numberOfMessages);
 		uiModel.addAttribute("lastMessageDate", lastMessageDate);
-		uiModel.addAttribute("discussionModel", new Discussion());
+		Discussion discussion = new Discussion();
+		discussion.setPhotoId(imageId);
+		uiModel.addAttribute("discussionModel", discussion);
 		uiModel.addAttribute("subTopicModel", new SubTopic());
 		uiModel.addAttribute("entities", subTopics);
+		uiModel.addAttribute("imageId", imageId);
 		populateModel(uiModel);
 		return "public/forum/subTopicView";
 	}
@@ -491,12 +497,13 @@ public class ForumController {
 	 * @return
 	 */
 	@RequestMapping(value = "/discussions/{id}", method = RequestMethod.GET)
-	public String showDiscussion(
+	public String showDiscussionView(
 			@PathVariable("id") BigInteger discussionId,
 			@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "size", required = false) Integer size,
 			@RequestParam(value = "sortFieldName", required = false) String sortFieldName,
 			@RequestParam(value = "sortOrder", required = false) String sortOrder,
+			@RequestParam(value = "imageId", required  = false) String imageId,
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse, Model uiModel) {
 		Discussion discussion = discussionService.findDiscussion(discussionId);
@@ -519,7 +526,9 @@ public class ForumController {
 			lastMessageDate = lastComment.getCreated();
 		}
 		uiModel.addAttribute("lastMessageDate", lastMessageDate);
-		uiModel.addAttribute("commentModel", new Comment());
+		Comment comment = new Comment();
+		comment.setPhotoId(imageId);
+		uiModel.addAttribute("commentModel", comment);
 		uiModel.addAttribute("entities", discussions);
 		populateModel(uiModel);
 		return "public/forum/discussionView";

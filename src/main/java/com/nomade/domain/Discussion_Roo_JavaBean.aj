@@ -77,4 +77,12 @@ privileged aspect Discussion_Roo_JavaBean {
         this.frozen = frozen;
     }
     
+    public String Discussion.getPhotoId() {
+        return this.photoId;
+    }
+    
+    public void Discussion.setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
+    
 }

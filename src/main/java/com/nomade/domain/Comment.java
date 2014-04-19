@@ -30,4 +30,8 @@ public class Comment {
     /**
      */
     private Boolean frozen;
+
+    /**
+     */
+    private String photoId;
 }

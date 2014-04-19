@@ -7,5 +7,6 @@
         <field:display field="nomade" id="s_com_nomade_domain_Comment_nomade" object="${comment}" z="uZbY4xf8PvUYv0JC/yz9s/o2v6g="/>
         <field:display field="businessId" id="s_com_nomade_domain_Comment_businessId" object="${comment}" z="xXj0kq/PEVOX6cw6wbU41KOR7L4="/>
         <field:display field="frozen" id="s_com_nomade_domain_Comment_frozen" object="${comment}" z="PrE/F9oA9JwOBx5/W2nuJ+RE0+I="/>
+        <field:display field="photoId" id="s_com_nomade_domain_Comment_photoId" object="${comment}" z="n9rf/9QOaKdBPH/i2WvBjDM9NEY="/>
     </page:show>
 </div>

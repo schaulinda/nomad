@@ -7,5 +7,6 @@
         <field:input field="nomade" id="c_com_nomade_domain_Comment_nomade" z="/cmeB5MN+CMZouit8qjUR0pt1hg="/>
         <field:input field="businessId" id="c_com_nomade_domain_Comment_businessId" z="z5oIy5Vkz+mRwXEZxY0RpM6Qjjw="/>
         <field:checkbox field="frozen" id="c_com_nomade_domain_Comment_frozen" z="py/38BXt09304Ce1mvpxSXzT1fo="/>
+        <field:input field="photoId" id="c_com_nomade_domain_Comment_photoId" z="zf6GIf2ZzfU0gJw0NdUwLTIt4ro="/>
     </form:update>
 </div>

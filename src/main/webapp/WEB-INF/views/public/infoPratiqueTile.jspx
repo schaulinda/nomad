@@ -175,7 +175,6 @@
 									   path="comment" 
 									   id="comment" 
 									   rows="4" />
-
 					</div>
 					<div class="col-lg-3 form-group">
 						<form:hidden id="photo" path="photo" />

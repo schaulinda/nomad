@@ -22,6 +22,8 @@ import javax.validation.Valid;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.imgscalr.Scalr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -98,7 +100,7 @@ public class UserController {
 	@Autowired
 	VoyageService voyageService;
 	
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 		
@@ -469,7 +471,7 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 		
 		UserNomade nomade = securite.getUserNomade();
 		String stringPage = request.getSession(true).getAttribute("backLink").toString();
-		
+		String entityId = request.getSession(true).getAttribute("entityId").toString();
 		//render previous page with marker an historik
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
@@ -483,7 +485,7 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 		//---------------end----------
 		
 		if(stringPage==null){
-			return "/";
+			return "redirect:/";
 		}
 		
 		if(stringPage.equals("profil")){
@@ -528,8 +530,15 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 			
 			return "public/danger";
 		}
+		if("forumSubTopicView".equals(stringPage)){
+			return "redirect:/forum/subtopics/"+encodeUrlPathSegment(entityId.toString(), request)+"?imageId="+encodeUrlPathSegment(id, request);
+		}
+
+		if("forumDiscussionView".equals(stringPage)){
+			return "redirect:/forum/discussions/"+encodeUrlPathSegment(entityId.toString(), request)+"?imageId="+encodeUrlPathSegment(id, request);
+		}
 		
-		return "/";
+		return "redirect:/";
 	}
 
 	

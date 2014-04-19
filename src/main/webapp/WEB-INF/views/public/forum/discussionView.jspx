@@ -33,21 +33,28 @@
 				<div class="modal-body">
 					<form:form commandName="commentModel"
 						action="${create_comment_url }" method="POST">
-						<div class="form-group">
+						<div class="row form-group">
 							<form:textarea placeholder="your comment please ..."
 								path="commentaire"
 								cssClass="summernote"
 								cssStyle="form-control  margin: 0px; width: 517px; height: 155px;" />
+								<util:photomanager entity="${commentModel }" id="${discussion.id}" backLink="forumDiscussionView" />
 						</div>
+						<div  class="row form-group">
+							
 						<div class="checkbox">
 						    <label>
 						      <form:checkbox path="frozen" value="false" /> Is Frozen ?
 						    </label>
 						</div>
+						</div>
+						<div class="row form-group">
+							
 						<button class="btn btn-primary" type="submit">Save
 							changes</button>
 						<button class="btn" data-dismiss="modal" type="reset"
 							aria-hidden="true" id="btnCloseDialog">Close</button>
+						</div>
 					</form:form>
 				</div>
 				<div class="modal-footer">

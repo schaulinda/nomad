@@ -69,9 +69,11 @@ public class AlbumController {
 	@RequestMapping("/myPic")
 	public String myPic(
 			@RequestParam(value = "backLink", required = false) String backLink,
+			@RequestParam(value="entityId",required=false) String id,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 
 		httpServletRequest.getSession(true).setAttribute("backLink", backLink);
+		httpServletRequest.getSession(true).setAttribute("entityId", id);
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("beanPictureManager", dataPic(nomade,httpServletRequest));
 		uiModel.addAttribute("nomade", nomade);

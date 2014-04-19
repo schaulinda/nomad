@@ -49,26 +49,43 @@
 				<div class="modal-body">
 					<form:form commandName="discussionModel"
 						action="${create_discussion_url }" method="POST">
-						<div class="form-group">
-							<span>Title</span>
-							<form:input path="title" cssClass="form-control"
-								placeholder="title..." />
+						<div class="row form-group">
+							<div class="col-lg-8">
+								<span>Title</span>
+								<form:input path="title" cssClass="form-control" id="discussionTitle"
+									placeholder="title..." />
+							</div>
+							<div class="col-lg-1">
+								<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+								<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=forumSubTopicView&amp;entityId=${subTopic.id}"> <i class="icon-edit">
+										<!-- -->
+								</i>
+								</a>
+							</div>
+							<div class="col-lg-3 form-group">
+								<form:hidden id="photoId" path="photoId" />
+								<c:if test="${not empty discussionModel.photoId}">
+									<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+									<img alt="" src="${imageRender_url}/${discussionModel.photoId}" width="100px" height="100px;" />
+								</c:if>
+							</div>
 						</div>
+						
 						<div class="form-group">
 							<span>Content</span>
-							<form:textarea path="content" cssClass="form-control summernote"
+							<form:textarea path="content" id="discussionContent" cssClass="form-control summernote"
 								placeholder="type the content..." />
 						</div>
 
 						<div class="form-group">
 							<label>Confidentiality</label>
-							<form:select path="confidentiality" cssClass="form-control"
+							<form:select path="confidentiality" cssClass="form-control" id="discussionConfidentiality"
 								items="${confidentialities}" placeholder="Confidentiality" />
 						</div>
 							
 						<div class="checkbox">
 							<label>
-								<form:checkbox path="frozen" value="false" /> Is Frozen ?
+								<form:checkbox path="frozen" value="false" id="discussionFrozen" /> Is Frozen ?
 							</label>
 						</div>
 						<button class="btn" data-dismiss="modal" aria-hidden="true"
@@ -310,10 +327,39 @@
 					hideOrDisplayForm(discussionDialog);
 				});
 			}
+			function bindEventsOnSelectImage(){
+				/* -------------------check session data and recover them --*/
+				$("#discussionTitle").val($.session.get('title'));
+				$("#discussionContent").val($.session.get('content'));
+				$("#discussionConfidentiality").val($.session.get('confidentiality'));
+				console.log($.session.get('frozen'));
+				$("#discussionFrozen").val('checked',$.session.get('frozen'));
+
+				$.session.remove('title');
+				$.session.remove('content');
+				$.session.remove('confidentiality');
+				$.session.remove('frozen');
+				
+				/* --------------------save session----------------------- */
+				$("#selectImg").click(
+
+						function(e) {
+							e.preventDefault();
+							$.session.set('title', $("#discussionTitle").val());
+							$.session.set('content', $("#discussionContent").val());
+							$.session.set('confidentiality', $("#discussionConfidentiality").val());
+							
+							console.log($("#discussionFrozen").val());
+							$.session.set('frozen', $("#discussionFrozen").val());
+							$(this).unbind('click').click();
+						});
+			}
 			$(document).ready(function() {
 				initCreateSubTopicDialogEvents();
 				initCreateDiscussionDialogEvents();
+				bindEventsOnSelectImage();
 			});
+			
 		})(jQuery);
 	</script>
 	<jsp:include page="summernote-js.jspx" />

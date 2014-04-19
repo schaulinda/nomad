@@ -9,6 +9,7 @@
             <table:column id="c_com_nomade_domain_Comment_nomade" property="nomade" z="B+hG5KNBtBmB76SGmcHTlHlNbnY="/>
             <table:column id="c_com_nomade_domain_Comment_businessId" property="businessId" z="c2FMSoTdLY3gdJSxe/XxsdiRxKE="/>
             <table:column id="c_com_nomade_domain_Comment_frozen" property="frozen" z="jYutQIXh3lNVkaayMRcag/RwMuk="/>
+            <table:column id="c_com_nomade_domain_Comment_photoId" property="photoId" z="y9jiz+6YeQLo25lMJU/23NUGPjQ="/>
         </table:table>
     </page:list>
 </div>

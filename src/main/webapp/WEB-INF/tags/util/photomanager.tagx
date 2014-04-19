@@ -1,0 +1,33 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:output omit-xml-declaration="yes" />
+
+	<jsp:directive.attribute name="entity" type="java.lang.Object" required="true" rtexprvalue="true" description="the model of the form" />
+	<jsp:directive.attribute name="photoFieldName" type="java.lang.String" required="false" rtexprvalue="true" description="the field of the photo id in the image" />
+	<jsp:directive.attribute name="backLink" type="java.lang.String" required="true" rtexprvalue="true" description="the field of the photo id in the image" />
+	<jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="the id of the main entity of this page" />
+
+	<c:if test="${empty render or render}">
+		<c:if test="${empty photoFieldName }">
+			<c:set var="photoFieldName" value="photoId"/>
+		</c:if>
+		<div class="col-lg-3 form-group">
+			<form:hidden id="photoId" path="${ photoFieldName}" />
+			<c:if test="${not empty entity.photoId}">
+				<spring:url value="/albums/imageRender" var="imageRender_url"></spring:url>
+				<img alt="" src="${imageRender_url}/${entity.photoId}" width="100px" height="100px;"></img>
+			</c:if>
+		</div>
+		<div class="col-lg-1">
+								<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
+								<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=${backLink }&amp;entityId=${id}"> <i class="icon-edit">
+										<!-- -->
+								</i>
+								</a>
+							</div>
+
+	</c:if>
+</jsp:root>

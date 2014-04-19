@@ -49,4 +49,12 @@ privileged aspect Comment_Roo_JavaBean {
         this.frozen = frozen;
     }
     
+    public String Comment.getPhotoId() {
+        return this.photoId;
+    }
+    
+    public void Comment.setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
+    
 }
