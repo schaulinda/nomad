@@ -48,10 +48,12 @@
 					</c:forEach>
 				</select>
 			</div>
-			<div class="form-group">
+			<div class="raw form-group">
 				<span>Title</span>
 				<form:input path="title" cssClass="form-control"
 					placeholder="title..." />
+					
+					<util:photomanager entity="${discussion }" id="${discussion.id}" backLink="forumUpdateDiscussionView" />
 			</div>
 
 			<div class="checkbox">

@@ -565,8 +565,10 @@ public class ForumController {
 	@RequestMapping(value = "/discussions/{discussionId}/form", method = RequestMethod.GET)
 	public String showUpdateDiscussionForm(
 			@PathVariable("discussionId") BigInteger discussionId,
+			@RequestParam(value = "imageId", required  = false) String imageId,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		Discussion discussion = discussionService.findDiscussion(discussionId);
+		discussion.setPhotoId(imageId);;
 		uiModel.addAttribute("discussion", discussion);
 		List<SubTopic> subTopics = subTopicService.findByParentTopic(discussion.getSubTopic().getParentTopic());
 		uiModel.addAttribute("subTopics", subTopics);
@@ -647,6 +649,7 @@ public class ForumController {
 	public String showUpdateCommentForm(
 			@PathVariable("discussionId") BigInteger discussionId,
 			@PathVariable("businessId") String commentBusinessId,
+			@RequestParam(value = "imageId", required  = false) String imageId,
 			Model uiModel, HttpServletRequest httpServletRequest) {
 		Discussion discussion = discussionService.findDiscussion(discussionId);
 		Comment comment = null;
@@ -655,6 +658,7 @@ public class ForumController {
 				comment = c;
 			}
 		}
+		comment.setPhotoId(imageId);
 		uiModel.addAttribute("discussion", discussion);
 		uiModel.addAttribute("comment", comment);
 		populateModel(uiModel);

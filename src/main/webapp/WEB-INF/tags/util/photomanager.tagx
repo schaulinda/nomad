@@ -9,6 +9,7 @@
 	<jsp:directive.attribute name="photoFieldName" type="java.lang.String" required="false" rtexprvalue="true" description="the field of the photo id in the image" />
 	<jsp:directive.attribute name="backLink" type="java.lang.String" required="true" rtexprvalue="true" description="the field of the photo id in the image" />
 	<jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="the id of the main entity of this page" />
+	<jsp:directive.attribute name="commentId" type="java.lang.String" required="false" rtexprvalue="true" description="this is the id of a comment" />
 
 	<c:if test="${empty render or render}">
 		<c:if test="${empty photoFieldName }">
@@ -23,7 +24,7 @@
 		</div>
 		<div class="col-lg-1">
 								<spring:url value="/albums/myPic" var="selectPhoto_url"></spring:url>
-								<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=${backLink }&amp;entityId=${id}"> <i class="icon-edit">
+								<a class="btn btn-default" id="selectImg" href="${selectPhoto_url}?backLink=${backLink }&amp;entityId=${id}&amp;commentId=${commentId}"> <i class="icon-edit">
 										<!-- -->
 								</i>
 								</a>

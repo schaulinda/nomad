@@ -70,10 +70,12 @@ public class AlbumController {
 	public String myPic(
 			@RequestParam(value = "backLink", required = false) String backLink,
 			@RequestParam(value="entityId",required=false) String id,
+			@RequestParam(value="commentId",required=false) String commentId,//optional comment Id, to handle request on update comment
 			Model uiModel, HttpServletRequest httpServletRequest) {
 
 		httpServletRequest.getSession(true).setAttribute("backLink", backLink);
 		httpServletRequest.getSession(true).setAttribute("entityId", id);
+		httpServletRequest.getSession(true).setAttribute("commentId", commentId);
 		UserNomade nomade = securite.getUserNomade();
 		uiModel.addAttribute("beanPictureManager", dataPic(nomade,httpServletRequest));
 		uiModel.addAttribute("nomade", nomade);

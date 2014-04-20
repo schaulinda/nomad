@@ -472,6 +472,7 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 		UserNomade nomade = securite.getUserNomade();
 		String stringPage = request.getSession(true).getAttribute("backLink").toString();
 		String entityId = request.getSession(true).getAttribute("entityId").toString();
+		String commentId = request.getSession(true).getAttribute("commentId").toString();
 		//render previous page with marker an historik
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 
@@ -536,6 +537,12 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 
 		if("forumDiscussionView".equals(stringPage)){
 			return "redirect:/forum/discussions/"+encodeUrlPathSegment(entityId.toString(), request)+"?imageId="+encodeUrlPathSegment(id, request);
+		}
+		if("forumUpdateDiscussionView".equals(stringPage)){
+			return "redirect:/forum/discussions/"+encodeUrlPathSegment(entityId, request)+"/form?imageId="+encodeUrlPathSegment(id, request);
+		}
+		if("forumUpdateCommentView".equals(stringPage)){
+			return "redirect:/forum/discussions/"+encodeUrlPathSegment(entityId, request)+"/comments/"+encodeUrlPathSegment(commentId, request)+"/form?imageId="+encodeUrlPathSegment(id, request);
 		}
 		
 		return "redirect:/";
