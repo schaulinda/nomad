@@ -76,7 +76,7 @@ public class FileMsgController {
 			e.printStackTrace();
 		}
  
-    	
+    	uiModel.addAttribute("nomade", nomade);
     	return "message/listMsg";
     }
 
@@ -113,6 +113,7 @@ public class FileMsgController {
     	List<FileMsg> myFileMsg = fileMsgService.findMyFileMsg(nomade);
     	
     	uiModel.addAttribute("listNomad", myFileMsg);
+    	uiModel.addAttribute("nomade", nomade);
     	return "message/listMsg";
     }
     
@@ -137,7 +138,7 @@ public class FileMsgController {
 			e.printStackTrace();
 		}
  
-    	
+    	uiModel.addAttribute("nomade", nomade);
     	return "message/listMsg";
     }
     
@@ -163,7 +164,7 @@ public class FileMsgController {
 			e.printStackTrace();
 		}
  
-    	
+    	uiModel.addAttribute("nomade", nomade);
     	return "message/listMsg";
     }
 }

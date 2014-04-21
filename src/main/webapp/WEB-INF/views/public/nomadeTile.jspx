@@ -73,7 +73,8 @@
 						</div>
 						<div
 							class="col-lg-5 col-lg-offset-1 col-sm-6 col-xs-12 col-md-12 first-info">
-							<label>${langNationality} : </label> ${nomad.compte.nationality}<br />
+							<label>${langNationality} : </label><img src="${res}/img/flag/${nomad.compte.nationality}.png" alt="${nomad.compte.nationality}" />
+							<br />
 							<label>${langName} : </label>${nomad.compte.fullName} <br /> <label>${langWebsite}
 								: </label>${nomad.profil.website}
 						</div>
@@ -102,9 +103,25 @@
 						</c:if>
 					</div>
 					<br /> <label>${langSpokenLanguage} : </label>
-					${nomad.profil.langues}<br /> <label>${langVisitedCountry}
-						: </label> ${nomad.profil.visitedCountry}<br /> <label>${langPurposeOfTheTrip}
-						:</label>${nomad.profil.butVoyage}
+					<table>
+						<tr>
+							<c:forEach  items="${nomad.profil.langues}" var="langCountry" >
+								<td><img src="${res}/img/flag/${langCountry}.png" alt="${langCountry}" /></td>
+							</c:forEach>
+						</tr>
+					</table>
+					
+					<br /> <label>${langVisitedCountry}: </label> 
+					<table>
+						<tr>
+							<c:forEach  items="${nomad.profil.visitedCountry}" var="visitedCountry" >
+								<td><img src="${res}/img/flag/${visitedCountry}.png" alt="${visitedCountry}" /></td>
+							</c:forEach>
+						</tr>
+					</table>
+					
+					<br /> <label>${langPurposeOfTheTrip}:</label>
+					${nomad.profil.butVoyage}
 				</div>
 				<div class="panel panel-warning col-lg-12 col-md-12">
 					<div class="panel-heading">
@@ -208,10 +225,11 @@
 													trigger : 'click',
 													placement : 'bottom',
 													title : '${langSendMessage}',
-													content : '<form id="formMsg"><p><textarea name="content"><!-- com --></textarea></p>'
+													content :''
+															+'<form id="formMsg"><p><textarea name="content"><!-- com --></textarea></p>'
 															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >${langCancel}</button>'
 															+'<input type="hidden" name="idReceiver" value="${beanNomadeManager.nomade.id}" />'
-															+ ' <button class="btn btn-primary" id="sendMsg" >${langSend}</button></form>'
+															+ ' <button class="btn btn-primary" onclick="" id="sendMsg" >${langSend}</button></form>'
 												});
 								
 								/* ajax for msg */
@@ -223,7 +241,11 @@
 							        });
 							        return false;
 							    });
-
+								
+								$("#sendMsg").click(function(){
+						        	console.log("ajaxjjk");
+						        });
+								
 								/* add friend */
 								$('#btn_add').click(
 										function() {
