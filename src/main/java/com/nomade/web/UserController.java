@@ -472,7 +472,11 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 		UserNomade nomade = securite.getUserNomade();
 		String stringPage = request.getSession(true).getAttribute("backLink").toString();
 		String entityId = request.getSession(true).getAttribute("entityId").toString();
-		String commentId = request.getSession(true).getAttribute("commentId").toString();
+		Object commentAttribute = request.getSession(true).getAttribute("commentId");
+		String commentId = null ;
+		if(commentAttribute != null){
+			commentId=commentAttribute.toString();
+		}
 		//render previous page with marker an historik
 		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div id="body" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:rooForm="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:form="http://www.springframework.org/tags/form"
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:tiles="http://tiles.apache.org/tags-tiles"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:url var="res" value="/resources" />
+
+		<script type="text/javascript">
+			jQuery.noConflict($);
+			(function($){
+				function bindEventsOnSelectImage(){
+					/* -------------------check session data and recover them --*/
+					$("#title").val($.session.get('title'));
+					$("#content").val($.session.get('content'));
+					$("#confidentiality").val($.session.get('confidentiality'));
+					console.log($.session.get('frozen'));
+					$("#frozen").prop('checked',$.session.get('frozen'));
+
+					$.session.remove('title');
+					$.session.remove('content');
+					$.session.remove('confidentiality');
+					$.session.remove('frozen');
+					
+					/* --------------------save session----------------------- */
+					$("#selectImg").click(
+
+							function(e) {
+								e.preventDefault();
+								$.session.set('title', $("#title").val());
+								$.session.set('content', $("#content").val());
+								$.session.set('confidentiality', $("#confidentiality").val());
+								
+								console.log($("#discussionFrozen").val());
+								$.session.set('frozen', $("#frozen").val());
+								$(this).unbind('click').click();
+							});
+				}
+				$(document).ready(function() {
+					bindEventsOnSelectImage();
+				});
+			})(jQuery);
+		</script>
+</div>

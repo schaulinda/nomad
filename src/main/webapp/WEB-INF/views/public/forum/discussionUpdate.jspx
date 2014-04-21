@@ -30,7 +30,7 @@
 			<form:hidden path="created" value="${formatedDateValue }" />
 			<!--form:hidden path="subTopic" value="${discussion.subTopic.id }" / -->
 			
-			<div class="form-group">
+			<div class="row form-group">
 				<span class="form-label">Choose a topic</span>
 					
 				<select name="subTopic" class="form-control" size="1" title="Please choose a different subtopic, if you want to move this discussion right there">
@@ -48,28 +48,29 @@
 					</c:forEach>
 				</select>
 			</div>
-			<div class="raw form-group">
+			<div class="row form-group">
 				<span>Title</span>
-				<form:input path="title" cssClass="form-control"
-					placeholder="title..." />
-					
-					<util:photomanager entity="${discussion }" id="${discussion.id}" backLink="forumUpdateDiscussionView" />
+				<div class="col-lg-7">
+					<form:input path="title" id="title" cssClass="form-control" placeholder="title..." />
+				</div>
+				<util:photomanager entity="${discussion }" id="${discussion.id}" backLink="forumUpdateDiscussionView" />
 			</div>
-
-			<div class="checkbox">
-				<label> <form:checkbox path="frozen"
-						value="${discussion.frozen }" /> Is Frozen ?
-				</label>
+			<div class="row form-group">
+				<div class="checkbox">
+					<label> <form:checkbox id="frozen" path="frozen"
+							value="${discussion.frozen }" /> Is Frozen ?
+					</label>
+				</div>
 			</div>
-			<div class="form-group">
+			<div class="row form-group">
 				<span>Content</span>
-				<form:textarea path="content" cssClass="form-control summernote"
+				<form:textarea path="content" id="content" cssClass="form-control summernote"
 					placeholder="type the content..." />
 			</div>
 
-			<div class="form-group">
+			<div class="row form-group">
 				<label>Confidentiality</label>
-				<form:select path="confidentiality" cssClass="form-control"
+				<form:select path="confidentiality" id="confidentiality" cssClass="form-control"
 					items="${confidentialities}" placeholder="Confidentiality" />
 			</div>
 			<input class="btn" type="reset" />
@@ -88,5 +89,6 @@
 		}));
 	</script>
 	<jsp:include page="summernote-js.jspx" />
+	<jsp:include page="sessiondatastore.jspx" />
 </div>
 

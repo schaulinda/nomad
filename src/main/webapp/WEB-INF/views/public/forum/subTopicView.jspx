@@ -52,7 +52,7 @@
 						<div class="row form-group">
 							<div class="col-lg-8">
 								<span>Title</span>
-								<form:input path="title" cssClass="form-control" id="discussionTitle"
+								<form:input path="title" cssClass="form-control" id="title"
 									placeholder="title..." />
 							</div>
 							<div class="col-lg-1">
@@ -73,19 +73,19 @@
 						
 						<div class="form-group">
 							<span>Content</span>
-							<form:textarea path="content" id="discussionContent" cssClass="form-control summernote"
+							<form:textarea path="content" id="content" cssClass="form-control summernote"
 								placeholder="type the content..." />
 						</div>
 
 						<div class="form-group">
 							<label>Confidentiality</label>
-							<form:select path="confidentiality" cssClass="form-control" id="discussionConfidentiality"
+							<form:select path="confidentiality" cssClass="form-control" id="confidentiality"
 								items="${confidentialities}" placeholder="Confidentiality" />
 						</div>
 							
 						<div class="checkbox">
 							<label>
-								<form:checkbox path="frozen" value="false" id="discussionFrozen" /> Is Frozen ?
+								<form:checkbox path="frozen" value="false" id="frozen" /> Is Frozen ?
 							</label>
 						</div>
 						<button class="btn" data-dismiss="modal" aria-hidden="true"
@@ -327,40 +327,13 @@
 					hideOrDisplayForm(discussionDialog);
 				});
 			}
-			function bindEventsOnSelectImage(){
-				/* -------------------check session data and recover them --*/
-				$("#discussionTitle").val($.session.get('title'));
-				$("#discussionContent").val($.session.get('content'));
-				$("#discussionConfidentiality").val($.session.get('confidentiality'));
-				console.log($.session.get('frozen'));
-				$("#discussionFrozen").val('checked',$.session.get('frozen'));
-
-				$.session.remove('title');
-				$.session.remove('content');
-				$.session.remove('confidentiality');
-				$.session.remove('frozen');
-				
-				/* --------------------save session----------------------- */
-				$("#selectImg").click(
-
-						function(e) {
-							e.preventDefault();
-							$.session.set('title', $("#discussionTitle").val());
-							$.session.set('content', $("#discussionContent").val());
-							$.session.set('confidentiality', $("#discussionConfidentiality").val());
-							
-							console.log($("#discussionFrozen").val());
-							$.session.set('frozen', $("#discussionFrozen").val());
-							$(this).unbind('click').click();
-						});
-			}
 			$(document).ready(function() {
 				initCreateSubTopicDialogEvents();
 				initCreateDiscussionDialogEvents();
-				bindEventsOnSelectImage();
 			});
 			
 		})(jQuery);
 	</script>
 	<jsp:include page="summernote-js.jspx" />
+	<jsp:include page="sessiondatastore.jspx" />
 </div>

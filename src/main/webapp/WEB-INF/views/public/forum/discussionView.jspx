@@ -34,17 +34,19 @@
 					<form:form commandName="commentModel"
 						action="${create_comment_url }" method="POST">
 						<div class="row form-group">
-							<form:textarea placeholder="your comment please ..."
+							<div class="col-lg-8">
+								<form:textarea placeholder="your comment please ..."
 								path="commentaire"
 								cssClass="summernote"
 								cssStyle="form-control  margin: 0px; width: 517px; height: 155px;" />
+							</div>
 								<util:photomanager entity="${commentModel }" id="${discussion.id}" backLink="forumDiscussionView" />
 						</div>
 						<div  class="row form-group">
 							
 						<div class="checkbox">
 						    <label>
-						      <form:checkbox path="frozen" value="false" /> Is Frozen ?
+						      <form:checkbox path="frozen" id="frozen" value="false" /> Is Frozen ?
 						    </label>
 						</div>
 						</div>
@@ -253,4 +255,5 @@
 				}));
 		</script>
 	<jsp:include page ="summernote-js.jspx" />
+	<jsp:include page="sessiondatastore.jspx" />
 </div>
