@@ -39,7 +39,7 @@ public class VoyageServiceImpl implements VoyageService {
 private String linkBase(HttpServletRequest httpServletRequest){
 		
 		StringBuilder stringBuilder = new StringBuilder()
-		.append("https://")
+		.append("http://")
 		.append(httpServletRequest.getServerName())
 		.append(":").append(httpServletRequest.getServerPort())
 		.append("/resources/img")

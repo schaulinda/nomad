@@ -43,24 +43,30 @@ public class FileMsgController {
     }
 
     @RequestMapping("/sendFromProfile")
-    @ResponseBody
     public String sendMsg(@RequestParam("content") String content,
     		@RequestParam("idReceiver") String idReceiver, HttpServletRequest request) {
-       
+
+		
     	send(content, idReceiver);
     	
-    	return "envoyer";
+    	return "redirect: /public/nomad/"+idReceiver;
+    }
+    
+    @RequestMapping("/formMsg") 
+    public String formMsg(HttpServletRequest request, Model uiModel, @RequestParam("nomadReceiver") String nomadReceiver) {
+       
+    	uiModel.addAttribute("nomadReceiver", userService.findUserNomade(new BigInteger(nomadReceiver)));
+    	return "message/formMsg";
     }
     
     @RequestMapping("/send")
-    @ResponseBody
     public String sendMsg2(@RequestParam("content") String content,
-    		@RequestParam("sender") String sender, HttpServletRequest request, Model uiModel) {
+    		@RequestParam("nomadReceiver") String nomadReceiver, HttpServletRequest request, Model uiModel) {
        
-    	send(content, sender);
+    	send(content, nomadReceiver);
     	
     	UserNomade nomade = security.getUserNomade();
-    	UserNomade nomad2 = userService.findUserNomade(new BigInteger(sender));
+    	UserNomade nomad2 = userService.findUserNomade(new BigInteger(nomadReceiver));
     	
     	List<FileMsg> myFileMsg = fileMsgService.findMyFileMsg(nomade);
     	uiModel.addAttribute("listNomad", myFileMsg);
@@ -70,7 +76,7 @@ public class FileMsgController {
 			FileMsg fileMsg = meAndOther.get(0);
 			fileMsg.setNumberUnreadMsg(0);
 			fileMsgService.saveFileMsg(fileMsg);
-			uiModel.addAttribute("msg", fileMsg.getMessages());
+			uiModel.addAttribute("msgs", fileMsg.getMessages());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,6 +94,7 @@ public class FileMsgController {
     	Message message = new Message(); 	
     	message.setContent(content);
     	message.setRead(false);
+    	message.setSender(nomad1);
     	message.setDateSend(new Date());
     	
     	List<FileMsg> listFileMsg = fileMsgService.findByMeAndOther(nomad1, nomad2);

@@ -81,7 +81,8 @@
 						<c:if test="${beanNomadeManager.me eq false}">
 							<sec:authorize access="isAuthenticated()">
 								<div class="col-lg-4 col-sm-4 col-12">
-									<a class="btn_cancel btn btn-default " id="btn_msg"> <i
+								<spring:url value="/filemsgs" var="filemsgs_url"></spring:url>
+									<a class="btn_cancel btn btn-default" href="${filemsgs_url}/formMsg?nomadReceiver=${nomad.id}" id="btn_msg"> <i
 										class="icon-envelope"> <!-- co --></i> ${langMessage}
 									</a>
 									<c:if test="${beanNomadeManager.amie eq false}">
@@ -216,35 +217,6 @@
 			$(document)
 					.ready(
 							function() {
-								/* popover ftion */
-								$('#btn_msg')
-										.popover(
-												{
-
-													html : 'true',
-													trigger : 'click',
-													placement : 'bottom',
-													title : '${langSendMessage}',
-													content :''
-															+'<form id="formMsg"><p><textarea name="content"><!-- com --></textarea></p>'
-															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >${langCancel}</button>'
-															+'<input type="hidden" name="idReceiver" value="${beanNomadeManager.nomade.id}" />'
-															+ ' <button class="btn btn-primary" onclick="" id="sendMsg" >${langSend}</button></form>'
-												});
-								
-								/* ajax for msg */
-								$("#formMsg").submit(function(){
-							        $.ajax({type:"GET", data: $(this).serialize(), url:"${message_url}",
-							            success: function(data){
-							                console.log(data);
-							            }
-							        });
-							        return false;
-							    });
-								
-								$("#sendMsg").click(function(){
-						        	console.log("ajaxjjk");
-						        });
 								
 								/* add friend */
 								$('#btn_add').click(
@@ -483,6 +455,16 @@
 	
 				});
 			}
+		if(dojo.byId("btn_msg")!=null){
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "btn_msg",
+				event : "onclick",
+				params : {
+					fragments : "smallTile"
+				}
+			}));
+		}
+			
 		});
 	</script>
 

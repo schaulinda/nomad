@@ -88,10 +88,12 @@
 				<div style="border-bottom-style: solid;">
 					<div class="row">
 						<div class="col-lg-4">
-							<b>date depart: </b>${parcours.depart.day}
+							<fmt:formatDate value="${parcours.depart.day}" var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
+							<b>date depart: </b>${formattedDateDepart}
 						</div>
 						<div class="col-lg-4">
-							<b>date Arrive: </b>${parcours.arrived.day}
+							<fmt:formatDate value="${parcours.arrived.day}" var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
+							<b>date Arrive: </b>${formattedDateArrived}
 						</div>
 						<div class="col-lg-4">
 							<b>nbre d'Etapes: </b>${parcours.nbreEtape}

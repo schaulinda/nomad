@@ -18,24 +18,25 @@
 				Pas de File de message!
 			</c:if>
 			<c:forEach items="${listNomad}" var="fileMsg">
-				<c:if test="${fileMsg.nomade.userName eq nomade.userName}">
-					<c:set var="nmd" value="${fileMsg.nomade2}"></c:set>
+				<c:if test="${fileMsg.nomad1.userName eq nomade.userName}">
+					<c:set var="nmd" value="${fileMsg.nomad2}"></c:set>
 				</c:if>
-				<c:if test="${fileMsg.nomade2.userName eq nomade.userName}">
-					<c:set var="nmd" value="${fileMsg.nomade}"></c:set>
+				<c:if test="${fileMsg.nomad2.userName eq nomade.userName}">
+					<c:set var="nmd" value="${fileMsg.nomad1}"></c:set>
 				</c:if>
-				<a href="#" class="list-group-item active"> <span
-					class="badge pull-right">${fileMsg.numberUnreadMsg}</span> 
-					<c:choose>
-							<c:when test="${empty nmd.profil.file}">
-								<img alt="user" src="${res}/img/avatar.png" class="img-rounded" title="" />
-							</c:when>
-							<c:otherwise>
-								<img alt="user" src="${imageRender_url}/${nmd.profil.file}"
-									 class="img-rounded" title="" />
-							</c:otherwise>
-						</c:choose>
-					${nmd.userName}
+				<spring:url value="/filemsgs/read" var="read_url"></spring:url>
+				<a href="${read_url}?idNomad=${nmd.id}" id="${nmd.id}id"
+					class="list-group-item active receiver"> <span
+					class="badge pull-right">${fileMsg.numberUnreadMsg}</span> <c:choose>
+						<c:when test="${empty nmd.profil.file}">
+							<img alt="user" src="${res}/img/avatar.png" width="14px"
+								height="14px" class="img-rounded" title="" />
+						</c:when>
+						<c:otherwise>
+							<img alt="user" src="${imageRender_url}/${nmd.profil.file}"
+								class="img-rounded" title="" />
+						</c:otherwise>
+					</c:choose> ${nmd.userName}
 				</a>
 			</c:forEach>
 		</div>
@@ -45,75 +46,75 @@
 		<!-- Chat
 					================================================== -->
 		<h3 class="">
-			<i class="icon-comments">
-				<!--  oc-->
+			<i class="icon-comments"> <!--  oc-->
 			</i> Message
 		</h3>
 		<hr />
 		<div class="widget-chat">
-			<div class="message">
-				<img src="img/avatar.png" alt="" />
-				<div>
-					<a href="#" title="">First User</a> says: <span class="pull-right">2
-						minutes ago</span>
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit, sed do eiusmod tempor incididunt ut labore.</div>
-				</div>
-			</div>
 
-			<div class="message right">
-				<img src="img/avatar.png" alt="" />
-				<div>
-					<a href="#" title="">Second User</a> says: <span class="pull-right">2
-						minutes ago</span>
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit, sed do eiusmod tempor incididunt ut labore.</div>
-				</div>
-			</div>
+			<c:if test="${not empty msgs}">
+				<c:forEach items="${msgs}" var="msg">
+					<c:if test="${msg.sender.userName eq nomad.userName }">
+						<c:set value="right" var="rigthClass"></c:set>
+					</c:if>
+					<div class="message ${rigthClass}">
+						<div>
+							<a href="#" title="">${msg.sender.userName}</a> says: <span
+								class="pull-right">${msg.dateSend}</span>
+							<div>${msg.content}</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
 
-			<div class="message">
-				<img src="img/avatar.png" alt="" />
-				<div>
-					<a href="#" title="">First User</a> says: <span class="pull-right">2
-						minutes ago</span>
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit, sed do eiusmod tempor incididunt ut labore.</div>
-				</div>
-			</div>
 
-			<div class="message right">
-				<img src="img/avatar.png" alt="" />
-				<div>
-					<a href="#" title="">Second User</a> says: <span class="pull-right">2
-						minutes ago</span>
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit, sed do eiusmod tempor incididunt ut labore.</div>
-				</div>
-			</div>
-
-			<div class="message">
-				<img src="img/avatar.png" alt="" />
-				<div>
-					<a href="#" title="">First User</a> says: <span class="pull-right">2
-						minutes ago</span>
-					<div>Lorem ipsum dolor sit amet, consectetur adipisicing
-						elit, sed do eiusmod tempor incididunt ut labore.</div>
-				</div>
-			</div>
 
 			<div class="widget-actions row">
-				<div class="col-lg-9">
-					<textarea rows="1" id="textarea-chat-example">
+				<spring:url value="/filemsgs/send" var="sendMsg_url"></spring:url>
+				<form action="${sendMsg_url}" id="formMsg">
+					<input type="hidden" name="nomadReceiver"
+						value="${nomadReceiver.id}" />
+					<div class="col-lg-9">
+						<textarea name="content" rows="2" cols="46"
+							id="textarea-chat-example">
 						<!-- co -->
 					</textarea>
-				</div>
-				<div class="col-lg-3">
-					<button class="btn btn-default" style="margin-top: 12px;">
-						Send</button>
-				</div>
-
+					</div>
+					<div class="col-lg-3">
+						<button class="btn btn-default" id="btn_send"
+							style="margin-top: 12px;">Send</button>
+					</div>
+				</form>
 			</div>
 		</div>
 		<!-- / Chat -->
 	</div>
+
+	<script type="text/javascript">
+		dojo.addOnLoad(function() {
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "btn_send",
+				formId : "formMsg",
+				event : "onclick",
+				params : {
+					fragments : "smallTile"
+				}
+			}));
+
+			dojo.query(".receiver").forEach(function(node, index, arr) {
+				var id = node.id;
+
+				Spring.addDecoration(new Spring.AjaxEventDecoration({
+					elementId : id,
+					event : "onclick",
+					params : {
+						fragments : "body"
+					}
+				}));
+			});
+
+		});
+	</script>
+
+
 </div>
