@@ -13,12 +13,22 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<spring:url value="/voyage/select" var="voyage_url"></spring:url>
+	
+<spring:message code="lang_close_the_travel" var="langCloseTheTravel"/>
+<spring:message code="lang_title" var="langTitle"/>
+<spring:message code="lang_departure_location" var="langDepartureLocation"/>
+<spring:message code="lang_departure_date" var="langDepartureDate"/>
+<spring:message code="lang_travel_already_finished" var="langTravelAlreadyFinished"/>
+<spring:message code="lang_arrival_location" var="langArrivalLocation"/>
+<spring:message code="lang_arrival_date" var="langArrivalDate"/>
+<spring:message code="lang_save" var="langSave"/>
+<spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap"/>
 
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i> Termine ce Voyage
+				<i class="icon-road"><!-- co --></i>
+				${langCloseTheTravel}
 			</h3>
 		</div>
 		<c:if test="${not empty beanNoteBookManager.error}" >
@@ -26,15 +36,19 @@
 		</c:if>
 		<spring:url value="/voyages/updateAndCloseVoy" var="updateAndCloseVoy_url"></spring:url>
 		<form:form action="${updateAndCloseVoy_url}" method="GET" id="form_voyage" commandName="voyage"  >
-			<label>Title</label>
+			<label>${langTitle}</label>
 			<form:input path="title" cssClass="form-control" disabled="true" required="required" />
 			<br/>
-			<label>depart location</label>
+			<label>${langDepartureLocation}</label>
 			<div class="input-group">
-				<form:input  id="depart" required="required" disabled="true" cssClass="form-control adress"
-					 path="depart.location" autocomplete="off" />
+				<form:input id="depart" 
+							required="required" 
+							disabled="true" 
+							cssClass="form-control adress"
+					 		path="depart.location" 
+					 		autocomplete="off" />
 					 <form:hidden id="departLat" path="depart.lat" />
-					 <form:hidden	id="departLng" path="depart.lng" /> 
+					 <form:hidden id="departLng" path="depart.lng" /> 
 					 <a href="#" class="mapPicker input-group-addon" id="depart-picker"> 
 					 <span class=""> 
 					 	<i class="icon-screenshot"> <!-- co --></i>
@@ -42,41 +56,54 @@
 				</a>
 			</div>
 			<br/>
-			<label>depart date</label>
+			<label>${langDepartureDate}</label>
 			<div class="input-group">
-				<form:input id="departDate" required="required" disabled="true" cssClass="datepicker form-control" path="depart.day"
-					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
-					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
+				<form:input id="departDate" 
+							required="required" 
+							disabled="true" 
+							cssClass="datepicker form-control" 
+							path="depart.day"
+							type="date" 
+							data-date-format="dd-mm-yyyy" 
+							format="dd-mm-yyyy" />
+				<span class="input-group-addon"><i class="icon-calendar"><!-- co --></i></span>
 			</div>
 			<br/>
 			<div class="input-group">
 				<form:checkbox path="terminated"  id="termined" />
-				voyage deja termine?
+				${langTravelAlreadyFinished}?
 			</div>
 			<br/>
 			<div class="disabled" id="grouparrived" >
-				<label>arrived location</label>
+				<label>${langArrivalLocation}</label>
 				<div class="input-group">
-				<form:input  id="arrived" cssClass="form-control adress" 
-					required="required" path="arrived.location" autocomplete="off" />
-					 <form:hidden id="arrivedLat" path="arrived.lat" />
-					 <form:hidden	id="arrivedLng" path="arrived.lng" /> 
-					 <a href="#" class="mapPicker input-group-addon" id="arrived-picker"> 
-					 <span class=""> 
-					 	<i class="icon-screenshot"> <!-- co --></i>
-					</span>
-				</a>
+					<form:input id="arrived" 
+								cssClass="form-control adress" 
+								required="required" 
+								path="arrived.location" 
+								autocomplete="off" />
+						 <form:hidden id="arrivedLat" path="arrived.lat" />
+						 <form:hidden id="arrivedLng" path="arrived.lng" /> 
+						 <a href="#" class="mapPicker input-group-addon" id="arrived-picker"> 
+						 <span class=""> 
+					 		<i class="icon-screenshot"><!-- co --></i>
+						</span>
+					</a>
+				</div>
+				<br/>
+				<label>${langArrivalDate}</label>
+				<div class="input-group">
+					<form:input id="arrivedDate" 
+								cssClass="datepicker form-control" 
+								path="arrived.day"
+								type="date" 
+								data-date-format="dd-mm-yyyy" 
+								format="dd-mm-yyyy" />
+					<span class="input-group-addon"><i class="icon-calendar"><!-- co --></i></span>
+				</div>
 			</div>
 			<br/>
-			<label>arrived date</label>
-			<div class="input-group">
-				<form:input id="arrivedDate"  cssClass="datepicker form-control" path="arrived.day"
-					type="date" data-date-format="dd-mm-yyyy" format="dd-mm-yyyy" /> <span
-					class="input-group-addon"> <i class="icon-calendar"> <!-- co --></i></span>
-			</div>
-			</div>
-			<br/>
-			<input type="submit" value="save" id="btn_save" class="btn btn-default btn-block" />
+			<input type="submit" value="${langSave}" id="btn_save" class="btn btn-default btn-block" />
 		</form:form>
 
 
@@ -147,7 +174,7 @@
 								
 								$('.mapPicker').tooltip({
 									trigger: 'hover',
-									title: 'click and drag and drop violet marker, to get location'
+									title: '${langDragMarkerOnMap}'
 								});
 								
 								/* ------------------click on mapPicker----------------- */
