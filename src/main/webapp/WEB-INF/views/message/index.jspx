@@ -52,7 +52,7 @@
 		<hr />
 		<div class="widget-chat">
 
-			<c:if test="${not empty msgs}">
+			<c:if test="${not empty msg}">
 				<c:forEach items="${msgs}" var="msg">
 					<c:if test="${msg.sender.userName eq nomad.userName }">
 						<c:set value="right" var="rigthClass"></c:set>

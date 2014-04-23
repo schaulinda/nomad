@@ -139,7 +139,7 @@ public class FileMsgController {
 			FileMsg fileMsg = meAndOther.get(0);
 			fileMsg.setNumberUnreadMsg(0);
 			fileMsgService.saveFileMsg(fileMsg);
-			uiModel.addAttribute("msg", fileMsg.getMessages());
+			uiModel.addAttribute("msgs", fileMsg.getMessages());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,7 +165,7 @@ public class FileMsgController {
 			fileMsg.setMessages(new ArrayList<Message>());
 			fileMsg.setNumberUnreadMsg(0);
 			fileMsgService.saveFileMsg(fileMsg);
-			uiModel.addAttribute("msg", fileMsg.getMessages());
+			uiModel.addAttribute("msgs", fileMsg.getMessages());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

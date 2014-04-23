@@ -97,6 +97,29 @@ public class HomeController {
 		return "/login";
 	}
 	
+	@RequestMapping("/visiteur")
+	public String visiteur(HttpServletRequest request, Model uiModel) {
+		
+		UserNomade nomade = securite.getUserNomade();
+		BeanNomadeManager beanNomadeManager = new BeanNomadeManager();
+		
+		beanHistoriqueDecoration(uiModel, nomade, 0);
+		
+		beanNomadeManager.setMarker(voyageService.buildNomadMakers(request));	
+		beanNomadeManager.setMe(true);
+		//beanNomadeManager.setHome(true);
+		beanNomadeManager.setNomade(nomade);
+		//String makers = parcoursService.buildMakers(findAllUserNomades);
+		//beanNomadeManager.setMakers(makers);
+		uiModel.addAttribute("beanNomadeManager", beanNomadeManager);
+		uiModel.addAttribute("nomade", nomade);
+		uiModel.addAttribute("onglet", "nomad");
+		
+		uiModel.addAttribute("demands", relationService.findReceivedDemand(nomade));
+		
+		return "public/nomad";
+		
+	}
 	
 	@RequestMapping("/@{username}")
 	public String nomad(@PathVariable("username") String username, HttpServletRequest request, Model uiModel) {
