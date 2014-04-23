@@ -258,6 +258,7 @@ public enum Nationality {
 	,Tuvalu
 	,Uganda
 	,Ukraine
+	,UK
 	,UNESCO
 	,UNICEF
 	,UnitedArabEmirates
