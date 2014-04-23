@@ -13,75 +13,99 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<spring:url value="voyages/select" var="voyage_url"></spring:url>
-	
+
+<spring:message code="lang_travel_list" var="langtravelList"/>
+<spring:message code="lang_create_new_travel" var="langCreateNewTravel"/>
+<spring:message code="lang_back_to_travel_notebook" var="langBackToTravelNotebook"/>
+<spring:message code="lang_title" var="langTitle"/>
+<spring:message code="lang_number_of_itinerary" var="langNumberOfItinerary"/>
+<spring:message code="lang_departure_date" var="langDepartureDate"/>
+<spring:message code="lang_arrival_date" var="langArrivalDate"/>
+<spring:message code="lang_status" var="langStatus"/>
+<spring:message code="lang_view_on_map" var="langViewOnMap"/>
+<spring:message code="lang_departure_location" var="langDepartureLocation"/>
+<spring:message code="lang_arrival_location" var="langArrivalLocation"/>
+<spring:message code="lang_delete" var="langDelete"/>
+<spring:message code="lang_itinerary_list" var="langItineraryList"/>
+
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i>Liste de voyage
+				<i class="icon-road"><!-- co --></i>
+				${langtravelList}
 			</h3>
 		</div>
 	<br/>
 	<div class="row">
 		<div class="col-lg-6">
 			<spring:url value="/voyages/voyager" var="voyage_url" ></spring:url>
-			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >creer un nouveau voyage</a>
+			<a href="${voyage_url}" id="newVoyage" class="btn btn-default btn-block" >
+				${langCreateNewTravel}
+			</a>
 		</div>
 		<div class="col-lg-6">
 			<spring:url value="/voyages/selectView" var="retour_url" ></spring:url>
-			<a href="${retour_url}" id="retour" class="btn btn-default btn-block" ><i class="icon-circle-arrow-left"><!-- co --></i> Retour au carnet de voyage</a>
+			<a href="${retour_url}" id="retour" class="btn btn-default btn-block" >
+				<i class="icon-circle-arrow-left"><!-- co --></i>
+				${langBackToTravelNotebook}
+			</a>
 		</div>
-	
 	</div>
-			<br/>
+	<br/>
 	<div style="overflow-y: auto;overflow-x: hidden;height: 400px;" >
 			<c:forEach  var="voyage" items="${listVoy}" >
 			<div style="border-bottom-style: solid;">
 				<div  class="row" >
 					<div class="col-lg-6" >
-						<b>Titre: </b>${voyage.title} 
+						<b>${langTitle} : </b>${voyage.title} 
 					</div>
 					<div class="col-lg-6" >
-						<b>nbre de parcours: </b>${voyage.nbreParcours}
+						<b>${langNumberOfItinerary} : </b>${voyage.nbreParcours}
 					</div >
 				</div>
 				<div  class="row" >
 					<div class="col-lg-4" >
 						<fmt:formatDate value="${voyage.depart.day}" var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
-						<b>date depart: </b>${formattedDateDepart} 
+						<b>${langDepartureDate} : </b>${formattedDateDepart} 
 					</div>
 					<div class="col-lg-4" >
 						<fmt:formatDate value="${voyage.arrived.day}" var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
-						<b>date Arrive: </b>${formattedDateArrived}
+						<b>${langArrivalDate} : </b>${formattedDateArrived}
 					</div >
 					<div class="col-lg-4" >
-						<b>Status: </b>${voyage.status}
+						<b>${langStatus} : </b>${voyage.status}
 						<spring:url value="/voyages/visualiser" var="visu_url" ></spring:url>
-						<a href="#" id="visu_${voyage.id}" class="visu" >Visualiser sur map</a>
+						<a href="#" id="visu_${voyage.id}" class="visu" >${langViewOnMap}</a>
 					</div >
 				</div>
 				<div  class="row" >
 					<div class="col-lg-4" >
-						<b>Lieu Depart: </b>${voyage.depart.location} 
+						<b>${langDepartureLocation} : </b>${voyage.depart.location} 
 					</div>
 					<div class="col-lg-4" >
-						<b>Lieu Arrive: </b>${voyage.arrived.location}
+						<b>${langArrivalLocation} : </b>${voyage.arrived.location}
 					</div >
 					<div class="col-lg-4" >
 						<spring:url value="/voyages/delete" var="supp_url" ></spring:url>
 						<spring:url value="/voyages/listParcours" var="parcours_url" ></spring:url>
-						<a href="${supp_url}?idV=${voyage.id}" id="supp_${voyage.id}" class="supp btn btn-default" style="margin-bottom: 3px;" >Delete</a>
-						<a href="${parcours_url}?idV=${voyage.id}" id="parcours_${voyage.id}" class="parcours btn btn-default" >List parcours </a>
+						<a href="${supp_url}?idV=${voyage.id}" 
+						   id="supp_${voyage.id}" 
+						   class="supp btn btn-default" 
+						   style="margin-bottom: 3px;" >
+							${langDelete}
+						</a>
+						<a href="${parcours_url}?idV=${voyage.id}" 
+						   id="parcours_${voyage.id}" 
+						   class="parcours btn btn-default" >
+							${langItineraryList}
+						</a>
 					</div>
 				</div>
 			</div>
 			<br/>
 			</c:forEach>
+		</div>
 	</div>
-	
-  </div>
-  
-  
  <script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
