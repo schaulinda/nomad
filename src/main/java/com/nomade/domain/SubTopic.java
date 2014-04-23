@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.layers.repository.mongo.RooMongoEntity;
 import org.springframework.roo.addon.tostring.RooToString;
+import org.springframework.beans.factory.annotation.Value;
 
 @RooJavaBean
 @RooToString
@@ -62,4 +63,14 @@ public class SubTopic {
      */
     @NotNull
     private Boolean frozen;
+
+    /**
+     */
+    @Column(unique = true)
+    private String internationalizationPropertyKey;
+
+    /**
+     */
+    @Value("false")
+    private Boolean isADefaultSubTopic;
 }

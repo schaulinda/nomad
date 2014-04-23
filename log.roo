@@ -345,3 +345,12 @@ focus --class ~.domain.Discussion
 field string --fieldName photoId 
 focus --class ~.domain.Comment
 field string --fieldName photoId 
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-04-23 05:01:33
+focus --class ~.domain.Topic
+focus --class ~.domain.Topic
+field string --fieldName internationalizationPropertyKey --unique true
+focus --class ~.domain.SubTopic
+field string --fieldName internationalizationPropertyKey --unique true
+field boolean --fieldName isADefaultSubTopic --value false
+focus --class ~.domain.Topic
+field boolean --fieldName isADefaultTopic --value false

@@ -75,4 +75,20 @@ privileged aspect SubTopic_Roo_JavaBean {
         this.frozen = frozen;
     }
     
+    public String SubTopic.getInternationalizationPropertyKey() {
+        return this.internationalizationPropertyKey;
+    }
+    
+    public void SubTopic.setInternationalizationPropertyKey(String internationalizationPropertyKey) {
+        this.internationalizationPropertyKey = internationalizationPropertyKey;
+    }
+    
+    public Boolean SubTopic.getIsADefaultSubTopic() {
+        return this.isADefaultSubTopic;
+    }
+    
+    public void SubTopic.setIsADefaultSubTopic(Boolean isADefaultSubTopic) {
+        this.isADefaultSubTopic = isADefaultSubTopic;
+    }
+    
 }
