@@ -13,26 +13,33 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<spring:url value="voyages/select" var="voyage_url"></spring:url>
+
+<spring:message code="lang_how_far_are_you" var="langHowFarAreYou"/>
+<spring:message code="lang_in_preparation" var="langInPreparation"/>
+<spring:message code="lang_in_preparation_description" var="langInPreparationDescription"/>
+<spring:message code="lang_new_travel" var="langNewTravel"/>
+<spring:message code="lang_new_travel_description" var="langNewTravelDescription"/>
 	
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i> Ou en etes vous?
+				<i class="icon-road"><!-- co --></i> ${langHowFarAreYou}?
 			</h3>
 		</div>
-	<br/>
-	<div>
-		<a href="${voyage_url}?type=preparation" id="preparation" class="btn btn-default btn-block" >En Preparation</a>
-		 <p class="help-block">
-		 		Si vous etes en recherche d'information ou planifier votre voyage
-		 .</p>
-	</div>
-	<br/>
-	<div>
-		<a href="${voyage_url}?type=nouveau" id="nouveau" class="btn btn-default btn-block" >Nouveau voyage</a>
-		 <p class="help-block">si vous etes deja en aventure ou debutez votre voyage.</p>
-	</div>
+		<br/>
+		<div>
+			<a href="${voyage_url}?type=preparation" id="preparation" class="btn btn-default btn-block" >
+				${langInPreparation}
+			</a>
+			<p class="help-block">${langInPreparationDescription}</p>
+		</div>
+		<br/>
+		<div>
+			<a href="${voyage_url}?type=nouveau" id="nouveau" class="btn btn-default btn-block" >
+				${langNewTravel}
+			</a>
+			<p class="help-block">${langNewTravelDescription}</p>
+		</div>
 	</div>
 	
 	
