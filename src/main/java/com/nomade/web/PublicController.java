@@ -133,10 +133,15 @@ public class PublicController {
 		beanNomadeManager.setHome(false);
 
 
-		if (nomade.getUserName().equals(findUserNomade.getUserName())) {
+		try {
+			if (nomade.getUserName().equals(findUserNomade.getUserName())) {
 
-			beanNomadeManager.setMe(true);
+				beanNomadeManager.setMe(true);
 
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 		}
 		
 		beanNomadeManager.setAmie(relationService.friendschip(nomade,
