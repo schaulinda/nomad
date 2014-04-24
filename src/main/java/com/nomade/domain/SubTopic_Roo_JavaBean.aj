@@ -83,11 +83,11 @@ privileged aspect SubTopic_Roo_JavaBean {
         this.internationalizationPropertyKey = internationalizationPropertyKey;
     }
     
-    public Boolean SubTopic.getIsADefaultSubTopic() {
+    public boolean SubTopic.isIsADefaultSubTopic() {
         return this.isADefaultSubTopic;
     }
     
-    public void SubTopic.setIsADefaultSubTopic(Boolean isADefaultSubTopic) {
+    public void SubTopic.setIsADefaultSubTopic(boolean isADefaultSubTopic) {
         this.isADefaultSubTopic = isADefaultSubTopic;
     }
     

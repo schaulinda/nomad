@@ -11,6 +11,11 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
+	<spring:url value="/forum" var="back_url"/>
+		<div class="row-fluid">
+			<span class="col-lg-6">Retourner au forum : </span>
+			<span class="col-lg-6"> <a href="${back_url }">Retourner</a></span>
+		</div>
 		<h1>Update Discussion</h1>
 
 		<spring:url value="/forum/discussions/update"

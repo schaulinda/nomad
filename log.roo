@@ -354,3 +354,4 @@ field string --fieldName internationalizationPropertyKey --unique true
 field boolean --fieldName isADefaultSubTopic --value false
 focus --class ~.domain.Topic
 field boolean --fieldName isADefaultTopic --value false
+// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-04-24 13:26:44

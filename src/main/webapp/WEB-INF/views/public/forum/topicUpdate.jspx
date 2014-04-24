@@ -11,39 +11,53 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
-		<h1>Update topic</h1>
-		<spring:url value="/forum/topics/update" var="update_topic_url" />
-		<c:if test="${empty dateTimePattern}">
-			<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
-		</c:if>
-		<form:form modelAttribute="topic" action="${update_topic_url }" method="POST" >
-			<form:hidden path="id" value="${discussion.id }" />
-			<c:if test="${not empty discussion.created }">
-				<spring:escapeBody>
-					<fmt:formatDate value="${discussion.created}"
-								pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
-				</spring:escapeBody>
-			</c:if>
-			<form:hidden path="created" value="${formatedDateValue }" />
-			<div class="form-group">
-				<span>Title</span>
-				<form:input path="title" cssClass="form-control"
-					placeholder="title..." />
-			</div>
-			<div class="form-group">
-				<span>Content</span>
-				<form:textarea path="content" cssClass="form-control summernote"
-					placeholder="type the content..." />
-			</div>
-
-			<div class="form-group">
-				<label>Confidentiality</label>
-				<form:select path="confidentiality" cssClass="form-control"
-					items="${confidentialities}" placeholder="Confidentiality" />
-			</div>
-			<input class="btn" type="reset" />
-			<button class="btn btn-primary" id="btn_updatetopic" type="submit">Save changes</button>
-		</form:form>
+	<spring:url value="/forum" var="back_url"/>
+		<div class="row-fluid">
+			<span class="col-lg-6">Retourner au forum : </span>
+			<span class="col-lg-6"> <a href="${back_url }">Retourner</a></span>
+		</div>
+		
+		<c:choose>
+			<c:when test="${topic.isADefaultTopic }">
+				Impossible de modifier ce topic
+			</c:when>
+			<c:otherwise>
+						
+				<h1>Update topic</h1>
+				<spring:url value="/forum/topics/update" var="update_topic_url" />
+				<c:if test="${empty dateTimePattern}">
+					<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
+				</c:if>
+				<form:form modelAttribute="topic" action="${update_topic_url }" method="POST" >
+					<form:hidden path="id" value="${topic.id }" />
+					<c:if test="${not empty topic.created }">
+						<spring:escapeBody>
+							<fmt:formatDate value="${topic.created}"
+										pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
+						</spring:escapeBody>
+					</c:if>
+					<form:hidden path="created" value="${formatedDateValue }" />
+					<div class="form-group">
+						<span>Title</span>
+						<form:input path="title" cssClass="form-control"
+							placeholder="title..." />
+					</div>
+					<div class="form-group">
+						<span>Content</span>
+						<form:textarea path="content" cssClass="form-control summernote"
+							placeholder="type the content..." />
+					</div>
+		
+					<div class="form-group">
+						<label>Confidentiality</label>
+						<form:select path="confidentiality" cssClass="form-control"
+							items="${confidentialities}" placeholder="Confidentiality" />
+					</div>
+					<input class="btn" type="reset" />
+					<button class="btn btn-primary" id="btn_updatetopic" type="submit">Save changes</button>
+				</form:form>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 	<script type="text/javascript">

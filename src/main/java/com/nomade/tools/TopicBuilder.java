@@ -26,6 +26,7 @@ public class TopicBuilder {
 		topic.setCreated(new Date());
 		topic.setNomade(nomade);
 		topic.setTitle(title);
+		topic.setIsADefaultTopic(true);
 		topics.add(topic);
 		return this;
 	}
@@ -38,6 +39,7 @@ public class TopicBuilder {
 		topic.setNomade(nomade);
 		topic.setTitle(title);
 		topic.setInternationalizationPropertyKey(i18nKey);
+		topic.setIsADefaultTopic(true);
 		topics.add(topic);
 		return this;
 	}
@@ -50,6 +52,7 @@ public class TopicBuilder {
 		topic.setNomade(nomade);
 		topic.setTitle(title);
 		topic.setInternationalizationPropertyKey(i18nKey);
+		topic.setIsADefaultTopic(true);
 		topics.add(topic);
 		return this;
 	}

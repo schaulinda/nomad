@@ -44,6 +44,7 @@ public class SubTopicBuilder {
 		subTopic.setParentTopic(parentTopic);
 		subTopic.setTitle(title);
 		subTopic.setFrozen(frozen);
+		subTopic.setIsADefaultSubTopic(true);
 		getSubTopics().add(subTopic);
 		return this;
 	}
@@ -66,6 +67,7 @@ public class SubTopicBuilder {
 		subTopic.setTitle(title);
 		subTopic.setFrozen(false);
 		subTopic.setInternationalizationPropertyKey(i18nKey);
+		subTopic.setIsADefaultSubTopic(true);
 		getSubTopics().add(subTopic);
 		return this;
 	}
@@ -90,6 +92,7 @@ public class SubTopicBuilder {
 		subTopic.setFrozen(false);
 		subTopic.setParentSubTopic(parentSubTopic);
 		subTopic.setInternationalizationPropertyKey(i18nKey);
+		subTopic.setIsADefaultSubTopic(true);
 		getSubTopics().add(subTopic);
 		return this;
 	}

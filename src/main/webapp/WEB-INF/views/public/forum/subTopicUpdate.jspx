@@ -12,52 +12,65 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 	<div class="row">
-		<h1>Update Sub Topic</h1>
-		<spring:url value="/forum/subtopics/update" var="update_subtopics_url" />
-		<c:if test="${empty dateTimePattern}">
-			<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
-		</c:if>
-		<form:form modelAttribute="subTopic" action="${update_subtopics_url }" method="POST" >
-			<form:hidden path="id" value="${subTopic.id }" />
-			<c:if test="${not empty subTopic.created }">
-				<spring:escapeBody>
-					<fmt:formatDate value="${subTopic.created}"
-								pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
-				</spring:escapeBody>
-			</c:if>
-			<form:hidden path="created" value="${formatedDateValue }" />
-			<form:hidden path="parentSubTopic" value="${subTopic.parentSubTopic.id }" />
-			<div class="form-group">
-				<span>Parent Topic</span>
-				<form:select path="parentTopic" items="${topics }" itemValue="id" itemLabel="title" >
-					<form:options items="${topcis }" itemValue="id" itemLabel="title"  />
-				</form:select>
-			</div>
-			<div class="form-group">
-				<span>Title</span>
-				<form:input path="title" cssClass="form-control"
-					placeholder="title..." />
-			</div>
-			<div class="form-group">
-				<span>Content</span>
-				<form:textarea path="content" cssClass="form-control summernote"
-					placeholder="type the content..." />
-			</div>
-
-			<div class="form-group">
-				<label>Confidentiality</label>
-				<form:select path="confidentiality" cssClass="form-control"
-					items="${confidentialities}" placeholder="Confidentiality" />
-			</div>
-			
-			<div class="checkbox">
-				<label>
-					<form:checkbox path="frozen" value="${subTopic.frozen}" /> Is Frozen ?
-				</label>
-			</div>
-			<input class="btn" type="reset" />
-			<button class="btn btn-primary" id="btn_updatesubtopic" type="submit">Save changes</button>
-		</form:form>
+		<spring:url value="/forum" var="back_url"/>
+		<div class="row-fluid">
+			<span class="col-lg-6">Retourner au forum : </span>
+			<span class="col-lg-6"> <a href="${back_url }">Retourner</a></span>
+		</div>
+		<c:choose>
+			<c:when test="${subTopic.isADefaultSubTopic }">
+				<spring:message code="msg_cannot_update_subtopic" var="cannotUpdateSubTopicMsg" />
+				${cannotUpdateSubTopicMsg }
+			</c:when>
+			<c:otherwise>
+				<h1>Update Sub Topic</h1>
+				<spring:url value="/forum/subtopics/update" var="update_subtopics_url" />
+				<c:if test="${empty dateTimePattern}">
+					<c:set value="dd-MM-yyyy hh:mm" var="dateTimePattern" />
+				</c:if>
+				<form:form modelAttribute="subTopic" action="${update_subtopics_url }" method="POST" >
+					<form:hidden path="id" value="${subTopic.id }" />
+					<c:if test="${not empty subTopic.created }">
+						<spring:escapeBody>
+							<fmt:formatDate value="${subTopic.created}"
+										pattern="${fn:escapeXml(dateTimePattern)}" var="formatedDateValue" />
+						</spring:escapeBody>
+					</c:if>
+					<form:hidden path="created" value="${formatedDateValue }" />
+					<form:hidden path="parentSubTopic" value="${subTopic.parentSubTopic.id }" />
+					<div class="form-group">
+						<span>Parent Topic</span>
+						<form:select path="parentTopic" items="${topics }" itemValue="id" itemLabel="title" >
+							<form:options items="${topcis }" itemValue="id" itemLabel="title"  />
+						</form:select>
+					</div>
+					<div class="form-group">
+						<span>Title</span>
+						<form:input path="title" cssClass="form-control"
+							placeholder="title..." />
+					</div>
+					<div class="form-group">
+						<span>Content</span>
+						<form:textarea path="content" cssClass="form-control summernote"
+							placeholder="type the content..." />
+					</div>
+		
+					<div class="form-group">
+						<label>Confidentiality</label>
+						<form:select path="confidentiality" cssClass="form-control"
+							items="${confidentialities}" placeholder="Confidentiality" />
+					</div>
+					
+					<div class="checkbox">
+						<label>
+							<form:checkbox path="frozen" value="${subTopic.frozen}" /> Is Frozen ?
+						</label>
+					</div>
+					<input class="btn" type="reset" />
+					<button class="btn btn-primary" id="btn_updatesubtopic" type="submit">Save changes</button>
+				</form:form>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	
 	<script type="text/javascript">

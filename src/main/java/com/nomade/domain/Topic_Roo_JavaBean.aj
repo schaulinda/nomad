@@ -76,11 +76,11 @@ privileged aspect Topic_Roo_JavaBean {
         this.internationalizationPropertyKey = internationalizationPropertyKey;
     }
     
-    public Boolean Topic.getIsADefaultTopic() {
+    public boolean Topic.isIsADefaultTopic() {
         return this.isADefaultTopic;
     }
     
-    public void Topic.setIsADefaultTopic(Boolean isADefaultTopic) {
+    public void Topic.setIsADefaultTopic(boolean isADefaultTopic) {
         this.isADefaultTopic = isADefaultTopic;
     }
     
