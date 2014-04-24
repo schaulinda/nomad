@@ -33,8 +33,18 @@
 											<spring:param name="size" value="3" />
 										</spring:url>
 										<spring:message code="${topicBean.topic.internationalizationPropertyKey }" var="topicTitleTraductionKey"/>
-									<u> <a class="forum-topic" id="${topicBean.topic.id }" href="${topic_url }"
-										title="${topicBean.topic.content }">${topicTitleTraductionKey}</a>
+									<u>
+									<c:choose>
+											<c:when test="${ topicBean.topic.isADefaultTopic}">
+												<a class="forum-topic" id="${topicBean.topic.id }" href="${topic_url }"
+												title="${topicBean.topic.content }">${topicTitleTraductionKey}</a>
+											</c:when>
+											<c:otherwise>
+												
+												<a class="forum-topic" id="${topicBean.topic.id }" href="${topic_url }"
+												title="${topicBean.topic.content }">${topicBean.topic.title}</a>
+											</c:otherwise>
+										</c:choose>
 								</u>
 							</b>
 						</span> <br />
@@ -42,8 +52,15 @@
 						<c:forEach items="${topicBean.topic.subTopics }" var="subTopic">
 								<spring:url value="/forum/subtopics/${subTopic.id }"	var="subtopic_url" />
 								<u>
-									<spring:message code="${subTopic.internationalizationPropertyKey }" var="subtopicTitleTraductionKey"/>
-									<a class="forum-topic-subtopic" id="${ subTopic.id}" style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subtopicTitleTraductionKey}</a>
+									<c:choose>
+										<c:when test="${subTopic.isADefaultSubTopic }">
+											<spring:message code="${subTopic.internationalizationPropertyKey }" var="subtopicTitleTraductionKey"/>
+											<a class="forum-topic-subtopic" id="${ subTopic.id}" style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subtopicTitleTraductionKey}</a>
+										</c:when>
+										<c:otherwise>
+											<a class="forum-topic-subtopic" id="${ subTopic.id}" style="margin-right: 8px;" href="${subtopic_url }"	title="${subTopic.content }">${subTopic.title}</a>
+										</c:otherwise>
+									</c:choose>
 								</u>
 							</c:forEach></td>
 						<td>${topicBean.nbOfDiscussion }</td>

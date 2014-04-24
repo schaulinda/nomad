@@ -17,7 +17,17 @@
 	<div class="row">
 
 		<div>
-			<span>${subTopic.title }</span> | <span style="margin-left: 20px;">${subTopic.content }</span>
+			<span>
+					
+			<c:choose>
+				<c:when test="${subTopic.isADefaultSubTopic }">
+					${subTopic.internationalizationPropertyKey }
+				</c:when>
+				<c:otherwise>
+					${subTopic.title }
+				</c:otherwise>
+			</c:choose>
+			</span> | <span style="margin-left: 20px;">${subTopic.content }</span>
 			| <span style="margin-left: 20px;">Created The :
 				${subTopic.created }</span> | <span style="margin-left: 20px;">${numberOfDiscussions }
 				Discussions</span> | <span style="margin-left: 20px;">${numberOfMessages }
@@ -155,9 +165,19 @@
 				var="topic_url" />
 			<spring:url value="/forum/topics" var="topics_url" />
 			<div class="col-lg-6">
-				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; <a
-					href="${ topic_url }" id="see_topic_link">${subTopic.parentTopic.title }</a>
-				&gt; <span>${subTopic.title }</span>
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; 
+				<c:choose>
+					<c:when test="${subTopic.parentTopic.isADefaultTopic }">
+						<spring:message code="${subTopic.parentTopic.internationalizationPropertyKey }" var="parentTopicTitleKey"/>
+						<spring:message code="${subTopic.internationalizationPropertyKey }" var="subtopicTitleKey"/>
+						<a	href="${ topic_url }" id="see_topic_link">${parentTopicTitleKey}</a>
+						&gt; <span>${subtopicTitleKey }</span>						
+					</c:when>
+					<c:otherwise>
+						<a	href="${ topic_url }" id="see_topic_link">${subTopic.parentTopic.title }</a>
+						&gt; <span>${subTopic.title }</span>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div>
 				<util:forum-entity-selection currentObject="${subTopic }"

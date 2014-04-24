@@ -10,11 +10,20 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.nomade.domain.BeanHistorique;
 import com.nomade.domain.BeanNoteBookManager;
 import com.nomade.domain.Etape;
 import com.nomade.domain.EtapeVoyage;
-import com.nomade.domain.InfoPratique;
 import com.nomade.domain.Parcours;
 import com.nomade.domain.Relation;
 import com.nomade.domain.StatusVoyage;
@@ -31,17 +40,6 @@ import com.nomade.service.UserService;
 import com.nomade.service.VoyageService;
 import com.nomade.tools.IdGenerator;
 import com.nomade.tools.ImageUtilInterface;
-
-import org.cloudfoundry.org.codehaus.jackson.annotate.JsonAnySetter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequestMapping("/voyages")
 @Controller

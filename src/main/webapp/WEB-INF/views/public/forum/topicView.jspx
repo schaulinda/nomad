@@ -17,7 +17,17 @@
 	<div class="row">
 
 		<div>
-			<span>${topicBean.topic.title }</span> | <span
+			<span>
+				<c:choose>
+					<c:when test="${topicBean.topic.isADefaultTopic }">
+						<spring:message code="${topicBean.topic.internationalizationPropertyKey }" var="topicTitleKey"/>
+						${topicTitleKey }
+					</c:when>
+					<c:otherwise>
+						${topicBean.topic.title }
+					</c:otherwise>
+				</c:choose>
+				</span> | <span
 				style="margin-left: 20px;">${topicBean.topic.content }</span> | <span
 				style="margin-left: 20px;">Created The :
 				${topicBean.topic.created }</span> | <span style="margin-left: 20px;">${topicBean.nbOfDiscussion }
@@ -32,7 +42,16 @@
 		<div class="row">
 			<spring:url value="/forum/topics" var="topics_url" />
 			<div class="col-lg-4">
-				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; <span>${topicBean.topic.title }</span>
+				<a href="${ topics_url }" id="see_all_topics_link">Topics</a> &gt; <span> 
+				<c:choose>
+					<c:when test="${topicBean.topic.isADefaultTopic }">
+						<spring:message code="${topicBean.topic.internationalizationPropertyKey }" var="topicTitleKey"/>
+						${topicTitleKey }
+					</c:when>
+					<c:otherwise>
+						${topicBean.topic.title }
+					</c:otherwise>
+				</c:choose> </span>
 			</div>
 			<div>
 				<util:forum-entity-selection currentObject="${topicBean.topic }"
@@ -56,8 +75,18 @@
 						<spring:url
 							value="/forum/subtopics/${subTopicToBean.subTopic.id }"
 							var="subtopic_url" />
-						<td><a href="${subtopic_url }"
-							id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link">${subTopicToBean.subTopic.title }</a>
+						<td>
+						<c:choose>
+							<c:when test="${ subTopicToBean.subTopic.isADefaultSubTopic}">
+								<spring:message code="${subTopicToBean.subTopic.internationalizationPropertyKey }" var="subtopicTitleKey" />
+								<a href="${subtopic_url }"
+									id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link">${subtopicTitleKey}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="${subtopic_url }"
+									id="s_${ subTopicToBean.subTopic.id}" class="see_subtopic_link">${subTopicToBean.subTopic.title }</a>
+							</c:otherwise>
+						</c:choose>
 						</td>
 						<td>${subTopicToBean.subTopic.content }</td>
 						<td>${subTopicToBean.subTopic.created }</td>
