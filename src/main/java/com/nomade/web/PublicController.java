@@ -261,5 +261,14 @@ public class PublicController {
 
 		return "public/forum";
 	}
+	
+	@RequestMapping("/{pageName}")
+	public String page(@PathVariable("pageName") String pageName, HttpServletRequest request, Model uiModel) {
+
+		if(pageName!=null && !"".equals("pageName"))
+			return "footerpages/"+pageName;
+		else
+			return "/";
+	}
 
 }
