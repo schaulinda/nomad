@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    
+    <definition extends="privateLayout" name="footerpages/whoarewe">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/whoarewe.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="footerpages/contact">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/contact.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="footerpages/advertisers">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/advertisers.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="footerpages/confidentiality">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/confidentiality.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="footerpages/development">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/development.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+     <definition extends="privateLayout" name="footerpages/help">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/help.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+    <definition extends="privateLayout" name="footerpages/professionnals">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/professionnals.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+    
+    <definition extends="privateLayout" name="footerpages/useragrement">
+        <put-attribute name="body" value="/WEB-INF/views/footerpages/useragrement.jspx"/>
+        <put-attribute name="id_subfooter" value="/WEB-INF/views/profil/subfooter.jspx"/>
+    </definition>
+
+</tiles-definitions>

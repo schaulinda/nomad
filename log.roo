@@ -296,3 +296,5 @@ service --entity ~.domain.FileMsg --interface ~.service.FileMsgService
 web mvc scaffold --class ~.domain.FileMsg --backingType ~.web.FileMsgController
 web mvc scaffold --class ~.web.FileMsgController --backingType ~.domain.FileMsg
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-22 12:09:51
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-25 10:05:50
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2014-04-25 10:31:06
