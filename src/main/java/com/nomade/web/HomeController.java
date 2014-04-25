@@ -196,4 +196,5 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade, int page
 		uiModel.addAttribute("beanHistorique", beanHistorique);
 	}
 
+
 }
