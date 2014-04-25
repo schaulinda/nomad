@@ -201,7 +201,7 @@ public class ImageUtil implements ImageUtilInterface {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		return idPhoto;

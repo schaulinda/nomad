@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<p>Qui n'a jamais eu de problèmes pour stationner la nuit, trouver
+		des points de ravitaillement en eau, en essence, des douches ou s'est
+		vu rebrousser chemin car rien n'indiquait que le gabarit de votre
+		véhicule n'était adapté à cette route ! Trop peu d'informations sont
+		mises à notre disposition pour voyager de manière informelle. Beauté
+		des paysages, grandeur de la nature, découvertes inattendues... De la
+		est née l'idée de créer une plateforme d'entraide entre voyageurs !!
+		Petitnomad vous propose de donner vos avis, de partager vos bonnes
+		comme vos mauvaises expériences, d'indiquer les lieux à risques, les
+		bons plans et de rester ensemble malgré les kilomètres! Petitnomad est
+		un espace d'entraide et de rencontres entre voyageurs, ce sont vous,
+		voyageurs qui participez et faite évoluer le site, il est donc dans
+		l’intérêt de tous de fournir des informations exacts et de ne pas
+		nuire au bon fonctionnement du site sous peine de poursuite . Afin de
+		répondre au plus vite aux besoins des voyageurs nomad's, l'équipe de
+		petitnomad vous propose sa version béta du projet afin de pour voir
+		collecter des a présent des infos, et bon plan utile pour préparer, ou
+		poursuivre son voyage ; veuillez être tolérant si certains problèmes
+		techniques surgissent ou si le design n'est pas encore terminez .
+
+		Petitnomad étant un site gratuit, nous nous voyons dans l'obligation
+		de faire des démarches publicitaire afin de subvenir au coût de
+		fonctionnement de la plate forme,à cet effet, et pour ne pas perturber
+		l'utilisateur sur le site petitnomad,des publicités ciblées sont
+		présentent sur le site rendu possible grâce aux système de cookies
+		placés sur votre ordinateur. Il vous est rappelé qu’il est possible à
+		tout moment d’accepter ou de refuser le placement d’un cookie sur
+		votre terminal de connexion, afin de mettre fin au ciblage
+		publicitaire qui vous est proposé. Dans ce cas, les bandeaux
+		publicitaires qui seront affichés sur le site Petitnomad seront des
+		bandeaux standardisés. Ou pour plus de confort visuel vous pouvez
+		créer un espace prémium vous permettant d'accéder a de nombreux
+		avantage ainsi que de suspendre les publicité lors de vos connexions</p>
+</div>

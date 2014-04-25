@@ -339,7 +339,6 @@ service --interface ~.service.MessageRepository --entity ~.domain.Message
 web mvc controller --class ~.domain.Message
 web mvc controller --class ~.domain.Message --preferredMapping ~.web.MessageController
 web mvc controller --class ~.web.MessageController
-// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-16 00:50:26
 service --interface ~.service.MessageService --entity ~.domain.Message// Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-04-18 05:52:39
 focus --class ~.domain.Discussion
 field string --fieldName photoId 
@@ -355,3 +354,12 @@ field boolean --fieldName isADefaultSubTopic --value false
 focus --class ~.domain.Topic
 field boolean --fieldName isADefaultTopic --value false
 // Spring Roo 1.2.5.RELEASE [rev 8341dc2] log opened at 2014-04-24 13:26:44
+service --interface ~.service.MessageService --entity ~.domain.Message
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-16 22:15:50
+repository mongo --interface ~.repository.FileMsgRepository --entity ~.domain.FileMsg
+service --entity ~.domain.FileMsg --interface ~.service.FileMsgService
+web mvc scaffold --class ~.domain.FileMsg --backingType ~.web.FileMsgController
+web mvc scaffold --class ~.web.FileMsgController --backingType ~.domain.FileMsg
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-22 12:09:51
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2014-04-25 10:05:50
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2014-04-25 10:31:06

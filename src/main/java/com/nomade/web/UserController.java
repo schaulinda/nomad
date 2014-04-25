@@ -155,7 +155,7 @@ private void beanHistoriqueDecoration(Model uiModel, UserNomade nomade) {
 
 		StringBuilder stringBuilder = new StringBuilder()
 				.append("we are glad to see you between our communeauty, Active your profil by cliking the link bellow.")
-				.append("\n\n").append("http://")
+				.append("\n\n").append("https://")
 				.append(httpServletRequest.getServerName())
 				//.append(":").append(httpServletRequest.getServerPort())
 				.append("/users/activate/").append(nomade.getId());

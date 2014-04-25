@@ -9,6 +9,7 @@ import com.nomade.domain.Comment;
 import com.nomade.domain.DangerPratique;
 import com.nomade.domain.EtapeVehicule;
 import com.nomade.domain.EtapeVoyage;
+import com.nomade.domain.FileMsg;
 import com.nomade.domain.InfoPratique;
 import com.nomade.domain.PointPacours;
 import com.nomade.domain.Profil;
@@ -21,6 +22,7 @@ import com.nomade.service.AlbumService;
 import com.nomade.service.DangerPratiqueService;
 import com.nomade.service.EtapeVehiculeService;
 import com.nomade.service.EtapeVoyageService;
+import com.nomade.service.FileMsgService;
 import com.nomade.service.InfoPratiqueService;
 import com.nomade.service.PointParcoursService;
 import com.nomade.service.ProfilService;
@@ -53,6 +55,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     EtapeVoyageService ApplicationConversionServiceFactoryBean.etapeVoyageService;
+    
+    @Autowired
+    FileMsgService ApplicationConversionServiceFactoryBean.fileMsgService;
     
     @Autowired
     InfoPratiqueService ApplicationConversionServiceFactoryBean.infoPratiqueService;
@@ -207,6 +212,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.EtapeVoyage>() {
             public com.nomade.domain.EtapeVoyage convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), EtapeVoyage.class);
+            }
+        };
+    }
+    
+    public Converter<FileMsg, String> ApplicationConversionServiceFactoryBean.getFileMsgToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.nomade.domain.FileMsg, java.lang.String>() {
+            public String convert(FileMsg fileMsg) {
+                return new StringBuilder().append(fileMsg.getNumberUnreadMsg()).toString();
+            }
+        };
+    }
+    
+    public Converter<BigInteger, FileMsg> ApplicationConversionServiceFactoryBean.getIdToFileMsgConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.nomade.domain.FileMsg>() {
+            public com.nomade.domain.FileMsg convert(java.math.BigInteger id) {
+                return fileMsgService.findFileMsg(id);
+            }
+        };
+    }
+    
+    public Converter<String, FileMsg> ApplicationConversionServiceFactoryBean.getStringToFileMsgConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.nomade.domain.FileMsg>() {
+            public com.nomade.domain.FileMsg convert(String id) {
+                return getObject().convert(getObject().convert(id, BigInteger.class), FileMsg.class);
             }
         };
     }
@@ -397,6 +426,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getEtapeVoyageToStringConverter());
         registry.addConverter(getIdToEtapeVoyageConverter());
         registry.addConverter(getStringToEtapeVoyageConverter());
+        registry.addConverter(getFileMsgToStringConverter());
+        registry.addConverter(getIdToFileMsgConverter());
+        registry.addConverter(getStringToFileMsgConverter());
         registry.addConverter(getInfoPratiqueToStringConverter());
         registry.addConverter(getIdToInfoPratiqueConverter());
         registry.addConverter(getStringToInfoPratiqueConverter());

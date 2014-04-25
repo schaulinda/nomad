@@ -88,7 +88,7 @@ public class VoyageController {
 					.findByVoyage(voyage));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 
 		try {

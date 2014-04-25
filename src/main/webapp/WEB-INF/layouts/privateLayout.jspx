@@ -77,7 +77,7 @@
 	
 </script>
 
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
 
 <script src="${res}/js/jquery-1.7.2.min.js">
 <!-- eh -->
@@ -105,7 +105,7 @@
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
-	background-color: #fffbe8;
+	background-color: #ffffff;
 	min-height: 400px;
 }
 
@@ -114,6 +114,7 @@ body {
 }
 </style>
 <link href="${res}/css/custom.css" rel="stylesheet" />
+<link href="${res}/css/chat.css" rel="stylesheet" />
 <link href="${res}/css/icon.css" rel="stylesheet" />
 <script src="${res}/js/holder.js">
 <!-- co -->
@@ -169,6 +170,7 @@ body {
 				<img src="${res}/img/navbarlogo.png" title="Petit Nomad" />
 			</a>
 			<div class="nav-collapse collapse bs-navbar-collapse">
+			<sec:authorize access="isAuthenticated()">
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -232,7 +234,7 @@ body {
 							<i class=" icon-envelope-alt"><!--co --></i>
 						</a>
 						<ul class="dropdown-menu xmoyen">
-							<li>
+							<!-- <li>
 								<div class="row">
 									<div class="col-lg-2 col-sm-2 col-2 avatarDropdown">
 										<img data-src="holder.js/40x40" 
@@ -247,7 +249,7 @@ body {
 									</div>
 								</div>
 							</li>
-							<li class="divider"><!--co --></li>
+							<li class="divider"></li>
 							<li>
 								<div class="row">
 									<div class="col-lg-2 col-sm-2 col-2 avatarDropdown">
@@ -263,9 +265,10 @@ body {
 									</div>
 								</div>
 							</li>
-							<li class="divider"><!--co --></li>
+							<li class="divider"></li> -->
 							<li>
-								<a href="message.html">
+							<spring:url value="/filemsgs/listMsg"  var="listMsg_url"></spring:url>
+								<a href="${listMsg_url}" id="ms_id" >
 									${langAllMessages}
 								</a>
 							</li>
@@ -290,6 +293,7 @@ body {
 						</ul>
 					</li>
 				</ul>
+				</sec:authorize>
 				<img id="throbber" 
 					 src="${res}/img/ajaxicon/ajax-loader-icon.gif"
 					 class="col-lg-offset-5"
@@ -430,23 +434,24 @@ body {
 			</div>
 		</div>
 		<tiles:insertAttribute name="id_subfooter" />
-		<br />
+		<br /><spring:url value="/public" var="public_url" ></spring:url>
 		<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#">© Petit Nomad 2238 <br /> 
+			© Petit Nomad 2238 <br />
+			<a href="${public_url}/whoarewe"> 
 				${langWhoAreWe}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/contact" class="traitgauche">
 				${langContact}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/confidentiality" class="traitgauche">
 				${langConfidentiality}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/useragrement" class="traitgauche">
 				${langUserAgreement}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/help" class="traitgauche">
 				${langHelpFAQ}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/professionnals" class="traitgauche">
 				${langProfessionals}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/advertisers" class="traitgauche">
 				${langAdvertiser}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/development" class="traitgauche">
 				${langDevelopmentTranslation}
 			</a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
 				${aForum}
@@ -462,6 +467,15 @@ body {
 <script type="text/javascript">
 	Spring.addDecoration(new Spring.AjaxEventDecoration({
 		elementId : "profil_id",
+		event : "onclick",
+		params : {
+			fragments : "body"
+		}
+	}));
+</script>
+<script type="text/javascript">
+	Spring.addDecoration(new Spring.AjaxEventDecoration({
+		elementId : "msg_id",
 		event : "onclick",
 		params : {
 			fragments : "body"

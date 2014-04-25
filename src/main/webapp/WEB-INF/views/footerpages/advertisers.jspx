@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	xmlns:form="urn:jsptagdir:/WEB-INF/tags/form"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
+	<p>Petitnomad est un espace d'entraide et de rencontres entre
+		voyageurs, ce sont vous, voyageurs qui par votre participation faite
+		évoluer les informations pour un meilleur tourisme itinérant, il est
+		donc dans l’intérêt de tous de fournir des informations exacts et de
+		ne pas nuire au bon fonctionnement du site sous peine de poursuite .
+		Afin de répondre au plus vite aux besoins des voyageurs nomad's,
+		l'équipe de petitnomad vous propose sa version béta du projet afin de
+		pouvoir collecter dès à présent des infos, et bon plan utile pour
+		préparer, ou poursuivre son voyage. Si vous avez des suggestions quant
+		à l'évolution des fonctionnalités du site n'hésiter pas a nous en
+		faire part. Créons dès aujourd'hui une vrai communauté de voyageurs,
+		parce que ensemble nous irons plus loin... Pour votre sécurité il est
+		souhaitable de ne pas divulguer trop d'information personnelles. Par
+		ailleurs, ne délivrez pas de parcours futur, mais préféré le récit
+		d'un parcours passée. Des personnes mal intentionnées pourraient se
+		servir de vos informations à des fin illicites ( cambriolage,
+		agressions..) Informer-vous sur les informations postés sur le site en
+		questionnant l'auteur des commentaires, et vos amis Voyageurs. Nous
+		nous efforçons de rendre le site sûr, mais ensemble nous pouvons
+		vérifié les informations, n'hésitez pas à nous signaler un contenu
+		abusif, ou des informations erronées preuves à l'appui.</p>
+</div>

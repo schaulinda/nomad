@@ -62,7 +62,6 @@ public class ApplicationInitService {
 
 	public void initData() throws IOException {
 		System.out.print("init");
-
 		mongoTemplate.getDb().dropDatabase();
 		nomadeDod.init();
 		initForum(userService.findAllUserNomades().iterator().next());
@@ -280,6 +279,11 @@ public class ApplicationInitService {
 						RandomStringUtils.randomAlphabetic(7), false)
 				.getDiscussions();
 		return new HashSet<Discussion>(discussions);
+		/*parcoursDataOnDemand.init();
+		voyageDataOnDemand.init();
+		vehiculeDataOnDemand.init();
+		pratiqueDataOnDemand.init();
+		infoPratiqueDataOnDemand.init();*/
 	}
 	/*
 	 * public void initApplication() {

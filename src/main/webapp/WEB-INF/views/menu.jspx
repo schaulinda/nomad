@@ -70,5 +70,9 @@
             <menu:item id="i_voyage_new" messageCode="global_menu_new" url="/voyages?form" z="JDbnAS9jkxo6EF/UNdvG+MaiB1U="/>
             <menu:item id="i_voyage_list" messageCode="global_menu_list" url="/voyages?page=1&amp;size=${empty param.size ? 10 : param.size}" z="2pgZcNQl1X1zI05q8wK0CcU/UVc="/>
         </menu:category>
+        <menu:category id="c_filemsg" z="+8Px3xVzXBFLbkSlbj7Fe1FOAUw=">
+            <menu:item id="i_filemsg_new" messageCode="global_menu_new" url="/filemsgs?form" z="19ZzZBeH5grAQI2UENJT2zyhvbs="/>
+            <menu:item id="i_filemsg_list" messageCode="global_menu_list" url="/filemsgs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mNTjwxMS38RhJfkLuvTMiQlHrj8="/>
+        </menu:category>
     </menu:menu>
 </div>

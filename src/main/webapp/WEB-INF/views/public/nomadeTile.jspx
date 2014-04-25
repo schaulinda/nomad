@@ -39,7 +39,7 @@
 	<spring:url var="nomad_url" value="/public/nomad" />
 	<spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
 	<spring:url value="/resources/img/mapicon/veh" var="iconveh_url"></spring:url>
-	<spring:url value="/message/send" var="message_url"></spring:url>
+	<spring:url value="/filemsgs/sendFromProfile" var="message_url"></spring:url>
 	<style type="text/css">
 @media ( min-width :992px) and (max-width:1199px) {
 	.first-info {
@@ -73,14 +73,16 @@
 						</div>
 						<div
 							class="col-lg-5 col-lg-offset-1 col-sm-6 col-xs-12 col-md-12 first-info">
-							<label>${langNationality} : </label> ${nomad.compte.nationality}<br />
+							<label>${langNationality} : </label><img src="${res}/img/flag/${nomad.compte.nationality}.png" alt="${nomad.compte.nationality}" />
+							<br />
 							<label>${langName} : </label>${nomad.compte.fullName} <br /> <label>${langWebsite}
 								: </label>${nomad.profil.website}
 						</div>
 						<c:if test="${beanNomadeManager.me eq false}">
 							<sec:authorize access="isAuthenticated()">
 								<div class="col-lg-4 col-sm-4 col-12">
-									<a class="btn_cancel btn btn-default " id="btn_msg"> <i
+								<spring:url value="/filemsgs" var="filemsgs_url"></spring:url>
+									<a class="btn_cancel btn btn-default" href="${filemsgs_url}/formMsg?nomadReceiver=${nomad.id}" id="btn_msg"> <i
 										class="icon-envelope"> <!-- co --></i> ${langMessage}
 									</a>
 									<c:if test="${beanNomadeManager.amie eq false}">
@@ -102,9 +104,25 @@
 						</c:if>
 					</div>
 					<br /> <label>${langSpokenLanguage} : </label>
-					${nomad.profil.langues}<br /> <label>${langVisitedCountry}
-						: </label> ${nomad.profil.visitedCountry}<br /> <label>${langPurposeOfTheTrip}
-						:</label>${nomad.profil.butVoyage}
+					<table>
+						<tr>
+							<c:forEach  items="${nomad.profil.langues}" var="langCountry" >
+								<td><img src="${res}/img/flag/${langCountry}.png" alt="${langCountry}" /></td>
+							</c:forEach>
+						</tr>
+					</table>
+					
+					<br /> <label>${langVisitedCountry}: </label> 
+					<table>
+						<tr>
+							<c:forEach  items="${nomad.profil.visitedCountry}" var="visitedCountry" >
+								<td><img src="${res}/img/flag/${visitedCountry}.png" alt="${visitedCountry}" /></td>
+							</c:forEach>
+						</tr>
+					</table>
+					
+					<br /> <label>${langPurposeOfTheTrip}:</label>
+					${nomad.profil.butVoyage}
 				</div>
 				<div class="panel panel-warning col-lg-12 col-md-12">
 					<div class="panel-heading">
@@ -199,31 +217,7 @@
 			$(document)
 					.ready(
 							function() {
-								/* popover ftion */
-								$('#btn_msg')
-										.popover(
-												{
-
-													html : 'true',
-													trigger : 'click',
-													placement : 'bottom',
-													title : '${langSendMessage}',
-													content : '<form id="formMsg"><p><textarea name="content"><!-- com --></textarea></p>'
-															+ '<button class="btn" id="btn_cancel" onclick="document.getElementsByClassName(this.id)[0].click();return false;" >${langCancel}</button>'
-															+'<input type="hidden" name="idReceiver" value="${beanNomadeManager.nomade.id}" />'
-															+ ' <button class="btn btn-primary" id="sendMsg" >${langSend}</button></form>'
-												});
 								
-								/* ajax for msg */
-								$("#formMsg").submit(function(){
-							        $.ajax({type:"GET", data: $(this).serialize(), url:"${message_url}",
-							            success: function(data){
-							                console.log(data);
-							            }
-							        });
-							        return false;
-							    });
-
 								/* add friend */
 								$('#btn_add').click(
 										function() {
@@ -461,6 +455,16 @@
 	
 				});
 			}
+		if(dojo.byId("btn_msg")!=null){
+			Spring.addDecoration(new Spring.AjaxEventDecoration({
+				elementId : "btn_msg",
+				event : "onclick",
+				params : {
+					fragments : "smallTile"
+				}
+			}));
+		}
+			
 		});
 	</script>
 

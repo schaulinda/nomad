@@ -67,17 +67,20 @@
 					href="${public_url}/itineraire" id="id_itineraireLink"> <spring:message
 							code="a.itinerary" />
 				</a></li>
+				<sec:authorize access="isAuthenticated()">
 				<li class="${carnetOnglet}">
 				<spring:url value="/voyages/selectView" var="voyage_url"></spring:url>
 				<a href="${voyage_url}"
 					id="id_carnetLink"> <spring:message code="a.logBook" />
 				</a></li>
+				</sec:authorize>
 			</ul>
 		  </div>
 		  <div class="col-lg-3 col-sm-6  nav navbar-nav selectVehicle">
 		   <div class="row">
 		   <spring:url value="/resources/img/iconstatut" var="iconstatut_url"></spring:url>
-		      <div class="col-lg-10 col-md-offset-1 col-sm-8 selectVehicle">
+		     	<sec:authorize access="isAuthenticated()">
+		     	 <div class="col-lg-10 col-md-offset-1 col-sm-8 selectVehicle">
 						<select id="vehiculeState_header" class="form-control" >
 							<spring:message code="option.withoutvehicle" var="withoutvehicle" />
 							<spring:message code="option.lookingForBuy" var="lookingForBuy" />
@@ -183,6 +186,7 @@
 						</select>
 						<a id="link_statutVeh" href="${updateVehState}" style="display: none;" ><!--co  --></a>
 					</div>
+					</sec:authorize>
 					<div class="col-lg-1 col-sm-4 pull-left img_veh1">
 					<sec:authorize access="isAuthenticated()" >
 					<a href="${users_url}/private/vehicule" id="img_veh1"> <c:choose>

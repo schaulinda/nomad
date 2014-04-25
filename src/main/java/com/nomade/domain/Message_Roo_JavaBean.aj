@@ -17,22 +17,6 @@ privileged aspect Message_Roo_JavaBean {
         this.content = content;
     }
     
-    public UserNomade Message.getSender() {
-        return this.sender;
-    }
-    
-    public void Message.setSender(UserNomade sender) {
-        this.sender = sender;
-    }
-    
-    public UserNomade Message.getReceiver() {
-        return this.receiver;
-    }
-    
-    public void Message.setReceiver(UserNomade receiver) {
-        this.receiver = receiver;
-    }
-    
     public Date Message.getDateSend() {
         return this.dateSend;
     }
@@ -47,6 +31,14 @@ privileged aspect Message_Roo_JavaBean {
     
     public void Message.setRead(boolean read) {
         this.read = read;
+    }
+    
+    public UserNomade Message.getSender() {
+        return this.sender;
+    }
+    
+    public void Message.setSender(UserNomade sender) {
+        this.sender = sender;
     }
     
 }

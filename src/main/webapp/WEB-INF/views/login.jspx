@@ -151,22 +151,24 @@
 		</div>
 	</div>
 	</div>
+	<spring:url value="/public" var="public_url" ></spring:url>
 	<footer class="text-center" style="z-index: 99; position: relative;">
-			<a href="#" class="traitgauche">© Petit Nomad 2238 
+			© Petit Nomad 2238 <br />
+			<a href="${public_url}/whoarewe"> 
 				${langWhoAreWe}
-			</a><br /> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/contact" class="traitgauche">
 				${langContact}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/confidentiality" class="traitgauche">
 				${langConfidentiality}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/useragrement" class="traitgauche">
 				${langUserAgreement}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/help" class="traitgauche">
 				${langHelpFAQ}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/professionnals" class="traitgauche">
 				${langProfessionals}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/advertisers" class="traitgauche">
 				${langAdvertiser}
-			</a> | <a href="#" class="traitgauche">
+			</a> | <a href="${public_url}/development" class="traitgauche">
 				${langDevelopmentTranslation}
 			</a> | <a href="${forum_url}" class="traitgauche" target="_blank" id="forum_id">
 				${aForum}

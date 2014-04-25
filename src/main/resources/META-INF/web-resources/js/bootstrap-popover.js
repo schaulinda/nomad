@@ -85,6 +85,8 @@
   }
 
   $.fn.popover.Constructor = Popover
+  
+  console.log("titi");
 
   $.fn.popover.defaults = $.extend({} , $.fn.tooltip.defaults, {
     placement: 'right'

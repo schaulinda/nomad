@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_nomade_domain_FileMsg" items="${filemsgs}" z="6RPjTnOhVDqijTPRs3nmPuuD0u0=">
+        <table:table data="${filemsgs}" id="l_com_nomade_domain_FileMsg" path="/filemsgs" z="PUfiLuvaYzD0Y/vPdLjWr+jRuVk=">
+            <table:column id="c_com_nomade_domain_FileMsg_nomad1" property="nomad1" z="PhXOmoEZI3TK1p6G1Zmp6g2cIpE="/>
+            <table:column id="c_com_nomade_domain_FileMsg_nomad2" property="nomad2" z="XhSnPEJKGTTZ0Ww8UuwBSRMRlWA="/>
+            <table:column id="c_com_nomade_domain_FileMsg_messages" property="messages" z="dBjIq5wt+fGyzYXG2B9ZDq8HfyE="/>
+            <table:column id="c_com_nomade_domain_FileMsg_numberUnreadMsg" property="numberUnreadMsg" z="qUh58oujIXnjoUsxWGM/aqaKXrI="/>
+        </table:table>
+    </page:list>
+</div>

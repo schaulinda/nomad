@@ -92,18 +92,6 @@ privileged aspect EtapeVoyageController_Roo_Controller {
         return "redirect:/etapevoyages";
     }
     
-    void EtapeVoyageController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("etapeVoyage_dateetape_date_format", "dd-MM-yyyy");
-        uiModel.addAttribute("etapeVoyage_created_date_format", "dd-MM-yyyy HH:mm");
-    }
-    
-    void EtapeVoyageController.populateEditForm(Model uiModel, EtapeVoyage etapeVoyage) {
-        uiModel.addAttribute("etapeVoyage", etapeVoyage);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("usernomades", userService.findAllUserNomades());
-        //uiModel.addAttribute("voyages", voyageService.findAllVoyages());
-    }
-    
     String EtapeVoyageController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

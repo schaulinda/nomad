@@ -13,104 +13,137 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<spring:url var="res" value="/resources" />
 
+<spring:message code="lang_itinerary_list" var="langItineraryList"/>
+<spring:message code="lang_create_new_itinerary" var="langCreateNewItinerary"/>
+<spring:message code="lang_back_to_travel_list" var="langBackToTravelList"/>
+<spring:message code="lang_departure_date" var="langDepartureDate"/>
+<spring:message code="lang_arrival_date" var="langArrivalDate"/>
+<spring:message code="lang_number_of_steps" var="langNumberOfSteps"/>
+<spring:message code="lang_departure_location" var="langDepartureLocation"/>
+<spring:message code="lang_arrival_location" var="langArrivalLocation"/>
+<spring:message code="lang_delete" var="langDelete"/>
+<spring:message code="lang_steps_list" var="langStepsList"/>
+<spring:message code="lang_drag_marker_on_map" var="langDragMarkerOnMap"/>
+
 	<div class="panel">
 		<div class="panel-heading">
 			<h3 class="panel-title">
-				<i class="icon-road"> <!-- co -->
-				</i>Liste de parcours
+				<i class="icon-road"><!-- co --></i>
+				${langItineraryList}
 			</h3>
 		</div>
 		<div class="panel">
-		<div class="panel-heading">
-			<!--CO  -->
-		</div>
+		<div class="panel-heading"><!-- co --></div>
 		<div>
-			<spring:url value="/voyages/createParcours"
-				var="creationParcours_url"></spring:url>
-			<form:form modelAttribute="parcours" method="GET" id="formParcours"
-				action="${creationParcours_url}">
+			<spring:url value="/voyages/createParcours" var="creationParcours_url"></spring:url>
+			<form:form modelAttribute="parcours" 
+					   method="GET" 
+					   id="formParcours"
+					   action="${creationParcours_url}">
 				<c:if test="${not empty beanNoteBookManager.error}">
 					<div class="alert alert-danger">${beanNoteBookManager.error}</div>
 				</c:if>
 				<input type="hidden" name="idV" value="${idV}" />
 				<div class="row">
 					<div class="input-group col-lg-7">
-						<form:input type="text" id="etape0" cssClass="form-control adress"
-							required="required" path="depart.location" autocomplete="off" />
+						<form:input type="text" 
+									id="etape0" 
+									cssClass="form-control adress"
+									required="required" 
+									path="depart.location" 
+									autocomplete="off" />
 						<form:hidden id="etape0Lat" path="depart.lat" />
 						<form:hidden id="etape0Lng" path="depart.lng" />
 						<a href="#" class="mapPicker input-group-addon" id="etape0-picker">
-							<span class=""> <i class="icon-screenshot"> <!-- co --></i>
-						</span>
+							<span class=""><i class="icon-screenshot"><!-- co --></i></span>
 						</a>
 					</div>
 					<div class="col-lg-4 input-group">
-						<form:input id="etape0Date" required="required" cssClass="datepicker form-control"
-							path="depart.day" data-date-format="dd-mm-yyyy"
-							format="dd-mm-yyyy" />
-						<span class="input-group-addon"> <i class="icon-calendar">
-								<!-- co -->
-						</i></span>
+						<form:input id="etape0Date" 
+									required="required" 
+									cssClass="datepicker form-control"
+									path="depart.day" 
+									data-date-format="dd-mm-yyyy"
+									format="dd-mm-yyyy" />
+						<span class="input-group-addon">
+							<i class="icon-calendar"><!-- co --></i>
+						</span>
 					</div>
-
 				</div>
 				<div class="row">
 					<div class="input-group col-lg-7">
-						<form:input id="etape1" cssClass="form-control adress"
-							required="required" path="arrived.location" autocomplete="off" />
+						<form:input id="etape1" 
+									cssClass="form-control adress"
+									required="required" 
+									path="arrived.location" 
+									autocomplete="off" />
 						<form:hidden id="etape1Lat" path="arrived.lat" />
 						<form:hidden id="etape1Lng" path="arrived.lng" />
 						<a href="#" class="mapPicker input-group-addon" id="etape1-picker">
-							<span class=""> <i class="icon-screenshot"> <!-- co --></i>
-						</span>
+							<span class=""><i class="icon-screenshot"><!-- co --></i></span>
 						</a>
 					</div>
 					<div class="col-lg-4 input-group">
-						<form:input id="etape1Date" cssClass="datepicker form-control"
-							path="arrived.day" type="date" required="required" data-date-format="dd-mm-yyyy"
-							format="dd-mm-yyyy" />
-						<span class="input-group-addon"> <i class="icon-calendar">
-								<!-- co -->
-						</i></span>
+						<form:input id="etape1Date" 
+									cssClass="datepicker form-control"
+									path="arrived.day" 
+									type="date" 
+									required="required" 
+									data-date-format="dd-mm-yyyy"
+									format="dd-mm-yyyy" />
+						<span class="input-group-addon">
+							<i class="icon-calendar"><!-- co --></i>
+						</span>
 					</div>
-
 				</div>
-				<input type="submit" class="btn btn-default" id="create"
-					value="create new parcours" />
+				<input type="submit" 
+					   class="btn btn-default" 
+					   id="create" 
+					   value="${langCreateNewItinerary}" />
 			</form:form>
 		</div>
 		</div>
 		<spring:url value="/voyages/list" var="list_url"></spring:url>
-			<a href="${list_url}" id="listVoyage"
-				class="btn btn-default btn-block">Retour a la liste de voyage</a> <br />
+		<a href="${list_url}" id="listVoyage" class="btn btn-default btn-block">
+			${langBackToTravelList}
+		</a>
+		<br />
 		<div style="overflow-y: auto;overflow-x: hidden;height: 200px;">
 			<c:forEach var="parcours" items="${listP}">
 				<div style="border-bottom-style: solid;">
 					<div class="row">
 						<div class="col-lg-4">
-							<b>date depart: </b>${parcours.depart.day}
+							<fmt:formatDate value="${parcours.depart.day}" var="formattedDateDepart" type="date" pattern="MM-dd-yyyy" />
+							<b>${langDepartureDate} : </b>${formattedDateDepart}
 						</div>
 						<div class="col-lg-4">
-							<b>date Arrive: </b>${parcours.arrived.day}
+							<fmt:formatDate value="${parcours.arrived.day}" var="formattedDateArrived" type="date" pattern="MM-dd-yyyy" />
+							<b>${langArrivalDate} : </b>${formattedDateArrived} 
 						</div>
 						<div class="col-lg-4">
-							<b>nbre d'Etapes: </b>${parcours.nbreEtape}
+							<b>${langNumberOfSteps} : </b>${parcours.nbreEtape}
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-4">
-							<b>Lieu Depart: </b>${parcours.depart.location}
+							<b>${langDepartureLocation} : </b>${parcours.depart.location}
 						</div>
 						<div class="col-lg-4">
-							<b>Lieu Arrive: </b>${parcours.arrived.location}
+							<b>${langArrivalLocation} : </b>${parcours.arrived.location}
 						</div>
 						<div class="col-lg-4">
 							<spring:url value="/voyages/deleteParcours" var="suppParcours_url"></spring:url>
 							<spring:url value="/voyages/listEtape" var="etapes_url"></spring:url>
 							<a href="${suppParcours_url}/${idV}?idP=${parcours.id}"
-								id="suppP_${parcours.id}" class="supp btn btn-default"
-								style="margin-bottom: 3px;">supprimer</a> 
-								<a href="${etapes_url}?idP=${parcours.id}" id="parcours_${parcours.id}" class="parcours btn btn-default">list Etapes
+							   id="suppP_${parcours.id}" 
+							   class="supp btn btn-default"
+							   style="margin-bottom: 3px;">
+								${langDelete}
+							</a> 
+							<a href="${etapes_url}?idP=${parcours.id}" 
+							   id="parcours_${parcours.id}" 
+							   class="parcours btn btn-default">
+								${langStepsList}
 							</a><!-- ${etapes_url}/${idV}?idP=${parcours.id} -->
 						</div>
 					</div>
@@ -118,9 +151,7 @@
 				<br />
 			</c:forEach>
 		</div>
-
 	</div>
-	
 	<script type="text/javascript">
 		jQuery.noConflict($);
 		(function($) {
@@ -136,7 +167,7 @@
 								
 								$('.mapPicker').tooltip({
 									trigger: 'hover',
-									title: 'click and drag and drop violet marker, to get location'
+									title: '${langDragMarkerOnMap}'
 								});
 								
 								/* ------------------click on mapPicker----------------- */
